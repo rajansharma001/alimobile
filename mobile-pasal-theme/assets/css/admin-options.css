@@ -49,9 +49,7 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	flex-direction: column;
 	color: #0f172a;
-	overflow-x: hidden;
 	width: 100%;
-	max-width: 100vw;
 }
 
 .bopt-app-wrap *,
@@ -84,6 +82,9 @@ body.toplevel_page_mp-inquiries #wpfooter {
 }
 
 @media screen and (max-width: 782px) {
+	.bopt-app-wrap {
+		overflow-x: clip;
+	}
 	.bopt-topbar {
 		top: 46px;
 		padding: 8px 12px;
