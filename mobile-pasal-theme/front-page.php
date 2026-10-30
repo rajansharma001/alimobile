@@ -268,10 +268,27 @@ $arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" strok
 					</button>
 				<?php endforeach; ?>
 			</div>
+
+			<div class="hx-hero-trust">
+				<div><strong>10K+</strong><span><?php esc_html_e( 'Devices Restored', 'mobile-pasal' ); ?></span></div>
+				<div><strong>100%</strong><span><?php esc_html_e( 'MDMS & VAT Billed', 'mobile-pasal' ); ?></span></div>
+				<div><strong>0 NPR</strong><span><?php esc_html_e( 'Counter Diagnosis', 'mobile-pasal' ); ?></span></div>
+			</div>
 		</div>
 
 		<div class="hx-hero-stage" data-hx-tilt>
+			<div class="hx-stage-aura" aria-hidden="true"></div>
 			<div class="hx-stage-orbit" aria-hidden="true"></div>
+			<div class="hx-hero-seal" aria-hidden="true">
+				<svg viewBox="0 0 120 120" width="92" height="92">
+					<defs><path id="hxHeroSeal" d="M 60,60 m -44,0 a 44,44 0 1,1 88,0 a 44,44 0 1,1 -88,0"/></defs>
+					<text font-size="9.2" font-weight="800" fill="currentColor" letter-spacing="2.4">
+						<textPath href="#hxHeroSeal">ALI MOBILE • APPLE FIX LAB • GULARIYA •</textPath>
+					</text>
+					<circle cx="60" cy="60" r="20" fill="var(--hx-ink)"/>
+					<path d="M52 60l5 5 11-11" stroke="var(--hx-lime)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</div>
 			<div class="hx-deck" data-hx-deck>
 				<?php foreach ( $hx_slides as $i => $s ) : ?>
 					<figure class="hx-deck-card" data-hx-card="<?php echo esc_attr( $i ); ?>" data-pos="<?php echo esc_attr( $i ); ?>">
@@ -307,11 +324,20 @@ $arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" strok
 		</div>
 	</div>
 
-	<div class="hx-ticker" aria-hidden="true">
-		<div class="hx-ticker-track">
-			<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
-				<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
-			<?php endforeach; endfor; ?>
+	<div class="hx-ticker-stack" aria-hidden="true">
+		<div class="hx-ticker hx-ticker-lime">
+			<div class="hx-ticker-track is-reverse">
+				<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
+					<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
+				<?php endforeach; endfor; ?>
+			</div>
+		</div>
+		<div class="hx-ticker">
+			<div class="hx-ticker-track">
+				<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
+					<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
+				<?php endforeach; endfor; ?>
+			</div>
 		</div>
 	</div>
 </section>
@@ -456,6 +482,11 @@ $arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" strok
 <section id="repair-builder" class="hx-repair" data-hx-workbench>
 	<div class="hx-repair-glow" aria-hidden="true"></div>
 	<div class="wrap">
+		<div class="hx-bench-bar fade-up" aria-hidden="true">
+			<div class="hx-bench-dots"><span></span><span></span><span></span></div>
+			<span class="hx-bench-title">APPLE_FIX_DIAGNOSTIC_OS v4.0 // GULARIYA_BENCH_01</span>
+			<span class="hx-bench-badge"><i class="fa-solid fa-bolt"></i> LIVE THERMAL PRINTER LINKED</span>
+		</div>
 		<header class="hx-head hx-head-split hx-on-dark fade-up">
 			<div>
 				<span class="hx-kicker"><?php echo esc_html( mp_opt( 'repair_kicker', 'Live Diagnostic Workbench' ) ); ?></span>
@@ -1244,6 +1275,16 @@ $hx_lab_features = array(
 		</div>
 	</div>
 </section>
+
+<!-- Floating Quick-Jump Studio Dock -->
+<nav class="hx-quick-dock" data-hx-dock aria-label="<?php esc_attr_e( 'Quick section navigation', 'mobile-pasal' ); ?>">
+	<a href="#categories" class="hx-dock-link"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span><?php esc_html_e( 'Depts', 'mobile-pasal' ); ?></span></a>
+	<a href="#repair-builder" class="hx-dock-link"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span><?php esc_html_e( 'Estimate', 'mobile-pasal' ); ?></span></a>
+	<a href="#catalog" class="hx-dock-link"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span><?php esc_html_e( 'Phones', 'mobile-pasal' ); ?></span></a>
+	<a href="#apple-fix" class="hx-dock-link"><i class="fa-solid fa-microscope" aria-hidden="true"></i><span><?php esc_html_e( '3D Lab', 'mobile-pasal' ); ?></span></a>
+	<a href="#services" class="hx-dock-link"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i><span><?php esc_html_e( 'Menu', 'mobile-pasal' ); ?></span></a>
+	<a href="#visit" class="hx-dock-link"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span><?php esc_html_e( 'Map', 'mobile-pasal' ); ?></span></a>
+</nav>
 
 </main>
 

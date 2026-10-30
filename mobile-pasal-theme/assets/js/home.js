@@ -741,6 +741,29 @@
 				});
 			}
 		}
+
+		var dock = document.querySelector('[data-hx-dock]');
+		if (dock && 'IntersectionObserver' in window) {
+			var links = Array.prototype.slice.call(dock.querySelectorAll('.hx-dock-link'));
+			var map = {};
+			links.forEach(function (l) {
+				var href = l.getAttribute('href');
+				if (href && href.charAt(0) === '#') map[href.slice(1)] = l;
+			});
+			var spy = new IntersectionObserver(function (entries) {
+				entries.forEach(function (entry) {
+					if (entry.isIntersecting && entry.target.id && map[entry.target.id]) {
+						links.forEach(function (l) { l.classList.remove('is-active'); });
+						map[entry.target.id].classList.add('is-active');
+					}
+				});
+			}, { rootMargin: '-35% 0px -50% 0px' });
+
+			Object.keys(map).forEach(function (id) {
+				var sec = document.getElementById(id);
+				if (sec) spy.observe(sec);
+			});
+		}
 	}
 
 	/* -------------------------------------------------------------------------
