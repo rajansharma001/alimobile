@@ -2126,12 +2126,27 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 .bopt-field-col-2 {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 16px;
+	gap: 20px;
+	padding: 10px 0;
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.bopt-field-col-2 .bopt-field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 0;
+	border-bottom: none;
+}
+
+.bopt-field-col-2 .bopt-field .bopt-field-info {
+	padding-top: 0;
 }
 
 @media screen and (max-width: 782px) {
 	.bopt-field-col-2 {
 		grid-template-columns: 1fr;
+		gap: 14px;
 	}
 }
 

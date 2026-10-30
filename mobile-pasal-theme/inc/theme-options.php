@@ -1652,8 +1652,6 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 						</div>
-							</div>
-						</div>
 					</div>
 
 					<!-- 3.2 4 Zero-Risk Assurance Cards -->
@@ -1998,8 +1996,6 @@ function mobile_pasal_options_render_dashboard() {
 										?>
 									</div>
 								</div>
-							</div>
-						</div>
 							</div>
 						</div>
 					</div>
@@ -2378,8 +2374,6 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 						</div>
-							</div>
-						</div>
 					</div>
 
 					<!-- 5.2 4 Milestone Stats -->
@@ -2554,9 +2548,6 @@ function mobile_pasal_options_render_dashboard() {
 							</div>
 						</div>
 					</div>
-							</div>
-						</div>
-					</div>
 
 					<!-- ===================================================================
 					     GROUP 6: CONTACT & LOCATION DESK
@@ -2680,8 +2671,6 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_textarea( 'contact_desk_desc', __( 'Showroom Info Card Description', 'mobile-pasal' ), __( 'Walk-in customer counter with on-site technician workbench...' ), 2 );
 									?>
 								</div>
-							</div>
-						</div>
 							</div>
 						</div>
 					</div>
