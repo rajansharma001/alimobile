@@ -2354,12 +2354,22 @@ function mobile_pasal_options_render_dashboard() {
 									<h4 class="bopt-rank-title"><i class="fa-solid fa-gauge-high"></i> <?php esc_html_e( 'Google & Organic Search Health Score', 'mobile-pasal' ); ?></h4>
 									<p class="bopt-rank-desc"><?php esc_html_e( 'Live audit of your meta tags, title lengths, and indexing configuration for search bots.', 'mobile-pasal' ); ?></p>
 								</div>
-								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-circle-check"></i> <?php esc_html_e( 'SEO Ready 100%', 'mobile-pasal' ); ?></span>
+								<?php if ( mp_is_rank_math_active() ) : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live" style="background:rgba(16,185,129,0.18); color:#34d399; border:1px solid #10b981;">
+										<i class="fa-solid fa-bolt"></i> <?php esc_html_e( 'Rank Math Synchronized', 'mobile-pasal' ); ?>
+									</span>
+								<?php else : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-circle-check"></i> <?php esc_html_e( 'SEO Ready 100%', 'mobile-pasal' ); ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="bopt-rank-meta-row">
 								<span><i class="fa-solid fa-bullseye"></i> <strong>Focus:</strong> Gulariya, Bardiya, Apple Fix, NTA Phones</span>
+								<?php if ( mp_is_rank_math_active() ) : ?>
+									<span><i class="fa-solid fa-puzzle-piece"></i> <strong>Rank Math:</strong> Active (Merged Schema & Fallback Meta)</span>
+								<?php else : ?>
+									<span><i class="fa-solid fa-robot"></i> <strong>Robots:</strong> Index, Follow</span>
+								<?php endif; ?>
 								<span><i class="fa-solid fa-share-nodes"></i> <strong>OpenGraph:</strong> 1200x630 Active</span>
-								<span><i class="fa-solid fa-robot"></i> <strong>Robots:</strong> Index, Follow</span>
 							</div>
 						</div>
 
@@ -2451,7 +2461,13 @@ function mobile_pasal_options_render_dashboard() {
 									<h4 class="bopt-rank-title"><i class="fa-solid fa-map-location-dot"></i> <?php esc_html_e( 'Local Pack & GEO Position Status', 'mobile-pasal' ); ?></h4>
 									<p class="bopt-rank-desc"><?php esc_html_e( 'Precision GPS tags (geo.position, ICBM, Schema GeoCoordinates) embedded for Gulariya-06.', 'mobile-pasal' ); ?></p>
 								</div>
-								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-location-crosshairs"></i> <?php esc_html_e( 'GPS Linked', 'mobile-pasal' ); ?></span>
+								<?php if ( mp_is_rank_math_active() ) : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live" style="background:rgba(16,185,129,0.18); color:#34d399; border:1px solid #10b981;">
+										<i class="fa-solid fa-location-crosshairs"></i> <?php esc_html_e( 'GEO Synced with Rank Math', 'mobile-pasal' ); ?>
+									</span>
+								<?php else : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-location-crosshairs"></i> <?php esc_html_e( 'GPS Linked', 'mobile-pasal' ); ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="bopt-rank-meta-row">
 								<span><i class="fa-solid fa-map-pin"></i> <strong>GPS:</strong> 28.2330° N, 81.3340° E</span>
@@ -2550,11 +2566,21 @@ function mobile_pasal_options_render_dashboard() {
 									<h4 class="bopt-rank-title"><i class="fa-solid fa-robot"></i> <?php esc_html_e( 'AI Answer Engine Grounding Status', 'mobile-pasal' ); ?></h4>
 									<p class="bopt-rank-desc"><?php esc_html_e( 'Active grounding feeds for Perplexity, ChatGPT Search, Apple Siri, and Google Gemini Overviews.', 'mobile-pasal' ); ?></p>
 								</div>
-								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-brain"></i> <?php esc_html_e( 'AEO Grounded', 'mobile-pasal' ); ?></span>
+								<?php if ( mp_is_rank_math_active() ) : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live" style="background:rgba(16,185,129,0.18); color:#34d399; border:1px solid #10b981;">
+										<i class="fa-solid fa-brain"></i> <?php esc_html_e( 'AEO Schema in Rank Math', 'mobile-pasal' ); ?>
+									</span>
+								<?php else : ?>
+									<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-brain"></i> <?php esc_html_e( 'AEO Grounded', 'mobile-pasal' ); ?></span>
+								<?php endif; ?>
 							</div>
 							<div class="bopt-rank-meta-row">
 								<span><i class="fa-solid fa-file-lines"></i> <strong>Endpoint:</strong> <a href="<?php echo esc_url( home_url( '/llms.txt' ) ); ?>" target="_blank" style="color:var(--bopt-gold-light);text-decoration:underline;">/llms.txt</a></span>
-								<span><i class="fa-solid fa-code"></i> <strong>Schema:</strong> FAQPage + Speakable</span>
+								<?php if ( mp_is_rank_math_active() ) : ?>
+									<span><i class="fa-solid fa-code"></i> <strong>Schema:</strong> Merged with Rank Math</span>
+								<?php else : ?>
+									<span><i class="fa-solid fa-code"></i> <strong>Schema:</strong> FAQPage + Speakable</span>
+								<?php endif; ?>
 								<span><i class="fa-solid fa-diagram-project"></i> <strong>Entity Graph:</strong> sameAs Connected</span>
 							</div>
 						</div>
