@@ -1,0 +1,1097 @@
+/* ==========================================================================
+   ALI MOBILE CENTER & APPLE FIX — FULL-WIDTH LUXURY THEME OPTIONS DASHBOARD
+   Architectural, Ultra-Responsive, Sapphire Blue Palette & Client-Friendly
+   Single-Sidebar Navigation Suite 3.0.0
+   ========================================================================== */
+
+/* ── WordPress Admin Full-Width Breakout & Overflow Fix ── */
+body.toplevel_page_mobile-pasal-options {
+	background: #f8fafc !important;
+	color: #0f172a !important;
+}
+
+body.toplevel_page_mobile-pasal-options,
+body.toplevel_page_mobile-pasal-options #wpwrap,
+body.toplevel_page_mobile-pasal-options #wpcontent,
+body.toplevel_page_mobile-pasal-options #wpbody,
+body.toplevel_page_mobile-pasal-options #wpbody-content {
+	overflow: visible !important;
+}
+
+body.toplevel_page_mobile-pasal-options #wpcontent {
+	padding-left: 0 !important;
+	padding-right: 0 !important;
+}
+
+body.toplevel_page_mobile-pasal-options #wpbody-content {
+	padding-bottom: 0 !important;
+}
+
+body.toplevel_page_mobile-pasal-options #wpfooter {
+	display: none !important;
+}
+
+/* ── Reset & Container ── */
+.bopt-app-wrap {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	box-sizing: border-box;
+	min-height: calc(100vh - 32px);
+	background: #f8fafc;
+	display: flex;
+	flex-direction: column;
+	color: #0f172a;
+}
+
+.bopt-app-wrap *,
+.bopt-app-wrap *::before,
+.bopt-app-wrap *::after {
+	box-sizing: border-box;
+}
+
+/* ── 1. Sticky Top Bar ── */
+.bopt-topbar {
+	position: sticky;
+	top: 32px;
+	z-index: 1000;
+	background: #0f172a;
+	border-bottom: 3px solid #0066cc;
+	padding: 12px 28px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-topbar {
+		top: 46px;
+		padding: 10px 16px;
+	}
+}
+
+.bopt-topbar-left {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.bopt-sidebar-toggle {
+	display: none;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	color: #38bdf8;
+	width: 38px;
+	height: 38px;
+	border-radius: 8px;
+	font-size: 16px;
+	cursor: pointer;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.2s ease;
+}
+
+.bopt-sidebar-toggle:hover {
+	background: rgba(0, 102, 204, 0.25);
+	color: #ffffff;
+}
+
+@media screen and (max-width: 1024px) {
+	.bopt-sidebar-toggle {
+		display: inline-flex;
+	}
+}
+
+.bopt-brand {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.bopt-brand-icon {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: linear-gradient(135deg, #0066cc 0%, #004c99 100%);
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 19px;
+	box-shadow: 0 2px 10px rgba(0, 102, 204, 0.4);
+}
+
+.bopt-brand-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.bopt-brand-title {
+	font-size: 16.5px;
+	font-weight: 800;
+	color: #ffffff;
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+}
+
+.bopt-brand-badge {
+	font-size: 10px;
+	font-weight: 700;
+	color: #38bdf8;
+	text-transform: uppercase;
+	letter-spacing: 0.12em;
+}
+
+.bopt-topbar-right {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.bopt-save-alert {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: rgba(22, 163, 74, 0.2);
+	border: 1px solid #16a34a;
+	color: #86efac;
+	padding: 6px 14px;
+	border-radius: 20px;
+	font-size: 12px;
+	font-weight: 600;
+	animation: boptFadeIn 0.3s ease;
+}
+
+.bopt-messages-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	color: #e2e8f0;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	text-decoration: none;
+	font-size: 12.5px;
+	font-weight: 600;
+	padding: 8px 13px;
+	border-radius: 8px;
+	transition: all 0.2s ease;
+}
+
+.bopt-messages-btn:hover {
+	color: #ffffff;
+	background: rgba(0, 102, 204, 0.25);
+	border-color: rgba(0, 102, 204, 0.5);
+}
+
+.bopt-badge-pill {
+	background: #0066cc;
+	color: #ffffff;
+	font-size: 10.5px;
+	font-weight: 800;
+	padding: 1px 7px;
+	border-radius: 10px;
+	line-height: 1.3;
+}
+
+.bopt-preview-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #cbd5e1;
+	text-decoration: none;
+	font-size: 12.5px;
+	font-weight: 600;
+	padding: 8px 14px;
+	border-radius: 8px;
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	transition: all 0.2s ease;
+}
+
+.bopt-preview-btn:hover {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.08);
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+.bopt-save-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+	color: #ffffff;
+	font-size: 13px;
+	font-weight: 700;
+	padding: 8px 18px;
+	border-radius: 8px;
+	border: none;
+	cursor: pointer;
+	box-shadow: 0 4px 14px rgba(0, 102, 204, 0.4);
+	transition: all 0.2s ease;
+}
+
+.bopt-save-btn:hover {
+	transform: translateY(-1px);
+	box-shadow: 0 6px 18px rgba(0, 102, 204, 0.6);
+	background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+	color: #ffffff;
+}
+
+.bopt-save-btn:active {
+	transform: translateY(0);
+}
+
+.bopt-key-hint {
+	font-size: 10px;
+	font-weight: 700;
+	background: rgba(255, 255, 255, 0.2);
+	color: #ffffff;
+	padding: 2px 5px;
+	border-radius: 4px;
+	margin-left: 2px;
+	text-transform: uppercase;
+}
+
+/* ── 2. Workspace Split ── */
+.bopt-workspace {
+	display: flex;
+	flex: 1;
+	min-height: calc(100vh - 100px);
+}
+
+/* ── 3. Left Navigation Sidebar ── */
+.bopt-sidebar {
+	width: 300px;
+	min-width: 300px;
+	background: #0f172a;
+	border-right: 1px solid #1e293b;
+	display: flex;
+	flex-direction: column;
+	position: sticky;
+	top: 96px;
+	height: calc(100vh - 96px);
+	overflow-y: auto;
+	scrollbar-width: thin;
+	scrollbar-color: #334155 #0f172a;
+	transition: transform 0.25s ease;
+	z-index: 900;
+}
+
+.bopt-sidebar::-webkit-scrollbar {
+	width: 5px;
+}
+.bopt-sidebar::-webkit-scrollbar-track {
+	background: #0f172a;
+}
+.bopt-sidebar::-webkit-scrollbar-thumb {
+	background: #334155;
+	border-radius: 4px;
+}
+.bopt-sidebar::-webkit-scrollbar-thumb:hover {
+	background: #0066cc;
+}
+
+@media screen and (max-width: 1024px) {
+	.bopt-sidebar {
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		height: 100vh;
+		width: 320px;
+		max-width: 85vw;
+		transform: translateX(-100%);
+		box-shadow: 6px 0 24px rgba(0, 0, 0, 0.5);
+		z-index: 10001;
+	}
+	.bopt-sidebar.is-mobile-open {
+		transform: translateX(0);
+	}
+}
+
+/* Search Box with Clear Button */
+.bopt-search-box {
+	padding: 16px 16px 12px;
+	position: relative;
+	border-bottom: 1px solid #1e293b;
+}
+
+.bopt-search-box i.fa-magnifying-glass {
+	position: absolute;
+	left: 28px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: #94a3b8;
+	font-size: 13px;
+	pointer-events: none;
+}
+
+.bopt-search-box input {
+	width: 100%;
+	padding: 9px 34px 9px 34px !important;
+	border-radius: 8px !important;
+	border: 1.5px solid #334155 !important;
+	background: #1e293b !important;
+	color: #ffffff !important;
+	font-size: 12.5px !important;
+	outline: none !important;
+	transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bopt-search-box input:focus {
+	border-color: #0066cc !important;
+	box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.3) !important;
+}
+
+.bopt-search-clear {
+	position: absolute;
+	right: 26px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: transparent;
+	border: none;
+	color: #94a3b8;
+	cursor: pointer;
+	padding: 4px;
+	font-size: 13px;
+	transition: color 0.2s ease;
+}
+
+.bopt-search-clear:hover {
+	color: #38bdf8;
+}
+
+/* Navigation Groups & Accordion */
+.bopt-nav {
+	flex: 1;
+	padding: 10px 10px 24px;
+}
+
+.bopt-nav-group {
+	margin-bottom: 12px;
+	border-radius: 8px;
+	background: rgba(30, 41, 59, 0.5);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	overflow: hidden;
+	transition: background 0.2s ease;
+}
+
+.bopt-nav-group.is-active-group {
+	background: rgba(0, 102, 204, 0.08);
+	border: 1px solid rgba(0, 102, 204, 0.3);
+}
+
+.bopt-nav-group-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	cursor: pointer;
+	user-select: none;
+	transition: all 0.18s ease;
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.bopt-nav-group-title:hover {
+	background: rgba(255, 255, 255, 0.06);
+}
+
+.bopt-group-title-left {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	font-size: 11.5px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #38bdf8;
+}
+
+.bopt-group-title-left i {
+	font-size: 12px;
+	color: #38bdf8;
+	width: 14px;
+	text-align: center;
+}
+
+.bopt-group-title-right {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.bopt-group-count {
+	font-size: 10px;
+	font-weight: 700;
+	background: #334155;
+	color: #cbd5e1;
+	padding: 1px 6px;
+	border-radius: 10px;
+}
+
+.bopt-nav-group.is-active-group .bopt-group-count {
+	background: #0066cc;
+	color: #ffffff;
+}
+
+.bopt-group-chevron {
+	font-size: 11px;
+	color: #94a3b8;
+	transition: transform 0.22s ease;
+}
+
+.bopt-nav-group.is-collapsed .bopt-group-chevron {
+	transform: rotate(-90deg);
+}
+
+.bopt-nav-group.is-collapsed .bopt-nav-list {
+	display: none;
+}
+
+/* Nav Items */
+.bopt-nav-list {
+	list-style: none;
+	margin: 0;
+	padding: 4px 6px 6px;
+}
+
+.bopt-nav-item {
+	margin-bottom: 2px;
+}
+
+.bopt-nav-link {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 12px;
+	color: #cbd5e1;
+	text-decoration: none;
+	font-size: 12.5px;
+	font-weight: 500;
+	border-radius: 6px;
+	transition: all 0.15s ease;
+	border-left: 3px solid transparent;
+}
+
+.bopt-nav-link i {
+	font-size: 13px;
+	width: 16px;
+	text-align: center;
+	color: #94a3b8;
+	transition: color 0.15s ease;
+	flex-shrink: 0;
+}
+
+.bopt-nav-label {
+	flex: 1;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.bopt-nav-link:hover {
+	color: #ffffff;
+	background: rgba(255, 255, 255, 0.08);
+}
+
+.bopt-nav-link:hover i {
+	color: #38bdf8;
+}
+
+.bopt-nav-item.is-active .bopt-nav-link {
+	background: #1e293b;
+	color: #ffffff;
+	font-weight: 700;
+	border-left-color: #0066cc;
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.bopt-nav-item.is-active .bopt-nav-link i {
+	color: #38bdf8;
+}
+
+/* Sidebar Footer */
+.bopt-sidebar-footer {
+	padding: 14px;
+	border-top: 1px solid #1e293b;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.bopt-accordion-toggle-all {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	width: 100%;
+	padding: 7px 12px;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid #334155;
+	border-radius: 6px;
+	color: #94a3b8;
+	font-size: 11.5px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.18s ease;
+}
+
+.bopt-accordion-toggle-all:hover {
+	background: rgba(255, 255, 255, 0.09);
+	color: #ffffff;
+	border-color: #0066cc;
+}
+
+.bopt-quick-tip {
+	display: flex;
+	gap: 9px;
+	background: rgba(0, 102, 204, 0.1);
+	border: 1px solid rgba(0, 102, 204, 0.25);
+	border-radius: 8px;
+	padding: 9px 11px;
+	font-size: 11px;
+	color: #cbd5e1;
+	line-height: 1.4;
+}
+
+.bopt-quick-tip i {
+	color: #38bdf8;
+	font-size: 13px;
+	flex-shrink: 0;
+	margin-top: 2px;
+}
+
+/* ── 4. Main Content Canvas ── */
+.bopt-content {
+	flex: 1;
+	padding: 28px 40px 80px;
+	max-width: 1300px;
+	min-width: 0;
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-content {
+		padding: 16px 12px 80px;
+	}
+}
+
+.bopt-breadcrumbs {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 11.5px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #64748b;
+	margin-bottom: 20px;
+}
+
+.bopt-breadcrumbs span.bopt-breadcrumb-sep {
+	color: #cbd5e1;
+}
+
+.bopt-breadcrumbs span.bopt-breadcrumb-active {
+	color: #0066cc;
+	font-weight: 700;
+}
+
+.bopt-tab-pane {
+	display: none;
+	animation: boptFadeIn 0.22s ease;
+}
+
+.bopt-tab-pane.is-active {
+	display: block;
+}
+
+@keyframes boptFadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(5px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.bopt-pane-header {
+	margin-bottom: 24px;
+}
+
+.bopt-pane-header h2 {
+	font-size: 24px;
+	font-weight: 800;
+	color: #0f172a;
+	margin: 0 0 6px 0;
+	letter-spacing: -0.02em;
+}
+
+.bopt-pane-header p {
+	font-size: 14px;
+	color: #64748b;
+	margin: 0;
+}
+
+/* ── 5. Setting Cards ── */
+.bopt-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 14px;
+	box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+	overflow: hidden;
+	margin-bottom: 24px;
+}
+
+.bopt-card-header {
+	padding: 20px 24px;
+	border-bottom: 1px solid #f1f5f9;
+	background: #f8fafc;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.bopt-card-header-icon {
+	width: 42px;
+	height: 42px;
+	border-radius: 12px;
+	background: rgba(0, 102, 204, 0.1);
+	color: #0066cc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 19px;
+	flex-shrink: 0;
+}
+
+.bopt-card-title {
+	font-size: 17px;
+	font-weight: 800;
+	color: #0f172a;
+	margin: 0 0 3px 0;
+	letter-spacing: -0.01em;
+}
+
+.bopt-card-desc {
+	font-size: 12.5px;
+	color: #64748b;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.bopt-card-body {
+	padding: 24px;
+}
+
+/* ── 6. Form Fields & 2-Column Responsive Layout ── */
+.bopt-field-grid {
+	display: flex;
+	flex-direction: column;
+}
+
+.bopt-field {
+	display: grid;
+	grid-template-columns: 290px 1fr;
+	gap: 28px;
+	padding: 18px 0;
+	border-bottom: 1px solid #f1f5f9;
+	align-items: start;
+}
+
+.bopt-field:first-child {
+	padding-top: 0;
+}
+
+.bopt-field:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+@media screen and (max-width: 900px) {
+	.bopt-field {
+		grid-template-columns: 1fr;
+		gap: 10px;
+	}
+}
+
+.bopt-field-info {
+	padding-top: 4px;
+}
+
+.bopt-label {
+	display: block;
+	font-size: 13.5px;
+	font-weight: 700;
+	color: #0f172a;
+	margin-bottom: 4px;
+}
+
+.bopt-desc {
+	font-size: 12px;
+	color: #64748b;
+	line-height: 1.45;
+	margin: 0;
+}
+
+.bopt-input-wrap {
+	width: 100%;
+}
+
+.bopt-text-input,
+.bopt-textarea {
+	width: 100% !important;
+	max-width: 100% !important;
+	background: #f8fafc !important;
+	border: 1.5px solid #cbd5e1 !important;
+	border-radius: 8px !important;
+	padding: 9px 13px !important;
+	font-size: 13px !important;
+	color: #0f172a !important;
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02) !important;
+	transition: all 0.2s ease !important;
+}
+
+.bopt-text-input:focus,
+.bopt-textarea:focus {
+	background: #ffffff !important;
+	border-color: #0066cc !important;
+	box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2) !important;
+	outline: none !important;
+}
+
+.bopt-textarea {
+	min-height: 80px;
+	line-height: 1.5 !important;
+	resize: vertical;
+}
+
+/* ── 7. Toggle Switch ── */
+.bopt-toggle-wrap {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.bopt-switch {
+	position: relative;
+	display: inline-block;
+	width: 48px;
+	height: 26px;
+	flex-shrink: 0;
+}
+
+.bopt-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+	position: absolute;
+}
+
+.bopt-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #cbd5e1;
+	border-radius: 26px;
+	transition: 0.25s;
+}
+
+.bopt-slider::before {
+	position: absolute;
+	content: "";
+	height: 20px;
+	width: 20px;
+	left: 3px;
+	bottom: 3px;
+	background-color: white;
+	border-radius: 50%;
+	transition: 0.25s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.bopt-switch input:checked + .bopt-slider {
+	background-color: #0f172a;
+}
+
+.bopt-switch input:checked + .bopt-slider::before {
+	transform: translateX(22px);
+	background-color: #0066cc;
+}
+
+.bopt-toggle-state {
+	font-size: 12px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	color: #64748b;
+}
+
+/* ── 8. Color Picker Wrap ── */
+.bopt-color-wrap {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	flex-wrap: wrap;
+}
+
+.bopt-color-hex-tag {
+	display: inline-block;
+	font-family: monospace;
+	font-size: 12px;
+	font-weight: 600;
+	background: #f1f5f9;
+	color: #0f172a;
+	padding: 4px 8px;
+	border-radius: 6px;
+	letter-spacing: 0.05em;
+	border: 1px solid #e2e8f0;
+}
+
+/* ── 9. Image Upload Box ── */
+.bopt-image {
+	display: flex;
+	gap: 16px;
+	align-items: flex-start;
+}
+
+.bopt-image-preview {
+	width: 88px;
+	height: 88px;
+	border-radius: 12px;
+	border: 2px dashed #cbd5e1;
+	background-color: #f1f5f9;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.bopt-image-placeholder {
+	color: #94a3b8;
+	font-size: 26px;
+}
+
+.bopt-image-controls {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.bopt-image-buttons {
+	display: flex;
+	gap: 8px;
+}
+
+.bopt-btn-gold {
+	background: #0066cc !important;
+	border-color: #0052a3 !important;
+	color: #ffffff !important;
+	font-weight: 700 !important;
+	padding: 6px 14px !important;
+	border-radius: 6px !important;
+	box-shadow: 0 1px 4px rgba(0, 102, 204, 0.3) !important;
+	cursor: pointer !important;
+	transition: all 0.2s ease !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	font-size: 12.5px !important;
+}
+
+.bopt-btn-gold:hover {
+	background: #004c99 !important;
+	color: #ffffff !important;
+}
+
+.bopt-image-clear {
+	color: #ef4444 !important;
+	border-color: #fecaca !important;
+	background: #fef2f2 !important;
+	font-weight: 600 !important;
+	padding: 6px 12px !important;
+	border-radius: 6px !important;
+	cursor: pointer !important;
+	display: inline-flex !important;
+	align-items: center !important;
+	gap: 6px !important;
+	font-size: 12.5px !important;
+}
+
+.bopt-image-clear:hover {
+	background: #fee2e2 !important;
+	color: #b91c1c !important;
+}
+
+/* ── 10. Visual Dividers ── */
+.bopt-divider {
+	display: flex;
+	align-items: center;
+	margin: 22px 0 16px;
+	text-align: center;
+}
+
+.bopt-divider::before,
+.bopt-divider::after {
+	content: "";
+	flex: 1;
+	border-bottom: 1px solid #e2e8f0;
+}
+
+.bopt-divider span {
+	padding: 4px 14px;
+	background: #f1f5f9;
+	color: #0f172a;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	border-radius: 20px;
+}
+
+/* ── 11. Sticky Bottom Floating Status Bar ── */
+.bopt-floating-save-bar {
+	position: sticky;
+	bottom: 0;
+	z-index: 999;
+	background: #0f172a;
+	border-top: 2px solid #0066cc;
+	padding: 12px 28px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.25);
+	margin-top: 36px;
+	border-radius: 12px 12px 0 0;
+}
+
+.bopt-floating-left {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 12.5px;
+	color: #e2e8f0;
+}
+
+.bopt-floating-status strong {
+	color: #38bdf8;
+}
+
+.bopt-floating-sep {
+	color: #475569;
+}
+
+.bopt-floating-tab {
+	color: #94a3b8;
+}
+
+.bopt-floating-right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.bopt-inbox-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	color: #38bdf8;
+	background: rgba(0, 102, 204, 0.15);
+	border: 1px solid rgba(0, 102, 204, 0.35);
+	padding: 7px 14px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.bopt-inbox-btn:hover {
+	background: rgba(0, 102, 204, 0.3);
+	color: #ffffff;
+}
+
+/* ── 12. CPT Quick Action Banner ── */
+.bopt-cpt-action-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+	border: 1px solid #334155;
+	border-left: 4px solid #0066cc;
+	border-radius: 12px;
+	padding: 18px 24px;
+	margin-bottom: 24px;
+	gap: 20px;
+	box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-cpt-action-box {
+		flex-direction: column;
+		align-items: flex-start;
+	}
+}
+
+.bopt-cpt-action-info {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.bopt-cpt-action-icon {
+	font-size: 26px;
+	color: #38bdf8;
+	width: 36px;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.bopt-cpt-action-info strong {
+	display: block;
+	font-size: 15px;
+	font-weight: 700;
+	color: #ffffff;
+	margin-bottom: 3px;
+}
+
+.bopt-cpt-action-info p {
+	font-size: 12.5px;
+	color: #cbd5e1;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.bopt-cpt-action-links {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+}
+
+.bopt-btn-gold-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: #0066cc;
+	color: #ffffff !important;
+	font-size: 12.5px;
+	font-weight: 700;
+	padding: 7px 14px;
+	border-radius: 6px;
+	text-decoration: none;
+	transition: all 0.2s ease;
+}
+
+.bopt-btn-gold-action:hover {
+	background: #004c99;
+	color: #ffffff;
+	transform: translateY(-1px);
+}
