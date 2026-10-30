@@ -68,10 +68,10 @@ add_action( 'after_setup_theme', 'mp_theme_setup' );
  * 3. Enqueue Frontend Styles and Scripts
  */
 function mp_enqueue_scripts() {
-	// Google Fonts (Plus Jakarta Sans, Instrument Serif, JetBrains Mono)
+	// Google Fonts
 	wp_enqueue_style(
 		'mp-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap',
+		'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap',
 		array(),
 		null
 	);
@@ -129,17 +129,6 @@ function mp_enqueue_scripts() {
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
 		'nonce'    => wp_create_nonce( 'mp_theme_nonce' ),
 	) );
-
-	// Homepage-specific Creative Studio Counter architecture
-	if ( is_front_page() ) {
-		$home_css = MP_THEME_DIR . '/assets/css/home.css';
-		$home_js  = MP_THEME_DIR . '/assets/js/home.js';
-		$hcss_ver = file_exists( $home_css ) ? (string) filemtime( $home_css ) : MP_VERSION;
-		$hjs_ver  = file_exists( $home_js ) ? (string) filemtime( $home_js ) : MP_VERSION;
-
-		wp_enqueue_style( 'mp-home-style', MP_THEME_URI . '/assets/css/home.css', array( 'mp-main-style' ), $hcss_ver );
-		wp_enqueue_script( 'mp-home-script', MP_THEME_URI . '/assets/js/home.js', array( 'mp-main-script' ), $hjs_ver, true );
-	}
 }
 add_action( 'wp_enqueue_scripts', 'mp_enqueue_scripts' );
 

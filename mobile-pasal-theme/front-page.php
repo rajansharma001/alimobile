@@ -2,24 +2,8 @@
 /**
  * The template for displaying the front page / home page
  *
- * Professional Mobile & Tech Retail Business Shop template:
- *  01. Store Hero: Retail flagship showcase, store status pill, VAT & MDMS assurances
- *  02. Store Value Strip: 4 business guarantees (VAT invoice, MDMS registration, free data setup, on-site lab)
- *  03. Shop Departments: 6 retail shopping category cards + Trade-in exchange bar
- *  04. Retail Showroom & Catalog: Live search, brand filter tabs, stock status, specs, WhatsApp order/reserve
- *  05. Featured Flagship Spotlight: Titanium flagship with finish & storage selector, counter bundle offer
- *  06. Authorized Brand Corners: Apple, Samsung, Google Pixel, OnePlus, Xiaomi, Original Gear
- *  07. On-Site Diagnostic & Repair Desk: Interactive 3-step repair builder + live digital job slip
- *  08. Service Pricing & SLA Menu: Turnaround times, warranty breakdown, 3-step counter process
- *  09. Business Trust & Customer Guarantees: NTA compliance, genuine parts, cashless payment & EMI
- *  10. Verified Customer Reviews: Real client testimonials and ratings from Gulariya & Bardiya locals
- *  11. Store Location & Visit Hub: Live Nepal time open/close status, interactive map, walk-in VIP pass
- *
- * All copy remains editable from Theme Options via mp_opt().
- * Fully compatible with assets/js/main.js & assets/js/home.js.
- *
  * @package Mobile_Pasal
- * @version 5.0.0
+ * @version 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,1182 +12,1221 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 get_header();
 
-$img_dir     = MP_THEME_URI . '/assets/images/';
-$phone_raw   = mp_opt( 'contact_phone', '9804530786' );
-$phone_clean = mp_clean_phone( $phone_raw );
-$maps_link   = mp_opt( 'google_maps_link', 'https://www.google.com/maps/search/?api=1&query=Ali+Mobile+Center+Gulariya+Bardiya' );
-
-/* -------------------------------------------------------------------------
- * Hero slides (Theme Options: Hero Slider tab)
- * ---------------------------------------------------------------------- */
-$hx_slides = array(
-	array(
-		'badge'  => mp_opt( 'hero_slide1_badge', 'Official Sealed Stock • NTA MDMS Approved' ),
-		'title'  => mp_opt( 'hero_slide1_title', 'Next-Gen Smartphones,' ),
-		'hl'     => mp_opt( 'hero_slide1_title_highlight', 'Sealed with Official VAT Bill.' ),
-		'desc'   => mp_opt( 'hero_slide1_desc', 'Explore the latest iPhone 16 Pro, Samsung Galaxy S24 Ultra, and Google Pixel 9. 100% genuine sealed handsets with official Nepal warranty, free in-store data migration, and instant WhatsApp counter quotes.' ),
-		'btn1'   => mp_opt( 'hero_slide1_btn1_text', 'Shop In-Stock Handsets' ),
-		'url1'   => '#catalog',
-		'btn2'   => mp_opt( 'hero_slide1_btn2_text', "Ask Today's Best Price" ),
-		'url2'   => mp_get_whatsapp_link( 'Namaste Ali Mobile, aaja ko latest smartphone price list dinus' ),
-		'img'    => mp_opt( 'hero_slide1_image', '' ) ?: $img_dir . 'hero-iphone-hand.jpg',
-		'tag'    => __( 'Flagship Phones', 'mobile-pasal' ),
-		'meta'   => 'MDMS VERIFIED • OFFICIAL WARRANTY',
-	),
-	array(
-		'badge'  => mp_opt( 'hero_slide2_badge', 'Certified In-Store Apple Fix Cleanroom Lab' ),
-		'title'  => mp_opt( 'hero_slide2_title', 'Phone Problems Fixed' ),
-		'hl'     => mp_opt( 'hero_slide2_title_highlight', 'Right in Front of You.' ),
-		'desc'   => mp_opt( 'hero_slide2_desc', 'Cracked display, degraded battery, or water damage? Watch our certified technicians repair your device on our ESD workstation. Original-grade parts, TrueTone EEPROM transfer, and written testing warranties.' ),
-		'btn1'   => mp_opt( 'hero_slide2_btn1_text', 'Instant Repair Estimate' ),
-		'url1'   => '#repair-builder',
-		'btn2'   => mp_opt( 'hero_slide2_btn2_text', 'Call Technician' ),
-		'url2'   => 'tel:+' . $phone_clean,
-		'img'    => mp_opt( 'hero_slide2_image', '' ) ?: $img_dir . 'apple-fix-bench.jpg',
-		'tag'    => __( 'Apple Fix Lab', 'mobile-pasal' ),
-		'meta'   => '30-45 MIN REPAIR • ESD BENCH',
-	),
-	array(
-		'badge'  => mp_opt( 'hero_slide3_badge', '100% Genuine Power, Audio & Armor' ),
-		'title'  => mp_opt( 'hero_slide3_title', 'Original Audio, Chargers' ),
-		'hl'     => mp_opt( 'hero_slide3_title_highlight', '& Everyday Protection.' ),
-		'desc'   => mp_opt( 'hero_slide3_desc', 'Original Apple 20W/30W PD Fast Chargers, authentic AirPods Pro, Samsung Galaxy Buds, durable MagSafe armor cases, and bubble-free 9H tempered glass installed at the counter in minutes.' ),
-		'btn1'   => mp_opt( 'hero_slide3_btn1_text', 'Browse Accessories' ),
-		'url1'   => '#categories',
-		'btn2'   => mp_opt( 'hero_slide3_btn2_text', 'Order on WhatsApp' ),
-		'url2'   => mp_get_whatsapp_link( 'Namaste Ali Mobile, original accessories ko barema bujhna chahanchhu' ),
-		'img'    => mp_opt( 'hero_slide3_image', '' ) ?: $img_dir . 'shop-accessories-shelf.jpg',
-		'tag'    => __( 'Genuine Accessories', 'mobile-pasal' ),
-		'meta'   => 'ORIGINAL CHARGERS • AIRPODS',
-	),
-);
-
-$ticker_items = array(
-	__( 'Official VAT Invoice on All Handsets', 'mobile-pasal' ),
-	__( '100% NTA MDMS Registered Stock', 'mobile-pasal' ),
-	__( 'Free Walk-in Data Transfer & Setup', 'mobile-pasal' ),
-	__( 'Same-Day Screen & Battery Replacement', 'mobile-pasal' ),
-	__( 'Smartphone Trade-in & Exchange Available', 'mobile-pasal' ),
-	__( 'eSewa, Fonepay & Cashless Accepted', 'mobile-pasal' ),
-	__( 'Authentic Apple & Samsung 20W/45W PD Chargers', 'mobile-pasal' ),
-	__( 'Opposite District Administration Office, Gulariya-06', 'mobile-pasal' ),
-);
-
-/* -------------------------------------------------------------------------
- * Repair services (CPT: repair_service, fallback: sample data)
- * ---------------------------------------------------------------------- */
-$hx_services    = array();
-$services_query = new WP_Query( array(
-	'post_type'      => 'repair_service',
-	'posts_per_page' => 6,
-	'post_status'    => 'publish',
-) );
-if ( $services_query->have_posts() ) {
-	while ( $services_query->have_posts() ) {
-		$services_query->the_post();
-		$sid           = get_the_ID();
-		$hx_services[] = array(
-			'title'      => get_the_title(),
-			'excerpt'    => wp_trim_words( get_the_excerpt(), 28 ),
-			'turnaround' => get_post_meta( $sid, '_mp_service_turnaround', true ) ?: '30-45 Mins',
-			'price'      => get_post_meta( $sid, '_mp_service_price', true ) ?: __( 'Quoted at Counter', 'mobile-pasal' ),
-			'warranty'   => get_post_meta( $sid, '_mp_service_warranty', true ) ?: __( '90 Days Testing Warranty', 'mobile-pasal' ),
-			'badge'      => get_post_meta( $sid, '_mp_service_badge', true ) ?: __( 'Original-Grade Parts', 'mobile-pasal' ),
-			'models'     => get_post_meta( $sid, '_mp_service_models', true ),
-		);
-	}
-	wp_reset_postdata();
-} else {
-	foreach ( mp_get_default_repair_services_data() as $r ) {
-		$hx_services[] = array(
-			'title'      => $r['title'],
-			'excerpt'    => $r['excerpt'],
-			'turnaround' => $r['turnaround'],
-			'price'      => $r['price'],
-			'warranty'   => $r['warranty'],
-			'badge'      => $r['badge'],
-			'models'     => isset( $r['models'] ) ? $r['models'] : '',
-		);
-	}
-}
-$hx_services = array_slice( $hx_services, 0, 6 );
-
-/* -------------------------------------------------------------------------
- * Handsets (CPT: handset, fallback: sample data)
- * ---------------------------------------------------------------------- */
-$hx_products   = array();
-$handset_query = new WP_Query( array(
-	'post_type'      => 'handset',
-	'posts_per_page' => 12,
-	'post_status'    => 'publish',
-) );
-if ( $handset_query->have_posts() ) {
-	while ( $handset_query->have_posts() ) {
-		$handset_query->the_post();
-		$pid         = get_the_ID();
-		$brand_terms = get_the_terms( $pid, 'device_brand' );
-		$specs       = get_post_meta( $pid, '_mp_spec_screen', true );
-		$hx_products[] = array(
-			'title'      => get_the_title(),
-			'brand_slug' => ( ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ) ? strtolower( $brand_terms[0]->slug ) : 'all',
-			'brand_name' => ( ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ) ? $brand_terms[0]->name : __( 'Smartphone', 'mobile-pasal' ),
-			'badge'      => get_post_meta( $pid, '_mp_badge', true ) ?: __( 'Sealed Box', 'mobile-pasal' ),
-			'price'      => get_post_meta( $pid, '_mp_price', true ),
-			'old_price'  => get_post_meta( $pid, '_mp_old_price', true ),
-			'rating'     => get_post_meta( $pid, '_mp_rating', true ) ?: '4.9',
-			'reviews'    => get_post_meta( $pid, '_mp_reviews_count', true ) ?: '38',
-			'img'        => mp_get_handset_img_url( $pid ),
-			'specs'      => $specs ? $specs : wp_trim_words( get_the_excerpt(), 14 ),
-		);
-	}
-	wp_reset_postdata();
-} else {
-	foreach ( mp_get_default_handsets_data() as $h ) {
-		$hx_products[] = array(
-			'title'      => $h['title'],
-			'brand_slug' => strtolower( $h['brand'] ),
-			'brand_name' => $h['brand'],
-			'badge'      => $h['badge'],
-			'price'      => $h['price'],
-			'old_price'  => $h['old_price'],
-			'rating'     => $h['rating'],
-			'reviews'    => $h['reviews'],
-			'img'        => mp_asset_img( $h['image'] ),
-			'specs'      => $h['screen'],
-		);
-	}
+// Hero Slide 1
+$slide1_title = mp_opt( 'hero_slide1_title', 'Experience Next-Gen Flagships & Precision Care.' );
+$slide1_desc  = mp_opt( 'hero_slide1_desc', 'Discover the latest iPhone 16 Series, Samsung Galaxy S24 Ultra, and Google Pixel 9. Official NTA-approved stock, verified IMEI bill, free data migration, and instant WhatsApp counter quotes.' );
+$slide1_btn1  = mp_opt( 'hero_slide1_btn1_text', 'Explore Handsets' );
+$slide1_btn2  = mp_opt( 'hero_slide1_btn2_text', "Ask Today's Price" );
+$slide1_img   = mp_opt( 'hero_slide1_image', '' );
+if ( empty( $slide1_img ) ) {
+	$slide1_img = MP_THEME_URI . '/assets/images/hero-iphone-hand.jpg';
 }
 
-/* -------------------------------------------------------------------------
- * Reviews (CPT: mp_review, fallback: sample data)
- * ---------------------------------------------------------------------- */
-$hx_reviews    = array();
-$reviews_query = new WP_Query( array(
-	'post_type'      => 'mp_review',
-	'posts_per_page' => 6,
-	'post_status'    => 'publish',
-) );
-if ( $reviews_query->have_posts() ) {
-	while ( $reviews_query->have_posts() ) {
-		$reviews_query->the_post();
-		$rid          = get_the_ID();
-		$hx_reviews[] = array(
-			'name'     => get_the_title(),
-			'location' => get_post_meta( $rid, '_mp_review_location', true ) ?: 'Gulariya, Bardiya',
-			'product'  => get_post_meta( $rid, '_mp_review_product', true ) ?: 'Verified Store Customer',
-			'content'  => wp_strip_all_tags( get_the_content() ),
-		);
-	}
-	wp_reset_postdata();
-} else {
-	foreach ( mp_get_default_testimonials_data() as $t ) {
-		$hx_reviews[] = array(
-			'name'     => $t['name'],
-			'location' => $t['location'],
-			'product'  => $t['product'],
-			'content'  => $t['content'],
-		);
-	}
+// Hero Slide 2
+$slide2_title = mp_opt( 'hero_slide2_title', "Gulariya's Premier Apple Fix Laboratory." );
+$slide2_desc  = mp_opt( 'hero_slide2_desc', 'Screen broken, battery drained, or phone dropped in water? We repair right in front of you at our on-site workstation. Original-grade parts, TrueTone display calibration, and honest diagnostics with zero hidden costs.' );
+$slide2_btn1  = mp_opt( 'hero_slide2_btn1_text', 'Start Repair Estimate' );
+$slide2_btn2  = mp_opt( 'hero_slide2_btn2_text', 'Call Technician' );
+$slide2_img   = mp_opt( 'hero_slide2_image', '' );
+if ( empty( $slide2_img ) ) {
+	$slide2_img = MP_THEME_URI . '/assets/images/apple-fix-bench.jpg';
 }
 
-$wa_icon    = '<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.23-8.24 8.23-1.48 0-2.93-.39-4.19-1.15l-.3-.17-3.12.82.83-3.04-.2-.32a8.188 8.188 0 0 1-1.26-4.38c.01-4.54 3.7-8.24 8.25-8.24M8.53 7.33c-.16 0-.43.06-.66.31-.22.25-.87.86-.87 2.07 0 1.22.89 2.39 1 2.56.14.17 1.76 2.67 4.25 3.73.59.27 1.05.42 1.41.53.59.19 1.13.16 1.56.1.48-.07 1.46-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.16-.48-.27-.25-.14-1.47-.74-1.69-.82-.23-.08-.37-.12-.56.12-.16.25-.64.81-.78.97-.15.17-.29.19-.53.07-.26-.13-1.06-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.12-.24-.01-.39.11-.5.11-.11.27-.29.37-.44.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.11-.56-1.35-.77-1.84-.2-.48-.4-.42-.56-.43-.14 0-.3-.01-.47-.01z"/></svg>';
-$arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+// Hero Slide 3
+$slide3_title = mp_opt( 'hero_slide3_title', 'Original Audio, PD Chargers & Gear.' );
+$slide3_desc  = mp_opt( 'hero_slide3_desc', 'Power and protect your device with authentic Apple AirPods, Galaxy Buds, 20W/30W/65W PD Fast Chargers, 9H tempered glass, MagSafe protective armor, and instant eSewa merchant top-up services.' );
+$slide3_btn1  = mp_opt( 'hero_slide3_btn1_text', 'Browse Accessories' );
+$slide3_btn2  = mp_opt( 'hero_slide3_btn2_text', 'Order on WhatsApp' );
+$slide3_img   = mp_opt( 'hero_slide3_image', '' );
+if ( empty( $slide3_img ) ) {
+	$slide3_img = MP_THEME_URI . '/assets/images/shop-accessories-shelf.jpg';
+}
 ?>
 
-<main class="front-page-main hx biz-shop">
+<main>
 
-<!-- =========================================================================
-     01. HERO SECTION: Modern Retail Business Showcase
-     ========================================================================= -->
-<section class="hx-hero biz-hero" data-hx-hero aria-label="<?php esc_attr_e( 'Welcome to Ali Mobile Center', 'mobile-pasal' ); ?>">
-	<div class="wrap hx-hero-inner biz-hero-grid">
-		<div class="hx-hero-copy biz-hero-content">
-			<div class="biz-pill-badge-row">
-				<div class="hx-status biz-store-status" data-hx-open-status data-open="9" data-close="20">
-					<span class="hx-status-dot"></span>
-					<span class="hx-status-text"><?php esc_html_e( 'Gulariya Store: Open Now', 'mobile-pasal' ); ?></span>
-					<span class="hx-status-sep" aria-hidden="true">•</span>
-					<span><?php esc_html_e( 'Opp. DAO Office', 'mobile-pasal' ); ?></span>
-				</div>
-				<span class="biz-badge-trust"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <?php esc_html_e( 'Authorized MDMS & VAT Billing', 'mobile-pasal' ); ?></span>
-			</div>
+<!-- Hero Slider Section -->
+<section class="hero-slider-section">
+	<div class="hero-slider-container">
 
-			<div class="hx-copy-stack biz-copy-stack">
-				<?php foreach ( $hx_slides as $i => $s ) : $tag = ( 0 === $i ) ? 'h1' : 'h2'; ?>
-					<div class="hx-copy<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hx-copy="<?php echo esc_attr( $i ); ?>"<?php echo 0 === $i ? '' : ' aria-hidden="true"'; ?>>
-						<span class="biz-eyebrow"><?php echo esc_html( $s['badge'] ); ?></span>
-						<<?php echo $tag; ?> class="biz-hero-title">
-							<?php echo esc_html( $s['title'] ); ?>
-							<span class="biz-title-gradient"><?php echo esc_html( $s['hl'] ); ?></span>
-						</<?php echo $tag; ?>>
-						<p class="biz-hero-desc"><?php echo esc_html( $s['desc'] ); ?></p>
-						<div class="biz-cta-group">
-							<a class="biz-btn biz-btn-primary" href="<?php echo esc_url( $s['url1'] ); ?>">
-								<i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
-								<span><?php echo esc_html( $s['btn1'] ); ?></span><?php echo $arrow_icon; // phpcs:ignore ?>
-							</a>
-							<a class="biz-btn biz-btn-secondary" href="<?php echo esc_url( $s['url2'] ); ?>"<?php echo 0 === strpos( $s['url2'], 'tel:' ) ? '' : ' target="_blank" rel="noopener"'; ?>>
-								<?php echo 0 === strpos( $s['url2'], 'tel:' ) ? '<i class="fa-solid fa-phone" aria-hidden="true"></i>' : $wa_icon; // phpcs:ignore ?>
-								<span><?php echo esc_html( $s['btn2'] ); ?></span>
-							</a>
-						</div>
-					</div>
-				<?php endforeach; ?>
-			</div>
+		<!-- Slide 1: Flagships -->
+		<div class="hero-slide active" data-slide-index="0">
+			<div class="wrap hero-grid">
+				<div class="hero-content-col fade-up in-view">
+					<h1 class="hero-title"><?php echo esc_html( $slide1_title ); ?></h1>
+					<p class="hero-description"><?php echo esc_html( $slide1_desc ); ?></p>
 
-			<!-- Quick Slide Department Navigation -->
-			<div class="biz-hero-nav" role="tablist" aria-label="<?php esc_attr_e( 'Featured Store Departments', 'mobile-pasal' ); ?>">
-				<?php foreach ( $hx_slides as $i => $s ) : ?>
-					<button type="button" class="biz-nav-tab<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hx-go="<?php echo esc_attr( $i ); ?>" role="tab" aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>">
-						<span class="biz-tab-icon"><i class="fa-solid <?php echo 0 === $i ? 'fa-mobile-screen-button' : ( 1 === $i ? 'fa-screwdriver-wrench' : 'fa-headphones' ); ?>" aria-hidden="true"></i></span>
-						<div class="biz-tab-text">
-							<span class="biz-tab-title"><?php echo esc_html( $s['tag'] ); ?></span>
-							<small><?php echo esc_html( $s['meta'] ); ?></small>
-						</div>
-					</button>
-				<?php endforeach; ?>
-			</div>
-		</div>
-
-		<!-- Right Side: Retail Product Display Stage -->
-		<div class="biz-hero-stage-col" data-hx-tilt>
-			<div class="biz-stage-card">
-				<div class="biz-stage-top-tag">
-					<span><i class="fa-solid fa-check-circle" aria-hidden="true"></i> <?php esc_html_e( 'In-Store Ready Stock', 'mobile-pasal' ); ?></span>
-					<strong><?php esc_html_e( 'Gulariya-06 Branch', 'mobile-pasal' ); ?></strong>
-				</div>
-				<div class="hx-deck biz-deck" data-hx-deck>
-					<?php foreach ( $hx_slides as $i => $s ) : ?>
-						<figure class="hx-deck-card biz-product-card-hero" data-hx-card="<?php echo esc_attr( $i ); ?>" data-pos="<?php echo esc_attr( $i ); ?>">
-							<span class="biz-card-badge"><?php echo esc_html( $s['badge'] ); ?></span>
-							<div class="biz-deck-img-wrap">
-								<img src="<?php echo esc_url( $s['img'] ); ?>" alt="<?php echo esc_attr( $s['tag'] ); ?>"<?php echo 0 === $i ? ' fetchpriority="high"' : ' loading="lazy"'; ?>>
-							</div>
-							<figcaption class="biz-deck-caption">
-								<div>
-									<strong><?php echo esc_html( $s['tag'] ); ?></strong>
-									<span><?php esc_html_e( 'Authorized Nepal Warranty', 'mobile-pasal' ); ?></span>
-								</div>
-								<span class="biz-deck-arrow"><?php echo $arrow_icon; // phpcs:ignore ?></span>
-							</figcaption>
-						</figure>
-					<?php endforeach; ?>
-				</div>
-
-				<div class="biz-stage-floating-pills">
-					<div class="biz-float-pill biz-pill-rating">
-						<span class="biz-stars" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-						<strong>4.9 / 5</strong>
-						<small><?php esc_html_e( 'Google Customer Score', 'mobile-pasal' ); ?></small>
-					</div>
-					<div class="biz-float-pill biz-pill-express">
-						<div class="biz-pill-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div>
-						<div>
-							<strong><?php echo esc_html( mp_opt( 'lab_stat3_num', '30-45 Mins' ) ); ?></strong>
-							<small><?php esc_html_e( 'Walk-In Repair & Setup', 'mobile-pasal' ); ?></small>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Continuous Retail Store Ticker -->
-	<div class="hx-ticker biz-ticker" aria-hidden="true">
-		<div class="hx-ticker-track">
-			<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $ticker_items as $t ) : ?>
-				<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
-			<?php endforeach; endfor; ?>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     02. STORE VALUES BAR: 4 Pillars of a Premier Tech Business
-     ========================================================================= -->
-<section class="biz-trust-strip">
-	<div class="wrap biz-trust-grid">
-		<div class="biz-trust-item">
-			<div class="biz-trust-icon"><i class="fa-solid fa-file-invoice-dollar" aria-hidden="true"></i></div>
-			<div>
-				<strong><?php esc_html_e( 'Official VAT Invoice', 'mobile-pasal' ); ?></strong>
-				<span><?php esc_html_e( '100% tax-paid, genuine stock with authorized warranty', 'mobile-pasal' ); ?></span>
-			</div>
-		</div>
-		<div class="biz-trust-item">
-			<div class="biz-trust-icon"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i></div>
-			<div>
-				<strong><?php esc_html_e( 'NTA MDMS Registered', 'mobile-pasal' ); ?></strong>
-				<span><?php esc_html_e( 'Fully compliant devices; zero risk of network disconnection', 'mobile-pasal' ); ?></span>
-			</div>
-		</div>
-		<div class="biz-trust-item">
-			<div class="biz-trust-icon"><i class="fa-solid fa-arrows-spin" aria-hidden="true"></i></div>
-			<div>
-				<strong><?php esc_html_e( 'Free Data Transfer', 'mobile-pasal' ); ?></strong>
-				<span><?php esc_html_e( 'Walk out with contacts, photos & apps ready on your new phone', 'mobile-pasal' ); ?></span>
-			</div>
-		</div>
-		<div class="biz-trust-item">
-			<div class="biz-trust-icon"><i class="fa-solid fa-shield-virus" aria-hidden="true"></i></div>
-			<div>
-				<strong><?php esc_html_e( 'On-Site Apple Fix Lab', 'mobile-pasal' ); ?></strong>
-				<span><?php esc_html_e( 'Precision microscope repairs across the counter in Gulariya', 'mobile-pasal' ); ?></span>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     03. SHOP BY DEPARTMENT: Retail Category Cards & Trade-In Bar (#categories)
-     ========================================================================= -->
-<section id="categories" class="biz-categories-section">
-	<div class="wrap">
-		<header class="biz-section-head">
-			<div>
-				<span class="hx-kicker"><?php echo esc_html( mp_opt( 'categories_kicker', 'Store Departments' ) ); ?></span>
-				<h2 class="biz-section-title"><?php echo esc_html( mp_opt( 'categories_title', 'Shop by Department' ) ); ?></h2>
-			</div>
-			<p class="biz-section-sub"><?php echo esc_html( mp_opt( 'categories_subtitle', 'Find authorized flagship smartphones, certified on-site repairs, and original Apple & Samsung gear under one roof in Gulariya.' ) ); ?></p>
-		</header>
-
-		<?php
-		$biz_departments = array(
-			array(
-				'title' => __( 'Flagship Handsets & iPhones', 'mobile-pasal' ),
-				'desc'  => __( 'Sealed iPhone 16 Series, Galaxy S24 Ultra & Google Pixel with official Nepal VAT billing.', 'mobile-pasal' ),
-				'tag'   => __( '50+ In Stock', 'mobile-pasal' ),
-				'link'  => '#catalog',
-				'img'   => $img_dir . 'iphone-16-colors.jpg',
-				'icon'  => 'fa-mobile-screen-button',
-			),
-			array(
-				'title' => __( 'Budget & Mid-Range Phones', 'mobile-pasal' ),
-				'desc'  => __( 'Top value Redmi Note, OnePlus Nord & Samsung Galaxy A-series with warranty.', 'mobile-pasal' ),
-				'tag'   => __( 'Popular', 'mobile-pasal' ),
-				'link'  => '#catalog',
-				'img'   => $img_dir . 'hero-iphone-hand.jpg',
-				'icon'  => 'fa-tag',
-			),
-			array(
-				'title' => __( 'Apple Fix & Repair Lab', 'mobile-pasal' ),
-				'desc'  => __( 'On-site screen replacement, BMS battery health restore & board-level microscope fixes.', 'mobile-pasal' ),
-				'tag'   => __( '30-45 Min Fix', 'mobile-pasal' ),
-				'link'  => '#repair-builder',
-				'img'   => $img_dir . 'apple-fix-bench.jpg',
-				'icon'  => 'fa-screwdriver-wrench',
-			),
-			array(
-				'title' => __( 'Original Fast Chargers & Power', 'mobile-pasal' ),
-				'desc'  => __( 'Authentic Apple 20W/30W, Samsung 45W GaN adapters, and certified Type-C cables.', 'mobile-pasal' ),
-				'tag'   => __( 'Genuine PD', 'mobile-pasal' ),
-				'link'  => mp_get_whatsapp_link( 'Namaste Ali Mobile, original charger ko price dinus' ),
-				'img'   => $img_dir . 'acc-charger.jpg',
-				'icon'  => 'fa-bolt',
-			),
-			array(
-				'title' => __( 'AirPods & Original Audio', 'mobile-pasal' ),
-				'desc'  => __( 'Apple AirPods Pro 2, Galaxy Buds3, Bluetooth neckbands and smart audio gear.', 'mobile-pasal' ),
-				'tag'   => __( 'ANC Verified', 'mobile-pasal' ),
-				'link'  => mp_get_whatsapp_link( 'Namaste Ali Mobile, original earbuds ko price dinus' ),
-				'img'   => $img_dir . 'acc-airpods.jpg',
-				'icon'  => 'fa-headphones',
-			),
-			array(
-				'title' => __( 'Tough Armor & 9H Glass', 'mobile-pasal' ),
-				'desc'  => __( 'MagSafe shockproof cases and edge-to-edge tempered glass fitted bubble-free.', 'mobile-pasal' ),
-				'tag'   => __( 'Free Install', 'mobile-pasal' ),
-				'link'  => mp_get_whatsapp_link( 'Namaste Ali Mobile, mero phone ko case ra tempered glass chahiyo' ),
-				'img'   => $img_dir . 'acc-cases.jpg',
-				'icon'  => 'fa-shield-halved',
-			),
-		);
-		?>
-		<div class="biz-dept-grid">
-			<?php foreach ( $biz_departments as $dept ) :
-				$is_ext = 0 === strpos( $dept['link'], 'http' );
-				?>
-				<a href="<?php echo esc_url( $dept['link'] ); ?>" class="biz-dept-card"<?php echo $is_ext ? ' target="_blank" rel="noopener"' : ''; ?>>
-					<div class="biz-dept-thumb">
-						<img src="<?php echo esc_url( $dept['img'] ); ?>" alt="<?php echo esc_attr( $dept['title'] ); ?>" loading="lazy">
-						<span class="biz-dept-tag"><?php echo esc_html( $dept['tag'] ); ?></span>
-					</div>
-					<div class="biz-dept-body">
-						<div class="biz-dept-header">
-							<span class="biz-dept-icon"><i class="fa-solid <?php echo esc_attr( $dept['icon'] ); ?>" aria-hidden="true"></i></span>
-							<h3 class="biz-dept-title"><?php echo esc_html( $dept['title'] ); ?></h3>
-						</div>
-						<p class="biz-dept-desc"><?php echo esc_html( $dept['desc'] ); ?></p>
-						<span class="biz-dept-link-text">
-							<span><?php esc_html_e( 'Explore Department', 'mobile-pasal' ); ?></span>
-							<?php echo $arrow_icon; // phpcs:ignore ?>
-						</span>
-					</div>
-				</a>
-			<?php endforeach; ?>
-		</div>
-
-		<!-- Interactive Trade-In / Exchange Counter Banner -->
-		<div class="biz-tradein-bar" data-hx-tradein>
-			<div class="biz-tradein-info">
-				<div class="biz-tradein-badge"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> <?php esc_html_e( 'Smartphone Trade-In Program', 'mobile-pasal' ); ?></div>
-				<h3 class="biz-tradein-title"><?php esc_html_e( 'Upgrade to a New Phone & Get Instant Counter Credit', 'mobile-pasal' ); ?></h3>
-				<p class="biz-tradein-desc"><?php esc_html_e( 'Bring your old phone in any working condition. We evaluate it on the spot and deduct the trade-in amount directly from your new handset invoice.', 'mobile-pasal' ); ?></p>
-				<div class="biz-tradein-selectors">
-					<div class="biz-select-group" data-trade-tier>
-						<span class="biz-select-label"><?php esc_html_e( 'Your Device:', 'mobile-pasal' ); ?></span>
-						<div class="biz-pills">
-							<button type="button" class="is-active" data-tier="iPhone 13 / 14 / 15 Series" data-min="52000" data-max="95000">iPhone 13–15</button>
-							<button type="button" data-tier="iPhone 11 / 12 Series" data-min="26000" data-max="46000">iPhone 11–12</button>
-							<button type="button" data-tier="Samsung Galaxy S / Z Series" data-min="38000" data-max="82000">Samsung S / Fold</button>
-							<button type="button" data-tier="Mid-Range Android" data-min="12000" data-max="32000">Android Mid-Range</button>
-						</div>
-					</div>
-					<div class="biz-select-group" data-trade-cond>
-						<span class="biz-select-label"><?php esc_html_e( 'Condition:', 'mobile-pasal' ); ?></span>
-						<div class="biz-pills">
-							<button type="button" class="is-active" data-cond="Mint / Clean" data-mult="1">Mint / Flawless</button>
-							<button type="button" data-cond="Good / Normal Wear" data-mult="0.82">Normal Wear</button>
-							<button type="button" data-cond="Cracked Screen / Low Battery" data-mult="0.58">Cracked / Low Battery</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="biz-tradein-valuation-box">
-				<span class="biz-val-label"><?php esc_html_e( 'Estimated Counter Value', 'mobile-pasal' ); ?></span>
-				<div class="biz-val-amount" data-trade-output>NPR 52,000 – 95,000</div>
-				<small data-trade-summary><?php esc_html_e( 'iPhone 13–15 • Mint / Flawless • Deducted from invoice', 'mobile-pasal' ); ?></small>
-				<a class="biz-btn biz-btn-primary biz-btn-block" data-trade-wa href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma purano phone exchange garna chahanchhu, valuation estimate NPR 52,000 - 95,000 dekhiyo.' ) ); ?>" target="_blank" rel="noopener">
-					<?php echo $wa_icon; // phpcs:ignore ?>
-					<span><?php esc_html_e( 'Claim Trade-In Value on WhatsApp', 'mobile-pasal' ); ?></span>
-				</a>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     04. RETAIL SHOWROOM & PRODUCT CATALOG (#catalog)
-     Preserves exact selectors for assets/js/main.js & assets/js/home.js:
-     #site-search, #search-clear-btn, .filter-tab-btn, .products-grid, .product-card
-     ========================================================================= -->
-<section id="catalog" class="biz-catalog-section" data-hx-catalog>
-	<div class="wrap">
-		<header class="biz-section-head biz-catalog-head">
-			<div>
-				<span class="hx-kicker"><?php esc_html_e( 'In-Store Inventory', 'mobile-pasal' ); ?></span>
-				<h2 class="biz-section-title"><?php esc_html_e( 'Browse Smartphones In Stock', 'mobile-pasal' ); ?></h2>
-				<p class="biz-section-sub"><?php esc_html_e( 'All devices are brand-new, sealed in box with official NTA approval and VAT invoice. In-store pickup or local delivery available.', 'mobile-pasal' ); ?></p>
-			</div>
-			<div class="biz-catalog-tools">
-				<div class="biz-view-toggle" role="group" aria-label="<?php esc_attr_e( 'View Mode', 'mobile-pasal' ); ?>">
-					<button type="button" class="is-active" data-hx-view="grid" title="<?php esc_attr_e( 'Grid View', 'mobile-pasal' ); ?>"><i class="fa-solid fa-grip" aria-hidden="true"></i></button>
-					<button type="button" data-hx-view="table" title="<?php esc_attr_e( 'Spec Sheet Table View', 'mobile-pasal' ); ?>"><i class="fa-solid fa-list-ul" aria-hidden="true"></i></button>
-				</div>
-				<div class="biz-sort-select-wrap">
-					<select data-hx-sort class="biz-sort-select" aria-label="<?php esc_attr_e( 'Sort inventory', 'mobile-pasal' ); ?>">
-						<option value="default"><?php esc_html_e( 'Featured Handsets', 'mobile-pasal' ); ?></option>
-						<option value="price-asc"><?php esc_html_e( 'Price: Low to High', 'mobile-pasal' ); ?></option>
-						<option value="price-desc"><?php esc_html_e( 'Price: High to Low', 'mobile-pasal' ); ?></option>
-						<option value="rating"><?php esc_html_e( 'Top Rated (4.9★)', 'mobile-pasal' ); ?></option>
-					</select>
-				</div>
-			</div>
-		</header>
-
-		<div class="biz-catalog-layout">
-			<!-- Left Sidebar Filter Console -->
-			<aside class="biz-catalog-sidebar">
-				<div class="biz-search-box" role="search">
-					<i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-					<input id="site-search" type="search" autocomplete="off" placeholder="<?php esc_attr_e( 'Search model or brand...', 'mobile-pasal' ); ?>" aria-label="<?php esc_attr_e( 'Search phones', 'mobile-pasal' ); ?>">
-					<button id="search-clear-btn" class="cat-search-clear" type="button" aria-label="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
-				</div>
-
-				<div class="biz-filter-group">
-					<span class="biz-filter-title"><?php esc_html_e( 'Filter by Brand', 'mobile-pasal' ); ?></span>
-					<div class="biz-filter-tabs" role="tablist" aria-label="<?php esc_attr_e( 'Brand filter', 'mobile-pasal' ); ?>">
-						<?php
-						$brand_filters = array(
-							'all'         => array( __( 'All Handsets', 'mobile-pasal' ), 'fa-layer-group' ),
-							'apple'       => array( 'Apple iPhone', 'fa-apple' ),
-							'samsung'     => array( 'Samsung Galaxy', 'fa-mobile-screen' ),
-							'google'      => array( 'Google Pixel', 'fa-google' ),
-							'oneplus'     => array( 'OnePlus', 'fa-plus' ),
-							'xiaomi'      => array( 'Xiaomi / Redmi', 'fa-android' ),
-							'accessories' => array( __( 'Accessories', 'mobile-pasal' ), 'fa-headphones' ),
-						);
-						foreach ( $brand_filters as $key => $bf ) :
-							$count = 'all' === $key ? count( $hx_products ) : count( array_filter( $hx_products, function ( $p ) use ( $key ) { return $p['brand_slug'] === $key; } ) );
-							$icon_cls = 0 === strpos( $bf[1], 'fa-apple' ) || 0 === strpos( $bf[1], 'fa-google' ) || 0 === strpos( $bf[1], 'fa-android' ) ? 'fa-brands ' . $bf[1] : 'fa-solid ' . $bf[1];
-							?>
-							<button type="button" class="filter-tab-btn biz-filter-btn<?php echo 'all' === $key ? ' active' : ''; ?>" data-filter="<?php echo esc_attr( $key ); ?>">
-								<span class="biz-filter-icon"><i class="<?php echo esc_attr( $icon_cls ); ?>" aria-hidden="true"></i></span>
-								<span class="biz-filter-name"><?php echo esc_html( $bf[0] ); ?></span>
-								<span class="biz-filter-count"><?php echo esc_html( $count ); ?></span>
-							</button>
-						<?php endforeach; ?>
-					</div>
-				</div>
-
-				<!-- Fast Stock Inquiry Widget -->
-				<div class="biz-side-cta-card">
-					<div class="biz-cta-card-icon"><i class="fa-solid fa-headset" aria-hidden="true"></i></div>
-					<h4><?php esc_html_e( 'Looking for a Specific Model?', 'mobile-pasal' ); ?></h4>
-					<p><?php esc_html_e( 'We receive new official stock weekly and can arrange custom models within 24 hours.', 'mobile-pasal' ); ?></p>
-					<a href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma specific phone model ko availability bujhna chahanchhu' ) ); ?>" class="biz-btn biz-btn-wa biz-btn-sm" target="_blank" rel="noopener">
-						<?php echo $wa_icon; // phpcs:ignore ?>
-						<span><?php esc_html_e( 'Inquire on WhatsApp', 'mobile-pasal' ); ?></span>
-					</a>
-				</div>
-			</aside>
-
-			<!-- Product Showcase Grid -->
-			<div class="biz-catalog-main">
-				<div class="products-grid biz-products-grid" data-hx-products-grid>
-					<?php foreach ( $hx_products as $idx => $p ) :
-						$numeric_price = (int) preg_replace( '/[^0-9]/', '', (string) $p['price'] );
-						?>
-						<article class="product-card biz-product-card" data-brand="<?php echo esc_attr( $p['brand_slug'] ); ?>" data-category="smartphones" data-order="<?php echo esc_attr( $idx ); ?>" data-price-num="<?php echo esc_attr( $numeric_price ?: 999999 ); ?>" data-rating-num="<?php echo esc_attr( $p['rating'] ); ?>" data-title="<?php echo esc_attr( $p['title'] ); ?>" data-price-str="<?php echo esc_attr( $p['price'] ?: __( 'Ask Counter', 'mobile-pasal' ) ); ?>">
-							<div class="biz-card-thumb-wrap">
-								<span class="biz-stock-tag"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?php echo esc_html( $p['badge'] ); ?></span>
-								<button type="button" class="hx-compare-btn biz-compare-toggle" data-compare-toggle="<?php echo esc_attr( $p['title'] ); ?>" title="<?php esc_attr_e( 'Add to comparison', 'mobile-pasal' ); ?>">
-									<i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
-									<span><?php esc_html_e( 'Compare', 'mobile-pasal' ); ?></span>
-								</button>
-								<img src="<?php echo esc_url( $p['img'] ); ?>" alt="<?php echo esc_attr( $p['title'] ); ?>" loading="lazy">
-							</div>
-							<div class="biz-card-content">
-								<div class="biz-card-brand-meta">
-									<span class="biz-brand-name"><?php echo esc_html( $p['brand_name'] ); ?></span>
-									<span class="biz-rating"><i class="fa-solid fa-star" aria-hidden="true"></i> <?php echo esc_html( $p['rating'] ); ?> <em>(<?php echo esc_html( $p['reviews'] ); ?>)</em></span>
-								</div>
-								<h3 class="product-title biz-card-title"><?php echo esc_html( $p['title'] ); ?></h3>
-								<p class="product-specs biz-card-specs"><?php echo esc_html( $p['specs'] ); ?></p>
-								<div class="biz-card-perks">
-									<span><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> <?php esc_html_e( 'VAT Bill Included', 'mobile-pasal' ); ?></span>
-									<span><i class="fa-solid fa-rotate" aria-hidden="true"></i> <?php esc_html_e( 'Exchange OK', 'mobile-pasal' ); ?></span>
-								</div>
-								<div class="biz-card-footer">
-									<div class="biz-price-block">
-										<?php if ( ! empty( $p['price'] ) ) : ?>
-											<span class="biz-price-current"><?php echo esc_html( $p['price'] ); ?></span>
-											<?php if ( ! empty( $p['old_price'] ) ) : ?><s class="biz-price-old"><?php echo esc_html( $p['old_price'] ); ?></s><?php endif; ?>
-										<?php else : ?>
-											<span class="biz-price-current"><?php esc_html_e( 'Best Price at Counter', 'mobile-pasal' ); ?></span>
-										<?php endif; ?>
-									</div>
-									<a class="biz-btn biz-btn-wa-compact" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $p['title'] . ' ko best price ra in-stock availability dinus' ) ); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr( sprintf( __( 'Ask price for %s on WhatsApp', 'mobile-pasal' ), $p['title'] ) ); ?>">
-										<?php echo $wa_icon; // phpcs:ignore ?>
-										<span><?php esc_html_e( 'Ask / Order', 'mobile-pasal' ); ?></span>
-									</a>
-								</div>
-							</div>
-						</article>
-					<?php endforeach; ?>
-				</div>
-
-				<!-- Live Comparison Tray -->
-				<div class="hx-compare-tray biz-compare-tray" data-hx-compare-tray hidden>
-					<div class="biz-compare-info">
-						<strong><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> <?php esc_html_e( 'Phone Comparison Tray', 'mobile-pasal' ); ?> (<span data-compare-count>0</span>/3)</strong>
-						<button type="button" class="biz-compare-clear" data-compare-clear><?php esc_html_e( 'Clear All', 'mobile-pasal' ); ?></button>
-					</div>
-					<div class="biz-compare-slots" data-compare-slots></div>
-					<a class="biz-btn biz-btn-primary biz-btn-sm" data-compare-wa href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
-						<?php echo $wa_icon; // phpcs:ignore ?>
-						<span><?php esc_html_e( 'Get Compare Recommendation on WhatsApp', 'mobile-pasal' ); ?></span>
-					</a>
-				</div>
-
-				<!-- Empty State Notice -->
-				<div id="catalog-empty-notice" class="catalog-empty-notice biz-empty-state" aria-live="polite">
-					<div class="biz-empty-icon"><i class="fa-solid fa-box-open" aria-hidden="true"></i></div>
-					<h3><?php esc_html_e( 'No Matching Phones Found', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'We may have this model in our offline backroom inventory. Chat with our technician directly on WhatsApp.', 'mobile-pasal' ); ?></p>
-					<a class="biz-btn biz-btn-wa" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
-						<?php echo $wa_icon; // phpcs:ignore ?>
-						<span><?php esc_html_e( 'Ask Store Concierge on WhatsApp', 'mobile-pasal' ); ?></span>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     05. FEATURED DEAL OF THE MONTH: Flagship Stage & Configurator (#deal)
-     ========================================================================= -->
-<?php
-$spotlight_img = mp_opt( 'spotlight_image', '' ) ?: $img_dir . 'iphone-16-pro-max.jpg';
-$spot_title    = mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' );
-?>
-<section id="deal" class="biz-deal-section" data-hx-spot data-finish="desert">
-	<div class="wrap">
-		<div class="biz-deal-container">
-			<div class="biz-deal-copy">
-				<div class="biz-deal-badge">
-					<i class="fa-brands fa-apple" aria-hidden="true"></i>
-					<span><?php echo esc_html( mp_opt( 'spotlight_badge', 'Official Flagship of the Month' ) ); ?></span>
-				</div>
-				<h2 class="biz-deal-title"><?php echo esc_html( $spot_title ); ?></h2>
-				<p class="biz-deal-sub"><?php echo esc_html( mp_opt( 'spotlight_subtitle', 'Grade 5 Titanium design, A18 Pro silicon, 48MP Fusion camera system, and all-day battery life. Official sealed stock available with VAT bill & authorized Nepal warranty.' ) ); ?></p>
-
-				<!-- Specifications Checklist -->
-				<div class="biz-deal-spec-grid">
-					<div class="biz-spec-pill">
-						<i class="fa-solid fa-microchip" aria-hidden="true"></i>
-						<div>
-							<small><?php esc_html_e( 'Processor', 'mobile-pasal' ); ?></small>
-							<strong><?php echo esc_html( mp_opt( 'spotlight_chip', 'A18 Pro Silicon' ) ); ?></strong>
-						</div>
-					</div>
-					<div class="biz-spec-pill">
-						<i class="fa-solid fa-camera" aria-hidden="true"></i>
-						<div>
-							<small><?php esc_html_e( 'Optics', 'mobile-pasal' ); ?></small>
-							<strong><?php echo esc_html( mp_opt( 'spotlight_camera', '48MP Fusion + 5x Telephoto' ) ); ?></strong>
-						</div>
-					</div>
-					<div class="biz-spec-pill">
-						<i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
-						<div>
-							<small><?php esc_html_e( 'Material', 'mobile-pasal' ); ?></small>
-							<strong data-spot-finish-text><?php echo esc_html( mp_opt( 'spotlight_finish', 'Desert Titanium' ) ); ?></strong>
-						</div>
-					</div>
-					<div class="biz-spec-pill">
-						<i class="fa-solid fa-receipt" aria-hidden="true"></i>
-						<div>
-							<small><?php esc_html_e( 'Assurance', 'mobile-pasal' ); ?></small>
-							<strong><?php esc_html_e( 'VAT Bill + 1-Yr AppleCare', 'mobile-pasal' ); ?></strong>
-						</div>
-					</div>
-				</div>
-
-				<!-- Color & Storage Selector -->
-				<div class="biz-deal-configurator">
-					<div class="biz-config-group">
-						<span class="biz-config-label"><?php esc_html_e( 'Choose Finish:', 'mobile-pasal' ); ?></span>
-						<div class="hx-swatches biz-swatches" role="radiogroup" aria-label="<?php esc_attr_e( 'Choose finish', 'mobile-pasal' ); ?>">
-							<button type="button" class="hx-swatch is-active" data-finish-key="desert" data-finish-name="Desert Titanium" style="--sw:#c5a888" title="Desert Titanium"><span></span><em>Desert</em></button>
-							<button type="button" class="hx-swatch" data-finish-key="natural" data-finish-name="Natural Titanium" style="--sw:#a8a49d" title="Natural Titanium"><span></span><em>Natural</em></button>
-							<button type="button" class="hx-swatch" data-finish-key="white" data-finish-name="White Titanium" style="--sw:#f1f0ec" title="White Titanium"><span></span><em>White</em></button>
-							<button type="button" class="hx-swatch" data-finish-key="black" data-finish-name="Black Titanium" style="--sw:#383b40" title="Black Titanium"><span></span><em>Black</em></button>
-						</div>
-					</div>
-					<div class="biz-config-group">
-						<span class="biz-config-label"><?php esc_html_e( 'Capacity:', 'mobile-pasal' ); ?></span>
-						<div class="hx-storages biz-storages" role="radiogroup" aria-label="<?php esc_attr_e( 'Choose capacity', 'mobile-pasal' ); ?>">
-							<button type="button" class="hx-storage" data-storage="128GB">128GB</button>
-							<button type="button" class="hx-storage is-active" data-storage="256GB">256GB</button>
-							<button type="button" class="hx-storage" data-storage="512GB">512GB</button>
-							<button type="button" class="hx-storage" data-storage="1TB">1TB</button>
-						</div>
-					</div>
-				</div>
-
-				<div class="biz-deal-cta-row">
-					<a class="biz-btn biz-btn-primary biz-btn-lg" data-spot-wa href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 Pro (Desert Titanium, 256GB) ko aaja ko price ra availability dinus' ) ); ?>" target="_blank" rel="noopener">
-						<?php echo $wa_icon; // phpcs:ignore ?>
-						<span data-spot-cta-label><?php esc_html_e( 'Reserve Desert Titanium (256GB) on WhatsApp', 'mobile-pasal' ); ?></span>
-					</a>
-					<a class="biz-btn biz-btn-secondary biz-btn-lg" href="#catalog" data-hx-filter-jump="apple">
-						<span><?php esc_html_e( 'See All Apple Handsets', 'mobile-pasal' ); ?></span>
-						<?php echo $arrow_icon; // phpcs:ignore ?>
-					</a>
-				</div>
-			</div>
-
-			<!-- Product Showcase Image -->
-			<div class="biz-deal-media">
-				<div class="biz-deal-visual-card">
-					<img src="<?php echo esc_url( $spotlight_img ); ?>" alt="<?php echo esc_attr( $spot_title ); ?>" loading="lazy">
-					<div class="biz-deal-floating-badge">
-						<span class="hx-status-dot"></span>
-						<span data-spot-summary><?php esc_html_e( 'Desert Titanium • 256GB • Sealed Box', 'mobile-pasal' ); ?></span>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     06. AUTHORIZED BRAND CORNERS (#brands)
-     ========================================================================= -->
-<?php
-$biz_brands = array(
-	array( 'apple', 'Apple', __( 'iPhone, iPad & Apple Fix', 'mobile-pasal' ), 'fa-brands fa-apple' ),
-	array( 'samsung', 'Samsung', __( 'Galaxy S24, Z Fold & A-Series', 'mobile-pasal' ), 'fa-solid fa-mobile-screen-button' ),
-	array( 'google', 'Google Pixel', __( 'Pixel 9 & Tensor Silicon', 'mobile-pasal' ), 'fa-brands fa-google' ),
-	array( 'oneplus', 'OnePlus', __( 'OnePlus 12 & Nord Series', 'mobile-pasal' ), 'fa-solid fa-bolt' ),
-	array( 'xiaomi', 'Xiaomi', __( 'Xiaomi 14 & Redmi Note', 'mobile-pasal' ), 'fa-solid fa-microchip' ),
-	array( 'accessories', __( 'Original Gear', 'mobile-pasal' ), __( 'Anker, Apple, PD Chargers', 'mobile-pasal' ), 'fa-solid fa-headphones' ),
-);
-?>
-<section id="brands" class="biz-brands-section" data-hx-brands>
-	<div class="wrap">
-		<header class="biz-section-head biz-brands-head">
-			<div>
-				<span class="hx-kicker"><?php echo esc_html( mp_opt( 'brands_kicker', 'Authorized Ecosystem' ) ); ?></span>
-				<h2 class="biz-section-title"><?php echo esc_html( mp_opt( 'brands_title', 'Top Smartphone Brands In Store' ) ); ?></h2>
-			</div>
-			<p class="biz-section-sub"><?php echo esc_html( mp_opt( 'brands_subtitle', 'Tap any brand below to filter the showroom inventory directly.' ) ); ?></p>
-		</header>
-
-		<div class="brands-grid biz-brands-grid">
-			<?php foreach ( $biz_brands as $b ) : ?>
-				<button type="button" class="brand-card-link biz-brand-card" data-filter-brand="<?php echo esc_attr( $b[0] ); ?>">
-					<div class="biz-brand-icon"><i class="<?php echo esc_attr( $b[3] ); ?>" aria-hidden="true"></i></div>
-					<strong class="biz-brand-title"><?php echo esc_html( $b[1] ); ?></strong>
-					<span class="biz-brand-sub"><?php echo esc_html( $b[2] ); ?></span>
-					<span class="biz-brand-filter-pill"><?php esc_html_e( 'View Handsets →', 'mobile-pasal' ); ?></span>
-				</button>
-			<?php endforeach; ?>
-		</div>
-	</div>
-</section>
-
-<!-- =========================================================================
-     07. IN-STORE DIAGNOSTIC & REPAIR DESK (#repair-builder)
-     Preserves exact selectors for assets/js/main.js & assets/js/home.js:
-     #repair-builder, .device-pills-grid, .dev-pill-btn, .fault-cards-grid,
-     .fault-select-card, #builder-model-input, .quick-chip-btn, #ticket-device-val,
-     #ticket-model-val, #ticket-fault-val, #ticket-time-val, #ticket-warranty-val,
-     #builder-preview-text, #builder-send-whatsapp-btn
-     ========================================================================= -->
-<section id="repair-builder" class="biz-repair-section" data-hx-workbench>
-	<div class="wrap">
-		<header class="biz-section-head hx-on-dark">
-			<div>
-				<span class="hx-kicker"><?php echo esc_html( mp_opt( 'repair_kicker', 'In-Store Repair Department' ) ); ?></span>
-				<h2 class="biz-section-title"><?php echo esc_html( mp_opt( 'repair_title', 'Phone Problem? Get a Direct Counter Estimate' ) ); ?></h2>
-			</div>
-			<p class="biz-section-sub"><?php echo esc_html( mp_opt( 'repair_subtitle', 'Select your device and fault below. Your service estimate prints automatically on the digital job docket on the right. Send it to our technician for priority bench queueing.' ) ); ?></p>
-		</header>
-
-		<div class="biz-repair-grid">
-			<!-- Step Picker -->
-			<div class="biz-repair-steps">
-				<!-- Step 1: Device -->
-				<div class="biz-step-card">
-					<div class="biz-step-header">
-						<span class="biz-step-num">1</span>
-						<div>
-							<h3 class="biz-step-title"><?php esc_html_e( 'Which Phone Brand?', 'mobile-pasal' ); ?></h3>
-							<small><?php esc_html_e( 'Select your device brand for specialized diagnostics', 'mobile-pasal' ); ?></small>
-						</div>
-					</div>
-					<div class="device-pills-grid biz-device-grid" data-group="device">
-						<?php
-						$devices = array(
-							array( 'Apple iPhone', 'fa-brands fa-apple' ),
-							array( 'Samsung Galaxy', 'fa-solid fa-mobile-screen' ),
-							array( 'Google Pixel', 'fa-brands fa-google' ),
-							array( 'OnePlus', 'fa-solid fa-plus' ),
-							array( 'Xiaomi / Redmi', 'fa-brands fa-android' ),
-							array( 'Other Android', 'fa-solid fa-mobile-retro' ),
-						);
-						foreach ( $devices as $i => $dv ) :
-							?>
-							<button type="button" class="dev-pill-btn biz-dev-pill<?php echo 0 === $i ? ' active' : ''; ?>" data-device="<?php echo esc_attr( $dv[0] ); ?>">
-								<i class="<?php echo esc_attr( $dv[1] ); ?>" aria-hidden="true"></i>
-								<span><?php echo esc_html( $dv[0] ); ?></span>
-							</button>
-						<?php endforeach; ?>
-					</div>
-				</div>
-
-				<!-- Step 2: Fault Selection -->
-				<div class="biz-step-card">
-					<div class="biz-step-header">
-						<span class="biz-step-num">2</span>
-						<div>
-							<h3 class="biz-step-title"><?php esc_html_e( 'What is the Problem?', 'mobile-pasal' ); ?></h3>
-							<small><?php esc_html_e( 'Select the primary issue for parts quotation & bench turnaround', 'mobile-pasal' ); ?></small>
-						</div>
-					</div>
-					<div class="fault-cards-grid biz-fault-grid">
-						<?php
-						$faults = array(
-							array( 'Screen & Display', 'Cracked glass, lines, touch dead', 'Screen & Display (Cracked glass / black spots / touch dead)', '30-45 Mins', '90 Days Testing Warranty', 'fa-mobile-screen-button', 'screen', 'OLED Panel & Digitizer Ribbon' ),
-							array( 'Battery & BMS', 'Fast drain, shutdowns, swollen cell', 'Battery Replacement (Fast drain / sudden shutdown / swollen)', '20-30 Mins', '6 Months Battery Warranty', 'fa-battery-quarter', 'battery', 'Lithium Cell & BMS Health Tag-On' ),
-							array( 'Charging & Port', 'Slow, loose or zero charge input', 'Charging & Port (Slow charging / loose port / cable angle)', '30 Mins', '30 Days Service Warranty', 'fa-plug-circle-bolt', 'port', 'USB-C / Lightning Flex Assembly' ),
-							array( 'Water Damage', 'Dropped in liquid, no power on', 'Water Damage (Dropped in water / ultrasonic clean / IC)', '1-2 Hours', 'Component Warranty', 'fa-droplet', 'water', 'Full Board Ultrasonic De-Oxidation' ),
-							array( 'Camera & Audio', 'Blurry lens, mic or speaker muffled', 'Camera & Sound (Mic not working / speaker muffled / camera)', '45 Mins', '60 Days Testing Warranty', 'fa-camera', 'camera', 'Camera Sensor Module & Speaker' ),
-							array( 'Motherboard IC', 'No boot, no network, IC micro-solder', 'Motherboard Micro-Soldering (No power / no network / IC fault)', '1-2 Days', 'Component Warranty', 'fa-microchip', 'board', 'Power Management PMIC / Baseband' ),
-						);
-						foreach ( $faults as $i => $f ) :
-							?>
-							<button type="button" class="fault-select-card biz-fault-card<?php echo 0 === $i ? ' active' : ''; ?>" data-issue="<?php echo esc_attr( $f[2] ); ?>" data-time="<?php echo esc_attr( $f[3] ); ?>" data-warranty="<?php echo esc_attr( $f[4] ); ?>" data-hx-zone="<?php echo esc_attr( $f[6] ); ?>" data-hx-zone-label="<?php echo esc_attr( $f[7] ); ?>">
-								<span class="biz-fault-icon"><i class="fa-solid <?php echo esc_attr( $f[5] ); ?>" aria-hidden="true"></i></span>
-								<div class="biz-fault-details">
-									<strong><?php echo esc_html( $f[0] ); ?></strong>
-									<small><?php echo esc_html( $f[1] ); ?></small>
-								</div>
-								<span class="biz-fault-time-tag"><?php echo esc_html( $f[3] ); ?></span>
-							</button>
-						<?php endforeach; ?>
-					</div>
-				</div>
-
-				<!-- Step 3: Exact Model Input -->
-				<div class="biz-step-card">
-					<div class="biz-step-header">
-						<span class="biz-step-num">3</span>
-						<div>
-							<h3 class="biz-step-title"><?php esc_html_e( 'Exact Model (Optional)', 'mobile-pasal' ); ?></h3>
-							<small><?php esc_html_e( 'Type or tap your model to check instant parts stock', 'mobile-pasal' ); ?></small>
-						</div>
-					</div>
-					<label class="screen-reader-text" for="builder-model-input"><?php esc_html_e( 'Phone model', 'mobile-pasal' ); ?></label>
-					<input id="builder-model-input" class="biz-text-input" type="text" autocomplete="off" placeholder="<?php esc_attr_e( 'e.g. iPhone 13 Pro, Galaxy S23, Redmi Note 13', 'mobile-pasal' ); ?>">
-					<div class="biz-chip-suggestions">
-						<span class="biz-chip-label"><?php esc_html_e( 'Quick picks:', 'mobile-pasal' ); ?></span>
-						<?php foreach ( array( 'iPhone 15 Pro Max', 'iPhone 13', 'Galaxy S23 Ultra', 'Redmi Note 13 Pro' ) as $m ) : ?>
-							<button type="button" class="quick-chip-btn biz-chip" data-model="<?php echo esc_attr( $m ); ?>"><?php echo esc_html( $m ); ?></button>
-						<?php endforeach; ?>
-					</div>
-				</div>
-			</div>
-
-			<!-- Right Side: Digital Service Docket -->
-			<aside class="biz-receipt-aside" aria-label="<?php esc_attr_e( 'Digital Service Slip', 'mobile-pasal' ); ?>">
-				<div class="biz-docket-card" data-hx-receipt>
-					<div class="biz-docket-header">
-						<div class="biz-docket-brand">
-							<strong><?php echo esc_html( mp_opt( 'store_name', 'Ali Mobile Center & Apple Fix' ) ); ?></strong>
-							<span><?php esc_html_e( 'Gulariya-06, Bardiya • Ph: 9804530786', 'mobile-pasal' ); ?></span>
-						</div>
-						<span class="biz-docket-id"><?php echo esc_html( 'DOCKET #' . wp_date( 'md' ) . '-' . wp_date( 'Hi' ) ); ?></span>
-					</div>
-
-					<div class="biz-docket-hardware-notice">
-						<i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-						<span><?php esc_html_e( 'Certified Cleanroom ESD Workstation Diagnostics', 'mobile-pasal' ); ?></span>
-					</div>
-
-					<dl class="biz-docket-specs">
-						<div class="biz-docket-row">
-							<dt><?php esc_html_e( 'Selected Brand', 'mobile-pasal' ); ?></dt>
-							<dd id="ticket-device-val">Apple iPhone</dd>
-						</div>
-						<div class="biz-docket-row">
-							<dt><?php esc_html_e( 'Device Model', 'mobile-pasal' ); ?></dt>
-							<dd id="ticket-model-val"><?php esc_html_e( 'Specified at Counter', 'mobile-pasal' ); ?></dd>
-						</div>
-						<div class="biz-docket-row">
-							<dt><?php esc_html_e( 'Primary Issue', 'mobile-pasal' ); ?></dt>
-							<dd id="ticket-fault-val">Screen &amp; Display</dd>
-						</div>
-						<div class="biz-docket-row">
-							<dt><?php esc_html_e( 'Estimated Bench Time', 'mobile-pasal' ); ?></dt>
-							<dd id="ticket-time-val">30-45 Mins</dd>
-						</div>
-						<div class="biz-docket-row">
-							<dt><?php esc_html_e( 'Written Warranty', 'mobile-pasal' ); ?></dt>
-							<dd id="ticket-warranty-val">90 Days Testing Warranty</dd>
-						</div>
-						<div class="biz-docket-row biz-docket-total">
-							<dt><?php esc_html_e( 'Counter Inspection', 'mobile-pasal' ); ?></dt>
-							<dd class="biz-free-tag"><?php esc_html_e( 'FREE (0 NPR)', 'mobile-pasal' ); ?></dd>
-						</div>
-					</dl>
-
-					<div class="biz-docket-preview">
-						<span><?php esc_html_e( 'Technician Message Preview:', 'mobile-pasal' ); ?></span>
-						<p id="builder-preview-text"></p>
-					</div>
-
-					<div class="biz-docket-barcode" aria-hidden="true"></div>
-
-					<div class="biz-docket-actions">
-						<a id="builder-send-whatsapp-btn" class="biz-btn biz-btn-primary biz-btn-block" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
-							<?php echo $wa_icon; // phpcs:ignore ?>
-							<span><?php esc_html_e( 'Send Slip & Reserve Bench on WhatsApp', 'mobile-pasal' ); ?></span>
+					<div class="hero-cta-group">
+						<a class="btn btn-primary btn-lg" href="#catalog">
+							<span><?php echo esc_html( $slide1_btn1 ); ?></span>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
 						</a>
-						<a class="biz-btn biz-btn-secondary biz-btn-block" href="tel:+<?php echo esc_attr( $phone_clean ); ?>">
-							<i class="fa-solid fa-phone" aria-hidden="true"></i>
-							<span><?php esc_html_e( 'Call Technician Directly', 'mobile-pasal' ); ?></span>
+						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 ra Galaxy S24 ko aaja ko price dinus' ) ); ?>" target="_blank" rel="noopener">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+							<span><?php echo esc_html( $slide1_btn2 ); ?></span>
 						</a>
 					</div>
-				</div>
-			</aside>
-		</div>
-	</div>
-</section>
 
-<!-- =========================================================================
-     08. SERVICE PRICING & SLA MENU (#services)
-     ========================================================================= -->
-<section id="services" class="biz-services-section">
-	<div class="wrap">
-		<header class="biz-section-head">
-			<div>
-				<span class="hx-kicker"><?php esc_html_e( 'Transparent Pricing & SLA', 'mobile-pasal' ); ?></span>
-				<h2 class="biz-section-title"><?php esc_html_e( 'In-Shop Repair Menu & Turnaround', 'mobile-pasal' ); ?></h2>
-			</div>
-			<p class="biz-section-sub"><?php esc_html_e( 'Every repair is timed and quoted upfront. All screen and battery replacements include dust and water gasket seals.', 'mobile-pasal' ); ?></p>
-		</header>
-
-		<div class="biz-services-grid" data-hx-tabs>
-			<div class="biz-service-list" role="tablist" aria-label="<?php esc_attr_e( 'Repair services', 'mobile-pasal' ); ?>">
-				<?php foreach ( $hx_services as $i => $s ) : ?>
-					<button type="button" class="biz-service-tab<?php echo 0 === $i ? ' is-active' : ''; ?>" role="tab" id="hx-svc-tab-<?php echo esc_attr( $i ); ?>" aria-controls="hx-svc-panel-<?php echo esc_attr( $i ); ?>" aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>" data-hx-tab="<?php echo esc_attr( $i ); ?>">
-						<span class="biz-service-num"><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
-						<div class="biz-service-tab-body">
-							<strong class="biz-service-tab-title"><?php echo esc_html( $s['title'] ); ?></strong>
-							<small><?php echo esc_html( $s['turnaround'] ); ?> &bull; <?php echo esc_html( $s['warranty'] ); ?></small>
-						</div>
-						<span class="biz-service-tab-arrow"><?php echo $arrow_icon; // phpcs:ignore ?></span>
-					</button>
-				<?php endforeach; ?>
-			</div>
-
-			<div class="biz-service-detail-view">
-				<?php foreach ( $hx_services as $i => $s ) : ?>
-					<div class="biz-service-panel<?php echo 0 === $i ? ' is-active' : ''; ?>" role="tabpanel" id="hx-svc-panel-<?php echo esc_attr( $i ); ?>" aria-labelledby="hx-svc-tab-<?php echo esc_attr( $i ); ?>" data-hx-panel="<?php echo esc_attr( $i ); ?>"<?php echo 0 === $i ? '' : ' hidden'; ?>>
-						<div class="biz-panel-badge-row">
-							<span class="biz-panel-badge" data-grade-badge><?php echo esc_html( $s['badge'] ); ?></span>
-							<div class="hx-grade-switch biz-grade-toggle" data-hx-grade>
-								<button type="button" class="is-active" data-grade-tier="orig" data-warranty="<?php echo esc_attr( $s['warranty'] ); ?>" data-badge="<?php echo esc_attr( $s['badge'] ); ?>">Original Service-Pack</button>
-								<button type="button" data-grade-tier="aaa" data-warranty="<?php esc_attr_e( '30 Days Testing Warranty', 'mobile-pasal' ); ?>" data-badge="<?php esc_attr_e( 'Budget Tested AAA Grade', 'mobile-pasal' ); ?>">Tested AAA Grade</button>
+					<!-- Trust Dock -->
+					<div class="hero-trust-dock">
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( '100% Genuine Handsets', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'NTA Approved Stock', 'mobile-pasal' ); ?></span>
 							</div>
 						</div>
-						<h3 class="biz-panel-title"><?php echo esc_html( $s['title'] ); ?></h3>
-						<p class="biz-panel-excerpt"><?php echo esc_html( $s['excerpt'] ); ?></p>
-
-						<div class="biz-panel-metrics">
-							<div class="biz-metric-item">
-								<small><?php esc_html_e( 'Turnaround Time', 'mobile-pasal' ); ?></small>
-								<strong><?php echo esc_html( $s['turnaround'] ); ?></strong>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"></polyline></svg>
 							</div>
-							<div class="biz-metric-item">
-								<small><?php esc_html_e( 'Written Warranty', 'mobile-pasal' ); ?></small>
-								<strong data-grade-warranty><?php echo esc_html( $s['warranty'] ); ?></strong>
-							</div>
-							<div class="biz-metric-item">
-								<small><?php esc_html_e( 'Starting Quote', 'mobile-pasal' ); ?></small>
-								<strong><?php echo esc_html( $s['price'] ); ?></strong>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'Official Warranty', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Verified Bill & IMEI', 'mobile-pasal' ); ?></span>
 							</div>
 						</div>
-
-						<ul class="biz-panel-checklist">
-							<li><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'TrueTone & biometric sensor data transferred', 'mobile-pasal' ); ?></li>
-							<li><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'New waterproof dust gasket seal installed', 'mobile-pasal' ); ?></li>
-							<li><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( '24-point quality testing before device handover', 'mobile-pasal' ); ?></li>
-						</ul>
-
-						<div class="biz-panel-cta-group">
-							<a class="biz-btn biz-btn-primary" href="#repair-builder">
-								<span><?php esc_html_e( 'Get Direct Repair Quote', 'mobile-pasal' ); ?></span>
-								<?php echo $arrow_icon; // phpcs:ignore ?>
-							</a>
-							<a class="biz-btn biz-btn-secondary" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $s['title'] . ' ko barema quotation dinus' ) ); ?>" target="_blank" rel="noopener">
-								<?php echo $wa_icon; // phpcs:ignore ?>
-								<span><?php esc_html_e( 'Inquire on WhatsApp', 'mobile-pasal' ); ?></span>
-							</a>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'Free Migration', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Contacts & Media Setup', 'mobile-pasal' ); ?></span>
+							</div>
 						</div>
 					</div>
-				<?php endforeach; ?>
+				</div>
+
+				<div class="hero-media-col">
+					<div class="hero-media-viewport">
+						<img src="<?php echo esc_url( $slide1_img ); ?>" alt="Apple iPhone Flagship at Ali Mobile Center">
+						<div class="viewport-floating-badge top-right">
+							<span><?php esc_html_e( '100% Genuine Sealed Stock', 'mobile-pasal' ); ?></span>
+						</div>
+						<div class="viewport-telemetry-dock">
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Featured Model', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value"><?php esc_html_e( 'iPhone 16 Series', 'mobile-pasal' ); ?></strong>
+							</div>
+							<div class="telemetry-divider"></div>
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Status in Gulariya', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value highlight"><?php esc_html_e( 'In Stock Now', 'mobile-pasal' ); ?></strong>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 
-		<!-- 3-Step Walk-In Workflow -->
-		<div class="biz-workflow-box">
-			<h4 class="biz-workflow-heading"><?php esc_html_e( 'How Walk-In Repairs Work at Our Counter', 'mobile-pasal' ); ?></h4>
-			<div class="biz-workflow-steps">
-				<div class="biz-wf-step">
-					<div class="biz-wf-num">1</div>
-					<strong><?php esc_html_e( 'Free Inspection (5 Mins)', 'mobile-pasal' ); ?></strong>
-					<p><?php esc_html_e( 'We inspect your device at the counter and give an exact cost quote. Zero diagnostic fee.', 'mobile-pasal' ); ?></p>
+		<!-- Slide 2: Apple Fix -->
+		<div class="hero-slide" data-slide-index="1">
+			<div class="wrap hero-grid">
+				<div class="hero-content-col">
+					<h2 class="hero-title"><?php echo esc_html( $slide2_title ); ?></h2>
+					<p class="hero-description"><?php echo esc_html( $slide2_desc ); ?></p>
+
+					<div class="hero-cta-group">
+						<a class="btn btn-primary btn-lg" href="#repair-builder">
+							<span><?php echo esc_html( $slide2_btn1 ); ?></span>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+						</a>
+						<a class="btn btn-whatsapp btn-lg" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+							<span><?php echo esc_html( $slide2_btn2 ); ?></span>
+						</a>
+					</div>
+
+					<div class="hero-trust-dock">
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( '30-Minute Screen Fix', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Same-Day Battery Swap', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'Live Front Testing', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Check Diagnosis Yourself', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'Testing Warranty', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Up to 90 Days Coverage', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="biz-wf-step">
-					<div class="biz-wf-num">2</div>
-					<strong><?php esc_html_e( 'Fixed In Front of You', 'mobile-pasal' ); ?></strong>
-					<p><?php esc_html_e( 'Your device never leaves the room. Watch it repaired on our ESD workstation in 30-45 mins.', 'mobile-pasal' ); ?></p>
+
+				<div class="hero-media-col">
+					<div class="hero-media-viewport">
+						<img src="<?php echo esc_url( $slide2_img ); ?>" alt="Apple Fix precision repair lab at Ali Mobile">
+						<div class="viewport-floating-badge top-right">
+							<span><?php esc_html_e( 'Certified Apple Fix Lab', 'mobile-pasal' ); ?></span>
+						</div>
+						<div class="viewport-telemetry-dock">
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Service Turnaround', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value highlight"><?php esc_html_e( '30–45 Mins Average', 'mobile-pasal' ); ?></strong>
+							</div>
+							<div class="telemetry-divider"></div>
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Technician Station', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value"><?php esc_html_e( 'Counter Diagnostic', 'mobile-pasal' ); ?></strong>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="biz-wf-step">
-					<div class="biz-wf-num">3</div>
-					<strong><?php esc_html_e( 'Tested with Warranty', 'mobile-pasal' ); ?></strong>
-					<p><?php esc_html_e( 'Display touch, cameras, charging and audio tested thoroughly before handover with written warranty.', 'mobile-pasal' ); ?></p>
+			</div>
+		</div>
+
+		<!-- Slide 3: Genuine Gear -->
+		<div class="hero-slide" data-slide-index="2">
+			<div class="wrap hero-grid">
+				<div class="hero-content-col">
+					<h2 class="hero-title"><?php echo esc_html( $slide3_title ); ?></h2>
+					<p class="hero-description"><?php echo esc_html( $slide3_desc ); ?></p>
+
+					<div class="hero-cta-group">
+						<a class="btn btn-primary btn-lg" href="#categories">
+							<span><?php echo esc_html( $slide3_btn1 ); ?></span>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+						</a>
+						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, accessories stock barema bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+							<span><?php echo esc_html( $slide3_btn2 ); ?></span>
+						</a>
+					</div>
+
+					<div class="hero-trust-dock">
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'PD Fast Chargers', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( '20W to 120W Certified', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( 'Smartwatches', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'AMOLED & Health Trackers', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+						<div class="trust-dock-card">
+							<div class="trust-dock-icon">
+								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+							</div>
+							<div class="trust-dock-content">
+								<strong><?php esc_html_e( '9H Tempered Glass', 'mobile-pasal' ); ?></strong>
+								<span><?php esc_html_e( 'Free Counter Fitting', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="hero-media-col">
+					<div class="hero-media-viewport">
+						<img src="<?php echo esc_url( $slide3_img ); ?>" alt="Showroom Accessories Shelves at Ali Mobile Center">
+						<div class="viewport-floating-badge top-right">
+							<span><?php esc_html_e( '100% Genuine Accessories', 'mobile-pasal' ); ?></span>
+						</div>
+						<div class="viewport-telemetry-dock">
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Genuine Accessories', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value highlight"><?php esc_html_e( 'Apple • Samsung • Anker', 'mobile-pasal' ); ?></strong>
+							</div>
+							<div class="telemetry-divider"></div>
+							<div class="telemetry-item">
+								<span class="telemetry-label"><?php esc_html_e( 'Accepted Payments', 'mobile-pasal' ); ?></span>
+								<strong class="telemetry-value"><?php esc_html_e( 'Cash & Digital Pay', 'mobile-pasal' ); ?></strong>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Slider Arrows -->
+	<div class="slider-nav-arrows">
+		<button id="slider-prev-btn" class="slider-arrow-btn" aria-label="<?php esc_attr_e( 'Previous Slide', 'mobile-pasal' ); ?>" type="button">
+			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+		</button>
+		<button id="slider-next-btn" class="slider-arrow-btn" aria-label="<?php esc_attr_e( 'Next Slide', 'mobile-pasal' ); ?>" type="button">
+			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+		</button>
+	</div>
+
+	<!-- Slider Navigation Dock -->
+	<div class="hero-slider-dock" role="tablist">
+		<button class="slider-dock-tab active" data-slide-to="0" role="tab" aria-selected="true" type="button">
+			<span class="dock-tab-index">01</span>
+			<span class="dock-tab-title"><?php esc_html_e( 'Flagship Lineup', 'mobile-pasal' ); ?></span>
+			<span class="dock-tab-bar"></span>
+		</button>
+		<button class="slider-dock-tab" data-slide-to="1" role="tab" aria-selected="false" type="button">
+			<span class="dock-tab-index">02</span>
+			<span class="dock-tab-title"><?php esc_html_e( 'Apple Fix Counter', 'mobile-pasal' ); ?></span>
+			<span class="dock-tab-bar"></span>
+		</button>
+		<button class="slider-dock-tab" data-slide-to="2" role="tab" aria-selected="false" type="button">
+			<span class="dock-tab-index">03</span>
+			<span class="dock-tab-title"><?php esc_html_e( 'Genuine Gear', 'mobile-pasal' ); ?></span>
+			<span class="dock-tab-bar"></span>
+		</button>
+	</div>
+</section>
+
+<!-- Interactive Repair Diagnostic Console -->
+<section id="repair-builder" class="repair-builder-section">
+	<div class="wrap">
+		<div class="sec-head sec-head-center fade-up">
+			<span class="sec-kicker">
+				<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+				<?php esc_html_e( 'Apple Fix Counter Diagnostic Console', 'mobile-pasal' ); ?>
+			</span>
+			<h2><?php esc_html_e( 'Phone Problem? Get a Direct Counter Estimate', 'mobile-pasal' ); ?></h2>
+			<p><?php esc_html_e( 'Select your device and fault below. Your live repair docket is prepared in real-time. Dispatch directly to our Gulariya technician on WhatsApp for instant counter quotes.', 'mobile-pasal' ); ?></p>
+		</div>
+
+		<div class="repair-station-layout fade-up">
+			<!-- Diagnostic Configuration -->
+			<div class="repair-station-form">
+				<!-- Step 1 -->
+				<div class="repair-step-block">
+					<div class="step-header">
+						<span class="step-num-badge"><?php esc_html_e( 'Step 1', 'mobile-pasal' ); ?></span>
+						<span class="step-title"><?php esc_html_e( 'Select Your Device', 'mobile-pasal' ); ?></span>
+					</div>
+					<div class="device-pills-grid" data-group="device">
+						<button type="button" class="dev-pill-btn active" data-device="Apple iPhone">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.64-.78 1.08-1.87.96-2.96-.93.04-2.05.62-2.72 1.4-.59.68-1.1 1.77-.96 2.83 1.03.08 2.08-.49 2.72-1.27z"/></svg>
+							<span><?php esc_html_e( 'Apple iPhone', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="dev-pill-btn" data-device="Samsung Galaxy">
+							<span><?php esc_html_e( 'Samsung Galaxy', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="dev-pill-btn" data-device="Xiaomi / Redmi">
+							<span><?php esc_html_e( 'Xiaomi / Redmi', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="dev-pill-btn" data-device="OnePlus">
+							<span><?php esc_html_e( 'OnePlus', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="dev-pill-btn" data-device="Google Pixel">
+							<span><?php esc_html_e( 'Google Pixel', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="dev-pill-btn" data-device="Other Android">
+							<span><?php esc_html_e( 'Other Android', 'mobile-pasal' ); ?></span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Step 2 -->
+				<div class="repair-step-block">
+					<div class="step-header">
+						<span class="step-num-badge"><?php esc_html_e( 'Step 2', 'mobile-pasal' ); ?></span>
+						<span class="step-title"><?php esc_html_e( 'What Needs Repair?', 'mobile-pasal' ); ?></span>
+						<span class="step-hint"><?php esc_html_e( '(Pick symptom)', 'mobile-pasal' ); ?></span>
+					</div>
+					<div class="fault-cards-grid">
+						<button type="button" class="fault-select-card active" data-issue="Screen &amp; Display (Cracked glass / black spots / touch dead)" data-time="30–45 Mins" data-warranty="90 Days Testing Warranty">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="18" x2="16" y2="18"></line></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Screen & Display', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 30–45m</span>
+								</div>
+								<small><?php esc_html_e( 'Cracked glass, black spots, touch dead', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+
+						<button type="button" class="fault-select-card" data-issue="Battery Replacement (Fast drain / sudden shutdown / swollen)" data-time="20–30 Mins" data-warranty="6 Months Battery Warranty">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line><line x1="6" y1="11" x2="6" y2="13"></line><line x1="10" y1="11" x2="10" y2="13"></line></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Battery Replacement', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 20–30m</span>
+								</div>
+								<small><?php esc_html_e( 'Fast drain, sudden shutdown, swollen', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+
+						<button type="button" class="fault-select-card" data-issue="Charging &amp; Port (Slow charging / loose port / cable angle)" data-time="30 Mins" data-warranty="30 Days Service Warranty">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Charging & Port', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 30m</span>
+								</div>
+								<small><?php esc_html_e( 'Slow charging, loose port, cable angle', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+
+						<button type="button" class="fault-select-card" data-issue="Water Damage (Dropped in water / ultrasonic clean / IC)" data-time="1–2 Hours" data-warranty="Component Warranty">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Water Damage', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 1–2h</span>
+								</div>
+								<small><?php esc_html_e( 'Dropped in water, ultrasonic clean, IC', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+
+						<button type="button" class="fault-select-card" data-issue="Camera &amp; Sound (Mic not working / speaker muffled / camera)" data-time="45 Mins" data-warranty="60 Days Testing Warranty">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Camera & Sound', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 45m</span>
+								</div>
+								<small><?php esc_html_e( 'Mic not working, speaker muffled, camera', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+
+						<button type="button" class="fault-select-card" data-issue="Software &amp; OS (Apple logo stuck / bootloop / data transfer)" data-time="30–60 Mins" data-warranty="OS Stability Assured">
+							<div class="fault-card-icon">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+							</div>
+							<div class="fault-card-info">
+								<div class="fault-card-title-row">
+									<strong><?php esc_html_e( 'Software & OS', 'mobile-pasal' ); ?></strong>
+									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 30–60m</span>
+								</div>
+								<small><?php esc_html_e( 'Apple logo stuck, bootloop, data transfer', 'mobile-pasal' ); ?></small>
+							</div>
+						</button>
+					</div>
+				</div>
+
+				<!-- Step 3 -->
+				<div class="repair-step-block">
+					<div class="step-header">
+						<span class="step-num-badge"><?php esc_html_e( 'Step 3', 'mobile-pasal' ); ?></span>
+						<span class="step-title"><?php esc_html_e( 'Specify Phone Model', 'mobile-pasal' ); ?></span>
+						<span class="step-hint"><?php esc_html_e( '(e.g. iPhone 15 Pro, Galaxy A54, Redmi Note 13)', 'mobile-pasal' ); ?></span>
+					</div>
+					<div class="model-input-wrap">
+						<input type="text" id="builder-model-input" class="model-text-field" placeholder="<?php esc_attr_e( 'Type your phone model name here...', 'mobile-pasal' ); ?>" autocomplete="off">
+					</div>
+					<div class="quick-model-chips">
+						<span class="quick-chips-label"><?php esc_html_e( 'Quick select:', 'mobile-pasal' ); ?></span>
+						<button type="button" class="quick-chip-btn" data-model="iPhone 15 Pro">iPhone 15 Pro</button>
+						<button type="button" class="quick-chip-btn" data-model="iPhone 13">iPhone 13</button>
+						<button type="button" class="quick-chip-btn" data-model="Galaxy S24">Galaxy S24</button>
+						<button type="button" class="quick-chip-btn" data-model="Redmi Note 13">Redmi Note 13</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Live Ticket Docket -->
+			<div class="repair-station-ticket">
+				<div class="ticket-docket-card">
+					<div class="docket-top-bar">
+						<div class="docket-id-badge">
+							<span class="docket-dot"></span>
+							<span><?php esc_html_e( 'DOCKET #AF-2026', 'mobile-pasal' ); ?></span>
+						</div>
+						<span class="docket-station-tag"><?php esc_html_e( 'Gulariya Counter', 'mobile-pasal' ); ?></span>
+					</div>
+
+					<div class="ticket-header">
+						<h3><?php esc_html_e( 'Gulariya Counter Estimate', 'mobile-pasal' ); ?></h3>
+						<p class="ticket-subtext"><?php esc_html_e( 'Live enquiry docket ready for counter handover', 'mobile-pasal' ); ?></p>
+					</div>
+
+					<div class="ticket-body">
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Device Brand', 'mobile-pasal' ); ?></span>
+							<strong id="ticket-device-val" class="t-val"><?php esc_html_e( 'Apple iPhone', 'mobile-pasal' ); ?></strong>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Model Name', 'mobile-pasal' ); ?></span>
+							<strong id="ticket-model-val" class="t-val"><?php esc_html_e( 'Specified at Counter', 'mobile-pasal' ); ?></strong>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Selected Fault', 'mobile-pasal' ); ?></span>
+							<strong id="ticket-fault-val" class="t-val"><?php esc_html_e( 'Screen & Display', 'mobile-pasal' ); ?></strong>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Est. Turnaround', 'mobile-pasal' ); ?></span>
+							<span id="ticket-time-val" class="t-badge-highlight">30–45 Mins</span>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Parts Grade', 'mobile-pasal' ); ?></span>
+							<span class="t-val-text"><?php esc_html_e( '100% Original-Grade / Certified', 'mobile-pasal' ); ?></span>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Counter Warranty', 'mobile-pasal' ); ?></span>
+							<span id="ticket-warranty-val" class="t-val-text">90 Days Testing Warranty</span>
+						</div>
+						<div class="ticket-row">
+							<span class="t-label"><?php esc_html_e( 'Counter Diagnosis', 'mobile-pasal' ); ?></span>
+							<span class="t-badge-free"><?php esc_html_e( 'FREE Walk-In Check', 'mobile-pasal' ); ?></span>
+						</div>
+					</div>
+
+					<div class="ticket-preview-box">
+						<div class="tp-label">
+							<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+							<span><?php esc_html_e( 'Prepared WhatsApp Dispatch Message:', 'mobile-pasal' ); ?></span>
+						</div>
+						<div id="builder-preview-text" class="tp-text">"Namaste Ali Mobile &amp; Apple Fix, mero iPhone ma problem chha: Screen Broken / Touch Fault. Gulariya counter ma check ra repair cost barema jankari dinus."</div>
+					</div>
+
+					<div class="ticket-actions">
+						<a id="builder-send-whatsapp-btn" class="btn btn-whatsapp btn-block" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+							<span><?php esc_html_e( 'Dispatch Enquiry to WhatsApp', 'mobile-pasal' ); ?></span>
+						</a>
+						<a class="btn btn-secondary btn-block" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+							<span><?php printf( esc_html__( 'Call Technician Directly (%s)', 'mobile-pasal' ), esc_html( mp_opt( 'contact_phone', '+977 9804530786' ) ) ); ?></span>
+						</a>
+					</div>
+
+					<div class="ticket-footer-note">
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+						<span><?php esc_html_e( 'Gulariya Counter • Walk in anytime 9 AM – 8 PM', 'mobile-pasal' ); ?></span>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
-<!-- =========================================================================
-     09. VERIFIED REVIEWS & STORE RATINGS (#reviews)
-     ========================================================================= -->
-<section class="biz-reviews-section">
-	<div class="wrap biz-reviews-layout">
-		<div class="biz-reputation-card">
-			<span class="hx-kicker"><?php echo esc_html( mp_opt( 'reviews_kicker', 'Customer Trust & Reputation' ) ); ?></span>
-			<h2 class="biz-section-title"><?php echo esc_html( mp_opt( 'reviews_title', 'What Bardiya Locals Say' ) ); ?></h2>
-			<div class="biz-score-display">
-				<span class="biz-big-num">4.9</span>
-				<div>
-					<div class="biz-stars" aria-label="<?php esc_attr_e( 'Rated 4.9 out of 5', 'mobile-pasal' ); ?>">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-					<small><?php esc_html_e( 'Based on 250+ Verified Store Customers', 'mobile-pasal' ); ?></small>
-				</div>
+<!-- Shop By Category Section -->
+<section id="categories" class="categories-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Showroom Counters', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Explore Store Counters', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'From brand-new sealed smartphones to Gulariya\'s dedicated Apple Fix lab and digital merchant services.', 'mobile-pasal' ); ?></p>
 			</div>
-			<p class="biz-reputation-text"><?php echo esc_html( mp_opt( 'reviews_subtitle', 'Authentic reviews from smartphone buyers and repair clients who chose our counter opposite the District Administration Office.' ) ); ?></p>
-			<a class="biz-btn biz-btn-secondary" href="<?php echo esc_url( $maps_link ); ?>" target="_blank" rel="noopener">
-				<i class="fa-brands fa-google" aria-hidden="true"></i>
-				<span><?php esc_html_e( 'Read More on Google Maps', 'mobile-pasal' ); ?></span>
+			<a class="view-all-link" href="#catalog">
+				<span><?php esc_html_e( 'View All Products', 'mobile-pasal' ); ?></span>
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
 			</a>
 		</div>
 
-		<!-- Review Quote Carousel/Stage -->
-		<div class="biz-testimonials-stage" data-hx-quotes>
-			<div class="biz-quotes-wrapper">
-				<?php foreach ( $hx_reviews as $i => $r ) : ?>
-					<div class="biz-quote-card<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hx-quote="<?php echo esc_attr( $i ); ?>"<?php echo 0 === $i ? '' : ' aria-hidden="true"'; ?>>
-						<div class="biz-quote-top">
-							<div class="biz-verified-badge"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?php esc_html_e( 'Verified Counter Client', 'mobile-pasal' ); ?></div>
-							<div class="biz-quote-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+		<div class="categories-grid fade-up">
+			<a class="category-card" href="#catalog">
+				<span class="cat-count-tag"><?php esc_html_e( '50+ Handsets', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+				</div>
+				<strong><?php esc_html_e( 'Smartphones', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( 'iPhone, Samsung, Pixel & Redmi', 'mobile-pasal' ); ?></small>
+			</a>
+
+			<a class="category-card" href="#repair-builder">
+				<span class="cat-count-tag"><?php esc_html_e( 'Screen • Battery', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+				</div>
+				<strong><?php esc_html_e( 'Apple Fix Lab', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( 'iPhone Screen, Battery & IC', 'mobile-pasal' ); ?></small>
+			</a>
+
+			<a class="category-card" href="#catalog">
+				<span class="cat-count-tag"><?php esc_html_e( 'Original Buds', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
+				</div>
+				<strong><?php esc_html_e( 'Audio & Buds', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( 'AirPods, Neckbands & ANC', 'mobile-pasal' ); ?></small>
+			</a>
+
+			<a class="category-card" href="#catalog">
+				<span class="cat-count-tag"><?php esc_html_e( 'AMOLED Calling', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
+				</div>
+				<strong><?php esc_html_e( 'Smartwatches', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( 'Calling, AMOLED & Fitness', 'mobile-pasal' ); ?></small>
+			</a>
+
+			<a class="category-card" href="#catalog">
+				<span class="cat-count-tag"><?php esc_html_e( 'PD 20W–120W', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+				</div>
+				<strong><?php esc_html_e( 'Chargers & Glass', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( '20W–120W Adapters & 9H Glass', 'mobile-pasal' ); ?></small>
+			</a>
+
+			<a class="category-card" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste, eSewa recharge sewa barema bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
+				<span class="cat-count-tag"><?php esc_html_e( 'Merchant Top-Up', 'mobile-pasal' ); ?></span>
+				<div class="cat-icon-wrap">
+					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+				</div>
+				<strong><?php esc_html_e( 'eSewa & Banking', 'mobile-pasal' ); ?></strong>
+				<small><?php esc_html_e( 'Top-Up, Bills & Money Transfer', 'mobile-pasal' ); ?></small>
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Brand Tiles Section -->
+<section id="brands" class="brands-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Authorized Brands', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Top Smartphone Brands In Store', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'Select any brand tile below to instantly filter available models in our showroom catalog.', 'mobile-pasal' ); ?></p>
+			</div>
+			<a class="view-all-link" href="#catalog">
+				<span><?php esc_html_e( 'Explore All Brands', 'mobile-pasal' ); ?></span>
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+			</a>
+		</div>
+
+		<div class="brands-grid fade-up">
+			<div class="brand-card-link" data-filter-brand="apple">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 170 170" width="32" height="32" fill="#0f172a"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.89-7.5-8.88-16.14-11.96-25.91-3.08-9.77-4.63-19.34-4.63-28.71 0-14.33 3.63-26.23 10.89-35.69 7.26-9.46 16.51-14.28 27.75-14.47 5.26 0 11.01 1.34 17.26 4.02 6.24 2.68 10.15 4.09 11.72 4.22 1.93-.26 5.86-1.63 11.79-4.11 5.92-2.48 11.22-3.6 15.9-3.35 12.04.75 21.6 5.37 28.69 13.88-10.53 6.38-15.67 15.2-15.42 26.47.25 8.78 3.52 16.19 9.8 22.23 6.28 6.04 13.78 9.69 22.5 10.95-1.93 6.01-4.41 12.18-7.44 18.52zm-32.96-107.4c0-7.39 2.65-14.22 7.95-20.5 5.3-6.28 11.89-10.05 19.78-11.3 1.13 8.13-1.47 15.36-7.8 21.69-6.33 6.33-13.62 10.15-21.87 11.47-.28-.45-.42-.99-.42-1.62-.01-.42.23-.97.72-1.65-.01.62-.25 1.17-.36 1.91z"/></svg>
+				</div>
+				<span class="brand-name">Apple</span>
+				<small><?php esc_html_e( 'iPhone & Apple Fix', 'mobile-pasal' ); ?></small>
+			</div>
+
+			<div class="brand-card-link" data-filter-brand="samsung">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 100 24" height="20" fill="#0c4da2"><path d="M12.8 14.5c0-1.8-1.5-2.7-4.3-3.4C6 10.5 4.9 9.9 4.9 8.8c0-.9.9-1.5 2.5-1.5 1.8 0 3 .7 3.2 2h3.2c-.3-2.9-2.6-4.6-6.4-4.6C3.1 4.7.7 6.8.7 9.8c0 2.2 1.4 3.3 4.5 4.1 2.8.7 3.8 1.4 3.8 2.5 0 1.1-1.1 1.7-2.9 1.7-2.2 0-3.6-.9-3.8-2.5H0c.2 3.3 2.7 5.1 7.1 5.1 4.4 0 6.9-2.2 6.9-5.1zm11.2-9.6l-5.6 15.4h3.7l1.1-3.3h5.9l1.1 3.3h3.7L28.3 4.9h-4.3zm.5 9.3l1.7-5.3 1.7 5.3h-3.4zm16.5-9.3v9.8l-5.5-9.8h-3.2v15.4h3.4V10.5l5.5 9.8h3.2V4.9h-3.4zm17.9 9.6c0-1.8-1.5-2.7-4.3-3.4-2.5-.6-3.6-1.2-3.6-2.3 0-.9.9-1.5 2.5-1.5 1.8 0 3 .7 3.2 2h3.2c-.3-2.9-2.6-4.6-6.4-4.6-4.3 0-6.7 2.1-6.7 5.1 0 2.2 1.4 3.3 4.5 4.1 2.8.7 3.8 1.4 3.8 2.5 0 1.1-1.1 1.7-2.9 1.7-2.2 0-3.6-.9-3.8-2.5h-3.2c.2 3.3 2.7 5.1 7.1 5.1 4.4 0 6.9-2.2 6.9-5.1zm11.8-9.6v9.8c0 1.8 1.1 2.7 2.8 2.7 1.8 0 2.8-.9 2.8-2.7V4.9h3.6v9.7c0 3.8-2.5 5.8-6.4 5.8s-6.4-2-6.4-5.8V4.9h3.6zm19.5 0v9.8l-5.5-9.8h-3.2v15.4h3.4V10.5l5.5 9.8h3.2V4.9h-3.4z"/></svg>
+				</div>
+				<span class="brand-name">Samsung</span>
+				<small><?php esc_html_e( 'Galaxy S & A Series', 'mobile-pasal' ); ?></small>
+			</div>
+
+			<div class="brand-card-link" data-filter-brand="google">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 24 24" width="26" height="26"><path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/><path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.13C3.26 21.36 7.33 24 12 24z"/><path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.25C.45 8.15 0 9.99 0 12s.45 3.85 1.25 5.43l4.03-3.14z"/><path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.57l4.03 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/></svg>
+				</div>
+				<span class="brand-name">Google Pixel</span>
+				<small><?php esc_html_e( 'Pixel 9 & Tensor AI', 'mobile-pasal' ); ?></small>
+			</div>
+
+			<div class="brand-card-link" data-filter-brand="oneplus">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 40 40" width="28" height="28"><rect width="40" height="40" rx="8" fill="#eb0028"/><path fill="#fff" d="M14 11h-3v18h3v-7h4c3.86 0 7-3.14 7-7s-3.14-7-7-7h-4zm0 8v-5h4c2.21 0 4 1.79 4 4s-1.79 4-4 4h-4zm15-4h-2v2h2v2h2v-2h2v-2h-2v-2h-2v2z"/></svg>
+				</div>
+				<span class="brand-name">OnePlus</span>
+				<small><?php esc_html_e( 'OnePlus 12 & Nord', 'mobile-pasal' ); ?></small>
+			</div>
+
+			<div class="brand-card-link" data-filter-brand="xiaomi">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 40 40" width="28" height="28"><rect width="40" height="40" rx="8" fill="#ff6900"/><path fill="#fff" d="M11 13h5.5v8.5H22V13h5.5v14h-5.5v-4.5h-5.5V27H11V13zm8 7.5v-4h2.5v4H19z"/></svg>
+				</div>
+				<span class="brand-name">Xiaomi</span>
+				<small><?php esc_html_e( 'Xiaomi 14 & Redmi 5G', 'mobile-pasal' ); ?></small>
+			</div>
+
+			<div class="brand-card-link" data-filter-brand="accessories">
+				<div class="brand-logo-svg">
+					<svg viewBox="0 0 24 24" width="28" height="28" fill="#059669"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+				</div>
+				<span class="brand-name">Accessories</span>
+				<small><?php esc_html_e( 'AirPods, Watch & Anker', 'mobile-pasal' ); ?></small>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Flagship Spotlight Banner (iPhone 16 Pro) -->
+<section class="flagship-banner-section">
+	<div class="wrap">
+		<div class="flagship-banner-card fade-up">
+			<div class="flagship-banner-content">
+				<div class="brand-tag-apple">
+					<svg viewBox="0 0 170 170" width="16" height="16" fill="currentColor"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.89-7.5-8.88-16.14-11.96-25.91-3.08-9.77-4.63-19.34-4.63-28.71 0-14.33 3.63-26.23 10.89-35.69 7.26-9.46 16.51-14.28 27.75-14.47 5.26 0 11.01 1.34 17.26 4.02 6.24 2.68 10.15 4.09 11.72 4.22 1.93-.26 5.86-1.63 11.79-4.11 5.92-2.48 11.22-3.6 15.9-3.35 12.04.75 21.6 5.37 28.69 13.88-10.53 6.38-15.67 15.2-15.42 26.47.25 8.78 3.52 16.19 9.8 22.23 6.28 6.04 13.78 9.69 22.5 10.95-1.93 6.01-4.41 12.18-7.44 18.52zm-32.96-107.4c0-7.39 2.65-14.22 7.95-20.5 5.3-6.28 11.89-10.05 19.78-11.3 1.13 8.13-1.47 15.36-7.8 21.69-6.33 6.33-13.62 10.15-21.87 11.47-.28-.45-.42-.99-.42-1.62-.01-.42.23-.97.72-1.65-.01.62-.25 1.17-.36 1.91z"/></svg>
+					<span><?php esc_html_e( 'Apple Official Handset', 'mobile-pasal' ); ?></span>
+				</div>
+				<h2><?php esc_html_e( 'iPhone 16 Pro & Pro Max', 'mobile-pasal' ); ?></h2>
+				<p class="tagline"><?php esc_html_e( 'Built for Apple Intelligence • Grade 5 Titanium', 'mobile-pasal' ); ?></p>
+				<p class="desc"><?php esc_html_e( 'Experience the supercharged A18 Pro chip, 48MP Fusion Camera system, dedicated tactile Camera Control, and best-ever battery endurance. Sealed stock ready for immediate handover at our Gulariya counter.', 'mobile-pasal' ); ?></p>
+
+				<div class="spec-pills-row">
+					<span class="spec-pill">A18 Pro Bionic</span>
+					<span class="spec-pill">Camera Control Button</span>
+					<span class="spec-pill">Grade 5 Titanium</span>
+					<span class="spec-pill">NTA Approved • Warranty</span>
+				</div>
+
+				<div class="flagship-actions">
+					<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste, iPhone 16 Pro (128GB / 256GB) ko aaja ko counter price dinus' ) ); ?>" target="_blank" rel="noopener">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+						<span><?php esc_html_e( 'Ask Price on WhatsApp', 'mobile-pasal' ); ?></span>
+					</a>
+					<a class="btn btn-secondary" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+						<span><?php printf( esc_html__( 'Call Shop (%s)', 'mobile-pasal' ), esc_html( mp_opt( 'contact_phone', '9804530786' ) ) ); ?></span>
+					</a>
+				</div>
+			</div>
+			<div class="flagship-media">
+				<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/iphone-16-pro.jpg' ); ?>" alt="Apple iPhone 16 Pro in Black Titanium">
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Showroom Handsets Catalog -->
+<section id="catalog" class="catalog-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Showroom Catalog', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Latest Smartphone Arrivals & Top Models', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'Every handset is checked, unboxed or sealed-pack with official VAT bill & warranty. Filter by brand or search your model.', 'mobile-pasal' ); ?></p>
+			</div>
+			<a class="view-all-link" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, full stock list dinus' ) ); ?>" target="_blank" rel="noopener">
+				<span><?php esc_html_e( 'Inquire Full Stock', 'mobile-pasal' ); ?></span>
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+			</a>
+		</div>
+
+		<!-- Toolbar -->
+		<div class="catalog-toolbar-panel fade-up">
+			<div class="filter-tabs-wrapper" role="tablist">
+				<button type="button" class="filter-tab-btn active" data-filter="all"><?php esc_html_e( 'All Devices', 'mobile-pasal' ); ?></button>
+				<button type="button" class="filter-tab-btn" data-filter="apple">Apple iPhone</button>
+				<button type="button" class="filter-tab-btn" data-filter="samsung">Samsung Galaxy</button>
+				<button type="button" class="filter-tab-btn" data-filter="google">Google Pixel</button>
+				<button type="button" class="filter-tab-btn" data-filter="oneplus">OnePlus</button>
+				<button type="button" class="filter-tab-btn" data-filter="xiaomi">Xiaomi / Redmi</button>
+				<button type="button" class="filter-tab-btn" data-filter="accessories"><?php esc_html_e( 'Accessories & Buds', 'mobile-pasal' ); ?></button>
+			</div>
+
+			<div class="catalog-live-search" role="search">
+				<span class="cat-search-icon" aria-hidden="true">
+					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+				</span>
+				<input id="site-search" type="search" placeholder="<?php esc_attr_e( 'Search iPhone, Galaxy, Pixel, Redmi, Buds...', 'mobile-pasal' ); ?>" aria-label="<?php esc_attr_e( 'Search showroom catalog', 'mobile-pasal' ); ?>" autocomplete="off">
+				<button id="search-clear-btn" class="cat-search-clear" title="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>" aria-label="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>" type="button">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+				</button>
+			</div>
+		</div>
+
+		<!-- Products Grid -->
+		<div class="products-grid fade-up">
+			<?php
+			$handset_query = new WP_Query( array(
+				'post_type'      => 'handset',
+				'posts_per_page' => 12,
+				'post_status'    => 'publish',
+			) );
+
+			if ( $handset_query->have_posts() ) :
+				while ( $handset_query->have_posts() ) :
+					$handset_query->the_post();
+					$p_id       = get_the_ID();
+					$p_title    = get_the_title();
+					$badge      = get_post_meta( $p_id, '_mp_badge', true ) ?: 'Verified Stock';
+					$price      = get_post_meta( $p_id, '_mp_price', true );
+					$old_price  = get_post_meta( $p_id, '_mp_old_price', true );
+					$rating     = get_post_meta( $p_id, '_mp_rating', true ) ?: '4.9';
+					$reviews    = get_post_meta( $p_id, '_mp_reviews_count', true ) ?: '38';
+					$img_url    = mp_get_handset_img_url( $p_id );
+
+					// Specs
+					$specs_text = get_post_meta( $p_id, '_mp_spec_screen', true );
+					if ( empty( $specs_text ) ) {
+						$specs_text = get_the_excerpt();
+					}
+
+					// Brand taxonomy
+					$brand_terms = get_the_terms( $p_id, 'device_brand' );
+					$brand_slug  = ! empty( $brand_terms ) ? strtolower( $brand_terms[0]->slug ) : 'all';
+					$brand_name  = ! empty( $brand_terms ) ? $brand_terms[0]->name : 'Handset';
+					?>
+					<article class="product-card" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="smartphones">
+						<div class="product-badge-wrap">
+							<span class="badge-tag"><?php echo esc_html( $badge ); ?></span>
 						</div>
-						<blockquote class="biz-quote-body">&ldquo;<?php echo esc_html( $r['content'] ); ?>&rdquo;</blockquote>
-						<div class="biz-quote-author">
-							<div class="biz-author-avatar"><?php echo esc_html( strtoupper( mb_substr( $r['name'], 0, 1 ) ) ); ?></div>
+						<div class="product-img-wrap">
+							<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $p_title ); ?>" loading="lazy">
+						</div>
+						<div class="product-body">
+							<span class="product-brand-tag"><?php echo esc_html( $brand_name ); ?></span>
+							<h3 class="product-title"><?php echo esc_html( $p_title ); ?></h3>
+							<p class="product-specs"><?php echo esc_html( $specs_text ); ?></p>
+							<?php if ( ! empty( $price ) ) : ?>
+								<div class="product-price-row" style="margin-bottom:8px;">
+									<strong style="color:var(--accent); font-size:16px;"><?php echo esc_html( $price ); ?></strong>
+									<?php if ( ! empty( $old_price ) ) : ?>
+										<span style="text-decoration:line-through; color:#64748b; font-size:13px; margin-left:6px;"><?php echo esc_html( $old_price ); ?></span>
+									<?php endif; ?>
+								</div>
+							<?php endif; ?>
+							<div class="product-stock-status">
+								<span class="stock-pulse-dot"></span>
+								<span><?php esc_html_e( 'In Stock at Gulariya Counter', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="product-rating">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<span><?php echo esc_html( $rating ); ?> (<?php echo esc_html( $reviews ); ?> <?php esc_html_e( 'reviews', 'mobile-pasal' ); ?>)</span>
+							</div>
+							<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $p_title . ' ko aaja ko price ra stock dinus' ) ); ?>" target="_blank" rel="noopener">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+								<span><?php esc_html_e( 'Ask Price on WhatsApp', 'mobile-pasal' ); ?></span>
+							</a>
+						</div>
+					</article>
+				<?php endwhile;
+				wp_reset_postdata();
+			else :
+				// Fallback default handsets
+				$default_handsets = mp_get_default_handsets_data();
+				foreach ( $default_handsets as $h ) :
+					$brand_slug = strtolower( $h['brand'] );
+					?>
+					<article class="product-card" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="smartphones">
+						<div class="product-badge-wrap">
+							<span class="badge-tag"><?php echo esc_html( $h['badge'] ); ?></span>
+						</div>
+						<div class="product-img-wrap">
+							<img src="<?php echo esc_url( mp_asset_img( $h['image'] ) ); ?>" alt="<?php echo esc_attr( $h['title'] ); ?>" loading="lazy">
+						</div>
+						<div class="product-body">
+							<span class="product-brand-tag"><?php echo esc_html( $h['brand'] ); ?></span>
+							<h3 class="product-title"><?php echo esc_html( $h['title'] ); ?></h3>
+							<p class="product-specs"><?php echo esc_html( $h['screen'] ); ?></p>
+							<div class="product-price-row" style="margin-bottom:8px;">
+								<strong style="color:var(--accent); font-size:16px;"><?php echo esc_html( $h['price'] ); ?></strong>
+								<?php if ( ! empty( $h['old_price'] ) ) : ?>
+									<span style="text-decoration:line-through; color:#64748b; font-size:13px; margin-left:6px;"><?php echo esc_html( $h['old_price'] ); ?></span>
+								<?php endif; ?>
+							</div>
+							<div class="product-stock-status">
+								<span class="stock-pulse-dot"></span>
+								<span><?php esc_html_e( 'In Stock at Gulariya Counter', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="product-rating">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+								<span><?php echo esc_html( $h['rating'] ); ?> (<?php echo esc_html( $h['reviews'] ); ?> <?php esc_html_e( 'reviews', 'mobile-pasal' ); ?>)</span>
+							</div>
+							<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $h['title'] . ' ko aaja ko price ra stock dinus' ) ); ?>" target="_blank" rel="noopener">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+								<span><?php esc_html_e( 'Ask Price on WhatsApp', 'mobile-pasal' ); ?></span>
+							</a>
+						</div>
+					</article>
+				<?php endforeach;
+			endif;
+			?>
+		</div>
+
+		<!-- No Results Notice -->
+		<div id="catalog-empty-notice" class="catalog-empty-notice" aria-live="polite">
+			<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+			<h3><?php esc_html_e( 'No matching models found in this tab', 'mobile-pasal' ); ?></h3>
+			<p><?php esc_html_e( 'We order rare or flagship variants directly from authorized distributors. Send your model name on WhatsApp for counter availability.', 'mobile-pasal' ); ?></p>
+			<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
+				<span><?php esc_html_e( 'Inquire Directly on WhatsApp', 'mobile-pasal' ); ?></span>
+			</a>
+		</div>
+	</div>
+</section>
+
+<!-- Apple Fix Precision Lab Showcase Banner -->
+<section class="apple-fix-showcase-section">
+	<div class="wrap">
+		<div class="apple-fix-banner-grid fade-up">
+			<div class="af-media-col">
+				<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/apple-fix-bench.jpg' ); ?>" alt="Apple Fix precision repair workstation in Gulariya">
+			</div>
+			<div class="af-text-col">
+				<div class="af-badge">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+					<span><?php esc_html_e( 'Apple Fix Specialist • Gulariya Counter', 'mobile-pasal' ); ?></span>
+				</div>
+				<h2><?php esc_html_e( 'Gulariya\'s Premier Precision Apple Fix Lab', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'We do not forward your phone to Nepalgunj or Kathmandu. Our on-site workstation handles display lamination, genuine battery replacement, ultrasonic board cleaning, and IC diagnostics right in front of you.', 'mobile-pasal' ); ?></p>
+
+				<div class="af-features-list">
+					<div class="af-feature-item">
+						<div class="af-f-icon">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+						</div>
+						<div>
+							<strong><?php esc_html_e( '30-Minute Screen Replacement', 'mobile-pasal' ); ?></strong>
+							<p><?php esc_html_e( 'Fast OLED and glass restoration with TrueTone & 3D touch programming.', 'mobile-pasal' ); ?></p>
+						</div>
+					</div>
+
+					<div class="af-feature-item">
+						<div class="af-f-icon">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="16" height="10" rx="2" ry="2"></rect><line x1="22" y1="11" x2="22" y2="13"></line></svg>
+						</div>
+						<div>
+							<strong><?php esc_html_e( 'Battery Health Calibration', 'mobile-pasal' ); ?></strong>
+							<p><?php esc_html_e( 'Certified battery replacements that restore peak 100% capacity and battery health cycle.', 'mobile-pasal' ); ?></p>
+						</div>
+					</div>
+
+					<div class="af-feature-item">
+						<div class="af-f-icon">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+						</div>
+						<div>
+							<strong><?php esc_html_e( 'In-Front-Of-You Transparency', 'mobile-pasal' ); ?></strong>
+							<p><?php esc_html_e( 'Watch your repair live across our counter. Complete privacy protection for photos & accounts.', 'mobile-pasal' ); ?></p>
+						</div>
+					</div>
+				</div>
+
+				<div class="af-cta-row">
+					<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Apple Fix, mero iPhone check garauna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+						<span><?php esc_html_e( 'Consult Our Technician', 'mobile-pasal' ); ?></span>
+					</a>
+					<a class="btn btn-secondary" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+						<span><?php printf( esc_html__( 'Call Counter (%s)', 'mobile-pasal' ), esc_html( mp_opt( 'contact_phone', '+977 9804530786' ) ) ); ?></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Repair Services Grid & Workflow Timeline -->
+<section id="services" class="repair-services-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Diagnostics & Solutions', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Complete Counter Repair Services', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'From Apple iPhone to Samsung Galaxy and Xiaomi devices, all repairs are performed with original-grade parts and live customer inspection.', 'mobile-pasal' ); ?></p>
+			</div>
+			<a class="view-all-link" href="#repair-builder">
+				<span><?php esc_html_e( 'Get Repair Quote', 'mobile-pasal' ); ?></span>
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+			</a>
+		</div>
+
+		<div class="services-grid fade-up">
+			<?php
+			$services_query = new WP_Query( array(
+				'post_type'      => 'repair_service',
+				'posts_per_page' => 6,
+				'post_status'    => 'publish',
+			) );
+
+			if ( $services_query->have_posts() ) :
+				while ( $services_query->have_posts() ) :
+					$services_query->the_post();
+					$s_id    = get_the_ID();
+					$turn    = get_post_meta( $s_id, '_mp_service_turnaround', true ) ?: '30–45 Mins';
+					$price_s = get_post_meta( $s_id, '_mp_service_price', true ) ?: 'Original Grade';
+					?>
+					<div class="service-card">
+						<div class="service-icon-wrap">
+							<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+						</div>
+						<h3><?php the_title(); ?></h3>
+						<p><?php echo esc_html( wp_trim_words( get_the_excerpt(), 18 ) ); ?></p>
+						<span class="service-badge"><?php echo esc_html( $turn ); ?> &bull; <?php echo esc_html( $price_s ); ?></span>
+					</div>
+				<?php endwhile;
+				wp_reset_postdata();
+			else :
+				// Fallback default services
+				$default_repairs = mp_get_default_repair_services_data();
+				foreach ( $default_repairs as $r ) :
+					?>
+					<div class="service-card">
+						<div class="service-icon-wrap">
+							<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+						</div>
+						<h3><?php echo esc_html( $r['title'] ); ?></h3>
+						<p><?php echo esc_html( $r['excerpt'] ); ?></p>
+						<span class="service-badge"><?php echo esc_html( $r['turnaround'] ); ?> &bull; <?php echo esc_html( $r['price'] ); ?></span>
+					</div>
+				<?php endforeach;
+			endif;
+			?>
+		</div>
+
+		<!-- 3-Step Counter Workflow Timeline -->
+		<div class="sec-head sec-head-center fade-up" style="margin-top: 56px; margin-bottom: 28px;">
+			<span class="sec-kicker"><?php esc_html_e( 'Transparent Workflow', 'mobile-pasal' ); ?></span>
+			<h2><?php esc_html_e( '3-Step Counter Service in Gulariya', 'mobile-pasal' ); ?></h2>
+			<p><?php esc_html_e( 'Simple, reliable, and completely open process from diagnosis to handover.', 'mobile-pasal' ); ?></p>
+		</div>
+
+		<div class="steps-flow-grid fade-up">
+			<div class="flow-step-card">
+				<div class="flow-num-badge">1</div>
+				<h3><?php esc_html_e( 'Free Counter Diagnostic', 'mobile-pasal' ); ?></h3>
+				<p><?php esc_html_e( 'Bring your phone to Ji. Pra. Ka. Chowk. Our technician inspects hardware symptoms in 5 minutes with exact repair estimate.', 'mobile-pasal' ); ?></p>
+			</div>
+			<div class="flow-step-card">
+				<div class="flow-num-badge">2</div>
+				<h3><?php esc_html_e( 'In-Front-Of-You Precision Fix', 'mobile-pasal' ); ?></h3>
+				<p><?php esc_html_e( 'Watch your repair live across our counter. Genuine parts installed with precision tools, heat beds, and ESD mats.', 'mobile-pasal' ); ?></p>
+			</div>
+			<div class="flow-step-card">
+				<div class="flow-num-badge">3</div>
+				<h3><?php esc_html_e( 'Testing & Handover', 'mobile-pasal' ); ?></h3>
+				<p><?php esc_html_e( 'Multi-point check for touch response, cameras, cellular signal, and battery. Handover with testing warranty.', 'mobile-pasal' ); ?></p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Phone First-Aid & Care Guides -->
+<section class="guides-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Technician Advice', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Phone First-Aid & Care Guides', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'Practical guidance from our certified technicians on protecting your smartphone before bringing it to our counter.', 'mobile-pasal' ); ?></p>
+			</div>
+			<a class="view-all-link" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste, mero phone ma problem chha advice chahiyo' ) ); ?>" target="_blank" rel="noopener">
+				<span><?php esc_html_e( 'Ask Technician Advice', 'mobile-pasal' ); ?></span>
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+			</a>
+		</div>
+
+		<div class="guides-grid fade-up">
+			<div class="guide-card">
+				<div class="guide-thumb-wrap">
+					<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/tip-cracked-screen.jpg' ); ?>" alt="First aid for broken phone screen">
+					<span class="guide-tag"><?php esc_html_e( 'Display Emergency', 'mobile-pasal' ); ?></span>
+				</div>
+				<div class="guide-card-body">
+					<h3><?php esc_html_e( 'Cracked Screen First-Aid', 'mobile-pasal' ); ?></h3>
+					<p><?php esc_html_e( 'Do not apply hard pressure on glass cracks to avoid bleeding the underlying OLED panel. Tape over cracks with clear tape to prevent finger cuts, and back up your data.', 'mobile-pasal' ); ?></p>
+					<a class="guide-action-link" href="#repair-builder">
+						<span><?php esc_html_e( 'Book Screen Replacement', 'mobile-pasal' ); ?></span>
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="guide-card">
+				<div class="guide-thumb-wrap">
+					<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/tip-water-damage.jpg' ); ?>" alt="Water damage phone care protocol">
+					<span class="guide-tag"><?php esc_html_e( 'Liquid Protocol', 'mobile-pasal' ); ?></span>
+				</div>
+				<div class="guide-card-body">
+					<h3><?php esc_html_e( 'Phone Dropped in Water?', 'mobile-pasal' ); ?></h3>
+					<p><?php esc_html_e( 'Turn off device immediately. Never plug in a charging cable, and avoid shaking or using a hair dryer. Bring it to our counter within 2 hours for ultrasonic de-oxidation.', 'mobile-pasal' ); ?></p>
+					<a class="guide-action-link" href="<?php echo esc_url( mp_get_whatsapp_link( 'Emergency: Mero phone pani ma paryo, Gulariya counter ma audai chhu' ) ); ?>" target="_blank" rel="noopener">
+						<span><?php esc_html_e( 'Contact Emergency Tech', 'mobile-pasal' ); ?></span>
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="guide-card">
+				<div class="guide-thumb-wrap">
+					<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/tip-battery-care.jpg' ); ?>" alt="Smartphone battery longevity tips">
+					<span class="guide-tag"><?php esc_html_e( 'Battery Health', 'mobile-pasal' ); ?></span>
+				</div>
+				<div class="guide-card-body">
+					<h3><?php esc_html_e( 'Maximizing Battery Longevity', 'mobile-pasal' ); ?></h3>
+					<p><?php esc_html_e( 'Avoid letting your battery drop below 15% frequently. Avoid playing heavy games while fast charging, and use only certified 20W/30W adapters to protect internal battery chemistry.', 'mobile-pasal' ); ?></p>
+					<a class="guide-action-link" href="#repair-builder">
+						<span><?php esc_html_e( 'Check Battery Health', 'mobile-pasal' ); ?></span>
+						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Verified Local Customer Reviews -->
+<section class="reviews-section">
+	<div class="wrap">
+		<div class="sec-head fade-up">
+			<div>
+				<span class="sec-kicker"><?php esc_html_e( 'Verified Local Customers', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'What Gulariya Residents Say', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'Real feedback from local smartphone buyers and repair customers across Bardiya.', 'mobile-pasal' ); ?></p>
+			</div>
+			<div class="overall-rating-badge">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+				<strong>4.9 / 5.0</strong>
+				<span><?php esc_html_e( '(250+ Local Customer Reviews)', 'mobile-pasal' ); ?></span>
+			</div>
+		</div>
+
+		<div class="reviews-grid fade-up">
+			<?php
+			$reviews_query = new WP_Query( array(
+				'post_type'      => 'mp_review',
+				'posts_per_page' => 3,
+				'post_status'    => 'publish',
+			) );
+
+			if ( $reviews_query->have_posts() ) :
+				while ( $reviews_query->have_posts() ) :
+					$reviews_query->the_post();
+					$r_id      = get_the_ID();
+					$location  = get_post_meta( $r_id, '_mp_review_location', true ) ?: 'Gulariya, Bardiya';
+					$product   = get_post_meta( $r_id, '_mp_review_product', true );
+					$initials  = mb_substr( get_the_title(), 0, 2 );
+					?>
+					<div class="review-card">
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+						</div>
+						<p class="review-quote">"<?php echo esc_html( get_the_content() ); ?>"</p>
+						<div class="reviewer-meta">
+							<div class="reviewer-avatar"><?php echo esc_html( strtoupper( $initials ) ); ?></div>
 							<div>
-								<strong><?php echo esc_html( $r['name'] ); ?></strong>
-								<span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <?php echo esc_html( $r['location'] ); ?><?php echo ! empty( $r['product'] ) ? ' &bull; ' . esc_html( $r['product'] ) : ''; ?></span>
+								<strong><?php the_title(); ?></strong>
+								<small><?php echo esc_html( $location ); ?><?php if ( ! empty( $product ) ) echo ' &bull; ' . esc_html( $product ); ?></small>
 							</div>
 						</div>
 					</div>
-				<?php endforeach; ?>
-			</div>
-
-			<div class="biz-quote-controls">
-				<div class="biz-quote-avatars">
-					<?php foreach ( $hx_reviews as $i => $r ) : ?>
-						<button type="button" class="biz-avatar-btn<?php echo 0 === $i ? ' is-active' : ''; ?>" data-hx-quote-go="<?php echo esc_attr( $i ); ?>" aria-label="<?php echo esc_attr( sprintf( __( 'Review by %s', 'mobile-pasal' ), $r['name'] ) ); ?>">
-							<?php echo esc_html( strtoupper( mb_substr( $r['name'], 0, 1 ) ) ); ?>
-						</button>
-					<?php endforeach; ?>
-				</div>
-				<div class="biz-quote-arrows">
-					<button type="button" class="biz-arrow-btn" data-hx-quote-step="-1" aria-label="<?php esc_attr_e( 'Previous', 'mobile-pasal' ); ?>"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
-					<button type="button" class="biz-arrow-btn" data-hx-quote-step="1" aria-label="<?php esc_attr_e( 'Next', 'mobile-pasal' ); ?>"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
-				</div>
-			</div>
+				<?php endwhile;
+				wp_reset_postdata();
+			else :
+				// Fallback default testimonials
+				$default_testimonials = mp_get_default_testimonials_data();
+				foreach ( $default_testimonials as $t ) :
+					$initials = mb_substr( $t['name'], 0, 2 );
+					?>
+					<div class="review-card">
+						<div class="review-stars">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+						</div>
+						<p class="review-quote">"<?php echo esc_html( $t['content'] ); ?>"</p>
+						<div class="reviewer-meta">
+							<div class="reviewer-avatar"><?php echo esc_html( strtoupper( $initials ) ); ?></div>
+							<div>
+								<strong><?php echo esc_html( $t['name'] ); ?></strong>
+								<small><?php echo esc_html( $t['location'] ); ?> &bull; <?php echo esc_html( $t['product'] ); ?></small>
+							</div>
+						</div>
+					</div>
+				<?php endforeach;
+			endif;
+			?>
 		</div>
 	</div>
 </section>
 
-<!-- =========================================================================
-     10. STORE LOCATION & VISIT HUB (#visit)
-     ========================================================================= -->
-<section id="visit" class="biz-visit-section">
-	<div class="wrap biz-visit-grid">
-		<!-- Store Details Card -->
-		<div class="biz-store-details-card">
-			<div class="biz-store-hours-top">
-				<div class="hx-status" data-hx-open-status data-open="9" data-close="20">
-					<span class="hx-status-dot"></span>
-					<span class="hx-status-text"><?php esc_html_e( 'Open Today: 9:00 AM – 8:00 PM', 'mobile-pasal' ); ?></span>
-				</div>
-				<span class="biz-time-badge" data-hx-clock>NPT --:--</span>
-			</div>
+<!-- Store Visit, Directions & Map -->
+<section id="visit" class="visit-section">
+	<div class="wrap">
+		<div class="visit-grid fade-up">
+			<div class="visit-info-card">
+				<span class="sec-kicker"><?php esc_html_e( 'Walk In Anytime', 'mobile-pasal' ); ?></span>
+				<h2><?php esc_html_e( 'Visit Us in Gulariya', 'mobile-pasal' ); ?></h2>
+				<p><?php esc_html_e( 'Centrally located at Ji. Pra. Ka. Chowk. Walk in for brand-new phone purchases, immediate repair diagnostic, screen protectors, or honest technical advice.', 'mobile-pasal' ); ?></p>
 
-			<h2 class="biz-visit-title"><?php esc_html_e( 'Visit Our Store in Gulariya', 'mobile-pasal' ); ?></h2>
-			<p class="biz-visit-desc"><?php esc_html_e( 'Walk in for sealed flagship unboxings, on-the-spot screen & battery replacement, or genuine accessories. Located right at Ji. Pra. Ka. Chowk.', 'mobile-pasal' ); ?></p>
+				<div class="visit-details-list">
+					<div class="visit-detail-item">
+						<div class="visit-detail-icon">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+						</div>
+						<div>
+							<strong><?php echo esc_html( mp_opt( 'store_name', 'Ali Mobile Center & Apple Fix' ) ); ?></strong>
+							<p><?php echo esc_html( mp_opt( 'contact_address', 'Gulariya-06, Ji. Pra. Ka. Chowk, Bardiya, Lumbini Province, Nepal' ) ); ?></p>
+						</div>
+					</div>
 
-			<div class="biz-contact-list">
-				<div class="biz-contact-item">
-					<div class="biz-ci-icon"><i class="fa-solid fa-location-dot" aria-hidden="true"></i></div>
-					<div>
-						<strong><?php echo esc_html( mp_opt( 'store_name', 'Ali Mobile Center & Apple Fix' ) ); ?></strong>
-						<span><?php echo esc_html( mp_opt( 'contact_address', 'Gulariya-06, Ji. Pra. Ka. Chowk (Opp. DAO Office), Bardiya, Nepal' ) ); ?></span>
+					<div class="visit-detail-item">
+						<div class="visit-detail-icon">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+						</div>
+						<div>
+							<strong><?php printf( esc_html__( 'Helpline & WhatsApp: %s', 'mobile-pasal' ), esc_html( mp_opt( 'contact_phone', '+977 9804530786' ) ) ); ?></strong>
+							<p><?php esc_html_e( 'Direct counter support available 7 days a week', 'mobile-pasal' ); ?></p>
+						</div>
+					</div>
+
+					<div class="visit-detail-item">
+						<div class="visit-detail-icon">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+						</div>
+						<div>
+							<strong><?php esc_html_e( 'Counter Hours', 'mobile-pasal' ); ?></strong>
+							<p><?php echo esc_html( mp_opt( 'contact_hours', 'Sunday – Friday: 9:00 AM – 8:00 PM | Saturday: Open' ) ); ?></p>
+						</div>
 					</div>
 				</div>
-				<div class="biz-contact-item">
-					<div class="biz-ci-icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></div>
-					<div>
-						<strong><a href="tel:+<?php echo esc_attr( $phone_clean ); ?>"><?php echo esc_html( $phone_raw ); ?></a></strong>
-						<span><?php esc_html_e( 'Direct Calls & WhatsApp Support with Shop Technician', 'mobile-pasal' ); ?></span>
-					</div>
-				</div>
-				<div class="biz-contact-item">
-					<div class="biz-ci-icon"><i class="fa-regular fa-clock" aria-hidden="true"></i></div>
-					<div>
-						<strong><?php esc_html_e( 'Operating Hours', 'mobile-pasal' ); ?></strong>
-						<span><?php echo esc_html( mp_opt( 'contact_hours', 'Sunday – Friday: 9:00 AM – 8:00 PM | Saturday: Open' ) ); ?></span>
-					</div>
+
+				<div class="visit-actions-row">
+					<a class="btn btn-primary" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+						<span><?php esc_html_e( 'Call Store Now', 'mobile-pasal' ); ?></span>
+					</a>
+					<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, tapaiharuko shop ma auna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
+						<span><?php esc_html_e( 'WhatsApp Us', 'mobile-pasal' ); ?></span>
+					</a>
+					<a class="btn btn-secondary" href="<?php echo esc_url( mp_opt( 'google_maps_link', 'https://www.google.com/maps/search/?api=1&query=Ali+Mobile+Center+Gulariya+Bardiya' ) ); ?>" target="_blank" rel="noopener">
+						<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
+						<span><?php esc_html_e( 'Directions', 'mobile-pasal' ); ?></span>
+					</a>
 				</div>
 			</div>
 
-			<div class="biz-visit-actions">
-				<a class="biz-btn biz-btn-primary" href="<?php echo esc_url( $maps_link ); ?>" target="_blank" rel="noopener">
-					<i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i>
-					<span><?php esc_html_e( 'Get Directions on Google Maps', 'mobile-pasal' ); ?></span>
-				</a>
-				<a class="biz-btn biz-btn-secondary" href="tel:+<?php echo esc_attr( $phone_clean ); ?>">
-					<i class="fa-solid fa-phone" aria-hidden="true"></i>
-					<span><?php esc_html_e( 'Call Counter', 'mobile-pasal' ); ?></span>
-				</a>
+			<!-- Google Maps -->
+			<div class="visit-map-container">
+				<iframe
+					src="https://maps.google.com/maps?q=Gulariya+06+Bardiya+Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					title="<?php esc_attr_e( 'Ali Mobile Center Location on Map', 'mobile-pasal' ); ?>">
+				</iframe>
 			</div>
-		</div>
-
-		<!-- Interactive Map Embed -->
-		<div class="biz-map-frame-wrap">
-			<iframe
-				src="https://maps.google.com/maps?q=Gulariya+06+Bardiya+Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed"
-				loading="lazy"
-				referrerpolicy="no-referrer-when-downgrade"
-				title="<?php esc_attr_e( 'Ali Mobile Center Store Location on Google Maps', 'mobile-pasal' ); ?>"></iframe>
 		</div>
 	</div>
 </section>
-
-<!-- =========================================================================
-     11. FINAL CLOSING BANNER & VIP VOUCHER
-     ========================================================================= -->
-<section class="biz-closing-section">
-	<div class="wrap biz-closing-inner">
-		<div class="biz-closing-copy">
-			<span class="biz-closing-kicker"><?php esc_html_e( 'Fast Counter Assistance in Gulariya', 'mobile-pasal' ); ?></span>
-			<h2 class="biz-closing-title"><?php esc_html_e( 'Ready to Upgrade or Need an Instant Repair?', 'mobile-pasal' ); ?></h2>
-			<p class="biz-closing-desc"><?php esc_html_e( 'Send us a photo of your device problem or ask for today\'s sealed smartphone price list. We reply within minutes.', 'mobile-pasal' ); ?></p>
-			<div class="biz-closing-ctas">
-				<a class="biz-btn biz-btn-wa biz-btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma phone purchase / repair barema bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
-					<?php echo $wa_icon; // phpcs:ignore ?>
-					<span><?php esc_html_e( 'Chat Directly on WhatsApp', 'mobile-pasal' ); ?></span>
-				</a>
-				<a class="biz-btn biz-btn-secondary biz-btn-lg" href="tel:+<?php echo esc_attr( $phone_clean ); ?>">
-					<i class="fa-solid fa-phone" aria-hidden="true"></i>
-					<span><?php echo esc_html( $phone_raw ); ?></span>
-				</a>
-			</div>
-		</div>
-
-		<!-- Perforated Walk-In Pass -->
-		<div class="biz-vip-pass" data-hx-voucher="GULARIYA-VIP">
-			<div class="biz-pass-stub">
-				<span class="biz-pass-badge"><?php esc_html_e( 'VIP STORE PASS', 'mobile-pasal' ); ?></span>
-				<strong><?php esc_html_e( 'Free 24-Point Check & Screen Clean', 'mobile-pasal' ); ?></strong>
-				<small><?php esc_html_e( 'Show code at the counter for priority walk-in queueing', 'mobile-pasal' ); ?></small>
-			</div>
-			<button type="button" class="biz-pass-code-btn" data-voucher-copy>
-				<span class="biz-pass-code">GULARIYA-VIP</span>
-				<span class="biz-pass-hint" data-voucher-status><i class="fa-regular fa-copy" aria-hidden="true"></i> <?php esc_html_e( 'Tap to copy', 'mobile-pasal' ); ?></span>
-			</button>
-		</div>
-	</div>
-</section>
-
-<!-- Floating Quick-Navigation Store Bar -->
-<nav class="biz-floating-nav" data-hx-dock aria-label="<?php esc_attr_e( 'Quick Shop Navigation', 'mobile-pasal' ); ?>">
-	<a href="#categories" class="biz-dock-link"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><span><?php esc_html_e( 'Depts', 'mobile-pasal' ); ?></span></a>
-	<a href="#catalog" class="biz-dock-link"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i><span><?php esc_html_e( 'Phones', 'mobile-pasal' ); ?></span></a>
-	<a href="#deal" class="biz-dock-link"><i class="fa-solid fa-star" aria-hidden="true"></i><span><?php esc_html_e( 'Deals', 'mobile-pasal' ); ?></span></a>
-	<a href="#repair-builder" class="biz-dock-link"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i><span><?php esc_html_e( 'Repairs', 'mobile-pasal' ); ?></span></a>
-	<a href="#services" class="biz-dock-link"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i><span><?php esc_html_e( 'Prices', 'mobile-pasal' ); ?></span></a>
-	<a href="#visit" class="biz-dock-link"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span><?php esc_html_e( 'Store', 'mobile-pasal' ); ?></span></a>
-</nav>
 
 </main>
 
