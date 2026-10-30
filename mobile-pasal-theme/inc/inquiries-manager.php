@@ -836,19 +836,59 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 	.mp-tracker-wa-btn:hover {
 		background: #15803d;
 	}
-	@media (max-width: 600px) {
+	@media (max-width: 640px) {
+		.mp-tracker-card {
+			padding: 20px 16px;
+		}
 		.mp-tracker-input-group {
 			flex-direction: column;
-			padding: 12px;
+			padding: 10px;
+			gap: 8px;
+		}
+		.mp-tracker-input-group svg {
+			display: none;
+		}
+		.mp-tracker-input {
+			width: 100%;
+			text-align: center;
+			padding: 8px 0;
 		}
 		.mp-tracker-submit-btn {
 			width: 100%;
+			justify-content: center;
 		}
-		.mp-step-label {
-			display: none;
+		.mp-tracker-stepper {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 16px;
+			margin: 20px 0;
+			padding-left: 8px;
 		}
 		.mp-tracker-stepper::before {
-			top: 18px;
+			top: 10px;
+			bottom: 10px;
+			left: 25px;
+			right: auto;
+			width: 2px;
+			height: auto;
+		}
+		.mp-step-item {
+			display: flex;
+			align-items: center;
+			gap: 14px;
+			width: 100%;
+			text-align: left;
+		}
+		.mp-step-circle {
+			margin: 0;
+			flex-shrink: 0;
+			width: 34px;
+			height: 34px;
+		}
+		.mp-step-label {
+			display: block !important;
+			font-size: 0.88rem;
+			color: var(--text-heading, #0f172a);
 		}
 	}
 	</style>

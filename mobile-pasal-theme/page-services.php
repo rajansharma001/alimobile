@@ -122,7 +122,7 @@ $services_desc  = mp_opt( 'services_hero_desc', 'Specialized component-level mic
 </section>
 
 <!-- Live Repair Docket Tracker -->
-<section id="track-repair" class="repair-tracker-section" style="padding: 50px 0; background: var(--bg-surface, #111827); border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.08));">
+<section id="track-repair" class="repair-tracker-section">
 	<div class="wrap">
 		<?php echo do_shortcode( '[mp_repair_tracker]' ); ?>
 	</div>

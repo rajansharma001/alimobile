@@ -151,7 +151,7 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
           <p style="color: var(--text-muted); margin-bottom: 24px;">
             <?php echo nl2br( esc_html( mp_opt( 'search_empty_desc', 'We couldn\'t find anything matching your search term. Feel free to browse our full showroom catalog or reach out on WhatsApp.' ) ) ); ?>
           </p>
-          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <div class="error-action-btns">
             <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><?php echo esc_html( mp_opt( 'search_btn_catalog', 'Showroom Catalog' ) ); ?></a>
             <a href="https://wa.me/<?php echo esc_attr( $wa_number ); ?>" target="_blank" rel="noopener" class="btn btn-whatsapp"><?php echo esc_html( mp_opt( 'search_btn_whatsapp', 'Ask on WhatsApp' ) ); ?></a>
           </div>

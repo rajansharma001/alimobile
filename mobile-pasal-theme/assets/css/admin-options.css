@@ -49,6 +49,9 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	flex-direction: column;
 	color: #0f172a;
+	overflow-x: hidden;
+	width: 100%;
+	max-width: 100vw;
 }
 
 .bopt-app-wrap *,
@@ -85,6 +88,19 @@ body.toplevel_page_mp-inquiries #wpfooter {
 		top: 46px;
 		padding: 8px 12px;
 		gap: 8px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	#wpadminbar {
+		position: fixed !important;
+		top: 0 !important;
+		left: 0 !important;
+		right: 0 !important;
+		z-index: 99999 !important;
+	}
+	.bopt-topbar {
+		top: 46px !important;
 	}
 }
 
@@ -176,7 +192,7 @@ body.toplevel_page_mp-inquiries #wpfooter {
 @media screen and (max-width: 1024px) {
 	.bopt-brand-title {
 		font-size: 14.5px;
-		max-width: 200px;
+		max-width: 180px;
 	}
 	.bopt-brand-badge {
 		display: none;
@@ -186,7 +202,7 @@ body.toplevel_page_mp-inquiries #wpfooter {
 @media screen and (max-width: 782px) {
 	.bopt-brand-title {
 		font-size: 13.5px;
-		max-width: 130px;
+		max-width: 120px;
 	}
 	.bopt-brand {
 		gap: 8px;
@@ -196,14 +212,13 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
 	.bopt-brand-title {
-		font-size: 12.5px;
-		max-width: 95px;
+		display: none !important;
 	}
 	.bopt-brand-icon {
-		width: 32px;
-		height: 32px;
+		width: 34px;
+		height: 34px;
 		font-size: 15px;
 		border-radius: 8px;
 	}
@@ -211,12 +226,6 @@ body.toplevel_page_mp-inquiries #wpfooter {
 		width: 34px;
 		height: 34px;
 		font-size: 15px;
-	}
-}
-
-@media screen and (max-width: 360px) {
-	.bopt-brand-title {
-		display: none;
 	}
 }
 
@@ -304,12 +313,22 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
 	.bopt-messages-btn {
-		height: 34px;
-		min-height: 34px;
-		padding: 6px 8px;
-		font-size: 12px;
+		width: 36px;
+		height: 36px;
+		min-height: 36px;
+		padding: 0 !important;
+		font-size: 13px;
+		position: relative;
+	}
+	.bopt-messages-btn .bopt-badge-pill {
+		position: absolute;
+		top: -4px;
+		right: -4px;
+		padding: 1px 5px;
+		font-size: 9px;
+		border-radius: 8px;
 	}
 }
 
@@ -353,11 +372,12 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	}
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
 	.bopt-preview-btn {
-		width: 34px;
-		height: 34px;
-		min-height: 34px;
+		width: 36px;
+		height: 36px;
+		min-height: 36px;
+		padding: 0 !important;
 		font-size: 13px;
 	}
 }
@@ -414,13 +434,10 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	text-transform: uppercase;
 }
 
-@media screen and (max-width: 1150px) {
+@media screen and (max-width: 1024px) {
 	.bopt-key-hint {
 		display: none !important;
 	}
-}
-
-@media screen and (max-width: 782px) {
 	.bopt-save-btn {
 		padding: 8px 14px;
 		font-size: 12.5px;
@@ -433,23 +450,16 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	}
 }
 
-@media screen and (max-width: 480px) {
-	.bopt-save-btn {
-		height: 34px;
-		min-height: 34px;
-		padding: 6px 12px;
-		font-size: 12px;
-		gap: 5px;
-	}
-}
-
-@media screen and (max-width: 350px) {
+@media screen and (max-width: 640px) {
 	.bopt-save-btn .bopt-btn-text-short {
 		display: none !important;
 	}
 	.bopt-save-btn {
-		width: 34px;
-		padding: 0;
+		width: 36px;
+		height: 36px;
+		min-height: 36px;
+		padding: 0 !important;
+		font-size: 14px;
 	}
 }
 
@@ -1357,6 +1367,32 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 	border-radius: 12px 12px 0 0;
 }
 
+@media screen and (max-width: 1100px) {
+	.bopt-floating-save-bar {
+		padding: 10px 18px;
+	}
+	.bopt-floating-status {
+		max-width: 220px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+	.bopt-floating-sep,
+	.bopt-floating-tab {
+		display: none !important;
+	}
+}
+
+@media screen and (max-width: 900px) {
+	.bopt-floating-left {
+		display: none !important;
+	}
+	.bopt-floating-save-bar {
+		justify-content: flex-end;
+		gap: 10px;
+	}
+}
+
 @media screen and (max-width: 782px) {
 	.bopt-floating-save-bar {
 		display: none !important;
@@ -2195,7 +2231,7 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 		backdrop-filter: blur(12px);
 		-webkit-backdrop-filter: blur(12px);
 		border-top: 1px solid #334155;
-		padding: 10px 14px;
+		padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
 		display: flex;
 		align-items: center;
 		gap: 10px;
@@ -2240,7 +2276,7 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 	}
 
 	body.toplevel_page_mobile-pasal-options .bopt-content {
-		padding-bottom: 90px !important;
+		padding-bottom: calc(90px + env(safe-area-inset-bottom, 0px)) !important;
 	}
 }
 

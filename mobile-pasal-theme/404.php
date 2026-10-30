@@ -32,7 +32,7 @@ $btn3_text  = mp_opt( 'error404_btn3_text', 'Ask Counter Help' );
         <?php echo nl2br( esc_html( $desc_text ) ); ?>
       </p>
 
-      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+      <div class="error-action-btns">
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn-primary btn-lg">
           <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
           <span><?php echo esc_html( $btn1_text ); ?></span>

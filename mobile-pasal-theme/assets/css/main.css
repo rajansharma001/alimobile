@@ -3903,7 +3903,7 @@ h3 {
   }
 }
 
-@media (max-width: 540px) {
+@media (max-width: 768px) {
   .page-hero-ribbon {
     grid-template-columns: 1fr;
     gap: 10px;
@@ -3911,6 +3911,7 @@ h3 {
   .page-hero-actions {
     flex-direction: column;
     align-items: stretch;
+    width: 100%;
   }
   .page-hero-actions .btn {
     width: 100%;
@@ -4915,5 +4916,48 @@ h3 {
   .about-stats-dock {
     grid-template-columns: minmax(0, 1fr);
     gap: 10px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   23. Global Responsive & Unbreakable Utilities
+   -------------------------------------------------------------------------- */
+.repair-tracker-section {
+  padding: clamp(36px, 6vw, 60px) 0;
+  background-color: var(--bg-surface-alt, #f8fafc);
+  border-bottom: 1px solid var(--border-light, #e2e8f0);
+}
+
+.error-action-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .error-action-btns {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .error-action-btns .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .mobile-bottom-bar {
+    height: 58px;
+  }
+  .mb-item-btn {
+    font-size: 0.65rem;
+    gap: 2px;
+  }
+  .mb-item-btn svg {
+    width: 18px;
+    height: 18px;
   }
 }
