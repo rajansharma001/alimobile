@@ -1759,3 +1759,338 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 		display: flex;
 	}
 }
+
+/* ══════════════════════════════════════════════════════════════
+   13. COMPACT SUBNAV PILLS & MULTI-ITEM SWITCHERS (Zero-Scroll UX)
+   ══════════════════════════════════════════════════════════════ */
+.bopt-subnav-pills {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 20px;
+	overflow-x: auto;
+	padding-bottom: 6px;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+.bopt-subnav-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 18px;
+	border-radius: 8px;
+	background: #ffffff;
+	border: 1.5px solid #cbd5e1;
+	color: #334155;
+	font-size: 13px;
+	font-weight: 700;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: all 0.2s ease;
+	min-height: 42px;
+	user-select: none;
+}
+
+.bopt-subnav-pill:hover {
+	border-color: #0066cc;
+	color: #0066cc;
+	background: #f8fafc;
+	transform: translateY(-1px);
+}
+
+.bopt-subnav-pill.is-active {
+	background: #0066cc;
+	border-color: #0066cc;
+	color: #ffffff;
+	box-shadow: 0 4px 14px rgba(0, 102, 204, 0.25);
+}
+
+.bopt-subnav-content {
+	display: none;
+}
+
+.bopt-subnav-content.is-active {
+	display: block;
+	animation: boptFadeIn 0.25s ease;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   14. COLLAPSIBLE CARD HEADERS & ACCORDIONS
+   ══════════════════════════════════════════════════════════════ */
+.bopt-card-header {
+	cursor: pointer;
+	user-select: none;
+	transition: background 0.15s ease;
+	justify-content: space-between;
+}
+
+.bopt-card-header:hover {
+	background: #f1f5f9;
+}
+
+.bopt-card-header-left {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.bopt-card-toggle-btn {
+	background: transparent;
+	border: none;
+	color: #64748b;
+	font-size: 15px;
+	cursor: pointer;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition: all 0.2s ease;
+}
+
+.bopt-card-header:hover .bopt-card-toggle-btn {
+	color: #0066cc;
+	background: rgba(0, 102, 204, 0.08);
+}
+
+.bopt-card.is-collapsed .bopt-card-body {
+	display: none;
+}
+
+.bopt-card.is-collapsed .bopt-card-header {
+	border-bottom: none;
+}
+
+.bopt-card.is-collapsed .bopt-card-toggle-btn i {
+	transform: rotate(180deg);
+}
+
+.bopt-pane-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-top: 10px;
+}
+
+.bopt-btn-pill-action {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	border-radius: 6px;
+	font-size: 12px;
+	font-weight: 700;
+	background: #ffffff;
+	border: 1px solid #cbd5e1;
+	color: #475569;
+	cursor: pointer;
+	transition: all 0.15s ease;
+	min-height: 34px;
+}
+
+.bopt-btn-pill-action:hover {
+	border-color: #0066cc;
+	color: #0066cc;
+	background: #eff6ff;
+}
+
+/* ══════════════════════════════════════════════════════════════
+   15. STICKY IN-PAGE ANCHOR CHIPS BAR (1-Tap Section Jump)
+   ══════════════════════════════════════════════════════════════ */
+.bopt-pane-anchors {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	overflow-x: auto;
+	padding: 8px 0 16px 0;
+	margin-bottom: 18px;
+	border-bottom: 1px solid #e2e8f0;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+}
+
+.bopt-pane-anchors::-webkit-scrollbar {
+	display: none;
+}
+
+.bopt-anchor-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 6px 14px;
+	border-radius: 20px;
+	background: #f1f5f9;
+	color: #475569;
+	font-size: 12px;
+	font-weight: 700;
+	text-decoration: none;
+	white-space: nowrap;
+	border: 1px solid #e2e8f0;
+	transition: all 0.15s ease;
+}
+
+.bopt-anchor-chip:hover {
+	background: #eff6ff;
+	color: #0066cc;
+	border-color: #bfdbfe;
+	transform: translateY(-1px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+   16. COMPACT 2-COLUMN FORM FIELDS (.bopt-field-col-2)
+   ══════════════════════════════════════════════════════════════ */
+.bopt-field-col-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-field-col-2 {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   17. SEO, GEO & AEO RANK COMMAND SUITE STYLES
+   ══════════════════════════════════════════════════════════════ */
+.bopt-rank-score-box {
+	background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+	border: 1px solid #334155;
+	border-left: 4px solid #10b981;
+	border-radius: 12px;
+	padding: 20px 24px;
+	color: #ffffff;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 24px;
+	gap: 16px;
+	box-shadow: 0 4px 16px rgba(15, 23, 42, 0.15);
+}
+
+.bopt-rank-score-info {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.bopt-rank-score-icon {
+	width: 50px;
+	height: 50px;
+	border-radius: 12px;
+	background: rgba(16, 185, 129, 0.15);
+	border: 1px solid rgba(16, 185, 129, 0.35);
+	color: #34d399;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	flex-shrink: 0;
+}
+
+.bopt-rank-score-title {
+	font-size: 16px;
+	font-weight: 800;
+	color: #ffffff;
+	margin: 0 0 4px 0;
+}
+
+.bopt-rank-score-desc {
+	font-size: 13px;
+	color: #94a3b8;
+	margin: 0;
+	line-height: 1.4;
+}
+
+.bopt-rank-pills {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.bopt-rank-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 12px;
+	border-radius: 6px;
+	font-size: 11px;
+	font-weight: 700;
+	background: rgba(255, 255, 255, 0.08);
+	border: 1px solid rgba(255, 255, 255, 0.15);
+	color: #38bdf8;
+}
+
+.bopt-rank-pill i {
+	color: #10b981;
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-rank-score-box {
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 16px;
+	}
+}
+
+/* ══════════════════════════════════════════════════════════════
+   18. MOBILE STICKY BOTTOM SAVE DOCK (Theme Options Suite)
+   ══════════════════════════════════════════════════════════════ */
+@media screen and (max-width: 782px) {
+	.bopt-mobile-save-dock {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 99999;
+		background: rgba(15, 23, 42, 0.96);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-top: 1px solid #334155;
+		padding: 10px 14px;
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.35);
+	}
+
+	.bopt-mobile-save-dock .bopt-btn-mobile-save {
+		flex: 1;
+		background: #0066cc;
+		color: #ffffff;
+		border: none;
+		border-radius: 8px;
+		padding: 12px 18px;
+		font-size: 15px;
+		font-weight: 800;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		cursor: pointer;
+		min-height: 48px;
+		box-shadow: 0 2px 10px rgba(0, 102, 204, 0.4);
+	}
+
+	.bopt-mobile-save-dock .bopt-btn-mobile-top {
+		background: rgba(255, 255, 255, 0.1);
+		color: #ffffff;
+		border: 1px solid rgba(255, 255, 255, 0.2);
+		border-radius: 8px;
+		padding: 12px 14px;
+		font-size: 14px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 48px;
+		cursor: pointer;
+	}
+
+	body.toplevel_page_mobile-pasal-options .bopt-content {
+		padding-bottom: 84px !important;
+	}
+}
+
+@media screen and (min-width: 783px) {
+	.bopt-mobile-save-dock {
+		display: none;
+	}
+}

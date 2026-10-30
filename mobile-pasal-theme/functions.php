@@ -24,6 +24,7 @@ require_once MP_THEME_DIR . '/inc/theme-options.php';
 require_once MP_THEME_DIR . '/inc/custom-post-types.php';
 require_once MP_THEME_DIR . '/inc/inquiries-manager.php';
 require_once MP_THEME_DIR . '/inc/sample-data.php';
+require_once MP_THEME_DIR . '/inc/seo-geo-aeo.php';
 
 /**
  * 2. Theme Setup

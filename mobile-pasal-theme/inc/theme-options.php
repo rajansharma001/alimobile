@@ -252,7 +252,47 @@ function mobile_pasal_options_defaults() {
 		'footer_col3_title'            => 'Store Information',
 		'footer_copyright'             => '© 2026 Ali Mobile Center & Apple Fix. Gulariya-06, Bardiya, Nepal. All Rights Reserved.',
 
-		// ── 13. Custom Code ──
+		// ── 13. Search Engine Optimization (SEO) ──
+		'seo_meta_title'               => 'Ali Mobile Center & Apple Fix | Official NTA Handsets & Precision Phone Repair Gulariya, Bardiya',
+		'seo_meta_desc'                => 'Gulariya\'s premier mobile showroom and authorized repair laboratory at Ji. Pra. Ka. Chowk. Genuine Apple iPhone, Samsung & Xiaomi handsets with official NTA approval, 1-year VAT bills, and 45-minute display & battery repairs.',
+		'seo_meta_keywords'            => 'mobile shop in gulariya, iphone repair bardiya, apple fix gulariya, ali mobile center, nta approved phone nepal, smartphone repair ji pra ka chowk, second hand iphone bardiya',
+		'seo_og_image'                 => '',
+		'seo_robots_index'             => '1',
+		'seo_google_verify'            => '',
+		'seo_bing_verify'              => '',
+
+		// ── 14. GEO & Local Google Maps Ranking ──
+		'geo_legal_name'               => 'Ali Mobile Center & Apple Fix',
+		'geo_street'                   => 'Gulariya-06, Ji. Pra. Ka. Chowk (District Police Office Chowk)',
+		'geo_city'                     => 'Gulariya',
+		'geo_district'                 => 'Bardiya',
+		'geo_province'                 => 'Lumbini Province',
+		'geo_postal'                   => '21800',
+		'geo_country_code'             => 'NP',
+		'geo_region_code'              => 'NP-P5',
+		'geo_latitude'                 => '28.2330',
+		'geo_longitude'                => '81.3340',
+		'geo_service_areas'            => 'Gulariya, Bansgadhi, Madhuwan, Badhaiyatal, Thakurbaba, Barbardiya, Rajapur, Kohalpur, Nepalgunj, Bardiya District',
+		'geo_opening_hours'            => 'Sun–Fri: 9:00 AM – 8:00 PM | Sat: Open 9:00 AM – 6:00 PM',
+		'geo_price_range'              => 'Rs. 500 - Rs. 2,50,000',
+		'geo_maps_url'                 => 'https://maps.google.com/?q=Ali+Mobile+Center+Gulariya',
+		'geo_gmb_review_url'           => 'https://g.page/r/alimobile/review',
+
+		// ── 15. AEO & AI Search Citation ──
+		'aeo_ai_summary'               => 'Ali Mobile Center & Apple Fix is the premier mobile phone showroom and cleanroom smartphone repair laboratory in Gulariya, Bardiya, Nepal, located at Ji. Pra. Ka. Chowk. The center retails 100% genuine NTA-approved iPhones, Samsung and Xiaomi handsets with official VAT bills, and provides component-level OLED screen, battery, and logic board micro-soldering repairs.',
+		'aeo_enable_faq_schema'        => '1',
+		'aeo_faq1_q'                   => 'Are all smartphones sold at Ali Mobile Center NTA approved?',
+		'aeo_faq1_a'                   => 'Yes, 100% of all handsets sold at Ali Mobile Center Gulariya are officially registered with Nepal Telecommunications Authority (NTA) IMEI compliance and accompanied by legitimate serial VAT bills for official warranty claims.',
+		'aeo_faq2_q'                   => 'How fast can I get my iPhone screen or battery replaced at Apple Fix Lab?',
+		'aeo_faq2_a'                   => 'Most iPhone OLED display swaps and battery health calibrations are completed in 45 to 60 minutes on our cleanroom bench, right in front of the customer, backed by a 90-day warranty.',
+		'aeo_faq3_q'                   => 'Where is Ali Mobile Center located in Bardiya?',
+		'aeo_faq3_a'                   => 'We are located at Gulariya-06, Ji. Pra. Ka. Chowk (District Police Office Chowk), Gulariya, Bardiya, Nepal. You can call or WhatsApp us directly at +977 9804530786.',
+		'aeo_faq4_q'                   => 'Does Ali Mobile Center accept trade-ins for old phones?',
+		'aeo_faq4_a'                   => 'Yes, our counter offers fair, transparent trade-in valuations for your existing handset toward any new smartphone, with free safe migration of your WhatsApp chats, contacts, photos, and apps.',
+		'aeo_sameas_urls'              => 'https://www.facebook.com/alimobilecenter, https://www.instagram.com/alimobilecenter, https://www.tiktok.com/@alimobilecenter, https://wa.me/9779804530786',
+		'aeo_enable_llms_txt'          => '1',
+
+		// ── 16. Custom Code ──
 		'custom_css'                   => '',
 		'custom_header_scripts'        => '',
 		'custom_footer_scripts'        => '',
@@ -658,6 +698,15 @@ function mobile_pasal_options_render_dashboard() {
 				'contact_inbox_tab'  => array( 'label' => __( 'Inquiries Inbox Manager', 'mobile-pasal' ), 'icon' => 'fa-inbox' ),
 			),
 		),
+		'rank_group' => array(
+			'group_title' => __( 'SEO, GEO & AI Search (AEO)', 'mobile-pasal' ),
+			'icon'        => 'fa-bullseye',
+			'items'       => array(
+				'seo_meta_tab'  => array( 'label' => __( 'SEO & Meta Ranking', 'mobile-pasal' ), 'icon' => 'fa-magnifying-glass-chart' ),
+				'geo_local_tab' => array( 'label' => __( 'GEO & Local Maps Ranking', 'mobile-pasal' ), 'icon' => 'fa-map-pin' ),
+				'aeo_ai_tab'    => array( 'label' => __( 'AEO & AI Search Citation', 'mobile-pasal' ), 'icon' => 'fa-robot' ),
+			),
+		),
 		'mobile_group' => array(
 			'group_title' => __( 'Mobile UX & Chat Widget', 'mobile-pasal' ),
 			'icon'        => 'fa-mobile-screen-button',
@@ -1034,86 +1083,117 @@ function mobile_pasal_options_render_dashboard() {
 							<p><?php esc_html_e( 'Customize all 3 rotating slides: Flagship Handsets, Apple Fix Lab, and Original Accessories.', 'mobile-pasal' ); ?></p>
 						</div>
 
-						<!-- Slide 1 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-mobile-screen"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 1: Flagship Handset Showcase', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Highlights official NTA smartphones (iPhone 16, Galaxy S24, Pixel 9, OnePlus).', 'mobile-pasal' ); ?></p>
+						<!-- Subnav Segmented Pills for Fast Zero-Scroll Editing -->
+						<div class="bopt-subnav-pills">
+							<button type="button" class="bopt-subnav-pill is-active" data-subtab="subtab-hero-1">
+								<i class="fa-solid fa-mobile-screen"></i>
+								<span><?php esc_html_e( 'Slide 1: Flagship Handsets', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-hero-2">
+								<i class="fa-solid fa-screwdriver-wrench"></i>
+								<span><?php esc_html_e( 'Slide 2: Apple Fix Lab', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-hero-3">
+								<i class="fa-solid fa-headphones"></i>
+								<span><?php esc_html_e( 'Slide 3: Genuine Gear', 'mobile-pasal' ); ?></span>
+							</button>
+						</div>
+
+						<!-- Slide 1 Content -->
+						<div class="bopt-subnav-content is-active" id="subtab-hero-1">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 1: Flagship Handset Showcase', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Highlights official NTA smartphones (iPhone 16, Galaxy S24, Pixel 9, OnePlus).', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'hero_slide1_badge', __( 'Slide 1 Pill Badge', 'mobile-pasal' ), __( 'e.g. 100% Genuine Sealed Stock' ) );
-									mp_render_field_text( 'hero_slide1_title', __( 'Slide 1 Title Line 1', 'mobile-pasal' ), __( 'e.g. Official NTA Smartphones &' ) );
-									mp_render_field_text( 'hero_slide1_title_highlight', __( 'Slide 1 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Genuine Gear.' ) );
-									mp_render_field_textarea( 'hero_slide1_subtitle', __( 'Slide 1 Subtitle / Description', 'mobile-pasal' ), __( 'Explains genuine IMEI bill, warranty support, and free data transfer.' ), 3 );
-									mp_render_field_text( 'hero_slide1_btn1_text', __( 'Slide 1 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Filter Handsets Below' ) );
-									mp_render_field_text( 'hero_slide1_btn1_url', __( 'Slide 1 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #catalog or page URL' ) );
-									mp_render_field_text( 'hero_slide1_btn2_text', __( 'Slide 1 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Ask Today\'s Counter Price' ) );
-									mp_render_field_text( 'hero_slide1_btn2_url', __( 'Slide 1 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp prefilled inquiry URL' ) );
-									mp_render_field_text( 'hero_slide1_telemetry_model', __( 'Floating Telemetry Pill: Model', 'mobile-pasal' ), __( 'e.g. iPhone 16 Series' ) );
-									mp_render_field_text( 'hero_slide1_telemetry_status', __( 'Floating Telemetry Pill: Status', 'mobile-pasal' ), __( 'e.g. In Stock Now' ) );
-									mp_render_field_image( 'hero_slide1_image', __( 'Slide 1 Handset Image', 'mobile-pasal' ), __( 'Transparent PNG or JPG of flagship handset in hand.' ) );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'hero_slide1_badge', __( 'Slide 1 Pill Badge', 'mobile-pasal' ), __( 'e.g. 100% Genuine Sealed Stock' ) );
+										mp_render_field_text( 'hero_slide1_title', __( 'Slide 1 Title Line 1', 'mobile-pasal' ), __( 'e.g. Official NTA Smartphones &' ) );
+										mp_render_field_text( 'hero_slide1_title_highlight', __( 'Slide 1 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Genuine Gear.' ) );
+										mp_render_field_textarea( 'hero_slide1_subtitle', __( 'Slide 1 Subtitle / Description', 'mobile-pasal' ), __( 'Explains genuine IMEI bill, warranty support, and free data transfer.' ), 3 );
+										mp_render_field_text( 'hero_slide1_btn1_text', __( 'Slide 1 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Filter Handsets Below' ) );
+										mp_render_field_text( 'hero_slide1_btn1_url', __( 'Slide 1 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #catalog or page URL' ) );
+										mp_render_field_text( 'hero_slide1_btn2_text', __( 'Slide 1 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Ask Today\'s Counter Price' ) );
+										mp_render_field_text( 'hero_slide1_btn2_url', __( 'Slide 1 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp prefilled inquiry URL' ) );
+										mp_render_field_text( 'hero_slide1_telemetry_model', __( 'Floating Telemetry Pill: Model', 'mobile-pasal' ), __( 'e.g. iPhone 16 Series' ) );
+										mp_render_field_text( 'hero_slide1_telemetry_status', __( 'Floating Telemetry Pill: Status', 'mobile-pasal' ), __( 'e.g. In Stock Now' ) );
+										mp_render_field_image( 'hero_slide1_image', __( 'Slide 1 Handset Image', 'mobile-pasal' ), __( 'Transparent PNG or JPG of flagship handset in hand.' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Slide 2 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 2: Certified Apple Fix Lab', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Showcases microscope repair bench, true-tone calibrations, and screen swaps.', 'mobile-pasal' ); ?></p>
+						<!-- Slide 2 Content -->
+						<div class="bopt-subnav-content" id="subtab-hero-2">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 2: Certified Apple Fix Lab', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Showcases microscope repair bench, true-tone calibrations, and screen swaps.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'hero_slide2_badge', __( 'Slide 2 Pill Badge', 'mobile-pasal' ), __( 'e.g. Certified Apple Fix Lab' ) );
-									mp_render_field_text( 'hero_slide2_title', __( 'Slide 2 Title Line 1', 'mobile-pasal' ), __( 'e.g. Gulariya\'s Premier' ) );
-									mp_render_field_text( 'hero_slide2_title_highlight', __( 'Slide 2 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Apple Fix & Lab.' ) );
-									mp_render_field_textarea( 'hero_slide2_subtitle', __( 'Slide 2 Subtitle / Description', 'mobile-pasal' ), __( 'Explains microscope micro-soldering, true-tone OLED swaps, and battery health.' ), 3 );
-									mp_render_field_text( 'hero_slide2_btn1_text', __( 'Slide 2 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Interactive Repair Estimator' ) );
-									mp_render_field_text( 'hero_slide2_btn1_url', __( 'Slide 2 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #repair-builder' ) );
-									mp_render_field_text( 'hero_slide2_btn2_text', __( 'Slide 2 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Direct WhatsApp Help' ) );
-									mp_render_field_text( 'hero_slide2_btn2_url', __( 'Slide 2 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp repair consultation URL' ) );
-									mp_render_field_text( 'hero_slide2_telemetry_time', __( 'Floating Telemetry Pill: Time', 'mobile-pasal' ), __( 'e.g. 30–45 Mins Average' ) );
-									mp_render_field_text( 'hero_slide2_telemetry_station', __( 'Floating Telemetry Pill: Station', 'mobile-pasal' ), __( 'e.g. Counter Diagnostic' ) );
-									mp_render_field_image( 'hero_slide2_image', __( 'Slide 2 Bench Image', 'mobile-pasal' ), __( 'High quality photo of technician bench or microscope.' ) );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'hero_slide2_badge', __( 'Slide 2 Pill Badge', 'mobile-pasal' ), __( 'e.g. Certified Apple Fix Lab' ) );
+										mp_render_field_text( 'hero_slide2_title', __( 'Slide 2 Title Line 1', 'mobile-pasal' ), __( 'e.g. Gulariya\'s Premier' ) );
+										mp_render_field_text( 'hero_slide2_title_highlight', __( 'Slide 2 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Apple Fix & Lab.' ) );
+										mp_render_field_textarea( 'hero_slide2_subtitle', __( 'Slide 2 Subtitle / Description', 'mobile-pasal' ), __( 'Explains microscope micro-soldering, true-tone OLED swaps, and battery health.' ), 3 );
+										mp_render_field_text( 'hero_slide2_btn1_text', __( 'Slide 2 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Interactive Repair Estimator' ) );
+										mp_render_field_text( 'hero_slide2_btn1_url', __( 'Slide 2 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #repair-builder' ) );
+										mp_render_field_text( 'hero_slide2_btn2_text', __( 'Slide 2 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Direct WhatsApp Help' ) );
+										mp_render_field_text( 'hero_slide2_btn2_url', __( 'Slide 2 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp repair consultation URL' ) );
+										mp_render_field_text( 'hero_slide2_telemetry_time', __( 'Floating Telemetry Pill: Time', 'mobile-pasal' ), __( 'e.g. 30–45 Mins Average' ) );
+										mp_render_field_text( 'hero_slide2_telemetry_station', __( 'Floating Telemetry Pill: Station', 'mobile-pasal' ), __( 'e.g. Counter Diagnostic' ) );
+										mp_render_field_image( 'hero_slide2_image', __( 'Slide 2 Bench Image', 'mobile-pasal' ), __( 'High quality photo of technician bench or microscope.' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<!-- Slide 3 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 3: Original Audio, Power & Protection', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Showcases AirPods Pro, MagSafe 20W/65W GaN adapters, and drop cases.', 'mobile-pasal' ); ?></p>
+						<!-- Slide 3 Content -->
+						<div class="bopt-subnav-content" id="subtab-hero-3">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 3: Original Audio, Power & Protection', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Showcases AirPods Pro, MagSafe 20W/65W GaN adapters, and drop cases.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'hero_slide3_badge', __( 'Slide 3 Pill Badge', 'mobile-pasal' ), __( 'e.g. 100% Genuine Accessories' ) );
-									mp_render_field_text( 'hero_slide3_title', __( 'Slide 3 Title Line 1', 'mobile-pasal' ), __( 'e.g. 100% Original Audio,' ) );
-									mp_render_field_text( 'hero_slide3_title_highlight', __( 'Slide 3 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Power & Protection.' ) );
-									mp_render_field_textarea( 'hero_slide3_subtitle', __( 'Slide 3 Subtitle / Description', 'mobile-pasal' ), __( 'Explains MagSafe chargers, 65W GaN dual-port adapters, and AirPods Pro 2.' ), 3 );
-									mp_render_field_text( 'hero_slide3_btn1_text', __( 'Slide 3 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Browse Accessories' ) );
-									mp_render_field_text( 'hero_slide3_btn1_url', __( 'Slide 3 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #categories' ) );
-									mp_render_field_text( 'hero_slide3_btn2_text', __( 'Slide 3 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Check Counter Stock' ) );
-									mp_render_field_text( 'hero_slide3_btn2_url', __( 'Slide 3 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp inquiry URL' ) );
-									mp_render_field_text( 'hero_slide3_telemetry_brands', __( 'Floating Telemetry Pill: Brands', 'mobile-pasal' ), __( 'e.g. Apple • Samsung • Anker' ) );
-									mp_render_field_text( 'hero_slide3_telemetry_pay', __( 'Floating Telemetry Pill: Pay', 'mobile-pasal' ), __( 'e.g. Cash & Digital Pay' ) );
-									mp_render_field_image( 'hero_slide3_image', __( 'Slide 3 Accessories Shelf Image', 'mobile-pasal' ), __( 'Photo of genuine accessories shelf or charging gear.' ) );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'hero_slide3_badge', __( 'Slide 3 Pill Badge', 'mobile-pasal' ), __( 'e.g. 100% Genuine Accessories' ) );
+										mp_render_field_text( 'hero_slide3_title', __( 'Slide 3 Title Line 1', 'mobile-pasal' ), __( 'e.g. 100% Original Audio,' ) );
+										mp_render_field_text( 'hero_slide3_title_highlight', __( 'Slide 3 Title Highlight (Gradient Text)', 'mobile-pasal' ), __( 'e.g. Power & Protection.' ) );
+										mp_render_field_textarea( 'hero_slide3_subtitle', __( 'Slide 3 Subtitle / Description', 'mobile-pasal' ), __( 'Explains MagSafe chargers, 65W GaN dual-port adapters, and AirPods Pro 2.' ), 3 );
+										mp_render_field_text( 'hero_slide3_btn1_text', __( 'Slide 3 Button 1 Text', 'mobile-pasal' ), __( 'e.g. Browse Accessories' ) );
+										mp_render_field_text( 'hero_slide3_btn1_url', __( 'Slide 3 Button 1 URL', 'mobile-pasal' ), __( 'e.g. #categories' ) );
+										mp_render_field_text( 'hero_slide3_btn2_text', __( 'Slide 3 Button 2 Text', 'mobile-pasal' ), __( 'e.g. Check Counter Stock' ) );
+										mp_render_field_text( 'hero_slide3_btn2_url', __( 'Slide 3 Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp inquiry URL' ) );
+										mp_render_field_text( 'hero_slide3_telemetry_brands', __( 'Floating Telemetry Pill: Brands', 'mobile-pasal' ), __( 'e.g. Apple • Samsung • Anker' ) );
+										mp_render_field_text( 'hero_slide3_telemetry_pay', __( 'Floating Telemetry Pill: Pay', 'mobile-pasal' ), __( 'e.g. Cash & Digital Pay' ) );
+										mp_render_field_image( 'hero_slide3_image', __( 'Slide 3 Accessories Shelf Image', 'mobile-pasal' ), __( 'Photo of genuine accessories shelf or charging gear.' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1422,11 +1502,14 @@ function mobile_pasal_options_render_dashboard() {
 
 						<div class="bopt-card">
 							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Assurance Section Headings', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Header text displayed above the 4 assurance cards.', 'mobile-pasal' ); ?></p>
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Assurance Section Headings', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Header text displayed above the 4 assurance cards.', 'mobile-pasal' ); ?></p>
+									</div>
 								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 							</div>
 							<div class="bopt-card-body">
 								<div class="bopt-field-grid">
@@ -1439,78 +1522,122 @@ function mobile_pasal_options_render_dashboard() {
 							</div>
 						</div>
 
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-certificate"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Card 1: 100% NTA Approved', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Compliant with Nepal Telecommunications Authority IMEI registration.', 'mobile-pasal' ); ?></p>
+						<!-- Subnav Segmented Pills for 4 Assurance Cards -->
+						<div class="bopt-subnav-pills">
+							<button type="button" class="bopt-subnav-pill is-active" data-subtab="subtab-assure-1">
+								<i class="fa-solid fa-certificate"></i>
+								<span><?php esc_html_e( 'Card 1: 100% NTA', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-assure-2">
+								<i class="fa-solid fa-receipt"></i>
+								<span><?php esc_html_e( 'Card 2: Official VAT Bill', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-assure-3">
+								<i class="fa-solid fa-arrow-right-arrow-left"></i>
+								<span><?php esc_html_e( 'Card 3: Data Transfer', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-assure-4">
+								<i class="fa-solid fa-arrows-rotate"></i>
+								<span><?php esc_html_e( 'Card 4: Trade-In Counter', 'mobile-pasal' ); ?></span>
+							</button>
+						</div>
+
+						<!-- Card 1 Content -->
+						<div class="bopt-subnav-content is-active" id="subtab-assure-1">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-certificate"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Card 1: 100% NTA Approved', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Compliant with Nepal Telecommunications Authority IMEI registration.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'assurance1_title', __( 'Card 1 Title', 'mobile-pasal' ), __( 'Default: 100% NTA Approved' ) );
-									mp_render_field_textarea( 'assurance1_desc', __( 'Card 1 Description', 'mobile-pasal' ), __( 'Default: Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted MDMS cellular service across Nepal.' ), 2 );
-									mp_render_field_text( 'assurance1_tag', __( 'Card 1 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: MDMS Verified' ) );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'assurance1_title', __( 'Card 1 Title', 'mobile-pasal' ), __( 'Default: 100% NTA Approved' ) );
+										mp_render_field_textarea( 'assurance1_desc', __( 'Card 1 Description', 'mobile-pasal' ), __( 'Default: Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted MDMS cellular service across Nepal.' ), 2 );
+										mp_render_field_text( 'assurance1_tag', __( 'Card 1 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: MDMS Verified' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-receipt"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Card 2: Official VAT Bill', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Authorized commercial VAT serial bill enabling legitimate distributor warranty claims.', 'mobile-pasal' ); ?></p>
+						<!-- Card 2 Content -->
+						<div class="bopt-subnav-content" id="subtab-assure-2">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-receipt"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Card 2: Official VAT Bill', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Authorized commercial VAT serial bill enabling legitimate distributor warranty claims.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'assurance2_title', __( 'Card 2 Title', 'mobile-pasal' ), __( 'Default: Official VAT Bill' ) );
-									mp_render_field_textarea( 'assurance2_desc', __( 'Card 2 Description', 'mobile-pasal' ), __( 'Default: Every single handset comes with an authorized commercial VAT serial bill enabling legitimate distributor warranty claims.' ), 2 );
-									mp_render_field_text( 'assurance2_tag', __( 'Card 2 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Genuine Bill' ) );
-									?>
-								</div>
-							</div>
-						</div>
-
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Card 3: Free Data Transfer', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Safe migration of WhatsApp chats, photos, contacts, and mobile apps.', 'mobile-pasal' ); ?></p>
-								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'assurance3_title', __( 'Card 3 Title', 'mobile-pasal' ), __( 'Default: Free Data Transfer' ) );
-									mp_render_field_textarea( 'assurance3_desc', __( 'Card 3 Description', 'mobile-pasal' ), __( 'Default: We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ), 2 );
-									mp_render_field_text( 'assurance3_tag', __( 'Card 3 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Walk-In Setup' ) );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'assurance2_title', __( 'Card 2 Title', 'mobile-pasal' ), __( 'Default: Official VAT Bill' ) );
+										mp_render_field_textarea( 'assurance2_desc', __( 'Card 2 Description', 'mobile-pasal' ), __( 'Default: Every single handset comes with an authorized commercial VAT serial bill enabling legitimate distributor warranty claims.' ), 2 );
+										mp_render_field_text( 'assurance2_tag', __( 'Card 2 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Genuine Bill' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Card 4: Trade-In Counter', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Fair, transparent counter evaluation toward any new smartphone.', 'mobile-pasal' ); ?></p>
+						<!-- Card 3 Content -->
+						<div class="bopt-subnav-content" id="subtab-assure-3">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-arrow-right-arrow-left"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Card 3: Free Data Transfer', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Safe migration of WhatsApp chats, photos, contacts, and mobile apps.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'assurance3_title', __( 'Card 3 Title', 'mobile-pasal' ), __( 'Default: Free Data Transfer' ) );
+										mp_render_field_textarea( 'assurance3_desc', __( 'Card 3 Description', 'mobile-pasal' ), __( 'Default: We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ), 2 );
+										mp_render_field_text( 'assurance3_tag', __( 'Card 3 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Walk-In Setup' ) );
+										?>
+									</div>
 								</div>
 							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'assurance4_title', __( 'Card 4 Title', 'mobile-pasal' ), __( 'Default: Trade-In Counter' ) );
-									mp_render_field_textarea( 'assurance4_desc', __( 'Card 4 Description', 'mobile-pasal' ), __( 'Default: Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ), 2 );
-									mp_render_field_text( 'assurance4_tag', __( 'Card 4 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Instant Valuation' ) );
-									?>
+						</div>
+
+						<!-- Card 4 Content -->
+						<div class="bopt-subnav-content" id="subtab-assure-4">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Card 4: Trade-In Counter', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Fair, transparent counter evaluation toward any new smartphone.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'assurance4_title', __( 'Card 4 Title', 'mobile-pasal' ), __( 'Default: Trade-In Counter' ) );
+										mp_render_field_textarea( 'assurance4_desc', __( 'Card 4 Description', 'mobile-pasal' ), __( 'Default: Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ), 2 );
+										mp_render_field_text( 'assurance4_tag', __( 'Card 4 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Instant Valuation' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1766,97 +1893,146 @@ function mobile_pasal_options_render_dashboard() {
 							<p><?php esc_html_e( 'Manage the 5 most common customer questions regarding screen turnaround, NTA registration, and battery health.', 'mobile-pasal' ); ?></p>
 						</div>
 
+						<!-- Subnav Segmented Pills for 5 FAQs -->
+						<div class="bopt-subnav-pills">
+							<button type="button" class="bopt-subnav-pill is-active" data-subtab="subtab-faq-1">
+								<i class="fa-solid fa-clock"></i>
+								<span><?php esc_html_e( 'FAQ 1: Screen Turnaround', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-faq-2">
+								<i class="fa-solid fa-shield-check"></i>
+								<span><?php esc_html_e( 'FAQ 2: NTA MDMS', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-faq-3">
+								<i class="fa-solid fa-battery-full"></i>
+								<span><?php esc_html_e( 'FAQ 3: iPhone Battery', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-faq-4">
+								<i class="fa-solid fa-certificate"></i>
+								<span><?php esc_html_e( 'FAQ 4: 90-Day Warranty', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-faq-5">
+								<i class="fa-solid fa-arrows-rotate"></i>
+								<span><?php esc_html_e( 'FAQ 5: Trade-In Counter', 'mobile-pasal' ); ?></span>
+							</button>
+						</div>
+
 						<!-- FAQ 1 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 1: Screen Replacement Turnaround Time', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Explains 35–45 minute screen replacement process and True-Tone data transfer.', 'mobile-pasal' ); ?></p>
+						<div class="bopt-subnav-content is-active" id="subtab-faq-1">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 1: Screen Replacement Turnaround Time', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Explains 35–45 minute screen replacement process and True-Tone data transfer.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'faq1_q', __( 'FAQ 1 Question', 'mobile-pasal' ), __( 'Default: How long does an iPhone screen replacement take?' ) );
-									mp_render_field_textarea( 'faq1_a', __( 'FAQ 1 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'faq1_q', __( 'FAQ 1 Question', 'mobile-pasal' ), __( 'Default: How long does an iPhone screen replacement take?' ) );
+										mp_render_field_textarea( 'faq1_a', __( 'FAQ 1 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- FAQ 2 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 2: NTA MDMS Registration Guarantee', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Explains 100% legal IMEI registration and genuine VAT bills.', 'mobile-pasal' ); ?></p>
+						<div class="bopt-subnav-content" id="subtab-faq-2">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 2: NTA MDMS Registration Guarantee', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Explains 100% legal IMEI registration and genuine VAT bills.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'faq2_q', __( 'FAQ 2 Question', 'mobile-pasal' ), __( 'Default: Are your new handsets registered with NTA MDMS?' ) );
-									mp_render_field_textarea( 'faq2_a', __( 'FAQ 2 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'faq2_q', __( 'FAQ 2 Question', 'mobile-pasal' ), __( 'Default: Are your new handsets registered with NTA MDMS?' ) );
+										mp_render_field_textarea( 'faq2_a', __( 'FAQ 2 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- FAQ 3 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 3: iPhone Battery Health & BMS Transplants', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Explains 100% maximum capacity calibration without unknown part warnings.', 'mobile-pasal' ); ?></p>
+						<div class="bopt-subnav-content" id="subtab-faq-3">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 3: iPhone Battery Health & BMS Transplants', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Explains 100% maximum capacity calibration without unknown part warnings.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'faq3_q', __( 'FAQ 3 Question', 'mobile-pasal' ), __( 'Default: Do you replace iPhone batteries without the unknown part warning?' ) );
-									mp_render_field_textarea( 'faq3_a', __( 'FAQ 3 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'faq3_q', __( 'FAQ 3 Question', 'mobile-pasal' ), __( 'Default: Do you replace iPhone batteries without the unknown part warning?' ) );
+										mp_render_field_textarea( 'faq3_a', __( 'FAQ 3 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- FAQ 4 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 4: 90-Day Repair Warranty Terms', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Explains coverage for touch sensitivity, display flicker, and battery defects.', 'mobile-pasal' ); ?></p>
+						<div class="bopt-subnav-content" id="subtab-faq-4">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 4: 90-Day Repair Warranty Terms', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Explains coverage for touch sensitivity, display flicker, and battery defects.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'faq4_q', __( 'FAQ 4 Question', 'mobile-pasal' ), __( 'Default: What is covered under the 90-day repair warranty?' ) );
-									mp_render_field_textarea( 'faq4_a', __( 'FAQ 4 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'faq4_q', __( 'FAQ 4 Question', 'mobile-pasal' ), __( 'Default: What is covered under the 90-day repair warranty?' ) );
+										mp_render_field_textarea( 'faq4_a', __( 'FAQ 4 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
 
 						<!-- FAQ 5 -->
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 5: Handset Trade-In Counter Process', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Explains fair counter valuation toward an iPhone 16 Pro or Samsung Galaxy.', 'mobile-pasal' ); ?></p>
+						<div class="bopt-subnav-content" id="subtab-faq-5">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 5: Handset Trade-In Counter Process', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Explains fair counter valuation toward an iPhone 16 Pro or Samsung Galaxy.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'faq5_q', __( 'FAQ 5 Question', 'mobile-pasal' ), __( 'Default: Can I trade in my old phone for an iPhone 16 Pro?' ) );
-									mp_render_field_textarea( 'faq5_a', __( 'FAQ 5 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
-									?>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'faq5_q', __( 'FAQ 5 Question', 'mobile-pasal' ), __( 'Default: Can I trade in my old phone for an iPhone 16 Pro?' ) );
+										mp_render_field_textarea( 'faq5_a', __( 'FAQ 5 Answer', 'mobile-pasal' ), __( 'Detailed answer...' ), 3 );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -1907,24 +2083,41 @@ function mobile_pasal_options_render_dashboard() {
 
 						<div class="bopt-card">
 							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-chart-line"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Milestone Numbers & Trust Labels', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Live counter cards on /about and /home.', 'mobile-pasal' ); ?></p>
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-chart-line"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Milestone Numbers & Trust Labels', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Live counter cards on /about and /home.', 'mobile-pasal' ); ?></p>
+									</div>
 								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
 							</div>
 							<div class="bopt-card-body">
 								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_text( 'about_stat1_num', __( 'Stat 1 Value', 'mobile-pasal' ), __( 'Default: 8+ Years' ) );
-									mp_render_field_text( 'about_stat1_label', __( 'Stat 1 Label', 'mobile-pasal' ), __( 'Default: Serving Gulariya & Bardiya' ) );
-									mp_render_field_text( 'about_stat2_num', __( 'Stat 2 Value', 'mobile-pasal' ), __( 'Default: 12,000+' ) );
-									mp_render_field_text( 'about_stat2_label', __( 'Stat 2 Label', 'mobile-pasal' ), __( 'Default: Satisfied Customers' ) );
-									mp_render_field_text( 'about_stat3_num', __( 'Stat 3 Value', 'mobile-pasal' ), __( 'Default: 100%' ) );
-									mp_render_field_text( 'about_stat3_label', __( 'Stat 3 Label', 'mobile-pasal' ), __( 'Default: NTA Verified IMEI Handsets' ) );
-									mp_render_field_text( 'about_stat4_num', __( 'Stat 4 Value', 'mobile-pasal' ), __( 'Default: 90 Days' ) );
-									mp_render_field_text( 'about_stat4_label', __( 'Stat 4 Label', 'mobile-pasal' ), __( 'Default: Repair Warranty Support' ) );
-									?>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_stat1_num', __( 'Stat 1 Value', 'mobile-pasal' ), __( 'Default: 8+ Years' ) );
+										mp_render_field_text( 'about_stat1_label', __( 'Stat 1 Label', 'mobile-pasal' ), __( 'Default: Serving Gulariya & Bardiya' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_stat2_num', __( 'Stat 2 Value', 'mobile-pasal' ), __( 'Default: 12,000+' ) );
+										mp_render_field_text( 'about_stat2_label', __( 'Stat 2 Label', 'mobile-pasal' ), __( 'Default: Satisfied Customers' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_stat3_num', __( 'Stat 3 Value', 'mobile-pasal' ), __( 'Default: 100%' ) );
+										mp_render_field_text( 'about_stat3_label', __( 'Stat 3 Label', 'mobile-pasal' ), __( 'Default: NTA Verified IMEI Handsets' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_stat4_num', __( 'Stat 4 Value', 'mobile-pasal' ), __( 'Default: 90 Days' ) );
+										mp_render_field_text( 'about_stat4_label', __( 'Stat 4 Label', 'mobile-pasal' ), __( 'Default: Repair Warranty Support' ) );
+										?>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -2143,6 +2336,374 @@ function mobile_pasal_options_render_dashboard() {
 					</div>
 
 					<!-- ===================================================================
+					     GROUP: SEO, GEO & AI SEARCH (AEO) ENGINE
+					     =================================================================== -->
+
+					<!-- SEO & Meta Ranking Tab -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'seo_meta_tab' ? 'is-active' : ''; ?>" id="tab-pane-seo_meta_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'SEO & Meta Ranking Engine', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Configure high-performance title tags, meta descriptions, Open Graph preview cards for Facebook & WhatsApp, and Google search verification tokens.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<!-- Rank Score Box -->
+						<div class="bopt-rank-score-box">
+							<div class="bopt-rank-score-header">
+								<div>
+									<h4 class="bopt-rank-title"><i class="fa-solid fa-gauge-high"></i> <?php esc_html_e( 'Google & Organic Search Health Score', 'mobile-pasal' ); ?></h4>
+									<p class="bopt-rank-desc"><?php esc_html_e( 'Live audit of your meta tags, title lengths, and indexing configuration for search bots.', 'mobile-pasal' ); ?></p>
+								</div>
+								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-circle-check"></i> <?php esc_html_e( 'SEO Ready 100%', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="bopt-rank-meta-row">
+								<span><i class="fa-solid fa-bullseye"></i> <strong>Focus:</strong> Gulariya, Bardiya, Apple Fix, NTA Phones</span>
+								<span><i class="fa-solid fa-share-nodes"></i> <strong>OpenGraph:</strong> 1200x630 Active</span>
+								<span><i class="fa-solid fa-robot"></i> <strong>Robots:</strong> Index, Follow</span>
+							</div>
+						</div>
+
+						<!-- Meta Title & Descriptions Card -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Google Search Snippet Preview & Meta', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Sets the exact title and snippet displayed on Google search results.', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'seo_meta_title', __( 'SEO Meta Title (Browser & Google Tab)', 'mobile-pasal' ), __( 'Recommended: 50–60 characters. Default: Ali Mobile Center & Apple Fix | Official NTA Handsets & Precision Phone Repair Gulariya, Bardiya' ) );
+									mp_render_field_textarea( 'seo_meta_desc', __( 'SEO Meta Description', 'mobile-pasal' ), __( 'Recommended: 140–160 characters. Displays under your site link in search results.' ), 3 );
+									mp_render_field_textarea( 'seo_meta_keywords', __( 'SEO Meta Keywords', 'mobile-pasal' ), __( 'Comma-separated target search keywords for Gulariya, Bardiya, and mobile services.' ), 2 );
+									?>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_toggle( 'seo_robots_index', __( 'Index in Google (Robots: index, follow)', 'mobile-pasal' ), __( 'Turn ON to allow Google & Bing to index this site.' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Social Open Graph & Share Cards -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-share-nodes"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Social Share Preview (Open Graph & WhatsApp)', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Rich preview banner image (1200x630px) when sharing website links on WhatsApp, Facebook, or Twitter.', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_image( 'seo_og_image', __( 'Open Graph Share Banner (1200x630)', 'mobile-pasal' ), __( 'Select an image representing your showroom counter. Falls back to hero slide image if empty.' ) );
+									?>
+								</div>
+							</div>
+						</div>
+
+						<!-- Webmaster Verification Tokens -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Search Engine Webmaster Verification Tokens', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Paste verification codes from Google Search Console and Bing Webmaster Tools.', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'seo_google_verify', __( 'Google Site Verification Token', 'mobile-pasal' ), __( 'Example: google-site-verification content code' ) );
+										mp_render_field_text( 'seo_bing_verify', __( 'Bing Webmaster Verification Code', 'mobile-pasal' ), __( 'Example: msvalidate.01 content code' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- GEO & Local Google Maps Ranking Tab -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'geo_local_tab' ? 'is-active' : ''; ?>" id="tab-pane-geo_local_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'GEO & Local Maps Ranking (Google Local Pack & Apple Maps)', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Coordinates, NAP (Name, Address, Phone) consistency, and schema positioning tags that push Ali Mobile Center to the #1 spot in Google Maps 3-Pack across Bardiya and Banke.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<!-- Local Pack Rank Score Box -->
+						<div class="bopt-rank-score-box">
+							<div class="bopt-rank-score-header">
+								<div>
+									<h4 class="bopt-rank-title"><i class="fa-solid fa-map-location-dot"></i> <?php esc_html_e( 'Local Pack & GEO Position Status', 'mobile-pasal' ); ?></h4>
+									<p class="bopt-rank-desc"><?php esc_html_e( 'Precision GPS tags (geo.position, ICBM, Schema GeoCoordinates) embedded for Gulariya-06.', 'mobile-pasal' ); ?></p>
+								</div>
+								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-location-crosshairs"></i> <?php esc_html_e( 'GPS Linked', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="bopt-rank-meta-row">
+								<span><i class="fa-solid fa-map-pin"></i> <strong>GPS:</strong> 28.2330° N, 81.3340° E</span>
+								<span><i class="fa-solid fa-building-flag"></i> <strong>Region:</strong> Lumbini Province (NP-P5)</span>
+								<span><i class="fa-solid fa-city"></i> <strong>City:</strong> Gulariya, Bardiya</span>
+							</div>
+						</div>
+
+						<!-- Legal Business NAP Consistency Card -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-id-card"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'NAP (Name, Address, Phone) & Legal Entity Details', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Exact matching details used by Google Business Profile to verify local counter authenticity.', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'geo_legal_name', __( 'Legal Registered Business Name', 'mobile-pasal' ), __( 'Default: Ali Mobile Center & Apple Fix' ) );
+										mp_render_field_text( 'geo_price_range', __( 'Showroom Price Range', 'mobile-pasal' ), __( 'Default: Rs. 500 - Rs. 2,50,000' ) );
+										?>
+									</div>
+									<?php
+									mp_render_field_text( 'geo_street', __( 'Physical Street Address', 'mobile-pasal' ), __( 'Default: Gulariya-06, Ji. Pra. Ka. Chowk (District Police Office Chowk)' ) );
+									?>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'geo_city', __( 'Municipality / City', 'mobile-pasal' ), __( 'Default: Gulariya' ) );
+										mp_render_field_text( 'geo_district', __( 'District', 'mobile-pasal' ), __( 'Default: Bardiya' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'geo_province', __( 'Province Name', 'mobile-pasal' ), __( 'Default: Lumbini Province' ) );
+										mp_render_field_text( 'geo_postal', __( 'Postal / Zip Code', 'mobile-pasal' ), __( 'Default: 21800' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'geo_region_code', __( 'ISO Region Code (Lumbini)', 'mobile-pasal' ), __( 'Default: NP-P5' ) );
+										mp_render_field_text( 'geo_country_code', __( 'ISO Country Code', 'mobile-pasal' ), __( 'Default: NP' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Exact GPS Coordinates & Map Links Card -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-earth-asia"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Exact GPS Coordinates & Google Business Links', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'Coordinates injected into geo.position, ICBM meta tags and Schema.org GeoCoordinates.', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'geo_latitude', __( 'Latitude (Decimal)', 'mobile-pasal' ), __( 'Default: 28.2330' ) );
+										mp_render_field_text( 'geo_longitude', __( 'Longitude (Decimal)', 'mobile-pasal' ), __( 'Default: 81.3340' ) );
+										?>
+									</div>
+									<?php
+									mp_render_field_text( 'geo_maps_url', __( 'Google Maps Direct Showroom URL', 'mobile-pasal' ), __( 'Default: https://maps.google.com/?q=Ali+Mobile+Center+Gulariya' ) );
+									mp_render_field_text( 'geo_gmb_review_url', __( 'Google Review Request URL', 'mobile-pasal' ), __( 'Direct 5-star link for satisfied counter customers.' ) );
+									mp_render_field_textarea( 'geo_service_areas', __( 'Service Areas (Comma Separated)', 'mobile-pasal' ), __( 'Default: Gulariya, Bansgadhi, Madhuwan, Badhaiyatal, Thakurbaba, Barbardiya, Rajapur, Kohalpur, Nepalgunj, Bardiya District' ), 2 );
+									mp_render_field_text( 'geo_opening_hours', __( 'Structured Opening Hours', 'mobile-pasal' ), __( 'Default: Sun–Fri: 9:00 AM – 8:00 PM | Sat: Open 9:00 AM – 6:00 PM' ) );
+									?>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- AEO & AI Search Citation Tab -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'aeo_ai_tab' ? 'is-active' : ''; ?>" id="tab-pane-aeo_ai_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'AEO (Answer Engine Optimization) & AI Search Citation', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Grounding facts, FAQPage JSON-LD schema, Speakable voice specifications, and /llms.txt manifest that ensure ChatGPT Search, Google Gemini, Perplexity AI, and Claude cite Ali Mobile Center as the definitive phone authority in Bardiya.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<!-- AI Search Readiness Score Box -->
+						<div class="bopt-rank-score-box">
+							<div class="bopt-rank-score-header">
+								<div>
+									<h4 class="bopt-rank-title"><i class="fa-solid fa-robot"></i> <?php esc_html_e( 'AI Answer Engine Grounding Status', 'mobile-pasal' ); ?></h4>
+									<p class="bopt-rank-desc"><?php esc_html_e( 'Active grounding feeds for Perplexity, ChatGPT Search, Apple Siri, and Google Gemini Overviews.', 'mobile-pasal' ); ?></p>
+								</div>
+								<span class="bopt-rank-badge bopt-rank-badge-live"><i class="fa-solid fa-brain"></i> <?php esc_html_e( 'AEO Grounded', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="bopt-rank-meta-row">
+								<span><i class="fa-solid fa-file-lines"></i> <strong>Endpoint:</strong> <a href="<?php echo esc_url( home_url( '/llms.txt' ) ); ?>" target="_blank" style="color:var(--bopt-gold-light);text-decoration:underline;">/llms.txt</a></span>
+								<span><i class="fa-solid fa-code"></i> <strong>Schema:</strong> FAQPage + Speakable</span>
+								<span><i class="fa-solid fa-diagram-project"></i> <strong>Entity Graph:</strong> sameAs Connected</span>
+							</div>
+						</div>
+
+						<!-- AI Grounding Narrative Summary Card -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-left">
+									<div class="bopt-card-header-icon"><i class="fa-solid fa-newspaper"></i></div>
+									<div>
+										<h3 class="bopt-card-title"><?php esc_html_e( 'Direct AI Grounding Factual Summary', 'mobile-pasal' ); ?></h3>
+										<p class="bopt-card-desc"><?php esc_html_e( 'This authoritative summary is ingested by LLMs when users query "best mobile shop in gulariya" or "where to fix iphone screen in bardiya".', 'mobile-pasal' ); ?></p>
+									</div>
+								</div>
+								<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_textarea( 'aeo_ai_summary', __( 'Authoritative Business Summary for LLMs', 'mobile-pasal' ), __( 'High-density factual paragraph containing store location, phone numbers, NTA compliance, and repair specialties.' ), 4 );
+									mp_render_field_textarea( 'aeo_sameas_urls', __( 'Knowledge Graph Entity URLs (sameAs)', 'mobile-pasal' ), __( 'Comma-separated links to verified Facebook page, Instagram profile, TikTok, and WhatsApp channel to establish Google Knowledge Graph entity identity.' ), 2 );
+									?>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_toggle( 'aeo_enable_llms_txt', __( 'Enable /llms.txt Knowledge Endpoint', 'mobile-pasal' ), __( 'Publishes clean markdown summary at /llms.txt for AI search crawlers.' ) );
+										mp_render_field_toggle( 'aeo_enable_faq_schema', __( 'Inject FAQPage JSON-LD Schema', 'mobile-pasal' ), __( 'Renders Google Rich Snippet Q&A accordion directly in search.' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Subnav Segmented Pills for 4 AEO FAQ Q&As -->
+						<div class="bopt-subnav-pills">
+							<button type="button" class="bopt-subnav-pill is-active" data-subtab="subtab-aeo-faq-1">
+								<i class="fa-solid fa-certificate"></i>
+								<span><?php esc_html_e( 'AEO Q1: NTA Approved', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-aeo-faq-2">
+								<i class="fa-solid fa-bolt"></i>
+								<span><?php esc_html_e( 'AEO Q2: Repair Turnaround', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-aeo-faq-3">
+								<i class="fa-solid fa-location-dot"></i>
+								<span><?php esc_html_e( 'AEO Q3: Location & Hours', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-aeo-faq-4">
+								<i class="fa-solid fa-arrows-rotate"></i>
+								<span><?php esc_html_e( 'AEO Q4: Trade-In Counter', 'mobile-pasal' ); ?></span>
+							</button>
+						</div>
+
+						<!-- AEO FAQ 1 -->
+						<div class="bopt-subnav-content is-active" id="subtab-aeo-faq-1">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'AEO Question 1: NTA IMEI & Legal Invoicing', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Direct factual answer served to ChatGPT and Google Gemini for handset authenticity queries.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'aeo_faq1_q', __( 'Question 1', 'mobile-pasal' ), __( 'Default: Are all smartphones sold at Ali Mobile Center NTA approved?' ) );
+										mp_render_field_textarea( 'aeo_faq1_a', __( 'Answer 1 (AI Grounded)', 'mobile-pasal' ), __( 'Direct factual answer...' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- AEO FAQ 2 -->
+						<div class="bopt-subnav-content" id="subtab-aeo-faq-2">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'AEO Question 2: Cleanroom Repair Speed', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Direct factual answer for screen and battery replacement turnaround queries.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'aeo_faq2_q', __( 'Question 2', 'mobile-pasal' ), __( 'Default: How fast can I get my iPhone screen or battery replaced at Apple Fix Lab?' ) );
+										mp_render_field_textarea( 'aeo_faq2_a', __( 'Answer 2 (AI Grounded)', 'mobile-pasal' ), __( 'Direct factual answer...' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- AEO FAQ 3 -->
+						<div class="bopt-subnav-content" id="subtab-aeo-faq-3">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'AEO Question 3: Physical Showroom Location', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Direct factual answer for directions and contact queries in Bardiya.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'aeo_faq3_q', __( 'Question 3', 'mobile-pasal' ), __( 'Default: Where is Ali Mobile Center located in Bardiya?' ) );
+										mp_render_field_textarea( 'aeo_faq3_a', __( 'Answer 3 (AI Grounded)', 'mobile-pasal' ), __( 'Direct factual answer...' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- AEO FAQ 4 -->
+						<div class="bopt-subnav-content" id="subtab-aeo-faq-4">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'AEO Question 4: Handset Trade-In Counter', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Direct factual answer for smartphone exchange and evaluation.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle card"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_text( 'aeo_faq4_q', __( 'Question 4', 'mobile-pasal' ), __( 'Default: Does Ali Mobile Center accept trade-ins for old phones?' ) );
+										mp_render_field_textarea( 'aeo_faq4_a', __( 'Answer 4 (AI Grounded)', 'mobile-pasal' ), __( 'Direct factual answer...' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- ===================================================================
 					     GROUP 7: MOBILE UX & CHAT WIDGET
 					     =================================================================== -->
 
@@ -2270,6 +2831,17 @@ function mobile_pasal_options_render_dashboard() {
 								<span class="bopt-key-hint">Ctrl+S</span>
 							</button>
 						</div>
+					</div>
+
+					<!-- Mobile Sticky Bottom Save Dock (Zero Scroll UX) -->
+					<div class="bopt-mobile-save-dock">
+						<button type="button" class="bopt-btn-mobile-top bopt-mobile-top-btn" id="boptMobileTopBtn" aria-label="<?php esc_attr_e( 'Back to top', 'mobile-pasal' ); ?>">
+							<i class="fa-solid fa-arrow-up"></i>
+						</button>
+						<button type="button" class="bopt-btn-mobile-save bopt-mobile-save-action" id="boptMobileSaveBtn">
+							<i class="fa-solid fa-floppy-disk"></i>
+							<span><?php esc_html_e( 'Save All Settings', 'mobile-pasal' ); ?></span>
+						</button>
 					</div>
 
 				</form>

@@ -494,6 +494,76 @@
 	}
 
 	/**
+	 * 14. Zero-Scroll UX: Subnav Pills, Card Collapses, Pane Anchors & Mobile Save Dock
+	 */
+	function initZeroScrollUX() {
+		// Subnav Pill Switchers (e.g. Hero Slide 1 / 2 / 3, FAQs 1-5, Assurance 1-4)
+		$( document ).on( 'click', '.bopt-subnav-pill', function ( e ) {
+			e.preventDefault();
+			var target = $( this ).data( 'subtab' );
+			var $wrap  = $( this ).closest( '.bopt-tab-pane' );
+
+			$wrap.find( '.bopt-subnav-pill' ).removeClass( 'is-active' );
+			$( this ).addClass( 'is-active' );
+
+			$wrap.find( '.bopt-subnav-content' ).removeClass( 'is-active' ).hide();
+			$wrap.find( '#' + target ).addClass( 'is-active' ).fadeIn( 150 );
+		} );
+
+		// Clickable Card Header Collapses
+		$( document ).on( 'click', '.bopt-card-header', function ( e ) {
+			if ( $( e.target ).is( 'input, select, textarea, a' ) || $( e.target ).closest( 'a, input, select, textarea' ).length ) {
+				return;
+			}
+			var $card = $( this ).closest( '.bopt-card' );
+			$card.toggleClass( 'is-collapsed' );
+		} );
+
+		// Global Pane Collapse/Expand All Cards
+		$( document ).on( 'click', '.bopt-pane-collapse-all', function ( e ) {
+			e.preventDefault();
+			var $pane     = $( this ).closest( '.bopt-tab-pane' );
+			var $cards    = $pane.find( '.bopt-card' );
+			var isAnyOpen = $cards.not( '.is-collapsed' ).length > 0;
+
+			if ( isAnyOpen ) {
+				$cards.addClass( 'is-collapsed' );
+				$( this ).html( '<i class="fa-solid fa-angles-down"></i> ' + ( $( this ).data( 'expand-text' ) || 'Expand All Cards' ) );
+			} else {
+				$cards.removeClass( 'is-collapsed' );
+				$( this ).html( '<i class="fa-solid fa-angles-up"></i> ' + ( $( this ).data( 'collapse-text' ) || 'Collapse All Cards' ) );
+			}
+		} );
+
+		// Smooth In-Page Anchor Chips Scroll
+		$( document ).on( 'click', '.bopt-anchor-chip', function ( e ) {
+			e.preventDefault();
+			var target  = $( this ).attr( 'href' );
+			var $target = $( target );
+			if ( $target.length ) {
+				if ( $target.hasClass( 'is-collapsed' ) ) {
+					$target.removeClass( 'is-collapsed' );
+				}
+				$( 'html, body' ).animate( {
+					scrollTop: $target.offset().top - 90
+				}, 250 );
+			}
+		} );
+
+		// Mobile Quick Save Dock
+		$( document ).on( 'click', '#boptMobileSaveBtn', function ( e ) {
+			e.preventDefault();
+			$( this ).html( '<i class="fa-solid fa-spinner fa-spin"></i> <span>Saving...</span>' );
+			$( '#bopt-main-form' ).trigger( 'submit' );
+		} );
+
+		$( document ).on( 'click', '#boptMobileTopBtn', function ( e ) {
+			e.preventDefault();
+			$( 'html, body' ).animate( { scrollTop: 0 }, 200 );
+		} );
+	}
+
+	/**
 	 * Document Ready Bootstrapper
 	 */
 	$( document ).ready( function () {
@@ -510,6 +580,7 @@
 		initKeyboardShortcuts();
 		initSaveAlertAutoDismiss();
 		initInquiriesFilter();
+		initZeroScrollUX();
 	} );
 
 } )( jQuery );
