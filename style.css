@@ -521,21 +521,42 @@ h3 {
   display: flex;
   align-items: center;
   gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links a {
+.nav-links li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+.nav-links a,
+.nav-links li a {
   font-weight: 700;
   font-size: 0.92rem;
   color: var(--text-body);
   position: relative;
   padding: 6px 0;
+  text-decoration: none;
+  display: inline-block;
+  transition: color var(--transition-fast);
 }
 
-.nav-links a:hover, .nav-links a.active {
+.nav-links a:hover,
+.nav-links a.active,
+.nav-links li a:hover,
+.nav-links li.current-menu-item > a,
+.nav-links li.current_page_item > a {
   color: var(--primary);
 }
 
-.nav-links a.active::after {
+.nav-links a.active::after,
+.nav-links li.current-menu-item > a::after,
+.nav-links li.current_page_item > a::after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -3236,6 +3257,15 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-links-list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .footer-links-list a {
