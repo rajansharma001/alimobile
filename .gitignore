@@ -10,3 +10,6 @@ Thumbs.db
 
 # Backups
 backups/
+scratch/
+template/
+
