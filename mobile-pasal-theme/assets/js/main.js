@@ -295,103 +295,105 @@ document.addEventListener('DOMContentLoaded', function () {
   /* ------------------------------------------------------------------------
      5. Interactive Repair Counter Station (Live Diagnostic Docket)
      ------------------------------------------------------------------------ */
-  var repairDevice = 'Apple iPhone';
-  var repairIssue = 'Screen & Display (Cracked glass / black spots / touch dead)';
-  var repairTime = '30–45 Mins';
-  var repairWarranty = '90 Days Testing Warranty';
-  
-  var repairModelInput = document.getElementById('builder-model-input');
-  var repairPreviewText = document.getElementById('builder-preview-text');
-  var repairSendBtn = document.getElementById('builder-send-whatsapp-btn');
-  
-  // Ticket Display Elements
-  var ticketDeviceVal = document.getElementById('ticket-device-val');
-  var ticketModelVal = document.getElementById('ticket-model-val');
-  var ticketFaultVal = document.getElementById('ticket-fault-val');
-  var ticketTimeVal = document.getElementById('ticket-time-val');
-  var ticketWarrantyVal = document.getElementById('ticket-warranty-val');
+  if (document.getElementById('repair-builder')) {
+    var repairDevice = 'Apple iPhone';
+    var repairIssue = 'Screen & Display (Cracked glass / black spots / touch dead)';
+    var repairTime = '30–45 Mins';
+    var repairWarranty = '90 Days Testing Warranty';
+    
+    var repairModelInput = document.getElementById('builder-model-input');
+    var repairPreviewText = document.getElementById('builder-preview-text');
+    var repairSendBtn = document.getElementById('builder-send-whatsapp-btn');
+    
+    // Ticket Display Elements
+    var ticketDeviceVal = document.getElementById('ticket-device-val');
+    var ticketModelVal = document.getElementById('ticket-model-val');
+    var ticketFaultVal = document.getElementById('ticket-fault-val');
+    var ticketTimeVal = document.getElementById('ticket-time-val');
+    var ticketWarrantyVal = document.getElementById('ticket-warranty-val');
 
-  var devicePills = document.querySelectorAll('.device-pills-grid .dev-pill-btn');
-  var faultCards = document.querySelectorAll('.fault-cards-grid .fault-select-card');
+    var devicePills = document.querySelectorAll('.device-pills-grid .dev-pill-btn');
+    var faultCards = document.querySelectorAll('.fault-cards-grid .fault-select-card');
 
-  function updateRepairTicket() {
-    var rawModel = (repairModelInput ? repairModelInput.value : '').trim();
-    var displayModel = rawModel ? rawModel : 'Specified at Counter';
-    var modelDesc = rawModel ? ' (Model: ' + rawModel + ')' : '';
+    function updateRepairTicket() {
+      var rawModel = (repairModelInput ? repairModelInput.value : '').trim();
+      var displayModel = rawModel ? rawModel : 'Specified at Counter';
+      var modelDesc = rawModel ? ' (Model: ' + rawModel + ')' : '';
 
-    // Update Ticket Card
-    if (ticketDeviceVal) ticketDeviceVal.textContent = repairDevice;
-    if (ticketModelVal) ticketModelVal.textContent = displayModel;
-    if (ticketFaultVal) {
-      // Short fault title (before first paren)
-      var shortFault = repairIssue.split('(')[0].trim();
-      ticketFaultVal.textContent = shortFault;
-    }
-    if (ticketTimeVal) ticketTimeVal.textContent = repairTime;
-    if (ticketWarrantyVal) ticketWarrantyVal.textContent = repairWarranty;
-
-    // Build Formatted WhatsApp Message
-    var message = 'Namaste Ali Mobile & Apple Fix, mero ' + repairDevice + modelDesc +
-                  ' ma problem chha: ' + repairIssue + '. Gulariya counter ma check ra repair cost barema jankari dinus.';
-
-    if (repairPreviewText) {
-      repairPreviewText.textContent = '"' + message + '"';
-    }
-
-    if (repairSendBtn) {
-      repairSendBtn.href = WA_BASE + encodeURIComponent(message);
-    }
-  }
-
-  devicePills.forEach(function (pill) {
-    pill.addEventListener('click', function () {
-      devicePills.forEach(function (p) { p.classList.remove('active'); });
-      this.classList.add('active');
-      repairDevice = this.getAttribute('data-device') || 'Smartphone';
-      updateRepairTicket();
-    });
-  });
-
-  faultCards.forEach(function (card) {
-    card.addEventListener('click', function () {
-      faultCards.forEach(function (c) { c.classList.remove('active'); });
-      this.classList.add('active');
-      repairIssue = this.getAttribute('data-issue') || 'Hardware Fault';
-      repairTime = this.getAttribute('data-time') || 'Same-Day';
-      repairWarranty = this.getAttribute('data-warranty') || 'Testing Warranty';
-      updateRepairTicket();
-    });
-  });
-
-  var quickChips = document.querySelectorAll('.quick-chip-btn');
-  quickChips.forEach(function (chip) {
-    chip.addEventListener('click', function () {
-      var model = this.getAttribute('data-model') || '';
-      if (repairModelInput) {
-        repairModelInput.value = model;
-        quickChips.forEach(function (c) { c.classList.remove('active'); });
-        this.classList.add('active');
-        updateRepairTicket();
+      // Update Ticket Card
+      if (ticketDeviceVal) ticketDeviceVal.textContent = repairDevice;
+      if (ticketModelVal) ticketModelVal.textContent = displayModel;
+      if (ticketFaultVal) {
+        // Short fault title (before first paren)
+        var shortFault = repairIssue.split('(')[0].trim();
+        ticketFaultVal.textContent = shortFault;
       }
-    });
-  });
+      if (ticketTimeVal) ticketTimeVal.textContent = repairTime;
+      if (ticketWarrantyVal) ticketWarrantyVal.textContent = repairWarranty;
 
-  if (repairModelInput) {
-    repairModelInput.addEventListener('input', function () {
-      var curVal = repairModelInput.value.trim().toLowerCase();
-      quickChips.forEach(function (c) {
-        if (curVal && (c.getAttribute('data-model') || '').toLowerCase() === curVal) {
-          c.classList.add('active');
-        } else {
-          c.classList.remove('active');
+      // Build Formatted WhatsApp Message
+      var message = 'Namaste Ali Mobile & Apple Fix, mero ' + repairDevice + modelDesc +
+                    ' ma problem chha: ' + repairIssue + '. Gulariya counter ma check ra repair cost barema jankari dinus.';
+
+      if (repairPreviewText) {
+        repairPreviewText.textContent = '"' + message + '"';
+      }
+
+      if (repairSendBtn) {
+        repairSendBtn.href = WA_BASE + encodeURIComponent(message);
+      }
+    }
+
+    devicePills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        devicePills.forEach(function (p) { p.classList.remove('active'); });
+        this.classList.add('active');
+        repairDevice = this.getAttribute('data-device') || 'Smartphone';
+        updateRepairTicket();
+      });
+    });
+
+    faultCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        faultCards.forEach(function (c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        repairIssue = this.getAttribute('data-issue') || 'Hardware Fault';
+        repairTime = this.getAttribute('data-time') || 'Same-Day';
+        repairWarranty = this.getAttribute('data-warranty') || 'Testing Warranty';
+        updateRepairTicket();
+      });
+    });
+
+    var quickChips = document.querySelectorAll('.quick-chip-btn');
+    quickChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var model = this.getAttribute('data-model') || '';
+        if (repairModelInput) {
+          repairModelInput.value = model;
+          quickChips.forEach(function (c) { c.classList.remove('active'); });
+          this.classList.add('active');
+          updateRepairTicket();
         }
       });
-      updateRepairTicket();
     });
-  }
 
-  // Initialize ticket with defaults
-  updateRepairTicket();
+    if (repairModelInput) {
+      repairModelInput.addEventListener('input', function () {
+        var curVal = repairModelInput.value.trim().toLowerCase();
+        quickChips.forEach(function (c) {
+          if (curVal && (c.getAttribute('data-model') || '').toLowerCase() === curVal) {
+            c.classList.add('active');
+          } else {
+            c.classList.remove('active');
+          }
+        });
+        updateRepairTicket();
+      });
+    }
+
+    // Initialize ticket with defaults
+    updateRepairTicket();
+  }
 
   /* ------------------------------------------------------------------------
      6. Product Catalog: Search & Filter Tabs

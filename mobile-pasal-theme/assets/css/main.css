@@ -1372,619 +1372,16 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   8. Interactive Repair Enquiry Builder (Apple Fix Diagnostic Station)
-   -------------------------------------------------------------------------- */
-.repair-builder-section {
-  padding: 88px 0;
-  background-color: var(--bg-surface-tint);
-  border-bottom: 1px solid var(--border-light);
-}
-
-.repair-station-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
-  gap: 36px;
-  align-items: start;
-}
-
-.repair-station-form {
-  background-color: #ffffff;
-  border: 1.5px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  padding: 36px;
-  box-shadow: var(--shadow-sm);
-}
-
-.repair-step-block {
-  margin-bottom: 28px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid var(--border-light);
-  position: relative;
-}
-
-.repair-step-block:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.step-header {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px 12px;
-  margin-bottom: 16px;
-}
-
-.step-num-badge {
-  background-color: var(--primary);
-  color: #ffffff;
-  font-size: 0.74rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  white-space: nowrap;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.2;
-}
-
-.step-title {
-  font-weight: 800;
-  font-size: 1.05rem;
-  color: var(--text-main);
-  flex: 0 1 auto;
-  line-height: 1.3;
-}
-
-.step-hint {
-  font-size: 0.84rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  line-height: 1.35;
-}
-
-@media (max-width: 640px) {
-  .repair-step-block {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-  }
-  .step-header {
-    gap: 6px 10px;
-    margin-bottom: 14px;
-  }
-  .step-title {
-    font-size: 0.98rem;
-  }
-  .step-hint {
-    width: 100%;
-    flex-basis: 100%;
-    display: block;
-    margin-top: 2px;
-    font-size: 0.82rem;
-    color: var(--text-muted);
-  }
-}
-
-/* Step 1: Device Brand Pills Grid */
-.device-pills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 10px;
-}
-
-.dev-pill-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 13px 14px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border-light);
-  background-color: var(--bg-surface-alt);
-  color: var(--text-body);
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.dev-pill-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  background-color: #ffffff;
-  transform: translateY(-1px);
-}
-
-.dev-pill-btn.active {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
-}
-
-/* Step 2: Fault Selection Cards Grid */
-.fault-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-}
-
-.fault-select-card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px 18px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border-light);
-  background-color: var(--bg-surface-alt);
-  color: var(--text-main);
-  text-align: left;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  min-width: 0;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-
-.fault-select-card:hover {
-  border-color: var(--primary);
-  background-color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 102, 204, 0.1);
-}
-
-.fault-select-card.active {
-  background-color: var(--primary-light);
-  border-color: var(--primary);
-  box-shadow: 0 4px 16px rgba(0, 102, 204, 0.16);
-}
-
-.fault-card-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--radius-sm);
-  background-color: #ffffff;
-  border: 1px solid var(--border-light);
-  display: grid;
-  place-items: center;
-  color: var(--primary);
-  flex-shrink: 0;
-  transition: all var(--transition-fast);
-}
-
-.fault-select-card.active .fault-card-icon {
-  background-color: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-  transform: scale(1.05);
-}
-
-.fault-card-info {
-  flex: 1 1 0%;
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-
-.fault-card-title-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  min-width: 0;
-}
-
-.fault-card-title-row strong {
-  font-size: 0.94rem;
-  font-weight: 800;
-  color: var(--text-main);
-  line-height: 1.3;
-  min-width: 0;
-  flex: 1 1 auto;
-}
-
-.fault-time-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  color: var(--primary);
-  background-color: #ffffff;
-  border: 1.5px solid rgba(0, 102, 204, 0.25);
-  padding: 3px 8px;
-  border-radius: var(--radius-full);
-  white-space: nowrap;
-  flex-shrink: 0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  margin-left: auto;
-  transition: all var(--transition-fast);
-}
-
-.fault-select-card.active .fault-time-tag {
-  background-color: var(--primary);
-  color: #ffffff;
-  border-color: var(--primary);
-}
-
-.fault-select-card:hover .fault-time-tag {
-  border-color: var(--primary);
-  transform: scale(1.04);
-}
-
-.fault-card-info small {
-  display: block;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  line-height: 1.35;
-}
-
-/* Step 3: Model Input Field & Quick Chips */
-.model-input-wrap {
-  position: relative;
-  margin-bottom: 12px;
-}
-
-.model-text-field {
-  width: 100%;
-  padding: 14px 18px;
-  border-radius: var(--radius-md);
-  border: 1.5px solid var(--border-light);
-  background-color: var(--bg-surface-alt);
-  font-size: 0.96rem;
-  font-weight: 600;
-  color: var(--text-main);
-  outline: none;
-  transition: all var(--transition-fast);
-}
-
-.model-text-field:focus {
-  background-color: #ffffff;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12);
-}
-
-.quick-model-chips {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.quick-chips-label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-muted);
-}
-
-.quick-chip-btn {
-  background-color: var(--bg-surface-alt);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-full);
-  padding: 4px 12px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: var(--text-body);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.quick-chip-btn:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  background-color: #ffffff;
-}
-
-.quick-chip-btn.active {
-  background-color: var(--primary);
-  border-color: var(--primary);
-  color: #ffffff;
-}
-
-/* Right Column: Digital Repair Docket Ticket */
-.ticket-docket-card {
-  background-color: #ffffff;
-  border: 1.5px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  box-shadow: 0 16px 36px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
-  position: sticky;
-  top: 96px;
-}
-
-.docket-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 14px;
-  border-bottom: 1px dashed var(--border-light);
-  margin-bottom: 18px;
-}
-
-.docket-id-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 900;
-  letter-spacing: 0.06em;
-  color: var(--primary);
-  background-color: var(--primary-light);
-  padding: 4px 10px;
-  border-radius: var(--radius-xs);
-}
-
-.docket-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--primary);
-}
-
-.docket-station-tag {
-  font-size: 0.74rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-
-.ticket-header {
-  margin-bottom: 20px;
-}
-
-.ticket-header h3 {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--text-main);
-  margin-bottom: 4px;
-}
-
-.ticket-subtext {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-}
-
-.ticket-body {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.ticket-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 8px 0;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.ticket-row .t-label {
-  color: var(--text-muted);
-  font-size: 0.84rem;
-  font-weight: 600;
-}
-
-.ticket-row .t-val {
-  color: var(--text-main);
-  font-size: 0.9rem;
-  font-weight: 800;
-  text-align: right;
-}
-
-.ticket-row .t-val-text {
-  color: var(--text-body);
-  font-size: 0.84rem;
-  font-weight: 700;
-  text-align: right;
-}
-
-.ticket-row .t-badge-highlight {
-  background-color: var(--primary-light);
-  color: var(--primary);
-  font-weight: 800;
-  font-size: 0.82rem;
-  padding: 3px 10px;
-  border-radius: var(--radius-xs);
-}
-
-.ticket-row .t-badge-free {
-  background-color: var(--accent-green-light);
-  color: #065f46;
-  font-weight: 800;
-  font-size: 0.82rem;
-  padding: 3px 10px;
-  border-radius: var(--radius-xs);
-}
-
-.ticket-preview-box {
-  background-color: var(--bg-surface-alt);
-  border: 1.5px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 14px 16px;
-  margin-bottom: 20px;
-}
-
-.tp-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.74rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-muted);
-  margin-bottom: 6px;
-}
-
-.tp-text {
-  font-size: 0.86rem;
-  color: var(--text-main);
-  font-style: italic;
-  line-height: 1.5;
-}
-
-.ticket-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.ticket-footer-note {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 14px;
-  text-align: center;
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-@media (max-width: 992px) {
-  .repair-station-layout {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-  .repair-station-form,
-  .ticket-docket-card {
-    min-width: 0;
-    max-width: 100%;
-    width: 100%;
-    box-sizing: border-box;
-  }
-  .ticket-docket-card {
-    position: static;
-    padding: 24px 20px;
-  }
-  .repair-station-form {
-    padding: 24px 20px;
-  }
-  .device-pills-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .fault-cards-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .repair-station-form {
-    padding: 16px 12px;
-    border-radius: var(--radius-lg);
-  }
-  .ticket-docket-card {
-    padding: 16px 12px;
-    border-radius: var(--radius-lg);
-  }
-  .device-pills-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 6px;
-  }
-  .dev-pill-btn {
-    padding: 9px 6px;
-    font-size: 0.8rem;
-    gap: 4px;
-    min-width: 0;
-    text-align: center;
-    justify-content: center;
-  }
-  .dev-pill-btn span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .fault-cards-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 10px;
-  }
-  .fault-select-card {
-    padding: 13px 14px;
-    gap: 12px;
-    min-width: 0;
-  }
-  .fault-card-icon {
-    width: 36px;
-    height: 36px;
-  }
-  .fault-card-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    min-width: 0;
-  }
-  .fault-card-title-row strong {
-    font-size: 0.9rem;
-    min-width: 0;
-    flex: 1 1 auto;
-  }
-  .fault-time-tag {
-    font-size: 0.7rem;
-    padding: 2px 7px;
-    flex-shrink: 0;
-    margin-left: auto;
-  }
-  .fault-card-info small {
-    font-size: 0.75rem;
-    line-height: 1.35;
-  }
-  .model-text-field {
-    padding: 10px 12px;
-    font-size: 0.88rem;
-  }
-  .quick-model-chips {
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .quick-chip-btn {
-    font-size: 0.72rem;
-    padding: 3px 8px;
-  }
-  .ticket-actions .btn {
-    font-size: 0.86rem;
-    padding: 11px 12px;
-  }
-  .ticket-row {
-    font-size: 0.8rem;
-    flex-wrap: wrap;
-    gap: 4px;
-  }
-  .ticket-row .t-val,
-  .ticket-row .t-val-text {
-    word-break: break-word;
-  }
-  .ticket-preview-box {
-    padding: 12px;
-  }
-  .tp-text {
-    font-size: 0.8rem;
-    word-break: break-word;
-    white-space: normal;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   9. Shop by Category
+   8. Visual Showroom Counters & Departments (Creative Bento Retail Cards)
    -------------------------------------------------------------------------- */
 .categories-section {
-  padding: 80px 0;
+  padding: 84px 0;
   background-color: var(--bg-page);
 }
 
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   gap: 20px;
 }
 
@@ -1993,102 +1390,158 @@ h3 {
   background-color: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 32px 20px 24px;
+  padding: 24px 20px 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  box-shadow: var(--shadow-xs);
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.cat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 14px;
 }
 
 .cat-count-tag {
-  position: absolute;
-  top: 12px;
-  right: 12px;
   font-size: 0.72rem;
   font-weight: 800;
   color: var(--primary);
   background-color: var(--primary-light);
-  border: 1px solid rgba(0, 102, 204, 0.18);
+  border: 1px solid rgba(0, 102, 204, 0.16);
   padding: 2px 8px;
   border-radius: var(--radius-full);
   letter-spacing: 0.02em;
-  transition: transform 0.22s ease, background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.cat-tag-accent {
+  color: #0369a1;
+  background-color: #e0f2fe;
+  border-color: rgba(3, 105, 161, 0.2);
+}
+
+.cat-card-arrow {
+  width: 26px;
+  height: 26px;
+  border-radius: var(--radius-full);
+  background-color: #f8fafc;
+  border: 1px solid var(--border-light);
+  color: #64748b;
+  display: grid;
+  place-items: center;
+  transition: transform 0.25s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .category-card:hover {
   border-color: rgba(0, 102, 204, 0.45);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
-  transform: translateY(-5px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
+  transform: translateY(-6px);
+}
+
+.category-card:hover .cat-card-arrow {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #ffffff;
+  transform: translateX(3px);
 }
 
 .category-card:hover .cat-count-tag {
   background-color: var(--primary);
   color: #ffffff;
-  transform: scale(1.06);
 }
 
 .cat-icon-wrap {
-  width: 56px;
-  height: 56px;
+  width: 58px;
+  height: 58px;
   border-radius: var(--radius-md);
-  background-color: var(--primary-light);
+  background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
   color: var(--primary);
   display: grid;
   place-items: center;
-  margin-bottom: 16px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s ease, color 0.22s ease;
+  margin-bottom: 14px;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.22s ease, color 0.22s ease;
 }
 
 .category-card:hover .cat-icon-wrap {
-  background-color: var(--primary);
+  background: var(--primary);
   color: #ffffff;
-  transform: scale(1.12) rotate(-4deg);
+  transform: scale(1.1) rotate(-3deg);
 }
 
 .category-card strong {
-  font-size: 1.02rem;
+  font-size: 1.05rem;
   font-weight: 800;
   color: var(--text-main);
   margin-bottom: 4px;
+  line-height: 1.25;
 }
 
 .category-card small {
   font-size: 0.82rem;
   color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.cat-explore-hint {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-top: 10px;
+  opacity: 0.75;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover .cat-explore-hint {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.cat-card-highlight {
+  border-color: rgba(0, 102, 204, 0.3);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
 }
 
 @media (max-width: 600px) {
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 12px;
   }
   .category-card {
-    padding: 24px 10px 16px;
+    padding: 18px 12px 16px;
   }
   .cat-icon-wrap {
-    width: 44px;
-    height: 44px;
+    width: 46px;
+    height: 46px;
     margin-bottom: 10px;
   }
   .category-card strong {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
   }
   .category-card small {
-    font-size: 0.72rem;
+    font-size: 0.74rem;
   }
   .cat-count-tag {
     font-size: 0.65rem;
     padding: 1px 6px;
-    top: 8px;
-    right: 8px;
+  }
+  .cat-card-arrow {
+    width: 22px;
+    height: 22px;
+  }
+  .cat-explore-hint {
+    display: none;
   }
 }
 
 /* --------------------------------------------------------------------------
-   10. Shop by Brand (Authentic Vector Logos)
+   9. Authorized Smartphone Brands Corners
    -------------------------------------------------------------------------- */
 .brands-section {
   padding: 80px 0;
@@ -2099,53 +1552,73 @@ h3 {
 
 .brands-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: 18px;
 }
 
 .brand-card-link {
-  background-color: var(--bg-page);
+  background-color: #ffffff;
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 20px 18px;
+  border-radius: var(--radius-lg);
+  padding: 24px 18px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
   transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .brand-card-link:hover {
   border-color: rgba(0, 102, 204, 0.45);
-  background-color: #ffffff;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  transform: translateY(-5px);
 }
 
 .brand-logo-svg {
-  height: 40px;
+  height: 42px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
   transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .brand-card-link:hover .brand-logo-svg {
-  transform: scale(1.08);
+  transform: scale(1.1);
 }
 
 .brand-name {
-  font-size: 0.96rem;
+  font-size: 1rem;
   font-weight: 800;
   color: var(--text-main);
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .brand-card-link small {
   font-size: 0.78rem;
   color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.brand-chip-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--primary);
+  background-color: var(--primary-light);
+  border: 1px solid rgba(0, 102, 204, 0.16);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  margin-top: 10px;
+  letter-spacing: 0.02em;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.brand-card-link:hover .brand-chip-pill {
+  background-color: var(--primary);
+  color: #ffffff;
+  transform: translateY(-1px);
 }
 
 @media (max-width: 600px) {
@@ -2154,39 +1627,44 @@ h3 {
     gap: 10px;
   }
   .brand-card-link {
-    padding: 14px 10px;
+    padding: 16px 12px 14px;
   }
   .brand-logo-svg {
     height: 32px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
   .brand-name {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
+  }
+  .brand-chip-pill {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    margin-top: 8px;
   }
 }
 
 /* --------------------------------------------------------------------------
-   11. Featured Deal / Flagship Banner (iPhone 16 Pro)
+   10. Official Flagship Spotlight Banner (Apple Pro Titanium Experience)
    -------------------------------------------------------------------------- */
 .flagship-banner-section {
-  padding: 80px 0;
+  padding: 84px 0;
   background-color: var(--bg-page);
 }
 
 .flagship-banner-card {
-  background: radial-gradient(ellipse at 80% 50%, rgba(0, 102, 204, 0.12) 0%, transparent 60%),
-              linear-gradient(135deg, #090e1a 0%, #0d1527 60%, #111d38 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-xl);
+  background: radial-gradient(ellipse at 85% 50%, rgba(0, 102, 204, 0.18) 0%, transparent 65%),
+              linear-gradient(135deg, #070d18 0%, #0d1629 55%, #101d38 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   overflow: hidden;
   display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-columns: 1.18fr 0.82fr;
   align-items: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 24px 50px rgba(7, 13, 24, 0.35);
 }
 
 .flagship-banner-content {
-  padding: clamp(32px, 5vw, 56px);
+  padding: clamp(36px, 5.5vw, 60px);
   color: #ffffff;
 }
 
@@ -2195,26 +1673,29 @@ h3 {
   align-items: center;
   gap: 8px;
   background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-full);
   margin-bottom: 18px;
+  color: #f8fafc;
 }
 
 .flagship-banner-content h2 {
   color: #ffffff;
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
   font-weight: 900;
   margin-bottom: 8px;
+  letter-spacing: -0.02em;
+  line-height: 1.18;
 }
 
 .flagship-banner-content .tagline {
   color: #60a5fa;
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   font-weight: 700;
   margin-bottom: 16px;
 }
@@ -2222,8 +1703,58 @@ h3 {
 .flagship-banner-content .desc {
   color: #cbd5e1;
   font-size: 1.02rem;
-  line-height: 1.6;
-  margin-bottom: 24px;
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+/* Titanium Finish Swatches */
+.flagship-finish-swatches {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 22px;
+  flex-wrap: wrap;
+}
+
+.swatch-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-right: 4px;
+}
+
+.swatch-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  display: inline-block;
+}
+
+.swatch-dot:hover,
+.swatch-dot.active {
+  transform: scale(1.18);
+  box-shadow: 0 0 0 2px #070d18, 0 0 0 4px #0066cc;
+}
+
+.swatch-desert {
+  background: linear-gradient(135deg, #d3c4b0 0%, #bfae99 100%);
+}
+
+.swatch-natural {
+  background: linear-gradient(135deg, #a6a096 0%, #8e887f 100%);
+}
+
+.swatch-white {
+  background: linear-gradient(135deg, #f0f1f3 0%, #dcdde0 100%);
+}
+
+.swatch-black {
+  background: linear-gradient(135deg, #444341 0%, #2c2b29 100%);
 }
 
 .spec-pills-row {
@@ -2231,12 +1762,15 @@ h3 {
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .spec-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   color: #f1f5f9;
   font-size: 0.8rem;
   font-weight: 700;
@@ -2244,10 +1778,24 @@ h3 {
   border-radius: var(--radius-full);
 }
 
+.flagship-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.32);
+  color: #34d399;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  margin-bottom: 28px;
+}
+
 .flagship-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -2255,13 +1803,19 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 32px;
 }
 
 .flagship-media img {
   border-radius: var(--radius-lg);
-  max-height: 380px;
+  max-height: 400px;
   object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flagship-banner-card:hover .flagship-media img {
+  transform: scale(1.03) translateY(-4px);
 }
 
 @media (max-width: 900px) {
@@ -2269,19 +1823,19 @@ h3 {
     grid-template-columns: 1fr;
   }
   .flagship-media {
-    padding: 0 32px 32px;
+    padding: 0 32px 36px;
   }
 }
 
 @media (max-width: 600px) {
   .flagship-banner-content {
-    padding: 24px 16px;
+    padding: 28px 18px;
   }
   .flagship-media {
-    padding: 0 16px 24px;
+    padding: 0 18px 28px;
   }
   .flagship-media img {
-    max-height: 240px;
+    max-height: 250px;
   }
   .flagship-actions {
     flex-direction: column;
@@ -2616,20 +2170,20 @@ h3 {
    13. Apple Fix Specialist Showcase (Dark Lab Grid)
    -------------------------------------------------------------------------- */
 .apple-fix-showcase-section {
-  padding: 80px 0;
+  padding: 84px 0;
   background-color: var(--bg-page);
 }
 
 .apple-fix-banner-grid {
-  background: radial-gradient(ellipse at 15% 50%, rgba(0, 102, 204, 0.12) 0%, transparent 60%),
-              linear-gradient(135deg, #090e1a 0%, #0d1527 60%, #111d38 100%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius-xl);
+  background: radial-gradient(ellipse at 15% 50%, rgba(0, 102, 204, 0.16) 0%, transparent 65%),
+              linear-gradient(135deg, #070d18 0%, #0d1629 55%, #101d38 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
   overflow: hidden;
   display: grid;
   grid-template-columns: 0.95fr 1.05fr;
   align-items: center;
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 24px 50px rgba(7, 13, 24, 0.35);
 }
 
 .af-media-col {
@@ -2639,13 +2193,13 @@ h3 {
 .af-media-col img {
   width: 100%;
   height: 100%;
-  min-height: 400px;
+  min-height: 440px;
   object-fit: cover;
   display: block;
 }
 
 .af-text-col {
-  padding: clamp(32px, 5vw, 56px);
+  padding: clamp(36px, 5.5vw, 60px);
   color: #ffffff;
 }
 
@@ -2654,27 +2208,30 @@ h3 {
   align-items: center;
   gap: 8px;
   background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: var(--radius-full);
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  color: #f8fafc;
 }
 
 .af-text-col h2 {
   color: #ffffff;
-  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-size: clamp(1.9rem, 3.4vw, 2.5rem);
   font-weight: 900;
   margin-bottom: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
 .af-text-col p {
   color: #cbd5e1;
   font-size: 1.02rem;
-  line-height: 1.6;
+  line-height: 1.65;
   margin-bottom: 24px;
 }
 
@@ -2682,7 +2239,7 @@ h3 {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 24px;
 }
 
 .af-feature-item {
@@ -2692,11 +2249,11 @@ h3 {
 }
 
 .af-f-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-xs);
   background-color: rgba(0, 102, 204, 0.25);
-  border: 1px solid rgba(0, 102, 204, 0.4);
+  border: 1px solid rgba(0, 102, 204, 0.45);
   color: #60a5fa;
   display: grid;
   place-items: center;
@@ -2706,23 +2263,70 @@ h3 {
 
 .af-feature-item strong {
   display: block;
-  font-size: 0.94rem;
+  font-size: 0.96rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 2px;
+  margin-bottom: 3px;
 }
 
 .af-feature-item p {
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   color: #94a3b8;
   line-height: 1.45;
   margin-bottom: 0;
 }
 
+/* Precision SLA Metrics Strip */
+.af-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.af-metric-box {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.af-metric-box:hover {
+  background-color: rgba(255, 255, 255, 0.09);
+  transform: translateY(-2px);
+}
+
+.af-m-num {
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #60a5fa;
+  display: block;
+  line-height: 1;
+  font-family: inherit;
+}
+
+.af-m-num small {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-left: 1px;
+}
+
+.af-m-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #cbd5e1;
+  margin-top: 6px;
+  display: block;
+  letter-spacing: 0.02em;
+}
+
 .af-cta-row {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   flex-wrap: wrap;
 }
 
@@ -2731,19 +2335,32 @@ h3 {
     grid-template-columns: minmax(0, 1fr);
   }
   .af-media-col img {
-    min-height: 220px;
-    max-height: 280px;
+    min-height: 240px;
+    max-height: 300px;
   }
 }
 
 @media (max-width: 600px) {
   .af-text-col {
-    padding: 24px 16px;
+    padding: 28px 18px;
     min-width: 0;
   }
   .af-badge {
     font-size: 0.72rem;
-    padding: 3px 10px;
+    padding: 4px 11px;
+  }
+  .af-metrics-strip {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+  .af-metric-box {
+    padding: 10px 6px;
+  }
+  .af-m-num {
+    font-size: 1.35rem;
+  }
+  .af-m-label {
+    font-size: 0.65rem;
   }
   .af-cta-row {
     flex-direction: column;
@@ -2760,7 +2377,7 @@ h3 {
    14. Repair Services Grid & 3-Step Counter Workflow
    -------------------------------------------------------------------------- */
 .repair-services-section {
-  padding: 80px 0;
+  padding: 84px 0;
   background-color: var(--bg-surface);
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
@@ -2769,7 +2386,7 @@ h3 {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 22px;
 }
 
 @media (max-width: 992px) {
@@ -2788,17 +2405,24 @@ h3 {
   background-color: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 28px;
-  box-shadow: var(--shadow-xs);
+  padding: 26px 24px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
   display: flex;
   flex-direction: column;
-  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.28s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.22s ease;
 }
 
 .service-card:hover {
   border-color: rgba(0, 102, 204, 0.45);
-  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.09);
   transform: translateY(-5px);
+}
+
+.service-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .service-icon-wrap {
@@ -2809,7 +2433,6 @@ h3 {
   color: var(--primary);
   display: grid;
   place-items: center;
-  margin-bottom: 18px;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.22s ease, color 0.22s ease;
 }
 
@@ -2824,6 +2447,7 @@ h3 {
   font-weight: 800;
   color: var(--text-main);
   margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .service-card p {
@@ -2836,16 +2460,48 @@ h3 {
 
 .service-badge {
   display: inline-block;
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 800;
   color: var(--primary);
   background-color: var(--primary-light);
-  padding: 4px 10px;
+  border: 1px solid rgba(0, 102, 204, 0.16);
+  padding: 3px 9px;
   border-radius: var(--radius-full);
-  align-self: flex-start;
 }
 
-/* 3-Step & 4-Step Flow */
+.service-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  margin-top: auto;
+}
+
+.service-price-tag {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+
+.service-quote-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: var(--primary);
+  text-decoration: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.service-quote-btn:hover {
+  color: var(--primary-hover);
+  transform: translateX(3px);
+}
+
+/* 3-Step Counter Workflow Timeline */
 .steps-flow-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2878,33 +2534,34 @@ h3 {
 }
 
 .flow-step-card {
-  background-color: var(--bg-page);
+  background-color: #ffffff;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   padding: 28px 24px;
   position: relative;
-  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.26s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
 .flow-step-card:hover {
   border-color: rgba(0, 102, 204, 0.45);
-  background-color: #ffffff;
-  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.07);
-  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+  transform: translateY(-5px);
 }
 
 .flow-num-badge,
 .flow-step-num {
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   border-radius: var(--radius-full);
-  background-color: var(--primary);
+  background: linear-gradient(135deg, var(--primary) 0%, #0052a3 100%);
   color: #ffffff;
   display: grid;
   place-items: center;
-  font-weight: 800;
-  font-size: 0.92rem;
-  margin-bottom: 16px;
+  font-weight: 900;
+  font-size: 0.98rem;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
   transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
   letter-spacing: -0.02em;
 }
@@ -2915,16 +2572,17 @@ h3 {
 }
 
 .flow-step-card h3 {
-  font-size: 1.12rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--text-main);
   margin-bottom: 8px;
+  line-height: 1.3;
 }
 
 .flow-step-card p {
   font-size: 0.92rem;
   color: var(--text-muted);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 @media (max-width: 600px) {
@@ -5007,8 +4665,6 @@ h3 {
   }
   .contact-form-card,
   .contact-info-card,
-  .repair-station-form,
-  .ticket-docket-card,
   .service-card,
   .flow-step-card,
   .review-card {
