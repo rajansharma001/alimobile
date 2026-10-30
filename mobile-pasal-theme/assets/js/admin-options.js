@@ -1,10 +1,10 @@
 /**
  * Ali Mobile Center & Apple Fix — Theme Options Dashboard Engine
  * Clean Single-Sidebar Navigation, Instant Tab Switching, Accordion Categories,
- * Live Search Filter, Native wp.media & Keyboard Shortcuts (Ctrl+S)
+ * Live Search Filter, Native wp.media, Preset Swatches, Unsaved Change Alerts & Touch-Friendly Mobile UI
  *
  * @package Mobile_Pasal
- * @version 3.0.0
+ * @version 3.5.0
  */
 ( function ( $ ) {
 	'use strict';
@@ -12,7 +12,7 @@
 	window.mobilePasalOptions = window.mobilePasalOptions || {};
 
 	/**
-	 * 1. Instant, Reliable Tab Switching Without Page Reload
+	 * 1. Instant Tab Switching
 	 */
 	window.boptSwitchTab = function ( tabKey, event ) {
 		if ( event && typeof event.preventDefault === 'function' ) {
@@ -88,6 +88,7 @@
 		// 7. On mobile/tablet, close drawer after selection
 		if ( $( window ).width() <= 1024 ) {
 			$( '#boptSidebar' ).removeClass( 'is-mobile-open' );
+			$( 'body' ).removeClass( 'bopt-drawer-active' );
 		}
 	};
 
@@ -182,18 +183,18 @@
 	 * 5. Responsive Mobile & Tablet Sidebar Drawer Toggle
 	 */
 	function initMobileDrawer() {
+		// Open drawer
 		$( document ).on( 'click', '#boptSidebarToggle', function ( e ) {
 			e.preventDefault();
-			$( '#boptSidebar' ).toggleClass( 'is-mobile-open' );
+			$( '#boptSidebar' ).addClass( 'is-mobile-open' );
+			$( 'body' ).addClass( 'bopt-drawer-active' );
 		} );
 
-		// Close drawer when clicking outside on mobile
-		$( document ).on( 'click', function ( e ) {
-			if ( $( window ).width() <= 1024 ) {
-				if ( ! $( e.target ).closest( '#boptSidebar, #boptSidebarToggle' ).length ) {
-					$( '#boptSidebar' ).removeClass( 'is-mobile-open' );
-				}
-			}
+		// Close drawer with close icon or clicking backdrop
+		$( document ).on( 'click', '#boptDrawerClose, #boptDrawerOverlay', function ( e ) {
+			e.preventDefault();
+			$( '#boptSidebar' ).removeClass( 'is-mobile-open' );
+			$( 'body' ).removeClass( 'bopt-drawer-active' );
 		} );
 	}
 
@@ -304,6 +305,7 @@
 						.css( 'background-image', 'url(' + attachment.url + ')' )
 						.html( '' );
 					$wrap.find( '.bopt-image-clear' ).show();
+					triggerUnsavedChange();
 				}
 			} );
 
@@ -319,6 +321,7 @@
 				.css( 'background-image', '' )
 				.html( '<span class="bopt-image-placeholder"><i class="fa-regular fa-image"></i></span>' );
 			$( this ).hide();
+			triggerUnsavedChange();
 		} );
 
 		// Live preview on manual input
@@ -336,11 +339,12 @@
 					.html( '<span class="bopt-image-placeholder"><i class="fa-regular fa-image"></i></span>' );
 				$wrap.find( '.bopt-image-clear' ).hide();
 			}
+			triggerUnsavedChange();
 		} );
 	}
 
 	/**
-	 * 8. Color Pickers Initialization
+	 * 8. Color Pickers & 1-Click Preset Palettes
 	 */
 	function initColorPickers() {
 		if ( $.fn.wpColorPicker ) {
@@ -352,12 +356,47 @@
 					change: function ( event, ui ) {
 						var hex = ui.color.toString();
 						$tagWrap.text( hex );
+						triggerUnsavedChange();
 					},
 					clear: function () {
 						$tagWrap.text( '#______' );
+						triggerUnsavedChange();
 					}
 				} );
 			} );
+		}
+
+		// 1-Click Preset Color Scheme Swatches
+		$( document ).on( 'click', '.bopt-preset-swatch', function ( e ) {
+			e.preventDefault();
+			var primary = $( this ).data( 'primary' );
+			var dark    = $( this ).data( 'dark' );
+			var light   = $( this ).data( 'light' );
+
+			if ( primary && $( '#opt_color_primary' ).length ) {
+				updateColorField( '#opt_color_primary', primary );
+			}
+			if ( dark && $( '#opt_color_primary_dark' ).length ) {
+				updateColorField( '#opt_color_primary_dark', dark );
+			}
+			if ( light && $( '#opt_color_primary_light' ).length ) {
+				updateColorField( '#opt_color_primary_light', light );
+			}
+
+			triggerUnsavedChange();
+		} );
+
+		function updateColorField( selector, hex ) {
+			var $input = $( selector );
+			if ( ! $input.length ) return;
+			$input.val( hex );
+			if ( $input.data( 'wpColorPicker' ) ) {
+				$input.wpColorPicker( 'color', hex );
+			}
+			var $tagWrap = $input.closest( '.bopt-color-wrap' ).find( '.bopt-color-hex-tag' );
+			if ( $tagWrap.length ) {
+				$tagWrap.text( hex );
+			}
 		}
 	}
 
@@ -369,11 +408,34 @@
 			var isChecked = $( this ).is( ':checked' );
 			var $state = $( this ).closest( '.bopt-toggle-wrap' ).find( '.bopt-toggle-state' );
 			$state.text( isChecked ? 'Active' : 'Disabled' );
+			triggerUnsavedChange();
 		} );
 	}
 
 	/**
-	 * 10. Keyboard Shortcut Ctrl+S / Cmd+S to Save Immediately
+	 * 10. Unsaved Changes Floating Badge
+	 */
+	function triggerUnsavedChange() {
+		var $badge = $( '#boptUnsavedPill' );
+		if ( ! $badge.length ) {
+			$badge = $( '<div class="bopt-unsaved-pill" id="boptUnsavedPill"><i class="fa-solid fa-circle-dot"></i> <span>Unsaved changes • Tap Save</span></div>' );
+			$( 'body' ).append( $badge );
+		}
+		$badge.fadeIn( 250 );
+	}
+
+	function initUnsavedTracker() {
+		$( document ).on( 'input change', '#bopt-main-form input, #bopt-main-form textarea, #bopt-main-form select', function () {
+			triggerUnsavedChange();
+		} );
+
+		$( document ).on( 'submit', '#bopt-main-form', function () {
+			$( '#boptUnsavedPill' ).fadeOut( 150 );
+		} );
+	}
+
+	/**
+	 * 11. Keyboard Shortcut Ctrl+S / Cmd+S
 	 */
 	function initKeyboardShortcuts() {
 		$( document ).on( 'keydown', function ( e ) {
@@ -390,7 +452,7 @@
 	}
 
 	/**
-	 * 11. Top Bar Save Alert Dismissal
+	 * 12. Top Bar Save Alert Dismissal
 	 */
 	function initSaveAlertAutoDismiss() {
 		var $alert = $( '#boptSaveAlert' );
@@ -399,6 +461,36 @@
 				$alert.fadeOut( 400 );
 			}, 4000 );
 		}
+	}
+
+	/**
+	 * 13. Inquiries Page Real-Time Filter
+	 */
+	function initInquiriesFilter() {
+		var $inqSearch = $( '#boptInquiriesSearchInput' );
+		if ( ! $inqSearch.length ) return;
+
+		$inqSearch.on( 'input keyup', function () {
+			var q = $( this ).val().toLowerCase().trim();
+			// Filter desktop rows
+			$( '.bopt-table tbody tr' ).each( function () {
+				var rowText = $( this ).text().toLowerCase();
+				if ( rowText.indexOf( q ) !== -1 ) {
+					$( this ).show();
+				} else {
+					$( this ).hide();
+				}
+			} );
+			// Filter mobile cards
+			$( '.bopt-docket-mobile-card' ).each( function () {
+				var cardText = $( this ).text().toLowerCase();
+				if ( cardText.indexOf( q ) !== -1 ) {
+					$( this ).show();
+				} else {
+					$( this ).hide();
+				}
+			} );
+		} );
 	}
 
 	/**
@@ -414,8 +506,10 @@
 		initMediaPicker();
 		initColorPickers();
 		initToggleSwitches();
+		initUnsavedTracker();
 		initKeyboardShortcuts();
 		initSaveAlertAutoDismiss();
+		initInquiriesFilter();
 	} );
 
 } )( jQuery );

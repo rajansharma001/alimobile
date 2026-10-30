@@ -411,7 +411,7 @@ add_action( 'admin_menu', 'mobile_pasal_options_admin_menu' );
  * Enqueue Admin Scripts & Styles for Theme Options
  */
 function mobile_pasal_options_admin_enqueue( $hook ) {
-	if ( strpos( $hook, 'mobile-pasal-options' ) === false ) {
+	if ( strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false ) {
 		return;
 	}
 
@@ -696,6 +696,11 @@ function mobile_pasal_options_render_dashboard() {
 			</div>
 
 			<div class="bopt-topbar-right">
+				<div class="bopt-unsaved-pill" id="boptUnsavedPill" style="display:none;">
+					<span class="bopt-unsaved-dot"></span>
+					<span><?php esc_html_e( 'Unsaved changes', 'mobile-pasal' ); ?></span>
+				</div>
+
 				<?php if ( $saved ) : ?>
 					<div class="bopt-save-alert" id="boptSaveAlert">
 						<i class="fa-solid fa-circle-check"></i>
@@ -730,6 +735,10 @@ function mobile_pasal_options_render_dashboard() {
 			<!-- Left Navigation Sidebar -->
 			<aside class="bopt-sidebar" id="boptSidebar">
 				
+				<button type="button" class="bopt-drawer-close" id="boptDrawerClose" aria-label="<?php esc_attr_e( 'Close navigation', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-xmark"></i>
+				</button>
+
 				<div class="bopt-search-box">
 					<i class="fa-solid fa-magnifying-glass"></i>
 					<input type="text" id="boptSearchInput" placeholder="<?php esc_attr_e( 'Filter settings (e.g. WhatsApp, Slider, iPhone)...', 'mobile-pasal' ); ?>" autocomplete="off" />
@@ -777,6 +786,8 @@ function mobile_pasal_options_render_dashboard() {
 
 			</aside>
 
+			<div class="bopt-drawer-overlay" id="boptDrawerOverlay"></div>
+
 			<!-- Main Settings Canvas -->
 			<main class="bopt-content">
 
@@ -802,6 +813,36 @@ function mobile_pasal_options_render_dashboard() {
 						<div class="bopt-pane-header">
 							<h2><?php esc_html_e( 'Color Palette & System Accent Engine', 'mobile-pasal' ); ?></h2>
 							<p><?php esc_html_e( 'Customize your official brand palette across buttons, badges, links, preloader, and ratings.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<!-- 1-Click Preset Color Schemes -->
+						<div class="bopt-presets-box">
+							<div class="bopt-presets-title">
+								<i class="fa-solid fa-wand-magic-sparkles"></i>
+								<span><?php esc_html_e( '1-Click Curated Color Schemes', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="bopt-preset-swatches">
+								<button type="button" class="bopt-preset-swatch" data-primary="#0066cc" data-dark="#004c99" data-light="#eff6ff" title="<?php esc_attr_e( 'Apply Sapphire Pro Theme', 'mobile-pasal' ); ?>">
+									<span class="bopt-swatch-circle" style="background:#0066cc;"></span>
+									<span><?php esc_html_e( 'Sapphire Pro (Default)', 'mobile-pasal' ); ?></span>
+								</button>
+								<button type="button" class="bopt-preset-swatch" data-primary="#0284c7" data-dark="#0369a1" data-light="#f0f9ff" title="<?php esc_attr_e( 'Apply Midnight Titanium Theme', 'mobile-pasal' ); ?>">
+									<span class="bopt-swatch-circle" style="background:#0284c7;"></span>
+									<span><?php esc_html_e( 'Midnight Titanium', 'mobile-pasal' ); ?></span>
+								</button>
+								<button type="button" class="bopt-preset-swatch" data-primary="#2563eb" data-dark="#1d4ed8" data-light="#eff6ff" title="<?php esc_attr_e( 'Apply Royal Cyber Blue Theme', 'mobile-pasal' ); ?>">
+									<span class="bopt-swatch-circle" style="background:#2563eb;"></span>
+									<span><?php esc_html_e( 'Royal Cyber Blue', 'mobile-pasal' ); ?></span>
+								</button>
+								<button type="button" class="bopt-preset-swatch" data-primary="#059669" data-dark="#047857" data-light="#ecfdf5" title="<?php esc_attr_e( 'Apply Emerald Lab Tech Theme', 'mobile-pasal' ); ?>">
+									<span class="bopt-swatch-circle" style="background:#059669;"></span>
+									<span><?php esc_html_e( 'Emerald Lab Tech', 'mobile-pasal' ); ?></span>
+								</button>
+								<button type="button" class="bopt-preset-swatch" data-primary="#d97706" data-dark="#b45309" data-light="#fffbeb" title="<?php esc_attr_e( 'Apply Luxury Amber Gold Theme', 'mobile-pasal' ); ?>">
+									<span class="bopt-swatch-circle" style="background:#d97706;"></span>
+									<span><?php esc_html_e( 'Luxury Amber Gold', 'mobile-pasal' ); ?></span>
+								</button>
+							</div>
 						</div>
 
 						<div class="bopt-card">
@@ -1260,6 +1301,85 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 						</div>
+
+						<!-- Verified Reviews CPT Manager -->
+						<div class="bopt-cpt-action-box" style="margin-top:20px;">
+							<div class="bopt-cpt-action-info">
+								<div class="bopt-cpt-action-icon"><i class="fa-solid fa-star"></i></div>
+								<div>
+									<strong><?php esc_html_e( 'Verified Customer Testimonials & Reviews', 'mobile-pasal' ); ?></strong>
+									<p><?php esc_html_e( 'Add or edit verified Google and counter feedback, star scores, and customer purchase stories.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-cpt-action-links">
+								<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=mp_review' ) ); ?>" class="bopt-btn-gold-action">
+									<i class="fa-solid fa-plus"></i> <?php esc_html_e( 'Add Customer Review', 'mobile-pasal' ); ?>
+								</a>
+								<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=mp_review' ) ); ?>" class="bopt-btn-gold-action" style="background:#1e293b;border:1px solid #334155;">
+									<i class="fa-solid fa-list"></i> <?php esc_html_e( 'View All Reviews', 'mobile-pasal' ); ?>
+								</a>
+							</div>
+						</div>
+
+						<?php
+						$review_query = get_posts( array(
+							'post_type'      => 'mp_review',
+							'posts_per_page' => 12,
+							'post_status'    => 'publish',
+							'orderby'        => 'date',
+							'order'          => 'DESC',
+						) );
+						?>
+						<div class="bopt-cpt-grid">
+							<?php if ( ! empty( $review_query ) ) : ?>
+								<?php foreach ( $review_query as $rv_post ) :
+									$location = get_post_meta( $rv_post->ID, '_mp_review_location', true ) ?: 'Gulariya, Bardiya';
+									$product  = get_post_meta( $rv_post->ID, '_mp_review_product', true );
+									$rating   = intval( get_post_meta( $rv_post->ID, '_mp_review_rating', true ) ?: 5 );
+									$verified = get_post_meta( $rv_post->ID, '_mp_review_verified', true ) !== '0';
+								?>
+									<div class="bopt-cpt-card">
+										<div>
+											<div class="bopt-cpt-card-top">
+												<div class="bopt-cpt-card-thumb" style="color:#f59e0b; font-size:20px; background:#fffbeb; border-color:#fef3c7;">
+													<i class="fa-solid fa-quote-left"></i>
+												</div>
+												<div style="flex:1; min-width:0;">
+													<h4 class="bopt-cpt-card-title"><?php echo esc_html( $rv_post->post_title ); ?></h4>
+													<div class="bopt-cpt-card-meta"><i class="fa-solid fa-location-dot"></i> <?php echo esc_html( $location ); ?></div>
+												</div>
+											</div>
+											<div style="display:flex; align-items:center; gap:4px; color:#f59e0b; font-size:13px; margin: 8px 0;">
+												<?php for ( $i = 1; $i <= 5; $i++ ) : ?>
+													<i class="fa-<?php echo $i <= $rating ? 'solid' : 'regular'; ?> fa-star"></i>
+												<?php endfor; ?>
+												<?php if ( $product ) : ?>
+													<span style="font-size:11px; color:#64748b; margin-left:6px;">(<?php echo esc_html( $product ); ?>)</span>
+												<?php endif; ?>
+											</div>
+											<?php if ( $rv_post->post_content ) : ?>
+												<p style="font-size:12px; color:#475569; line-height:1.4; margin:0 0 8px 0; font-style:italic;">
+													"<?php echo esc_html( wp_trim_words( $rv_post->post_content, 16 ) ); ?>"
+												</p>
+											<?php endif; ?>
+											<?php if ( $verified ) : ?>
+												<span class="bopt-cpt-card-badge in_stock"><i class="fa-solid fa-circle-check"></i> <?php esc_html_e( 'Verified Client', 'mobile-pasal' ); ?></span>
+											<?php endif; ?>
+										</div>
+										<div class="bopt-cpt-card-actions">
+											<a href="<?php echo esc_url( get_edit_post_link( $rv_post->ID ) ); ?>" class="bopt-btn-action-small bopt-btn-edit">
+												<i class="fa-solid fa-pen-to-square"></i> <?php esc_html_e( 'Edit Review', 'mobile-pasal' ); ?>
+											</a>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							<?php else : ?>
+								<div class="bopt-empty-cpt-box">
+									<i class="fa-solid fa-comments"></i>
+									<p><?php esc_html_e( 'No customer reviews published yet. Tap "Add Customer Review" above to showcase 5-star customer experiences!', 'mobile-pasal' ); ?></p>
+								</div>
+							<?php endif; ?>
+						</div>
 					</div>
 
 					<!-- ===================================================================
@@ -1420,6 +1540,73 @@ function mobile_pasal_options_render_dashboard() {
 								</a>
 							</div>
 						</div>
+
+						<?php
+						$handset_query = get_posts( array(
+							'post_type'      => 'handset',
+							'posts_per_page' => 12,
+							'post_status'    => 'publish',
+							'orderby'        => 'date',
+							'order'          => 'DESC',
+						) );
+						?>
+						<div class="bopt-cpt-grid">
+							<?php if ( ! empty( $handset_query ) ) : ?>
+								<?php foreach ( $handset_query as $h_post ) :
+									$h_price   = get_post_meta( $h_post->ID, '_mp_price', true );
+									$h_stock   = get_post_meta( $h_post->ID, '_mp_stock_status', true ) ?: 'in_stock';
+									$h_badge   = get_post_meta( $h_post->ID, '_mp_badge', true );
+									$thumb_url = get_the_post_thumbnail_url( $h_post->ID, 'medium' );
+									$brands    = wp_get_post_terms( $h_post->ID, 'device_brand', array( 'fields' => 'names' ) );
+									$brand_str = ! empty( $brands ) ? implode( ', ', $brands ) : '';
+								?>
+									<div class="bopt-cpt-card">
+										<div>
+											<div class="bopt-cpt-card-top">
+												<div class="bopt-cpt-card-thumb" <?php echo $thumb_url ? 'style="background-image:url(\'' . esc_url( $thumb_url ) . '\'); background-size:contain; background-repeat:no-repeat;"' : ''; ?>>
+													<?php if ( ! $thumb_url ) : ?>
+														<i class="fa-solid fa-mobile-screen"></i>
+													<?php endif; ?>
+												</div>
+												<div style="flex:1; min-width:0;">
+													<h4 class="bopt-cpt-card-title"><?php echo esc_html( $h_post->post_title ); ?></h4>
+													<?php if ( $brand_str ) : ?>
+														<div class="bopt-cpt-card-meta"><i class="fa-solid fa-tag"></i> <?php echo esc_html( $brand_str ); ?></div>
+													<?php endif; ?>
+												</div>
+											</div>
+											<div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px;">
+												<div class="bopt-cpt-card-price"><?php echo esc_html( $h_price ? $h_price : 'Price on Call' ); ?></div>
+												<span class="bopt-cpt-card-badge <?php echo esc_attr( $h_stock ); ?>">
+													<?php
+													$stock_labels = array(
+														'in_stock'     => __( 'In Stock', 'mobile-pasal' ),
+														'low_stock'    => __( 'Low Stock', 'mobile-pasal' ),
+														'pre_order'    => __( 'Pre-Order', 'mobile-pasal' ),
+														'out_of_stock' => __( 'Out of Stock', 'mobile-pasal' ),
+													);
+													echo esc_html( isset( $stock_labels[ $h_stock ] ) ? $stock_labels[ $h_stock ] : $h_stock );
+													?>
+												</span>
+											</div>
+										</div>
+										<div class="bopt-cpt-card-actions">
+											<a href="<?php echo esc_url( get_edit_post_link( $h_post->ID ) ); ?>" class="bopt-btn-action-small bopt-btn-edit">
+												<i class="fa-solid fa-pen-to-square"></i> <?php esc_html_e( 'Edit Handset', 'mobile-pasal' ); ?>
+											</a>
+											<a href="<?php echo esc_url( get_permalink( $h_post->ID ) ); ?>" target="_blank" class="bopt-btn-action-small bopt-btn-view">
+												<i class="fa-solid fa-arrow-up-right-from-square"></i> <?php esc_html_e( 'View', 'mobile-pasal' ); ?>
+											</a>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							<?php else : ?>
+								<div class="bopt-empty-cpt-box">
+									<i class="fa-solid fa-box-open"></i>
+									<p><?php esc_html_e( 'No showroom handsets found in your catalog. Tap "Add New Handset" above to stock your first phone!', 'mobile-pasal' ); ?></p>
+								</div>
+							<?php endif; ?>
+						</div>
 					</div>
 
 					<!-- ===================================================================
@@ -1478,6 +1665,71 @@ function mobile_pasal_options_render_dashboard() {
 									<i class="fa-solid fa-list"></i> <?php esc_html_e( 'View All Services', 'mobile-pasal' ); ?>
 								</a>
 							</div>
+						</div>
+
+						<?php
+						$repair_query = get_posts( array(
+							'post_type'      => 'repair_service',
+							'posts_per_page' => 12,
+							'post_status'    => 'publish',
+							'orderby'        => 'date',
+							'order'          => 'DESC',
+						) );
+						?>
+						<div class="bopt-cpt-grid">
+							<?php if ( ! empty( $repair_query ) ) : ?>
+								<?php foreach ( $repair_query as $r_post ) :
+									$r_price      = get_post_meta( $r_post->ID, '_mp_service_price', true );
+									$r_turnaround = get_post_meta( $r_post->ID, '_mp_service_turnaround', true );
+									$r_warranty   = get_post_meta( $r_post->ID, '_mp_service_warranty', true );
+									$r_icon       = get_post_meta( $r_post->ID, '_mp_service_icon', true );
+									$icon_class   = 'fa-screwdriver-wrench';
+									switch ( $r_icon ) {
+										case 'screen':   $icon_class = 'fa-mobile-screen-button'; break;
+										case 'battery':  $icon_class = 'fa-battery-full'; break;
+										case 'water':    $icon_class = 'fa-droplet'; break;
+										case 'board':    $icon_class = 'fa-microchip'; break;
+										case 'camera':   $icon_class = 'fa-camera'; break;
+										case 'charging': $icon_class = 'fa-bolt'; break;
+										case 'software': $icon_class = 'fa-laptop-code'; break;
+									}
+								?>
+									<div class="bopt-cpt-card">
+										<div>
+											<div class="bopt-cpt-card-top">
+												<div class="bopt-cpt-card-thumb" style="color:#0066cc; font-size:24px;">
+													<i class="fa-solid <?php echo esc_attr( $icon_class ); ?>"></i>
+												</div>
+												<div style="flex:1; min-width:0;">
+													<h4 class="bopt-cpt-card-title"><?php echo esc_html( $r_post->post_title ); ?></h4>
+													<?php if ( $r_turnaround ) : ?>
+														<div class="bopt-cpt-card-meta"><i class="fa-solid fa-clock"></i> <?php echo esc_html( $r_turnaround ); ?></div>
+													<?php endif; ?>
+												</div>
+											</div>
+											<div style="display:flex; align-items:center; justify-content:space-between; margin-top:8px;">
+												<div class="bopt-cpt-card-price"><?php echo esc_html( $r_price ? $r_price : 'Diagnostic Estimate' ); ?></div>
+												<?php if ( $r_warranty ) : ?>
+													<span class="bopt-cpt-card-badge in_stock"><i class="fa-solid fa-shield-halved"></i> <?php echo esc_html( $r_warranty ); ?></span>
+												<?php endif; ?>
+											</div>
+										</div>
+										<div class="bopt-cpt-card-actions">
+											<a href="<?php echo esc_url( get_edit_post_link( $r_post->ID ) ); ?>" class="bopt-btn-action-small bopt-btn-edit">
+												<i class="fa-solid fa-pen-to-square"></i> <?php esc_html_e( 'Edit Service', 'mobile-pasal' ); ?>
+											</a>
+											<a href="<?php echo esc_url( get_permalink( $r_post->ID ) ); ?>" target="_blank" class="bopt-btn-action-small bopt-btn-view">
+												<i class="fa-solid fa-arrow-up-right-from-square"></i> <?php esc_html_e( 'View', 'mobile-pasal' ); ?>
+											</a>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							<?php else : ?>
+								<div class="bopt-empty-cpt-box">
+									<i class="fa-solid fa-screwdriver-wrench"></i>
+									<p><?php esc_html_e( 'No repair services registered. Tap "Add Repair Service" above to build your laboratory menu!', 'mobile-pasal' ); ?></p>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 
@@ -1815,9 +2067,78 @@ function mobile_pasal_options_render_dashboard() {
 							</div>
 							<div class="bopt-cpt-action-links">
 								<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries' ) ); ?>" class="bopt-btn-gold-action">
-									<i class="fa-solid fa-envelope-open-text"></i> <?php esc_html_e( 'Open Inquiries Inbox', 'mobile-pasal' ); ?>
+									<i class="fa-solid fa-envelope-open-text"></i> <?php esc_html_e( 'Open Full Inquiries Suite', 'mobile-pasal' ); ?>
 								</a>
 							</div>
+						</div>
+
+						<?php
+						global $wpdb;
+						$table_name = $wpdb->prefix . 'mp_inquiries';
+						$recent_dockets = array();
+						if ( $wpdb->get_var( "SHOW TABLES LIKE '$table_name'" ) === $table_name ) {
+							$recent_dockets = $wpdb->get_results( "SELECT * FROM $table_name ORDER BY id DESC LIMIT 6" );
+						}
+						?>
+						<div class="bopt-cpt-grid" style="margin-top:16px;">
+							<?php if ( ! empty( $recent_dockets ) ) : ?>
+								<?php foreach ( $recent_dockets as $docket ) :
+									$clean_phone = preg_replace( '/[^0-9]/', '', $docket->phone );
+									$wa_phone    = ( strpos( $clean_phone, '977' ) === 0 ) ? $clean_phone : '977' . ltrim( $clean_phone, '0' );
+									$wa_msg      = sprintf(
+										__( 'Namaste %s ji! This is Ali Mobile Center & Apple Fix Gulariya regarding your %s (%s). How can we assist you today?', 'mobile-pasal' ),
+										$docket->name,
+										$docket->device_model ? $docket->device_model : 'Handset',
+										$docket->service_type ? $docket->service_type : 'Inquiry'
+									);
+									$wa_url      = 'https://wa.me/' . $wa_phone . '?text=' . rawurlencode( $wa_msg );
+									$tel_url     = 'tel:' . esc_attr( $docket->phone );
+									$status_cls  = ( 'new' === $docket->status ) ? 'out_of_stock' : ( ( 'contacted' === $docket->status ) ? 'low_stock' : 'in_stock' );
+									$status_lbl  = ( 'new' === $docket->status ) ? __( 'Pending Action', 'mobile-pasal' ) : ( ( 'contacted' === $docket->status ) ? __( 'In Progress', 'mobile-pasal' ) : __( 'Resolved', 'mobile-pasal' ) );
+								?>
+									<div class="bopt-cpt-card">
+										<div>
+											<div class="bopt-cpt-card-top">
+												<div class="bopt-cpt-card-thumb" style="color:#0066cc; font-size:20px; background:#eff6ff;">
+													<i class="fa-solid fa-wrench"></i>
+												</div>
+												<div style="flex:1; min-width:0;">
+													<div style="display:flex; align-items:center; justify-content:space-between; gap:6px;">
+														<h4 class="bopt-cpt-card-title"><?php echo esc_html( $docket->name ); ?></h4>
+														<span style="font-size:11px; font-weight:700; color:#64748b;">#<?php echo esc_html( $docket->id ); ?></span>
+													</div>
+													<div class="bopt-cpt-card-meta"><i class="fa-solid fa-mobile-screen"></i> <?php echo esc_html( $docket->device_model ?: 'Smartphone' ); ?></div>
+												</div>
+											</div>
+											<div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px;">
+												<span style="font-size:12px; font-weight:600; color:#334155;"><?php echo esc_html( $docket->service_type ?: 'General Inquiry' ); ?></span>
+												<span class="bopt-cpt-card-badge <?php echo esc_attr( $status_cls ); ?>"><?php echo esc_html( $status_lbl ); ?></span>
+											</div>
+											<?php if ( $docket->message ) : ?>
+												<p style="font-size:12px; color:#475569; line-height:1.4; margin:8px 0; background:#f8fafc; padding:6px 10px; border-radius:6px; border:1px solid #f1f5f9;">
+													<?php echo esc_html( wp_trim_words( $docket->message, 14 ) ); ?>
+												</p>
+											<?php endif; ?>
+											<div style="font-size:11px; color:#94a3b8; margin-top:4px;">
+												<i class="fa-regular fa-clock"></i> <?php echo esc_html( date_i18n( 'M j, Y - g:i A', strtotime( $docket->created_at ) ) ); ?>
+											</div>
+										</div>
+										<div class="bopt-cpt-card-actions">
+											<a href="<?php echo esc_url( $tel_url ); ?>" class="bopt-btn-action-small" style="background:#eff6ff; color:#0066cc; border:1px solid #bfdbfe;">
+												<i class="fa-solid fa-phone"></i> <?php esc_html_e( 'Call', 'mobile-pasal' ); ?>
+											</a>
+											<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-action-small" style="background:#ecfdf5; color:#059669; border:1px solid #a7f3d0;">
+												<i class="fa-brands fa-whatsapp"></i> <?php esc_html_e( 'WhatsApp', 'mobile-pasal' ); ?>
+											</a>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							<?php else : ?>
+								<div class="bopt-empty-cpt-box">
+									<i class="fa-solid fa-inbox"></i>
+									<p><?php esc_html_e( 'Your inquiries inbox is clean. No customer repair tickets currently pending.', 'mobile-pasal' ); ?></p>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 
