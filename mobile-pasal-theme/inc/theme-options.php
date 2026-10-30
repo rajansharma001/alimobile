@@ -759,20 +759,21 @@ function mobile_pasal_options_render_dashboard() {
 
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Customer Repair Dockets & Inquiries', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-envelope"></i>
-					<span><?php esc_html_e( 'Inquiries', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Inquiries', 'mobile-pasal' ); ?></span>
 					<?php if ( $unread_inquiries > 0 ) : ?>
 						<span class="bopt-badge-pill"><?php echo esc_html( $unread_inquiries ); ?></span>
 					<?php endif; ?>
 				</a>
 
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" class="bopt-preview-btn">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" class="bopt-preview-btn" title="<?php esc_attr_e( 'View Live Site', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-arrow-up-right-from-square"></i>
-					<span><?php esc_html_e( 'View Live Site', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text"><?php esc_html_e( 'View Live Site', 'mobile-pasal' ); ?></span>
 				</a>
 
-				<button type="submit" form="bopt-main-form" class="bopt-save-btn">
+				<button type="submit" form="bopt-main-form" class="bopt-save-btn" id="boptTopbarSaveBtn" title="<?php esc_attr_e( 'Save Changes (Ctrl+S)', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-floppy-disk"></i>
-					<span><?php esc_html_e( 'Save Changes', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text-full"><?php esc_html_e( 'Save Changes', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text-short"><?php esc_html_e( 'Save', 'mobile-pasal' ); ?></span>
 					<span class="bopt-key-hint">Ctrl+S</span>
 				</button>
 			</div>
@@ -2825,9 +2826,10 @@ function mobile_pasal_options_render_dashboard() {
 									<span class="bopt-badge-pill"><?php echo esc_html( $unread_inquiries ); ?></span>
 								<?php endif; ?>
 							</a>
-							<button type="submit" class="bopt-save-btn">
+							<button type="submit" class="bopt-save-btn" title="<?php esc_attr_e( 'Save All Settings (Ctrl+S)', 'mobile-pasal' ); ?>">
 								<i class="fa-solid fa-floppy-disk"></i>
-								<span><?php esc_html_e( 'Save All Settings', 'mobile-pasal' ); ?></span>
+								<span class="bopt-btn-text-full"><?php esc_html_e( 'Save All Settings', 'mobile-pasal' ); ?></span>
+								<span class="bopt-btn-text-short"><?php esc_html_e( 'Save', 'mobile-pasal' ); ?></span>
 								<span class="bopt-key-hint">Ctrl+S</span>
 							</button>
 						</div>

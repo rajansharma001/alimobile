@@ -68,13 +68,23 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	gap: 12px;
 	box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+	flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 1024px) {
+	.bopt-topbar {
+		padding: 10px 18px;
+		gap: 10px;
+	}
 }
 
 @media screen and (max-width: 782px) {
 	.bopt-topbar {
 		top: 46px;
-		padding: 10px 14px;
+		padding: 8px 12px;
+		gap: 8px;
 	}
 }
 
@@ -82,6 +92,9 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	min-width: 0;
+	flex: 1 1 auto;
+	overflow: hidden;
 }
 
 .bopt-sidebar-toggle {
@@ -115,6 +128,8 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .bopt-brand-icon {
@@ -134,14 +149,19 @@ body.toplevel_page_mp-inquiries #wpfooter {
 .bopt-brand-info {
 	display: flex;
 	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .bopt-brand-title {
-	font-size: 16.5px;
+	font-size: 16px;
 	font-weight: 800;
 	color: #ffffff;
 	letter-spacing: -0.01em;
 	line-height: 1.2;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .bopt-brand-badge {
@@ -150,17 +170,52 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	color: #38bdf8;
 	text-transform: uppercase;
 	letter-spacing: 0.12em;
+	white-space: nowrap;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
 	.bopt-brand-title {
-		font-size: 14px;
-		max-width: 160px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		font-size: 14.5px;
+		max-width: 200px;
 	}
 	.bopt-brand-badge {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-brand-title {
+		font-size: 13.5px;
+		max-width: 130px;
+	}
+	.bopt-brand {
+		gap: 8px;
+	}
+	.bopt-topbar-left {
+		gap: 8px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.bopt-brand-title {
+		font-size: 12.5px;
+		max-width: 95px;
+	}
+	.bopt-brand-icon {
+		width: 32px;
+		height: 32px;
+		font-size: 15px;
+		border-radius: 8px;
+	}
+	.bopt-sidebar-toggle {
+		width: 34px;
+		height: 34px;
+		font-size: 15px;
+	}
+}
+
+@media screen and (max-width: 360px) {
+	.bopt-brand-title {
 		display: none;
 	}
 }
@@ -169,6 +224,15 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	flex: 0 0 auto;
+	flex-shrink: 0;
+	flex-wrap: nowrap;
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-topbar-right {
+		gap: 6px;
+	}
 }
 
 .bopt-save-alert {
@@ -182,18 +246,21 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	border-radius: 20px;
 	font-size: 12px;
 	font-weight: 600;
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
 	animation: boptFadeIn 0.3s ease;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 960px) {
 	.bopt-save-alert {
-		display: none;
+		display: none !important;
 	}
 }
 
 .bopt-messages-btn {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	gap: 7px;
 	color: #e2e8f0;
 	background: rgba(255, 255, 255, 0.06);
@@ -205,6 +272,10 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	border-radius: 8px;
 	transition: all 0.2s ease;
 	min-height: 38px;
+	height: 38px;
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
+	box-sizing: border-box;
 }
 
 .bopt-messages-btn:hover {
@@ -223,9 +294,30 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	line-height: 1.3;
 }
 
+@media screen and (max-width: 960px) {
+	.bopt-messages-btn .bopt-btn-text,
+	.bopt-messages-btn span:not(.bopt-badge-pill) {
+		display: none !important;
+	}
+	.bopt-messages-btn {
+		padding: 8px 10px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.bopt-messages-btn {
+		height: 34px;
+		min-height: 34px;
+		padding: 6px 8px;
+		font-size: 12px;
+	}
+}
+
+/* ── View Live Site Button (Responsive & Unbreakable) ── */
 .bopt-preview-btn {
 	display: inline-flex;
 	align-items: center;
+	justify-content: center;
 	gap: 6px;
 	color: #cbd5e1;
 	text-decoration: none;
@@ -236,6 +328,10 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	border: 1px solid rgba(255, 255, 255, 0.15);
 	transition: all 0.2s ease;
 	min-height: 38px;
+	height: 38px;
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
+	box-sizing: border-box;
 }
 
 .bopt-preview-btn:hover {
@@ -244,19 +340,34 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	border-color: rgba(255, 255, 255, 0.3);
 }
 
-@media screen and (max-width: 782px) {
+@media screen and (max-width: 1024px) {
+	.bopt-preview-btn .bopt-btn-text,
 	.bopt-preview-btn span {
-		display: none;
+		display: none !important;
 	}
 	.bopt-preview-btn {
-		padding: 8px 10px;
+		width: 38px;
+		height: 38px;
+		padding: 0;
+		font-size: 14px;
 	}
 }
 
+@media screen and (max-width: 480px) {
+	.bopt-preview-btn {
+		width: 34px;
+		height: 34px;
+		min-height: 34px;
+		font-size: 13px;
+	}
+}
+
+/* ── Save Changes Action Button (Responsive & Unbreakable) ── */
 .bopt-save-btn {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
+	justify-content: center;
+	gap: 7px;
 	background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
 	color: #ffffff;
 	font-size: 13px;
@@ -268,6 +379,17 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	box-shadow: 0 4px 14px rgba(0, 102, 204, 0.4);
 	transition: all 0.2s ease;
 	min-height: 38px;
+	height: 38px;
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
+	box-sizing: border-box;
+}
+
+.bopt-save-btn .bopt-btn-text-full {
+	display: inline;
+}
+.bopt-save-btn .bopt-btn-text-short {
+	display: none;
 }
 
 .bopt-save-btn:hover {
@@ -292,13 +414,42 @@ body.toplevel_page_mp-inquiries #wpfooter {
 	text-transform: uppercase;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1150px) {
 	.bopt-key-hint {
-		display: none;
+		display: none !important;
+	}
+}
+
+@media screen and (max-width: 782px) {
+	.bopt-save-btn {
+		padding: 8px 14px;
+		font-size: 12.5px;
+	}
+	.bopt-save-btn .bopt-btn-text-full {
+		display: none !important;
+	}
+	.bopt-save-btn .bopt-btn-text-short {
+		display: inline !important;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.bopt-save-btn {
+		height: 34px;
+		min-height: 34px;
+		padding: 6px 12px;
+		font-size: 12px;
+		gap: 5px;
+	}
+}
+
+@media screen and (max-width: 350px) {
+	.bopt-save-btn .bopt-btn-text-short {
+		display: none !important;
 	}
 	.bopt-save-btn {
-		padding: 8px 12px;
-		font-size: 12px;
+		width: 34px;
+		padding: 0;
 	}
 }
 
@@ -1208,9 +1359,7 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 
 @media screen and (max-width: 782px) {
 	.bopt-floating-save-bar {
-		padding: 10px 16px;
-		border-radius: 0;
-		margin-top: 20px;
+		display: none !important;
 	}
 }
 
@@ -1220,6 +1369,8 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 	gap: 10px;
 	font-size: 12.5px;
 	color: #e2e8f0;
+	min-width: 0;
+	overflow: hidden;
 }
 
 .bopt-floating-status strong {
@@ -1234,20 +1385,17 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 	color: #94a3b8;
 }
 
-@media screen and (max-width: 600px) {
-	.bopt-floating-left {
-		display: none;
-	}
-	.bopt-floating-right {
-		width: 100%;
-		justify-content: space-between;
-	}
-}
-
 .bopt-floating-right {
 	display: flex;
 	align-items: center;
 	gap: 12px;
+	flex-shrink: 0;
+	flex-wrap: nowrap;
+}
+
+.bopt-floating-save-bar .bopt-save-btn {
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
 }
 
 .bopt-inbox-btn {
@@ -1264,6 +1412,8 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 	text-decoration: none;
 	transition: all 0.2s ease;
 	min-height: 40px;
+	white-space: nowrap !important;
+	flex-shrink: 0 !important;
 }
 
 .bopt-inbox-btn:hover {
@@ -2058,16 +2208,18 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 		color: #ffffff;
 		border: none;
 		border-radius: 8px;
-		padding: 12px 18px;
-		font-size: 15px;
+		padding: 10px 16px;
+		font-size: 14px;
 		font-weight: 800;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		gap: 8px;
 		cursor: pointer;
-		min-height: 48px;
+		min-height: 44px;
 		box-shadow: 0 2px 10px rgba(0, 102, 204, 0.4);
+		white-space: nowrap !important;
+		box-sizing: border-box;
 	}
 
 	.bopt-mobile-save-dock .bopt-btn-mobile-top {
@@ -2075,22 +2227,25 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 		color: #ffffff;
 		border: 1px solid rgba(255, 255, 255, 0.2);
 		border-radius: 8px;
-		padding: 12px 14px;
+		padding: 10px 14px;
 		font-size: 14px;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		min-height: 48px;
+		min-height: 44px;
+		width: 44px;
+		flex-shrink: 0;
 		cursor: pointer;
+		box-sizing: border-box;
 	}
 
 	body.toplevel_page_mobile-pasal-options .bopt-content {
-		padding-bottom: 84px !important;
+		padding-bottom: 90px !important;
 	}
 }
 
 @media screen and (min-width: 783px) {
 	.bopt-mobile-save-dock {
-		display: none;
+		display: none !important;
 	}
 }

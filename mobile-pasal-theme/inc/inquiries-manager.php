@@ -116,13 +116,13 @@ function mp_render_inquiries_admin_page() {
 			</div>
 
 			<div class="bopt-topbar-right">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Theme Options', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-sliders"></i>
-					<span><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
 				</a>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" class="bopt-preview-btn">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" target="_blank" class="bopt-preview-btn" title="<?php esc_attr_e( 'View Live Site', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-arrow-up-right-from-square"></i>
-					<span><?php esc_html_e( 'View Live Site', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text"><?php esc_html_e( 'View Live Site', 'mobile-pasal' ); ?></span>
 				</a>
 			</div>
 		</header>

@@ -80,6 +80,8 @@
 	text-decoration: none;
 	transition: all 0.2s ease;
 	min-height: 36px;
+	white-space: nowrap !important;
+	box-sizing: border-box;
 }
 
 .mp-cpt-btn-action:hover {
