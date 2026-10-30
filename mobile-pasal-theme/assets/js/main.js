@@ -103,7 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ------------------------------------------------------------------------
-     4. Hero Slider (Multi-Slide, Auto-Play, Pause-on-Hover, Touch Swipe)
+     4. Hero Slider (Creative Studio, Live Progress, 3D Tilt, Touch & Keys)
      ------------------------------------------------------------------------ */
   var heroSlides = document.querySelectorAll('.hero-slide');
   var sliderDots = document.querySelectorAll('.slider-dot');
@@ -111,9 +111,43 @@ document.addEventListener('DOMContentLoaded', function () {
   var prevSlideBtn = document.getElementById('slider-prev-btn');
   var nextSlideBtn = document.getElementById('slider-next-btn');
   var heroContainer = document.querySelector('.hero-slider-section');
+  var counterCurrentEl = document.querySelector('.slider-counter .current-slide');
+  var progressBars = document.querySelectorAll('.dock-tab-progress-fill');
   var currentSlideIdx = 0;
   var slideTimer = null;
+  var progressRaf = null;
+  var progressStartTime = null;
   var SLIDE_DURATION = 5500;
+
+  function animateProgress(timestamp) {
+    if (!progressStartTime) progressStartTime = timestamp;
+    var elapsed = timestamp - progressStartTime;
+    var pct = Math.min(100, (elapsed / SLIDE_DURATION) * 100);
+    var activeTab = document.querySelector('.slider-dock-tab.active');
+    if (activeTab) {
+      var fill = activeTab.querySelector('.dock-tab-progress-fill');
+      if (fill) fill.style.width = pct + '%';
+    }
+    if (pct < 100 && slideTimer) {
+      progressRaf = requestAnimationFrame(animateProgress);
+    }
+  }
+
+  function resetProgress() {
+    if (progressRaf) {
+      cancelAnimationFrame(progressRaf);
+      progressRaf = null;
+    }
+    progressStartTime = null;
+    progressBars.forEach(function (bar) {
+      bar.style.width = '0%';
+    });
+  }
+
+  function startProgress() {
+    resetProgress();
+    progressRaf = requestAnimationFrame(animateProgress);
+  }
 
   function showSlide(idx) {
     if (!heroSlides.length) return;
@@ -134,7 +168,12 @@ document.addEventListener('DOMContentLoaded', function () {
       tab.setAttribute('aria-selected', i === idx ? 'true' : 'false');
     });
 
+    if (counterCurrentEl) {
+      counterCurrentEl.textContent = (idx + 1 < 10 ? '0' : '') + (idx + 1);
+    }
+
     currentSlideIdx = idx;
+    startProgress();
   }
 
   function nextSlide() {
@@ -148,12 +187,17 @@ document.addEventListener('DOMContentLoaded', function () {
   function startSlideShow() {
     stopSlideShow();
     slideTimer = setInterval(nextSlide, SLIDE_DURATION);
+    startProgress();
   }
 
   function stopSlideShow() {
     if (slideTimer) {
       clearInterval(slideTimer);
       slideTimer = null;
+    }
+    if (progressRaf) {
+      cancelAnimationFrame(progressRaf);
+      progressRaf = null;
     }
   }
 
@@ -191,9 +235,38 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // 3D Perspective Mouse Tilt Stage
+  var mediaStages = document.querySelectorAll('.hero-media-stage');
+  mediaStages.forEach(function (stage) {
+    var viewport = stage.querySelector('.hero-media-viewport');
+    if (!viewport || !window.matchMedia('(pointer: fine)').matches) return;
+    stage.addEventListener('mousemove', function (e) {
+      var rect = stage.getBoundingClientRect();
+      var nx = ((e.clientX - rect.left) / rect.width) - 0.5;
+      var ny = ((e.clientY - rect.top) / rect.height) - 0.5;
+      var rotX = -ny * 10;
+      var rotY = nx * 10;
+      viewport.style.transform = 'perspective(900px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) scale3d(1.02, 1.02, 1.02)';
+    });
+    stage.addEventListener('mouseleave', function () {
+      viewport.style.transform = '';
+    });
+  });
+
   if (heroContainer) {
     heroContainer.addEventListener('mouseenter', stopSlideShow);
     heroContainer.addEventListener('mouseleave', startSlideShow);
+
+    // Keyboard Arrow navigation
+    heroContainer.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') {
+        prevSlide();
+        startSlideShow();
+      } else if (e.key === 'ArrowRight') {
+        nextSlide();
+        startSlideShow();
+      }
+    });
 
     // Touch swipe support for mobile
     var touchStartX = 0;
