@@ -292,13 +292,12 @@ $arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" strok
 			<div class="hx-deck" data-hx-deck>
 				<?php foreach ( $hx_slides as $i => $s ) : ?>
 					<figure class="hx-deck-card" data-hx-card="<?php echo esc_attr( $i ); ?>" data-pos="<?php echo esc_attr( $i ); ?>">
-						<span class="hx-deck-tape" aria-hidden="true"></span>
 						<span class="hx-deck-stamp"><?php echo esc_html( $s['meta'] ); ?></span>
 						<img src="<?php echo esc_url( $s['img'] ); ?>" alt="<?php echo esc_attr( $s['label'] ); ?>"<?php echo 0 === $i ? ' fetchpriority="high"' : ' loading="lazy"'; ?>>
 						<figcaption>
 							<span><?php echo esc_html( sprintf( '%02d', $i + 1 ) ); ?></span>
 							<strong><?php echo esc_html( $s['label'] ); ?></strong>
-							<em><?php esc_html_e( 'Tap to cycle', 'mobile-pasal' ); ?> &#8635;</em>
+							<em><?php esc_html_e( 'Next view', 'mobile-pasal' ); ?> &rarr;</em>
 						</figcaption>
 					</figure>
 				<?php endforeach; ?>
@@ -324,20 +323,11 @@ $arrow_icon = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" strok
 		</div>
 	</div>
 
-	<div class="hx-ticker-stack" aria-hidden="true">
-		<div class="hx-ticker hx-ticker-lime">
-			<div class="hx-ticker-track is-reverse">
-				<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
-					<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
-				<?php endforeach; endfor; ?>
-			</div>
-		</div>
-		<div class="hx-ticker">
-			<div class="hx-ticker-track">
-				<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
-					<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
-				<?php endforeach; endfor; ?>
-			</div>
+	<div class="hx-ticker" aria-hidden="true">
+		<div class="hx-ticker-track">
+			<?php for ( $loop = 0; $loop < 2; $loop++ ) : foreach ( $hx_ticker as $t ) : ?>
+				<span class="hx-ticker-item"><i></i><?php echo esc_html( $t ); ?></span>
+			<?php endforeach; endfor; ?>
 		</div>
 	</div>
 </section>
