@@ -52,48 +52,52 @@ $shop_desc  = mp_opt( 'shop_hero_desc', 'Discover Gulariya\'s largest verified i
 				<div class="hero-spotlight-card">
 					<div class="spotlight-top-bar">
 						<div class="spotlight-title-row">
-							<span class="spotlight-badge"><?php esc_html_e( 'Showroom Live Inventory', 'mobile-pasal' ); ?></span>
+							<span class="spotlight-badge"><?php echo esc_html( mp_opt( 'shop_spotlight_badge', 'Showroom Live Inventory' ) ); ?></span>
 						</div>
-						<small style="color: var(--text-muted); font-weight: 700;"><?php esc_html_e( 'Gulariya Counter', 'mobile-pasal' ); ?></small>
+						<small style="color: var(--text-muted); font-weight: 700;"><?php echo esc_html( mp_opt( 'shop_spotlight_subtitle', 'Gulariya Counter' ) ); ?></small>
 					</div>
 
 					<div class="spotlight-metric-list">
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-								<?php esc_html_e( 'NTA Registration', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'shop_spotlight_m1_label', 'NTA Registration' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( '100% Verified Bill', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m1_val', '100% Verified Bill' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-								<?php esc_html_e( 'Data Migration', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'shop_spotlight_m2_label', 'Data Migration' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( 'FREE Walk-In Setup', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m2_val', 'FREE Walk-In Setup' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-								<?php esc_html_e( 'Old Device Trade-In', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'shop_spotlight_m3_label', 'Old Device Trade-In' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( 'Instant Valuation', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m3_val', 'Instant Valuation' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-								<?php esc_html_e( 'Top Flagships', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'shop_spotlight_m4_label', 'Top Flagships' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( 'In Stock Today', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m4_val', 'In Stock Today' ) ); ?></strong>
 						</div>
 					</div>
 
 					<div class="spotlight-tags-row">
-						<span class="spotlight-tag-pill">Apple iPhone</span>
-						<span class="spotlight-tag-pill">Samsung Galaxy</span>
-						<span class="spotlight-tag-pill">Google Pixel</span>
-						<span class="spotlight-tag-pill">OnePlus</span>
-						<span class="spotlight-tag-pill">Xiaomi</span>
+						<?php
+						$shop_tags_str = mp_opt( 'shop_spotlight_tags', 'Apple iPhone, Samsung Galaxy, Google Pixel, OnePlus, Xiaomi' );
+						$shop_tags     = array_map( 'trim', explode( ',', $shop_tags_str ) );
+						foreach ( $shop_tags as $s_tag ) :
+							if ( ! empty( $s_tag ) ) : ?>
+								<span class="spotlight-tag-pill"><?php echo esc_html( $s_tag ); ?></span>
+							<?php endif;
+						endforeach;
+						?>
 					</div>
 
 					<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, handset stock ra rate barema bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">

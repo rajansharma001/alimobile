@@ -28,8 +28,8 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
 
           <h1 class="page-hero-title">
             <?php
-            /* translators: %s: search query. */
-            printf( esc_html__( 'Search: %s', 'mobile-pasal' ), '<span class="text-gradient">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
+            $search_title_fmt = mp_opt( 'search_results_title', 'Search: %s' );
+            printf( esc_html( $search_title_fmt ), '<span class="text-gradient">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
             ?>
           </h1>
           <p class="page-hero-desc">
@@ -147,13 +147,13 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
 
       <?php else : ?>
         <div class="empty-results-box" style="text-align: center; padding: 60px 20px;">
-          <h2 style="font-size: 1.5rem; margin-bottom: 12px;"><?php esc_html_e( 'No Matches Found', 'mobile-pasal' ); ?></h2>
+          <h2 style="font-size: 1.5rem; margin-bottom: 12px;"><?php echo esc_html( mp_opt( 'search_empty_title', 'No Matches Found' ) ); ?></h2>
           <p style="color: var(--text-muted); margin-bottom: 24px;">
-            <?php esc_html_e( 'We couldn\'t find anything matching your search term. Feel free to browse our full showroom catalog or reach out on WhatsApp.', 'mobile-pasal' ); ?>
+            <?php echo nl2br( esc_html( mp_opt( 'search_empty_desc', 'We couldn\'t find anything matching your search term. Feel free to browse our full showroom catalog or reach out on WhatsApp.' ) ) ); ?>
           </p>
           <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><?php esc_html_e( 'Showroom Catalog', 'mobile-pasal' ); ?></a>
-            <a href="https://wa.me/<?php echo esc_attr( $wa_number ); ?>" target="_blank" rel="noopener" class="btn btn-whatsapp"><?php esc_html_e( 'Ask on WhatsApp', 'mobile-pasal' ); ?></a>
+            <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="btn btn-primary"><?php echo esc_html( mp_opt( 'search_btn_catalog', 'Showroom Catalog' ) ); ?></a>
+            <a href="https://wa.me/<?php echo esc_attr( $wa_number ); ?>" target="_blank" rel="noopener" class="btn btn-whatsapp"><?php echo esc_html( mp_opt( 'search_btn_whatsapp', 'Ask on WhatsApp' ) ); ?></a>
           </div>
         </div>
       <?php endif; ?>

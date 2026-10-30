@@ -60,39 +60,39 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 				<div class="hero-spotlight-card">
 					<div class="spotlight-top-bar">
 						<div class="spotlight-title-row">
-							<span class="spotlight-badge"><?php esc_html_e( 'Heritage & Trust', 'mobile-pasal' ); ?></span>
+							<span class="spotlight-badge"><?php echo esc_html( mp_opt( 'about_spotlight_badge', 'Heritage & Trust' ) ); ?></span>
 						</div>
-						<small style="color: var(--text-muted); font-weight: 700;"><?php esc_html_e( 'Since 2014', 'mobile-pasal' ); ?></small>
+						<small style="color: var(--text-muted); font-weight: 700;"><?php echo esc_html( mp_opt( 'about_spotlight_year', 'Since 2014' ) ); ?></small>
 					</div>
 
 					<div class="spotlight-metric-list">
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-								<?php esc_html_e( 'Operational Heritage', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'about_spotlight_m1_label', 'Operational Heritage' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( '10+ Years in Bardiya', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'about_spotlight_m1_val', '10+ Years in Bardiya' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-								<?php esc_html_e( 'Restored Handsets', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'about_spotlight_m2_label', 'Restored Handsets' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( '15,000+ Devices', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'about_spotlight_m2_val', '15,000+ Devices' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-								<?php esc_html_e( 'Data Privacy Policy', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'about_spotlight_m3_label', 'Data Privacy Policy' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( '100% Confidential', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'about_spotlight_m3_val', '100% Confidential' ) ); ?></strong>
 						</div>
 						<div class="spotlight-metric-item">
 							<span>
 								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-								<?php esc_html_e( 'Central Location', 'mobile-pasal' ); ?>
+								<?php echo esc_html( mp_opt( 'about_spotlight_m4_label', 'Central Location' ) ); ?>
 							</span>
-							<strong><?php esc_html_e( 'Ji. Pra. Ka. Chowk', 'mobile-pasal' ); ?></strong>
+							<strong><?php echo esc_html( mp_opt( 'about_spotlight_m4_val', 'Ji. Pra. Ka. Chowk' ) ); ?></strong>
 						</div>
 					</div>
 
@@ -107,19 +107,19 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 		<div class="page-hero-ribbon fade-up">
 			<div class="hero-ribbon-item">
 				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-				<span><?php esc_html_e( 'Cleanroom Bench Tooling', 'mobile-pasal' ); ?></span>
+				<span><?php echo esc_html( mp_opt( 'about_ribbon_1', 'Cleanroom Bench Tooling' ) ); ?></span>
 			</div>
 			<div class="hero-ribbon-item">
 				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-				<span><?php esc_html_e( 'On-the-Spot Diagnostics', 'mobile-pasal' ); ?></span>
+				<span><?php echo esc_html( mp_opt( 'about_ribbon_2', 'On-the-Spot Diagnostics' ) ); ?></span>
 			</div>
 			<div class="hero-ribbon-item">
 				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-				<span><?php esc_html_e( 'Certified OEM-Grade Parts', 'mobile-pasal' ); ?></span>
+				<span><?php echo esc_html( mp_opt( 'about_ribbon_3', 'Certified OEM-Grade Parts' ) ); ?></span>
 			</div>
 			<div class="hero-ribbon-item">
 				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path></svg>
-				<span><?php esc_html_e( '90-Day Testing Warranty', 'mobile-pasal' ); ?></span>
+				<span><?php echo esc_html( mp_opt( 'about_ribbon_4', '90-Day Testing Warranty' ) ); ?></span>
 			</div>
 		</div>
 	</div>
@@ -131,13 +131,13 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 		<div class="about-story-grid fade-up">
 			<!-- Story Content -->
 			<div class="about-story-content">
-				<span class="sec-kicker"><?php esc_html_e( 'Our Heritage', 'mobile-pasal' ); ?></span>
-				<h2><?php esc_html_e( 'Built on Precision, Honesty & Local Trust', 'mobile-pasal' ); ?></h2>
+				<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_story_kicker', 'Our Heritage' ) ); ?></span>
+				<h2><?php echo esc_html( mp_opt( 'about_story_head', 'Built on Genuine Handsets & Microscope Precision' ) ); ?></h2>
 				<p style="color: var(--text-body); font-size: 1.02rem; line-height: 1.7; margin-bottom: 16px;">
-					<?php printf( esc_html__( 'Located centrally at %1$s, Ali Mobile Center & Apple Fix started as a focused electronics repair bench over a decade ago. As smartphones transformed into modern pocket computers holding people’s livelihoods, banking, and precious memories, we invested heavily into specialized micro-soldering equipment, cleanroom work surfaces, and genuine manufacturer supply channels.', 'mobile-pasal' ), '<strong>Ji. Pra. Ka. Chowk, Gulariya</strong>' ); ?>
+					<?php echo nl2br( esc_html( mp_opt( 'about_story_p1', 'Ali Mobile Center was founded with a singular conviction: residents of Gulariya and wider Bardiya should not have to compromise on smartphone authenticity or travel 40km to Nepalgunj for skilled iPhone repairs. From day one, every handset on our shelves is 100% NTA approved with an official VAT bill.' ) ) ); ?>
 				</p>
 				<p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 24px;">
-					<?php esc_html_e( 'Today, we operate Bardiya\'s premier dedicated Apple Fix laboratory alongside our official smartphone showroom. We take pride in diagnosing problems right in front of you, quoting fair prices before taking apart a device, and safeguarding customer privacy above all else.', 'mobile-pasal' ); ?>
+					<?php echo nl2br( esc_html( mp_opt( 'about_story_p2', 'Over eight years of service, we invested in German stereomicroscopes, programmable thermal rework stations, and ultrasonic liquid cleaning baths. Today, whether you need a sealed iPhone 16 Pro Max or precision BGA micro-soldering, our counter provides five-star reliability.' ) ) ); ?>
 				</p>
 
 				<!-- Stats Dock -->
@@ -163,7 +163,13 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 
 			<!-- Framed Workbench Media -->
 			<div class="about-media-frame">
-				<img src="<?php echo esc_url( MP_THEME_URI . '/assets/images/apple-fix-bench.jpg' ); ?>" alt="<?php esc_attr_e( 'Ali Mobile Apple Fix Workbench in Gulariya', 'mobile-pasal' ); ?>">
+				<?php 
+				$story_img = mp_opt( 'about_story_image' );
+				if ( empty( $story_img ) ) {
+					$story_img = MP_THEME_URI . '/assets/images/apple-fix-bench.jpg';
+				}
+				?>
+				<img src="<?php echo esc_url( $story_img ); ?>" alt="<?php esc_attr_e( 'Ali Mobile Apple Fix Workbench in Gulariya', 'mobile-pasal' ); ?>">
 				<div class="about-image-overlay-card">
 					<div class="ai-badge-icon">
 						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
@@ -182,9 +188,9 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 <section class="lab-standards-section">
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
-			<span class="sec-kicker"><?php esc_html_e( 'Cleanroom Tooling', 'mobile-pasal' ); ?></span>
-			<h2><?php esc_html_e( 'Professional Hardware Equipment on Our Bench', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'We invest in industrial-grade diagnostic equipment so your premium smartphone is treated with laboratory care.', 'mobile-pasal' ); ?></p>
+			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_tooling_kicker', 'Cleanroom Tooling' ) ); ?></span>
+			<h2><?php echo esc_html( mp_opt( 'about_tooling_head', 'Professional Hardware Equipment on Our Bench' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'about_tooling_desc', 'We invest in industrial-grade diagnostic equipment so your premium smartphone is treated with laboratory care.' ) ); ?></p>
 		</div>
 
 		<div class="services-grid fade-up">
@@ -192,24 +198,24 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
 				</div>
-				<h3><?php esc_html_e( 'Stereo Optical Microscope', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( '45x continuous zoom trinocular microscope for precision inspection of 0201 SMD resistors, broken circuit jumper wires, and logic board BGA pads.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_tool1_title', 'Stereo Optical Microscope' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_tool1_desc', '45x continuous zoom trinocular microscope for precision inspection of 0201 SMD resistors, broken circuit jumper wires, and logic board BGA pads.' ) ); ?></p>
 			</div>
 
 			<div class="service-card">
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
 				</div>
-				<h3><?php esc_html_e( 'Digital Ultrasonic Sonicator', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'Multi-frequency heated ultrasonic chemical bath specifically designed to dislodge liquid oxidation and electrolytic crystals from water-damaged logic boards.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_tool2_title', 'Digital Ultrasonic Sonicator' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_tool2_desc', 'Multi-frequency heated ultrasonic chemical bath specifically designed to dislodge liquid oxidation and electrolytic crystals from water-damaged logic boards.' ) ); ?></p>
 			</div>
 
 			<div class="service-card">
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
 				</div>
-				<h3><?php esc_html_e( 'Programmable Rework & Micro-Pencil', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'Micro-soldering station with rapid temperature recovery, anti-static ESD earthing, and custom nozzles to protect adjacent motherboard IC components.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_tool3_title', 'Programmable Rework & Micro-Pencil' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_tool3_desc', 'Micro-soldering station with rapid temperature recovery, anti-static ESD earthing, and custom nozzles to protect adjacent motherboard IC components.' ) ); ?></p>
 			</div>
 		</div>
 	</div>
@@ -219,34 +225,34 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 <section class="commitments-section">
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
-			<span class="sec-kicker"><?php esc_html_e( 'Integrity First', 'mobile-pasal' ); ?></span>
-			<h2><?php esc_html_e( 'Our 4 Core Counter Commitments', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'How we do business every day at Ji. Pra. Ka. Chowk.', 'mobile-pasal' ); ?></p>
+			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_commitments_kicker', 'Integrity First' ) ); ?></span>
+			<h2><?php echo esc_html( mp_opt( 'about_commitments_head', 'Our 4 Core Counter Commitments' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'about_commitments_desc', 'How we do business every day at Ji. Pra. Ka. Chowk.' ) ); ?></p>
 		</div>
 
 		<div class="steps-flow-grid fade-up">
 			<div class="flow-step-card">
 				<div class="flow-step-num">01</div>
-				<h3><?php esc_html_e( '100% Data Privacy', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'We respect customer privacy. Technicians do not browse personal photos, chat apps, or notes. We test hardware using dedicated hardware diagnostics.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_commit1_title', '100% Data Privacy' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_commit1_desc', 'We respect customer privacy. Technicians do not browse personal photos, chat apps, or notes. We test hardware using dedicated hardware diagnostics.' ) ); ?></p>
 			</div>
 
 			<div class="flow-step-card">
 				<div class="flow-step-num">02</div>
-				<h3><?php esc_html_e( 'Zero Hidden Extra Fees', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'Every quote is provided upfront. If unexpected secondary faults are found during repair, we call and obtain your permission before proceeding.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_commit2_title', 'Zero Hidden Extra Fees' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_commit2_desc', 'Every quote is provided upfront. If unexpected secondary faults are found during repair, we call and obtain your permission before proceeding.' ) ); ?></p>
 			</div>
 
 			<div class="flow-step-card">
 				<div class="flow-step-num">03</div>
-				<h3><?php esc_html_e( 'No Counterfeits Sold as OEM', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'We clearly distinguish between original-grade parts and value options. We never sell low-grade copy screens claiming they are genuine displays.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_commit3_title', 'No Counterfeits Sold as OEM' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_commit3_desc', 'We clearly distinguish between original-grade parts and value options. We never sell low-grade copy screens claiming they are genuine displays.' ) ); ?></p>
 			</div>
 
 			<div class="flow-step-card">
 				<div class="flow-step-num">04</div>
-				<h3><?php esc_html_e( 'Safe Battery Recycling', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'Swollen and depleted lithium-ion batteries are isolated and disposed of responsibly to prevent toxic chemical leaching and fire hazards.', 'mobile-pasal' ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_commit4_title', 'Safe Battery Recycling' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_commit4_desc', 'Swollen and depleted lithium-ion batteries are isolated and disposed of responsibly to prevent toxic chemical leaching and fire hazards.' ) ); ?></p>
 			</div>
 		</div>
 	</div>

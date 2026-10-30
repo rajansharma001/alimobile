@@ -158,6 +158,17 @@ function mobile_pasal_options_defaults() {
 		'shop_hero_badge'              => 'Gulariya Verified Showroom',
 		'shop_hero_title'              => 'Official NTA Smartphones & Genuine Gear.',
 		'shop_hero_desc'               => 'Discover Gulariya\'s largest verified inventory of flagship handsets: Apple iPhone 16 Series, Samsung Galaxy S24 Ultra, Google Pixel 9, OnePlus 12, and Xiaomi 14. 100% genuine IMEI bill, warranty support, and free data setup.',
+		'shop_spotlight_badge'         => 'Showroom Live Inventory',
+		'shop_spotlight_subtitle'      => 'Gulariya Counter',
+		'shop_spotlight_m1_label'      => 'NTA Registration',
+		'shop_spotlight_m1_val'        => '100% Verified Bill',
+		'shop_spotlight_m2_label'      => 'Data Migration',
+		'shop_spotlight_m2_val'        => 'FREE Walk-In Setup',
+		'shop_spotlight_m3_label'      => 'Old Device Trade-In',
+		'shop_spotlight_m3_val'        => 'Instant Valuation',
+		'shop_spotlight_m4_label'      => 'Top Flagships',
+		'shop_spotlight_m4_val'        => 'In Stock Today',
+		'shop_spotlight_tags'          => 'Apple iPhone, Samsung Galaxy, Google Pixel, OnePlus, Xiaomi',
 		'assurance_kicker'             => 'Zero-Risk Purchase',
 		'assurance_title'              => 'The Ali Mobile Handset Assurance',
 		'assurance_subtitle'           => 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.',
@@ -178,6 +189,20 @@ function mobile_pasal_options_defaults() {
 		'services_hero_badge'          => 'Gulariya\'s Premier Mobile Clinic',
 		'services_hero_title'          => 'Apple Fix Lab & Precision Repairs',
 		'services_hero_desc'           => 'Component-level micro-soldering, true-tone OLED display calibrations, 0-cycle battery replacements, and ultrasonic liquid recovery performed live in Gulariya.',
+		'services_spotlight_badge'     => 'Bench Handover Desk',
+		'services_spotlight_sub'       => 'Gulariya-06',
+		'services_spotlight_m1_label'  => 'Walk-in Diagnosis',
+		'services_spotlight_m1_val'    => 'FREE (5-Min Check)',
+		'services_spotlight_m2_label'  => 'Average Turnaround',
+		'services_spotlight_m2_val'    => '30–45 Mins',
+		'services_spotlight_m3_label'  => 'Replacement Parts',
+		'services_spotlight_m3_val'    => '100% Certified Grade',
+		'services_spotlight_m4_label'  => 'Counter Warranty',
+		'services_spotlight_m4_val'    => '90 Days Testing Warranty',
+		'services_ribbon_1'            => 'Component-Level Micro-Soldering',
+		'services_ribbon_2'            => 'TrueTone & FaceID Transfer',
+		'services_ribbon_3'            => 'Ultrasonic Oxidation Bath',
+		'services_ribbon_4'            => 'Fast Express Counter Service',
 		'services_cta_title'           => 'Need an Urgent Screen, Battery, or Board Fix?',
 		'services_cta_desc'            => 'Bring your phone to our counter at Ji. Pra. Ka. Chowk or send your device fault on WhatsApp for instant evaluation.',
 		'services_warranty_badge'      => '90-Day Ali Mobile Cleanroom Warranty',
@@ -198,6 +223,21 @@ function mobile_pasal_options_defaults() {
 		'about_hero_badge'             => 'Serving Bardiya Since 2018',
 		'about_hero_title'             => 'The Story Behind Ali Mobile Center & Apple Fix',
 		'about_hero_desc'              => 'From a modest handset desk to Gulariya\'s premier smartphone showroom and precision electronics laboratory, built on trust, genuine billing, and skilled engineering.',
+		'about_spotlight_badge'        => 'Heritage & Trust',
+		'about_spotlight_year'         => 'Since 2014',
+		'about_spotlight_m1_label'     => 'Operational Heritage',
+		'about_spotlight_m1_val'       => '10+ Years in Bardiya',
+		'about_spotlight_m2_label'     => 'Restored Handsets',
+		'about_spotlight_m2_val'       => '15,000+ Devices',
+		'about_spotlight_m3_label'     => 'Data Privacy Policy',
+		'about_spotlight_m3_val'       => '100% Confidential',
+		'about_spotlight_m4_label'     => 'Central Location',
+		'about_spotlight_m4_val'       => 'Ji. Pra. Ka. Chowk',
+		'about_ribbon_1'               => 'Cleanroom Bench Tooling',
+		'about_ribbon_2'               => 'On-the-Spot Diagnostics',
+		'about_ribbon_3'               => 'Certified OEM-Grade Parts',
+		'about_ribbon_4'               => '90-Day Testing Warranty',
+		'about_story_kicker'           => 'Our Heritage',
 		'about_story_head'             => 'Built on Genuine Handsets & Microscope Precision',
 		'about_story_p1'               => 'Ali Mobile Center was founded with a singular conviction: residents of Gulariya and wider Bardiya should not have to compromise on smartphone authenticity or travel 40km to Nepalgunj for skilled iPhone repairs. From day one, every handset on our shelves is 100% NTA approved with an official VAT bill.',
 		'about_story_p2'               => 'Over eight years of service, we invested in German stereomicroscopes, programmable thermal rework stations, and ultrasonic liquid cleaning baths. Today, whether you need a sealed iPhone 16 Pro Max or precision BGA micro-soldering, our counter provides five-star reliability.',
@@ -211,11 +251,61 @@ function mobile_pasal_options_defaults() {
 		'about_stat4_num'              => '90 Days',
 		'about_stat4_label'            => 'Repair Warranty Support',
 		'about_story_image'            => $uri . '/assets/images/hero-repair-lab.jpg',
+		'about_tooling_kicker'         => 'Cleanroom Tooling',
+		'about_tooling_head'           => 'Professional Hardware Equipment on Our Bench',
+		'about_tooling_desc'           => 'We invest in industrial-grade diagnostic equipment so your premium smartphone is treated with laboratory care.',
+		'about_tool1_title'            => 'Stereo Optical Microscope',
+		'about_tool1_desc'             => '45x continuous zoom trinocular microscope for precision inspection of 0201 SMD resistors, broken circuit jumper wires, and logic board BGA pads.',
+		'about_tool2_title'            => 'Digital Ultrasonic Sonicator',
+		'about_tool2_desc'             => 'Multi-frequency heated ultrasonic chemical bath specifically designed to dislodge liquid oxidation and electrolytic crystals from water-damaged logic boards.',
+		'about_tool3_title'            => 'Programmable Rework & Micro-Pencil',
+		'about_tool3_desc'             => 'Micro-soldering station with rapid temperature recovery, anti-static ESD earthing, and custom nozzles to protect adjacent motherboard IC components.',
+		'about_commitments_kicker'     => 'Integrity First',
+		'about_commitments_head'       => 'Our 4 Core Counter Commitments',
+		'about_commitments_desc'       => 'How we do business every day at Ji. Pra. Ka. Chowk.',
+		'about_commit1_title'          => '100% Data Privacy',
+		'about_commit1_desc'           => 'We respect customer privacy. Technicians do not browse personal photos, chat apps, or notes. We test hardware using dedicated hardware diagnostics.',
+		'about_commit2_title'          => 'Zero Hidden Extra Fees',
+		'about_commit2_desc'           => 'Every quote is provided upfront. If unexpected secondary faults are found during repair, we call and obtain your permission before proceeding.',
+		'about_commit3_title'          => 'No Counterfeits Sold as OEM',
+		'about_commit3_desc'           => 'We clearly distinguish between original-grade parts and value options. We never sell low-grade copy screens claiming they are genuine displays.',
+		'about_commit4_title'          => 'Safe Battery Recycling',
+		'about_commit4_desc'           => 'Swollen and depleted lithium-ion batteries are isolated and disposed of responsibly to prevent toxic chemical leaching and fire hazards.',
 
 		// ── 10. Contact Page & Direct Helplines ──
 		'contact_hero_badge'           => 'Gulariya Counter & Lab',
 		'contact_hero_title'           => 'Visit Our Counter or Send a Direct Inquiry.',
 		'contact_hero_desc'            => 'Whether you are looking to purchase a new flagship handset, need an urgent screen replacement, or want trade-in pricing, visit our counter at Ji. Pra. Ka. Chowk.',
+		'contact_spotlight_badge'      => 'Gulariya Counter Desk',
+		'contact_spotlight_time'       => '9 AM – 8 PM',
+		'contact_spotlight_m1_label'   => 'Direct Hotline',
+		'contact_spotlight_m1_val'     => '+977 9804530786',
+		'contact_spotlight_m2_label'   => 'Exact Landmark',
+		'contact_spotlight_m2_val'     => 'Ji. Pra. Ka. Chowk',
+		'contact_spotlight_m3_label'   => 'Walk-in Diagnosis',
+		'contact_spotlight_m3_val'     => '5-Minute Free Check',
+		'contact_spotlight_m4_label'   => 'Customer Parking',
+		'contact_spotlight_m4_val'     => 'Easy Front Access',
+		'contact_ribbon_1'             => 'Direct WhatsApp & Call Line',
+		'contact_ribbon_2'             => 'Quick 5-Minute WhatsApp Quotes',
+		'contact_ribbon_3'             => 'Opposite District Admin Office',
+		'contact_ribbon_4'             => 'Saturday Open • 9 AM – 8 PM',
+		'contact_form_title'           => 'Direct Consultation & Repair Inquiry',
+		'contact_form_subtitle'        => 'Fill out your device and symptom details below. Your request will automatically compile and dispatch directly to our technician on WhatsApp.',
+		'contact_desk_title'           => 'Showroom & Lab Counter',
+		'contact_desk_desc'            => 'Walk-in customer counter with on-site technician workbench. Free diagnostic checks in 5 minutes.',
+		'contact_map_kicker'           => 'Navigation & Map',
+		'contact_map_title'            => 'Locate Us at Ji. Pra. Ka. Chowk',
+		'contact_map_desc'             => 'Easily accessible from all major junctions in Gulariya and surrounding Bardiya municipal areas.',
+		'contact_landmarks_kicker'     => 'Arrival & Transit',
+		'contact_landmarks_title'      => 'Finding Our Store Counter',
+		'contact_landmarks_desc'       => 'Key landmarks and convenient parking tips for your visit to Ji. Pra. Ka. Chowk.',
+		'contact_lm1_title'            => 'Prominent Landmark',
+		'contact_lm1_desc'             => 'Situated directly at Ji. Pra. Ka. Chowk (District Administration Office junction), opposite the main arterial road in Gulariya Bazar.',
+		'contact_lm2_title'            => 'Easy Front Parking',
+		'contact_lm2_desc'             => 'Ample dedicated front space for motorcycle and scooter parking, as well as easy pull-up access for cars while dropping off devices.',
+		'contact_lm3_title'            => '2 Mins from Bus Stand',
+		'contact_lm3_desc'             => 'Only a 2-minute walk from Gulariya Main Bus Stand & Birendra Chowk. Direct local autos available from Badhaiyatal, Madhuwan, and Rajapur.',
 		'contact_card1_title'          => 'Voice Call / Counter Desk',
 		'contact_card1_val'            => '+977 9804530786',
 		'contact_card1_action'         => 'Call Now',
@@ -292,7 +382,20 @@ function mobile_pasal_options_defaults() {
 		'aeo_sameas_urls'              => 'https://www.facebook.com/alimobilecenter, https://www.instagram.com/alimobilecenter, https://www.tiktok.com/@alimobilecenter, https://wa.me/9779804530786',
 		'aeo_enable_llms_txt'          => '1',
 
-		// ── 16. Custom Code ──
+		// ── 16. 404 Error & Search Results Pages ──
+		'error404_code'                => '404',
+		'error404_title'               => 'Device Page Not Found',
+		'error404_desc'                => 'The handset, repair service, or store page you are looking for may have moved, been renamed, or is temporarily out of stock.',
+		'error404_btn1_text'           => 'Back to Home',
+		'error404_btn2_text'           => 'Browse Handsets',
+		'error404_btn3_text'           => 'Ask Counter Help',
+		'search_results_title'         => 'Search: %s',
+		'search_empty_title'           => 'No Matches Found',
+		'search_empty_desc'            => 'We couldn\'t find anything matching your search term. Feel free to browse our full showroom catalog or reach out on WhatsApp.',
+		'search_btn_catalog'           => 'Showroom Catalog',
+		'search_btn_whatsapp'          => 'Ask on WhatsApp',
+
+		// ── 17. Custom Code ──
 		'custom_css'                   => '',
 		'custom_header_scripts'        => '',
 		'custom_footer_scripts'        => '',
@@ -684,18 +787,28 @@ function mobile_pasal_options_render_dashboard() {
 			'group_title' => __( 'Heritage & About Us', 'mobile-pasal' ),
 			'icon'        => 'fa-book-open',
 			'items'       => array(
-				'about_story_tab'     => array( 'label' => __( 'About Us Hero & Story', 'mobile-pasal' ), 'icon' => 'fa-book-open' ),
-				'about_stats_tab'     => array( 'label' => __( '4 Milestone Stat Counters', 'mobile-pasal' ), 'icon' => 'fa-chart-line' ),
-				'about_cleanroom_tab' => array( 'label' => __( 'Cleanroom Tooling & Standards', 'mobile-pasal' ), 'icon' => 'fa-wrench' ),
+				'about_story_tab'       => array( 'label' => __( 'About Us Hero & Story', 'mobile-pasal' ), 'icon' => 'fa-book-open' ),
+				'about_stats_tab'       => array( 'label' => __( '4 Milestone Stat Counters', 'mobile-pasal' ), 'icon' => 'fa-chart-line' ),
+				'about_cleanroom_tab'   => array( 'label' => __( 'Cleanroom Tooling & Standards', 'mobile-pasal' ), 'icon' => 'fa-wrench' ),
+				'about_commitments_tab' => array( 'label' => __( '4 Core Commitments', 'mobile-pasal' ), 'icon' => 'fa-handshake-angle' ),
 			),
 		),
 		'contact_group' => array(
 			'group_title' => __( 'Contact & Location Desk', 'mobile-pasal' ),
 			'icon'        => 'fa-location-dot',
 			'items'       => array(
-				'contact_coords_tab' => array( 'label' => __( 'Contact Coordinates & Hours', 'mobile-pasal' ), 'icon' => 'fa-location-dot' ),
-				'contact_map_tab'    => array( 'label' => __( 'Direct Helplines & Map Embed', 'mobile-pasal' ), 'icon' => 'fa-map-location-dot' ),
-				'contact_inbox_tab'  => array( 'label' => __( 'Inquiries Inbox Manager', 'mobile-pasal' ), 'icon' => 'fa-inbox' ),
+				'contact_coords_tab'    => array( 'label' => __( 'Contact Coordinates & Hours', 'mobile-pasal' ), 'icon' => 'fa-location-dot' ),
+				'contact_map_tab'       => array( 'label' => __( 'Direct Helplines & Map Embed', 'mobile-pasal' ), 'icon' => 'fa-map-location-dot' ),
+				'contact_landmarks_tab' => array( 'label' => __( 'Arrival & Transit Guidance', 'mobile-pasal' ), 'icon' => 'fa-signs-post' ),
+				'contact_inbox_tab'     => array( 'label' => __( 'Inquiries Inbox Manager', 'mobile-pasal' ), 'icon' => 'fa-inbox' ),
+			),
+		),
+		'pages_group' => array(
+			'group_title' => __( '404 & Search Results', 'mobile-pasal' ),
+			'icon'        => 'fa-file-circle-question',
+			'items'       => array(
+				'error_404_tab'   => array( 'label' => __( '404 Device Not Found Page', 'mobile-pasal' ), 'icon' => 'fa-circle-exclamation' ),
+				'search_page_tab' => array( 'label' => __( 'Search Results & Fallbacks', 'mobile-pasal' ), 'icon' => 'fa-magnifying-glass' ),
 			),
 		),
 		'rank_group' => array(
@@ -1492,6 +1605,55 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-star"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Shop Spotlight Inventory Card (Right Column)', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Live counter inventory metrics and tag pills displayed beside the hero.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'shop_spotlight_badge', __( 'Card Badge', 'mobile-pasal' ), __( 'Default: Showroom Live Inventory' ) );
+										mp_render_field_text( 'shop_spotlight_subtitle', __( 'Location Subtitle', 'mobile-pasal' ), __( 'Default: Gulariya Counter' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'shop_spotlight_m1_label', __( 'Metric 1 Label', 'mobile-pasal' ), __( 'Default: NTA Registration' ) );
+										mp_render_field_text( 'shop_spotlight_m1_val', __( 'Metric 1 Value', 'mobile-pasal' ), __( 'Default: 100% Verified Bill' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'shop_spotlight_m2_label', __( 'Metric 2 Label', 'mobile-pasal' ), __( 'Default: Data Migration' ) );
+										mp_render_field_text( 'shop_spotlight_m2_val', __( 'Metric 2 Value', 'mobile-pasal' ), __( 'Default: FREE Walk-In Setup' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'shop_spotlight_m3_label', __( 'Metric 3 Label', 'mobile-pasal' ), __( 'Default: Old Device Trade-In' ) );
+										mp_render_field_text( 'shop_spotlight_m3_val', __( 'Metric 3 Value', 'mobile-pasal' ), __( 'Default: Instant Valuation' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'shop_spotlight_m4_label', __( 'Metric 4 Label', 'mobile-pasal' ), __( 'Default: Top Flagships' ) );
+										mp_render_field_text( 'shop_spotlight_m4_val', __( 'Metric 4 Value', 'mobile-pasal' ), __( 'Default: In Stock Today' ) );
+										?>
+									</div>
+									<?php
+									mp_render_field_text( 'shop_spotlight_tags', __( 'Brand Tag Pills (comma-separated)', 'mobile-pasal' ), __( 'Default: Apple iPhone, Samsung Galaxy, Google Pixel, OnePlus, Xiaomi' ) );
+									?>
+								</div>
+							</div>
+						</div>
+							</div>
+						</div>
 					</div>
 
 					<!-- 3.2 4 Zero-Risk Assurance Cards -->
@@ -1766,6 +1928,78 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_textarea( 'services_cta_desc', __( 'Repair Callout Banner Description', 'mobile-pasal' ), __( 'Default: Bring your phone to our counter at Ji. Pra. Ka. Chowk or send your device fault on WhatsApp...' ), 2 );
 									?>
 								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-microscope"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Services Spotlight Desk Card (Right Column)', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Bench metrics displayed beside the hero on /services.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_spotlight_badge', __( 'Card Badge', 'mobile-pasal' ), __( 'Default: Bench Handover Desk' ) );
+										mp_render_field_text( 'services_spotlight_sub', __( 'Location Subtitle', 'mobile-pasal' ), __( 'Default: Gulariya-06' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_spotlight_m1_label', __( 'Metric 1 Label', 'mobile-pasal' ), __( 'Default: Walk-in Diagnosis' ) );
+										mp_render_field_text( 'services_spotlight_m1_val', __( 'Metric 1 Value', 'mobile-pasal' ), __( 'Default: FREE (5-Min Check)' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_spotlight_m2_label', __( 'Metric 2 Label', 'mobile-pasal' ), __( 'Default: Average Turnaround' ) );
+										mp_render_field_text( 'services_spotlight_m2_val', __( 'Metric 2 Value', 'mobile-pasal' ), __( 'Default: 30–45 Mins' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_spotlight_m3_label', __( 'Metric 3 Label', 'mobile-pasal' ), __( 'Default: Replacement Parts' ) );
+										mp_render_field_text( 'services_spotlight_m3_val', __( 'Metric 3 Value', 'mobile-pasal' ), __( 'Default: 100% Certified Grade' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_spotlight_m4_label', __( 'Metric 4 Label', 'mobile-pasal' ), __( 'Default: Counter Warranty' ) );
+										mp_render_field_text( 'services_spotlight_m4_val', __( 'Metric 4 Value', 'mobile-pasal' ), __( 'Default: 90 Days Testing Warranty' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-ribbon"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Services Micro-Ribbon 4 Quick Features', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Horizontal banner icons and badges below hero.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_ribbon_1', __( 'Ribbon Item 1', 'mobile-pasal' ), __( 'Default: Component-Level Micro-Soldering' ) );
+										mp_render_field_text( 'services_ribbon_2', __( 'Ribbon Item 2', 'mobile-pasal' ), __( 'Default: TrueTone & FaceID Transfer' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'services_ribbon_3', __( 'Ribbon Item 3', 'mobile-pasal' ), __( 'Default: Ultrasonic Oxidation Bath' ) );
+										mp_render_field_text( 'services_ribbon_4', __( 'Ribbon Item 4', 'mobile-pasal' ), __( 'Default: Fast Express Counter Service' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
 							</div>
 						</div>
 					</div>
@@ -2064,6 +2298,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'about_hero_badge', __( 'About Hero Badge', 'mobile-pasal' ), __( 'Default: Serving Bardiya Since 2018' ) );
 									mp_render_field_text( 'about_hero_title', __( 'About Hero Title', 'mobile-pasal' ), __( 'Default: The Story Behind Ali Mobile Center & Apple Fix' ) );
 									mp_render_field_textarea( 'about_hero_desc', __( 'About Hero Subtitle', 'mobile-pasal' ), __( 'Default: From a modest handset desk to Gulariya\'s premier smartphone showroom...' ), 3 );
+									mp_render_field_text( 'about_story_kicker', __( 'Story Section Kicker', 'mobile-pasal' ), __( 'Default: Our Heritage' ) );
 									mp_render_field_text( 'about_story_head', __( 'Story Main Heading', 'mobile-pasal' ), __( 'Default: Built on Genuine Handsets & Microscope Precision' ) );
 									mp_render_field_textarea( 'about_story_p1', __( 'Story Paragraph 1', 'mobile-pasal' ), __( 'Foundational history in Gulariya...' ), 4 );
 									mp_render_field_textarea( 'about_story_p2', __( 'Story Paragraph 2', 'mobile-pasal' ), __( 'Investment in stereomicroscopes and cleanroom tools...' ), 4 );
@@ -2071,6 +2306,78 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_image( 'about_story_image', __( 'Story Lab Photo', 'mobile-pasal' ), __( 'Photo of technician workbench or showroom' ) );
 									?>
 								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-star"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'About Spotlight Heritage Card (Right Column)', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Spotlight card displayed in hero on /about.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_spotlight_badge', __( 'Card Badge', 'mobile-pasal' ), __( 'Default: Heritage & Trust' ) );
+										mp_render_field_text( 'about_spotlight_year', __( 'Operational Year', 'mobile-pasal' ), __( 'Default: Since 2014' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_spotlight_m1_label', __( 'Metric 1 Label', 'mobile-pasal' ), __( 'Default: Operational Heritage' ) );
+										mp_render_field_text( 'about_spotlight_m1_val', __( 'Metric 1 Value', 'mobile-pasal' ), __( 'Default: 10+ Years in Bardiya' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_spotlight_m2_label', __( 'Metric 2 Label', 'mobile-pasal' ), __( 'Default: Restored Handsets' ) );
+										mp_render_field_text( 'about_spotlight_m2_val', __( 'Metric 2 Value', 'mobile-pasal' ), __( 'Default: 15,000+ Devices' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_spotlight_m3_label', __( 'Metric 3 Label', 'mobile-pasal' ), __( 'Default: Data Privacy Policy' ) );
+										mp_render_field_text( 'about_spotlight_m3_val', __( 'Metric 3 Value', 'mobile-pasal' ), __( 'Default: 100% Confidential' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_spotlight_m4_label', __( 'Metric 4 Label', 'mobile-pasal' ), __( 'Default: Central Location' ) );
+										mp_render_field_text( 'about_spotlight_m4_val', __( 'Metric 4 Value', 'mobile-pasal' ), __( 'Default: Ji. Pra. Ka. Chowk' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-ribbon"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'About Micro-Ribbon 4 Feature Badges', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Horizontal banner icons and badges below hero.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_ribbon_1', __( 'Ribbon Item 1', 'mobile-pasal' ), __( 'Default: Cleanroom Bench Tooling' ) );
+										mp_render_field_text( 'about_ribbon_2', __( 'Ribbon Item 2', 'mobile-pasal' ), __( 'Default: On-the-Spot Diagnostics' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_ribbon_3', __( 'Ribbon Item 3', 'mobile-pasal' ), __( 'Default: Certified OEM-Grade Parts' ) );
+										mp_render_field_text( 'about_ribbon_4', __( 'Ribbon Item 4', 'mobile-pasal' ), __( 'Default: 90-Day Testing Warranty' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
 							</div>
 						</div>
 					</div>
@@ -2142,10 +2449,111 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card-body">
 								<div class="bopt-field-grid">
 									<?php
-									mp_render_field_text( 'about_tooling_head', __( 'Cleanroom Tooling Heading', 'mobile-pasal' ), __( 'Default: Laboratory Grade Equipment on Our Bench' ) );
+									mp_render_field_text( 'about_tooling_kicker', __( 'Section Kicker', 'mobile-pasal' ), __( 'Default: Cleanroom Tooling' ) );
+									mp_render_field_text( 'about_tooling_head', __( 'Cleanroom Tooling Heading', 'mobile-pasal' ), __( 'Default: Professional Hardware Equipment on Our Bench' ) );
 									mp_render_field_textarea( 'about_tooling_desc', __( 'Cleanroom Tooling Description', 'mobile-pasal' ), __( 'Details regarding stereo zoom microscope, anti-static thermal stations, and genuine original components.' ), 3 );
 									?>
 								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-microscope"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( '3 Cleanroom Diagnostic & Repair Tools', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Cards displayed on /about detailing workbench hardware.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_tool1_title', __( 'Tool 1 Title', 'mobile-pasal' ), __( 'Default: Stereo Optical Microscope' ) );
+										mp_render_field_textarea( 'about_tool1_desc', __( 'Tool 1 Description', 'mobile-pasal' ), __( 'Microscope zoom and board inspection capabilities' ), 2 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_tool2_title', __( 'Tool 2 Title', 'mobile-pasal' ), __( 'Default: Digital Ultrasonic Sonicator' ) );
+										mp_render_field_textarea( 'about_tool2_desc', __( 'Tool 2 Description', 'mobile-pasal' ), __( 'Ultrasonic bath for liquid damage cleaning' ), 2 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_tool3_title', __( 'Tool 3 Title', 'mobile-pasal' ), __( 'Default: Programmable Rework & Micro-Pencil' ) );
+										mp_render_field_textarea( 'about_tool3_desc', __( 'Tool 3 Description', 'mobile-pasal' ), __( 'Soldering station and heat recovery' ), 2 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- 5.4 4 Core Commitments -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'about_commitments_tab' ? 'is-active' : ''; ?>" id="tab-pane-about_commitments_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( '4 Core Counter Commitments & Customer Guarantees', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Manage the 4 trust guarantees displayed on the About page (Privacy, Zero Hidden Fees, Genuine OEM, Battery Recycling).', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Commitments Section Header', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Headers for the 4 core guarantees section.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'about_commitments_kicker', __( 'Section Kicker', 'mobile-pasal' ), __( 'Default: Integrity First' ) );
+									mp_render_field_text( 'about_commitments_head', __( 'Main Heading', 'mobile-pasal' ), __( 'Default: Our 4 Core Counter Commitments' ) );
+									mp_render_field_textarea( 'about_commitments_desc', __( 'Subtitle / Description', 'mobile-pasal' ), __( 'Default: How we do business every day at Ji. Pra. Ka. Chowk.' ), 2 );
+									?>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-heart"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'The 4 Commitment Cards', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Detailed guarantees that build trust with customers.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_commit1_title', __( 'Commitment 1 Title', 'mobile-pasal' ), __( 'Default: 100% Data Privacy' ) );
+										mp_render_field_textarea( 'about_commit1_desc', __( 'Commitment 1 Description', 'mobile-pasal' ), __( 'Customer data and private photo protection policy' ), 3 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_commit2_title', __( 'Commitment 2 Title', 'mobile-pasal' ), __( 'Default: Zero Hidden Extra Fees' ) );
+										mp_render_field_textarea( 'about_commit2_desc', __( 'Commitment 2 Description', 'mobile-pasal' ), __( 'Transparent pricing and phone call permission policy' ), 3 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_commit3_title', __( 'Commitment 3 Title', 'mobile-pasal' ), __( 'Default: No Counterfeits Sold as OEM' ) );
+										mp_render_field_textarea( 'about_commit3_desc', __( 'Commitment 3 Description', 'mobile-pasal' ), __( 'Clear distinction between OEM and copy parts' ), 3 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'about_commit4_title', __( 'Commitment 4 Title', 'mobile-pasal' ), __( 'Default: Safe Battery Recycling' ) );
+										mp_render_field_textarea( 'about_commit4_desc', __( 'Commitment 4 Description', 'mobile-pasal' ), __( 'Ecological and fire safety disposal of swollen lithium batteries' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 							</div>
 						</div>
 					</div>
@@ -2182,6 +2590,98 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'counter_hours', __( 'Official Counter Hours', 'mobile-pasal' ), __( 'Default: Sun–Fri: 9:00 AM – 8:00 PM | Sat: Open' ) );
 									?>
 								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-star"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Contact Spotlight Desk Card (Right Column)', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Quick hotline & landmark card beside hero on /contact.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_spotlight_badge', __( 'Card Badge', 'mobile-pasal' ), __( 'Default: Gulariya Counter Desk' ) );
+										mp_render_field_text( 'contact_spotlight_time', __( 'Operating Time', 'mobile-pasal' ), __( 'Default: 9 AM – 8 PM' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_spotlight_m1_label', __( 'Metric 1 Label', 'mobile-pasal' ), __( 'Default: Direct Hotline' ) );
+										mp_render_field_text( 'contact_spotlight_m1_val', __( 'Metric 1 Value', 'mobile-pasal' ), __( 'Default: +977 9804530786' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_spotlight_m2_label', __( 'Metric 2 Label', 'mobile-pasal' ), __( 'Default: Exact Landmark' ) );
+										mp_render_field_text( 'contact_spotlight_m2_val', __( 'Metric 2 Value', 'mobile-pasal' ), __( 'Default: Ji. Pra. Ka. Chowk' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_spotlight_m3_label', __( 'Metric 3 Label', 'mobile-pasal' ), __( 'Default: Walk-in Diagnosis' ) );
+										mp_render_field_text( 'contact_spotlight_m3_val', __( 'Metric 3 Value', 'mobile-pasal' ), __( 'Default: 5-Minute Free Check' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_spotlight_m4_label', __( 'Metric 4 Label', 'mobile-pasal' ), __( 'Default: Customer Parking' ) );
+										mp_render_field_text( 'contact_spotlight_m4_val', __( 'Metric 4 Value', 'mobile-pasal' ), __( 'Default: Easy Front Access' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-ribbon"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Contact Micro-Ribbon 4 Fast Badges', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Horizontal banner icons and badges below hero.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_ribbon_1', __( 'Ribbon Item 1', 'mobile-pasal' ), __( 'Default: Direct WhatsApp & Call Line' ) );
+										mp_render_field_text( 'contact_ribbon_2', __( 'Ribbon Item 2', 'mobile-pasal' ), __( 'Default: Quick 5-Minute WhatsApp Quotes' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_ribbon_3', __( 'Ribbon Item 3', 'mobile-pasal' ), __( 'Default: Opposite District Admin Office' ) );
+										mp_render_field_text( 'contact_ribbon_4', __( 'Ribbon Item 4', 'mobile-pasal' ), __( 'Default: Saturday Open • 9 AM – 8 PM' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-file-signature"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Consultation Form & Counter Desk Card Headings', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Titles and descriptions for the inquiry docket form and contact card on /contact.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'contact_form_title', __( 'Form Card Title', 'mobile-pasal' ), __( 'Default: Direct Consultation & Repair Inquiry' ) );
+									mp_render_field_textarea( 'contact_form_subtitle', __( 'Form Card Description', 'mobile-pasal' ), __( 'Fill out your device and symptom details below...' ), 2 );
+									mp_render_field_text( 'contact_desk_title', __( 'Showroom Info Card Title', 'mobile-pasal' ), __( 'Default: Showroom & Lab Counter' ) );
+									mp_render_field_textarea( 'contact_desk_desc', __( 'Showroom Info Card Description', 'mobile-pasal' ), __( 'Walk-in customer counter with on-site technician workbench...' ), 2 );
+									?>
+								</div>
+							</div>
+						</div>
 							</div>
 						</div>
 					</div>
@@ -2236,7 +2736,64 @@ function mobile_pasal_options_render_dashboard() {
 						</div>
 					</div>
 
-					<!-- 6.3 Inquiries Inbox -->
+					<!-- 6.3 Arrival & Transit Guidance -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'contact_landmarks_tab' ? 'is-active' : ''; ?>" id="tab-pane-contact_landmarks_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'Arrival, Transit & Parking Guidance', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Manage the 3 landmark cards and transit directions for visiting the store counter at Ji. Pra. Ka. Chowk.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-signs-post"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Arrival Section Header', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Header text above the 3 landmark cards on /contact.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'contact_landmarks_kicker', __( 'Section Kicker', 'mobile-pasal' ), __( 'Default: Arrival & Transit' ) );
+									mp_render_field_text( 'contact_landmarks_title', __( 'Main Heading', 'mobile-pasal' ), __( 'Default: Finding Our Store Counter' ) );
+									mp_render_field_textarea( 'contact_landmarks_desc', __( 'Subtitle / Description', 'mobile-pasal' ), __( 'Default: Key landmarks and convenient parking tips for your visit to Ji. Pra. Ka. Chowk.' ), 2 );
+									?>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-map-pin"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( '3 Arrival & Landmark Cards', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Clear instructions for walk-in customers and drivers.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_lm1_title', __( 'Landmark 1 Title', 'mobile-pasal' ), __( 'Default: Prominent Landmark' ) );
+										mp_render_field_textarea( 'contact_lm1_desc', __( 'Landmark 1 Description', 'mobile-pasal' ), __( 'District Admin Office junction details' ), 3 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_lm2_title', __( 'Landmark 2 Title', 'mobile-pasal' ), __( 'Default: Easy Front Parking' ) );
+										mp_render_field_textarea( 'contact_lm2_desc', __( 'Landmark 2 Description', 'mobile-pasal' ), __( 'Front bike/scooter and car parking information' ), 3 );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'contact_lm3_title', __( 'Landmark 3 Title', 'mobile-pasal' ), __( 'Default: 2 Mins from Bus Stand' ) );
+										mp_render_field_textarea( 'contact_lm3_desc', __( 'Landmark 3 Description', 'mobile-pasal' ), __( 'Distance from Gulariya bus stand and auto routes' ), 3 );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="bopt-tab-pane <?php echo $active_tab === 'contact_inbox_tab' ? 'is-active' : ''; ?>" id="tab-pane-contact_inbox_tab">
 						<div class="bopt-pane-header">
 							<h2><?php esc_html_e( 'Customer Inquiries & Repair Dockets Inbox', 'mobile-pasal' ); ?></h2>
@@ -2333,6 +2890,101 @@ function mobile_pasal_options_render_dashboard() {
 									<p><?php esc_html_e( 'Your inquiries inbox is clean. No customer repair tickets currently pending.', 'mobile-pasal' ); ?></p>
 								</div>
 							<?php endif; ?>
+						</div>
+					</div>
+
+					<!-- ===================================================================
+					     GROUP: 404 & SEARCH RESULTS PAGES
+					     =================================================================== -->
+
+					<!-- 404 Error Page Tab -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'error_404_tab' ? 'is-active' : ''; ?>" id="tab-pane-error_404_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( '404 Device Not Found Page Customizer', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Manage the headline, helpful guidance, and action buttons shown when a visitor lands on an invalid or expired URL.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( '404 Error Messages & Number', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Custom branding for page not found errors.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'error404_code', __( 'Error Big Number / Code', 'mobile-pasal' ), __( 'Default: 404' ) );
+									mp_render_field_text( 'error404_title', __( 'Main Error Headline', 'mobile-pasal' ), __( 'Default: Device Page Not Found' ) );
+									mp_render_field_textarea( 'error404_desc', __( 'Helpful Visitor Guidance', 'mobile-pasal' ), __( 'Default: The handset, repair service, or store page you are looking for may have moved, been renamed, or is temporarily out of stock.' ), 3 );
+									?>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-arrow-pointer"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( '404 Recovery Action Buttons', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Button text labels that direct lost customers back into buying or chatting.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'error404_btn1_text', __( 'Primary Button (Home)', 'mobile-pasal' ), __( 'Default: Back to Home' ) );
+									mp_render_field_text( 'error404_btn2_text', __( 'Secondary Button (Catalog)', 'mobile-pasal' ), __( 'Default: Browse Handsets' ) );
+									mp_render_field_text( 'error404_btn3_text', __( 'WhatsApp Help Button', 'mobile-pasal' ), __( 'Default: Ask Counter Help' ) );
+									?>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Search Page Tab -->
+					<div class="bopt-tab-pane <?php echo $active_tab === 'search_page_tab' ? 'is-active' : ''; ?>" id="tab-pane-search_page_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'Search Results & Zero-Results Fallbacks', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Manage search banner titles and the empty-results recovery message when a search query finds no models.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Search Results Banner & Headings', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Format of the headline on search results.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'search_results_title', __( 'Search Results Heading Format', 'mobile-pasal' ), __( 'Use %s for the query. Default: Search: %s' ) );
+									?>
+								</div>
+							</div>
+						</div>
+
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-box-open"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Empty / Zero Matches Recovery Box', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Displayed when an inquiry returns 0 results to guide visitors to WhatsApp.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'search_empty_title', __( 'No Matches Title', 'mobile-pasal' ), __( 'Default: No Matches Found' ) );
+									mp_render_field_textarea( 'search_empty_desc', __( 'No Matches Description', 'mobile-pasal' ), __( 'Default: We couldn\'t find anything matching your search term. Feel free to browse our full showroom catalog or reach out on WhatsApp.' ), 3 );
+									mp_render_field_text( 'search_btn_catalog', __( 'Showroom Catalog Button Label', 'mobile-pasal' ), __( 'Default: Showroom Catalog' ) );
+									mp_render_field_text( 'search_btn_whatsapp', __( 'WhatsApp Inquiry Button Label', 'mobile-pasal' ), __( 'Default: Ask on WhatsApp' ) );
+									?>
+								</div>
+							</div>
 						</div>
 					</div>
 

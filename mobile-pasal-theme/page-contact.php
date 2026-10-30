@@ -36,8 +36,8 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
             <span class="crumb-active">Contact</span>
           </nav>
 
-          <h1 class="page-hero-title">Visit Our Counter or <span class="text-gradient">Send a Direct Inquiry.</span></h1>
-          <p class="page-hero-desc">Centrally located at Ji. Pra. Ka. Chowk in Gulariya-06. Walk in anytime from 9:00 AM to 8:00 PM for on-the-spot bench diagnostics, smartphone sales, or eSewa services. Or submit your enquiry below for instant WhatsApp dispatch.</p>
+          <h1 class="page-hero-title"><?php echo esc_html( mp_opt( 'contact_hero_title', 'Visit Our Counter or Send a Direct Inquiry.' ) ); ?></h1>
+          <p class="page-hero-desc"><?php echo esc_html( mp_opt( 'contact_hero_desc', 'Centrally located at Ji. Pra. Ka. Chowk in Gulariya-06. Walk in anytime from 9:00 AM to 8:00 PM for on-the-spot bench diagnostics, smartphone sales, or eSewa services. Or submit your enquiry below for instant WhatsApp dispatch.' ) ); ?></p>
 
           <div class="page-hero-actions">
             <a class="btn btn-primary btn-lg" href="tel:+<?php echo esc_attr( $store_phone_raw ); ?>">
@@ -56,39 +56,39 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
           <div class="hero-spotlight-card">
             <div class="spotlight-top-bar">
               <div class="spotlight-title-row">
-                <span class="spotlight-badge">Gulariya Counter Desk</span>
+                <span class="spotlight-badge"><?php echo esc_html( mp_opt( 'contact_spotlight_badge', 'Gulariya Counter Desk' ) ); ?></span>
               </div>
-              <small style="color: var(--text-muted); font-weight: 700;">9 AM &ndash; 8 PM</small>
+              <small style="color: var(--text-muted); font-weight: 700;"><?php echo esc_html( mp_opt( 'contact_spotlight_time', '9 AM – 8 PM' ) ); ?></small>
             </div>
 
             <div class="spotlight-metric-list">
               <div class="spotlight-metric-item">
                 <span>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  Direct Hotline
+                  <?php echo esc_html( mp_opt( 'contact_spotlight_m1_label', 'Direct Hotline' ) ); ?>
                 </span>
-                <strong><?php echo esc_html( $store_phone ); ?></strong>
+                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m1_val', $store_phone ) ); ?></strong>
               </div>
               <div class="spotlight-metric-item">
                 <span>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  Exact Landmark
+                  <?php echo esc_html( mp_opt( 'contact_spotlight_m2_label', 'Exact Landmark' ) ); ?>
                 </span>
-                <strong>Ji. Pra. Ka. Chowk</strong>
+                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m2_val', 'Ji. Pra. Ka. Chowk' ) ); ?></strong>
               </div>
               <div class="spotlight-metric-item">
                 <span>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                  Walk-in Diagnosis
+                  <?php echo esc_html( mp_opt( 'contact_spotlight_m3_label', 'Walk-in Diagnosis' ) ); ?>
                 </span>
-                <strong>5-Minute Free Check</strong>
+                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m3_val', '5-Minute Free Check' ) ); ?></strong>
               </div>
               <div class="spotlight-metric-item">
                 <span>
                   <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                  Customer Parking
+                  <?php echo esc_html( mp_opt( 'contact_spotlight_m4_label', 'Customer Parking' ) ); ?>
                 </span>
-                <strong>Easy Front Access</strong>
+                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m4_val', 'Easy Front Access' ) ); ?></strong>
               </div>
             </div>
 
@@ -104,19 +104,19 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
       <div class="page-hero-ribbon fade-up">
         <div class="hero-ribbon-item">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>Direct WhatsApp &amp; Call Line</span>
+          <span><?php echo esc_html( mp_opt( 'contact_ribbon_1', 'Direct WhatsApp & Call Line' ) ); ?></span>
         </div>
         <div class="hero-ribbon-item">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <span>Quick 5-Minute WhatsApp Quotes</span>
+          <span><?php echo esc_html( mp_opt( 'contact_ribbon_2', 'Quick 5-Minute WhatsApp Quotes' ) ); ?></span>
         </div>
         <div class="hero-ribbon-item">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          <span>Opposite District Admin Office</span>
+          <span><?php echo esc_html( mp_opt( 'contact_ribbon_3', 'Opposite District Admin Office' ) ); ?></span>
         </div>
         <div class="hero-ribbon-item">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span>Saturday Open &bull; 9 AM &ndash; 8 PM</span>
+          <span><?php echo esc_html( mp_opt( 'contact_ribbon_4', 'Saturday Open • 9 AM – 8 PM' ) ); ?></span>
         </div>
       </div>
 
@@ -132,8 +132,8 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
         
         <!-- Interactive Consultation & Repair Booking Form -->
         <div class="contact-form-card">
-          <h2>Direct Consultation &amp; Repair Inquiry</h2>
-          <p>Fill out your device and symptom details below. Your request will automatically compile and dispatch directly to our technician on WhatsApp.</p>
+          <h2><?php echo esc_html( mp_opt( 'contact_form_title', 'Direct Consultation & Repair Inquiry' ) ); ?></h2>
+          <p><?php echo esc_html( mp_opt( 'contact_form_subtitle', 'Fill out your device and symptom details below. Your request will automatically compile and dispatch directly to our technician on WhatsApp.' ) ); ?></p>
           
           <form id="contact-enquiry-form">
             <div class="form-group-grid">
@@ -182,9 +182,9 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
 
         <!-- Direct Counter Contact & Hours Card -->
         <div class="contact-info-card">
-          <h2>Showroom &amp; Lab Counter</h2>
+          <h2><?php echo esc_html( mp_opt( 'contact_desk_title', 'Showroom & Lab Counter' ) ); ?></h2>
           <p style="color: var(--text-muted); font-size: 0.94rem; margin-bottom: 24px; line-height: 1.6;">
-            Walk-in customer counter with on-site technician workbench. Free diagnostic checks in 5 minutes.
+            <?php echo esc_html( mp_opt( 'contact_desk_desc', 'Walk-in customer counter with on-site technician workbench. Free diagnostic checks in 5 minutes.' ) ); ?>
           </p>
 
           <div class="visit-details-list">
@@ -254,9 +254,9 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
   <section class="map-embed-section">
     <div class="wrap">
       <div class="sec-head sec-head-center fade-up">
-        <span class="sec-kicker">Navigation &amp; Map</span>
-        <h2>Locate Us at Ji. Pra. Ka. Chowk</h2>
-        <p>Easily accessible from all major junctions in Gulariya and surrounding Bardiya municipal areas.</p>
+        <span class="sec-kicker"><?php echo esc_html( mp_opt( 'contact_map_kicker', 'Navigation & Map' ) ); ?></span>
+        <h2><?php echo esc_html( mp_opt( 'contact_map_title', 'Locate Us at Ji. Pra. Ka. Chowk' ) ); ?></h2>
+        <p><?php echo esc_html( mp_opt( 'contact_map_desc', 'Easily accessible from all major junctions in Gulariya and surrounding Bardiya municipal areas.' ) ); ?></p>
       </div>
 
       <div class="map-card fade-up">
@@ -280,33 +280,33 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
   <section class="landmarks-section">
     <div class="wrap">
       <div class="sec-head sec-head-center fade-up" style="margin-bottom: 32px;">
-        <span class="sec-kicker">Arrival &amp; Transit</span>
-        <h2>Finding Our Store Counter</h2>
-        <p>Key landmarks and convenient parking tips for your visit to Ji. Pra. Ka. Chowk.</p>
+        <span class="sec-kicker"><?php echo esc_html( mp_opt( 'contact_landmarks_kicker', 'Arrival & Transit' ) ); ?></span>
+        <h2><?php echo esc_html( mp_opt( 'contact_landmarks_title', 'Finding Our Store Counter' ) ); ?></h2>
+        <p><?php echo esc_html( mp_opt( 'contact_landmarks_desc', 'Key landmarks and convenient parking tips for your visit to Ji. Pra. Ka. Chowk.' ) ); ?></p>
       </div>
       <div class="steps-flow-grid landmarks-flow-grid fade-up">
         <div class="flow-step-card">
           <div class="flow-step-num">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
           </div>
-          <h3>Prominent Landmark</h3>
-          <p>Situated directly at Ji. Pra. Ka. Chowk (District Administration Office junction), opposite the main arterial road in Gulariya Bazar.</p>
+          <h3><?php echo esc_html( mp_opt( 'contact_lm1_title', 'Prominent Landmark' ) ); ?></h3>
+          <p><?php echo esc_html( mp_opt( 'contact_lm1_desc', 'Situated directly at Ji. Pra. Ka. Chowk (District Administration Office junction), opposite the main arterial road in Gulariya Bazar.' ) ); ?></p>
         </div>
 
         <div class="flow-step-card">
           <div class="flow-step-num">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
           </div>
-          <h3>Easy Front Parking</h3>
-          <p>Ample dedicated front space for motorcycle and scooter parking, as well as easy pull-up access for cars while dropping off devices.</p>
+          <h3><?php echo esc_html( mp_opt( 'contact_lm2_title', 'Easy Front Parking' ) ); ?></h3>
+          <p><?php echo esc_html( mp_opt( 'contact_lm2_desc', 'Ample dedicated front space for motorcycle and scooter parking, as well as easy pull-up access for cars while dropping off devices.' ) ); ?></p>
         </div>
 
         <div class="flow-step-card">
           <div class="flow-step-num">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
           </div>
-          <h3>2 Mins from Bus Stand</h3>
-          <p>Only a 2-minute walk from Gulariya Main Bus Stand &amp; Birendra Chowk. Direct local autos available from Badhaiyatal, Madhuwan, and Rajapur.</p>
+          <h3><?php echo esc_html( mp_opt( 'contact_lm3_title', '2 Mins from Bus Stand' ) ); ?></h3>
+          <p><?php echo esc_html( mp_opt( 'contact_lm3_desc', 'Only a 2-minute walk from Gulariya Main Bus Stand & Birendra Chowk. Direct local autos available from Badhaiyatal, Madhuwan, and Rajapur.' ) ); ?></p>
         </div>
       </div>
     </div>
