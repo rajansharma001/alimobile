@@ -45,135 +45,95 @@ if ( empty( $slide3_img ) ) {
 
 <main>
 
-<!-- Hero Slider Section -->
-<section class="hero-slider-section">
+<!-- Hero Slider Section: Creative Business Mobile Shop Architecture -->
+<section class="hero-slider-section" id="hero-slider">
+	<!-- Top Retail Store Bar -->
+	<div class="hero-biz-top-bar">
+		<div class="wrap hero-biz-top-inner">
+			<div class="hero-biz-location">
+				<i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+				<span><?php echo esc_html( mp_opt( 'contact_address', 'Gulariya-06, Main Market, Bardiya' ) ); ?></span>
+			</div>
+			<div class="hero-biz-badge-group">
+				<span class="hero-biz-pill"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <?php esc_html_e( 'NTA MDMS Registered', 'mobile-pasal' ); ?></span>
+				<span class="hero-biz-pill"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> <?php esc_html_e( 'Official Nepal VAT Invoice', 'mobile-pasal' ); ?></span>
+				<span class="hero-biz-status-pill">
+					<span class="hero-biz-status-dot"></span>
+					<span><?php esc_html_e( 'Store Open: 9:00 AM – 8:00 PM', 'mobile-pasal' ); ?></span>
+				</span>
+			</div>
+		</div>
+	</div>
+
 	<div class="hero-slider-container">
 
 		<!-- Slide 1: Flagships -->
-		<div class="hero-slide active" data-slide-index="0" data-theme="sapphire">
-			<div class="hero-ambient-aura aura-sapphire" aria-hidden="true"></div>
-			<div class="wrap hero-grid">
-				<div class="hero-content-col fade-up in-view">
-					<div class="hero-kicker-pill">
-						<span class="kicker-pulse-dot"></span>
-						<span class="kicker-text"><?php esc_html_e( 'Gulariya Official Store • NTA MDMS Approved • Nepal VAT Invoice', 'mobile-pasal' ); ?></span>
+		<div class="hero-slide active" data-slide-index="0">
+			<div class="wrap hero-biz-grid">
+				<!-- Left Column: Department Offer & CTAs -->
+				<div class="hero-biz-info fade-up in-view">
+					<div class="hero-biz-dept-kicker">
+						<span class="kicker-num">01</span>
+						<span class="kicker-sep">/</span>
+						<span class="kicker-label"><?php esc_html_e( 'Authorized Smartphones & Flagships', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<h1 class="hero-title"><?php echo esc_html( $slide1_title ); ?></h1>
-					<p class="hero-description"><?php echo esc_html( $slide1_desc ); ?></p>
+					<h1 class="hero-biz-title"><?php echo esc_html( $slide1_title ); ?></h1>
+					<p class="hero-biz-description"><?php echo esc_html( $slide1_desc ); ?></p>
 
-					<!-- Creative Tech Specification Chips -->
-					<div class="hero-tech-chips" role="list" aria-label="<?php esc_attr_e( 'Featured Capabilities', 'mobile-pasal' ); ?>">
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-bolt" aria-hidden="true"></i> <?php esc_html_e( 'iPhone 16 Pro Max', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <?php esc_html_e( 'Galaxy S24 Ultra AI', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> <?php esc_html_e( 'Instant Trade-In Credit', 'mobile-pasal' ); ?></span>
+					<!-- Retail Trust Perks -->
+					<div class="hero-biz-perks">
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( '100% Sealed Box', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'VAT Bill & 1-Yr Warranty', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Free Data Migration', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<div class="hero-cta-group">
+					<div class="hero-biz-cta-group">
 						<a class="btn btn-primary btn-lg" href="#catalog">
 							<span><?php echo esc_html( $slide1_btn1 ); ?></span>
 							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
 						</a>
-						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 ra Galaxy S24 ko aaja ko price dinus' ) ); ?>" target="_blank" rel="noopener">
+						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 ra Galaxy S24 ko aaja ko counter price dinus' ) ); ?>" target="_blank" rel="noopener">
 							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
 							<span><?php echo esc_html( $slide1_btn2 ); ?></span>
 						</a>
 					</div>
-
-					<!-- Trust Dock -->
-					<div class="hero-trust-dock">
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( '100% Genuine Handsets', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'NTA Approved Stock', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'Official Warranty', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Verified Bill & IMEI', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'Free Data Setup', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Contacts & Photos Transfer', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="hero-media-col">
-					<div class="hero-media-stage">
-						<div class="hero-media-viewport">
-							<span class="viewport-corner-reticle top-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle top-right" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-right" aria-hidden="true"></span>
-
-							<img src="<?php echo esc_url( $slide1_img ); ?>" alt="Apple iPhone Flagship at Ali Mobile Center">
-
-							<div class="viewport-floating-badge top-left">
-								<span class="live-status-ping emerald"></span>
-								<span><?php esc_html_e( 'Sealed Box In Stock', 'mobile-pasal' ); ?></span>
-							</div>
-							<div class="viewport-floating-badge top-right highlight-pill">
-								<i class="fa-solid fa-certificate" aria-hidden="true"></i>
-								<span><?php esc_html_e( 'NTA MDMS Verified', 'mobile-pasal' ); ?></span>
-							</div>
-
-							<div class="viewport-telemetry-dock">
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Featured Lineup', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( 'iPhone 16 Series', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Status in Gulariya', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value"><?php esc_html_e( 'Available Today', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Trade-In', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( 'Instant Credit', 'mobile-pasal' ); ?></strong>
-								</div>
-							</div>
+				<!-- Center Column: Showcase Media Stage -->
+				<div class="hero-biz-stage">
+					<div class="hero-biz-media-frame">
+						<span class="biz-stock-tag"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?php esc_html_e( 'In Stock in Gulariya', 'mobile-pasal' ); ?></span>
+						<img src="<?php echo esc_url( $slide1_img ); ?>" alt="Apple iPhone Flagship at Ali Mobile Center" loading="eager">
+						<div class="hero-biz-media-badge">
+							<small><?php esc_html_e( 'Official Warranty', 'mobile-pasal' ); ?></small>
+							<strong><?php esc_html_e( 'Authorized Nepal Stock', 'mobile-pasal' ); ?></strong>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 
-		<!-- Slide 2: Apple Fix -->
-		<div class="hero-slide" data-slide-index="1" data-theme="emerald">
-			<div class="hero-ambient-aura aura-emerald" aria-hidden="true"></div>
-			<div class="wrap hero-grid">
-				<div class="hero-content-col">
-					<div class="hero-kicker-pill fix-kicker">
-						<span class="kicker-pulse-dot emerald"></span>
-						<span class="kicker-text"><?php esc_html_e( 'On-Site Cleanroom Lab • 45x Microscope Bench • 30-Min Fix', 'mobile-pasal' ); ?></span>
+		<!-- Slide 2: Apple Fix Lab -->
+		<div class="hero-slide" data-slide-index="1">
+			<div class="wrap hero-biz-grid">
+				<div class="hero-biz-info">
+					<div class="hero-biz-dept-kicker">
+						<span class="kicker-num">02</span>
+						<span class="kicker-sep">/</span>
+						<span class="kicker-label"><?php esc_html_e( 'On-Site Diagnostic & Repair Lab', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<h2 class="hero-title"><?php echo esc_html( $slide2_title ); ?></h2>
-					<p class="hero-description"><?php echo esc_html( $slide2_desc ); ?></p>
+					<h2 class="hero-biz-title"><?php echo esc_html( $slide2_title ); ?></h2>
+					<p class="hero-biz-description"><?php echo esc_html( $slide2_desc ); ?></p>
 
-					<!-- Creative Tech Specification Chips -->
-					<div class="hero-tech-chips" role="list" aria-label="<?php esc_attr_e( 'Lab Capabilities', 'mobile-pasal' ); ?>">
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> <?php esc_html_e( 'TrueTone Display Restore', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-battery-full" aria-hidden="true"></i> <?php esc_html_e( '100% BMS Battery Health', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-droplet-slash" aria-hidden="true"></i> <?php esc_html_e( 'Water Damage Recovery', 'mobile-pasal' ); ?></span>
+					<div class="hero-biz-perks">
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( '30–45 Min Screen Fix', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Original Service-Pack Parts', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Up to 90 Days Testing Warranty', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<div class="hero-cta-group">
+					<div class="hero-biz-cta-group">
 						<a class="btn btn-primary btn-lg" href="#repair-builder">
 							<span><?php echo esc_html( $slide2_btn1 ); ?></span>
 							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -183,73 +143,15 @@ if ( empty( $slide3_img ) ) {
 							<span><?php echo esc_html( $slide2_btn2 ); ?></span>
 						</a>
 					</div>
-
-					<div class="hero-trust-dock">
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( '30-Minute Screen Fix', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Same-Day Battery Swap', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'Live Front Testing', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Watch On-Site ESD Bench', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'Testing Warranty', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Up to 90 Days Coverage', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="hero-media-col">
-					<div class="hero-media-stage">
-						<div class="hero-media-viewport">
-							<span class="viewport-corner-reticle top-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle top-right" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-right" aria-hidden="true"></span>
-
-							<img src="<?php echo esc_url( $slide2_img ); ?>" alt="Apple Fix precision repair lab at Ali Mobile">
-
-							<div class="viewport-floating-badge top-left">
-								<span class="live-status-ping emerald"></span>
-								<span><?php esc_html_e( 'Cleanroom Lab Open', 'mobile-pasal' ); ?></span>
-							</div>
-							<div class="viewport-floating-badge top-right highlight-pill">
-								<i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
-								<span><?php esc_html_e( 'Zero Diagnostic Fee', 'mobile-pasal' ); ?></span>
-							</div>
-
-							<div class="viewport-telemetry-dock">
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Diagnostic Speed', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( '30–45 Mins Average', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Technician Station', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value"><?php esc_html_e( 'Microscope Bench', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Part Grade', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( 'Original Service-Pack', 'mobile-pasal' ); ?></strong>
-								</div>
-							</div>
+				<div class="hero-biz-stage">
+					<div class="hero-biz-media-frame">
+						<span class="biz-stock-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> <?php esc_html_e( 'ESD Bench Active', 'mobile-pasal' ); ?></span>
+						<img src="<?php echo esc_url( $slide2_img ); ?>" alt="Apple Fix precision repair lab at Ali Mobile" loading="lazy">
+						<div class="hero-biz-media-badge">
+							<small><?php esc_html_e( 'Diagnosis Time', 'mobile-pasal' ); ?></small>
+							<strong><?php esc_html_e( 'Instant Front Counter Check', 'mobile-pasal' ); ?></strong>
 						</div>
 					</div>
 				</div>
@@ -257,26 +159,25 @@ if ( empty( $slide3_img ) ) {
 		</div>
 
 		<!-- Slide 3: Genuine Gear -->
-		<div class="hero-slide" data-slide-index="2" data-theme="violet">
-			<div class="hero-ambient-aura aura-violet" aria-hidden="true"></div>
-			<div class="wrap hero-grid">
-				<div class="hero-content-col">
-					<div class="hero-kicker-pill gear-kicker">
-						<span class="kicker-pulse-dot violet"></span>
-						<span class="kicker-text"><?php esc_html_e( '100% Certified Authentic Gear • Apple • Samsung • Anker Authorised', 'mobile-pasal' ); ?></span>
+		<div class="hero-slide" data-slide-index="2">
+			<div class="wrap hero-biz-grid">
+				<div class="hero-biz-info">
+					<div class="hero-biz-dept-kicker">
+						<span class="kicker-num">03</span>
+						<span class="kicker-sep">/</span>
+						<span class="kicker-label"><?php esc_html_e( 'Original Accessories & Power Systems', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<h2 class="hero-title"><?php echo esc_html( $slide3_title ); ?></h2>
-					<p class="hero-description"><?php echo esc_html( $slide3_desc ); ?></p>
+					<h2 class="hero-biz-title"><?php echo esc_html( $slide3_title ); ?></h2>
+					<p class="hero-biz-description"><?php echo esc_html( $slide3_desc ); ?></p>
 
-					<!-- Creative Tech Specification Chips -->
-					<div class="hero-tech-chips" role="list" aria-label="<?php esc_attr_e( 'Gear Highlights', 'mobile-pasal' ); ?>">
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-bolt" aria-hidden="true"></i> <?php esc_html_e( '20W–120W GaN Fast Chargers', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-headphones" aria-hidden="true"></i> <?php esc_html_e( 'AirPods Pro 2 & Buds3 ANC', 'mobile-pasal' ); ?></span>
-						<span class="tech-chip" role="listitem"><i class="fa-solid fa-shield" aria-hidden="true"></i> <?php esc_html_e( 'Free 9H Glass Fitting', 'mobile-pasal' ); ?></span>
+					<div class="hero-biz-perks">
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Apple 20W/30W & Samsung 45W GaN', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Original AirPods & Galaxy Buds', 'mobile-pasal' ); ?></span>
+						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php esc_html_e( 'Free Counter Glass Installation', 'mobile-pasal' ); ?></span>
 					</div>
 
-					<div class="hero-cta-group">
+					<div class="hero-biz-cta-group">
 						<a class="btn btn-primary btn-lg" href="#categories">
 							<span><?php echo esc_html( $slide3_btn1 ); ?></span>
 							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -286,73 +187,15 @@ if ( empty( $slide3_img ) ) {
 							<span><?php echo esc_html( $slide3_btn2 ); ?></span>
 						</a>
 					</div>
-
-					<div class="hero-trust-dock">
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'PD Fast Chargers', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( '20W to 120W Certified', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( 'Smartwatches', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'AMOLED & Health Trackers', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-						<div class="trust-dock-card">
-							<div class="trust-dock-icon">
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-							</div>
-							<div class="trust-dock-content">
-								<strong><?php esc_html_e( '9H Tempered Glass', 'mobile-pasal' ); ?></strong>
-								<span><?php esc_html_e( 'Free Counter Fitting', 'mobile-pasal' ); ?></span>
-							</div>
-						</div>
-					</div>
 				</div>
 
-				<div class="hero-media-col">
-					<div class="hero-media-stage">
-						<div class="hero-media-viewport">
-							<span class="viewport-corner-reticle top-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle top-right" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-left" aria-hidden="true"></span>
-							<span class="viewport-corner-reticle bottom-right" aria-hidden="true"></span>
-
-							<img src="<?php echo esc_url( $slide3_img ); ?>" alt="Showroom Accessories Shelves at Ali Mobile Center">
-
-							<div class="viewport-floating-badge top-left">
-								<span class="live-status-ping violet"></span>
-								<span><?php esc_html_e( 'Authorised Original Gear', 'mobile-pasal' ); ?></span>
-							</div>
-							<div class="viewport-floating-badge top-right highlight-pill">
-								<i class="fa-solid fa-shield-check" aria-hidden="true"></i>
-								<span><?php esc_html_e( 'Brand Warranty', 'mobile-pasal' ); ?></span>
-							</div>
-
-							<div class="viewport-telemetry-dock">
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Genuine Accessories', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( 'Apple • Samsung • Anker', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Accepted Payments', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value"><?php esc_html_e( 'Cash & Digital Pay', 'mobile-pasal' ); ?></strong>
-								</div>
-								<div class="telemetry-divider"></div>
-								<div class="telemetry-item">
-									<span class="telemetry-label"><?php esc_html_e( 'Installation', 'mobile-pasal' ); ?></span>
-									<strong class="telemetry-value highlight"><?php esc_html_e( 'Free at Counter', 'mobile-pasal' ); ?></strong>
-								</div>
-							</div>
+				<div class="hero-biz-stage">
+					<div class="hero-biz-media-frame">
+						<span class="biz-stock-tag"><i class="fa-solid fa-certificate" aria-hidden="true"></i> <?php esc_html_e( '100% Genuine Sealed', 'mobile-pasal' ); ?></span>
+						<img src="<?php echo esc_url( $slide3_img ); ?>" alt="Showroom Accessories Shelves at Ali Mobile Center" loading="lazy">
+						<div class="hero-biz-media-badge">
+							<small><?php esc_html_e( 'Brand Warranty', 'mobile-pasal' ); ?></small>
+							<strong><?php esc_html_e( 'Official PD Fast Charging', 'mobile-pasal' ); ?></strong>
 						</div>
 					</div>
 				</div>
@@ -361,38 +204,83 @@ if ( empty( $slide3_img ) ) {
 
 	</div>
 
-	<!-- Slider Controls: Arrows & Active Slide Counter -->
-	<div class="slider-nav-arrows">
-		<button id="slider-prev-btn" class="slider-arrow-btn" aria-label="<?php esc_attr_e( 'Previous Slide', 'mobile-pasal' ); ?>" type="button">
-			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-		</button>
-		<div class="slider-counter" aria-live="polite">
-			<span class="current-slide">01</span>
-			<span class="counter-divider">/</span>
-			<span class="total-slides">03</span>
+	<!-- Creative Business Department Switcher & Slide Controls -->
+	<div class="wrap hero-biz-dock-wrap">
+		<div class="hero-biz-dock" role="tablist" aria-label="<?php esc_attr_e( 'Retail Departments', 'mobile-pasal' ); ?>">
+			<button class="slider-dock-tab active" data-slide-to="0" role="tab" aria-selected="true" type="button">
+				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
+				<span class="dock-tab-index">01</span>
+				<div class="dock-tab-text">
+					<strong><?php esc_html_e( 'Flagship Handsets', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( 'iPhone 16, S24 & Pixel 9', 'mobile-pasal' ); ?></small>
+				</div>
+			</button>
+			<button class="slider-dock-tab" data-slide-to="1" role="tab" aria-selected="false" type="button">
+				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
+				<span class="dock-tab-index">02</span>
+				<div class="dock-tab-text">
+					<strong><?php esc_html_e( 'Apple Fix Lab', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( '30-Min On-Site Repairs', 'mobile-pasal' ); ?></small>
+				</div>
+			</button>
+			<button class="slider-dock-tab" data-slide-to="2" role="tab" aria-selected="false" type="button">
+				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
+				<span class="dock-tab-index">03</span>
+				<div class="dock-tab-text">
+					<strong><?php esc_html_e( 'Original Gear', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( 'PD Chargers, Audio & Armor', 'mobile-pasal' ); ?></small>
+				</div>
+			</button>
 		</div>
-		<button id="slider-next-btn" class="slider-arrow-btn" aria-label="<?php esc_attr_e( 'Next Slide', 'mobile-pasal' ); ?>" type="button">
-			<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-		</button>
+
+		<!-- Nav Arrows & Slide Counter -->
+		<div class="hero-biz-nav-tools">
+			<button id="slider-prev-btn" class="biz-nav-btn" aria-label="<?php esc_attr_e( 'Previous', 'mobile-pasal' ); ?>" type="button">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+			</button>
+			<div class="slider-counter">
+				<span class="current-slide">01</span>
+				<span class="counter-divider">/</span>
+				<span class="total-slides">03</span>
+			</div>
+			<button id="slider-next-btn" class="biz-nav-btn" aria-label="<?php esc_attr_e( 'Next', 'mobile-pasal' ); ?>" type="button">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+			</button>
+		</div>
 	</div>
 
-	<!-- Slider Navigation Dock with Live Countdown Progress Bars -->
-	<div class="hero-slider-dock" role="tablist" aria-label="<?php esc_attr_e( 'Homepage Slide Carousel', 'mobile-pasal' ); ?>">
-		<button class="slider-dock-tab active" data-slide-to="0" role="tab" aria-selected="true" type="button">
-			<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-			<span class="dock-tab-index">01</span>
-			<span class="dock-tab-title"><?php esc_html_e( 'Flagship Lineup', 'mobile-pasal' ); ?></span>
-		</button>
-		<button class="slider-dock-tab" data-slide-to="1" role="tab" aria-selected="false" type="button">
-			<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-			<span class="dock-tab-index">02</span>
-			<span class="dock-tab-title"><?php esc_html_e( 'Apple Fix Counter', 'mobile-pasal' ); ?></span>
-		</button>
-		<button class="slider-dock-tab" data-slide-to="2" role="tab" aria-selected="false" type="button">
-			<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-			<span class="dock-tab-index">03</span>
-			<span class="dock-tab-title"><?php esc_html_e( 'Genuine Gear', 'mobile-pasal' ); ?></span>
-		</button>
+	<!-- 4 Retail Store Assurances Strip -->
+	<div class="hero-biz-assurances">
+		<div class="wrap hero-assurances-grid">
+			<div class="hero-assurance-item">
+				<div class="assurance-icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></div>
+				<div class="assurance-body">
+					<strong><?php esc_html_e( 'Official Nepal VAT Invoice', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( 'Claim input tax & authorized warranty', 'mobile-pasal' ); ?></small>
+				</div>
+			</div>
+			<div class="hero-assurance-item">
+				<div class="assurance-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+				<div class="assurance-body">
+					<strong><?php esc_html_e( 'NTA MDMS Registered', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( '100% legal tax-paid phone IMEI', 'mobile-pasal' ); ?></small>
+				</div>
+			</div>
+			<div class="hero-assurance-item">
+				<div class="assurance-icon"><i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i></div>
+				<div class="assurance-body">
+					<strong><?php esc_html_e( 'On-Site Diagnostic Lab', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( 'Watch repair directly at ESD bench', 'mobile-pasal' ); ?></small>
+				</div>
+			</div>
+			<div class="hero-assurance-item">
+				<div class="assurance-icon"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i></div>
+				<div class="assurance-body">
+					<strong><?php esc_html_e( 'Free Data Transfer & Setup', 'mobile-pasal' ); ?></strong>
+					<small><?php esc_html_e( 'Full iCloud, WhatsApp & photos move', 'mobile-pasal' ); ?></small>
+				</div>
+			</div>
+		</div>
 	</div>
 </section>
 
