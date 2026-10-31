@@ -71,13 +71,13 @@ function mobile_pasal_options_defaults() {
 		'hero_slide1_trust'            => 'Trusted by 10,000+ Customers',
 		'hero_slide1_title'            => 'Expert <span class="accent">Mobile Repair</span> & Service',
 		'hero_slide1_intro'            => 'Your One-Stop Solution for Mobile Repair, Accessories and More.',
-		'hero_slide1_f1_icon'          => '◷',
+		'hero_slide1_f1_icon'          => 'clock',
 		'hero_slide1_f1_text'          => 'Fast<br>Service',
-		'hero_slide1_f2_icon'          => '⬟',
+		'hero_slide1_f2_icon'          => 'screen',
 		'hero_slide1_f2_text'          => 'Genuine<br>Parts',
-		'hero_slide1_f3_icon'          => '✹',
+		'hero_slide1_f3_icon'          => 'wrench',
 		'hero_slide1_f3_text'          => 'Skilled<br>Technicians',
-		'hero_slide1_f4_icon'          => '♧',
+		'hero_slide1_f4_icon'          => 'tag',
 		'hero_slide1_f4_text'          => 'Affordable<br>Price',
 		'hero_slide1_btn1_text'        => 'Book a Repair',
 		'hero_slide1_btn1_url'         => '#contact',
@@ -90,13 +90,13 @@ function mobile_pasal_options_defaults() {
 		'hero_slide2_trust'            => 'Careful Repairs. Quality Parts.',
 		'hero_slide2_title'            => 'Cracked Screen? <span class="accent">We\'ve Got You.</span>',
 		'hero_slide2_intro'            => 'From screen replacement to battery problems, get your phone back in shape with reliable service.',
-		'hero_slide2_f1_icon'          => '▣',
+		'hero_slide2_f1_icon'          => 'screen',
 		'hero_slide2_f1_text'          => 'Screen<br>Replacement',
-		'hero_slide2_f2_icon'          => 'ϟ',
+		'hero_slide2_f2_icon'          => 'battery',
 		'hero_slide2_f2_text'          => 'Battery<br>Change',
-		'hero_slide2_f3_icon'          => '⌁',
+		'hero_slide2_f3_icon'          => 'water',
 		'hero_slide2_f3_text'          => 'Water Damage<br>Check',
-		'hero_slide2_f4_icon'          => '⚙',
+		'hero_slide2_f4_icon'          => 'microchip',
 		'hero_slide2_f4_text'          => 'Software<br>Support',
 		'hero_slide2_btn1_text'        => 'Get Your Phone Fixed',
 		'hero_slide2_btn1_url'         => '#contact',
@@ -109,13 +109,13 @@ function mobile_pasal_options_defaults() {
 		'hero_slide3_trust'            => 'Your Local Mobile Store',
 		'hero_slide3_title'            => 'Find Your <span class="accent">Next Phone.</span>',
 		'hero_slide3_intro'            => 'Explore popular smartphones, useful accessories and friendly advice — all in one place.',
-		'hero_slide3_f1_icon'          => '▣',
+		'hero_slide3_f1_icon'          => 'star',
 		'hero_slide3_f1_text'          => 'Popular<br>Brands',
-		'hero_slide3_f2_icon'          => '◇',
+		'hero_slide3_f2_icon'          => 'cable',
 		'hero_slide3_f2_text'          => 'Accessories',
-		'hero_slide3_f3_icon'          => '♡',
+		'hero_slide3_f3_icon'          => 'heart',
 		'hero_slide3_f3_text'          => 'Helpful<br>Advice',
-		'hero_slide3_f4_icon'          => '✓',
+		'hero_slide3_f4_icon'          => 'coins',
 		'hero_slide3_f4_text'          => 'Trusted<br>Service',
 		'hero_slide3_btn1_text'        => 'Visit Our Store',
 		'hero_slide3_btn1_url'         => '#contact',
@@ -126,12 +126,16 @@ function mobile_pasal_options_defaults() {
 
 		// ── Post-Hero Guarantees (Common 4 Features Bar) ──
 		'trust_bar_enabled'            => 1,
+		'trust_feat1_icon'             => 'clock',
 		'trust_feat1_title'            => 'Fast 45-Min Fix',
 		'trust_feat1_desc'             => 'Instant on-counter screen & battery turnaround',
+		'trust_feat2_icon'             => 'screen',
 		'trust_feat2_title'            => 'Genuine OLED Parts',
 		'trust_feat2_desc'             => 'TrueTone & 3D Touch programming retained',
+		'trust_feat3_icon'             => 'wrench',
 		'trust_feat3_title'            => 'Level 4 Technicians',
 		'trust_feat3_desc'             => 'Micro-soldering & stereo microscope cleanroom lab',
+		'trust_feat4_icon'             => 'shield',
 		'trust_feat4_title'            => 'Affordable Pricing',
 		'trust_feat4_desc'             => 'Transparent rates with warranty & official VAT bill',
 
@@ -279,8 +283,11 @@ function mobile_pasal_options_defaults() {
 		'lab_image'                    => $uri . '/assets/images/apple-fix-bench.jpg',
 		'lab_live_status'              => 'Live Gulariya Counter Cleanroom Lab',
 		'lab_tagline'                  => 'Stereo Zoom Microscope • Anti-Static ESD Station',
+		'lab_feat1_icon'               => 'clock',
 		'lab_feat1_chip'               => 'TrueTone & 3D Touch Retained',
+		'lab_feat2_icon'               => 'battery',
 		'lab_feat2_chip'               => 'Zero Error BMS Micro-Welded',
+		'lab_feat3_icon'               => 'shield',
 		'lab_feat3_chip'               => '100% Privacy Protection',
 
 		// ── Homepage Repair Services & Workflow ──
@@ -358,15 +365,19 @@ function mobile_pasal_options_defaults() {
 		'assurance_kicker'             => 'Zero-Risk Purchase',
 		'assurance_title'              => 'The Ali Mobile Handset Assurance',
 		'assurance_subtitle'           => 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.',
+		'assurance1_icon'              => 'shield',
 		'assurance1_title'             => '100% NTA Approved',
 		'assurance1_desc'              => 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted MDMS cellular service across Nepal.',
 		'assurance1_tag'               => 'MDMS Verified',
+		'assurance2_icon'              => 'receipt',
 		'assurance2_title'             => 'Official VAT Bill',
 		'assurance2_desc'              => 'Every single handset comes with an authorized commercial VAT serial bill enabling legitimate distributor warranty claims.',
 		'assurance2_tag'               => 'Genuine Bill',
+		'assurance3_icon'              => 'arrows-rotate',
 		'assurance3_title'             => 'Free Data Transfer',
 		'assurance3_desc'              => 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.',
 		'assurance3_tag'               => 'Walk-In Setup',
+		'assurance4_icon'              => 'store',
 		'assurance4_title'             => 'Trade-In Counter',
 		'assurance4_desc'              => 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.',
 		'assurance4_tag'               => 'Instant Valuation',
@@ -527,12 +538,16 @@ function mobile_pasal_options_defaults() {
 		'footer_col2_title'            => 'Apple Fix Lab',
 		'footer_col3_title'            => 'Store Information',
 		'footer_copyright'             => '© 2026 Ali Mobile Center & Apple Fix. Gulariya-06, Bardiya, Nepal. All Rights Reserved.',
+		'trust_box1_icon'              => 'shield',
 		'trust_box1_title'             => 'NTA Registered Devices',
 		'trust_box1_desc'              => '100% compliant with Nepal MDMS laws.',
+		'trust_box2_icon'              => 'bolt',
 		'trust_box2_title'             => 'Express 45-Min Lab',
 		'trust_box2_desc'              => 'Quick turnaround with genuine spare parts.',
+		'trust_box3_icon'              => 'tag',
 		'trust_box3_title'             => 'Zero Hidden Charges',
 		'trust_box3_desc'              => 'Transparent billing and authentic warranties.',
+		'trust_box4_icon'              => 'location',
 		'trust_box4_title'             => 'Counter Agent Ready',
 		'trust_box4_desc'              => 'eSewa top-up, bill payments & cash points.',
 
@@ -801,6 +816,7 @@ function mobile_pasal_options_admin_enqueue( $hook ) {
 	wp_localize_script( 'mobile-pasal-admin-options', 'mobilePasalOptions', array(
 		'choose_image' => __( 'Select or Upload Store Image', 'mobile-pasal' ),
 		'use_image'    => __( 'Use This Media Asset', 'mobile-pasal' ),
+		'icons'        => mp_get_all_icons_svg_map(),
 	) );
 }
 add_action( 'admin_enqueue_scripts', 'mobile_pasal_options_admin_enqueue' );
@@ -808,6 +824,223 @@ add_action( 'admin_enqueue_scripts', 'mobile_pasal_options_admin_enqueue' );
 /**
  * Form Field Renderers
  */
+/**
+ * --------------------------------------------------------------------------
+ * Core High-Tech Icon System (Clean Vector SVGs - Zero Emojis)
+ * --------------------------------------------------------------------------
+ */
+
+/**
+ * Curated Available Icon Catalog
+ */
+function mp_get_available_icons() {
+	return array(
+		// Repair & Lab Hardware
+		'clock'         => array( 'label' => __( 'Clock / Fast Turnaround', 'mobile-pasal' ), 'category' => __( 'Repair & Speed', 'mobile-pasal' ) ),
+		'screen'        => array( 'label' => __( 'OLED Screen / Display Glass', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'wrench'        => array( 'label' => __( 'Precision Tool / Cleanroom Wrench', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'screwdriver'   => array( 'label' => __( 'Micro-Tools / Screwdriver', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'microscope'    => array( 'label' => __( 'Stereo Zoom Microscope', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'microchip'     => array( 'label' => __( 'IC Motherboard Micro-Soldering', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'battery'       => array( 'label' => __( 'Battery / 100% Health BMS', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'water'         => array( 'label' => __( 'Water Soak / Ultrasonic Cleaning', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'camera'        => array( 'label' => __( 'Camera Lens & 48MP OIS Sensor', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+
+		// Trust & Guarantees
+		'shield'        => array( 'label' => __( 'Shield / NTA MDMS Compliant', 'mobile-pasal' ), 'category' => __( 'Trust & Security', 'mobile-pasal' ) ),
+		'shield-check'  => array( 'label' => __( 'Shield Verified / Authentic Parts', 'mobile-pasal' ), 'category' => __( 'Trust & Security', 'mobile-pasal' ) ),
+		'certificate'   => array( 'label' => __( 'Certified / Level 4 Technicians', 'mobile-pasal' ), 'category' => __( 'Trust & Security', 'mobile-pasal' ) ),
+		'user-shield'   => array( 'label' => __( 'Privacy / Photos & Accounts Safe', 'mobile-pasal' ), 'category' => __( 'Trust & Security', 'mobile-pasal' ) ),
+		'check'         => array( 'label' => __( 'Checkmark / Tested & Approved', 'mobile-pasal' ), 'category' => __( 'Trust & Security', 'mobile-pasal' ) ),
+
+		// Performance & Speed
+		'bolt'          => array( 'label' => __( 'Lightning / Express 45-Min Fix', 'mobile-pasal' ), 'category' => __( 'Repair & Speed', 'mobile-pasal' ) ),
+		'sparkles'      => array( 'label' => __( 'Sparkles / Apple Intelligence', 'mobile-pasal' ), 'category' => __( 'Repair & Speed', 'mobile-pasal' ) ),
+		'star'          => array( 'label' => __( 'Star / Top Tier Smartphone Brands', 'mobile-pasal' ), 'category' => __( 'Quality & Retail', 'mobile-pasal' ) ),
+		'gem'           => array( 'label' => __( 'Diamond / Titanium Premium', 'mobile-pasal' ), 'category' => __( 'Quality & Retail', 'mobile-pasal' ) ),
+
+		// Finance & Billing
+		'tag'           => array( 'label' => __( 'Price Tag / Zero Hidden Charges', 'mobile-pasal' ), 'category' => __( 'Finance & Billing', 'mobile-pasal' ) ),
+		'receipt'       => array( 'label' => __( 'Nepal Official VAT Serial Bill', 'mobile-pasal' ), 'category' => __( 'Finance & Billing', 'mobile-pasal' ) ),
+		'coins'         => array( 'label' => __( 'Cash / eSewa Banking Counter', 'mobile-pasal' ), 'category' => __( 'Finance & Billing', 'mobile-pasal' ) ),
+
+		// Accessories & Connectivity
+		'headphones'    => array( 'label' => __( 'Headphones / Audio & Earbuds', 'mobile-pasal' ), 'category' => __( 'Accessories', 'mobile-pasal' ) ),
+		'cable'         => array( 'label' => __( 'Type-C Cable / Anker PD Charger', 'mobile-pasal' ), 'category' => __( 'Accessories', 'mobile-pasal' ) ),
+		'heart'         => array( 'label' => __( 'Heart / Tech Setup Care', 'mobile-pasal' ), 'category' => __( 'Quality & Retail', 'mobile-pasal' ) ),
+		'arrows-rotate' => array( 'label' => __( 'Trade-In / Free Data Transfer', 'mobile-pasal' ), 'category' => __( 'Quality & Retail', 'mobile-pasal' ) ),
+
+		// Location & Contact
+		'location'      => array( 'label' => __( 'Location Pin / Gulariya Counter', 'mobile-pasal' ), 'category' => __( 'Contact & Store', 'mobile-pasal' ) ),
+		'store'         => array( 'label' => __( 'Showroom Counter / Ji. Pra. Ka.', 'mobile-pasal' ), 'category' => __( 'Contact & Store', 'mobile-pasal' ) ),
+		'phone'         => array( 'label' => __( 'Phone Hotline / Immediate Call', 'mobile-pasal' ), 'category' => __( 'Contact & Store', 'mobile-pasal' ) ),
+		'whatsapp'      => array( 'label' => __( 'WhatsApp Direct Chat', 'mobile-pasal' ), 'category' => __( 'Contact & Store', 'mobile-pasal' ) ),
+		'truck'         => array( 'label' => __( 'Courier / Local Dispatch', 'mobile-pasal' ), 'category' => __( 'Contact & Store', 'mobile-pasal' ) ),
+	);
+}
+
+/**
+ * Normalize legacy symbol or unicode characters to clean slug
+ */
+function mp_normalize_icon_key( $key ) {
+	$key = trim( (string) $key );
+	$map = array(
+		'◷'  => 'clock',
+		'⬟'  => 'screen',
+		'✹'  => 'wrench',
+		'♧'  => 'tag',
+		'▣'  => 'screen',
+		'ϟ'  => 'battery',
+		'⌁'  => 'water',
+		'⚙'  => 'microchip',
+		'◇'  => 'cable',
+		'♡'  => 'heart',
+		'✓'  => 'check',
+		'✔'  => 'check',
+		'★'  => 'star',
+	);
+	return isset( $map[ $key ] ) ? $map[ $key ] : $key;
+}
+
+/**
+ * Return crisp vector SVG markup for given icon slug
+ */
+function mp_get_icon_svg( $icon_key, $width = 22, $height = 22, $extra_class = '' ) {
+	$icon_key = mp_normalize_icon_key( $icon_key );
+	$w = intval( $width ) ?: 22;
+	$h = intval( $height ) ?: 22;
+	$cls = $extra_class ? ' ' . esc_attr( $extra_class ) : '';
+
+	$paths = array(
+		'clock'         => '<circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>',
+		'screen'        => '<rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line>',
+		'wrench'        => '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>',
+		'screwdriver'   => '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>',
+		'microscope'    => '<path d="M6 18h8"></path><path d="M3 22h18"></path><path d="M14 22a7 7 0 1 0 0-14h-1"></path><path d="M9 14h2"></path><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"></path><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"></path>',
+		'microchip'     => '<rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line>',
+		'battery'       => '<rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line><line x1="6" y1="10" x2="6" y2="14"></line><line x1="10" y1="10" x2="10" y2="14"></line>',
+		'water'         => '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>',
+		'camera'        => '<path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle>',
+		'shield'        => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>',
+		'shield-check'  => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline>',
+		'certificate'   => '<circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path>',
+		'user-shield'   => '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle>',
+		'check'         => '<polyline points="20 6 9 17 4 12"></polyline>',
+		'bolt'          => '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>',
+		'sparkles'      => '<path d="M12 3l1.912 5.813a2 2 0 0 0 1.275 1.275L21 12l-5.813 1.912a2 2 0 0 0-1.275 1.275L12 21l-1.912-5.813a2 2 0 0 0-1.275-1.275L3 12l5.813-1.912a2 2 0 0 0 1.275-1.275L12 3z"></path>',
+		'star'          => '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>',
+		'gem'           => '<polygon points="6 3 18 3 22 9 12 22 2 9"></polygon><line x1="12" y1="22" x2="6" y2="9"></line><line x1="12" y1="22" x2="18" y2="9"></line><line x1="2" y1="9" x2="22" y2="9"></line>',
+		'tag'           => '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><circle cx="7" cy="7" r="1.5" fill="currentColor"></circle>',
+		'receipt'       => '<path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"></path><line x1="8" y1="8" x2="16" y2="8"></line><line x1="8" y1="12" x2="16" y2="12"></line><line x1="8" y1="16" x2="12" y2="16"></line>',
+		'coins'         => '<circle cx="8" cy="8" r="6"></circle><path d="M18.09 10.37A6 6 0 1 1 10.34 18"></path><path d="M7 6h1v4"></path><path d="M16.7 13.3l.6.7"></path>',
+		'headphones'    => '<path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>',
+		'cable'         => '<path d="M12 22v-5"></path><path d="M9 8V2"></path><path d="M15 8V2"></path><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"></path>',
+		'heart'         => '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>',
+		'arrows-rotate' => '<path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>',
+		'location'      => '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>',
+		'store'         => '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline>',
+		'phone'         => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>',
+		'whatsapp'      => '<path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z" fill="currentColor"></path>',
+		'truck'         => '<rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>',
+	);
+
+	$inner = isset( $paths[ $icon_key ] ) ? $paths[ $icon_key ] : $paths['clock'];
+	return sprintf(
+		'<svg class="mp-icon-svg%s" width="%d" height="%d" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">%s</svg>',
+		$cls,
+		$w,
+		$h,
+		$inner
+	);
+}
+
+/**
+ * Return JSON/array map of all SVG strings for client-side live preview
+ */
+function mp_get_all_icons_svg_map() {
+	$icons = mp_get_available_icons();
+	$map = array();
+	foreach ( array_keys( $icons ) as $slug ) {
+		$map[ $slug ] = mp_get_icon_svg( $slug, 24, 24 );
+	}
+	return $map;
+}
+
+/**
+ * Render Selectable Icon Picker Field with Live Preview & Quick-Pick Chips
+ */
+function mp_render_field_icon( $key, $label, $desc = '', $default = 'clock' ) {
+	$raw_val = mobile_pasal_get_option( $key, $default );
+	$val = mp_normalize_icon_key( $raw_val );
+	if ( empty( $val ) ) {
+		$val = $default;
+	}
+	$all_icons = mp_get_available_icons();
+	$preview_svg = mp_get_icon_svg( $val, 24, 24 );
+	$field_id = 'opt_' . esc_attr( $key );
+	$preview_id = 'icon_preview_' . esc_attr( $key );
+	?>
+	<div class="bopt-field bopt-field-icon" data-field-key="<?php echo esc_attr( $key ); ?>">
+		<div class="bopt-field-info">
+			<label class="bopt-label" for="<?php echo $field_id; ?>"><?php echo esc_html( $label ); ?></label>
+			<?php if ( $desc ) : ?>
+				<p class="bopt-desc"><?php echo esc_html( $desc ); ?></p>
+			<?php endif; ?>
+		</div>
+		<div class="bopt-input-wrap bopt-icon-picker-wrap">
+			<div class="bopt-icon-picker-row">
+				<div class="bopt-icon-preview-box" id="<?php echo $preview_id; ?>" title="<?php esc_attr_e( 'Selected Icon Live Preview', 'mobile-pasal' ); ?>">
+					<?php echo $preview_svg; ?>
+				</div>
+				<div class="bopt-icon-select-wrap">
+					<select id="<?php echo $field_id; ?>"
+							name="mp_opt[<?php echo esc_attr( $key ); ?>]"
+							class="bopt-icon-select"
+							data-preview-target="#<?php echo $preview_id; ?>"
+							onchange="if(typeof mpUpdateIconPreview==='function'){mpUpdateIconPreview(this);}">
+						<?php
+						$current_cat = '';
+						foreach ( $all_icons as $slug => $info ) {
+							if ( $info['category'] !== $current_cat ) {
+								if ( '' !== $current_cat ) {
+									echo '</optgroup>';
+								}
+								$current_cat = $info['category'];
+								echo '<optgroup label="' . esc_attr( $current_cat ) . '">';
+							}
+							$selected = ( $val === $slug ) ? 'selected="selected"' : '';
+							echo '<option value="' . esc_attr( $slug ) . '" ' . $selected . '>' . esc_html( $info['label'] ) . '</option>';
+						}
+						if ( '' !== $current_cat ) {
+							echo '</optgroup>';
+						}
+						?>
+					</select>
+				</div>
+			</div>
+			<div class="bopt-icon-quick-chips">
+				<span class="bopt-quick-chips-label"><?php esc_html_e( 'Quick Pick:', 'mobile-pasal' ); ?></span>
+				<?php
+				$quick_picks = array( 'clock', 'screen', 'wrench', 'shield', 'battery', 'bolt', 'tag', 'receipt', 'location', 'water', 'star' );
+				foreach ( $quick_picks as $qp ) :
+					$qp_active = ( $val === $qp ) ? ' is-active' : '';
+				?>
+					<button type="button"
+							class="bopt-icon-chip<?php echo $qp_active; ?>"
+							data-icon-slug="<?php echo esc_attr( $qp ); ?>"
+							data-target-select="#<?php echo $field_id; ?>"
+							title="<?php echo esc_attr( $all_icons[ $qp ]['label'] ); ?>"
+							onclick="if(typeof mpPickIconChip==='function'){mpPickIconChip(this);}">
+						<?php echo mp_get_icon_svg( $qp, 14, 14 ); ?>
+						<span><?php echo esc_html( ucfirst( $qp ) ); ?></span>
+					</button>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+	<?php
+}
+
 function mp_render_field_text( $key, $label, $desc = '', $placeholder = '' ) {
 	$val = mobile_pasal_get_option( $key );
 	?>
@@ -1427,24 +1660,28 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-field-grid">
 									<div class="bopt-field-col-2">
 										<?php
+										mp_render_field_icon( 'trust_box1_icon', __( 'Trust Box 1 Icon', 'mobile-pasal' ), __( 'Choose icon for trust guarantee 1.' ), 'shield' );
 										mp_render_field_text( 'trust_box1_title', __( 'Trust Box 1 Title', 'mobile-pasal' ), __( 'Default: NTA Registered Devices' ) );
 										mp_render_field_text( 'trust_box1_desc', __( 'Trust Box 1 Subtitle', 'mobile-pasal' ), __( 'Default: 100% compliant with Nepal MDMS laws.' ) );
 										?>
 									</div>
 									<div class="bopt-field-col-2">
 										<?php
+										mp_render_field_icon( 'trust_box2_icon', __( 'Trust Box 2 Icon', 'mobile-pasal' ), __( 'Choose icon for trust guarantee 2.' ), 'bolt' );
 										mp_render_field_text( 'trust_box2_title', __( 'Trust Box 2 Title', 'mobile-pasal' ), __( 'Default: Express 45-Min Lab' ) );
 										mp_render_field_text( 'trust_box2_desc', __( 'Trust Box 2 Subtitle', 'mobile-pasal' ), __( 'Default: Quick turnaround with genuine spare parts.' ) );
 										?>
 									</div>
 									<div class="bopt-field-col-2">
 										<?php
+										mp_render_field_icon( 'trust_box3_icon', __( 'Trust Box 3 Icon', 'mobile-pasal' ), __( 'Choose icon for trust guarantee 3.' ), 'tag' );
 										mp_render_field_text( 'trust_box3_title', __( 'Trust Box 3 Title', 'mobile-pasal' ), __( 'Default: Zero Hidden Charges' ) );
 										mp_render_field_text( 'trust_box3_desc', __( 'Trust Box 3 Subtitle', 'mobile-pasal' ), __( 'Default: Transparent billing and authentic warranties.' ) );
 										?>
 									</div>
 									<div class="bopt-field-col-2">
 										<?php
+										mp_render_field_icon( 'trust_box4_icon', __( 'Trust Box 4 Icon', 'mobile-pasal' ), __( 'Choose icon for trust guarantee 4.' ), 'location' );
 										mp_render_field_text( 'trust_box4_title', __( 'Trust Box 4 Title', 'mobile-pasal' ), __( 'Default: Counter Agent Ready' ) );
 										mp_render_field_text( 'trust_box4_desc', __( 'Trust Box 4 Subtitle', 'mobile-pasal' ), __( 'Default: eSewa top-up, bill payments & cash points.' ) );
 										?>
@@ -1531,13 +1768,13 @@ function mobile_pasal_options_render_dashboard() {
 										mp_render_field_text( 'hero_slide1_trust', __( 'Slide 1 Trust Tag', 'mobile-pasal' ), __( 'Default: Trusted by 10,000+ Customers' ) );
 										mp_render_field_text( 'hero_slide1_title', __( 'Slide 1 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Expert <span class="accent">Mobile Repair</span> & Service' ) );
 										mp_render_field_textarea( 'hero_slide1_intro', __( 'Slide 1 Intro Subtitle', 'mobile-pasal' ), __( 'Default: Your One-Stop Solution for Mobile Repair, Accessories and More.' ), 2 );
-										mp_render_field_text( 'hero_slide1_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ◷' ) );
+										mp_render_field_icon( 'hero_slide1_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 1.' ), 'clock' );
 										mp_render_field_text( 'hero_slide1_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Fast<br>Service' ) );
-										mp_render_field_text( 'hero_slide1_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ⬟' ) );
+										mp_render_field_icon( 'hero_slide1_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 2.' ), 'screen' );
 										mp_render_field_text( 'hero_slide1_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Genuine<br>Parts' ) );
-										mp_render_field_text( 'hero_slide1_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ✹' ) );
+										mp_render_field_icon( 'hero_slide1_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 3.' ), 'wrench' );
 										mp_render_field_text( 'hero_slide1_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Skilled<br>Technicians' ) );
-										mp_render_field_text( 'hero_slide1_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ♧' ) );
+										mp_render_field_icon( 'hero_slide1_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 4.' ), 'tag' );
 										mp_render_field_text( 'hero_slide1_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Affordable<br>Price' ) );
 										mp_render_field_text( 'hero_slide1_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Book a Repair' ) );
 										mp_render_field_text( 'hero_slide1_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
@@ -1570,13 +1807,13 @@ function mobile_pasal_options_render_dashboard() {
 										mp_render_field_text( 'hero_slide2_trust', __( 'Slide 2 Trust Tag', 'mobile-pasal' ), __( 'Default: Careful Repairs. Quality Parts.' ) );
 										mp_render_field_text( 'hero_slide2_title', __( 'Slide 2 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Cracked Screen? <span class="accent">We\'ve Got You.</span>' ) );
 										mp_render_field_textarea( 'hero_slide2_intro', __( 'Slide 2 Intro Subtitle', 'mobile-pasal' ), __( 'Default: From screen replacement to battery problems, get your phone back in shape with reliable service.' ), 2 );
-										mp_render_field_text( 'hero_slide2_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ▣' ) );
+										mp_render_field_icon( 'hero_slide2_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 1.' ), 'screen' );
 										mp_render_field_text( 'hero_slide2_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Screen<br>Replacement' ) );
-										mp_render_field_text( 'hero_slide2_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ϟ' ) );
+										mp_render_field_icon( 'hero_slide2_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 2.' ), 'battery' );
 										mp_render_field_text( 'hero_slide2_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Battery<br>Change' ) );
-										mp_render_field_text( 'hero_slide2_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ⌁' ) );
+										mp_render_field_icon( 'hero_slide2_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 3.' ), 'droplet' );
 										mp_render_field_text( 'hero_slide2_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Water Damage<br>Check' ) );
-										mp_render_field_text( 'hero_slide2_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ⚙' ) );
+										mp_render_field_icon( 'hero_slide2_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 4.' ), 'cpu' );
 										mp_render_field_text( 'hero_slide2_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Software<br>Support' ) );
 										mp_render_field_text( 'hero_slide2_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Get Your Phone Fixed' ) );
 										mp_render_field_text( 'hero_slide2_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
@@ -1609,13 +1846,13 @@ function mobile_pasal_options_render_dashboard() {
 										mp_render_field_text( 'hero_slide3_trust', __( 'Slide 3 Trust Tag', 'mobile-pasal' ), __( 'Default: Your Local Mobile Store' ) );
 										mp_render_field_text( 'hero_slide3_title', __( 'Slide 3 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Find Your <span class="accent">Next Phone.</span>' ) );
 										mp_render_field_textarea( 'hero_slide3_intro', __( 'Slide 3 Intro Subtitle', 'mobile-pasal' ), __( 'Default: Explore popular smartphones, useful accessories and friendly advice — all in one place.' ), 2 );
-										mp_render_field_text( 'hero_slide3_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ▣' ) );
+										mp_render_field_icon( 'hero_slide3_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 1.' ), 'phone' );
 										mp_render_field_text( 'hero_slide3_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Popular<br>Brands' ) );
-										mp_render_field_text( 'hero_slide3_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ◇' ) );
+										mp_render_field_icon( 'hero_slide3_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 2.' ), 'plug' );
 										mp_render_field_text( 'hero_slide3_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Accessories' ) );
-										mp_render_field_text( 'hero_slide3_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ♡' ) );
+										mp_render_field_icon( 'hero_slide3_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 3.' ), 'heart' );
 										mp_render_field_text( 'hero_slide3_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Helpful<br>Advice' ) );
-										mp_render_field_text( 'hero_slide3_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ✓' ) );
+										mp_render_field_icon( 'hero_slide3_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Choose icon for feature 4.' ), 'wallet' );
 										mp_render_field_text( 'hero_slide3_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Trusted<br>Service' ) );
 										mp_render_field_text( 'hero_slide3_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Visit Our Store' ) );
 										mp_render_field_text( 'hero_slide3_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
@@ -1677,24 +1914,28 @@ function mobile_pasal_options_render_dashboard() {
 										?>
 										<div class="bopt-field-col-2">
 											<?php
+											mp_render_field_icon( 'trust_feat1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Choose icon for trust feature 1.' ), 'clock' );
 											mp_render_field_text( 'trust_feat1_title', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Fast 45-Min Fix' ) );
 											mp_render_field_text( 'trust_feat1_desc', __( 'Feature 1 Description', 'mobile-pasal' ), __( 'Default: Instant on-counter screen & battery turnaround' ) );
 											?>
 										</div>
 										<div class="bopt-field-col-2">
 											<?php
+											mp_render_field_icon( 'trust_feat2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Choose icon for trust feature 2.' ), 'screen' );
 											mp_render_field_text( 'trust_feat2_title', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Genuine OLED Parts' ) );
 											mp_render_field_text( 'trust_feat2_desc', __( 'Feature 2 Description', 'mobile-pasal' ), __( 'Default: TrueTone & 3D Touch programming retained' ) );
 											?>
 										</div>
 										<div class="bopt-field-col-2">
 											<?php
+											mp_render_field_icon( 'trust_feat3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Choose icon for trust feature 3.' ), 'wrench' );
 											mp_render_field_text( 'trust_feat3_title', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Level 4 Technicians' ) );
 											mp_render_field_text( 'trust_feat3_desc', __( 'Feature 3 Description', 'mobile-pasal' ), __( 'Default: Micro-soldering & stereo microscope cleanroom lab' ) );
 											?>
 										</div>
 										<div class="bopt-field-col-2">
 											<?php
+											mp_render_field_icon( 'trust_feat4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Choose icon for trust feature 4.' ), 'shield' );
 											mp_render_field_text( 'trust_feat4_title', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Affordable Pricing' ) );
 											mp_render_field_text( 'trust_feat4_desc', __( 'Feature 4 Description', 'mobile-pasal' ), __( 'Default: Transparent rates with warranty & official VAT bill' ) );
 											?>
@@ -1990,12 +2231,15 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'lab_title', __( 'Lab Section Title', 'mobile-pasal' ), __( 'Default: Gulariya\'s Premier Precision Apple Fix Lab' ) );
 									mp_render_field_textarea( 'lab_desc', __( 'Lab Section Subtitle', 'mobile-pasal' ), __( 'Default: We do not forward your phone to Nepalgunj or Kathmandu...' ), 3 );
 
+									mp_render_field_icon( 'lab_feat1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Choose icon for screen replacement.' ), 'clock' );
 									mp_render_field_text( 'lab_feat1_title', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: 30-Minute Screen Replacement' ) );
 									mp_render_field_text( 'lab_feat1_chip', __( 'Feature 1 Status Chip', 'mobile-pasal' ), __( 'Default: TrueTone & 3D Touch Retained' ) );
 									mp_render_field_text( 'lab_feat1_desc', __( 'Feature 1 Description', 'mobile-pasal' ), __( 'Default: Fast OLED and glass restoration with TrueTone & 3D touch programming.' ) );
+									mp_render_field_icon( 'lab_feat2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Choose icon for battery calibration.' ), 'battery' );
 									mp_render_field_text( 'lab_feat2_title', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Battery Health Calibration' ) );
 									mp_render_field_text( 'lab_feat2_chip', __( 'Feature 2 Status Chip', 'mobile-pasal' ), __( 'Default: Zero Error BMS Micro-Welded' ) );
 									mp_render_field_text( 'lab_feat2_desc', __( 'Feature 2 Description', 'mobile-pasal' ), __( 'Default: Certified battery replacements that restore peak 100% capacity...' ) );
+									mp_render_field_icon( 'lab_feat3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Choose icon for counter transparency.' ), 'shield' );
 									mp_render_field_text( 'lab_feat3_title', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: In-Front-Of-You Transparency' ) );
 									mp_render_field_text( 'lab_feat3_chip', __( 'Feature 3 Status Chip', 'mobile-pasal' ), __( 'Default: 100% Privacy Protection' ) );
 									mp_render_field_text( 'lab_feat3_desc', __( 'Feature 3 Description', 'mobile-pasal' ), __( 'Default: Watch your repair live across our counter...' ) );
@@ -2433,6 +2677,7 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
+										mp_render_field_icon( 'assurance1_icon', __( 'Card 1 Icon', 'mobile-pasal' ), __( 'Choose icon for card 1.' ), 'shield' );
 										mp_render_field_text( 'assurance1_title', __( 'Card 1 Title', 'mobile-pasal' ), __( 'Default: 100% NTA Approved' ) );
 										mp_render_field_textarea( 'assurance1_desc', __( 'Card 1 Description', 'mobile-pasal' ), __( 'Default: Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted MDMS cellular service across Nepal.' ), 2 );
 										mp_render_field_text( 'assurance1_tag', __( 'Card 1 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: MDMS Verified' ) );
@@ -2458,6 +2703,7 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
+										mp_render_field_icon( 'assurance2_icon', __( 'Card 2 Icon', 'mobile-pasal' ), __( 'Choose icon for card 2.' ), 'receipt' );
 										mp_render_field_text( 'assurance2_title', __( 'Card 2 Title', 'mobile-pasal' ), __( 'Default: Official VAT Bill' ) );
 										mp_render_field_textarea( 'assurance2_desc', __( 'Card 2 Description', 'mobile-pasal' ), __( 'Default: Every single handset comes with an authorized commercial VAT serial bill enabling legitimate distributor warranty claims.' ), 2 );
 										mp_render_field_text( 'assurance2_tag', __( 'Card 2 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Genuine Bill' ) );
@@ -2483,6 +2729,7 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
+										mp_render_field_icon( 'assurance3_icon', __( 'Card 3 Icon', 'mobile-pasal' ), __( 'Choose icon for card 3.' ), 'arrows-rotate' );
 										mp_render_field_text( 'assurance3_title', __( 'Card 3 Title', 'mobile-pasal' ), __( 'Default: Free Data Transfer' ) );
 										mp_render_field_textarea( 'assurance3_desc', __( 'Card 3 Description', 'mobile-pasal' ), __( 'Default: We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ), 2 );
 										mp_render_field_text( 'assurance3_tag', __( 'Card 3 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Walk-In Setup' ) );
@@ -2508,6 +2755,7 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
+										mp_render_field_icon( 'assurance4_icon', __( 'Card 4 Icon', 'mobile-pasal' ), __( 'Choose icon for card 4.' ), 'store' );
 										mp_render_field_text( 'assurance4_title', __( 'Card 4 Title', 'mobile-pasal' ), __( 'Default: Trade-In Counter' ) );
 										mp_render_field_textarea( 'assurance4_desc', __( 'Card 4 Description', 'mobile-pasal' ), __( 'Default: Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ), 2 );
 										mp_render_field_text( 'assurance4_tag', __( 'Card 4 Footer Pill Tag', 'mobile-pasal' ), __( 'Default: Instant Valuation' ) );

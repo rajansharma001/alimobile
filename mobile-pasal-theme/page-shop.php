@@ -371,7 +371,7 @@ get_header();
 			<!-- Card 1: NTA Approved -->
 			<div class="assurance-card">
 				<div class="assurance-icon-box">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+					<?php echo mp_get_icon_svg( mp_opt( 'assurance1_icon', 'shield' ), 24, 24 ); ?>
 				</div>
 				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h3>
 				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
@@ -386,7 +386,7 @@ get_header();
 			<!-- Card 2: Official VAT Bill -->
 			<div class="assurance-card">
 				<div class="assurance-icon-box">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+					<?php echo mp_get_icon_svg( mp_opt( 'assurance2_icon', 'receipt' ), 24, 24 ); ?>
 				</div>
 				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h3>
 				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
@@ -401,7 +401,7 @@ get_header();
 			<!-- Card 3: Free Data Transfer -->
 			<div class="assurance-card">
 				<div class="assurance-icon-box">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+					<?php echo mp_get_icon_svg( mp_opt( 'assurance3_icon', 'arrows-rotate' ), 24, 24 ); ?>
 				</div>
 				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h3>
 				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
@@ -416,7 +416,7 @@ get_header();
 			<!-- Card 4: Trade-In Counter -->
 			<div class="assurance-card">
 				<div class="assurance-icon-box">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+					<?php echo mp_get_icon_svg( mp_opt( 'assurance4_icon', 'store' ), 24, 24 ); ?>
 				</div>
 				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h3>
 				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>

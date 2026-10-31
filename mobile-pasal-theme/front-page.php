@@ -24,13 +24,13 @@ $map_url = mp_opt( 'google_maps_link', 'https://maps.google.com/?q=Gulariya,Bard
 $slide1_trust     = mp_opt( 'hero_slide1_trust', 'Trusted by 10,000+ Customers across Bardiya' );
 $slide1_title     = mp_opt( 'hero_slide1_title', 'Expert <span class="accent">Mobile Repair</span> &amp; Service' );
 $slide1_intro     = mp_opt( 'hero_slide1_intro', 'Your One-Stop Solution for Official Sealed Smartphones, Genuine Accessories, and Micro-Surgical Lab Repairs.' );
-$slide1_f1_icon   = mp_opt( 'hero_slide1_f1_icon', '◷' );
+$slide1_f1_icon   = mp_opt( 'hero_slide1_f1_icon', 'clock' );
 $slide1_f1_text   = mp_opt( 'hero_slide1_f1_text', 'Fast<br>45-Min Fix' );
-$slide1_f2_icon   = mp_opt( 'hero_slide1_f2_icon', '⬟' );
+$slide1_f2_icon   = mp_opt( 'hero_slide1_f2_icon', 'screen' );
 $slide1_f2_text   = mp_opt( 'hero_slide1_f2_text', 'Genuine<br>OLED Parts' );
-$slide1_f3_icon   = mp_opt( 'hero_slide1_f3_icon', '✹' );
+$slide1_f3_icon   = mp_opt( 'hero_slide1_f3_icon', 'wrench' );
 $slide1_f3_text   = mp_opt( 'hero_slide1_f3_text', 'Level 4<br>Technicians' );
-$slide1_f4_icon   = mp_opt( 'hero_slide1_f4_icon', '♧' );
+$slide1_f4_icon   = mp_opt( 'hero_slide1_f4_icon', 'tag' );
 $slide1_f4_text   = mp_opt( 'hero_slide1_f4_text', 'Affordable<br>Pricing' );
 $slide1_btn1_text = mp_opt( 'hero_slide1_btn1_text', 'Shop Handsets' );
 $slide1_btn1_url  = mp_opt( 'hero_slide1_btn1_url', '#categories' );
@@ -46,13 +46,13 @@ if ( empty( $slide1_img ) ) {
 $slide2_trust     = mp_opt( 'hero_slide2_trust', '100% Genuine Apple &amp; Android Displays' );
 $slide2_title     = mp_opt( 'hero_slide2_title', 'Cracked Screen? <span class="accent">We\'ve Got You.</span>' );
 $slide2_intro     = mp_opt( 'hero_slide2_intro', 'Precision IC board diagnostics, rapid original battery replacements, and certified glass lamination with 1-Year Warranty.' );
-$slide2_f1_icon   = mp_opt( 'hero_slide2_f1_icon', '▣' );
+$slide2_f1_icon   = mp_opt( 'hero_slide2_f1_icon', 'screen' );
 $slide2_f1_text   = mp_opt( 'hero_slide2_f1_text', 'OLED Screen<br>Replacement' );
-$slide2_f2_icon   = mp_opt( 'hero_slide2_f2_icon', 'ϟ' );
+$slide2_f2_icon   = mp_opt( 'hero_slide2_f2_icon', 'battery' );
 $slide2_f2_text   = mp_opt( 'hero_slide2_f2_text', 'Certified<br>Battery Swap' );
-$slide2_f3_icon   = mp_opt( 'hero_slide2_f3_icon', '⌁' );
+$slide2_f3_icon   = mp_opt( 'hero_slide2_f3_icon', 'droplet' );
 $slide2_f3_text   = mp_opt( 'hero_slide2_f3_text', 'Water Soak<br>Restoration' );
-$slide2_f4_icon   = mp_opt( 'hero_slide2_f4_icon', '⚙' );
+$slide2_f4_icon   = mp_opt( 'hero_slide2_f4_icon', 'cpu' );
 $slide2_f4_text   = mp_opt( 'hero_slide2_f4_text', 'Motherboard<br>Micro-Soldering' );
 $slide2_btn1_text = mp_opt( 'hero_slide2_btn1_text', 'Book Counter Fix' );
 $slide2_btn2_text = mp_opt( 'hero_slide2_btn2_text', 'Explore Services' );
@@ -67,13 +67,13 @@ if ( empty( $slide2_img ) ) {
 $slide3_trust     = mp_opt( 'hero_slide3_trust', 'Official Nepal Distro Guarantee' );
 $slide3_title     = mp_opt( 'hero_slide3_title', 'Find Your <span class="accent">Next Phone.</span>' );
 $slide3_intro     = mp_opt( 'hero_slide3_intro', 'Brand new sealed smartphones with MDMS / NTA registration, zero markup rates, and flexible exchange options.' );
-$slide3_f1_icon   = mp_opt( 'hero_slide3_f1_icon', '▣' );
+$slide3_f1_icon   = mp_opt( 'hero_slide3_f1_icon', 'phone' );
 $slide3_f1_text   = mp_opt( 'hero_slide3_f1_text', 'Top Tier<br>Brands' );
-$slide3_f2_icon   = mp_opt( 'hero_slide3_f2_icon', '◇' );
+$slide3_f2_icon   = mp_opt( 'hero_slide3_f2_icon', 'plug' );
 $slide3_f2_text   = mp_opt( 'hero_slide3_f2_text', 'Anker &amp; PD<br>Accessories' );
-$slide3_f3_icon   = mp_opt( 'hero_slide3_f3_icon', '♡' );
+$slide3_f3_icon   = mp_opt( 'hero_slide3_f3_icon', 'heart' );
 $slide3_f3_text   = mp_opt( 'hero_slide3_f3_text', 'Tech Setup<br>Assistance' );
-$slide3_f4_icon   = mp_opt( 'hero_slide3_f4_icon', '✓' );
+$slide3_f4_icon   = mp_opt( 'hero_slide3_f4_icon', 'wallet' );
 $slide3_f4_text   = mp_opt( 'hero_slide3_f4_text', 'eSewa &amp; Bank<br>Counters' );
 $slide3_btn1_text = mp_opt( 'hero_slide3_btn1_text', 'Browse Nepal Stock' );
 $slide3_btn1_url  = mp_opt( 'hero_slide3_btn1_url', '#catalog' );
@@ -100,10 +100,13 @@ if ( empty( $spotlight_img ) ) {
 $lab_badge   = mp_opt( 'lab_badge', 'CLEANROOM BENCH SETUP' );
 $lab_title   = mp_opt( 'lab_title', 'Precision Microscope Level Repairs Right in Gulariya' );
 $lab_desc    = mp_opt( 'lab_desc', 'We do not courier your valuable phone to Nepalgunj or Kathmandu. Repairs happen transparently inside our Gulariya counter laboratory with stereo zoom microscopes, anti-static thermal stations, and genuine parts.' );
+$lab_feat1_icon = mp_opt( 'lab_feat1_icon', 'screen' );
 $lab_f1_h    = mp_opt( 'lab_feat1_title', '30-Minute Screen Replacement' );
 $lab_f1_d    = mp_opt( 'lab_feat1_desc', 'Fast OLED and glass restoration with TrueTone &amp; 3D touch programming.' );
+$lab_feat2_icon = mp_opt( 'lab_feat2_icon', 'battery' );
 $lab_f2_h    = mp_opt( 'lab_feat2_title', 'Battery Health Calibration' );
 $lab_f2_d    = mp_opt( 'lab_feat2_desc', 'Certified battery replacements that restore peak 100% capacity and battery health cycle.' );
+$lab_feat3_icon = mp_opt( 'lab_feat3_icon', 'shield' );
 $lab_f3_h    = mp_opt( 'lab_feat3_title', 'In-Front-Of-You Transparency' );
 $lab_f3_d    = mp_opt( 'lab_feat3_desc', 'Watch your repair live across our counter. Complete privacy protection for photos &amp; accounts.' );
 $lab_s1_n    = mp_opt( 'lab_stat1_num', '10,000+' );
@@ -119,12 +122,16 @@ if ( empty( $lab_img ) ) {
 
 // Hero Trust Bar
 $trust_bar_enabled = mp_opt( 'trust_bar_enabled', 1 );
+$trust_feat1_icon  = mp_opt( 'trust_feat1_icon', 'clock' );
 $trust_feat1_title = mp_opt( 'trust_feat1_title', 'Fast 45-Min Fix' );
 $trust_feat1_desc  = mp_opt( 'trust_feat1_desc', 'Instant on-counter screen & battery turnaround' );
+$trust_feat2_icon  = mp_opt( 'trust_feat2_icon', 'screen' );
 $trust_feat2_title = mp_opt( 'trust_feat2_title', 'Genuine OLED Parts' );
 $trust_feat2_desc  = mp_opt( 'trust_feat2_desc', 'TrueTone & 3D Touch programming retained' );
+$trust_feat3_icon  = mp_opt( 'trust_feat3_icon', 'wrench' );
 $trust_feat3_title = mp_opt( 'trust_feat3_title', 'Level 4 Technicians' );
 $trust_feat3_desc  = mp_opt( 'trust_feat3_desc', 'Micro-soldering & stereo microscope cleanroom lab' );
+$trust_feat4_icon  = mp_opt( 'trust_feat4_icon', 'tag' );
 $trust_feat4_title = mp_opt( 'trust_feat4_title', 'Affordable Pricing' );
 $trust_feat4_desc  = mp_opt( 'trust_feat4_desc', 'Transparent rates with warranty & official VAT bill' );
 
@@ -290,10 +297,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- 1. Fast 45-Min Fix -->
       <div class="hero-trust-card">
         <div class="trust-card-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"></circle>
-            <polyline points="12 6 12 12 16 14"></polyline>
-          </svg>
+          <?php echo mp_get_icon_svg( $trust_feat1_icon, 22, 22 ); ?>
         </div>
         <div class="trust-card-content">
           <h3 class="trust-card-title"><?php echo esc_html( $trust_feat1_title ); ?></h3>
@@ -304,10 +308,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- 2. Genuine OLED Parts -->
       <div class="hero-trust-card">
         <div class="trust-card-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2"></rect>
-            <line x1="12" y1="18" x2="12.01" y2="18"></line>
-          </svg>
+          <?php echo mp_get_icon_svg( $trust_feat2_icon, 22, 22 ); ?>
         </div>
         <div class="trust-card-content">
           <h3 class="trust-card-title"><?php echo esc_html( $trust_feat2_title ); ?></h3>
@@ -318,9 +319,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- 3. Level 4 Technicians -->
       <div class="hero-trust-card">
         <div class="trust-card-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-          </svg>
+          <?php echo mp_get_icon_svg( $trust_feat3_icon, 22, 22 ); ?>
         </div>
         <div class="trust-card-content">
           <h3 class="trust-card-title"><?php echo esc_html( $trust_feat3_title ); ?></h3>
@@ -331,10 +330,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- 4. Affordable Pricing -->
       <div class="hero-trust-card">
         <div class="trust-card-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            <polyline points="9 12 11 14 15 10"></polyline>
-          </svg>
+          <?php echo mp_get_icon_svg( $trust_feat4_icon, 22, 22 ); ?>
         </div>
         <div class="trust-card-content">
           <h3 class="trust-card-title"><?php echo esc_html( $trust_feat4_title ); ?></h3>
@@ -795,7 +791,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <!-- Feature 1: Screen Replacement -->
             <div class="cleanroom-feature-row">
               <div class="feature-icon-pod">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <?php echo mp_get_icon_svg( $lab_feat1_icon, 22, 22 ); ?>
               </div>
               <div class="feature-text-wrap">
                 <div class="feature-header-line">
@@ -809,7 +805,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <!-- Feature 2: Battery Health Calibration -->
             <div class="cleanroom-feature-row">
               <div class="feature-icon-pod">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
+                <?php echo mp_get_icon_svg( $lab_feat2_icon, 22, 22 ); ?>
               </div>
               <div class="feature-text-wrap">
                 <div class="feature-header-line">
@@ -823,7 +819,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <!-- Feature 3: In-Front-Of-You Transparency -->
             <div class="cleanroom-feature-row">
               <div class="feature-icon-pod">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <?php echo mp_get_icon_svg( $lab_feat3_icon, 22, 22 ); ?>
               </div>
               <div class="feature-text-wrap">
                 <div class="feature-header-line">

@@ -32,7 +32,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
     <div class="trust-strip-grid">
       <div class="trust-box">
         <div class="trust-box-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <?php echo mp_get_icon_svg( mp_opt( 'trust_box1_icon', 'shield' ), 22, 22 ); ?>
         </div>
         <div>
           <h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'trust_box1_title', 'NTA Registered Devices' ) ); ?></h4>
@@ -41,7 +41,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
       <div class="trust-box">
         <div class="trust-box-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          <?php echo mp_get_icon_svg( mp_opt( 'trust_box2_icon', 'bolt' ), 22, 22 ); ?>
         </div>
         <div>
           <h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'trust_box2_title', 'Express 45-Min Lab' ) ); ?></h4>
@@ -50,7 +50,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
       <div class="trust-box">
         <div class="trust-box-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><circle cx="7" cy="7" r="1.5" fill="currentColor"></circle></svg>
+          <?php echo mp_get_icon_svg( mp_opt( 'trust_box3_icon', 'tag' ), 22, 22 ); ?>
         </div>
         <div>
           <h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'trust_box3_title', 'Zero Hidden Charges' ) ); ?></h4>
@@ -59,7 +59,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
       <div class="trust-box">
         <div class="trust-box-icon">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          <?php echo mp_get_icon_svg( mp_opt( 'trust_box4_icon', 'location' ), 22, 22 ); ?>
         </div>
         <div>
           <h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'trust_box4_title', 'Counter Agent Ready' ) ); ?></h4>

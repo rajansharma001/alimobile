@@ -566,7 +566,55 @@
 	/**
 	 * Document Ready Bootstrapper
 	 */
-	$( document ).ready( function () {
+	
+	/**
+	 * Icon Picker & Live Preview System
+	 */
+	function initIconPickers() {
+		// Global update helper for inline onchange / chip clicks
+		window.mpUpdateIconPreview = function ( selectElem ) {
+			if ( ! selectElem ) return;
+			var $select  = $( selectElem );
+			var slug     = $select.val();
+			var targetId = $select.data( 'preview-target' );
+			var $preview = targetId ? $( targetId ) : $select.closest( '.bopt-icon-picker-wrap' ).find( '.bopt-icon-preview-box' );
+			var $wrap    = $select.closest( '.bopt-icon-picker-wrap' );
+
+			if ( window.mobilePasalOptions && window.mobilePasalOptions.icons && window.mobilePasalOptions.icons[ slug ] ) {
+				$preview.html( window.mobilePasalOptions.icons[ slug ] );
+			}
+
+			// Update chips active state
+			$wrap.find( '.bopt-icon-chip' ).removeClass( 'is-active' );
+			$wrap.find( '.bopt-icon-chip[data-icon-slug="' + slug + '"]' ).addClass( 'is-active' );
+		};
+
+		window.mpPickIconChip = function ( chipElem ) {
+			if ( ! chipElem ) return;
+			var $chip        = $( chipElem );
+			var slug         = $chip.data( 'icon-slug' );
+			var targetSelect = $chip.data( 'target-select' );
+			var $select      = $( targetSelect );
+
+			if ( $select.length ) {
+				$select.val( slug ).trigger( 'change' );
+				window.mpUpdateIconPreview( $select[ 0 ] );
+			}
+		};
+
+		// Delegate event listener for selects
+		$( document ).on( 'change', '.bopt-icon-select', function () {
+			window.mpUpdateIconPreview( this );
+		} );
+
+		// Delegate event listener for quick chips
+		$( document ).on( 'click', '.bopt-icon-chip', function ( e ) {
+			e.preventDefault();
+			window.mpPickIconChip( this );
+		} );
+	}
+
+$( document ).ready( function () {
 		initActiveTabFromUrl();
 		initHashChangeListener();
 		initTabClickHandlers();
@@ -581,6 +629,7 @@
 		initSaveAlertAutoDismiss();
 		initInquiriesFilter();
 		initZeroScrollUX();
+		initIconPickers();
 	} );
 
 } )( jQuery );
