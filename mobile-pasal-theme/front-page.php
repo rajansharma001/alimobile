@@ -124,10 +124,15 @@ if ( empty( $lab_img ) ) {
   <div class="tech-ring-accent" aria-hidden="true"></div>
 
   <div class="hero">
-    <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">‹</button>
-    <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">›</button>
+    <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+    </button>
+    <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+    </button>
 
-    <!-- Slide 1 -->
+    <div class="hero-slider-stage" id="heroSliderStage">
+      <!-- Slide 1 -->
     <div class="slide active" data-slide="0">
       <div class="copy">
         <div class="trust">
@@ -239,9 +244,12 @@ if ( empty( $lab_img ) ) {
         <img class="product-image" src="<?php echo esc_url( $slide3_img ); ?>" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide3_title ) ); ?>" />
         <div class="tagline"><?php echo wp_kses_post( $slide3_tagline ); ?></div>
       </div>
-    </div>
+    </div><!-- /#heroSliderStage -->
 
     <div class="blue-swoosh"></div>
+    <div class="hero-progress-bar" aria-hidden="true">
+      <div class="hero-progress-fill" id="heroProgress"></div>
+    </div>
   </div>
 </section>
 

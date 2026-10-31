@@ -96,76 +96,135 @@
   ];
 
   // -------------------------------------------------------------
-  // 2. HERO SLIDER LOGIC
+  // 2. HERO SLIDER LOGIC (Directional Slide, Staggered Flow & Progress Timer)
   // -------------------------------------------------------------
-  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
-  var prevBtn = document.querySelector(".slider-arrow.prev");
-  var nextBtn = document.querySelector(".slider-arrow.next");
+  var slides = Array.prototype.slice.call(document.querySelectorAll("#heroSlider .slide"));
+  var prevBtn = document.querySelector("#heroSlider .slider-arrow.prev");
+  var nextBtn = document.querySelector("#heroSlider .slider-arrow.next");
+  var heroSliderElem = document.getElementById("heroSlider");
+  var heroProgress = document.getElementById("heroProgress");
   var currentSlide = 0;
-  var autoPlayInterval;
+  var isHeroPaused = false;
+  var heroProgressTimer = null;
+  var heroProgressMs = 0;
+  var SLIDE_DURATION_MS = 6000;
+  var TICK_INTERVAL_MS = 50;
 
-  function showSlide(index) {
+  function showSlide(index, direction) {
     if (!slides.length) return;
-    currentSlide = (index + slides.length) % slides.length;
-    slides.forEach(function (slide, i) {
-      slide.classList.toggle("active", i === currentSlide);
-      slide.querySelectorAll(".dot").forEach(function (dot, dotIndex) {
+    var nextSlide = (index + slides.length) % slides.length;
+    var dir = direction || (nextSlide > currentSlide ? "next" : "prev");
+
+    // Remove active and directional classes from all slides
+    slides.forEach(function (slide) {
+      slide.classList.remove("active", "slide-from-right", "slide-from-left");
+    });
+
+    // Activate the target slide with the proper directional glide
+    var target = slides[nextSlide];
+    if (target) {
+      // Force DOM reflow so animations retrigger cleanly on every slide change
+      void target.offsetWidth;
+      target.classList.add("active");
+      if (dir === "next") {
+        target.classList.add("slide-from-right");
+      } else {
+        target.classList.add("slide-from-left");
+      }
+    }
+
+    currentSlide = nextSlide;
+
+    // Reset progress bar on manual or automatic slide change
+    heroProgressMs = 0;
+    if (heroProgress) {
+      heroProgress.style.width = "0%";
+    }
+
+    // Synchronize dot indicators across all slides
+    document.querySelectorAll("#heroSlider .dots").forEach(function (dotsContainer) {
+      dotsContainer.querySelectorAll(".dot").forEach(function (dot, dotIndex) {
         dot.classList.toggle("active", dotIndex === currentSlide);
       });
     });
   }
 
   function startAutoPlay() {
-    clearInterval(autoPlayInterval);
-    if (slides.length > 1) {
-      autoPlayInterval = setInterval(function () {
-        showSlide(currentSlide + 1);
-      }, 6500);
-    }
+    if (heroProgressTimer) clearInterval(heroProgressTimer);
+    heroProgressMs = 0;
+    if (slides.length <= 1) return;
+
+    heroProgressTimer = setInterval(function () {
+      if (!isHeroPaused) {
+        heroProgressMs += TICK_INTERVAL_MS;
+        var pct = Math.min(100, (heroProgressMs / SLIDE_DURATION_MS) * 100);
+        if (heroProgress) {
+          heroProgress.style.width = pct + "%";
+        }
+        if (heroProgressMs >= SLIDE_DURATION_MS) {
+          heroProgressMs = 0;
+          showSlide(currentSlide + 1, "next");
+        }
+      }
+    }, TICK_INTERVAL_MS);
   }
 
-  if (prevBtn && nextBtn) {
+  if (prevBtn) {
     prevBtn.addEventListener("click", function () {
-      showSlide(currentSlide - 1);
-      startAutoPlay();
-    });
-    nextBtn.addEventListener("click", function () {
-      showSlide(currentSlide + 1);
-      startAutoPlay();
+      showSlide(currentSlide - 1, "prev");
     });
   }
 
-  document.querySelectorAll(".dot").forEach(function (dot) {
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      showSlide(currentSlide + 1, "next");
+    });
+  }
+
+  // Bind click handlers to dot indicators across all slides
+  document.querySelectorAll("#heroSlider .dot").forEach(function (dot) {
     dot.addEventListener("click", function () {
-      var label = dot.getAttribute("aria-label") || "Slide 1";
-      var index = Number(label.replace("Slide ", "")) - 1;
-      if (!isNaN(index)) {
-        showSlide(index);
-        startAutoPlay();
+      var label = dot.getAttribute("aria-label") || "";
+      var match = label.match(/\d+/);
+      var targetIndex = match ? parseInt(match[0], 10) - 1 : 0;
+      if (!isNaN(targetIndex) && targetIndex !== currentSlide) {
+        var dir = targetIndex > currentSlide ? "next" : "prev";
+        showSlide(targetIndex, dir);
       }
     });
   });
 
-  // Touch swipe for Hero
-  var heroSliderElem = document.getElementById("heroSlider");
+  // Touch swipe & hover pause for Hero
   var touchStartX = 0;
   var touchEndX = 0;
 
   if (heroSliderElem) {
+    heroSliderElem.addEventListener("mouseenter", function () {
+      isHeroPaused = true;
+    });
+
+    heroSliderElem.addEventListener("mouseleave", function () {
+      isHeroPaused = false;
+    });
+
     heroSliderElem.addEventListener("touchstart", function (e) {
+      isHeroPaused = true;
       if (e.changedTouches && e.changedTouches[0]) {
         touchStartX = e.changedTouches[0].screenX;
       }
     }, { passive: true });
 
     heroSliderElem.addEventListener("touchend", function (e) {
+      isHeroPaused = false;
       if (e.changedTouches && e.changedTouches[0]) {
         touchEndX = e.changedTouches[0].screenX;
         var diff = touchStartX - touchEndX;
         if (Math.abs(diff) > 40) {
-          if (diff > 0) showSlide(currentSlide + 1);
-          else showSlide(currentSlide - 1);
-          startAutoPlay();
+          if (diff > 0) {
+            showSlide(currentSlide + 1, "next");
+          } else {
+            showSlide(currentSlide - 1, "prev");
+          }
         }
       }
     }, { passive: true });
@@ -244,12 +303,10 @@
       closeQuoteModal();
     }
     if (e.key === "ArrowLeft" && slides.length) {
-      showSlide(currentSlide - 1);
-      startAutoPlay();
+      showSlide(currentSlide - 1, "prev");
     }
     if (e.key === "ArrowRight" && slides.length) {
-      showSlide(currentSlide + 1);
-      startAutoPlay();
+      showSlide(currentSlide + 1, "next");
     }
   });
 
@@ -269,7 +326,14 @@
     });
     var img = document.getElementById("flagshipDisplayImg");
     if (img && finishImages[finishName]) {
-      img.src = finishImages[finishName];
+      img.style.transition = "opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1)";
+      img.style.opacity = "0.2";
+      img.style.transform = "scale(0.96) translateY(4px)";
+      setTimeout(function () {
+        img.src = finishImages[finishName];
+        img.style.opacity = "1";
+        img.style.transform = "scale(1) translateY(0)";
+      }, 160);
     }
     var waBtn = document.getElementById("flagshipWaBtn");
     if (waBtn) {
