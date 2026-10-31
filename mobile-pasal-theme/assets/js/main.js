@@ -271,10 +271,10 @@
     });
   }
 
-  window.addEventListener("scroll", function () {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+  function handleStickyHeader() {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
     if (headerBar) {
-      if (scrollY > 30) {
+      if (scrollY > 20) {
         headerBar.classList.add("scrolled");
       } else {
         headerBar.classList.remove("scrolled");
@@ -288,7 +288,10 @@
         scrollTopBtn.classList.remove("visible");
       }
     }
-  }, { passive: true });
+  }
+
+  window.addEventListener("scroll", handleStickyHeader, { passive: true });
+  handleStickyHeader();
 
   if (scrollTopBtn) {
     scrollTopBtn.addEventListener("click", function () {
