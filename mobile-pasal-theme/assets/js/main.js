@@ -474,6 +474,98 @@
   }
   setTimeout(hidePreloader, 1000);
 
+  
+  // -------------------------------------------------------------
+  // SERVICES PAGE: INTERACTIVE REPAIR COUNTER STATION
+  // -------------------------------------------------------------
+  var repairBuilder = document.getElementById('repair-builder');
+  if (repairBuilder) {
+    var repairDevice = 'Apple iPhone';
+    var repairIssue = 'Screen & Display (Cracked glass / black spots / touch dead)';
+    var repairTime = '30–45 Mins';
+    var repairWarranty = '90 Days Testing Warranty';
+
+    var repairModelInput = document.getElementById('builder-model-input') || document.querySelector('.model-text-field');
+    var repairPreviewText = document.getElementById('builder-preview-text');
+    var repairSendBtn = document.getElementById('builder-send-whatsapp-btn');
+
+    var ticketDeviceVal = document.getElementById('ticket-device-val');
+    var ticketModelVal = document.getElementById('ticket-model-val');
+    var ticketFaultVal = document.getElementById('ticket-fault-val');
+    var ticketTimeVal = document.getElementById('ticket-time-val');
+    var ticketWarrantyVal = document.getElementById('ticket-warranty-val');
+
+    var devicePills = document.querySelectorAll('.device-pills-grid .dev-pill-btn');
+    var faultCards = document.querySelectorAll('.fault-cards-grid .fault-select-card');
+
+    function updateRepairTicket() {
+      var rawModel = (repairModelInput ? repairModelInput.value : '').trim();
+      var displayModel = rawModel ? rawModel : 'Specified at Counter';
+      var modelDesc = rawModel ? ' (Model: ' + rawModel + ')' : '';
+
+      if (ticketDeviceVal) ticketDeviceVal.textContent = repairDevice;
+      if (ticketModelVal) ticketModelVal.textContent = displayModel;
+      if (ticketFaultVal) {
+        var shortFault = repairIssue.split('(')[0].trim();
+        ticketFaultVal.textContent = shortFault;
+      }
+      if (ticketTimeVal) ticketTimeVal.textContent = repairTime;
+      if (ticketWarrantyVal) ticketWarrantyVal.textContent = repairWarranty;
+
+      var message = 'Namaste Ali Mobile & Apple Fix, mero ' + repairDevice + modelDesc +
+                    ' ma problem chha: ' + repairIssue + '. Gulariya counter ma check ra repair cost barema jankari dinus.';
+
+      if (repairPreviewText) {
+        repairPreviewText.textContent = '"' + message + '"';
+      }
+
+      if (repairSendBtn) {
+        repairSendBtn.href = WA_BASE + encodeURIComponent(message);
+      }
+    }
+
+    devicePills.forEach(function (pill) {
+      pill.addEventListener('click', function () {
+        devicePills.forEach(function (p) { p.classList.remove('active'); });
+        this.classList.add('active');
+        repairDevice = this.getAttribute('data-device') || 'Smartphone';
+        updateRepairTicket();
+      });
+    });
+
+    faultCards.forEach(function (card) {
+      card.addEventListener('click', function () {
+        faultCards.forEach(function (c) { c.classList.remove('active'); });
+        this.classList.add('active');
+        repairIssue = this.getAttribute('data-issue') || 'Hardware Fault';
+        repairTime = this.getAttribute('data-time') || 'Same-Day';
+        repairWarranty = this.getAttribute('data-warranty') || 'Testing Warranty';
+        updateRepairTicket();
+      });
+    });
+
+    var quickChips = document.querySelectorAll('.quick-chip-btn');
+    quickChips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        var model = this.getAttribute('data-model') || '';
+        if (repairModelInput) {
+          repairModelInput.value = model;
+          quickChips.forEach(function (c) { c.classList.remove('active'); });
+          this.classList.add('active');
+          updateRepairTicket();
+        }
+      });
+    });
+
+    if (repairModelInput) {
+      repairModelInput.addEventListener('input', function () {
+        updateRepairTicket();
+      });
+    }
+
+    updateRepairTicket();
+  }
+
   // -------------------------------------------------------------
   // 8. SERVICES PAGE: FAQ ACCORDION HANDLER
   // -------------------------------------------------------------
@@ -633,6 +725,21 @@
         card.style.display = (pos >= start && pos < end) ? '' : 'none';
       });
 
+      var catalogCountEl = document.getElementById('catalog-count-num');
+      if (catalogCountEl) {
+        catalogCountEl.textContent = matched.length;
+      }
+
+      var emptyNotice = document.getElementById('catalog-empty-notice');
+      if (emptyNotice) {
+        emptyNotice.style.display = (matched.length === 0) ? 'block' : 'none';
+      }
+
+      var mobileFilterCount = document.getElementById('mobile-filter-count');
+      if (mobileFilterCount) {
+        mobileFilterCount.textContent = (shopCategory !== 'all' || q) ? '1+' : '0';
+      }
+
       renderShopPagination(matched.length);
     }
 
@@ -651,6 +758,44 @@
       });
     }
 
+    
+    var searchClearBtn = document.getElementById('search-clear-btn');
+    if (searchClearBtn && shopSearchInput) {
+      searchClearBtn.addEventListener('click', function () {
+        shopSearchInput.value = '';
+        searchClearBtn.style.display = 'none';
+        filterShopProducts(true);
+      });
+      shopSearchInput.addEventListener('input', function () {
+        searchClearBtn.style.display = shopSearchInput.value.length > 0 ? 'block' : 'none';
+      });
+    }
+
+    var shopResetBtn = document.getElementById('sidebar-reset-btn');
+    if (shopResetBtn) {
+      shopResetBtn.addEventListener('click', function () {
+        if (shopSearchInput) shopSearchInput.value = '';
+        if (searchClearBtn) searchClearBtn.style.display = 'none';
+        shopCategory = 'all';
+        shopFilterTabs.forEach(function (t) {
+          if ((t.getAttribute('data-filter') || '') === 'all') {
+            t.classList.add('active');
+          } else {
+            t.classList.remove('active');
+          }
+        });
+        filterShopProducts(true);
+      });
+    }
+
+    var mobileFilterDrawerBtn = document.getElementById('mobile-filter-drawer-btn');
+    var shopSidebarFilters = document.getElementById('shop-sidebar-filters');
+    if (mobileFilterDrawerBtn && shopSidebarFilters) {
+      mobileFilterDrawerBtn.addEventListener('click', function () {
+        shopSidebarFilters.classList.toggle('drawer-open');
+      });
+    }
+  
     filterShopProducts(true);
   }
 
