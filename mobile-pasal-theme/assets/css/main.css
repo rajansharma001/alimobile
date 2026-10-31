@@ -3431,10 +3431,14 @@ h3 {
     linear-gradient(180deg, #ffffff 0%, var(--bg-surface-tint) 100%);
   background-size: auto, auto, 24px 24px, auto;
   color: var(--text-main);
-  padding: 64px 0 44px;
+  padding: 16px 0;
   border-bottom: 1px solid var(--border-light);
   position: relative;
   overflow: hidden;
+}
+
+.page-hero-banner .breadcrumb-nav {
+  margin-bottom: 0;
 }
 
 .page-hero-grid {

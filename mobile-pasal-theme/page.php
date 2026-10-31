@@ -13,19 +13,14 @@ get_header();
     <!-- Page Hero Banner -->
     <section class="page-hero-banner">
       <div class="wrap">
-        <div class="page-hero-grid fade-up in-view">
-          <div class="page-hero-content">
-            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-              <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                <span>Home</span>
-              </a>
-              <span class="crumb-divider">/</span>
-              <span class="crumb-active"><?php the_title(); ?></span>
-            </nav>
-            <h1 class="page-hero-title"><?php the_title(); ?></h1>
-          </div>
-        </div>
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            <span>Home</span>
+          </a>
+          <span class="crumb-divider">/</span>
+          <span class="crumb-active"><?php the_title(); ?></span>
+        </nav>
       </div>
     </section>
 
@@ -33,6 +28,7 @@ get_header();
     <section class="single-page-content" style="padding: 60px 0;">
       <div class="wrap" style="max-width: 900px;">
         <article id="post-<?php the_ID(); ?>" <?php post_class( 'page-body-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.8; color: var(--text-body);">
+          <h1 class="page-title" style="margin-top: 0; margin-bottom: 24px; color: var(--text-heading); font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800;"><?php the_title(); ?></h1>
           <?php if ( has_post_thumbnail() ) : ?>
             <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 32px;">
               <?php the_post_thumbnail( 'full', [ 'style' => 'width: 100%; height: auto; display: block;' ] ); ?>

@@ -20,113 +20,14 @@ $shop_desc  = mp_opt( 'shop_hero_desc', 'Discover Gulariya\'s largest verified i
 <!-- Page Hero Banner -->
 <section class="page-hero-banner">
 	<div class="wrap">
-		<div class="page-hero-grid fade-up in-view">
-			<!-- Left: Hero Content -->
-			<div class="page-hero-content">
-				<nav class="breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
-					<a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-						<span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
-					</a>
-					<span class="crumb-divider">/</span>
-					<span class="crumb-active"><?php esc_html_e( 'Shop', 'mobile-pasal' ); ?></span>
-				</nav>
-
-				<h1 class="page-hero-title"><?php echo esc_html( $shop_title ); ?></h1>
-				<p class="page-hero-desc"><?php echo esc_html( $shop_desc ); ?></p>
-
-				<div class="page-hero-actions">
-					<a class="btn btn-primary btn-lg" href="#catalog">
-						<span><?php esc_html_e( 'Filter Handsets Below', 'mobile-pasal' ); ?></span>
-						<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-					</a>
-					<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 ra S24 Ultra ko aaja ko counter rate dinus' ) ); ?>" target="_blank" rel="noopener">
-						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-						<span><?php esc_html_e( 'Ask Today\'s Counter Price', 'mobile-pasal' ); ?></span>
-					</a>
-				</div>
-			</div>
-
-			<!-- Right: Spotlight Card -->
-			<div class="page-hero-spotlight">
-				<div class="hero-spotlight-card">
-					<div class="spotlight-top-bar">
-						<div class="spotlight-title-row">
-							<span class="spotlight-badge"><?php echo esc_html( mp_opt( 'shop_spotlight_badge', 'Showroom Live Inventory' ) ); ?></span>
-						</div>
-						<small style="color: var(--text-muted); font-weight: 700;"><?php echo esc_html( mp_opt( 'shop_spotlight_subtitle', 'Gulariya Counter' ) ); ?></small>
-					</div>
-
-					<div class="spotlight-metric-list">
-						<div class="spotlight-metric-item">
-							<span>
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-								<?php echo esc_html( mp_opt( 'shop_spotlight_m1_label', 'NTA Registration' ) ); ?>
-							</span>
-							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m1_val', '100% Verified Bill' ) ); ?></strong>
-						</div>
-						<div class="spotlight-metric-item">
-							<span>
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-								<?php echo esc_html( mp_opt( 'shop_spotlight_m2_label', 'Data Migration' ) ); ?>
-							</span>
-							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m2_val', 'FREE Walk-In Setup' ) ); ?></strong>
-						</div>
-						<div class="spotlight-metric-item">
-							<span>
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-								<?php echo esc_html( mp_opt( 'shop_spotlight_m3_label', 'Old Device Trade-In' ) ); ?>
-							</span>
-							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m3_val', 'Instant Valuation' ) ); ?></strong>
-						</div>
-						<div class="spotlight-metric-item">
-							<span>
-								<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-								<?php echo esc_html( mp_opt( 'shop_spotlight_m4_label', 'Top Flagships' ) ); ?>
-							</span>
-							<strong><?php echo esc_html( mp_opt( 'shop_spotlight_m4_val', 'In Stock Today' ) ); ?></strong>
-						</div>
-					</div>
-
-					<div class="spotlight-tags-row">
-						<?php
-						$shop_tags_str = mp_opt( 'shop_spotlight_tags', 'Apple iPhone, Samsung Galaxy, Google Pixel, OnePlus, Xiaomi' );
-						$shop_tags     = array_map( 'trim', explode( ',', $shop_tags_str ) );
-						foreach ( $shop_tags as $s_tag ) :
-							if ( ! empty( $s_tag ) ) : ?>
-								<span class="spotlight-tag-pill"><?php echo esc_html( $s_tag ); ?></span>
-							<?php endif;
-						endforeach;
-						?>
-					</div>
-
-					<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, handset stock ra rate barema bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
-						<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-						<span><?php esc_html_e( 'Chat with Showroom Sales Desk', 'mobile-pasal' ); ?></span>
-					</a>
-				</div>
-			</div>
-		</div>
-
-		<!-- Micro-Ribbon -->
-		<div class="page-hero-ribbon fade-up">
-			<div class="hero-ribbon-item">
-				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-				<span><?php esc_html_e( '100% Official VAT Bill', 'mobile-pasal' ); ?></span>
-			</div>
-			<div class="hero-ribbon-item">
-				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-				<span><?php esc_html_e( 'Free Safe Data Migration', 'mobile-pasal' ); ?></span>
-			</div>
-			<div class="hero-ribbon-item">
-				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
-				<span><?php esc_html_e( 'Original Accessories Assured', 'mobile-pasal' ); ?></span>
-			</div>
-			<div class="hero-ribbon-item">
-				<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-				<span><?php esc_html_e( 'Instant Counter Quotes', 'mobile-pasal' ); ?></span>
-			</div>
-		</div>
+		<nav class="breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+			<a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+				<span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+			</a>
+			<span class="crumb-divider">/</span>
+			<span class="crumb-active"><?php esc_html_e( 'Shop', 'mobile-pasal' ); ?></span>
+		</nav>
 	</div>
 </section>
 

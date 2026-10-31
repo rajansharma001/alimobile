@@ -13,26 +13,31 @@ get_header();
     <!-- Post Hero Banner -->
     <section class="page-hero-banner">
       <div class="wrap">
-        <div class="page-hero-grid fade-up in-view">
-          <div class="page-hero-content">
-            <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-              <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                <span>Home</span>
-              </a>
-              <span class="crumb-divider">/</span>
-              <?php
-              $categories = get_the_category();
-              if ( ! empty( $categories ) ) :
-              ?>
-                <a class="crumb-link" href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>"><?php echo esc_html( $categories[0]->name ); ?></a>
-                <span class="crumb-divider">/</span>
-              <?php endif; ?>
-              <span class="crumb-active"><?php the_title(); ?></span>
-            </nav>
+        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+          <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+            <span>Home</span>
+          </a>
+          <span class="crumb-divider">/</span>
+          <?php
+          $categories = get_the_category();
+          if ( ! empty( $categories ) ) :
+          ?>
+            <a class="crumb-link" href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>"><?php echo esc_html( $categories[0]->name ); ?></a>
+            <span class="crumb-divider">/</span>
+          <?php endif; ?>
+          <span class="crumb-active"><?php the_title(); ?></span>
+        </nav>
+      </div>
+    </section>
 
-            <h1 class="page-hero-title"><?php the_title(); ?></h1>
-            <div style="display: flex; align-items: center; gap: 16px; margin-top: 14px; color: var(--text-muted); font-size: 0.9rem;">
+    <!-- Post Article Content -->
+    <section class="single-post-section" style="padding: 60px 0;">
+      <div class="wrap" style="max-width: 860px;">
+        <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-entry-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.85; color: var(--text-body);">
+          <header class="entry-header" style="margin-bottom: 24px;">
+            <h1 class="entry-title" style="margin-top: 0; margin-bottom: 14px; color: var(--text-heading); font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; line-height: 1.25;"><?php the_title(); ?></h1>
+            <div style="display: flex; align-items: center; gap: 16px; color: var(--text-muted); font-size: 0.9rem;">
               <span>
                 <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" style="vertical-align: -2px;"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
                 <?php the_author(); ?>
@@ -43,15 +48,7 @@ get_header();
                 <?php echo esc_html( get_the_date() ); ?>
               </span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Post Article Content -->
-    <section class="single-post-section" style="padding: 60px 0;">
-      <div class="wrap" style="max-width: 860px;">
-        <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-entry-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.85; color: var(--text-body);">
+          </header>
           <?php if ( has_post_thumbnail() ) : ?>
             <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 32px;">
               <?php the_post_thumbnail( 'large', [ 'style' => 'width: 100%; height: auto; display: block;' ] ); ?>

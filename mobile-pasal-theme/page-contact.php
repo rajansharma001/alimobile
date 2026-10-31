@@ -19,107 +19,18 @@ $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed
 <main>
 
   <!-- ====================================================================
-       PAGE HERO BANNER (Elevated Creative Light Studio Theme)
+       PAGE HERO BANNER (Standard Breadcrumb Bar)
        ==================================================================== -->
   <section class="page-hero-banner">
     <div class="wrap">
-      <div class="page-hero-grid fade-up in-view">
-        
-        <!-- Left: Hero Text Column -->
-        <div class="page-hero-content">
-          <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-              <span>Home</span>
-            </a>
-            <span class="crumb-divider">/</span>
-            <span class="crumb-active">Contact</span>
-          </nav>
-
-          <h1 class="page-hero-title"><?php echo esc_html( mp_opt( 'contact_hero_title', 'Visit Our Counter or Send a Direct Inquiry.' ) ); ?></h1>
-          <p class="page-hero-desc"><?php echo esc_html( mp_opt( 'contact_hero_desc', 'Centrally located at Ji. Pra. Ka. Chowk in Gulariya-06. Walk in anytime from 9:00 AM to 8:00 PM for on-the-spot bench diagnostics, smartphone sales, or eSewa services. Or submit your enquiry below for instant WhatsApp dispatch.' ) ); ?></p>
-
-          <div class="page-hero-actions">
-            <a class="btn btn-primary btn-lg" href="tel:+<?php echo esc_attr( $store_phone_raw ); ?>">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-              <span>Call Helpline: <?php echo esc_html( $store_phone ); ?></span>
-            </a>
-            <a class="btn btn-whatsapp btn-lg" href="https://wa.me/<?php echo esc_attr( $wa_number ); ?>?text=<?php echo rawurlencode( 'Namaste Ali Mobile, ma Gulariya counter ma aauna chahanchhu' ); ?>" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-              <span>Chat on WhatsApp</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right: Hero Spotlight Card -->
-        <div class="page-hero-spotlight">
-          <div class="hero-spotlight-card">
-            <div class="spotlight-top-bar">
-              <div class="spotlight-title-row">
-                <span class="spotlight-badge"><?php echo esc_html( mp_opt( 'contact_spotlight_badge', 'Gulariya Counter Desk' ) ); ?></span>
-              </div>
-              <small style="color: var(--text-muted); font-weight: 700;"><?php echo esc_html( mp_opt( 'contact_spotlight_time', '9 AM – 8 PM' ) ); ?></small>
-            </div>
-
-            <div class="spotlight-metric-list">
-              <div class="spotlight-metric-item">
-                <span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-                  <?php echo esc_html( mp_opt( 'contact_spotlight_m1_label', 'Direct Hotline' ) ); ?>
-                </span>
-                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m1_val', $store_phone ) ); ?></strong>
-              </div>
-              <div class="spotlight-metric-item">
-                <span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                  <?php echo esc_html( mp_opt( 'contact_spotlight_m2_label', 'Exact Landmark' ) ); ?>
-                </span>
-                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m2_val', 'Ji. Pra. Ka. Chowk' ) ); ?></strong>
-              </div>
-              <div class="spotlight-metric-item">
-                <span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                  <?php echo esc_html( mp_opt( 'contact_spotlight_m3_label', 'Walk-in Diagnosis' ) ); ?>
-                </span>
-                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m3_val', '5-Minute Free Check' ) ); ?></strong>
-              </div>
-              <div class="spotlight-metric-item">
-                <span>
-                  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
-                  <?php echo esc_html( mp_opt( 'contact_spotlight_m4_label', 'Customer Parking' ) ); ?>
-                </span>
-                <strong><?php echo esc_html( mp_opt( 'contact_spotlight_m4_val', 'Easy Front Access' ) ); ?></strong>
-              </div>
-            </div>
-
-            <a class="btn btn-outline btn-sm btn-block" href="#contact-enquiry-form">
-              <span>Fill Instant Inquiry Docket &darr;</span>
-            </a>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Micro-Ribbon -->
-      <div class="page-hero-ribbon fade-up">
-        <div class="hero-ribbon-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span><?php echo esc_html( mp_opt( 'contact_ribbon_1', 'Direct WhatsApp & Call Line' ) ); ?></span>
-        </div>
-        <div class="hero-ribbon-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          <span><?php echo esc_html( mp_opt( 'contact_ribbon_2', 'Quick 5-Minute WhatsApp Quotes' ) ); ?></span>
-        </div>
-        <div class="hero-ribbon-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          <span><?php echo esc_html( mp_opt( 'contact_ribbon_3', 'Opposite District Admin Office' ) ); ?></span>
-        </div>
-        <div class="hero-ribbon-item">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          <span><?php echo esc_html( mp_opt( 'contact_ribbon_4', 'Saturday Open • 9 AM – 8 PM' ) ); ?></span>
-        </div>
-      </div>
-
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>Home</span>
+        </a>
+        <span class="crumb-divider">/</span>
+        <span class="crumb-active">Contact</span>
+      </nav>
     </div>
   </section>
 

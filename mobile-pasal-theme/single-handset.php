@@ -45,7 +45,7 @@ while ( have_posts() ) : the_post();
 
 <main>
   <!-- Breadcrumb Bar -->
-  <section class="page-hero-banner" style="padding-bottom: 30px;">
+  <section class="page-hero-banner">
     <div class="wrap">
       <nav class="breadcrumb-nav" aria-label="Breadcrumb">
         <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">

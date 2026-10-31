@@ -15,31 +15,29 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
   <!-- Page Hero Banner -->
   <section class="page-hero-banner">
     <div class="wrap">
-      <div class="page-hero-grid fade-up in-view">
-        <div class="page-hero-content">
-          <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-              <span>Home</span>
-            </a>
-            <span class="crumb-divider">/</span>
-            <?php if ( $is_handset_archive ) : ?>
-              <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>">Shop</a>
-              <span class="crumb-divider">/</span>
-            <?php endif; ?>
-            <span class="crumb-active"><?php the_archive_title(); ?></span>
-          </nav>
-
-          <h1 class="page-hero-title"><?php the_archive_title(); ?></h1>
-          <?php the_archive_description( '<p class="page-hero-desc">', '</p>' ); ?>
-        </div>
-      </div>
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>Home</span>
+        </a>
+        <span class="crumb-divider">/</span>
+        <?php if ( $is_handset_archive ) : ?>
+          <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>">Shop</a>
+          <span class="crumb-divider">/</span>
+        <?php endif; ?>
+        <span class="crumb-active"><?php the_archive_title(); ?></span>
+      </nav>
     </div>
   </section>
 
   <!-- Archive Content Section -->
-  <section class="archive-section" style="padding: 60px 0;">
+  <section class="archive-section" style="padding: 40px 0 60px;">
     <div class="wrap">
+      <div class="sec-head" style="margin-bottom: 32px;">
+        <h1 class="sec-title" style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-heading); margin-bottom: 8px;"><?php the_archive_title(); ?></h1>
+        <?php the_archive_description( '<div class="sec-desc" style="color: var(--text-muted); font-size: 1rem; max-width: 720px;">', '</div>' ); ?>
+      </div>
+
       <?php if ( have_posts() ) : ?>
 
         <?php if ( $is_handset_archive ) : ?>

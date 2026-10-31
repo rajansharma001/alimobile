@@ -27,37 +27,19 @@ while ( have_posts() ) : the_post();
 ?>
 
 <main>
-  <!-- Breadcrumb & Hero Banner -->
+  <!-- Breadcrumb Bar -->
   <section class="page-hero-banner">
     <div class="wrap">
-      <div class="page-hero-grid fade-up in-view">
-        <div class="page-hero-content">
-          <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-              <span>Home</span>
-            </a>
-            <span class="crumb-divider">/</span>
-            <a class="crumb-link" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Services</a>
-            <span class="crumb-divider">/</span>
-            <span class="crumb-active"><?php the_title(); ?></span>
-          </nav>
-
-          <h1 class="page-hero-title"><?php the_title(); ?></h1>
-          <p class="page-hero-desc">Certified hardware service executed on ESD-safe benches at our Gulariya-06 lab. Includes genuine replacement parts and official warranty.</p>
-
-          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px;">
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.08); color: var(--primary); padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.88rem;">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span>Turnaround: <?php echo esc_html( $turnaround ); ?></span>
-            </div>
-            <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(34,197,94,0.1); color: #16a34a; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.88rem;">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-              <span><?php echo esc_html( $warranty ); ?></span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+          <span>Home</span>
+        </a>
+        <span class="crumb-divider">/</span>
+        <a class="crumb-link" href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Services</a>
+        <span class="crumb-divider">/</span>
+        <span class="crumb-active"><?php the_title(); ?></span>
+      </nav>
     </div>
   </section>
 
@@ -69,7 +51,18 @@ while ( have_posts() ) : the_post();
         <!-- Left: Service Detailed Info -->
         <div style="display: flex; flex-direction: column; gap: 28px;">
           <div style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 40px); line-height: 1.8; color: var(--text-body);">
-            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-heading); margin-bottom: 16px;">Service Overview &amp; Laboratory Procedure</h2>
+            <h1 style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-heading); margin-top: 0; margin-bottom: 14px;"><?php the_title(); ?></h1>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(37,99,235,0.08); color: var(--primary); padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.88rem;">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                <span>Turnaround: <?php echo esc_html( $turnaround ); ?></span>
+              </div>
+              <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(34,197,94,0.1); color: #16a34a; padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.88rem;">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                <span><?php echo esc_html( $warranty ); ?></span>
+              </div>
+            </div>
+            <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-heading); margin-bottom: 16px; border-top: 1px solid var(--border-color); padding-top: 20px;">Service Overview &amp; Laboratory Procedure</h2>
             <?php the_content(); ?>
 
             <?php if ( ! empty( $symptoms ) ) : ?>
