@@ -31,13 +31,6 @@ $services_desc  = mp_opt( 'services_hero_desc', 'Specialized component-level mic
 	</div>
 </section>
 
-<!-- Live Repair Docket Tracker -->
-<section id="track-repair" class="repair-tracker-section">
-	<div class="wrap">
-		<?php echo do_shortcode( '[mp_repair_tracker]' ); ?>
-	</div>
-</section>
-
 <!-- Interactive Repair Diagnostic Console -->
 <section id="repair-builder" class="repair-builder-section">
 	<div class="wrap">
