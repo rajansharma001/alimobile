@@ -814,7 +814,7 @@ h3 {
    7. Hero Slider Section (Ali Mobile Repair & Handset Showcase)
    -------------------------------------------------------------------------- */
 .hero-slider-section {
-  min-height: auto;
+  min-height: clamp(650px, 80vh, 880px);
   overflow: hidden;
   position: relative;
   display: flex;
@@ -845,9 +845,10 @@ h3 {
 .hero {
   width: 100%;
   max-width: 1540px;
+  min-height: clamp(650px, 80vh, 880px);
   flex: 1;
   margin: 0 auto;
-  padding: clamp(20px, 3vw, 40px) clamp(24px, 5vw, 84px) clamp(44px, 5vw, 72px);
+  padding: clamp(40px, 4.5vw, 72px) clamp(24px, 5vw, 84px) clamp(60px, 6vw, 96px);
   display: flex;
   align-items: center;
   position: relative;
@@ -1047,7 +1048,7 @@ h3 {
 
 /* ================= RIGHT VISUAL COLUMN ================= */
 .visual {
-  min-height: clamp(320px, 44vw, 600px);
+  min-height: clamp(420px, 48vw, 680px);
   position: relative;
   display: flex;
   align-items: center;
@@ -1082,8 +1083,8 @@ h3 {
 }
 
 .product-image {
-  width: min(100%, 640px);
-  max-height: clamp(300px, 42vw, 560px);
+  width: min(100%, 720px);
+  max-height: clamp(380px, 46vw, 640px);
   object-fit: cover;
   filter: drop-shadow(0 24px 28px rgba(7,27,59,.14));
   border-radius: 28px;
@@ -1218,8 +1219,13 @@ h3 {
 
 /* Tablet & Mobile Stacked Layout */
 @media (max-width: 960px) {
+  .hero-slider-section {
+    min-height: auto;
+  }
+
   .hero {
-    padding: 16px 20px 56px;
+    min-height: auto;
+    padding: 24px 20px 64px;
   }
 
   .slide.active {
