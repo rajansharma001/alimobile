@@ -302,12 +302,6 @@ if ( empty( $guide3_img ) ) {
 
 		<div class="categories-grid fade-up">
 			<a class="category-card" href="<?php echo esc_url( mp_opt( 'cat1_url', '#catalog' ) ); ?>">
-				<div class="cat-card-header">
-					<span class="cat-count-tag"><?php echo esc_html( mp_opt( 'cat1_count', '50+ Handsets' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
 				</div>
@@ -317,12 +311,6 @@ if ( empty( $guide3_img ) ) {
 			</a>
 
 			<a class="category-card cat-card-highlight" href="<?php echo esc_url( mp_opt( 'cat2_url', '#services' ) ); ?>">
-				<div class="cat-card-header">
-					<span class="cat-count-tag cat-tag-accent"><?php echo esc_html( mp_opt( 'cat2_count', 'Screen • Battery' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
 				</div>
@@ -332,12 +320,6 @@ if ( empty( $guide3_img ) ) {
 			</a>
 
 			<a class="category-card" href="<?php echo esc_url( mp_opt( 'cat3_url', '#catalog' ) ); ?>">
-				<div class="cat-card-header">
-					<span class="cat-count-tag"><?php echo esc_html( mp_opt( 'cat3_count', 'Original Buds' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
 				</div>
@@ -347,12 +329,6 @@ if ( empty( $guide3_img ) ) {
 			</a>
 
 			<a class="category-card" href="<?php echo esc_url( mp_opt( 'cat4_url', '#catalog' ) ); ?>">
-				<div class="cat-card-header">
-					<span class="cat-count-tag"><?php echo esc_html( mp_opt( 'cat4_count', 'AMOLED Calling' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"></circle><polyline points="12 9 12 12 13.5 13.5"></polyline><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7l.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"></path></svg>
 				</div>
@@ -362,12 +338,6 @@ if ( empty( $guide3_img ) ) {
 			</a>
 
 			<a class="category-card" href="<?php echo esc_url( mp_opt( 'cat5_url', '#catalog' ) ); ?>">
-				<div class="cat-card-header">
-					<span class="cat-count-tag"><?php echo esc_html( mp_opt( 'cat5_count', 'PD 20W–120W' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
 				</div>
@@ -377,12 +347,6 @@ if ( empty( $guide3_img ) ) {
 			</a>
 
 			<a class="category-card" href="<?php echo esc_url( mp_opt( 'cat6_url', mp_get_whatsapp_link( 'Namaste, eSewa recharge sewa barema bujhna chahanchhu' ) ) ); ?>" target="_blank" rel="noopener">
-				<div class="cat-card-header">
-					<span class="cat-count-tag"><?php echo esc_html( mp_opt( 'cat6_count', 'Merchant Top-Up' ) ); ?></span>
-					<span class="cat-card-arrow" aria-hidden="true">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-					</span>
-				</div>
 				<div class="cat-icon-wrap">
 					<svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
 				</div>
@@ -519,170 +483,361 @@ if ( empty( $guide3_img ) ) {
 	</div>
 </section>
 
-<!-- Showroom Handsets Catalog -->
+<!-- Showroom Handsets Catalog with Sticky Sidebar Filtration & Pagination -->
 <section id="catalog" class="catalog-section">
 	<div class="wrap">
-		<div class="sec-head fade-up">
+		<div class="sec-head fade-up" style="margin-bottom: 28px;">
 			<div>
 				<span class="sec-kicker"><?php echo esc_html( mp_opt( 'catalog_kicker', 'Showroom Catalog' ) ); ?></span>
 				<h2><?php echo esc_html( mp_opt( 'catalog_title', 'Latest Smartphone Arrivals & Top Models' ) ); ?></h2>
 				<p><?php echo esc_html( mp_opt( 'catalog_subtitle', 'Every handset is checked, unboxed or sealed-pack with official VAT bill & warranty. Filter by brand or search your model.' ) ); ?></p>
 			</div>
-			<a class="view-all-link" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, full stock list dinus' ) ); ?>" target="_blank" rel="noopener">
-				<span><?php echo esc_html( mp_opt( 'catalog_header_btn_text', 'Inquire Full Stock' ) ); ?></span>
+			<a class="view-all-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>">
+				<span><?php echo esc_html( mp_opt( 'catalog_header_btn_text', 'View Full Shop' ) ); ?></span>
 				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="9 18 15 12 9 6"></polyline></svg>
 			</a>
 		</div>
 
-		<!-- Toolbar -->
-		<div class="catalog-toolbar-panel fade-up">
-			<div class="filter-tabs-wrapper" role="tablist">
-				<button type="button" class="filter-tab-btn active" data-filter="all"><?php echo esc_html( mp_opt( 'catalog_tab1_label', 'All Devices' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="apple"><?php echo esc_html( mp_opt( 'catalog_tab2_label', 'Apple iPhone' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="samsung"><?php echo esc_html( mp_opt( 'catalog_tab3_label', 'Samsung Galaxy' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="google"><?php echo esc_html( mp_opt( 'catalog_tab4_label', 'Google Pixel' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="oneplus"><?php echo esc_html( mp_opt( 'catalog_tab5_label', 'OnePlus' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="xiaomi"><?php echo esc_html( mp_opt( 'catalog_tab6_label', 'Xiaomi / Redmi' ) ); ?></button>
-				<button type="button" class="filter-tab-btn" data-filter="accessories"><?php echo esc_html( mp_opt( 'catalog_tab7_label', 'Accessories & Buds' ) ); ?></button>
-			</div>
-
-			<div class="catalog-live-search" role="search">
-				<span class="cat-search-icon" aria-hidden="true">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-				</span>
-				<input id="site-search" type="search" placeholder="<?php echo esc_attr( mp_opt( 'catalog_search_placeholder', 'Search iPhone, Galaxy, Pixel, Redmi, Buds...' ) ); ?>" aria-label="<?php esc_attr_e( 'Search showroom catalog', 'mobile-pasal' ); ?>" autocomplete="off">
-				<button id="search-clear-btn" class="cat-search-clear" title="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>" aria-label="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>" type="button">
-					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-				</button>
-			</div>
+		<!-- Mobile Filter Drawer Trigger Button -->
+		<div class="shop-mobile-filter-bar">
+			<button type="button" id="mobile-filter-drawer-btn" class="btn btn-outline btn-block">
+				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+				<span><?php esc_html_e( 'Filter Handsets & Budget', 'mobile-pasal' ); ?></span>
+				<span class="mobile-filter-count-badge" id="mobile-filter-count">0</span>
+			</button>
 		</div>
 
-		<!-- Products Grid -->
-		<div class="products-grid fade-up">
-			<?php
-			$handset_query = new WP_Query( array(
-				'post_type'      => 'handset',
-				'posts_per_page' => 12,
-				'post_status'    => 'publish',
-			) );
+		<!-- Two-Column Layout Grid -->
+		<div class="shop-layout-grid fade-up">
 
-			if ( $handset_query->have_posts() ) :
-				while ( $handset_query->have_posts() ) :
-					$handset_query->the_post();
-					$p_id       = get_the_ID();
-					$p_title    = get_the_title();
-					$badge      = get_post_meta( $p_id, '_mp_badge', true ) ?: 'Verified Stock';
-					$price      = get_post_meta( $p_id, '_mp_price', true );
-					$old_price  = get_post_meta( $p_id, '_mp_old_price', true );
-					$rating     = get_post_meta( $p_id, '_mp_rating', true ) ?: '4.9';
-					$reviews    = get_post_meta( $p_id, '_mp_reviews_count', true ) ?: '38';
-					$img_url    = mp_get_handset_img_url( $p_id );
+			<!-- LEFT COLUMN: Sticky Filter Sidebar -->
+			<aside class="shop-sidebar-filters" id="shop-sidebar-filters">
+				<div class="sidebar-filter-header">
+					<div class="sf-title-row">
+						<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+						<h3><?php esc_html_e( 'Filters', 'mobile-pasal' ); ?></h3>
+					</div>
+					<button type="button" id="sidebar-reset-btn" class="btn-clear-all" title="<?php esc_attr_e( 'Reset all filters', 'mobile-pasal' ); ?>">
+						<?php esc_html_e( 'Clear All', 'mobile-pasal' ); ?>
+					</button>
+				</div>
 
-					// Specs
-					$specs_text = get_post_meta( $p_id, '_mp_spec_screen', true );
-					if ( empty( $specs_text ) ) {
-						$specs_text = get_the_excerpt();
-					}
+				<!-- Search Input -->
+				<div class="sidebar-filter-group">
+					<label class="filter-group-label" for="site-search"><?php esc_html_e( 'Search Models', 'mobile-pasal' ); ?></label>
+					<div class="sidebar-search-wrap">
+						<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+						<input id="site-search" type="search" placeholder="<?php echo esc_attr( mp_opt( 'catalog_search_placeholder', 'Search iPhone, Galaxy, Pixel, Redmi...' ) ); ?>" autocomplete="off">
+						<button id="search-clear-btn" type="button" class="sidebar-search-clear" style="display:none;" aria-label="<?php esc_attr_e( 'Clear search', 'mobile-pasal' ); ?>">&times;</button>
+					</div>
+				</div>
 
-					// Brand taxonomy
-					$brand_terms = get_the_terms( $p_id, 'device_brand' );
-					$brand_slug  = ! empty( $brand_terms ) ? strtolower( $brand_terms[0]->slug ) : 'all';
-					$brand_name  = ! empty( $brand_terms ) ? $brand_terms[0]->name : 'Handset';
-					?>
-					<article class="product-card" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="smartphones">
-						<div class="product-badge-wrap">
-							<span class="badge-tag"><?php echo esc_html( $badge ); ?></span>
+				<!-- Brand / Ecosystem Filter -->
+				<div class="sidebar-filter-group">
+					<label class="filter-group-label"><?php esc_html_e( 'Brand & Ecosystem', 'mobile-pasal' ); ?></label>
+					<div class="sidebar-filter-list" role="tablist">
+						<button type="button" class="sidebar-filter-item filter-tab-btn active" data-filter="all">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab1_label', 'All Handsets' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="apple">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab2_label', 'Apple iPhone' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="samsung">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab3_label', 'Samsung Galaxy' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="xiaomi">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab6_label', 'Xiaomi / Redmi' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="oneplus">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab5_label', 'OnePlus' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="google">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab4_label', 'Google Pixel' ) ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item filter-tab-btn" data-filter="accessories">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php echo esc_html( mp_opt( 'catalog_tab7_label', 'Accessories & Gear' ) ); ?></span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Budget Range Filter -->
+				<div class="sidebar-filter-group">
+					<label class="filter-group-label"><?php esc_html_e( 'Budget Range (NPR)', 'mobile-pasal' ); ?></label>
+					<div class="sidebar-filter-list" id="sidebar-price-filters">
+						<button type="button" class="sidebar-filter-item price-filter-btn active" data-price="all">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php esc_html_e( 'All Price Ranges', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item price-filter-btn" data-price="under-30k">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php esc_html_e( 'Under Rs. 30,000', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item price-filter-btn" data-price="30k-75k">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php esc_html_e( 'Rs. 30,000 – Rs. 75,000', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item price-filter-btn" data-price="75k-150k">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php esc_html_e( 'Rs. 75,000 – Rs. 1,50,000', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="sidebar-filter-item price-filter-btn" data-price="above-150k">
+							<span class="filter-check-radio"></span>
+							<span class="filter-name"><?php esc_html_e( 'Above Rs. 1,50,000', 'mobile-pasal' ); ?></span>
+						</button>
+					</div>
+				</div>
+
+				<!-- Sidebar Counter Help Card -->
+				<div class="sidebar-help-card">
+					<div class="shc-icon">
+						<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+					</div>
+					<h4><?php esc_html_e( 'Direct Counter Price?', 'mobile-pasal' ); ?></h4>
+					<p><?php esc_html_e( 'Ask our Gulariya showroom sales desk on WhatsApp for today\'s cash offer and trade-in quote.', 'mobile-pasal' ); ?></p>
+					<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
+						<?php esc_html_e( 'Chat with Sales Desk', 'mobile-pasal' ); ?>
+					</a>
+				</div>
+			</aside>
+
+			<!-- RIGHT COLUMN: Products Main Area -->
+			<div class="shop-products-main">
+
+				<!-- Toolbar Header Bar -->
+				<div class="shop-products-header-bar">
+					<div class="sph-left">
+						<h3 class="sph-heading"><?php esc_html_e( 'Verified Handset Catalog', 'mobile-pasal' ); ?></h3>
+						<div class="sph-count-badge">
+							<span id="catalog-count-num">0</span> <?php esc_html_e( 'Models Found', 'mobile-pasal' ); ?>
 						</div>
-						<div class="product-img-wrap">
-							<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $p_title ); ?>" loading="lazy">
-						</div>
-						<div class="product-body">
-							<span class="product-brand-tag"><?php echo esc_html( $brand_name ); ?></span>
-							<h3 class="product-title"><?php echo esc_html( $p_title ); ?></h3>
-							<p class="product-specs"><?php echo esc_html( $specs_text ); ?></p>
-							<?php if ( ! empty( $price ) ) : ?>
-								<div class="product-price-row" style="margin-bottom:8px;">
-									<strong style="color:var(--accent); font-size:16px;"><?php echo esc_html( $price ); ?></strong>
-									<?php if ( ! empty( $old_price ) ) : ?>
-										<span style="text-decoration:line-through; color:#64748b; font-size:13px; margin-left:6px;"><?php echo esc_html( $old_price ); ?></span>
-									<?php endif; ?>
+					</div>
+					<div class="sph-right">
+						<label for="filter-sort-by" class="sph-sort-label"><?php esc_html_e( 'Sort by:', 'mobile-pasal' ); ?></label>
+						<select id="filter-sort-by" class="filter-select">
+							<option value="featured"><?php esc_html_e( 'Featured / Newest', 'mobile-pasal' ); ?></option>
+							<option value="price-asc"><?php esc_html_e( 'Price: Low to High', 'mobile-pasal' ); ?></option>
+							<option value="price-desc"><?php esc_html_e( 'Price: High to Low', 'mobile-pasal' ); ?></option>
+							<option value="name-asc"><?php esc_html_e( 'Model: A to Z', 'mobile-pasal' ); ?></option>
+						</select>
+					</div>
+				</div>
+
+				<!-- Products Grid -->
+				<div class="products-grid" id="products-grid">
+					<?php
+					$handset_query = new WP_Query( array(
+						'post_type'      => 'handset',
+						'posts_per_page' => 48,
+						'post_status'    => 'publish',
+					) );
+
+					$card_idx = 0;
+
+					if ( $handset_query->have_posts() ) :
+						while ( $handset_query->have_posts() ) :
+							$handset_query->the_post();
+							$p_id       = get_the_ID();
+							$p_title    = get_the_title();
+							$permalink  = get_permalink( $p_id );
+							$badge      = get_post_meta( $p_id, '_mp_badge', true ) ?: 'Official VAT Bill';
+							$price      = get_post_meta( $p_id, '_mp_price', true );
+							$old_price  = get_post_meta( $p_id, '_mp_old_price', true );
+							$img_url    = mp_get_handset_img_url( $p_id );
+
+							// Specs
+							$spec_screen  = get_post_meta( $p_id, '_mp_spec_screen', true );
+							$spec_chip    = get_post_meta( $p_id, '_mp_spec_chip', true );
+							$spec_storage = get_post_meta( $p_id, '_mp_spec_storage', true );
+
+							$brand_terms = get_the_terms( $p_id, 'device_brand' );
+							$brand_slug  = ! empty( $brand_terms ) ? strtolower( $brand_terms[0]->slug ) : 'all';
+							$brand_name  = ! empty( $brand_terms ) ? $brand_terms[0]->name : 'Handset';
+
+							$cat_terms   = get_the_terms( $p_id, 'device_category' );
+							$cat_slug    = ! empty( $cat_terms ) ? strtolower( $cat_terms[0]->slug ) : 'smartphones';
+							$cat_name    = ! empty( $cat_terms ) ? $cat_terms[0]->name : $brand_name;
+
+							$numeric_price = (int) preg_replace( '/[^0-9]/', '', $price );
+							?>
+							<article class="product-card" data-index="<?php echo esc_attr( $card_idx++ ); ?>" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="<?php echo esc_attr( $cat_slug ); ?>" data-price-numeric="<?php echo esc_attr( $numeric_price ); ?>" data-title="<?php echo esc_attr( strtolower( $p_title ) ); ?>">
+								<!-- Top Badges Row -->
+								<div class="product-card-topbar">
+									<span class="product-badge-pill"><?php echo esc_html( $badge ); ?></span>
+									<span class="product-category-chip"><?php echo esc_html( $cat_name ); ?></span>
 								</div>
-							<?php endif; ?>
-							<div class="product-stock-status">
-								<span class="stock-pulse-dot"></span>
-								<span><?php echo esc_html( mp_opt( 'catalog_card_stock_status', 'In Stock at Gulariya Counter' ) ); ?></span>
-							</div>
-							<div class="product-rating">
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<span><?php echo esc_html( $rating ); ?> (<?php echo esc_html( $reviews ); ?> <?php esc_html_e( 'reviews', 'mobile-pasal' ); ?>)</span>
-							</div>
-							<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $p_title . ' ko aaja ko price ra stock dinus' ) ); ?>" target="_blank" rel="noopener">
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
-								<span><?php echo esc_html( mp_opt( 'catalog_card_btn_text', 'Ask Price on WhatsApp' ) ); ?></span>
-							</a>
-						</div>
-					</article>
-				<?php endwhile;
-				wp_reset_postdata();
-			else :
-				// Fallback default handsets
-				$default_handsets = mp_get_default_handsets_data();
-				foreach ( $default_handsets as $h ) :
-					$brand_slug = strtolower( $h['brand'] );
+
+								<!-- Device Showcase Image Pedestal -->
+								<a class="product-img-anchor" href="<?php echo esc_url( $permalink ); ?>" aria-label="<?php echo esc_attr( $p_title ); ?>">
+									<div class="product-img-wrap">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php echo esc_attr( $p_title ); ?>" loading="lazy">
+									</div>
+								</a>
+
+								<!-- Card Body -->
+								<div class="product-body">
+									<div class="product-meta-row">
+										<span class="product-brand-kicker"><?php echo esc_html( $brand_name ); ?></span>
+										<span class="product-nta-tag">
+											<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+											<span>MDMS &amp; VAT</span>
+										</span>
+									</div>
+
+									<h4 class="product-title">
+										<a href="<?php echo esc_url( $permalink ); ?>">
+											<?php echo esc_html( $p_title ); ?>
+										</a>
+									</h4>
+
+									<!-- Hardware Spec Micro-Pills -->
+									<div class="product-spec-chips">
+										<?php if ( ! empty( $spec_screen ) ) : ?>
+											<span class="spec-chip" title="<?php echo esc_attr( $spec_screen ); ?>">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
+												<span><?php echo esc_html( wp_trim_words( $spec_screen, 4, '' ) ); ?></span>
+											</span>
+										<?php endif; ?>
+										<?php if ( ! empty( $spec_chip ) ) : ?>
+											<span class="spec-chip" title="<?php echo esc_attr( $spec_chip ); ?>">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+												<span><?php echo esc_html( wp_trim_words( $spec_chip, 3, '' ) ); ?></span>
+											</span>
+										<?php endif; ?>
+										<?php if ( ! empty( $spec_storage ) ) : ?>
+											<span class="spec-chip" title="<?php echo esc_attr( $spec_storage ); ?>">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+												<span><?php echo esc_html( $spec_storage ); ?></span>
+											</span>
+										<?php endif; ?>
+									</div>
+
+									<!-- Pricing Dock -->
+									<div class="product-pricing-dock">
+										<div class="price-val-wrap">
+											<?php if ( ! empty( $price ) ) : ?>
+												<span class="price-current"><?php echo esc_html( $price ); ?></span>
+											<?php else : ?>
+												<span class="price-current"><?php esc_html_e( 'Call for Rate', 'mobile-pasal' ); ?></span>
+											<?php endif; ?>
+											<?php if ( ! empty( $old_price ) ) : ?>
+												<span class="price-original"><?php echo esc_html( $old_price ); ?></span>
+											<?php endif; ?>
+										</div>
+										<span class="price-tax-paid"><?php esc_html_e( 'Nepal VAT Bill', 'mobile-pasal' ); ?></span>
+									</div>
+
+									<!-- Action Buttons -->
+									<div class="product-action-dock">
+										<a class="btn btn-whatsapp btn-sm btn-product-action" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma tapaiharuko website ma ' . $p_title . ' herera aako chhu. Gulariya counter ma availability ra rate confirm gardinus na.' ) ); ?>" target="_blank" rel="noopener">
+											<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+											<span><?php esc_html_e( 'WhatsApp Rate', 'mobile-pasal' ); ?></span>
+										</a>
+										<a class="btn btn-outline btn-sm btn-product-details" href="<?php echo esc_url( $permalink ); ?>" title="<?php esc_attr_e( 'View Details & Specs', 'mobile-pasal' ); ?>">
+											<span><?php esc_html_e( 'Specs', 'mobile-pasal' ); ?></span>
+											<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+										</a>
+									</div>
+								</div>
+							</article>
+						<?php endwhile;
+						wp_reset_postdata();
+					else :
+						// Fallback default handsets
+						$default_handsets = mp_get_default_handsets_data();
+						foreach ( $default_handsets as $h ) :
+							$brand_slug    = strtolower( $h['brand'] );
+							$cat_slug      = ! empty( $h['category'] ) ? strtolower( $h['category'] ) : 'smartphones';
+							$numeric_price = (int) preg_replace( '/[^0-9]/', '', $h['price'] );
+							?>
+							<article class="product-card" data-index="<?php echo esc_attr( $card_idx++ ); ?>" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="<?php echo esc_attr( $cat_slug ); ?>" data-price-numeric="<?php echo esc_attr( $numeric_price ); ?>" data-title="<?php echo esc_attr( strtolower( $h['title'] ) ); ?>">
+								<div class="product-card-topbar">
+									<span class="product-badge-pill"><?php echo esc_html( $h['badge'] ); ?></span>
+									<span class="product-category-chip"><?php echo esc_html( $h['brand'] ); ?></span>
+								</div>
+								<div class="product-img-wrap">
+									<img src="<?php echo esc_url( mp_asset_img( $h['image'] ) ); ?>" alt="<?php echo esc_attr( $h['title'] ); ?>" loading="lazy">
+								</div>
+								<div class="product-body">
+									<div class="product-meta-row">
+										<span class="product-brand-kicker"><?php echo esc_html( $h['brand'] ); ?></span>
+										<span class="product-nta-tag">
+											<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+											<span>MDMS &amp; VAT</span>
+										</span>
+									</div>
+									<h4 class="product-title"><?php echo esc_html( $h['title'] ); ?></h4>
+									<div class="product-spec-chips">
+										<?php if ( ! empty( $h['screen'] ) ) : ?>
+											<span class="spec-chip">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
+												<span><?php echo esc_html( wp_trim_words( $h['screen'], 4, '' ) ); ?></span>
+											</span>
+										<?php endif; ?>
+										<?php if ( ! empty( $h['chip'] ) ) : ?>
+											<span class="spec-chip">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+												<span><?php echo esc_html( wp_trim_words( $h['chip'], 3, '' ) ); ?></span>
+											</span>
+										<?php endif; ?>
+										<?php if ( ! empty( $h['storage'] ) ) : ?>
+											<span class="spec-chip">
+												<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+												<span><?php echo esc_html( $h['storage'] ); ?></span>
+											</span>
+										<?php endif; ?>
+									</div>
+									<div class="product-pricing-dock">
+										<div class="price-val-wrap">
+											<span class="price-current"><?php echo esc_html( $h['price'] ); ?></span>
+											<?php if ( ! empty( $h['old_price'] ) ) : ?>
+												<span class="price-original"><?php echo esc_html( $h['old_price'] ); ?></span>
+											<?php endif; ?>
+										</div>
+										<span class="price-tax-paid"><?php esc_html_e( 'Nepal VAT Bill', 'mobile-pasal' ); ?></span>
+									</div>
+									<div class="product-action-dock" style="grid-template-columns: 1fr;">
+										<a class="btn btn-whatsapp btn-sm btn-product-action" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma ' . $h['title'] . ' ko aaja ko rate ra counter stock bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">
+											<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+											<span><?php esc_html_e( 'WhatsApp Rate', 'mobile-pasal' ); ?></span>
+										</a>
+									</div>
+								</div>
+							</article>
+						<?php endforeach;
+					endif;
 					?>
-					<article class="product-card" data-brand="<?php echo esc_attr( $brand_slug ); ?>" data-category="smartphones">
-						<div class="product-badge-wrap">
-							<span class="badge-tag"><?php echo esc_html( $h['badge'] ); ?></span>
-						</div>
-						<div class="product-img-wrap">
-							<img src="<?php echo esc_url( mp_asset_img( $h['image'] ) ); ?>" alt="<?php echo esc_attr( $h['title'] ); ?>" loading="lazy">
-						</div>
-						<div class="product-body">
-							<span class="product-brand-tag"><?php echo esc_html( $h['brand'] ); ?></span>
-							<h3 class="product-title"><?php echo esc_html( $h['title'] ); ?></h3>
-							<p class="product-specs"><?php echo esc_html( $h['screen'] ); ?></p>
-							<div class="product-price-row" style="margin-bottom:8px;">
-								<strong style="color:var(--accent); font-size:16px;"><?php echo esc_html( $h['price'] ); ?></strong>
-								<?php if ( ! empty( $h['old_price'] ) ) : ?>
-									<span style="text-decoration:line-through; color:#64748b; font-size:13px; margin-left:6px;"><?php echo esc_html( $h['old_price'] ); ?></span>
-								<?php endif; ?>
-							</div>
-							<div class="product-stock-status">
-								<span class="stock-pulse-dot"></span>
-								<span><?php echo esc_html( mp_opt( 'catalog_card_stock_status', 'In Stock at Gulariya Counter' ) ); ?></span>
-							</div>
-							<div class="product-rating">
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-								<span><?php echo esc_html( $h['rating'] ); ?> (<?php echo esc_html( $h['reviews'] ); ?> <?php esc_html_e( 'reviews', 'mobile-pasal' ); ?>)</span>
-							</div>
-							<a class="btn btn-whatsapp btn-sm btn-block" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ' . $h['title'] . ' ko aaja ko price ra stock dinus' ) ); ?>" target="_blank" rel="noopener">
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
-								<span><?php echo esc_html( mp_opt( 'catalog_card_btn_text', 'Ask Price on WhatsApp' ) ); ?></span>
-							</a>
-						</div>
-					</article>
-				<?php endforeach;
-			endif;
-			?>
+				</div>
+
+				<!-- Empty Results Notice -->
+				<div id="catalog-empty-notice" class="catalog-empty-notice" aria-live="polite">
+					<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+					<h3><?php echo esc_html( mp_opt( 'catalog_empty_title', 'No matching handsets found in this filter' ) ); ?></h3>
+					<p><?php echo esc_html( mp_opt( 'catalog_empty_desc', 'We order rare or flagship variants directly from authorized Nepal distributors. Send your model name on WhatsApp for quick counter availability.' ) ); ?></p>
+					<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
+						<span><?php echo esc_html( mp_opt( 'catalog_empty_btn_text', 'Inquire Directly on WhatsApp' ) ); ?></span>
+					</a>
+				</div>
+
+				<!-- Client & Server Pagination Container -->
+				<div class="shop-pagination-wrapper">
+					<div class="shop-pagination" id="shop-pagination-controls">
+						<!-- Dynamically populated page buttons -->
+					</div>
+					<div class="shop-pagination-info" id="shop-pagination-info">
+						<!-- Showing page 1 of X -->
+					</div>
+				</div>
+
+			</div>
 		</div>
 
-		<!-- No Results Notice -->
-		<div id="catalog-empty-notice" class="catalog-empty-notice" aria-live="polite">
-			<svg viewBox="0 0 24 24" width="44" height="44" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-			<h3><?php echo esc_html( mp_opt( 'catalog_empty_title', 'No matching models found in this tab' ) ); ?></h3>
-			<p><?php echo esc_html( mp_opt( 'catalog_empty_desc', 'We order rare or flagship variants directly from authorized distributors. Send your model name on WhatsApp for counter availability.' ) ); ?></p>
-			<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener">
-				<span><?php echo esc_html( mp_opt( 'catalog_empty_btn_text', 'Inquire Directly on WhatsApp' ) ); ?></span>
-			</a>
-		</div>
 	</div>
 </section>
 

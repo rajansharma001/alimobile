@@ -28,98 +28,13 @@ get_header();
 	</div>
 </section>
 
-<!-- Showroom Ecosystem Category Cards -->
-<section class="shop-category-section">
-	<div class="wrap">
-		<div class="sec-head sec-head-center fade-up" style="margin-bottom: 24px;">
-			<span class="sec-kicker"><?php esc_html_e( 'Official Flagship Lines', 'mobile-pasal' ); ?></span>
-			<h2 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); margin-bottom: 6px;"><?php esc_html_e( 'Browse by Brand & Device Ecosystem', 'mobile-pasal' ); ?></h2>
-			<p style="max-width: 680px; margin: 0 auto;"><?php esc_html_e( 'Select an ecosystem to filter our live Gulariya showroom stock with verified IMEI and Nepal VAT invoice.', 'mobile-pasal' ); ?></p>
-		</div>
-
-		<div class="shop-category-cards-grid fade-up">
-			<!-- Apple -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="apple">
-				<div class="cat-card-icon-wrap" style="background: rgba(15, 23, 42, 0.05); color: #0f172a;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.84c.64-.78 1.08-1.87.96-2.96-.93.04-2.05.62-2.72 1.4-.59.68-1.1 1.77-.96 2.83 1.03.08 2.08-.49 2.72-1.27z"/></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">Apple Flagships</span>
-					<h3 class="cat-card-title">iPhone 16 &amp; 15</h3>
-					<span class="cat-status-pill">NTA MDMS Registered</span>
-				</div>
-			</a>
-
-			<!-- Samsung -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="samsung">
-				<div class="cat-card-icon-wrap" style="background: rgba(37, 99, 235, 0.08); color: #2563eb;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">Samsung Galaxy</span>
-					<h3 class="cat-card-title">S24 Ultra &amp; A-Series</h3>
-					<span class="cat-status-pill">Official Nepal Warranty</span>
-				</div>
-			</a>
-
-			<!-- Xiaomi -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="xiaomi">
-				<div class="cat-card-icon-wrap" style="background: rgba(249, 115, 22, 0.08); color: #ea580c;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">Xiaomi / Redmi</span>
-					<h3 class="cat-card-title">Note 13 &amp; HyperOS</h3>
-					<span class="cat-status-pill">Best Value Tech</span>
-				</div>
-			</a>
-
-			<!-- OnePlus -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="oneplus">
-				<div class="cat-card-icon-wrap" style="background: rgba(239, 68, 68, 0.08); color: #dc2626;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">OnePlus Flagship</span>
-					<h3 class="cat-card-title">OnePlus 12 &amp; Nord</h3>
-					<span class="cat-status-pill">OxygenOS 100W Speed</span>
-				</div>
-			</a>
-
-			<!-- Google Pixel -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="google">
-				<div class="cat-card-icon-wrap" style="background: rgba(16, 185, 129, 0.08); color: #059669;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">Google Pixel</span>
-					<h3 class="cat-card-title">Pixel 9 &amp; Tensor AI</h3>
-					<span class="cat-status-pill">Pro Computational Cam</span>
-				</div>
-			</a>
-
-			<!-- Accessories -->
-			<a href="#catalog" class="shop-cat-card" data-category-target="accessories">
-				<div class="cat-card-icon-wrap" style="background: rgba(99, 102, 241, 0.08); color: #4f46e5;">
-					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
-				</div>
-				<div class="cat-card-content">
-					<span class="cat-brand-tag">Audio &amp; Gear</span>
-					<h3 class="cat-card-title">AirPods, Buds &amp; GaN</h3>
-					<span class="cat-status-pill">100% Genuine Brands</span>
-				</div>
-			</a>
-		</div>
-	</div>
-</section>
-
 <!-- Main Catalog Section: Left-Sidebar Filters + Right-Products -->
 <section class="catalog-section" id="catalog">
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up" style="margin-bottom: 28px;">
-			<span class="sec-kicker"><?php esc_html_e( 'Gulariya Counter Stock', 'mobile-pasal' ); ?></span>
-			<h2><?php esc_html_e( 'Official NTA Smartphones & Genuine Gear', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'Browse verified smartphones with 100% MDMS IMEI registration, official VAT invoices, and free walk-in data migration.', 'mobile-pasal' ); ?></p>
+			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'catalog_kicker', 'Gulariya Counter Stock' ) ); ?></span>
+			<h2><?php echo esc_html( mp_opt( 'catalog_title', 'Official NTA Smartphones & Genuine Gear' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'catalog_subtitle', 'Browse verified smartphones with 100% MDMS IMEI registration, official VAT invoices, and free walk-in data migration.' ) ); ?></p>
 		</div>
 
 		<!-- Mobile Filter Drawer Trigger Button -->
