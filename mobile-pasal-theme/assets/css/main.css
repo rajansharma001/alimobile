@@ -11,7 +11,7 @@
   --primary: #0066cc;               /* Signature Sapphire Blue */
   --primary-hover: #0052a3;
   --primary-light: #eff6ff;
-  --primary-gradient: linear-gradient(135deg, #0066cc 0%, #004b99 100%);
+  --primary-gradient: #0066cc;
   
   --secondary: #0a0e1a;             /* Obsidian Dark Slate */
   --secondary-card: #111827;
@@ -407,7 +407,7 @@ h3 {
   top: 0;
   height: 100%;
   width: 45%;
-  background: linear-gradient(90deg, var(--primary) 0%, #60a5fa 100%);
+  background: var(--primary);
   border-radius: var(--radius-full);
   animation: preloaderSlide 0.9s infinite ease-in-out;
 }
@@ -1208,7 +1208,7 @@ h3 {
 }
 
 .slider-dock-tab.active .dock-tab-progress-fill {
-  background: linear-gradient(90deg, #0066cc, #38bdf8);
+  background: #0066cc;
 }
 
 /* Nav Tools: Arrows & Counter */
@@ -1375,8 +1375,8 @@ h3 {
    8. Visual Showroom Counters & Departments (Creative Bento Retail Cards)
    -------------------------------------------------------------------------- */
 .categories-section {
-  padding: 84px 0;
-  background-color: var(--bg-page);
+  padding: 80px 0;
+  background-color: #ffffff;
 }
 
 .categories-grid {
@@ -1461,7 +1461,7 @@ h3 {
   width: 58px;
   height: 58px;
   border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--primary-light) 0%, #eff6ff 100%);
+  background: #f0f7ff;
   color: var(--primary);
   display: grid;
   place-items: center;
@@ -1505,7 +1505,7 @@ h3 {
 
 .cat-card-highlight {
   border-color: rgba(0, 102, 204, 0.3);
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+  background: #ffffff;
 }
 
 @media (max-width: 600px) {
@@ -1545,7 +1545,7 @@ h3 {
    -------------------------------------------------------------------------- */
 .brands-section {
   padding: 80px 0;
-  background-color: var(--bg-surface);
+  background-color: #f8fafc;
   border-top: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
 }
@@ -1644,207 +1644,421 @@ h3 {
 }
 
 /* --------------------------------------------------------------------------
-   10. Official Flagship Spotlight Banner (Apple Pro Titanium Experience)
+   10. Official Flagship Spotlight Showcase (Apple Pro Titanium Experience - No Gradients)
    -------------------------------------------------------------------------- */
 .flagship-banner-section {
   padding: 84px 0;
-  background-color: var(--bg-page);
+  background-color: #0b1120;
 }
 
-.flagship-banner-card {
-  background: radial-gradient(ellipse at 85% 50%, rgba(0, 102, 204, 0.18) 0%, transparent 65%),
-              linear-gradient(135deg, #070d18 0%, #0d1629 55%, #101d38 100%);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 24px;
-  overflow: hidden;
-  display: grid;
-  grid-template-columns: 1.18fr 0.82fr;
+.flagship-showcase-container {
+  background-color: #0f172a;
+  border: 1.5px solid #1e293b;
+  border-radius: 28px;
+  padding: clamp(28px, 4vw, 44px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+}
+
+.fsc-header-strip {
+  display: flex;
   align-items: center;
-  box-shadow: 0 24px 50px rgba(7, 13, 24, 0.35);
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #1e293b;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
-.flagship-banner-content {
-  padding: clamp(36px, 5.5vw, 60px);
-  color: #ffffff;
-}
-
-.brand-tag-apple {
+.fsc-brand-badge {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 5px 14px;
-  border-radius: var(--radius-full);
-  margin-bottom: 18px;
+  background-color: #1e293b;
   color: #f8fafc;
-}
-
-.flagship-banner-content h2 {
-  color: #ffffff;
-  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
-  font-weight: 900;
-  margin-bottom: 8px;
-  letter-spacing: -0.02em;
-  line-height: 1.18;
-}
-
-.flagship-banner-content .tagline {
-  color: #60a5fa;
-  font-size: 0.98rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.flagship-banner-content .desc {
-  color: #cbd5e1;
-  font-size: 1.02rem;
-  line-height: 1.65;
-  margin-bottom: 22px;
-}
-
-/* Titanium Finish Swatches */
-.flagship-finish-swatches {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 22px;
-  flex-wrap: wrap;
-}
-
-.swatch-label {
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 800;
-  color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  margin-right: 4px;
+  border: 1px solid #334155;
 }
 
-.swatch-dot {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 2px solid transparent;
-  cursor: pointer;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
-  display: inline-block;
+.fsc-brand-badge svg {
+  flex-shrink: 0;
 }
 
-.swatch-dot:hover,
-.swatch-dot.active {
-  transform: scale(1.18);
-  box-shadow: 0 0 0 2px #070d18, 0 0 0 4px #0066cc;
-}
-
-.swatch-desert {
-  background: linear-gradient(135deg, #d3c4b0 0%, #bfae99 100%);
-}
-
-.swatch-natural {
-  background: linear-gradient(135deg, #a6a096 0%, #8e887f 100%);
-}
-
-.swatch-white {
-  background: linear-gradient(135deg, #f0f1f3 0%, #dcdde0 100%);
-}
-
-.swatch-black {
-  background: linear-gradient(135deg, #444341 0%, #2c2b29 100%);
-}
-
-.spec-pills-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 24px;
-}
-
-.spec-pill {
+.fsc-location-tag {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  background-color: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #f1f5f9;
-  font-size: 0.8rem;
+  color: #94a3b8;
+  font-size: 0.78rem;
   font-weight: 700;
-  padding: 5px 12px;
-  border-radius: var(--radius-full);
 }
 
-.flagship-status-badge {
-  display: inline-flex;
+.fsc-location-tag svg {
+  color: #38bdf8;
+  flex-shrink: 0;
+}
+
+.fsc-main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
   align-items: center;
-  gap: 8px;
-  background-color: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.32);
-  color: #34d399;
-  font-size: 0.8rem;
-  font-weight: 700;
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  margin-bottom: 28px;
 }
 
-.flagship-actions {
+.fsc-heading-block {
+  margin-bottom: 20px;
+}
+
+.fsc-kicker {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.fsc-title {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  font-weight: 900;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+}
+
+.fsc-tagline {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #93c5fd;
+  margin-bottom: 14px;
+}
+
+.fsc-desc {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: #94a3b8;
+  margin-bottom: 22px;
+  max-width: 620px;
+}
+
+/* Finishes Pill Bar */
+.fsc-finishes-box {
+  margin-bottom: 22px;
+  padding: 14px 18px;
+  background-color: #131d31;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+}
+
+.fsc-finishes-title {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.fsc-finishes-list {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
-.flagship-media {
+.finish-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background-color: #0f172a;
+  border: 1.5px solid #334155;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.finish-pill:hover,
+.finish-pill.active {
+  border-color: #38bdf8;
+  background-color: #1e293b;
+  color: #ffffff;
+}
+
+.finish-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Hardware Highlights Bento Grid */
+.fsc-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.fsc-bento-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background-color: #131d31;
+  border: 1px solid #1e293b;
+  border-radius: 14px;
+  padding: 12px 14px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fsc-bento-card:hover {
+  border-color: #334155;
+  transform: translateY(-2px);
+}
+
+.fbc-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px;
+  flex-shrink: 0;
+  border: 1px solid #1e293b;
 }
 
-.flagship-media img {
-  border-radius: var(--radius-lg);
-  max-height: 400px;
+.fbc-text strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.fbc-text small {
+  display: block;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  line-height: 1.25;
+  margin-top: 2px;
+}
+
+/* Stock Status Handover Badge */
+.fsc-stock-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #0b2214;
+  border: 1px solid #166534;
+  padding: 10px 16px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+}
+
+.fsc-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22c55e;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.25);
+}
+
+.fsc-stock-text {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #4ade80;
+}
+
+/* Actions */
+.fsc-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.fsc-actions-row .btn-whatsapp {
+  background-color: #16a34a;
+  color: #ffffff;
+  border: none;
+  font-weight: 800;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.fsc-actions-row .btn-whatsapp:hover {
+  background-color: #15803d;
+  transform: translateY(-2px);
+}
+
+.fsc-actions-row .btn-secondary {
+  background-color: #1e293b;
+  color: #ffffff;
+  border: 1.5px solid #475569;
+  font-weight: 800;
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.fsc-actions-row .btn-secondary:hover {
+  background-color: #334155;
+  border-color: #64748b;
+  transform: translateY(-2px);
+}
+
+/* Visual Showcase Column (Right) */
+.fsc-visual-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fsc-pedestal-card {
+  background-color: #131d31;
+  border: 1.5px solid #1e293b;
+  border-radius: 24px;
+  padding: 44px 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 480px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+}
+
+.fsc-img-showcase {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.fsc-img-showcase img {
+  max-height: 380px;
+  max-width: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+  border-radius: 18px;
+  filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.6));
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.flagship-banner-card:hover .flagship-media img {
-  transform: scale(1.03) translateY(-4px);
+.fsc-pedestal-card:hover .fsc-img-showcase img {
+  transform: scale(1.04) translateY(-6px);
 }
 
-@media (max-width: 900px) {
-  .flagship-banner-card {
+.fsc-floating-tag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #f1f5f9;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+.fsc-floating-tag .ft-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #38bdf8;
+  display: inline-block;
+}
+
+.fsc-ft-top {
+  top: 20px;
+  right: 20px;
+}
+
+.fsc-ft-bottom-left {
+  bottom: 22px;
+  left: 20px;
+  color: #38bdf8;
+}
+
+.fsc-ft-bottom-right {
+  bottom: 22px;
+  right: 20px;
+  color: #4ade80;
+}
+
+@media (max-width: 992px) {
+  .fsc-main-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
-  .flagship-media {
-    padding: 0 32px 36px;
+
+  .fsc-pedestal-card {
+    min-height: 380px;
+    padding: 36px 20px;
+  }
+
+  .fsc-img-showcase img {
+    max-height: 300px;
   }
 }
 
-@media (max-width: 600px) {
-  .flagship-banner-content {
-    padding: 28px 18px;
+@media (max-width: 640px) {
+  .flagship-showcase-container {
+    padding: 24px 18px;
+    border-radius: 20px;
   }
-  .flagship-media {
-    padding: 0 18px 28px;
-  }
-  .flagship-media img {
-    max-height: 250px;
-  }
-  .flagship-actions {
-    flex-direction: column;
-    align-items: stretch;
+
+  .fsc-bento-grid {
+    grid-template-columns: 1fr;
     gap: 10px;
   }
-  .flagship-actions .btn {
+
+  .fsc-actions-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .fsc-actions-row .btn-whatsapp,
+  .fsc-actions-row .btn-secondary {
     width: 100%;
     justify-content: center;
+  }
+
+  .fsc-floating-tag {
+    position: static;
+    margin: 6px 0;
+  }
+
+  .fsc-pedestal-card {
+    flex-direction: column;
+    gap: 14px;
+    min-height: auto;
+    padding: 24px 16px;
   }
 }
 
@@ -2171,12 +2385,12 @@ h3 {
    -------------------------------------------------------------------------- */
 .apple-fix-showcase-section {
   padding: 84px 0;
-  background-color: var(--bg-page);
+  background-color: #0f172a;
 }
 
 .apple-fix-banner-grid {
-  background: radial-gradient(ellipse at 15% 50%, rgba(0, 102, 204, 0.16) 0%, transparent 65%),
-              linear-gradient(135deg, #070d18 0%, #0d1629 55%, #101d38 100%);
+  background: #0f172a;
+  border: 1.5px solid #1e293b;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 24px;
   overflow: hidden;
@@ -2555,7 +2769,7 @@ h3 {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--primary) 0%, #0052a3 100%);
+  background: var(--primary);
   color: #ffffff;
   display: grid;
   place-items: center;
@@ -3424,13 +3638,7 @@ h3 {
 
 /* Page Hero Banner (Creative Elevated Studio Theme matching Home Page) */
 .page-hero-banner {
-  background-color: #ffffff;
-  background-image: 
-    radial-gradient(circle at 85% 15%, rgba(0, 102, 204, 0.08) 0%, transparent 45%),
-    radial-gradient(circle at 10% 85%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
-    radial-gradient(rgba(0, 102, 204, 0.06) 1.2px, transparent 1.2px),
-    linear-gradient(180deg, #ffffff 0%, var(--bg-surface-tint) 100%);
-  background-size: auto, auto, 24px 24px, auto;
+  background-color: #f8fafc;
   color: var(--text-main);
   padding: 16px 0;
   border-bottom: 1px solid var(--border-light);
@@ -3454,9 +3662,7 @@ h3 {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--text-main) 20%, var(--primary) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--primary);
   display: inline;
 }
 
@@ -3556,7 +3762,7 @@ h3 {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--primary) 0%, #60a5fa 100%);
+  background: var(--primary);
 }
 
 .spotlight-top-bar {
@@ -4956,9 +5162,9 @@ h3 {
 /* Handset Assurance Section & Feature Cards */
 .assurance-section {
   padding: 80px 0;
-  background: linear-gradient(180deg, var(--bg-surface) 0%, #ffffff 100%);
+  background-color: #f8fafc;
   border-top: 1px solid var(--border-light);
-  position: relative;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .assurance-grid {
@@ -4988,7 +5194,7 @@ h3 {
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.4), transparent);
+  background: var(--primary);
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -5657,7 +5863,7 @@ h3 {
 }
 
 .shop-cat-card.active {
-  background: linear-gradient(180deg, #ffffff 0%, #f0f7ff 100%);
+  background: #f0f7ff;
   border-color: var(--primary);
 }
 
@@ -5911,7 +6117,8 @@ h3 {
 
 /* Sidebar Counter Advisory Card */
 .sidebar-help-card {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: #0f172a;
+  border: 1.5px solid #1e293b;
   border-radius: 16px;
   padding: 18px;
   color: #ffffff;
@@ -6101,7 +6308,8 @@ h3 {
 
 .shop-products-main .product-img-wrap {
   height: 200px;
-  background: radial-gradient(circle at center, #ffffff 30%, #f8fafc 100%);
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
   border-radius: 14px;
   display: flex;
   align-items: center;

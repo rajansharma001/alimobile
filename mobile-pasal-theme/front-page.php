@@ -431,53 +431,144 @@ if ( empty( $guide3_img ) ) {
 	</div>
 </section>
 
-<!-- Flagship Spotlight Banner (iPhone 16 Pro) -->
+<!-- Flagship Spotlight Showcase (iPhone 16 Pro & Pro Max) -->
 <section class="flagship-banner-section">
 	<div class="wrap">
-		<div class="flagship-banner-card fade-up">
-			<div class="flagship-banner-content">
-				<div class="brand-tag-apple">
+		<div class="flagship-showcase-container fade-up">
+
+			<!-- Top Showcase Header Strip -->
+			<div class="fsc-header-strip">
+				<div class="fsc-brand-badge">
 					<svg viewBox="0 0 170 170" width="16" height="16" fill="currentColor"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.7-3.04-7.58-7.71-11.65-14-4.89-7.5-8.88-16.14-11.96-25.91-3.08-9.77-4.63-19.34-4.63-28.71 0-14.33 3.63-26.23 10.89-35.69 7.26-9.46 16.51-14.28 27.75-14.47 5.26 0 11.01 1.34 17.26 4.02 6.24 2.68 10.15 4.09 11.72 4.22 1.93-.26 5.86-1.63 11.79-4.11 5.92-2.48 11.22-3.6 15.9-3.35 12.04.75 21.6 5.37 28.69 13.88-10.53 6.38-15.67 15.2-15.42 26.47.25 8.78 3.52 16.19 9.8 22.23 6.28 6.04 13.78 9.69 22.5 10.95-1.93 6.01-4.41 12.18-7.44 18.52zm-32.96-107.4c0-7.39 2.65-14.22 7.95-20.5 5.3-6.28 11.89-10.05 19.78-11.3 1.13 8.13-1.47 15.36-7.8 21.69-6.33 6.33-13.62 10.15-21.87 11.47-.28-.45-.42-.99-.42-1.62-.01-.42.23-.97.72-1.65-.01.62-.25 1.17-.36 1.91z"/></svg>
 					<span><?php echo esc_html( mp_opt( 'spotlight_badge', 'Official Authorized Flagship Handset' ) ); ?></span>
 				</div>
-				<h2><?php echo esc_html( mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' ) ); ?></h2>
-				<p class="tagline"><?php echo esc_html( mp_opt( 'spotlight_tagline', 'Built for Apple Intelligence • Grade 5 Titanium' ) ); ?></p>
-				<p class="desc"><?php echo esc_html( mp_opt( 'spotlight_desc', 'Experience the supercharged A18 Pro chip, 48MP Fusion Camera system, tactile Camera Control button, and unmatched battery endurance. Sealed-pack stock ready for immediate counter handover at Ali Mobile Gulariya.' ) ); ?></p>
-
-				<!-- Titanium Swatches -->
-				<div class="flagship-finish-swatches">
-					<span class="swatch-label"><?php echo esc_html( mp_opt( 'spotlight_swatch_label', 'Available Finishes:' ) ); ?></span>
-					<span class="swatch-dot swatch-desert" title="Desert Titanium"></span>
-					<span class="swatch-dot swatch-natural" title="Natural Titanium"></span>
-					<span class="swatch-dot swatch-white" title="White Titanium"></span>
-					<span class="swatch-dot swatch-black active" title="Black Titanium"></span>
-				</div>
-
-				<div class="spec-pills-row">
-					<span class="spec-pill"><i class="fa-solid fa-microchip" aria-hidden="true"></i> <?php echo esc_html( mp_opt( 'spotlight_spec1', 'A18 Pro Bionic' ) ); ?></span>
-					<span class="spec-pill"><i class="fa-solid fa-camera" aria-hidden="true"></i> <?php echo esc_html( mp_opt( 'spotlight_spec2', 'Camera Control' ) ); ?></span>
-					<span class="spec-pill"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> <?php echo esc_html( mp_opt( 'spotlight_spec3', 'Grade 5 Titanium' ) ); ?></span>
-					<span class="spec-pill"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> <?php echo esc_html( mp_opt( 'spotlight_spec4', 'NTA Approved • 100% Legal IMEI' ) ); ?></span>
-				</div>
-
-				<div class="flagship-status-badge">
-					<span class="status-pulse-dot"></span>
-					<span><?php echo esc_html( mp_opt( 'spotlight_status_text', 'Sealed Stock Handover Ready at Gulariya Showroom Counter' ) ); ?></span>
-				</div>
-
-				<div class="flagship-actions">
-					<a class="btn btn-whatsapp" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste, iPhone 16 Pro (128GB / 256GB) ko aaja ko counter price dinus' ) ); ?>" target="_blank" rel="noopener">
-						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>
-						<span><?php echo esc_html( mp_opt( 'spotlight_btn1_text', 'Ask Today\'s Price on WhatsApp' ) ); ?></span>
-					</a>
-					<a class="btn btn-secondary" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
-						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-						<span><?php printf( esc_html__( '%s (%s)', 'mobile-pasal' ), esc_html( mp_opt( 'spotlight_btn2_prefix', 'Call Store Direct' ) ), esc_html( mp_opt( 'contact_phone', '9804530786' ) ) ); ?></span>
-					</a>
-				</div>
+				<span class="fsc-location-tag">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+					<span><?php esc_html_e( 'Gulariya Showroom Live Counter', 'mobile-pasal' ); ?></span>
+				</span>
 			</div>
-			<div class="flagship-media">
-				<img src="<?php echo esc_url( $spotlight_img ); ?>" alt="<?php echo esc_attr( mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' ) ); ?>">
+
+			<!-- Main Showcase Grid -->
+			<div class="fsc-main-grid">
+
+				<!-- Left Column: Specs, Finishes & Actions -->
+				<div class="fsc-content-col">
+					<div class="fsc-heading-block">
+						<span class="fsc-kicker"><?php esc_html_e( 'Featured Flagship in Gulariya', 'mobile-pasal' ); ?></span>
+						<h2 class="fsc-title"><?php echo esc_html( mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' ) ); ?></h2>
+						<p class="fsc-tagline"><?php echo esc_html( mp_opt( 'spotlight_tagline', 'Built for Apple Intelligence • Grade 5 Titanium' ) ); ?></p>
+						<p class="fsc-desc"><?php echo esc_html( mp_opt( 'spotlight_desc', 'Grade 5 Titanium design with thinner borders, A18 Pro silicon chip, 48MP Fusion camera with 4K 120fps Dolby Vision, and revolutionary Camera Control button.' ) ); ?></p>
+					</div>
+
+					<!-- Available Finishes Capsule Bar -->
+					<div class="fsc-finishes-box">
+						<span class="fsc-finishes-title"><?php echo esc_html( mp_opt( 'spotlight_swatch_label', 'Available Finishes:' ) ); ?></span>
+						<div class="fsc-finishes-list">
+							<div class="finish-pill active">
+								<span class="finish-dot" style="background-color: #c2b097;"></span>
+								<span class="finish-name"><?php esc_html_e( 'Desert Titanium', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="finish-pill">
+								<span class="finish-dot" style="background-color: #9a958d;"></span>
+								<span class="finish-name"><?php esc_html_e( 'Natural Titanium', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="finish-pill">
+								<span class="finish-dot" style="background-color: #f2f2f2; border: 1px solid #cbd5e1;"></span>
+								<span class="finish-name"><?php esc_html_e( 'White Titanium', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="finish-pill">
+								<span class="finish-dot" style="background-color: #2c2b2a;"></span>
+								<span class="finish-name"><?php esc_html_e( 'Black Titanium', 'mobile-pasal' ); ?></span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Hardware Highlights: 4 Solid Bento Cards -->
+					<div class="fsc-bento-grid">
+						<div class="fsc-bento-card">
+							<div class="fbc-icon" style="background-color: #0f172a; color: #38bdf8;">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+							</div>
+							<div class="fbc-text">
+								<strong><?php echo esc_html( mp_opt( 'spotlight_spec1', 'A18 Pro Bionic' ) ); ?></strong>
+								<small><?php esc_html_e( '3nm Silicon & 6-Core GPU', 'mobile-pasal' ); ?></small>
+							</div>
+						</div>
+
+						<div class="fsc-bento-card">
+							<div class="fbc-icon" style="background-color: #0f172a; color: #f59e0b;">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+							</div>
+							<div class="fbc-text">
+								<strong><?php echo esc_html( mp_opt( 'spotlight_spec2', 'Camera Control' ) ); ?></strong>
+								<small><?php esc_html_e( 'Tactile Haptic Slide & Click', 'mobile-pasal' ); ?></small>
+							</div>
+						</div>
+
+						<div class="fsc-bento-card">
+							<div class="fbc-icon" style="background-color: #0f172a; color: #a78bfa;">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+							</div>
+							<div class="fbc-text">
+								<strong><?php echo esc_html( mp_opt( 'spotlight_spec3', 'Grade 5 Titanium' ) ); ?></strong>
+								<small><?php esc_html_e( 'Aerospace Micro-Blasted Frame', 'mobile-pasal' ); ?></small>
+							</div>
+						</div>
+
+						<div class="fsc-bento-card">
+							<div class="fbc-icon" style="background-color: #0f172a; color: #34d399;">
+								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+							</div>
+							<div class="fbc-text">
+								<strong><?php echo esc_html( mp_opt( 'spotlight_spec4', 'NTA Approved • 100% Legal IMEI' ) ); ?></strong>
+								<small><?php esc_html_e( 'Official Nepal VAT Bill & Warranty', 'mobile-pasal' ); ?></small>
+							</div>
+						</div>
+					</div>
+
+					<!-- Counter Stock Handover Assurance -->
+					<div class="fsc-stock-banner">
+						<span class="fsc-pulse-dot"></span>
+						<span class="fsc-stock-text"><?php echo esc_html( mp_opt( 'spotlight_status_text', 'Sealed Stock Handover Ready at Gulariya Showroom Counter' ) ); ?></span>
+					</div>
+
+					<!-- Actions Row -->
+					<div class="fsc-actions-row">
+						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste, iPhone 16 Pro (128GB / 256GB) ko aaja ko counter price dinus' ) ); ?>" target="_blank" rel="noopener">
+							<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+							<span><?php echo esc_html( mp_opt( 'spotlight_btn1_text', 'Ask Today\'s Price on WhatsApp' ) ); ?></span>
+						</a>
+						<a class="btn btn-secondary btn-lg" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
+							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
+							<span><?php printf( esc_html__( '%s (%s)', 'mobile-pasal' ), esc_html( mp_opt( 'spotlight_btn2_prefix', 'Call Store Direct' ) ), esc_html( mp_opt( 'contact_phone', '9804530786' ) ) ); ?></span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Right Column: Showcase Pedestal & Floating Badges -->
+				<div class="fsc-visual-col">
+					<div class="fsc-pedestal-card">
+						<div class="fsc-floating-tag fsc-ft-top">
+							<span class="ft-indicator"></span>
+							<span>48MP Fusion • 4K 120fps Dolby</span>
+						</div>
+
+						<div class="fsc-img-showcase">
+							<img src="<?php echo esc_url( $spotlight_img ); ?>" alt="<?php echo esc_attr( mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' ) ); ?>" loading="lazy">
+						</div>
+
+						<div class="fsc-floating-tag fsc-ft-bottom-left">
+							<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+							<span>Apple Intelligence Ready</span>
+						</div>
+
+						<div class="fsc-floating-tag fsc-ft-bottom-right">
+							<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+							<span>Official 1-Year Warranty</span>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>
