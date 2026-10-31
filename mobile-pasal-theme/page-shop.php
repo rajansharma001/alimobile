@@ -259,21 +259,6 @@ get_header();
 										<?php endif; ?>
 									</div>
 
-									<!-- Pricing Dock -->
-									<div class="product-pricing-dock">
-										<div class="price-val-wrap">
-											<?php if ( ! empty( $price ) ) : ?>
-												<span class="price-current"><?php echo esc_html( $price ); ?></span>
-											<?php else : ?>
-												<span class="price-current"><?php esc_html_e( 'Call for Rate', 'mobile-pasal' ); ?></span>
-											<?php endif; ?>
-											<?php if ( ! empty( $old_price ) ) : ?>
-												<span class="price-original"><?php echo esc_html( $old_price ); ?></span>
-											<?php endif; ?>
-										</div>
-										<span class="price-tax-paid"><?php esc_html_e( 'Nepal VAT Bill', 'mobile-pasal' ); ?></span>
-									</div>
-
 									<!-- Action Buttons -->
 									<div class="product-action-dock">
 										<a class="btn btn-whatsapp btn-sm btn-product-action" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma tapaiharuko website ma ' . $p_title . ' herera aako chhu. Gulariya counter ma availability ra rate confirm gardinus na.' ) ); ?>" target="_blank" rel="noopener">
@@ -333,15 +318,6 @@ get_header();
 												<span><?php echo esc_html( $h['storage'] ); ?></span>
 											</span>
 										<?php endif; ?>
-									</div>
-									<div class="product-pricing-dock">
-										<div class="price-val-wrap">
-											<span class="price-current"><?php echo esc_html( $h['price'] ); ?></span>
-											<?php if ( ! empty( $h['old_price'] ) ) : ?>
-												<span class="price-original"><?php echo esc_html( $h['old_price'] ); ?></span>
-											<?php endif; ?>
-										</div>
-										<span class="price-tax-paid"><?php esc_html_e( 'Nepal VAT Bill', 'mobile-pasal' ); ?></span>
 									</div>
 									<div class="product-action-dock" style="grid-template-columns: 1fr;">
 										<a class="btn btn-whatsapp btn-sm btn-product-action" href="<?php echo esc_url( mp_get_whatsapp_link( 'Namaste Ali Mobile, ma ' . $h['title'] . ' ko aaja ko rate ra counter stock bujhna chahanchhu' ) ); ?>" target="_blank" rel="noopener">

@@ -368,13 +368,11 @@
     }
 
     productsGrid.innerHTML = items.map(function (item) {
-      var formattedPrice = item.price.toLocaleString("en-IN");
-      var oldPriceHtml = item.oldPrice ? '<span class="old-price">Rs. ' + item.oldPrice.toLocaleString("en-IN") + '</span>' : '';
       var specsHtml = item.specs.map(function (spec) {
         return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + spec + '</span></div>';
       }).join("");
 
-      var waLink = "https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20interested%20in%20buying%20" + encodeURIComponent(item.name) + "%20priced%20at%20Rs.%20" + formattedPrice + ".";
+      var waLink = "https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20interested%20in%20buying%20" + encodeURIComponent(item.name) + ".%20Please%20share%20today's%20counter%20price%20and%20availability.";
 
       return (
         '<article class="product-card">' +
@@ -394,13 +392,6 @@
           '</div>' +
           '<h3 class="product-name">' + item.name + '</h3>' +
           '<div class="product-specs-list">' + specsHtml + '</div>' +
-          '<div class="product-pricing-row">' +
-            '<div class="price-wrap">' +
-              '<span class="current-price">Rs. ' + formattedPrice + '</span>' +
-              oldPriceHtml +
-            '</div>' +
-            '<span class="vat-tag">NEPAL VAT BILL</span>' +
-          '</div>' +
           '<div class="product-actions">' +
             '<a class="card-wa-btn" href="' + waLink + '" target="_blank" rel="noopener noreferrer">' +
               '<span>WhatsApp Rate</span>' +

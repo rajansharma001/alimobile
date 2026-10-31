@@ -1733,6 +1733,9 @@
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 8px;
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
     }
 
     .card-wa-btn {
@@ -5593,6 +5596,8 @@
   grid-template-columns: 1fr auto;
   gap: 8px;
   margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px dashed #e2e8f0;
 }
 
 .btn-product-action {
