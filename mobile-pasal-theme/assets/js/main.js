@@ -1,18 +1,468 @@
 /**
- * ALI MOBILE CENTER & APPLE FIX — OFFICIAL JAVASCRIPT
+ * ALI MOBILE CENTER & APPLE FIX — OFFICIAL JAVASCRIPT ENGINE
  * Gulariya-06, Ji. Pra. Ka. Chowk, Bardiya, Nepal
  * Direct Counter Helpline & WhatsApp: +977 9804530786
+ * Complete Store & Certified Repair Lab Interactive Architecture
  */
 
-document.addEventListener('DOMContentLoaded', function () {
+(function () {
   'use strict';
 
   var SHOP_PHONE = '9779804530786';
   var WA_BASE = 'https://wa.me/' + SHOP_PHONE + '?text=';
 
-  /* ------------------------------------------------------------------------
-     1. Preloader Handling (Icon-Only, Exactly 1 Second Display)
-     ------------------------------------------------------------------------ */
+  // -------------------------------------------------------------
+  // 1. CATALOG DATA (Handsets & Genuine Accessories)
+  // -------------------------------------------------------------
+  var catalogData = [
+    {
+      id: "c1",
+      tag: "CERTIFIED TURBO",
+      categoryTag: "Accessories",
+      brand: "Accessories & Gear",
+      name: "Anker 735 65W GaNPrime Fast Charger",
+      img: "https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=500&q=80",
+      specs: ["Compact GaN III Semiconductor", "PowerIQ 4.0 Dynamic Allocation", "2x USB-C Ports + 1x USB-A Fast Port"],
+      price: 6499,
+      oldPrice: 7200,
+      vat: true,
+      featured: 1
+    },
+    {
+      id: "c2",
+      tag: "SMART HEALTH",
+      categoryTag: "Wearable",
+      brand: "Samsung Galaxy",
+      name: "Samsung Galaxy Watch 6 Classic (47mm)",
+      img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=80",
+      specs: ["1.5\" Super AMOLED Sapphire", "Exynos W930 Dual Core", "2GB RAM + 16GB Storage (Wear OS)"],
+      price: 44999,
+      oldPrice: 48000,
+      vat: true,
+      featured: 2
+    },
+    {
+      id: "c3",
+      tag: "ORIGINAL AUDIO",
+      categoryTag: "Audio",
+      brand: "Apple iPhone",
+      name: "Apple AirPods Pro 2 (USB-C MagSafe)",
+      img: "https://images.unsplash.com/photo-1600294037681-c80b4cb5b434?auto=format&fit=crop&w=500&q=80",
+      specs: ["H2 Headphone Chip + Apple H2 Audio", "Adaptive Noise Cancellation 2x", "USB-C MagSafe with Precision Finding"],
+      price: 38999,
+      oldPrice: 42000,
+      vat: true,
+      featured: 3
+    },
+    {
+      id: "c4",
+      tag: "PERISCOPE TELEPHOTO",
+      categoryTag: "Flagship Phone",
+      brand: "OnePlus",
+      name: "OnePlus 12 5G (16GB / 512GB)",
+      img: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?auto=format&fit=crop&w=500&q=80",
+      specs: ["Snapdragon 8 Gen 3 (4nm)", "64MP 3x Periscope Telephoto Hasselblad", "5400mAh Battery + 100W SUPERVOOC"],
+      price: 129999,
+      oldPrice: 135000,
+      vat: true,
+      featured: 4
+    },
+    {
+      id: "c5",
+      tag: "LEICA OPTICS",
+      categoryTag: "Flagship Phone",
+      brand: "Xiaomi / Redmi",
+      name: "Xiaomi 14 Leica Flagship (512GB)",
+      img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=500&q=80",
+      specs: ["Leica Summilux 75mm Floating Lens", "Snapdragon 8 Gen 3 Flagship", "90W HyperCharge + 50W Wireless"],
+      price: 69999,
+      oldPrice: 74999,
+      vat: true,
+      featured: 5
+    },
+    {
+      id: "c6",
+      tag: "120W TURBO",
+      categoryTag: "Mid-Range Phone",
+      brand: "Xiaomi / Redmi",
+      name: "Redmi Note 13 Pro+ 5G (256GB)",
+      img: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?auto=format&fit=crop&w=500&q=80",
+      specs: ["200MP OIS Camera with 4x In-Sensor", "Curved 1.5K AMOLED 120Hz", "IP68 Dust & Water Resistance"],
+      price: 42999,
+      oldPrice: 46000,
+      vat: true,
+      featured: 6
+    }
+  ];
+
+  // -------------------------------------------------------------
+  // 2. HERO SLIDER LOGIC
+  // -------------------------------------------------------------
+  var slides = Array.prototype.slice.call(document.querySelectorAll(".slide"));
+  var prevBtn = document.querySelector(".slider-arrow.prev");
+  var nextBtn = document.querySelector(".slider-arrow.next");
+  var currentSlide = 0;
+  var autoPlayInterval;
+
+  function showSlide(index) {
+    if (!slides.length) return;
+    currentSlide = (index + slides.length) % slides.length;
+    slides.forEach(function (slide, i) {
+      slide.classList.toggle("active", i === currentSlide);
+      slide.querySelectorAll(".dot").forEach(function (dot, dotIndex) {
+        dot.classList.toggle("active", dotIndex === currentSlide);
+      });
+    });
+  }
+
+  function startAutoPlay() {
+    clearInterval(autoPlayInterval);
+    if (slides.length > 1) {
+      autoPlayInterval = setInterval(function () {
+        showSlide(currentSlide + 1);
+      }, 6500);
+    }
+  }
+
+  if (prevBtn && nextBtn) {
+    prevBtn.addEventListener("click", function () {
+      showSlide(currentSlide - 1);
+      startAutoPlay();
+    });
+    nextBtn.addEventListener("click", function () {
+      showSlide(currentSlide + 1);
+      startAutoPlay();
+    });
+  }
+
+  document.querySelectorAll(".dot").forEach(function (dot) {
+    dot.addEventListener("click", function () {
+      var label = dot.getAttribute("aria-label") || "Slide 1";
+      var index = Number(label.replace("Slide ", "")) - 1;
+      if (!isNaN(index)) {
+        showSlide(index);
+        startAutoPlay();
+      }
+    });
+  });
+
+  // Touch swipe for Hero
+  var heroSliderElem = document.getElementById("heroSlider");
+  var touchStartX = 0;
+  var touchEndX = 0;
+
+  if (heroSliderElem) {
+    heroSliderElem.addEventListener("touchstart", function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
+      }
+    }, { passive: true });
+
+    heroSliderElem.addEventListener("touchend", function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 40) {
+          if (diff > 0) showSlide(currentSlide + 1);
+          else showSlide(currentSlide - 1);
+          startAutoPlay();
+        }
+      }
+    }, { passive: true });
+  }
+
+  // -------------------------------------------------------------
+  // 3. NAVIGATION & SCROLL OBSERVER
+  // -------------------------------------------------------------
+  var menuToggle = document.getElementById("menuToggle");
+  var nav = document.getElementById("nav");
+  var headerBar = document.getElementById("topHeader");
+  var scrollTopBtn = document.getElementById("scrollTopBtn");
+
+  function closeNav() {
+    if (nav) nav.classList.remove("open");
+    if (menuToggle) {
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.textContent = "☰";
+    }
+  }
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener("click", function (e) {
+      e.stopPropagation();
+      var isOpen = nav.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "✕" : "☰";
+    });
+
+    nav.querySelectorAll("a").forEach(function (a) {
+      a.addEventListener("click", closeNav);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (nav.classList.contains("open") && !nav.contains(e.target) && e.target !== menuToggle) {
+        closeNav();
+      }
+    });
+  }
+
+  window.addEventListener("scroll", function () {
+    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
+    if (headerBar) {
+      if (scrollY > 30) {
+        headerBar.classList.add("scrolled");
+      } else {
+        headerBar.classList.remove("scrolled");
+      }
+    }
+
+    if (scrollTopBtn) {
+      if (scrollY > 350) {
+        scrollTopBtn.classList.add("visible");
+      } else {
+        scrollTopBtn.classList.remove("visible");
+      }
+    }
+  }, { passive: true });
+
+  if (scrollTopBtn) {
+    scrollTopBtn.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  }
+
+  // Global key bindings (Escape, Left, Right)
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closeNav();
+      closeQuoteModal();
+    }
+    if (e.key === "ArrowLeft" && slides.length) {
+      showSlide(currentSlide - 1);
+      startAutoPlay();
+    }
+    if (e.key === "ArrowRight" && slides.length) {
+      showSlide(currentSlide + 1);
+      startAutoPlay();
+    }
+  });
+
+  // -------------------------------------------------------------
+  // 4. iPHONE 16 PRO FINISH SELECTOR
+  // -------------------------------------------------------------
+  var finishImages = {
+    "Desert Titanium": "https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=900&q=85",
+    "Natural Titanium": "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=900&q=85",
+    "White Titanium": "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?auto=format&fit=crop&w=900&q=85",
+    "Black Titanium": "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85"
+  };
+
+  function setFinish(finishName, colorHex) {
+    document.querySelectorAll("#finishSelector .finish-btn").forEach(function (btn) {
+      btn.classList.toggle("active", btn.getAttribute("data-finish") === finishName);
+    });
+    var img = document.getElementById("flagshipDisplayImg");
+    if (img && finishImages[finishName]) {
+      img.src = finishImages[finishName];
+    }
+    var waBtn = document.getElementById("flagshipWaBtn");
+    if (waBtn) {
+      waBtn.href = "https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20please%20quote%20today's%20best%20price%20for%20iPhone%2016%20Pro%20(" + encodeURIComponent(finishName) + ")%20with%20Nepal%20VAT%20Bill.";
+    }
+    triggerToast("Finish selected: " + finishName);
+  }
+
+  // -------------------------------------------------------------
+  // 5. CATALOG FILTER & SORT LOGIC (Homepage Section)
+  // -------------------------------------------------------------
+  var productsGrid = document.getElementById("productsGrid");
+  var catalogCount = document.getElementById("catalogCount");
+  var catalogSearch = document.getElementById("catalogSearch");
+  var catalogSort = document.getElementById("catalogSort");
+
+  function renderCatalog(items) {
+    if (!productsGrid) return;
+    if (items.length === 0) {
+      productsGrid.innerHTML = 
+        '<div class="catalog-empty">' +
+          '<h3 style="font-size:18px; margin:0 0 8px 0; color:var(--navy);">No matching models found</h3>' +
+          '<p style="font-size:13.5px; color:var(--muted); margin:0 0 16px 0;">Try adjusting your brand radio or clearing the search text.</p>' +
+          '<button class="view-all-pill" onclick="resetCatalogFilters()" type="button">Reset All Filters</button>' +
+        '</div>';
+      if (catalogCount) catalogCount.textContent = "0 Models Found";
+      return;
+    }
+
+    if (catalogCount) {
+      catalogCount.textContent = items.length + " " + (items.length === 1 ? "Model" : "Models") + " Found";
+    }
+
+    productsGrid.innerHTML = items.map(function (item) {
+      var formattedPrice = item.price.toLocaleString("en-IN");
+      var oldPriceHtml = item.oldPrice ? '<span class="old-price">Rs. ' + item.oldPrice.toLocaleString("en-IN") + '</span>' : '';
+      var specsHtml = item.specs.map(function (spec) {
+        return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + spec + '</span></div>';
+      }).join("");
+
+      var waLink = "https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20interested%20in%20buying%20" + encodeURIComponent(item.name) + "%20priced%20at%20Rs.%20" + formattedPrice + ".";
+
+      return (
+        '<article class="product-card">' +
+          '<div class="product-card-topbar">' +
+            '<span class="product-tag">' + item.tag + '</span>' +
+            '<span class="product-cat-tag">' + item.categoryTag + '</span>' +
+          '</div>' +
+          '<div class="product-img-box">' +
+            '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy" />' +
+          '</div>' +
+          '<div class="product-brand-row">' +
+            '<span>' + item.brand + '</span>' +
+            '<span class="product-mdms-tag">🛡️ MDMS &amp; VAT</span>' +
+          '</div>' +
+          '<h3 class="product-name">' + item.name + '</h3>' +
+          '<div class="product-specs-list">' + specsHtml + '</div>' +
+          '<div class="product-pricing-row">' +
+            '<div class="price-wrap">' +
+              '<span class="current-price">Rs. ' + formattedPrice + '</span>' +
+              oldPriceHtml +
+            '</div>' +
+            '<span class="vat-tag">NEPAL VAT BILL</span>' +
+          '</div>' +
+          '<div class="product-actions">' +
+            '<a class="card-wa-btn" href="' + waLink + '" target="_blank" rel="noopener noreferrer">' +
+              '<span>WhatsApp Rate</span>' +
+            '</a>' +
+            '<button class="card-specs-btn" onclick="openQuoteModal(\'' + item.name.replace(/'/g, "\\'") + '\')" type="button">Specs ›</button>' +
+          '</div>' +
+        '</article>'
+      );
+    }).join("");
+  }
+
+  function filterCatalog() {
+    if (!productsGrid) return;
+    var query = (catalogSearch ? catalogSearch.value : '').trim().toLowerCase();
+    var checkedBrand = document.querySelector('input[name="brandFilter"]:checked');
+    var selectedBrand = checkedBrand ? checkedBrand.value : "all";
+    var checkedPrice = document.querySelector('input[name="priceFilter"]:checked');
+    var selectedPrice = checkedPrice ? checkedPrice.value : "all";
+
+    // Update active label styles
+    document.querySelectorAll('input[name="brandFilter"]').forEach(function (radio) {
+      if (radio.parentElement) radio.parentElement.classList.toggle("active", radio.checked);
+    });
+    document.querySelectorAll('input[name="priceFilter"]').forEach(function (radio) {
+      if (radio.parentElement) radio.parentElement.classList.toggle("active", radio.checked);
+    });
+
+    var filtered = catalogData.filter(function (item) {
+      var matchesQuery = !query || 
+        item.name.toLowerCase().includes(query) || 
+        item.brand.toLowerCase().includes(query) || 
+        item.tag.toLowerCase().includes(query) ||
+        item.specs.some(function (s) { return s.toLowerCase().includes(query); });
+
+      var matchesBrand = (selectedBrand === "all") || (item.brand === selectedBrand);
+
+      var matchesPrice = true;
+      if (selectedPrice === "under-30k") matchesPrice = item.price < 30000;
+      else if (selectedPrice === "30k-75k") matchesPrice = item.price >= 30000 && item.price <= 75000;
+      else if (selectedPrice === "75k-150k") matchesPrice = item.price > 75000 && item.price <= 150000;
+      else if (selectedPrice === "above-150k") matchesPrice = item.price > 150000;
+
+      return matchesQuery && matchesBrand && matchesPrice;
+    });
+
+    // Sort
+    var sortMode = catalogSort ? catalogSort.value : "featured";
+    if (sortMode === "low-high") {
+      filtered.sort(function (a, b) { return a.price - b.price; });
+    } else if (sortMode === "high-low") {
+      filtered.sort(function (a, b) { return b.price - a.price; });
+    } else {
+      filtered.sort(function (a, b) { return a.featured - b.featured; });
+    }
+
+    renderCatalog(filtered);
+  }
+
+  function sortCatalog() {
+    filterCatalog();
+  }
+
+  function filterCatalogByBrand(brandName) {
+    var targetRadio = document.querySelector('input[name="brandFilter"][value="' + brandName + '"]');
+    if (targetRadio) {
+      targetRadio.checked = true;
+      filterCatalog();
+      var catalogSec = document.getElementById("catalog");
+      if (catalogSec) catalogSec.scrollIntoView({ behavior: "smooth" });
+      triggerToast("Filtering showroom: " + brandName);
+    }
+  }
+
+  function resetCatalogFilters() {
+    if (catalogSearch) catalogSearch.value = "";
+    var allBrandRadio = document.querySelector('input[name="brandFilter"][value="all"]');
+    var allPriceRadio = document.querySelector('input[name="priceFilter"][value="all"]');
+    if (allBrandRadio) allBrandRadio.checked = true;
+    if (allPriceRadio) allPriceRadio.checked = true;
+    if (catalogSort) catalogSort.value = "featured";
+    filterCatalog();
+    triggerToast("All filters reset");
+  }
+
+  // -------------------------------------------------------------
+  // 6. MODAL & TOAST NOTIFICATION
+  // -------------------------------------------------------------
+  var quoteModal = document.getElementById("quoteModal");
+  var modalDevice = document.getElementById("modalDevice");
+  var modalIssue = document.getElementById("modalIssue");
+  var toastNotice = document.getElementById("toastNotice");
+  var toastMsg = document.getElementById("toastMsg");
+  var toastTimer;
+
+  function openQuoteModal(defaultDevice) {
+    if (modalDevice && defaultDevice) {
+      modalDevice.value = defaultDevice;
+    }
+    if (quoteModal) {
+      quoteModal.classList.add("open");
+    }
+  }
+
+  function closeQuoteModal() {
+    if (quoteModal) {
+      quoteModal.classList.remove("open");
+    }
+  }
+
+  function handleQuoteSubmit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var dev = modalDevice ? modalDevice.value.trim() : "";
+    var issue = modalIssue ? modalIssue.value : "";
+    var phoneInput = document.getElementById("modalPhone");
+    var phone = phoneInput ? phoneInput.value.trim() : "";
+
+    var text = "Hello Ali Mobile Center Gulariya, I would like to request counter service for my device:%0A• Device: " + encodeURIComponent(dev) + "%0A• Problem/Service: " + encodeURIComponent(issue) + "%0A• My Phone: " + encodeURIComponent(phone);
+    window.open("https://wa.me/" + SHOP_PHONE + "?text=" + text, "_blank", "noopener,noreferrer");
+    closeQuoteModal();
+    triggerToast("Opening WhatsApp with your request...");
+  }
+
+  function triggerToast(message) {
+    if (!toastNotice || !toastMsg) return;
+    clearTimeout(toastTimer);
+    toastMsg.textContent = message;
+    toastNotice.classList.add("show");
+    toastTimer = setTimeout(function () {
+      toastNotice.classList.remove("show");
+    }, 2600);
+  }
+
+  // -------------------------------------------------------------
+  // 7. PRELOADER HANDLING (Exact 1s duration)
+  // -------------------------------------------------------------
   var preloader = document.getElementById('preloader');
   function hidePreloader() {
     if (preloader && !preloader.classList.contains('loaded')) {
@@ -22,813 +472,11 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 500);
     }
   }
-  // Hold preloader for exactly 1 second (1000ms) as requested
   setTimeout(hidePreloader, 1000);
 
-  /* ------------------------------------------------------------------------
-     2. Sticky Header & Scroll Spy
-     ------------------------------------------------------------------------ */
-  var header = document.querySelector('header.site-header');
-  var navLinks = document.querySelectorAll('nav.nav-links a, .mobile-nav-list a');
-  var sections = document.querySelectorAll('main section[id], .hero-slider-section');
-
-  window.addEventListener('scroll', function () {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    if (header) {
-      if (scrollY > 25) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    }
-
-    // Scroll spy for navigation
-    var currentSection = '';
-    sections.forEach(function (sec) {
-      var top = sec.offsetTop - 120;
-      var height = sec.offsetHeight;
-      if (scrollY >= top && scrollY < top + height) {
-        currentSection = sec.getAttribute('id') || '';
-      }
-    });
-
-    navLinks.forEach(function (link) {
-      link.classList.remove('active');
-      var href = link.getAttribute('href') || '';
-      if (currentSection && href === '#' + currentSection) {
-        link.classList.add('active');
-      } else if (!currentSection && (href === '#top' || href === '#')) {
-        link.classList.add('active');
-      }
-    });
-  }, { passive: true });
-
-  /* ------------------------------------------------------------------------
-     3. Mobile Navigation Drawer
-     ------------------------------------------------------------------------ */
-  var mobileToggleBtn = document.getElementById('btn-mobile-toggle');
-  var mobileDrawer = document.getElementById('mobile-drawer');
-  var mobileDrawerClose = document.getElementById('btn-drawer-close');
-  var mobileDrawerOverlay = document.getElementById('mobile-drawer-overlay');
-  var mobileLinks = document.querySelectorAll('.mobile-nav-list a');
-
-  function openDrawer() {
-    if (mobileDrawer) {
-      mobileDrawer.classList.add('open');
-      mobileDrawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
-  }
-
-  function closeDrawer() {
-    if (mobileDrawer) {
-      mobileDrawer.classList.remove('open');
-      mobileDrawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
-  }
-
-  if (mobileToggleBtn) mobileToggleBtn.addEventListener('click', openDrawer);
-  if (mobileDrawerClose) mobileDrawerClose.addEventListener('click', closeDrawer);
-  if (mobileDrawerOverlay) mobileDrawerOverlay.addEventListener('click', closeDrawer);
-  
-  mobileLinks.forEach(function (link) {
-    link.addEventListener('click', closeDrawer);
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
-      closeDrawer();
-    }
-  });
-
-  /* ------------------------------------------------------------------------
-     4. Hero Slider (Touch, Swipe, Keyboard, Auto-play & Dots)
-     ------------------------------------------------------------------------ */
-  var heroSlider = document.getElementById('heroSlider');
-  if (heroSlider) {
-    var heroSlides = Array.from(heroSlider.querySelectorAll('.slide'));
-    var prevBtn = heroSlider.querySelector('.slider-arrow.prev');
-    var nextBtn = heroSlider.querySelector('.slider-arrow.next');
-    var currentSlide = 0;
-    var autoPlayTimer = null;
-    var SLIDE_DURATION = 6000;
-
-    function showSlide(index) {
-      if (!heroSlides.length) return;
-      currentSlide = (index + heroSlides.length) % heroSlides.length;
-      heroSlides.forEach(function (slide, i) {
-        slide.classList.toggle('active', i === currentSlide);
-        var dots = slide.querySelectorAll('.dot');
-        dots.forEach(function (dot, dotIndex) {
-          dot.classList.toggle('active', dotIndex === currentSlide);
-        });
-      });
-    }
-
-    function startAutoPlay() {
-      clearInterval(autoPlayTimer);
-      autoPlayTimer = setInterval(function () {
-        showSlide(currentSlide + 1);
-      }, SLIDE_DURATION);
-    }
-
-    function stopAutoPlay() {
-      if (autoPlayTimer) {
-        clearInterval(autoPlayTimer);
-        autoPlayTimer = null;
-      }
-    }
-
-    if (prevBtn) {
-      prevBtn.addEventListener('click', function () {
-        showSlide(currentSlide - 1);
-        startAutoPlay();
-      });
-    }
-
-    if (nextBtn) {
-      nextBtn.addEventListener('click', function () {
-        showSlide(currentSlide + 1);
-        startAutoPlay();
-      });
-    }
-
-    var allDots = heroSlider.querySelectorAll('.dot');
-    allDots.forEach(function (dot) {
-      dot.addEventListener('click', function () {
-        var label = dot.getAttribute('aria-label') || '';
-        var num = parseInt(label.replace('Slide ', ''), 10);
-        if (!isNaN(num)) {
-          showSlide(num - 1);
-          startAutoPlay();
-        }
-      });
-    });
-
-    heroSlider.addEventListener('mouseenter', stopAutoPlay);
-    heroSlider.addEventListener('mouseleave', startAutoPlay);
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'ArrowLeft') {
-        showSlide(currentSlide - 1);
-        startAutoPlay();
-      } else if (e.key === 'ArrowRight') {
-        showSlide(currentSlide + 1);
-        startAutoPlay();
-      }
-    });
-
-    // Touch Swipe Support for Mobile & Tablet
-    var touchStartX = 0;
-    var touchEndX = 0;
-
-    heroSlider.addEventListener('touchstart', function (e) {
-      if (e.changedTouches && e.changedTouches[0]) {
-        touchStartX = e.changedTouches[0].screenX;
-      }
-    }, { passive: true });
-
-    heroSlider.addEventListener('touchend', function (e) {
-      if (e.changedTouches && e.changedTouches[0]) {
-        touchEndX = e.changedTouches[0].screenX;
-        var diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 45) {
-          if (diff > 0) {
-            showSlide(currentSlide + 1);
-          } else {
-            showSlide(currentSlide - 1);
-          }
-          startAutoPlay();
-        }
-      }
-    }, { passive: true });
-
-    startAutoPlay();
-  }
-
-
-  /* ------------------------------------------------------------------------
-     5. Interactive Repair Counter Station (Live Diagnostic Docket)
-     ------------------------------------------------------------------------ */
-  if (document.getElementById('repair-builder')) {
-    var repairDevice = 'Apple iPhone';
-    var repairIssue = 'Screen & Display (Cracked glass / black spots / touch dead)';
-    var repairTime = '30–45 Mins';
-    var repairWarranty = '90 Days Testing Warranty';
-    
-    var repairModelInput = document.getElementById('builder-model-input');
-    var repairPreviewText = document.getElementById('builder-preview-text');
-    var repairSendBtn = document.getElementById('builder-send-whatsapp-btn');
-    
-    // Ticket Display Elements
-    var ticketDeviceVal = document.getElementById('ticket-device-val');
-    var ticketModelVal = document.getElementById('ticket-model-val');
-    var ticketFaultVal = document.getElementById('ticket-fault-val');
-    var ticketTimeVal = document.getElementById('ticket-time-val');
-    var ticketWarrantyVal = document.getElementById('ticket-warranty-val');
-
-    var devicePills = document.querySelectorAll('.device-pills-grid .dev-pill-btn');
-    var faultCards = document.querySelectorAll('.fault-cards-grid .fault-select-card');
-
-    function updateRepairTicket() {
-      var rawModel = (repairModelInput ? repairModelInput.value : '').trim();
-      var displayModel = rawModel ? rawModel : 'Specified at Counter';
-      var modelDesc = rawModel ? ' (Model: ' + rawModel + ')' : '';
-
-      // Update Ticket Card
-      if (ticketDeviceVal) ticketDeviceVal.textContent = repairDevice;
-      if (ticketModelVal) ticketModelVal.textContent = displayModel;
-      if (ticketFaultVal) {
-        // Short fault title (before first paren)
-        var shortFault = repairIssue.split('(')[0].trim();
-        ticketFaultVal.textContent = shortFault;
-      }
-      if (ticketTimeVal) ticketTimeVal.textContent = repairTime;
-      if (ticketWarrantyVal) ticketWarrantyVal.textContent = repairWarranty;
-
-      // Build Formatted WhatsApp Message
-      var message = 'Namaste Ali Mobile & Apple Fix, mero ' + repairDevice + modelDesc +
-                    ' ma problem chha: ' + repairIssue + '. Gulariya counter ma check ra repair cost barema jankari dinus.';
-
-      if (repairPreviewText) {
-        repairPreviewText.textContent = '"' + message + '"';
-      }
-
-      if (repairSendBtn) {
-        repairSendBtn.href = WA_BASE + encodeURIComponent(message);
-      }
-    }
-
-    devicePills.forEach(function (pill) {
-      pill.addEventListener('click', function () {
-        devicePills.forEach(function (p) { p.classList.remove('active'); });
-        this.classList.add('active');
-        repairDevice = this.getAttribute('data-device') || 'Smartphone';
-        updateRepairTicket();
-      });
-    });
-
-    faultCards.forEach(function (card) {
-      card.addEventListener('click', function () {
-        faultCards.forEach(function (c) { c.classList.remove('active'); });
-        this.classList.add('active');
-        repairIssue = this.getAttribute('data-issue') || 'Hardware Fault';
-        repairTime = this.getAttribute('data-time') || 'Same-Day';
-        repairWarranty = this.getAttribute('data-warranty') || 'Testing Warranty';
-        updateRepairTicket();
-      });
-    });
-
-    var quickChips = document.querySelectorAll('.quick-chip-btn');
-    quickChips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        var model = this.getAttribute('data-model') || '';
-        if (repairModelInput) {
-          repairModelInput.value = model;
-          quickChips.forEach(function (c) { c.classList.remove('active'); });
-          this.classList.add('active');
-          updateRepairTicket();
-        }
-      });
-    });
-
-    if (repairModelInput) {
-      repairModelInput.addEventListener('input', function () {
-        var curVal = repairModelInput.value.trim().toLowerCase();
-        quickChips.forEach(function (c) {
-          if (curVal && (c.getAttribute('data-model') || '').toLowerCase() === curVal) {
-            c.classList.add('active');
-          } else {
-            c.classList.remove('active');
-          }
-        });
-        updateRepairTicket();
-      });
-    }
-
-    // Initialize ticket with defaults
-    updateRepairTicket();
-  }
-
-  /* ------------------------------------------------------------------------
-     6. Product Catalog: Left Sidebar Filtration, Sorting & Pagination
-     ------------------------------------------------------------------------ */
-  var filterTabs = document.querySelectorAll('.filter-tab-btn');
-  var priceFilterBtns = document.querySelectorAll('.price-filter-btn');
-  var categoryCards = document.querySelectorAll('.shop-cat-card');
-  var productsGrid = document.getElementById('products-grid');
-  var searchInput = document.getElementById('site-search');
-  var searchClearBtn = document.getElementById('search-clear-btn');
-  var priceFilter = document.getElementById('filter-price-range');
-  var sortFilter = document.getElementById('filter-sort-by');
-  var resetBtn = document.getElementById('sidebar-reset-btn') || document.getElementById('catalog-reset-btn');
-  var countBadge = document.getElementById('catalog-count-num');
-  var emptyNotice = document.getElementById('catalog-empty-notice');
-  var mobileDrawerBtn = document.getElementById('mobile-filter-drawer-btn');
-  var sidebarFilters = document.getElementById('shop-sidebar-filters');
-  var mobileFilterCount = document.getElementById('mobile-filter-count');
-  var paginationControls = document.getElementById('shop-pagination-controls');
-  var paginationInfo = document.getElementById('shop-pagination-info');
-
-  var currentCategory = 'all';
-  var currentPriceRange = 'all';
-  var currentPage = 1;
-  var PAGE_SIZE = 9;
-
-  function renderPagination(totalMatches) {
-    if (!paginationControls) return;
-
-    var totalPages = Math.ceil(totalMatches / PAGE_SIZE);
-    if (totalPages <= 0) totalPages = 1;
-
-    if (currentPage > totalPages) {
-      currentPage = 1;
-    }
-
-    paginationControls.innerHTML = '';
-
-    if (totalMatches <= PAGE_SIZE) {
-      if (paginationInfo) {
-        paginationInfo.textContent = totalMatches > 0
-          ? 'Showing all ' + totalMatches + ' handsets'
-          : '';
-      }
-      return;
-    }
-
-    // Previous Button
-    var prevBtn = document.createElement('button');
-    prevBtn.type = 'button';
-    prevBtn.className = 'page-btn' + (currentPage === 1 ? ' disabled' : '');
-    prevBtn.innerHTML = '‹ Prev';
-    prevBtn.disabled = (currentPage === 1);
-    prevBtn.setAttribute('aria-label', 'Previous Page');
-    prevBtn.addEventListener('click', function () {
-      if (currentPage > 1) {
-        currentPage--;
-        filterCatalog(false);
-        scrollToCatalogTop();
-      }
-    });
-    paginationControls.appendChild(prevBtn);
-
-    // Numbered Buttons
-    for (var i = 1; i <= totalPages; i++) {
-      var numBtn = document.createElement('button');
-      numBtn.type = 'button';
-      numBtn.className = 'page-btn' + (i === currentPage ? ' active' : '');
-      numBtn.textContent = i;
-      numBtn.setAttribute('aria-label', 'Go to Page ' + i);
-      (function (pageIdx) {
-        numBtn.addEventListener('click', function () {
-          if (currentPage !== pageIdx) {
-            currentPage = pageIdx;
-            filterCatalog(false);
-            scrollToCatalogTop();
-          }
-        });
-      })(i);
-      paginationControls.appendChild(numBtn);
-    }
-
-    // Next Button
-    var nextBtn = document.createElement('button');
-    nextBtn.type = 'button';
-    nextBtn.className = 'page-btn' + (currentPage === totalPages ? ' disabled' : '');
-    nextBtn.innerHTML = 'Next ›';
-    nextBtn.disabled = (currentPage === totalPages);
-    nextBtn.setAttribute('aria-label', 'Next Page');
-    nextBtn.addEventListener('click', function () {
-      if (currentPage < totalPages) {
-        currentPage++;
-        filterCatalog(false);
-        scrollToCatalogTop();
-      }
-    });
-    paginationControls.appendChild(nextBtn);
-
-    // Update pagination info text
-    if (paginationInfo) {
-      var startIdx = (currentPage - 1) * PAGE_SIZE + 1;
-      var endIdx = Math.min(currentPage * PAGE_SIZE, totalMatches);
-      paginationInfo.textContent = 'Showing ' + startIdx + '–' + endIdx + ' of ' + totalMatches + ' handsets (Page ' + currentPage + ' of ' + totalPages + ')';
-    }
-  }
-
-  function scrollToCatalogTop() {
-    var catalogEl = document.getElementById('catalog') || productsGrid;
-    if (catalogEl) {
-      catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-
-  function filterCatalog(resetPage) {
-    if (resetPage !== false) {
-      currentPage = 1;
-    }
-
-    var query = (searchInput ? searchInput.value : '').trim().toLowerCase();
-    var priceRange = currentPriceRange;
-    if (priceFilter && priceFilter.value) {
-      priceRange = priceFilter.value;
-    }
-    var sortBy = (sortFilter ? sortFilter.value : 'featured');
-    var cardsArray = Array.prototype.slice.call(document.querySelectorAll('.products-grid .product-card'));
-
-    // Sorting
-    if (sortBy === 'price-asc') {
-      cardsArray.sort(function (a, b) {
-        return (parseInt(a.getAttribute('data-price-numeric'), 10) || 0) - (parseInt(b.getAttribute('data-price-numeric'), 10) || 0);
-      });
-    } else if (sortBy === 'price-desc') {
-      cardsArray.sort(function (a, b) {
-        return (parseInt(b.getAttribute('data-price-numeric'), 10) || 0) - (parseInt(a.getAttribute('data-price-numeric'), 10) || 0);
-      });
-    } else if (sortBy === 'name-asc') {
-      cardsArray.sort(function (a, b) {
-        var tA = (a.getAttribute('data-title') || '').toLowerCase();
-        var tB = (b.getAttribute('data-title') || '').toLowerCase();
-        return tA.localeCompare(tB);
-      });
-    } else {
-      // Natural order (by data-index)
-      cardsArray.sort(function (a, b) {
-        return (parseInt(a.getAttribute('data-index'), 10) || 0) - (parseInt(b.getAttribute('data-index'), 10) || 0);
-      });
-    }
-
-    // Reorder in DOM
-    if (productsGrid) {
-      cardsArray.forEach(function (card) {
-        productsGrid.appendChild(card);
-      });
-    }
-
-    // Match filtering
-    var matchedCards = [];
-    cardsArray.forEach(function (card) {
-      var brand = (card.getAttribute('data-brand') || '').toLowerCase();
-      var category = (card.getAttribute('data-category') || '').toLowerCase();
-      var priceNum = parseInt(card.getAttribute('data-price-numeric'), 10) || 0;
-      var title = (card.getAttribute('data-title') || '').toLowerCase();
-      var specs = (card.querySelector('.product-specs') ? card.querySelector('.product-specs').textContent : '').toLowerCase();
-
-      // Brand / Category filter
-      var matchFilter = (currentCategory === 'all') ||
-                        (brand.indexOf(currentCategory) !== -1) ||
-                        (category.indexOf(currentCategory) !== -1) ||
-                        (currentCategory === 'apple' && (brand.indexOf('apple') !== -1 || title.indexOf('iphone') !== -1)) ||
-                        (currentCategory === 'samsung' && (brand.indexOf('samsung') !== -1 || title.indexOf('galaxy') !== -1)) ||
-                        (currentCategory === 'xiaomi' && (brand.indexOf('xiaomi') !== -1 || brand.indexOf('redmi') !== -1 || title.indexOf('redmi') !== -1)) ||
-                        (currentCategory === 'oneplus' && (brand.indexOf('oneplus') !== -1 || title.indexOf('oneplus') !== -1)) ||
-                        (currentCategory === 'google' && (brand.indexOf('google') !== -1 || brand.indexOf('pixel') !== -1 || title.indexOf('pixel') !== -1)) ||
-                        (currentCategory === 'accessories' && (category.indexOf('accessories') !== -1 || brand.indexOf('accessories') !== -1 || title.indexOf('charger') !== -1 || title.indexOf('airpods') !== -1 || title.indexOf('watch') !== -1 || title.indexOf('buds') !== -1));
-
-      // Query filter
-      var matchQuery = !query ||
-                       title.indexOf(query) !== -1 ||
-                       specs.indexOf(query) !== -1 ||
-                       brand.indexOf(query) !== -1;
-
-      // Price range filter
-      var matchPrice = true;
-      if (priceRange === 'under-30k') {
-        matchPrice = priceNum > 0 && priceNum < 30000;
-      } else if (priceRange === '30k-75k') {
-        matchPrice = priceNum >= 30000 && priceNum <= 75000;
-      } else if (priceRange === '75k-150k') {
-        matchPrice = priceNum > 75000 && priceNum <= 150000;
-      } else if (priceRange === 'above-150k') {
-        matchPrice = priceNum > 150000;
-      }
-
-      if (matchFilter && matchQuery && matchPrice) {
-        matchedCards.push(card);
-      }
-    });
-
-    var matchCount = matchedCards.length;
-
-    // Apply pagination slice
-    var startIdx = (currentPage - 1) * PAGE_SIZE;
-    var endIdx = startIdx + PAGE_SIZE;
-
-    cardsArray.forEach(function (card) {
-      var matchPos = matchedCards.indexOf(card);
-      if (matchPos >= startIdx && matchPos < endIdx) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    // Update count badge
-    if (countBadge) {
-      countBadge.textContent = matchCount;
-    }
-
-    // Render pagination controls
-    renderPagination(matchCount);
-
-    // Toggle empty notice
-    if (emptyNotice) {
-      if (matchCount === 0) {
-        emptyNotice.classList.add('visible');
-      } else {
-        emptyNotice.classList.remove('visible');
-      }
-    }
-
-    // Show/hide search clear button
-    if (searchClearBtn) {
-      searchClearBtn.style.display = query ? 'block' : 'none';
-    }
-
-    // Show/hide reset button
-    var isFiltered = (currentCategory !== 'all') || (query !== '') || (priceRange !== 'all') || (sortBy !== 'featured');
-    if (resetBtn) {
-      resetBtn.style.display = isFiltered ? 'inline-flex' : 'none';
-    }
-
-    // Update mobile filter active counter
-    if (mobileFilterCount) {
-      var filterActiveCount = 0;
-      if (currentCategory !== 'all') filterActiveCount++;
-      if (priceRange !== 'all') filterActiveCount++;
-      if (query !== '') filterActiveCount++;
-      mobileFilterCount.textContent = filterActiveCount;
-    }
-  }
-
-  // Brand tabs / sidebar buttons
-  filterTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      filterTabs.forEach(function (t) { t.classList.remove('active'); });
-      this.classList.add('active');
-      currentCategory = this.getAttribute('data-filter') || 'all';
-
-      // Sync category cards if any
-      categoryCards.forEach(function (c) {
-        c.classList.toggle('active', c.getAttribute('data-category-target') === currentCategory);
-      });
-
-      filterCatalog(true);
-    });
-  });
-
-  // Price buttons in sidebar
-  priceFilterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      priceFilterBtns.forEach(function (b) { b.classList.remove('active'); });
-      this.classList.add('active');
-      currentPriceRange = this.getAttribute('data-price') || 'all';
-      if (priceFilter) priceFilter.value = currentPriceRange;
-      filterCatalog(true);
-    });
-  });
-
-  // Category cards at top
-  categoryCards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      e.preventDefault();
-      var targetCat = this.getAttribute('data-category-target') || 'all';
-      currentCategory = targetCat;
-
-      // Sync active tab
-      filterTabs.forEach(function (t) {
-        t.classList.toggle('active', t.getAttribute('data-filter') === targetCat);
-      });
-
-      categoryCards.forEach(function (c) {
-        c.classList.toggle('active', c.getAttribute('data-category-target') === targetCat);
-      });
-
-      filterCatalog(true);
-
-      var catalogEl = document.getElementById('catalog');
-      if (catalogEl) {
-        catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-
-  // Mobile filter drawer toggle
-  if (mobileDrawerBtn && sidebarFilters) {
-    mobileDrawerBtn.addEventListener('click', function () {
-      sidebarFilters.classList.toggle('drawer-open');
-    });
-  }
-
-  if (priceFilter) {
-    priceFilter.addEventListener('change', function () {
-      currentPriceRange = this.value;
-      priceFilterBtns.forEach(function (b) {
-        b.classList.toggle('active', b.getAttribute('data-price') === currentPriceRange);
-      });
-      filterCatalog(true);
-    });
-  }
-
-  if (sortFilter) {
-    sortFilter.addEventListener('change', function () {
-      filterCatalog(true);
-    });
-  }
-
-  // Reset button(s)
-  var allResetBtns = document.querySelectorAll('#sidebar-reset-btn, #catalog-reset-btn, .btn-clear-all');
-  allResetBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      if (searchInput) searchInput.value = '';
-      if (priceFilter) priceFilter.value = 'all';
-      if (sortFilter) sortFilter.value = 'featured';
-      currentCategory = 'all';
-      currentPriceRange = 'all';
-      filterTabs.forEach(function (t) {
-        t.classList.toggle('active', t.getAttribute('data-filter') === 'all');
-      });
-      priceFilterBtns.forEach(function (b) {
-        b.classList.toggle('active', b.getAttribute('data-price') === 'all');
-      });
-      categoryCards.forEach(function (c) {
-        c.classList.remove('active');
-      });
-      filterCatalog(true);
-    });
-  });
-
-  if (searchInput) {
-    searchInput.addEventListener('input', function () {
-      filterCatalog(true);
-    });
-  }
-
-  if (searchClearBtn && searchInput) {
-    searchClearBtn.addEventListener('click', function () {
-      searchInput.value = '';
-      filterCatalog(true);
-      searchInput.focus();
-    });
-  }
-
-  // Initial calculation of count & pagination
-  filterCatalog(true);
-
-  /* ------------------------------------------------------------------------
-     7. Shop by Brand — Click to Filter Catalog & Smooth Scroll
-     ------------------------------------------------------------------------ */
-  var brandCards = document.querySelectorAll('.brands-grid .brand-card-link');
-  brandCards.forEach(function (card) {
-    card.addEventListener('click', function (e) {
-      var brandTarget = this.getAttribute('data-filter-brand');
-      if (brandTarget) {
-        e.preventDefault();
-        var matchingTab = document.querySelector('.filter-tab-btn[data-filter="' + brandTarget + '"]');
-        if (matchingTab) {
-          filterTabs.forEach(function (t) { t.classList.remove('active'); });
-          matchingTab.classList.add('active');
-          currentCategory = brandTarget;
-          filterCatalog(true);
-
-          var catalogSection = document.getElementById('catalog');
-          if (catalogSection) {
-            catalogSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      }
-    });
-  });
-
-  /* ------------------------------------------------------------------------
-     8. Floating WhatsApp Direct Chat Widget
-     ------------------------------------------------------------------------ */
-  var waFloatingBtn = document.getElementById('floating-whatsapp-btn');
-  var waChatPopup = document.getElementById('whatsapp-chat-popup');
-  var waCloseBtn = document.getElementById('chat-popup-close-btn');
-  var waQuickBtns = document.querySelectorAll('.chat-quick-btn');
-  var waCustomInput = document.getElementById('chat-custom-input');
-  var waCustomSendBtn = document.getElementById('chat-custom-send-btn');
-
-  function toggleWhatsAppPopup() {
-    if (waChatPopup) {
-      waChatPopup.classList.toggle('active');
-      if (waChatPopup.classList.contains('active') && waCustomInput) {
-        waCustomInput.focus();
-      }
-    }
-  }
-
-  if (waFloatingBtn) waFloatingBtn.addEventListener('click', toggleWhatsAppPopup);
-  if (waCloseBtn) waCloseBtn.addEventListener('click', function () {
-    if (waChatPopup) waChatPopup.classList.remove('active');
-  });
-
-  // Handle Quick Pre-set Buttons
-  waQuickBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var preset = this.getAttribute('data-msg') || 'Namaste Ali Mobile, malai jankari chahiyo';
-      window.open(WA_BASE + encodeURIComponent(preset), '_blank');
-      if (waChatPopup) waChatPopup.classList.remove('active');
-    });
-  });
-
-  // Handle Custom Message Input
-  function sendCustomWhatsApp() {
-    if (!waCustomInput) return;
-    var customMsg = waCustomInput.value.trim();
-    if (!customMsg) {
-      customMsg = 'Namaste Ali Mobile, malai phone / repair barema jankari chahiyo.';
-    }
-    window.open(WA_BASE + encodeURIComponent(customMsg), '_blank');
-    waCustomInput.value = '';
-    if (waChatPopup) waChatPopup.classList.remove('active');
-  }
-
-  if (waCustomSendBtn) waCustomSendBtn.addEventListener('click', sendCustomWhatsApp);
-  if (waCustomInput) {
-    waCustomInput.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        sendCustomWhatsApp();
-      }
-    });
-  }
-
-  /* ------------------------------------------------------------------------
-     9. Back-to-Top Button
-     ------------------------------------------------------------------------ */
-  var backToTopBtn = document.getElementById('back-to-top-btn');
-  window.addEventListener('scroll', function () {
-    var scrollY = window.pageYOffset || document.documentElement.scrollTop;
-    if (backToTopBtn) {
-      if (scrollY > 350) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-    }
-  }, { passive: true });
-
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', function () {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
-
-  /* ------------------------------------------------------------------------
-     10. Scroll-Reveal Animations (IntersectionObserver & Fallback)
-     ------------------------------------------------------------------------ */
-  var fadeElements = document.querySelectorAll('.fade-up');
-  function checkFadeIn() {
-    var winHeight = window.innerHeight || document.documentElement.clientHeight;
-    fadeElements.forEach(function (el) {
-      if (!el.classList.contains('in-view')) {
-        var rect = el.getBoundingClientRect();
-        if (rect.top <= winHeight + 100) {
-          el.classList.add('in-view');
-        }
-      }
-    });
-  }
-
-  if ('IntersectionObserver' in window) {
-    var appearObserver = new IntersectionObserver(function (entries, observer) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      rootMargin: '100px 0px 100px 0px',
-      threshold: 0.01
-    });
-
-    fadeElements.forEach(function (el) {
-      appearObserver.observe(el);
-    });
-  }
-
-  window.addEventListener('scroll', checkFadeIn, { passive: true });
-  window.addEventListener('resize', checkFadeIn, { passive: true });
-  checkFadeIn();
-  setTimeout(checkFadeIn, 250);
-
-  /* ------------------------------------------------------------------------
-     11. Dynamic Year Update
-     ------------------------------------------------------------------------ */
-  var yearNode = document.getElementById('current-year');
-  if (yearNode) {
-    yearNode.textContent = new Date().getFullYear();
-  }
-
-  /* ------------------------------------------------------------------------
-     12. FAQ Accordion Handler (Services Page)
-     ------------------------------------------------------------------------ */
+  // -------------------------------------------------------------
+  // 8. SERVICES PAGE: FAQ ACCORDION HANDLER
+  // -------------------------------------------------------------
   var faqButtons = document.querySelectorAll('.faq-question-btn');
   faqButtons.forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -851,9 +499,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* ------------------------------------------------------------------------
-     13. Contact & Consultation Form (Direct WhatsApp Dispatch & Database Log)
-     ------------------------------------------------------------------------ */
+  // -------------------------------------------------------------
+  // 9. CONTACT FORM: WHATSAPP DISPATCH & LOG
+  // -------------------------------------------------------------
   var contactForm = document.getElementById('contact-enquiry-form');
   if (contactForm) {
     contactForm.addEventListener('submit', function (e) {
@@ -864,7 +512,6 @@ document.addEventListener('DOMContentLoaded', function () {
       var service = (document.getElementById('cf-service') || {}).value || 'Repair';
       var notes = (document.getElementById('cf-notes') || {}).value || '';
 
-      // Save to WordPress database asynchronously
       if (window.mpAjax && window.mpAjax.ajaxurl) {
         var formData = new FormData();
         formData.append('action', 'mp_submit_contact_form');
@@ -893,27 +540,135 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  /* ------------------------------------------------------------------------
-     14. Smooth Scrolling for Anchor Links (with Sticky Header Offset)
-     ------------------------------------------------------------------------ */
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var href = this.getAttribute('href');
-      if (!href || href === '#' || href === '#!') return;
-      var target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-        var drawer = document.getElementById('mobile-drawer');
-        if (drawer && drawer.classList.contains('open')) {
-          drawer.classList.remove('open');
-          document.body.classList.remove('drawer-open');
-        }
-      }
-    });
-  });
+  // -------------------------------------------------------------
+  // 10. DEDICATED SHOP PAGE FILTRATION & PAGINATION (page-shop.php)
+  // -------------------------------------------------------------
+  var shopFilterTabs = document.querySelectorAll('.filter-tab-btn');
+  var shopCards = document.querySelectorAll('.shop-products-main .product-card, .catalog-section .product-card');
+  var shopSearchInput = document.getElementById('site-search');
+  var shopPaginationControls = document.getElementById('shop-pagination-controls');
+  var shopPaginationInfo = document.getElementById('shop-pagination-info');
 
-});
+  if (shopFilterTabs.length > 0 && shopCards.length > 0) {
+    var shopCategory = 'all';
+    var shopPage = 1;
+    var SHOP_PAGE_SIZE = 9;
+
+    function renderShopPagination(totalMatches) {
+      if (!shopPaginationControls) return;
+      var totalPages = Math.ceil(totalMatches / SHOP_PAGE_SIZE) || 1;
+      if (shopPage > totalPages) shopPage = 1;
+      shopPaginationControls.innerHTML = '';
+
+      if (totalMatches <= SHOP_PAGE_SIZE) {
+        if (shopPaginationInfo) {
+          shopPaginationInfo.textContent = totalMatches > 0 ? 'Showing all ' + totalMatches + ' handsets' : '';
+        }
+        return;
+      }
+
+      var pBtn = document.createElement('button');
+      pBtn.type = 'button';
+      pBtn.className = 'page-btn' + (shopPage === 1 ? ' disabled' : '');
+      pBtn.innerHTML = '‹ Prev';
+      pBtn.disabled = (shopPage === 1);
+      pBtn.addEventListener('click', function () {
+        if (shopPage > 1) { shopPage--; filterShopProducts(false); }
+      });
+      shopPaginationControls.appendChild(pBtn);
+
+      for (var p = 1; p <= totalPages; p++) {
+        var numBtn = document.createElement('button');
+        numBtn.type = 'button';
+        numBtn.className = 'page-btn' + (p === shopPage ? ' active' : '');
+        numBtn.textContent = p;
+        (function (pageIndex) {
+          numBtn.addEventListener('click', function () {
+            if (shopPage !== pageIndex) { shopPage = pageIndex; filterShopProducts(false); }
+          });
+        })(p);
+        shopPaginationControls.appendChild(numBtn);
+      }
+
+      var nBtn = document.createElement('button');
+      nBtn.type = 'button';
+      nBtn.className = 'page-btn' + (shopPage === totalPages ? ' disabled' : '');
+      nBtn.innerHTML = 'Next ›';
+      nBtn.disabled = (shopPage === totalPages);
+      nBtn.addEventListener('click', function () {
+        if (shopPage < totalPages) { shopPage++; filterShopProducts(false); }
+      });
+      shopPaginationControls.appendChild(nBtn);
+
+      if (shopPaginationInfo) {
+        var sIdx = (shopPage - 1) * SHOP_PAGE_SIZE + 1;
+        var eIdx = Math.min(shopPage * SHOP_PAGE_SIZE, totalMatches);
+        shopPaginationInfo.textContent = 'Showing ' + sIdx + '–' + eIdx + ' of ' + totalMatches + ' handsets (Page ' + shopPage + ' of ' + totalPages + ')';
+      }
+    }
+
+    function filterShopProducts(resetPage) {
+      if (resetPage !== false) shopPage = 1;
+      var q = (shopSearchInput ? shopSearchInput.value : '').trim().toLowerCase();
+      var matched = [];
+
+      shopCards.forEach(function (card) {
+        var cardCat = (card.getAttribute('data-brand') || card.getAttribute('data-category') || '').toLowerCase();
+        var title = (card.querySelector('.product-title, .product-name, h3') || {}).textContent || '';
+        title = title.toLowerCase();
+
+        var matchCategory = (shopCategory === 'all') || (cardCat.indexOf(shopCategory) !== -1);
+        var matchQ = !q || title.indexOf(q) !== -1;
+
+        if (matchCategory && matchQ) {
+          matched.push(card);
+        }
+      });
+
+      var start = (shopPage - 1) * SHOP_PAGE_SIZE;
+      var end = start + SHOP_PAGE_SIZE;
+
+      shopCards.forEach(function (card) {
+        var pos = matched.indexOf(card);
+        card.style.display = (pos >= start && pos < end) ? '' : 'none';
+      });
+
+      renderShopPagination(matched.length);
+    }
+
+    shopFilterTabs.forEach(function (tab) {
+      tab.addEventListener('click', function () {
+        shopFilterTabs.forEach(function (t) { t.classList.remove('active'); });
+        this.classList.add('active');
+        shopCategory = this.getAttribute('data-filter') || 'all';
+        filterShopProducts(true);
+      });
+    });
+
+    if (shopSearchInput) {
+      shopSearchInput.addEventListener('input', function () {
+        filterShopProducts(true);
+      });
+    }
+
+    filterShopProducts(true);
+  }
+
+  // -------------------------------------------------------------
+  // 11. EXPOSE GLOBAL HANDLERS ON WINDOW
+  // -------------------------------------------------------------
+  window.setFinish = setFinish;
+  window.openQuoteModal = openQuoteModal;
+  window.closeQuoteModal = closeQuoteModal;
+  window.handleQuoteSubmit = handleQuoteSubmit;
+  window.triggerToast = triggerToast;
+  window.filterCatalogByBrand = filterCatalogByBrand;
+  window.resetCatalogFilters = resetCatalogFilters;
+  window.filterCatalog = filterCatalog;
+  window.sortCatalog = sortCatalog;
+
+  // Initialize
+  filterCatalog();
+  startAutoPlay();
+
+})();
