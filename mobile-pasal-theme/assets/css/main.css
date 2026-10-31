@@ -330,6 +330,10 @@
        ========================================================= */
     .hero-section {
       position: relative;
+      min-height: clamp(660px, 86vh, 920px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
       background:
         radial-gradient(ellipse at 80% 25%, rgba(40,116,255,.11), transparent 45%),
         linear-gradient(110deg, #ffffff 0%, #fbfdff 45%, #eff5ff 100%);
@@ -353,7 +357,7 @@
       width: 100%;
       max-width: 1540px;
       margin: 0 auto;
-      padding: clamp(20px, 3vw, 42px) clamp(20px, 4vw, 56px) clamp(48px, 5vw, 80px);
+      padding: clamp(36px, 4.5vw, 64px) clamp(20px, 4vw, 56px) clamp(54px, 5.5vw, 88px);
       position: relative;
     }
 
@@ -363,7 +367,8 @@
       grid-template-rows: auto;
       width: 100%;
       position: relative;
-      min-height: 520px;
+      min-height: clamp(560px, 66vh, 740px);
+      align-items: center;
     }
 
     .slide {
@@ -731,7 +736,7 @@
     }
 
     .visual {
-      min-height: clamp(320px, 44vw, 560px);
+      min-height: clamp(380px, 50vw, 650px);
       position: relative;
       display: flex;
       align-items: center;
@@ -766,8 +771,8 @@
     }
 
     .product-image {
-      width: min(100%, 620px);
-      max-height: clamp(300px, 42vw, 520px);
+      width: min(100%, 680px);
+      max-height: clamp(360px, 48vw, 600px);
       object-fit: cover;
       filter: drop-shadow(0 24px 28px rgba(7,27,59,.14));
       border-radius: 28px;
@@ -2724,6 +2729,12 @@
         display: inline-flex;
         margin-top: 10px;
         width: 100%;
+      }
+      .hero-section {
+        min-height: auto;
+      }
+      .hero-slider-stage {
+        min-height: auto;
       }
       .slide.active {
         grid-template-columns: 1fr;
