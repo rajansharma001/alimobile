@@ -31,14 +31,42 @@ $clean_p = mp_clean_phone( $phone );
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
-<?php if ( mp_opt( 'enable_preloader', '1' ) ) : ?>
-<!-- Preloader -->
-<div id="preloader" aria-hidden="true">
+<?php
+$preloader_active = mp_opt( 'preloader_enabled', null );
+if ( null === $preloader_active || '' === $preloader_active ) {
+	$preloader_active = mp_opt( 'enable_preloader', '1' );
+}
+$preloader_dur   = mp_opt( 'preloader_duration', '1000' );
+$preloader_color = mp_opt( 'color_primary', '#0066cc' );
+?>
+<?php if ( ! empty( $preloader_active ) && '0' !== (string) $preloader_active ) : ?>
+<!-- Cleanroom Precision Preloader Inline Critical CSS -->
+<style id="mp-preloader-critical-css">
+#preloader{position:fixed;inset:0;width:100%;height:100%;background-color:#ffffff;z-index:999999;display:flex;align-items:center;justify-content:center;opacity:1;visibility:visible;transition:opacity .45s cubic-bezier(.16,1,.3,1),visibility .45s cubic-bezier(.16,1,.3,1);pointer-events:auto}
+#preloader.loaded{opacity:0;visibility:hidden;pointer-events:none}
+.preloader-content{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.preloader-logo-wrap{position:relative;width:80px;height:80px;display:flex;align-items:center;justify-content:center}
+.preloader-pulse{position:absolute;inset:-6px;border-radius:20px;border:2px solid <?php echo esc_attr( $preloader_color ); ?>;opacity:0;animation:preloaderPulseRing 1.8s cubic-bezier(.24,0,.38,1) infinite}
+.preloader-logo{width:56px;height:56px;object-fit:contain;position:relative;z-index:2;border-radius:14px;animation:preloaderLogoPulse 2s ease-in-out infinite alternate}
+.preloader-bar{width:140px;height:3px;background-color:#e8eff9;border-radius:999px;overflow:hidden;position:relative}
+.preloader-bar::after{content:'';position:absolute;top:0;left:-50%;width:50%;height:100%;background-color:<?php echo esc_attr( $preloader_color ); ?>;border-radius:999px;animation:preloaderProgressLine 1.3s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes preloaderPulseRing{0%{transform:scale(.85);opacity:.85}60%{transform:scale(1.22);opacity:0}100%{transform:scale(1.22);opacity:0}}
+@keyframes preloaderLogoPulse{0%{transform:scale(.96)}100%{transform:scale(1.04)}}
+@keyframes preloaderProgressLine{0%{left:-40%;width:35%}50%{left:30%;width:55%}100%{left:100%;width:35%}}
+</style>
+<!-- Cleanroom Precision Preloader -->
+<div id="preloader" class="preloader-overlay" data-duration="<?php echo esc_attr( $preloader_dur ); ?>" aria-hidden="true">
 	<div class="preloader-content">
 		<div class="preloader-logo-wrap">
 			<div class="preloader-pulse"></div>
 			<?php
 			$logo_icon = mp_opt( 'favicon_image', '' );
+			if ( empty( $logo_icon ) ) {
+				$logo_icon = mp_opt( 'site_favicon', '' );
+			}
+			if ( empty( $logo_icon ) ) {
+				$logo_icon = mp_opt( 'logo_image', '' );
+			}
 			if ( empty( $logo_icon ) ) {
 				$logo_icon = MP_THEME_URI . '/assets/images/logo-icon.png';
 			}

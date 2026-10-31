@@ -528,18 +528,38 @@
   }
 
   // -------------------------------------------------------------
-  // 7. PRELOADER HANDLING (Exact 1s duration)
+  // 7. PRELOADER HANDLING (Exact duration from Theme Options with failsafe)
   // -------------------------------------------------------------
   var preloader = document.getElementById('preloader');
-  function hidePreloader() {
-    if (preloader && !preloader.classList.contains('loaded')) {
+  if (preloader) {
+    var rawDur = parseInt(preloader.getAttribute('data-duration'), 10);
+    var preloaderDuration = (!isNaN(rawDur) && rawDur >= 200) ? rawDur : 1000;
+    var preloaderDismissed = false;
+
+    function hidePreloader() {
+      if (preloaderDismissed || !preloader) return;
+      preloaderDismissed = true;
       preloader.classList.add('loaded');
       setTimeout(function () {
-        if (preloader) preloader.style.display = 'none';
+        if (preloader && preloader.parentNode) {
+          preloader.style.display = 'none';
+        }
       }, 500);
     }
+
+    // Dismiss cleanly after configured duration
+    setTimeout(hidePreloader, preloaderDuration);
+
+    // Fallback failsafe so preloader never hangs
+    if (document.readyState === 'complete') {
+      setTimeout(hidePreloader, Math.min(preloaderDuration, 400));
+    } else {
+      window.addEventListener('load', function () {
+        setTimeout(hidePreloader, Math.min(preloaderDuration, 500));
+      });
+      setTimeout(hidePreloader, Math.max(preloaderDuration + 1500, 3000));
+    }
   }
-  setTimeout(hidePreloader, 1000);
 
   
   // -------------------------------------------------------------

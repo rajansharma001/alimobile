@@ -655,6 +655,10 @@ function mobile_pasal_get_option( $key, $default = null ) {
 
 	// 1. Direct saved option
 	if ( is_array( $options ) && array_key_exists( $key, $options ) && '' !== $options[ $key ] && null !== $options[ $key ] ) {
+		// If option is '0' or 0, but its active alias was set to 1, return the active alias value
+		if ( ( '0' === (string) $options[ $key ] || 0 === $options[ $key ] ) && isset( $aliases[ $key ] ) && isset( $options[ $aliases[ $key ] ] ) && ! empty( $options[ $aliases[ $key ] ] ) && '0' !== (string) $options[ $aliases[ $key ] ] ) {
+			return $options[ $aliases[ $key ] ];
+		}
 		return $options[ $key ];
 	}
 
@@ -723,6 +727,19 @@ function mobile_pasal_options_save() {
 			if ( ! isset( $_POST['mp_opt'][ $d_key ] ) ) {
 				$existing[ $d_key ] = 0;
 			}
+		}
+	}
+
+	// Bidirectional alias sync for toggle pairs (e.g. preloader_enabled <=> enable_preloader)
+	$alias_sync_pairs = array(
+		'preloader_enabled' => 'enable_preloader',
+		'enable_preloader'  => 'preloader_enabled',
+		'topbar_show'       => 'topbar_enabled',
+		'topbar_enabled'    => 'topbar_show',
+	);
+	foreach ( $alias_sync_pairs as $src_k => $dst_k ) {
+		if ( isset( $_POST['mp_opt'][ $src_k ] ) ) {
+			$existing[ $dst_k ] = $existing[ $src_k ];
 		}
 	}
 
