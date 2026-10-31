@@ -143,12 +143,6 @@ if ( empty( $lab_img ) ) {
         </div>
         <h1><?php echo wp_kses_post( $slide1_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide1_intro ); ?></p>
-        <div class="hero-features">
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide1_f1_icon ); ?></span><?php echo wp_kses_post( $slide1_f1_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide1_f2_icon ); ?></span><?php echo wp_kses_post( $slide1_f2_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide1_f3_icon ); ?></span><?php echo wp_kses_post( $slide1_f3_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide1_f4_icon ); ?></span><?php echo wp_kses_post( $slide1_f4_text ); ?></div>
-        </div>
         <div class="actions">
           <a class="primary" href="<?php echo esc_url( $slide1_btn1_url ); ?>"><?php echo esc_html( $slide1_btn1_text ); ?> <span>→</span></a>
           <a class="secondary" href="<?php echo esc_url( $slide1_btn2_url ); ?>">
@@ -181,12 +175,6 @@ if ( empty( $lab_img ) ) {
         </div>
         <h1><?php echo wp_kses_post( $slide2_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide2_intro ); ?></p>
-        <div class="hero-features">
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide2_f1_icon ); ?></span><?php echo wp_kses_post( $slide2_f1_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide2_f2_icon ); ?></span><?php echo wp_kses_post( $slide2_f2_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide2_f3_icon ); ?></span><?php echo wp_kses_post( $slide2_f3_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide2_f4_icon ); ?></span><?php echo wp_kses_post( $slide2_f4_text ); ?></div>
-        </div>
         <div class="actions">
           <button class="primary" onclick="openQuoteModal('Display &amp; Touch Screen Replacement')" type="button"><?php echo esc_html( $slide2_btn1_text ); ?> <span>→</span></button>
           <a class="secondary" href="<?php echo esc_url( $slide2_btn2_url ); ?>">
@@ -219,12 +207,6 @@ if ( empty( $lab_img ) ) {
         </div>
         <h1><?php echo wp_kses_post( $slide3_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide3_intro ); ?></p>
-        <div class="hero-features">
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide3_f1_icon ); ?></span><?php echo wp_kses_post( $slide3_f1_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide3_f2_icon ); ?></span><?php echo wp_kses_post( $slide3_f2_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide3_f3_icon ); ?></span><?php echo wp_kses_post( $slide3_f3_text ); ?></div>
-          <div class="hero-feature"><span class="hero-feature-icon"><?php echo esc_html( $slide3_f4_icon ); ?></span><?php echo wp_kses_post( $slide3_f4_text ); ?></div>
-        </div>
         <div class="actions">
           <a class="primary" href="<?php echo esc_url( $slide3_btn1_url ); ?>"><?php echo esc_html( $slide3_btn1_text ); ?> <span>→</span></a>
           <a class="secondary" href="<?php echo esc_url( $slide3_btn2_url ); ?>">
@@ -249,6 +231,68 @@ if ( empty( $lab_img ) ) {
     <div class="blue-swoosh"></div>
     <div class="hero-progress-bar" aria-hidden="true">
       <div class="hero-progress-fill" id="heroProgress"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HERO TRUST BAR (COMMON 4 FEATURES) ================= -->
+<section class="hero-trust-bar" id="heroTrustBar" aria-label="<?php esc_attr_e( 'Ali Mobile Guarantees and Services', 'mobile-pasal' ); ?>">
+  <div class="container">
+    <div class="hero-trust-grid">
+      <!-- 1. Fast 45-Min Fix -->
+      <div class="hero-trust-card">
+        <div class="trust-card-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="trust-card-content">
+          <h3 class="trust-card-title"><?php esc_html_e( 'Fast 45-Min Fix', 'mobile-pasal' ); ?></h3>
+          <p class="trust-card-desc"><?php esc_html_e( 'Instant on-counter screen & battery turnaround', 'mobile-pasal' ); ?></p>
+        </div>
+      </div>
+
+      <!-- 2. Genuine OLED Parts -->
+      <div class="hero-trust-card">
+        <div class="trust-card-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <line x1="12" y1="18" x2="12.01" y2="18"></line>
+          </svg>
+        </div>
+        <div class="trust-card-content">
+          <h3 class="trust-card-title"><?php esc_html_e( 'Genuine OLED Parts', 'mobile-pasal' ); ?></h3>
+          <p class="trust-card-desc"><?php esc_html_e( 'TrueTone & 3D Touch programming retained', 'mobile-pasal' ); ?></p>
+        </div>
+      </div>
+
+      <!-- 3. Level 4 Technicians -->
+      <div class="hero-trust-card">
+        <div class="trust-card-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+          </svg>
+        </div>
+        <div class="trust-card-content">
+          <h3 class="trust-card-title"><?php esc_html_e( 'Level 4 Technicians', 'mobile-pasal' ); ?></h3>
+          <p class="trust-card-desc"><?php esc_html_e( 'Micro-soldering & stereo microscope cleanroom lab', 'mobile-pasal' ); ?></p>
+        </div>
+      </div>
+
+      <!-- 4. Affordable Pricing -->
+      <div class="hero-trust-card">
+        <div class="trust-card-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            <polyline points="9 12 11 14 15 10"></polyline>
+          </svg>
+        </div>
+        <div class="trust-card-content">
+          <h3 class="trust-card-title"><?php esc_html_e( 'Affordable Pricing', 'mobile-pasal' ); ?></h3>
+          <p class="trust-card-desc"><?php esc_html_e( 'Transparent rates with warranty & official VAT bill', 'mobile-pasal' ); ?></p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
