@@ -5,7 +5,7 @@
  * Fully Connected with WordPress Admin Theme Options
  *
  * @package Mobile_Pasal
- * @version 3.2.0
+ * @version 3.3.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -120,6 +120,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 1. HERO SLIDER SECTION ================= -->
 <section class="hero-section" id="heroSlider" aria-label="<?php esc_attr_e( 'Mobile repair and store hero slider', 'mobile-pasal' ); ?>">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="hero">
     <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">‹</button>
     <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">›</button>
@@ -214,6 +217,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 2. SHOP BY CATEGORY ================= -->
 <section class="section-wrap" id="categories">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -298,6 +304,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 3. SHOP BY VERIFIED BRAND ================= -->
 <section class="section-wrap" id="brands">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -380,102 +389,118 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
-<!-- ================= 4. FEATURED FLAGSHIP SPOTLIGHT (DARK THEME) ================= -->
-<section class="section-wrap dark-theme" id="flagship">
+<!-- ================= 4. REDESIGNED FEATURED FLAGSHIP SPOTLIGHT (DARK THEME) ================= -->
+<section class="section-wrap dark-theme flagship-section" id="flagship">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="container">
-    <div class="flagship-card">
-      <div class="flagship-topbar">
-        <span class="flagship-badge"><?php echo esc_html( $spotlight_badge ); ?></span>
-        <div class="live-counter-pill">
-          <span class="pulse-dot"></span>
-          <span>Gulariya Showroom Live Counter</span>
+    <div class="flagship-bento-hero">
+      <!-- Top Status Banner -->
+      <div class="flagship-header-bar">
+        <div class="flagship-pill-left">
+          <span class="apple-logo-glow"></span>
+          <span class="flagship-kicker-text"><?php echo esc_html( $spotlight_badge ); ?></span>
+        </div>
+        <div class="flagship-live-beacon">
+          <span class="beacon-dot"></span>
+          <span><?php echo esc_html( $spotlight_status ); ?></span>
         </div>
       </div>
 
-      <div class="flagship-grid">
-        <!-- Left Info -->
-        <div>
-          <h2 class="flagship-title"><?php echo esc_html( $spotlight_title ); ?></h2>
-          <div class="flagship-subline"><?php echo esc_html( $spotlight_tag ); ?></div>
-          <p class="flagship-paragraph"><?php echo esc_html( $spotlight_desc ); ?></p>
+      <!-- Main Bento Grid -->
+      <div class="flagship-bento-grid">
+        <!-- Column 1: Core Showcase & Finishes -->
+        <div class="flagship-core-column">
+          <h2 class="flagship-title-hero"><?php echo esc_html( $spotlight_title ); ?></h2>
+          <div class="flagship-tagline-chip"><?php echo esc_html( $spotlight_tag ); ?></div>
+          <p class="flagship-lead-p"><?php echo esc_html( $spotlight_desc ); ?></p>
 
-          <!-- Finishes -->
-          <div class="finish-selector-wrap">
-            <div class="finish-selector-label">AVAILABLE FINISHES:</div>
-            <div class="finish-buttons" id="finishSelector">
-              <button class="finish-btn active" data-finish="Desert Titanium" data-color="#c5a992" onclick="setFinish('Desert Titanium', '#c5a992')" type="button">
-                <span class="color-swatch" style="background: #c5a992;"></span> Desert Titanium
+          <!-- Interactive Finishes Console -->
+          <div class="finish-interactive-console">
+            <span class="finish-console-title"><?php esc_html_e( 'SELECT FINISH / COLOR:', 'mobile-pasal' ); ?></span>
+            <div class="finish-chips-row" id="finishSelector">
+              <button class="finish-chip active" data-finish="Desert Titanium" data-color="#c5a992" onclick="setFinish('Desert Titanium', '#c5a992')" type="button">
+                <span class="finish-circle" style="background: #c5a992; box-shadow: 0 0 10px rgba(197, 169, 146, 0.4);"></span>
+                <span class="finish-name">Desert Titanium</span>
               </button>
-              <button class="finish-btn" data-finish="Natural Titanium" data-color="#9a958e" onclick="setFinish('Natural Titanium', '#9a958e')" type="button">
-                <span class="color-swatch" style="background: #9a958e;"></span> Natural Titanium
+              <button class="finish-chip" data-finish="Natural Titanium" data-color="#9a958e" onclick="setFinish('Natural Titanium', '#9a958e')" type="button">
+                <span class="finish-circle" style="background: #9a958e; box-shadow: 0 0 10px rgba(154, 149, 142, 0.4);"></span>
+                <span class="finish-name">Natural Titanium</span>
               </button>
-              <button class="finish-btn" data-finish="White Titanium" data-color="#f2f2ee" onclick="setFinish('White Titanium', '#f2f2ee')" type="button">
-                <span class="color-swatch" style="background: #f2f2ee;"></span> White Titanium
+              <button class="finish-chip" data-finish="White Titanium" data-color="#f2f2ee" onclick="setFinish('White Titanium', '#f2f2ee')" type="button">
+                <span class="finish-circle" style="background: #f2f2ee; box-shadow: 0 0 10px rgba(242, 242, 238, 0.4);"></span>
+                <span class="finish-name">White Titanium</span>
               </button>
-              <button class="finish-btn" data-finish="Black Titanium" data-color="#3c3b3f" onclick="setFinish('Black Titanium', '#3c3b3f')" type="button">
-                <span class="color-swatch" style="background: #3c3b3f;"></span> Black Titanium
+              <button class="finish-chip" data-finish="Black Titanium" data-color="#3c3b3f" onclick="setFinish('Black Titanium', '#3c3b3f')" type="button">
+                <span class="finish-circle" style="background: #3c3b3f; box-shadow: 0 0 10px rgba(60, 59, 63, 0.4);"></span>
+                <span class="finish-name">Black Titanium</span>
               </button>
             </div>
           </div>
 
-          <!-- Bento Pods -->
-          <div class="flagship-features-grid">
-            <div class="flagship-feature-pod">
-              <div class="pod-icon">⚡</div>
-              <div>
-                <h4 class="pod-title">A18 Pro Bionic</h4>
-                <p class="pod-desc">3nm Silicon &amp; 6–Core GPU</p>
+          <!-- Bento Micro-Specs Grid -->
+          <div class="flagship-bento-specs">
+            <div class="spec-bento-pod">
+              <div class="spec-pod-icon">⚡</div>
+              <div class="spec-pod-body">
+                <strong>A18 Pro Bionic</strong>
+                <small>3nm Silicon &amp; 6–Core GPU</small>
               </div>
             </div>
-            <div class="flagship-feature-pod">
-              <div class="pod-icon">📷</div>
-              <div>
-                <h4 class="pod-title">Camera Control</h4>
-                <p class="pod-desc">Tactile Haptic Slide &amp; Click</p>
+            <div class="spec-bento-pod">
+              <div class="spec-pod-icon">📷</div>
+              <div class="spec-pod-body">
+                <strong>Camera Control</strong>
+                <small>Haptic Slide &amp; Click</small>
               </div>
             </div>
-            <div class="flagship-feature-pod">
-              <div class="pod-icon">🛡️</div>
-              <div>
-                <h4 class="pod-title">Grade 5 Titanium</h4>
-                <p class="pod-desc">Aerospace Micro-Blasted Frame</p>
+            <div class="spec-bento-pod">
+              <div class="spec-pod-icon">🛡️</div>
+              <div class="spec-pod-body">
+                <strong>Grade 5 Titanium</strong>
+                <small>Micro-Blasted Frame</small>
               </div>
             </div>
-            <div class="flagship-feature-pod">
-              <div class="pod-icon">📄</div>
-              <div>
-                <h4 class="pod-title">NTA Approved • 100% Legal IMEI</h4>
-                <p class="pod-desc">Official Nepal VAT Bill &amp; Warranty</p>
+            <div class="spec-bento-pod">
+              <div class="spec-pod-icon">📄</div>
+              <div class="spec-pod-body">
+                <strong>NTA Approved IMEI</strong>
+                <small>Official Nepal VAT Bill</small>
               </div>
             </div>
           </div>
 
-          <div class="stock-ready-banner">
-            <span class="green-dot"></span>
-            <span><?php echo esc_html( $spotlight_status ); ?></span>
-          </div>
-
-          <div class="flagship-actions">
-            <a class="whatsapp-action-btn" id="flagshipWaBtn" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Center,%20please%20quote%20today's%20best%20price%20for%20iPhone%2016%20Pro%20(Desert%20Titanium)%20with%20Nepal%20VAT%20Bill." target="_blank" rel="noopener noreferrer">
+          <!-- Action Buttons -->
+          <div class="flagship-action-row">
+            <a class="btn-flagship-wa" id="flagshipWaBtn" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Center,%20please%20quote%20today's%20best%20price%20for%20iPhone%2016%20Pro%20(Desert%20Titanium)%20with%20Nepal%20VAT%20Bill." target="_blank" rel="noopener noreferrer">
               <span>Ask Today's Price on WhatsApp</span>
+              <span class="btn-arrow">→</span>
             </a>
-            <a class="direct-call-btn" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-              <span>☎ Call Store Direct (<?php echo esc_html( $phone ); ?>)</span>
+            <a class="btn-flagship-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+              <span>☎ Call Store: <?php echo esc_html( $phone ); ?></span>
             </a>
           </div>
         </div>
 
-        <!-- Right Preview Mockup -->
-        <div class="flagship-preview-box">
-          <div style="display:flex; justify-content:flex-end;">
-            <span class="preview-chip-badge">● 48MP Fusion • 4K 120fps Dolby</span>
-          </div>
-          <div class="preview-mockup-frame">
-            <img id="flagshipDisplayImg" src="<?php echo esc_url( $spotlight_img ); ?>" alt="iPhone 16 Pro Flagship in Desert Titanium" />
-          </div>
-          <div class="preview-footer-chips">
-            <span class="preview-footer-chip"> Apple Intelligence Ready</span>
-            <span class="preview-footer-chip" style="color: #4ade80;">✓ Official 1-Year Warranty</span>
+        <!-- Column 2: 3D Stage Pedestal Showcase -->
+        <div class="flagship-stage-column">
+          <div class="stage-pedestal-card">
+            <div class="stage-floating-chip">
+              <span class="chip-dot"></span>
+              <span>48MP Fusion • 4K 120fps Dolby Vision</span>
+            </div>
+            <div class="stage-device-frame">
+              <img id="flagshipDisplayImg" src="<?php echo esc_url( $spotlight_img ); ?>" alt="iPhone 16 Pro Flagship" />
+            </div>
+            <div class="stage-footer-assurances">
+              <div class="stage-assurance-pill">
+                <span> Apple Intelligence Ready</span>
+              </div>
+              <div class="stage-assurance-pill pill-verified">
+                <span>✓ 1-Year Official Warranty</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -485,6 +510,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 5. SHOWROOM CATALOG WITH LEFT FILTERS ================= -->
 <section class="section-wrap" id="catalog">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -561,73 +589,83 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
-<!-- ================= 6. CLEANROOM LAB BENCH SETUP (DARK THEME) ================= -->
-<section class="section-wrap dark-theme" id="lab">
+<!-- ================= 6. REDESIGNED CLEANROOM LAB BENCH SETUP (DARK THEME) ================= -->
+<section class="section-wrap dark-theme lab-section" id="lab">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
+
   <div class="container">
-    <div class="cleanroom-card">
-      <div class="cleanroom-grid">
-        <!-- Left Bench Photo -->
-        <div class="cleanroom-image-frame">
+    <div class="lab-console-header">
+      <div class="lab-console-badge">
+        <span class="lab-badge-pulse"></span>
+        <span><?php echo esc_html( $lab_badge ); ?></span>
+      </div>
+      <h2 class="section-title lab-main-title"><?php echo esc_html( $lab_title ); ?></h2>
+      <p class="section-subtitle lab-main-subtitle"><?php echo esc_html( $lab_desc ); ?></p>
+    </div>
+
+    <!-- 3-Card Laboratory Bento Layout -->
+    <div class="lab-bento-grid">
+      <!-- Feature 1: Cleanroom Live Bench Window -->
+      <div class="lab-bento-card lab-card-featured">
+        <div class="lab-card-media-wrap">
           <img src="<?php echo esc_url( $lab_img ); ?>" alt="Cleanroom microscope repair lab technicians" />
-        </div>
-
-        <!-- Right Lab Info -->
-        <div>
-          <span class="cleanroom-badge"><?php echo esc_html( $lab_badge ); ?></span>
-          <h2 class="section-title" style="color:#ffffff;"><?php echo esc_html( $lab_title ); ?></h2>
-          <p class="section-subtitle" style="color:#9cb3d8;"><?php echo esc_html( $lab_desc ); ?></p>
-
-          <div class="cleanroom-points">
-            <div class="cleanroom-point">
-              <div class="point-icon-box">⏱️</div>
-              <div>
-                <h4 class="point-title"><?php echo esc_html( $lab_f1_h ); ?></h4>
-                <p class="point-desc"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
-              </div>
-            </div>
-
-            <div class="cleanroom-point">
-              <div class="point-icon-box">🔋</div>
-              <div>
-                <h4 class="point-title"><?php echo esc_html( $lab_f2_h ); ?></h4>
-                <p class="point-desc"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
-              </div>
-            </div>
-
-            <div class="cleanroom-point">
-              <div class="point-icon-box">👁️</div>
-              <div>
-                <h4 class="point-title"><?php echo esc_html( $lab_f3_h ); ?></h4>
-                <p class="point-desc"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Stats row -->
-          <div class="lab-stats-row">
-            <div class="lab-stat-box">
-              <div class="stat-number"><?php echo esc_html( $lab_s1_n ); ?></div>
-              <div class="stat-label"><?php echo esc_html( $lab_s1_l ); ?></div>
-            </div>
-            <div class="lab-stat-box">
-              <div class="stat-number"><?php echo esc_html( $lab_s2_n ); ?></div>
-              <div class="stat-label"><?php echo esc_html( $lab_s2_l ); ?></div>
-            </div>
-            <div class="lab-stat-box">
-              <div class="stat-number"><?php echo esc_html( $lab_s3_n ); ?></div>
-              <div class="stat-label"><?php echo esc_html( $lab_s3_l ); ?></div>
-            </div>
-          </div>
-
-          <div class="flagship-actions">
-            <a class="whatsapp-action-btn" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
-              <span>Consult Our Technician</span>
-            </a>
-            <a class="direct-call-btn" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-              <span>Call Counter (<?php echo esc_html( $phone ); ?>)</span>
-            </a>
+          <div class="lab-media-badge">
+            <span class="live-pulse"></span>
+            <span>Gulariya Counter Cleanroom Lab</span>
           </div>
         </div>
+        <div class="lab-card-body">
+          <div class="lab-card-icon-tag">👁️</div>
+          <h3 class="lab-card-heading"><?php echo esc_html( $lab_f3_h ); ?></h3>
+          <p class="lab-card-para"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
+        </div>
+      </div>
+
+      <!-- Feature 2: 30-Min Screen Replacement -->
+      <div class="lab-bento-card">
+        <div class="lab-card-icon-tag">⏱️</div>
+        <h3 class="lab-card-heading"><?php echo esc_html( $lab_f1_h ); ?></h3>
+        <p class="lab-card-para"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
+        <div class="lab-card-highlight-badge">
+          <span>TrueTone &amp; 3D Touch Retained</span>
+        </div>
+      </div>
+
+      <!-- Feature 3: Battery Health Calibration -->
+      <div class="lab-bento-card">
+        <div class="lab-card-icon-tag">🔋</div>
+        <h3 class="lab-card-heading"><?php echo esc_html( $lab_f2_h ); ?></h3>
+        <p class="lab-card-para"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
+        <div class="lab-card-highlight-badge">
+          <span>Zero Error BMS Micro-Welded</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Live Lab Telemetry Stats Bar -->
+    <div class="lab-telemetry-strip">
+      <div class="telemetry-box">
+        <span class="telemetry-val"><?php echo esc_html( $lab_s1_n ); ?></span>
+        <span class="telemetry-lbl"><?php echo esc_html( $lab_s1_l ); ?></span>
+      </div>
+      <div class="telemetry-divider"></div>
+      <div class="telemetry-box">
+        <span class="telemetry-val"><?php echo esc_html( $lab_s2_n ); ?></span>
+        <span class="telemetry-lbl"><?php echo esc_html( $lab_s2_l ); ?></span>
+      </div>
+      <div class="telemetry-divider"></div>
+      <div class="telemetry-box">
+        <span class="telemetry-val"><?php echo esc_html( $lab_s3_n ); ?></span>
+        <span class="telemetry-lbl"><?php echo esc_html( $lab_s3_l ); ?></span>
+      </div>
+      <div class="telemetry-actions">
+        <a class="btn-lab-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
+          <span>Consult Our Technician →</span>
+        </a>
+        <a class="btn-lab-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+          <span>Call Counter (<?php echo esc_html( $phone ); ?>)</span>
+        </a>
       </div>
     </div>
   </div>
@@ -635,6 +673,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 7. COMPLETE COUNTER REPAIR SERVICES ================= -->
 <section class="section-wrap" id="repairs">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -735,6 +776,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 8. TRANSPARENT WORKFLOW ================= -->
 <section class="section-wrap" id="workflow">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header" style="justify-content:center; text-align:center;">
       <div class="section-header-copy" style="max-width:800px;">
@@ -768,6 +812,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 9. CARE GUIDES ================= -->
 <section class="section-wrap" id="guides">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -820,6 +867,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 10. VERIFIED CUSTOMER REVIEWS ================= -->
 <section class="section-wrap" id="reviews">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
@@ -884,6 +934,9 @@ if ( empty( $lab_img ) ) {
 
 <!-- ================= 11. VISIT US IN GULARIYA / CONTACT ================= -->
 <section class="section-wrap" id="contact">
+  <div class="tech-bg-grid" aria-hidden="true"></div>
+  <div class="tech-ring-accent" aria-hidden="true"></div>
+
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">

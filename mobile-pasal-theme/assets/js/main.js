@@ -258,7 +258,7 @@
   };
 
   function setFinish(finishName, colorHex) {
-    document.querySelectorAll("#finishSelector .finish-btn").forEach(function (btn) {
+    document.querySelectorAll("#finishSelector .finish-chip, #finishSelector .finish-btn").forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-finish") === finishName);
     });
     var img = document.getElementById("flagshipDisplayImg");
