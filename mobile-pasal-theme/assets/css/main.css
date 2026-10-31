@@ -595,16 +595,16 @@
 
     h1 {
       margin: 0;
-      max-width: 720px;
-      font-size: clamp(38px, 5.2vw, 84px);
-      line-height: 1.01;
-      letter-spacing: clamp(-3.5px, -0.04em, -1.2px);
+      max-width: 680px;
+      font-size: clamp(26px, 3.4vw, 52px);
+      line-height: 1.12;
+      letter-spacing: clamp(-1.8px, -0.025em, -0.5px);
       font-weight: 900;
     }
 
     h1 .accent {
       color: var(--blue);
-      display: block;
+      display: inline-block;
     }
 
     .intro {
