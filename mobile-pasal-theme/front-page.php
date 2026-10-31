@@ -116,6 +116,26 @@ $lab_img     = mp_opt( 'lab_image', '' );
 if ( empty( $lab_img ) ) {
 	$lab_img = 'https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=1000&q=85';
 }
+
+// Hero Trust Bar
+$trust_bar_enabled = mp_opt( 'trust_bar_enabled', 1 );
+$trust_feat1_title = mp_opt( 'trust_feat1_title', 'Fast 45-Min Fix' );
+$trust_feat1_desc  = mp_opt( 'trust_feat1_desc', 'Instant on-counter screen & battery turnaround' );
+$trust_feat2_title = mp_opt( 'trust_feat2_title', 'Genuine OLED Parts' );
+$trust_feat2_desc  = mp_opt( 'trust_feat2_desc', 'TrueTone & 3D Touch programming retained' );
+$trust_feat3_title = mp_opt( 'trust_feat3_title', 'Level 4 Technicians' );
+$trust_feat3_desc  = mp_opt( 'trust_feat3_desc', 'Micro-soldering & stereo microscope cleanroom lab' );
+$trust_feat4_title = mp_opt( 'trust_feat4_title', 'Affordable Pricing' );
+$trust_feat4_desc  = mp_opt( 'trust_feat4_desc', 'Transparent rates with warranty & official VAT bill' );
+
+// Cleanroom Lab Bench Enhancements
+$lab_live_status   = mp_opt( 'lab_live_status', 'Live Gulariya Counter Cleanroom Lab' );
+$lab_tagline       = mp_opt( 'lab_tagline', 'Stereo Zoom Microscope • Anti-Static ESD Station' );
+$lab_feat1_chip    = mp_opt( 'lab_feat1_chip', 'TrueTone & 3D Touch Retained' );
+$lab_feat2_chip    = mp_opt( 'lab_feat2_chip', 'Zero Error BMS Micro-Welded' );
+$lab_feat3_chip    = mp_opt( 'lab_feat3_chip', '100% Privacy Protection' );
+$lab_btn1_text     = mp_opt( 'lab_btn1_text', 'Consult Our Technician' );
+$lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
 ?>
 
 <!-- ================= 1. HERO SLIDER SECTION ================= -->
@@ -235,6 +255,7 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
+<?php if ( ! empty( $trust_bar_enabled ) ) : ?>
 <!-- ================= HERO TRUST BAR (COMMON 4 FEATURES) ================= -->
 <section class="hero-trust-bar" id="heroTrustBar" aria-label="<?php esc_attr_e( 'Ali Mobile Guarantees and Services', 'mobile-pasal' ); ?>">
   <div class="container">
@@ -248,8 +269,8 @@ if ( empty( $lab_img ) ) {
           </svg>
         </div>
         <div class="trust-card-content">
-          <h3 class="trust-card-title"><?php esc_html_e( 'Fast 45-Min Fix', 'mobile-pasal' ); ?></h3>
-          <p class="trust-card-desc"><?php esc_html_e( 'Instant on-counter screen & battery turnaround', 'mobile-pasal' ); ?></p>
+          <h3 class="trust-card-title"><?php echo esc_html( $trust_feat1_title ); ?></h3>
+          <p class="trust-card-desc"><?php echo esc_html( $trust_feat1_desc ); ?></p>
         </div>
       </div>
 
@@ -257,13 +278,13 @@ if ( empty( $lab_img ) ) {
       <div class="hero-trust-card">
         <div class="trust-card-icon" aria-hidden="true">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect>
+            <rect x="5" y="2" width="14" height="20" rx="2"></rect>
             <line x1="12" y1="18" x2="12.01" y2="18"></line>
           </svg>
         </div>
         <div class="trust-card-content">
-          <h3 class="trust-card-title"><?php esc_html_e( 'Genuine OLED Parts', 'mobile-pasal' ); ?></h3>
-          <p class="trust-card-desc"><?php esc_html_e( 'TrueTone & 3D Touch programming retained', 'mobile-pasal' ); ?></p>
+          <h3 class="trust-card-title"><?php echo esc_html( $trust_feat2_title ); ?></h3>
+          <p class="trust-card-desc"><?php echo esc_html( $trust_feat2_desc ); ?></p>
         </div>
       </div>
 
@@ -275,8 +296,8 @@ if ( empty( $lab_img ) ) {
           </svg>
         </div>
         <div class="trust-card-content">
-          <h3 class="trust-card-title"><?php esc_html_e( 'Level 4 Technicians', 'mobile-pasal' ); ?></h3>
-          <p class="trust-card-desc"><?php esc_html_e( 'Micro-soldering & stereo microscope cleanroom lab', 'mobile-pasal' ); ?></p>
+          <h3 class="trust-card-title"><?php echo esc_html( $trust_feat3_title ); ?></h3>
+          <p class="trust-card-desc"><?php echo esc_html( $trust_feat3_desc ); ?></p>
         </div>
       </div>
 
@@ -289,13 +310,14 @@ if ( empty( $lab_img ) ) {
           </svg>
         </div>
         <div class="trust-card-content">
-          <h3 class="trust-card-title"><?php esc_html_e( 'Affordable Pricing', 'mobile-pasal' ); ?></h3>
-          <p class="trust-card-desc"><?php esc_html_e( 'Transparent rates with warranty & official VAT bill', 'mobile-pasal' ); ?></p>
+          <h3 class="trust-card-title"><?php echo esc_html( $trust_feat4_title ); ?></h3>
+          <p class="trust-card-desc"><?php echo esc_html( $trust_feat4_desc ); ?></p>
         </div>
       </div>
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <!-- ================= 2. SHOP BY CATEGORY ================= -->
 <section class="section-wrap" id="categories">
@@ -704,7 +726,7 @@ if ( empty( $lab_img ) ) {
         </div>
         <div class="cleanroom-live-pill">
           <span class="cleanroom-pulse-dot"></span>
-          <span><?php esc_html_e( 'Live Gulariya Counter Cleanroom Lab', 'mobile-pasal' ); ?></span>
+          <span><?php echo esc_html( $lab_live_status ); ?></span>
         </div>
       </div>
 
@@ -716,7 +738,7 @@ if ( empty( $lab_img ) ) {
             <img src="<?php echo esc_url( $lab_img ); ?>" alt="<?php esc_attr_e( 'Cleanroom microscope repair lab technicians', 'mobile-pasal' ); ?>" loading="lazy" />
             <div class="cleanroom-photo-overlay-tag">
               <span class="photo-tag-pulse"></span>
-              <span><?php esc_html_e( 'Stereo Zoom Microscope • Anti-Static ESD Station', 'mobile-pasal' ); ?></span>
+              <span><?php echo esc_html( $lab_tagline ); ?></span>
             </div>
           </div>
 
@@ -751,7 +773,7 @@ if ( empty( $lab_img ) ) {
               <div class="feature-text-wrap">
                 <div class="feature-header-line">
                   <h3 class="feature-title-item"><?php echo esc_html( $lab_f1_h ); ?></h3>
-                  <span class="feature-status-chip chip-green"><?php esc_html_e( 'TrueTone & 3D Touch Retained', 'mobile-pasal' ); ?></span>
+                  <span class="feature-status-chip chip-green"><?php echo esc_html( $lab_feat1_chip ); ?></span>
                 </div>
                 <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
               </div>
@@ -765,7 +787,7 @@ if ( empty( $lab_img ) ) {
               <div class="feature-text-wrap">
                 <div class="feature-header-line">
                   <h3 class="feature-title-item"><?php echo esc_html( $lab_f2_h ); ?></h3>
-                  <span class="feature-status-chip chip-blue"><?php esc_html_e( 'Zero Error BMS Micro-Welded', 'mobile-pasal' ); ?></span>
+                  <span class="feature-status-chip chip-blue"><?php echo esc_html( $lab_feat2_chip ); ?></span>
                 </div>
                 <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
               </div>
@@ -779,7 +801,7 @@ if ( empty( $lab_img ) ) {
               <div class="feature-text-wrap">
                 <div class="feature-header-line">
                   <h3 class="feature-title-item"><?php echo esc_html( $lab_f3_h ); ?></h3>
-                  <span class="feature-status-chip chip-purple"><?php esc_html_e( '100% Privacy Protection', 'mobile-pasal' ); ?></span>
+                  <span class="feature-status-chip chip-purple"><?php echo esc_html( $lab_feat3_chip ); ?></span>
                 </div>
                 <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
               </div>
@@ -790,12 +812,12 @@ if ( empty( $lab_img ) ) {
           <div class="cleanroom-actions-bar">
             <a class="btn-cleanroom-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-              <span><?php esc_html_e( 'Consult Our Technician', 'mobile-pasal' ); ?></span>
+              <span><?php echo esc_html( $lab_btn1_text ); ?></span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
             <a class="btn-cleanroom-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-              <span><?php printf( esc_html__( 'Call Counter (%s)', 'mobile-pasal' ), esc_html( $phone ) ); ?></span>
+              <span><?php printf( esc_html__( '%s (%s)', 'mobile-pasal' ), esc_html( $lab_btn2_prefix ), esc_html( $phone ) ); ?></span>
             </a>
           </div>
         </div>
@@ -1042,131 +1064,111 @@ if ( empty( $lab_img ) ) {
     <!-- Smooth Slider Carousel Viewport -->
     <div class="reviews-carousel-viewport" id="reviewsViewport">
       <div class="reviews-carousel-track" id="reviewsTrack">
-        <!-- Review 1 -->
-        <div class="review-card">
-          <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="review-text">"My battery health was down to 74% and causing phone slowdowns. They replaced it with original-grade cell and re-coded the BMS so there is no annoying battery error in settings. Lasts a full day and a half now!"</p>
-          </div>
-          <div class="reviewer-info">
-            <div class="reviewer-avatar">AC</div>
-            <div>
-              <h4 class="reviewer-name">Anil Chaudhary</h4>
-              <p class="reviewer-meta">Badhaiyatal, Bardiya • iPhone 13 Battery Replacement</p>
-            </div>
-          </div>
-        </div>
+        <?php
+        $review_posts = get_posts( array(
+            'post_type'      => 'mp_review',
+            'posts_per_page' => 12,
+            'post_status'    => 'publish',
+        ) );
 
-        <!-- Review 2 -->
-        <div class="review-card">
-          <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="review-text">"Honest pricing without hidden markup. They clearly explained the warranty difference between unverified grey imports and official NTA-registered models. Highly recommended for genuine phones in Western Nepal."</p>
-          </div>
-          <div class="reviewer-info">
-            <div class="reviewer-avatar">DY</div>
-            <div>
-              <h4 class="reviewer-name">Dharmendra Yadav</h4>
-              <p class="reviewer-meta">Rajapur, Bardiya • Samsung Galaxy A55 5G + Anker PD</p>
-            </div>
-          </div>
-        </div>
+        $reviews_data = array();
 
-        <!-- Review 3 -->
-        <div class="review-card">
-          <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="review-text">"My S24 Ultra screen shattered during a bike ride. Two shops in Nepalgunj told me I had to leave the phone for 5 days. Ali Mobile fixed it in their cleanroom lab in under an hour while I had tea next door. Touch and color are 100% perfect."</p>
-          </div>
-          <div class="reviewer-info">
-            <div class="reviewer-avatar">PS</div>
-            <div>
-              <h4 class="reviewer-name">Pooja Shrestha</h4>
-              <p class="reviewer-meta">Bansgadhi, Bardiya • Galaxy S24 Ultra OLED Screen</p>
-            </div>
-          </div>
-        </div>
+        if ( ! empty( $review_posts ) ) {
+            foreach ( $review_posts as $rv ) {
+                $author   = $rv->post_title;
+                $content_text = strip_tags( $rv->post_content );
+                $loc      = get_post_meta( $rv->ID, '_mp_review_location', true ) ?: 'Gulariya, Bardiya';
+                $prod     = get_post_meta( $rv->ID, '_mp_review_product', true );
+                $rating   = intval( get_post_meta( $rv->ID, '_mp_review_rating', true ) ?: 5 );
+                $meta_str = $loc . ( $prod ? ' • ' . $prod : '' );
+                
+                $parts = explode( ' ', trim( $author ) );
+                $initials = '';
+                if ( ! empty( $parts[0] ) ) {
+                    $initials .= mb_substr( $parts[0], 0, 1 );
+                }
+                if ( count( $parts ) > 1 && ! empty( $parts[ count( $parts ) - 1 ] ) ) {
+                    $initials .= mb_substr( $parts[ count( $parts ) - 1 ], 0, 1 );
+                }
+                if ( empty( $initials ) ) {
+                    $initials = 'AM';
+                }
 
-        <!-- Review 4 -->
-        <div class="review-card">
-          <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="review-text">"Bought Redmi Note 13 Pro 5G with official Nepal VAT bill. The technician at the counter helped register my MDMS on the spot with NTA SMS verification. Genuine sealed box with official warranty."</p>
-          </div>
-          <div class="reviewer-info">
-            <div class="reviewer-avatar">RT</div>
-            <div>
-              <h4 class="reviewer-name">Ramesh Thapa</h4>
-              <p class="reviewer-meta">Gulariya-04, Bardiya • Redmi Note 13 Pro (Official MDMS)</p>
-            </div>
-          </div>
-        </div>
+                $reviews_data[] = array(
+                    'text'     => '"' . $content_text . '"',
+                    'name'     => $author,
+                    'meta'     => $meta_str,
+                    'initials' => strtoupper( $initials ),
+                    'rating'   => $rating,
+                );
+            }
+        } else {
+            $reviews_data = array(
+                array(
+                    'text'     => '"My battery health was down to 74% and causing phone slowdowns. They replaced it with original-grade cell and re-coded the BMS so there is no annoying battery error in settings. Lasts a full day and a half now!"',
+                    'name'     => 'Anil Chaudhary',
+                    'meta'     => 'Badhaiyatal, Bardiya • iPhone 13 Battery Replacement',
+                    'initials' => 'AC',
+                    'rating'   => 5,
+                ),
+                array(
+                    'text'     => '"Honest pricing without hidden markup. They clearly explained the warranty difference between unverified grey imports and official NTA-registered models. Highly recommended for genuine phones in Western Nepal."',
+                    'name'     => 'Dharmendra Yadav',
+                    'meta'     => 'Rajapur, Bardiya • Samsung Galaxy A55 5G + Anker PD',
+                    'initials' => 'DY',
+                    'rating'   => 5,
+                ),
+                array(
+                    'text'     => '"My S24 Ultra screen shattered during a bike ride. Two shops in Nepalgunj told me I had to leave the phone for 5 days. Ali Mobile fixed it in their cleanroom lab in under an hour while I had tea next door. Touch and color are 100% perfect."',
+                    'name'     => 'Pooja Shrestha',
+                    'meta'     => 'Bansgadhi, Bardiya • Galaxy S24 Ultra OLED Screen',
+                    'initials' => 'PS',
+                    'rating'   => 5,
+                ),
+                array(
+                    'text'     => '"Bought Redmi Note 13 Pro 5G with official Nepal VAT bill. The technician at the counter helped register my MDMS on the spot with NTA SMS verification. Genuine sealed box with official warranty."',
+                    'name'     => 'Ramesh Thapa',
+                    'meta'     => 'Gulariya-04, Bardiya • Redmi Note 13 Pro (Official MDMS)',
+                    'initials' => 'RT',
+                    'rating'   => 5,
+                ),
+                array(
+                    'text'     => '"My phone fell into an irrigation canal during field work. They dismantled the motherboard, cleaned every IC in their ultrasonic bath, and revived the phone completely without any data loss. Lifesavers!"',
+                    'name'     => 'Sunita BK',
+                    'meta'     => 'Madhuwan, Bardiya • Ultrasonic Liquid Damage De-Oxidation',
+                    'initials' => 'SB',
+                    'rating'   => 5,
+                ),
+                array(
+                    'text'     => '"Loose Type-C port on OnePlus 12 was refusing 100W SuperVOOC charge. Replacement took exactly 35 minutes across the counter. Works at peak 100W flash charging speed again with zero heating issues."',
+                    'name'     => 'Bikash Sharma',
+                    'meta'     => 'Nepalgunj Road, Bardiya • OnePlus 12 Fast Charging Port Fix',
+                    'initials' => 'BS',
+                    'rating'   => 5,
+                ),
+            );
+        }
 
-        <!-- Review 5 -->
+        foreach ( $reviews_data as $rv_item ) :
+        ?>
         <div class="review-card">
           <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <div class="review-stars" aria-label="<?php echo esc_attr( $rv_item['rating'] ); ?> out of 5 stars">
+              <?php for ( $s = 0; $s < 5; $s++ ) : ?>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="<?php echo $s < $rv_item['rating'] ? '#f59e0b' : '#cbd5e1'; ?>" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <?php endfor; ?>
             </div>
-            <p class="review-text">"My phone fell into an irrigation canal during field work. They dismantled the motherboard, cleaned every IC in their ultrasonic bath, and revived the phone completely without any data loss. Lifesavers!"</p>
+            <p class="review-text"><?php echo esc_html( $rv_item['text'] ); ?></p>
           </div>
           <div class="reviewer-info">
-            <div class="reviewer-avatar">SB</div>
+            <div class="reviewer-avatar"><?php echo esc_html( $rv_item['initials'] ); ?></div>
             <div>
-              <h4 class="reviewer-name">Sunita BK</h4>
-              <p class="reviewer-meta">Madhuwan, Bardiya • Ultrasonic Liquid Damage De-Oxidation</p>
+              <h4 class="reviewer-name"><?php echo esc_html( $rv_item['name'] ); ?></h4>
+              <p class="reviewer-meta"><?php echo esc_html( $rv_item['meta'] ); ?></p>
             </div>
           </div>
         </div>
-
-        <!-- Review 6 -->
-        <div class="review-card">
-          <div>
-            <div class="review-stars" aria-label="5 out of 5 stars">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            </div>
-            <p class="review-text">"Loose Type-C port on OnePlus 12 was refusing 100W SuperVOOC charge. Replacement took exactly 35 minutes across the counter. Works at peak 100W flash charging speed again with zero heating issues."</p>
-          </div>
-          <div class="reviewer-info">
-            <div class="reviewer-avatar">BS</div>
-            <div>
-              <h4 class="reviewer-name">Bikash Sharma</h4>
-              <p class="reviewer-meta">Nepalgunj Road, Bardiya • OnePlus 12 Fast Charging Port Fix</p>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
 

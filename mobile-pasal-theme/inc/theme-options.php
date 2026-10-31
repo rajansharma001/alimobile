@@ -24,6 +24,8 @@ function mobile_pasal_options_defaults() {
 		'site_domain_badge'            => 'Gulariya-06, Ji. Pra. Ka. Chowk',
 		'site_tagline'                 => 'Official NTA Smartphones, Genuine Gear & Apple Fix Precision Lab',
 		'footer_brand_desc'            => 'Official NTA Smartphones, Genuine Gear & Apple Fix Precision Lab',
+		'brand_name_line1'             => 'Ali Mobile',
+		'brand_name_line2'             => 'Center',
 		'site_logo'                    => '',
 		'logo_image'                   => '',
 		'site_favicon'                 => '',
@@ -121,6 +123,17 @@ function mobile_pasal_options_defaults() {
 		'hero_slide3_btn2_url'         => '#gallery',
 		'hero_slide3_tagline'          => 'Discover More.<br>Stay Connected!',
 		'hero_slide3_image'            => $uri . '/assets/images/hero-accessories.jpg',
+
+		// ── Post-Hero Guarantees (Common 4 Features Bar) ──
+		'trust_bar_enabled'            => 1,
+		'trust_feat1_title'            => 'Fast 45-Min Fix',
+		'trust_feat1_desc'             => 'Instant on-counter screen & battery turnaround',
+		'trust_feat2_title'            => 'Genuine OLED Parts',
+		'trust_feat2_desc'             => 'TrueTone & 3D Touch programming retained',
+		'trust_feat3_title'            => 'Level 4 Technicians',
+		'trust_feat3_desc'             => 'Micro-soldering & stereo microscope cleanroom lab',
+		'trust_feat4_title'            => 'Affordable Pricing',
+		'trust_feat4_desc'             => 'Transparent rates with warranty & official VAT bill',
 
 		// ── Hero Dock Tabs (Retail Department Switcher) ──
 		'hero_dock_tab1_title'         => 'Flagship Handsets',
@@ -264,6 +277,11 @@ function mobile_pasal_options_defaults() {
 		'lab_btn1_text'                => 'Consult Our Technician',
 		'lab_btn2_prefix'              => 'Call Counter',
 		'lab_image'                    => $uri . '/assets/images/apple-fix-bench.jpg',
+		'lab_live_status'              => 'Live Gulariya Counter Cleanroom Lab',
+		'lab_tagline'                  => 'Stereo Zoom Microscope • Anti-Static ESD Station',
+		'lab_feat1_chip'               => 'TrueTone & 3D Touch Retained',
+		'lab_feat2_chip'               => 'Zero Error BMS Micro-Welded',
+		'lab_feat3_chip'               => '100% Privacy Protection',
 
 		// ── Homepage Repair Services & Workflow ──
 		'services_kicker'              => 'Diagnostics & Solutions',
@@ -509,6 +527,21 @@ function mobile_pasal_options_defaults() {
 		'footer_col2_title'            => 'Apple Fix Lab',
 		'footer_col3_title'            => 'Store Information',
 		'footer_copyright'             => '© 2026 Ali Mobile Center & Apple Fix. Gulariya-06, Bardiya, Nepal. All Rights Reserved.',
+		'trust_box1_title'             => 'NTA Registered Devices',
+		'trust_box1_desc'              => '100% compliant with Nepal MDMS laws.',
+		'trust_box2_title'             => 'Express 45-Min Lab',
+		'trust_box2_desc'              => 'Quick turnaround with genuine spare parts.',
+		'trust_box3_title'             => 'Zero Hidden Charges',
+		'trust_box3_desc'              => 'Transparent billing and authentic warranties.',
+		'trust_box4_title'             => 'Counter Agent Ready',
+		'trust_box4_desc'              => 'eSewa top-up, bill payments & cash points.',
+
+		'social_facebook'              => 'https://facebook.com/alimobilecenter',
+		'social_instagram'             => 'https://instagram.com/alimobilecenter',
+		'social_whatsapp'              => 'https://wa.me/9779804530786',
+		'social_tiktok'                => 'https://tiktok.com/@alimobilecenter',
+		'social_google_maps'           => 'https://maps.google.com/?q=Ali+Mobile+Center+Gulariya',
+		'social_youtube'               => 'https://youtube.com/@alimobilecenter',
 
 		// ── 13. Search Engine Optimization (SEO) ──
 		'seo_meta_title'               => 'Ali Mobile Center & Apple Fix | Official NTA Handsets & Precision Phone Repair Gulariya, Bardiya',
@@ -1245,6 +1278,8 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-field-grid">
 									<?php
 									mp_render_field_text( 'site_brand_name', __( 'Shop / Business Name', 'mobile-pasal' ), __( 'Primary business title (e.g. Ali Mobile Center & Apple Fix).' ), 'Ali Mobile Center & Apple Fix' );
+									mp_render_field_text( 'brand_name_line1', __( 'Header Brand Name (Line 1)', 'mobile-pasal' ), __( 'First line of stylized header logo text.' ), 'Ali Mobile' );
+									mp_render_field_text( 'brand_name_line2', __( 'Header Brand Name (Line 2)', 'mobile-pasal' ), __( 'Second line of stylized header logo text.' ), 'Center' );
 									mp_render_field_text( 'site_domain_badge', __( 'Location / Chowk Badge', 'mobile-pasal' ), __( 'Short badge displayed beside logo (e.g. Gulariya-06, Ji. Pra. Ka. Chowk).' ), 'Gulariya-06, Ji. Pra. Ka. Chowk' );
 									mp_render_field_textarea( 'site_tagline', __( 'Store Tagline / Biography', 'mobile-pasal' ), __( 'Official description used in footer bio and search metadata.' ), 3, 'Official NTA Smartphones, Genuine Gear & Apple Fix Precision Lab' );
 									?>
@@ -1361,6 +1396,68 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 						</div>
+
+						<!-- Footer Trust Guarantees Strip -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-check"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Footer 4 Trust Guarantees Box Strip', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Manage the 4 trust badges appearing just above the footer across the website.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'trust_box1_title', __( 'Trust Box 1 Title', 'mobile-pasal' ), __( 'Default: NTA Registered Devices' ) );
+										mp_render_field_text( 'trust_box1_desc', __( 'Trust Box 1 Subtitle', 'mobile-pasal' ), __( 'Default: 100% compliant with Nepal MDMS laws.' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'trust_box2_title', __( 'Trust Box 2 Title', 'mobile-pasal' ), __( 'Default: Express 45-Min Lab' ) );
+										mp_render_field_text( 'trust_box2_desc', __( 'Trust Box 2 Subtitle', 'mobile-pasal' ), __( 'Default: Quick turnaround with genuine spare parts.' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'trust_box3_title', __( 'Trust Box 3 Title', 'mobile-pasal' ), __( 'Default: Zero Hidden Charges' ) );
+										mp_render_field_text( 'trust_box3_desc', __( 'Trust Box 3 Subtitle', 'mobile-pasal' ), __( 'Default: Transparent billing and authentic warranties.' ) );
+										?>
+									</div>
+									<div class="bopt-field-col-2">
+										<?php
+										mp_render_field_text( 'trust_box4_title', __( 'Trust Box 4 Title', 'mobile-pasal' ), __( 'Default: Counter Agent Ready' ) );
+										mp_render_field_text( 'trust_box4_desc', __( 'Trust Box 4 Subtitle', 'mobile-pasal' ), __( 'Default: eSewa top-up, bill payments & cash points.' ) );
+										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Social Media Profiles -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-share-nodes"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Official Social Media Profiles & Channels', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Links for the footer social icons. Leave empty to hide any channel.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_text( 'social_facebook', __( 'Facebook Page URL', 'mobile-pasal' ), __( 'e.g. https://facebook.com/alimobilecenter' ) );
+									mp_render_field_text( 'social_instagram', __( 'Instagram Profile URL', 'mobile-pasal' ), __( 'e.g. https://instagram.com/alimobilecenter' ) );
+									mp_render_field_text( 'social_whatsapp', __( 'WhatsApp Chat URL', 'mobile-pasal' ), __( 'e.g. https://wa.me/9779804530786' ) );
+									mp_render_field_text( 'social_tiktok', __( 'TikTok Profile URL', 'mobile-pasal' ), __( 'e.g. https://tiktok.com/@alimobilecenter' ) );
+									mp_render_field_text( 'social_google_maps', __( 'Google Maps Location URL', 'mobile-pasal' ), __( 'Direct location link' ) );
+									mp_render_field_text( 'social_youtube', __( 'YouTube Channel URL', 'mobile-pasal' ), __( 'e.g. https://youtube.com/@alimobilecenter' ) );
+									?>
+								</div>
+							</div>
+						</div>
 					</div>
 
 					<!-- ===================================================================
@@ -1391,6 +1488,10 @@ function mobile_pasal_options_render_dashboard() {
 							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-hero-dock">
 								<i class="fa-solid fa-sliders"></i>
 								<span><?php esc_html_e( 'Department Switcher Dock', 'mobile-pasal' ); ?></span>
+							</button>
+							<button type="button" class="bopt-subnav-pill" data-subtab="subtab-hero-trust">
+								<i class="fa-solid fa-shield-halved"></i>
+								<span><?php esc_html_e( 'Post-Hero Guarantees (4 Features)', 'mobile-pasal' ); ?></span>
 							</button>
 						</div>
 
@@ -1534,6 +1635,53 @@ function mobile_pasal_options_render_dashboard() {
 										mp_render_field_text( 'hero_dock_tab3_title', __( 'Dock Tab 3 Title', 'mobile-pasal' ), __( 'Default: Original Gear' ) );
 										mp_render_field_text( 'hero_dock_tab3_sub', __( 'Dock Tab 3 Subtitle', 'mobile-pasal' ), __( 'Default: PD Chargers, Audio & Armor' ) );
 										?>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Slide 5: Post-Hero Trust Bar (Common 4 Features) -->
+						<div class="bopt-subnav-content" id="subtab-hero-trust">
+							<div class="bopt-card">
+								<div class="bopt-card-header">
+									<div class="bopt-card-header-left">
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
+										<div>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Post-Hero 4-Feature Trust Strip Bar', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Configure the common guarantees strip placed directly below the hero slider.', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
+								</div>
+								<div class="bopt-card-body">
+									<div class="bopt-field-grid">
+										<?php
+										mp_render_field_toggle( 'trust_bar_enabled', __( 'Enable Post-Hero Trust Bar', 'mobile-pasal' ), __( 'Show or hide the dedicated 4-card trust strip below the hero slider.' ) );
+										?>
+										<div class="bopt-field-col-2">
+											<?php
+											mp_render_field_text( 'trust_feat1_title', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Fast 45-Min Fix' ) );
+											mp_render_field_text( 'trust_feat1_desc', __( 'Feature 1 Description', 'mobile-pasal' ), __( 'Default: Instant on-counter screen & battery turnaround' ) );
+											?>
+										</div>
+										<div class="bopt-field-col-2">
+											<?php
+											mp_render_field_text( 'trust_feat2_title', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Genuine OLED Parts' ) );
+											mp_render_field_text( 'trust_feat2_desc', __( 'Feature 2 Description', 'mobile-pasal' ), __( 'Default: TrueTone & 3D Touch programming retained' ) );
+											?>
+										</div>
+										<div class="bopt-field-col-2">
+											<?php
+											mp_render_field_text( 'trust_feat3_title', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Level 4 Technicians' ) );
+											mp_render_field_text( 'trust_feat3_desc', __( 'Feature 3 Description', 'mobile-pasal' ), __( 'Default: Micro-soldering & stereo microscope cleanroom lab' ) );
+											?>
+										</div>
+										<div class="bopt-field-col-2">
+											<?php
+											mp_render_field_text( 'trust_feat4_title', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Affordable Pricing' ) );
+											mp_render_field_text( 'trust_feat4_desc', __( 'Feature 4 Description', 'mobile-pasal' ), __( 'Default: Transparent rates with warranty & official VAT bill' ) );
+											?>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1820,14 +1968,19 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-field-grid">
 									<?php
 									mp_render_field_text( 'lab_badge', __( 'Lab Section Badge', 'mobile-pasal' ), __( 'Default: Apple Fix Specialist • Gulariya Counter' ) );
+									mp_render_field_text( 'lab_live_status', __( 'Top Right Status Pill', 'mobile-pasal' ), __( 'Default: Live Gulariya Counter Cleanroom Lab' ) );
+									mp_render_field_text( 'lab_tagline', __( 'Photo Overlay Tagline', 'mobile-pasal' ), __( 'Default: Stereo Zoom Microscope • Anti-Static ESD Station' ) );
 									mp_render_field_text( 'lab_title', __( 'Lab Section Title', 'mobile-pasal' ), __( 'Default: Gulariya\'s Premier Precision Apple Fix Lab' ) );
 									mp_render_field_textarea( 'lab_desc', __( 'Lab Section Subtitle', 'mobile-pasal' ), __( 'Default: We do not forward your phone to Nepalgunj or Kathmandu...' ), 3 );
 
 									mp_render_field_text( 'lab_feat1_title', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: 30-Minute Screen Replacement' ) );
+									mp_render_field_text( 'lab_feat1_chip', __( 'Feature 1 Status Chip', 'mobile-pasal' ), __( 'Default: TrueTone & 3D Touch Retained' ) );
 									mp_render_field_text( 'lab_feat1_desc', __( 'Feature 1 Description', 'mobile-pasal' ), __( 'Default: Fast OLED and glass restoration with TrueTone & 3D touch programming.' ) );
 									mp_render_field_text( 'lab_feat2_title', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Battery Health Calibration' ) );
+									mp_render_field_text( 'lab_feat2_chip', __( 'Feature 2 Status Chip', 'mobile-pasal' ), __( 'Default: Zero Error BMS Micro-Welded' ) );
 									mp_render_field_text( 'lab_feat2_desc', __( 'Feature 2 Description', 'mobile-pasal' ), __( 'Default: Certified battery replacements that restore peak 100% capacity...' ) );
 									mp_render_field_text( 'lab_feat3_title', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: In-Front-Of-You Transparency' ) );
+									mp_render_field_text( 'lab_feat3_chip', __( 'Feature 3 Status Chip', 'mobile-pasal' ), __( 'Default: 100% Privacy Protection' ) );
 									mp_render_field_text( 'lab_feat3_desc', __( 'Feature 3 Description', 'mobile-pasal' ), __( 'Default: Watch your repair live across our counter...' ) );
 
 									mp_render_field_text( 'lab_stat1_num', __( 'Lab Metric 1 Number', 'mobile-pasal' ), __( 'Default: 30m' ) );

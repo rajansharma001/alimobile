@@ -15,6 +15,14 @@ $phone     = mp_opt( 'contact_phone', '+977 9804530786' );
 $clean_p   = mp_clean_phone( $phone );
 $address   = mp_opt( 'contact_address', 'Ji. Pra. Ka. Chowk, Gulariya-06, Bardiya' );
 $copyright = mp_opt( 'footer_copyright', '© 2026 Ali Mobile Center & Apple Fix, Gulariya-06, Bardiya. All rights reserved.' );
+
+// Social Media Links
+$soc_fb = mp_opt( 'social_facebook', 'https://facebook.com/alimobilecenter' );
+$soc_ig = mp_opt( 'social_instagram', 'https://instagram.com/alimobilecenter' );
+$soc_wa = mp_opt( 'social_whatsapp', 'https://wa.me/' . $clean_p );
+$soc_tt = mp_opt( 'social_tiktok', 'https://tiktok.com/@alimobilecenter' );
+$soc_gm = mp_opt( 'social_google_maps', 'https://maps.google.com/?q=Ali+Mobile+Center+Gulariya' );
+$soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
 ?>
 </main><!-- /#top -->
 
@@ -81,24 +89,36 @@ $copyright = mp_opt( 'footer_copyright', '© 2026 Ali Mobile Center & Apple Fix,
         <div class="footer-social-bar">
           <span class="social-bar-label"><?php esc_html_e( 'Connect With Us:', 'mobile-pasal' ); ?></span>
           <div class="social-icons-row">
-            <a class="social-icon-btn social-fb" href="https://facebook.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <?php if ( ! empty( $soc_fb ) ) : ?>
+            <a class="social-icon-btn social-fb" href="<?php echo esc_url( $soc_fb ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a class="social-icon-btn social-ig" href="https://instagram.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <?php endif; ?>
+            <?php if ( ! empty( $soc_ig ) ) : ?>
+            <a class="social-icon-btn social-ig" href="<?php echo esc_url( $soc_ig ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
-            <a class="social-icon-btn social-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <?php endif; ?>
+            <?php if ( ! empty( $soc_wa ) ) : ?>
+            <a class="social-icon-btn social-wa" href="<?php echo esc_url( $soc_wa ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.12c-.24.68-1.39 1.3-1.92 1.38-.49.08-1.12.11-3.23-.76-2.69-1.11-4.43-3.83-4.57-4.01-.13-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.54-.34.72-.34.18 0 .36.01.52.02.17.01.4-.06.62.48.24.58.8 1.95.87 2.1.07.14.12.31.02.5-.09.19-.14.3-.28.46-.14.16-.3.35-.43.47-.14.14-.29.3-.12.59.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.73-.85.92-1.15.2-.29.39-.24.66-.14.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.13.07.74-.17 1.42z"/></svg>
             </a>
-            <a class="social-icon-btn social-tt" href="https://tiktok.com/@alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <?php endif; ?>
+            <?php if ( ! empty( $soc_tt ) ) : ?>
+            <a class="social-icon-btn social-tt" href="<?php echo esc_url( $soc_tt ); ?>" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c-.01 2.21-.81 4.41-2.31 6.03-1.6 1.74-3.9 2.74-6.27 2.75-2.5 0-4.9-1.07-6.52-2.91-1.68-1.89-2.45-4.47-2.12-6.99.34-2.58 1.87-4.88 4.09-6.15 1.65-.95 3.58-1.33 5.48-1.09v4.11c-.99-.24-2.07-.12-2.98.34-.9.45-1.57 1.27-1.85 2.23-.29.98-.12 2.07.45 2.91.56.84 1.51 1.36 2.53 1.39 1.19.04 2.35-.55 2.99-1.55.43-.67.62-1.47.62-2.27V.02z"/></svg>
             </a>
-            <a class="social-icon-btn social-gm" href="https://maps.google.com/?q=Ali+Mobile+Center+Gulariya" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+            <?php endif; ?>
+            <?php if ( ! empty( $soc_gm ) ) : ?>
+            <a class="social-icon-btn social-gm" href="<?php echo esc_url( $soc_gm ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 7 13 8 16 1-3 8-10.75 8-16 0-4.42-3.58-8-8-8zm0 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
             </a>
-            <a class="social-icon-btn social-yt" href="https://youtube.com/@alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <?php endif; ?>
+            <?php if ( ! empty( $soc_yt ) ) : ?>
+            <a class="social-icon-btn social-yt" href="<?php echo esc_url( $soc_yt ); ?>" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </a>
+            <?php endif; ?>
           </div>
         </div>
       </div>
