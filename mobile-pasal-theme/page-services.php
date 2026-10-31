@@ -32,7 +32,7 @@ $services_desc  = mp_opt( 'services_hero_desc', 'Specialized component-level mic
 </section>
 
 <!-- Interactive Repair Diagnostic Console -->
-<section id="repair-builder" class="repair-builder-section">
+<section id="repair-builder" class="repair-builder-section" style="margin-top: 48px;">
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker">

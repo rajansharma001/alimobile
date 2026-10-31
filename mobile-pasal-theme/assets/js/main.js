@@ -396,26 +396,128 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* ------------------------------------------------------------------------
-     6. Product Catalog: Comprehensive Search, Category, Price & Sort Filters
+     6. Product Catalog: Left Sidebar Filtration, Sorting & Pagination
      ------------------------------------------------------------------------ */
   var filterTabs = document.querySelectorAll('.filter-tab-btn');
+  var priceFilterBtns = document.querySelectorAll('.price-filter-btn');
   var categoryCards = document.querySelectorAll('.shop-cat-card');
-  var productCards = document.querySelectorAll('.products-grid .product-card');
   var productsGrid = document.getElementById('products-grid');
   var searchInput = document.getElementById('site-search');
   var searchClearBtn = document.getElementById('search-clear-btn');
   var priceFilter = document.getElementById('filter-price-range');
   var sortFilter = document.getElementById('filter-sort-by');
-  var resetBtn = document.getElementById('catalog-reset-btn');
+  var resetBtn = document.getElementById('sidebar-reset-btn') || document.getElementById('catalog-reset-btn');
   var countBadge = document.getElementById('catalog-count-num');
   var emptyNotice = document.getElementById('catalog-empty-notice');
-  var currentCategory = 'all';
+  var mobileDrawerBtn = document.getElementById('mobile-filter-drawer-btn');
+  var sidebarFilters = document.getElementById('shop-sidebar-filters');
+  var mobileFilterCount = document.getElementById('mobile-filter-count');
+  var paginationControls = document.getElementById('shop-pagination-controls');
+  var paginationInfo = document.getElementById('shop-pagination-info');
 
-  function filterCatalog() {
+  var currentCategory = 'all';
+  var currentPriceRange = 'all';
+  var currentPage = 1;
+  var PAGE_SIZE = 9;
+
+  function renderPagination(totalMatches) {
+    if (!paginationControls) return;
+
+    var totalPages = Math.ceil(totalMatches / PAGE_SIZE);
+    if (totalPages <= 0) totalPages = 1;
+
+    if (currentPage > totalPages) {
+      currentPage = 1;
+    }
+
+    paginationControls.innerHTML = '';
+
+    if (totalMatches <= PAGE_SIZE) {
+      if (paginationInfo) {
+        paginationInfo.textContent = totalMatches > 0
+          ? 'Showing all ' + totalMatches + ' handsets'
+          : '';
+      }
+      return;
+    }
+
+    // Previous Button
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'page-btn' + (currentPage === 1 ? ' disabled' : '');
+    prevBtn.innerHTML = '‹ Prev';
+    prevBtn.disabled = (currentPage === 1);
+    prevBtn.setAttribute('aria-label', 'Previous Page');
+    prevBtn.addEventListener('click', function () {
+      if (currentPage > 1) {
+        currentPage--;
+        filterCatalog(false);
+        scrollToCatalogTop();
+      }
+    });
+    paginationControls.appendChild(prevBtn);
+
+    // Numbered Buttons
+    for (var i = 1; i <= totalPages; i++) {
+      var numBtn = document.createElement('button');
+      numBtn.type = 'button';
+      numBtn.className = 'page-btn' + (i === currentPage ? ' active' : '');
+      numBtn.textContent = i;
+      numBtn.setAttribute('aria-label', 'Go to Page ' + i);
+      (function (pageIdx) {
+        numBtn.addEventListener('click', function () {
+          if (currentPage !== pageIdx) {
+            currentPage = pageIdx;
+            filterCatalog(false);
+            scrollToCatalogTop();
+          }
+        });
+      })(i);
+      paginationControls.appendChild(numBtn);
+    }
+
+    // Next Button
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'page-btn' + (currentPage === totalPages ? ' disabled' : '');
+    nextBtn.innerHTML = 'Next ›';
+    nextBtn.disabled = (currentPage === totalPages);
+    nextBtn.setAttribute('aria-label', 'Next Page');
+    nextBtn.addEventListener('click', function () {
+      if (currentPage < totalPages) {
+        currentPage++;
+        filterCatalog(false);
+        scrollToCatalogTop();
+      }
+    });
+    paginationControls.appendChild(nextBtn);
+
+    // Update pagination info text
+    if (paginationInfo) {
+      var startIdx = (currentPage - 1) * PAGE_SIZE + 1;
+      var endIdx = Math.min(currentPage * PAGE_SIZE, totalMatches);
+      paginationInfo.textContent = 'Showing ' + startIdx + '–' + endIdx + ' of ' + totalMatches + ' handsets (Page ' + currentPage + ' of ' + totalPages + ')';
+    }
+  }
+
+  function scrollToCatalogTop() {
+    var catalogEl = document.getElementById('catalog') || productsGrid;
+    if (catalogEl) {
+      catalogEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  function filterCatalog(resetPage) {
+    if (resetPage !== false) {
+      currentPage = 1;
+    }
+
     var query = (searchInput ? searchInput.value : '').trim().toLowerCase();
-    var priceRange = (priceFilter ? priceFilter.value : 'all');
+    var priceRange = currentPriceRange;
+    if (priceFilter && priceFilter.value) {
+      priceRange = priceFilter.value;
+    }
     var sortBy = (sortFilter ? sortFilter.value : 'featured');
-    var matchCount = 0;
     var cardsArray = Array.prototype.slice.call(document.querySelectorAll('.products-grid .product-card'));
 
     // Sorting
@@ -447,6 +549,8 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    // Match filtering
+    var matchedCards = [];
     cardsArray.forEach(function (card) {
       var brand = (card.getAttribute('data-brand') || '').toLowerCase();
       var category = (card.getAttribute('data-category') || '').toLowerCase();
@@ -484,17 +588,32 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       if (matchFilter && matchQuery && matchPrice) {
+        matchedCards.push(card);
+      }
+    });
+
+    var matchCount = matchedCards.length;
+
+    // Apply pagination slice
+    var startIdx = (currentPage - 1) * PAGE_SIZE;
+    var endIdx = startIdx + PAGE_SIZE;
+
+    cardsArray.forEach(function (card) {
+      var matchPos = matchedCards.indexOf(card);
+      if (matchPos >= startIdx && matchPos < endIdx) {
         card.style.display = '';
-        matchCount++;
       } else {
         card.style.display = 'none';
       }
     });
 
-    // Update counter
+    // Update count badge
     if (countBadge) {
       countBadge.textContent = matchCount;
     }
+
+    // Render pagination controls
+    renderPagination(matchCount);
 
     // Toggle empty notice
     if (emptyNotice) {
@@ -515,8 +634,18 @@ document.addEventListener('DOMContentLoaded', function () {
     if (resetBtn) {
       resetBtn.style.display = isFiltered ? 'inline-flex' : 'none';
     }
+
+    // Update mobile filter active counter
+    if (mobileFilterCount) {
+      var filterActiveCount = 0;
+      if (currentCategory !== 'all') filterActiveCount++;
+      if (priceRange !== 'all') filterActiveCount++;
+      if (query !== '') filterActiveCount++;
+      mobileFilterCount.textContent = filterActiveCount;
+    }
   }
 
+  // Brand tabs / sidebar buttons
   filterTabs.forEach(function (tab) {
     tab.addEventListener('click', function () {
       filterTabs.forEach(function (t) { t.classList.remove('active'); });
@@ -528,10 +657,22 @@ document.addEventListener('DOMContentLoaded', function () {
         c.classList.toggle('active', c.getAttribute('data-category-target') === currentCategory);
       });
 
-      filterCatalog();
+      filterCatalog(true);
     });
   });
 
+  // Price buttons in sidebar
+  priceFilterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      priceFilterBtns.forEach(function (b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      currentPriceRange = this.getAttribute('data-price') || 'all';
+      if (priceFilter) priceFilter.value = currentPriceRange;
+      filterCatalog(true);
+    });
+  });
+
+  // Category cards at top
   categoryCards.forEach(function (card) {
     card.addEventListener('click', function (e) {
       e.preventDefault();
@@ -540,19 +681,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Sync active tab
       filterTabs.forEach(function (t) {
-        if (t.getAttribute('data-filter') === targetCat) {
-          t.classList.add('active');
-        } else {
-          t.classList.remove('active');
-        }
+        t.classList.toggle('active', t.getAttribute('data-filter') === targetCat);
       });
 
-      // Highlight active category card
       categoryCards.forEach(function (c) {
         c.classList.toggle('active', c.getAttribute('data-category-target') === targetCat);
       });
 
-      filterCatalog();
+      filterCatalog(true);
 
       var catalogEl = document.getElementById('catalog');
       if (catalogEl) {
@@ -561,50 +697,67 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Mobile filter drawer toggle
+  if (mobileDrawerBtn && sidebarFilters) {
+    mobileDrawerBtn.addEventListener('click', function () {
+      sidebarFilters.classList.toggle('drawer-open');
+    });
+  }
+
   if (priceFilter) {
     priceFilter.addEventListener('change', function () {
-      filterCatalog();
+      currentPriceRange = this.value;
+      priceFilterBtns.forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-price') === currentPriceRange);
+      });
+      filterCatalog(true);
     });
   }
 
   if (sortFilter) {
     sortFilter.addEventListener('change', function () {
-      filterCatalog();
+      filterCatalog(true);
     });
   }
 
-  if (resetBtn) {
-    resetBtn.addEventListener('click', function () {
+  // Reset button(s)
+  var allResetBtns = document.querySelectorAll('#sidebar-reset-btn, #catalog-reset-btn, .btn-clear-all');
+  allResetBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
       if (searchInput) searchInput.value = '';
       if (priceFilter) priceFilter.value = 'all';
       if (sortFilter) sortFilter.value = 'featured';
       currentCategory = 'all';
+      currentPriceRange = 'all';
       filterTabs.forEach(function (t) {
         t.classList.toggle('active', t.getAttribute('data-filter') === 'all');
+      });
+      priceFilterBtns.forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-price') === 'all');
       });
       categoryCards.forEach(function (c) {
         c.classList.remove('active');
       });
-      filterCatalog();
+      filterCatalog(true);
     });
-  }
+  });
 
   if (searchInput) {
     searchInput.addEventListener('input', function () {
-      filterCatalog();
+      filterCatalog(true);
     });
   }
 
   if (searchClearBtn && searchInput) {
     searchClearBtn.addEventListener('click', function () {
       searchInput.value = '';
-      filterCatalog();
+      filterCatalog(true);
       searchInput.focus();
     });
   }
 
-  // Initial calculation of count
-  filterCatalog();
+  // Initial calculation of count & pagination
+  filterCatalog(true);
 
   /* ------------------------------------------------------------------------
      7. Shop by Brand — Click to Filter Catalog & Smooth Scroll
@@ -620,7 +773,7 @@ document.addEventListener('DOMContentLoaded', function () {
           filterTabs.forEach(function (t) { t.classList.remove('active'); });
           matchingTab.classList.add('active');
           currentCategory = brandTarget;
-          filterCatalog();
+          filterCatalog(true);
 
           var catalogSection = document.getElementById('catalog');
           if (catalogSection) {
