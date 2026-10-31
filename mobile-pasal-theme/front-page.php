@@ -14,59 +14,69 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 
 // Hero Slide 1
-$slide1_kicker      = mp_opt( 'hero_slide1_kicker', 'Authorized Smartphones & Flagships' );
-$slide1_title       = mp_opt( 'hero_slide1_title', 'Experience Next-Gen Flagships & Precision Care.' );
-$slide1_desc        = mp_opt( 'hero_slide1_desc', 'Discover the latest iPhone 16 Series, Samsung Galaxy S24 Ultra, and Google Pixel 9. Official NTA-approved stock, verified IMEI bill, free data migration, and instant WhatsApp counter quotes.' );
-$slide1_perk1       = mp_opt( 'hero_slide1_perk1', '100% Sealed Box' );
-$slide1_perk2       = mp_opt( 'hero_slide1_perk2', 'VAT Bill & 1-Yr Warranty' );
-$slide1_perk3       = mp_opt( 'hero_slide1_perk3', 'Free Data Migration' );
-$slide1_btn1        = mp_opt( 'hero_slide1_btn1_text', 'Explore Handsets' );
-$slide1_btn1_url    = mp_opt( 'hero_slide1_btn1_url', '#catalog' );
-$slide1_btn2        = mp_opt( 'hero_slide1_btn2_text', "Ask Today's Price" );
-$slide1_btn2_url    = mp_opt( 'hero_slide1_btn2_url', mp_get_whatsapp_link( 'Namaste Ali Mobile, iPhone 16 ra Galaxy S24 ko aaja ko counter price dinus' ) );
-$slide1_stock_tag   = mp_opt( 'hero_slide1_stock_tag', 'In Stock in Gulariya' );
-$slide1_badge_sub   = mp_opt( 'hero_slide1_badge_sub', 'Official Warranty' );
-$slide1_badge_title = mp_opt( 'hero_slide1_badge_title', 'Authorized Nepal Stock' );
-$slide1_img         = mp_opt( 'hero_slide1_image', '' );
+$slide1_trust     = mp_opt( 'hero_slide1_trust', 'Trusted by 10,000+ Customers' );
+$slide1_title     = mp_opt( 'hero_slide1_title', 'Expert <span class="accent">Mobile Repair</span> & Service' );
+$slide1_intro     = mp_opt( 'hero_slide1_intro', 'Your One-Stop Solution for Mobile Repair, Accessories and More.' );
+$slide1_f1_icon   = mp_opt( 'hero_slide1_f1_icon', '◷' );
+$slide1_f1_text   = mp_opt( 'hero_slide1_f1_text', 'Fast<br>Service' );
+$slide1_f2_icon   = mp_opt( 'hero_slide1_f2_icon', '⬟' );
+$slide1_f2_text   = mp_opt( 'hero_slide1_f2_text', 'Genuine<br>Parts' );
+$slide1_f3_icon   = mp_opt( 'hero_slide1_f3_icon', '✹' );
+$slide1_f3_text   = mp_opt( 'hero_slide1_f3_text', 'Skilled<br>Technicians' );
+$slide1_f4_icon   = mp_opt( 'hero_slide1_f4_icon', '♧' );
+$slide1_f4_text   = mp_opt( 'hero_slide1_f4_text', 'Affordable<br>Price' );
+$slide1_btn1_text = mp_opt( 'hero_slide1_btn1_text', 'Book a Repair' );
+$slide1_btn1_url  = mp_opt( 'hero_slide1_btn1_url', '#contact' );
+$slide1_btn2_text = mp_opt( 'hero_slide1_btn2_text', 'Watch Video' );
+$slide1_btn2_url  = mp_opt( 'hero_slide1_btn2_url', '#services' );
+$slide1_tagline   = mp_opt( 'hero_slide1_tagline', 'Fix It.<br>Stay Connected!' );
+$slide1_img       = mp_opt( 'hero_slide1_image', '' );
 if ( empty( $slide1_img ) ) {
-	$slide1_img = MP_THEME_URI . '/assets/images/hero-iphone-hand.jpg';
+	$slide1_img = MP_THEME_URI . '/assets/images/hero-repair-lab.jpg';
 }
 
 // Hero Slide 2
-$slide2_kicker      = mp_opt( 'hero_slide2_kicker', 'On-Site Diagnostic & Repair Lab' );
-$slide2_title       = mp_opt( 'hero_slide2_title', "Gulariya's Premier Apple Fix Laboratory." );
-$slide2_desc        = mp_opt( 'hero_slide2_desc', 'Screen broken, battery drained, or phone dropped in water? We repair right in front of you at our on-site workstation. Original-grade parts, TrueTone display calibration, and honest diagnostics with zero hidden costs.' );
-$slide2_perk1       = mp_opt( 'hero_slide2_perk1', '30–45 Min Screen Fix' );
-$slide2_perk2       = mp_opt( 'hero_slide2_perk2', 'Original Service-Pack Parts' );
-$slide2_perk3       = mp_opt( 'hero_slide2_perk3', 'Up to 90 Days Testing Warranty' );
-$slide2_btn1        = mp_opt( 'hero_slide2_btn1_text', 'View Repair Services' );
-$slide2_btn1_url    = mp_opt( 'hero_slide2_btn1_url', '#services' );
-$slide2_btn2        = mp_opt( 'hero_slide2_btn2_text', 'Call Technician' );
-$slide2_stock_tag   = mp_opt( 'hero_slide2_stock_tag', 'ESD Bench Active' );
-$slide2_badge_sub   = mp_opt( 'hero_slide2_badge_sub', 'Diagnosis Time' );
-$slide2_badge_title = mp_opt( 'hero_slide2_badge_title', 'Instant Front Counter Check' );
-$slide2_img         = mp_opt( 'hero_slide2_image', '' );
+$slide2_trust     = mp_opt( 'hero_slide2_trust', 'Careful Repairs. Quality Parts.' );
+$slide2_title     = mp_opt( 'hero_slide2_title', 'Cracked Screen? <span class="accent">We\'ve Got You.</span>' );
+$slide2_intro     = mp_opt( 'hero_slide2_intro', 'From screen replacement to battery problems, get your phone back in shape with reliable service.' );
+$slide2_f1_icon   = mp_opt( 'hero_slide2_f1_icon', '▣' );
+$slide2_f1_text   = mp_opt( 'hero_slide2_f1_text', 'Screen<br>Replacement' );
+$slide2_f2_icon   = mp_opt( 'hero_slide2_f2_icon', 'ϟ' );
+$slide2_f2_text   = mp_opt( 'hero_slide2_f2_text', 'Battery<br>Change' );
+$slide2_f3_icon   = mp_opt( 'hero_slide2_f3_icon', '⌁' );
+$slide2_f3_text   = mp_opt( 'hero_slide2_f3_text', 'Water Damage<br>Check' );
+$slide2_f4_icon   = mp_opt( 'hero_slide2_f4_icon', '⚙' );
+$slide2_f4_text   = mp_opt( 'hero_slide2_f4_text', 'Software<br>Support' );
+$slide2_btn1_text = mp_opt( 'hero_slide2_btn1_text', 'Get Your Phone Fixed' );
+$slide2_btn1_url  = mp_opt( 'hero_slide2_btn1_url', '#contact' );
+$slide2_btn2_text = mp_opt( 'hero_slide2_btn2_text', 'Explore Services' );
+$slide2_btn2_url  = mp_opt( 'hero_slide2_btn2_url', '#services' );
+$slide2_tagline   = mp_opt( 'hero_slide2_tagline', 'Repair Right.<br>Relax More.' );
+$slide2_img       = mp_opt( 'hero_slide2_image', '' );
 if ( empty( $slide2_img ) ) {
-	$slide2_img = MP_THEME_URI . '/assets/images/apple-fix-bench.jpg';
+	$slide2_img = MP_THEME_URI . '/assets/images/iphone-repair-hands.jpg';
 }
 
 // Hero Slide 3
-$slide3_kicker      = mp_opt( 'hero_slide3_kicker', 'Original Accessories & Power Systems' );
-$slide3_title       = mp_opt( 'hero_slide3_title', 'Original Audio, PD Chargers & Gear.' );
-$slide3_desc        = mp_opt( 'hero_slide3_desc', 'Power and protect your device with authentic Apple AirPods, Galaxy Buds, 20W/30W/65W PD Fast Chargers, 9H tempered glass, MagSafe protective armor, and instant eSewa merchant top-up services.' );
-$slide3_perk1       = mp_opt( 'hero_slide3_perk1', 'Apple 20W/30W & Samsung 45W GaN' );
-$slide3_perk2       = mp_opt( 'hero_slide3_perk2', 'Original AirPods & Galaxy Buds' );
-$slide3_perk3       = mp_opt( 'hero_slide3_perk3', 'Free Counter Glass Installation' );
-$slide3_btn1        = mp_opt( 'hero_slide3_btn1_text', 'Browse Accessories' );
-$slide3_btn1_url    = mp_opt( 'hero_slide3_btn1_url', '#categories' );
-$slide3_btn2        = mp_opt( 'hero_slide3_btn2_text', 'Order on WhatsApp' );
-$slide3_btn2_url    = mp_opt( 'hero_slide3_btn2_url', mp_get_whatsapp_link( 'Namaste Ali Mobile, accessories stock barema bujhna chahanchhu' ) );
-$slide3_stock_tag   = mp_opt( 'hero_slide3_stock_tag', '100% Genuine Sealed' );
-$slide3_badge_sub   = mp_opt( 'hero_slide3_badge_sub', 'Brand Warranty' );
-$slide3_badge_title = mp_opt( 'hero_slide3_badge_title', 'Official PD Fast Charging' );
-$slide3_img         = mp_opt( 'hero_slide3_image', '' );
+$slide3_trust     = mp_opt( 'hero_slide3_trust', 'Your Local Mobile Store' );
+$slide3_title     = mp_opt( 'hero_slide3_title', 'Find Your <span class="accent">Next Phone.</span>' );
+$slide3_intro     = mp_opt( 'hero_slide3_intro', 'Explore popular smartphones, useful accessories and friendly advice — all in one place.' );
+$slide3_f1_icon   = mp_opt( 'hero_slide3_f1_icon', '▣' );
+$slide3_f1_text   = mp_opt( 'hero_slide3_f1_text', 'Popular<br>Brands' );
+$slide3_f2_icon   = mp_opt( 'hero_slide3_f2_icon', '◇' );
+$slide3_f2_text   = mp_opt( 'hero_slide3_f2_text', 'Accessories' );
+$slide3_f3_icon   = mp_opt( 'hero_slide3_f3_icon', '♡' );
+$slide3_f3_text   = mp_opt( 'hero_slide3_f3_text', 'Helpful<br>Advice' );
+$slide3_f4_icon   = mp_opt( 'hero_slide3_f4_icon', '✓' );
+$slide3_f4_text   = mp_opt( 'hero_slide3_f4_text', 'Trusted<br>Service' );
+$slide3_btn1_text = mp_opt( 'hero_slide3_btn1_text', 'Visit Our Store' );
+$slide3_btn1_url  = mp_opt( 'hero_slide3_btn1_url', '#contact' );
+$slide3_btn2_text = mp_opt( 'hero_slide3_btn2_text', 'View Gallery' );
+$slide3_btn2_url  = mp_opt( 'hero_slide3_btn2_url', '#gallery' );
+$slide3_tagline   = mp_opt( 'hero_slide3_tagline', 'Discover More.<br>Stay Connected!' );
+$slide3_img       = mp_opt( 'hero_slide3_image', '' );
 if ( empty( $slide3_img ) ) {
-	$slide3_img = MP_THEME_URI . '/assets/images/shop-accessories-shelf.jpg';
+	$slide3_img = MP_THEME_URI . '/assets/images/hero-accessories.jpg';
 }
 
 // Flagship Spotlight Image
@@ -98,190 +108,112 @@ if ( empty( $guide3_img ) ) {
 
 <main>
 
-<!-- Hero Slider Section: Creative Business Mobile Shop Architecture -->
+<!-- Hero Slider Section: Ali Mobile Repair & Handset Showcase -->
 <section class="hero-slider-section" id="hero-slider">
-	<div class="hero-slider-container">
+	<div class="hero" id="heroSlider" aria-label="<?php esc_attr_e( 'Mobile repair hero slider', 'mobile-pasal' ); ?>">
+		<button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>">‹</button>
+		<button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>">›</button>
 
-		<!-- Slide 1: Flagships -->
-		<div class="hero-slide active" data-slide-index="0">
-			<div class="wrap hero-biz-grid">
-				<!-- Left Column: Department Offer & CTAs -->
-				<div class="hero-biz-info fade-up in-view">
-					<div class="hero-biz-dept-kicker">
-						<span class="kicker-num">01</span>
-						<span class="kicker-sep">/</span>
-						<span class="kicker-label"><?php echo esc_html( $slide1_kicker ); ?></span>
-					</div>
-
-					<h1 class="hero-biz-title"><?php echo esc_html( $slide1_title ); ?></h1>
-					<p class="hero-biz-description"><?php echo esc_html( $slide1_desc ); ?></p>
-
-					<!-- Retail Trust Perks -->
-					<div class="hero-biz-perks">
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide1_perk1 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide1_perk2 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide1_perk3 ); ?></span>
-					</div>
-
-					<div class="hero-biz-cta-group">
-						<a class="btn btn-primary btn-lg" href="<?php echo esc_url( $slide1_btn1_url ); ?>">
-							<span><?php echo esc_html( $slide1_btn1 ); ?></span>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-						</a>
-						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( $slide1_btn2_url ); ?>" target="_blank" rel="noopener">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-							<span><?php echo esc_html( $slide1_btn2 ); ?></span>
-						</a>
-					</div>
+		<!-- Slide 1 -->
+		<div class="slide active" data-slide="0">
+			<div class="copy">
+				<div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide1_trust ); ?></div>
+				<h1><?php echo wp_kses_post( $slide1_title ); ?></h1>
+				<p class="intro"><?php echo esc_html( $slide1_intro ); ?></p>
+				<div class="features">
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide1_f1_icon ); ?></span><?php echo wp_kses_post( $slide1_f1_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide1_f2_icon ); ?></span><?php echo wp_kses_post( $slide1_f2_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide1_f3_icon ); ?></span><?php echo wp_kses_post( $slide1_f3_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide1_f4_icon ); ?></span><?php echo wp_kses_post( $slide1_f4_text ); ?></div>
 				</div>
-
-				<!-- Center Column: Showcase Media Stage -->
-				<div class="hero-biz-stage">
-					<div class="hero-biz-media-frame">
-						<span class="biz-stock-tag"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> <?php echo esc_html( $slide1_stock_tag ); ?></span>
-						<img src="<?php echo esc_url( $slide1_img ); ?>" alt="<?php echo esc_attr( $slide1_title ); ?>" loading="eager">
-						<div class="hero-biz-media-badge">
-							<small><?php echo esc_html( $slide1_badge_sub ); ?></small>
-							<strong><?php echo esc_html( $slide1_badge_title ); ?></strong>
-						</div>
-					</div>
+				<div class="actions">
+					<a class="primary" href="<?php echo esc_url( $slide1_btn1_url ); ?>"><?php echo esc_html( $slide1_btn1_text ); ?> <span>&rarr;</span></a>
+					<a class="secondary" href="<?php echo esc_url( $slide1_btn2_url ); ?>"><span class="play">&#9654;</span> <?php echo esc_html( $slide1_btn2_text ); ?></a>
 				</div>
+				<div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+					<button class="dot active" aria-label="Slide 1"></button>
+					<button class="dot" aria-label="Slide 2"></button>
+					<button class="dot" aria-label="Slide 3"></button>
+				</div>
+			</div>
+			<div class="visual">
+				<img
+					class="product-image"
+					src="<?php echo esc_url( $slide1_img ); ?>"
+					onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85';"
+					alt="<?php echo esc_attr( strip_tags( $slide1_title ) ); ?>"
+				/>
+				<div class="tagline"><?php echo wp_kses_post( $slide1_tagline ); ?></div>
 			</div>
 		</div>
 
-		<!-- Slide 2: Apple Fix Lab -->
-		<div class="hero-slide" data-slide-index="1">
-			<div class="wrap hero-biz-grid">
-				<div class="hero-biz-info">
-					<div class="hero-biz-dept-kicker">
-						<span class="kicker-num">02</span>
-						<span class="kicker-sep">/</span>
-						<span class="kicker-label"><?php echo esc_html( $slide2_kicker ); ?></span>
-					</div>
-
-					<h2 class="hero-biz-title"><?php echo esc_html( $slide2_title ); ?></h2>
-					<p class="hero-biz-description"><?php echo esc_html( $slide2_desc ); ?></p>
-
-					<div class="hero-biz-perks">
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide2_perk1 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide2_perk2 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide2_perk3 ); ?></span>
-					</div>
-
-					<div class="hero-biz-cta-group">
-						<a class="btn btn-primary btn-lg" href="<?php echo esc_url( $slide2_btn1_url ); ?>">
-							<span><?php echo esc_html( $slide2_btn1 ); ?></span>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-						</a>
-						<a class="btn btn-whatsapp btn-lg" href="tel:+<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '9804530786' ) ) ); ?>">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-							<span><?php echo esc_html( $slide2_btn2 ); ?></span>
-						</a>
-					</div>
+		<!-- Slide 2 -->
+		<div class="slide" data-slide="1">
+			<div class="copy">
+				<div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide2_trust ); ?></div>
+				<h1><?php echo wp_kses_post( $slide2_title ); ?></h1>
+				<p class="intro"><?php echo esc_html( $slide2_intro ); ?></p>
+				<div class="features">
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide2_f1_icon ); ?></span><?php echo wp_kses_post( $slide2_f1_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide2_f2_icon ); ?></span><?php echo wp_kses_post( $slide2_f2_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide2_f3_icon ); ?></span><?php echo wp_kses_post( $slide2_f3_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide2_f4_icon ); ?></span><?php echo wp_kses_post( $slide2_f4_text ); ?></div>
 				</div>
-
-				<div class="hero-biz-stage">
-					<div class="hero-biz-media-frame">
-						<span class="biz-stock-tag"><i class="fa-solid fa-microscope" aria-hidden="true"></i> <?php echo esc_html( $slide2_stock_tag ); ?></span>
-						<img src="<?php echo esc_url( $slide2_img ); ?>" alt="<?php echo esc_attr( $slide2_title ); ?>" loading="lazy">
-						<div class="hero-biz-media-badge">
-							<small><?php echo esc_html( $slide2_badge_sub ); ?></small>
-							<strong><?php echo esc_html( $slide2_badge_title ); ?></strong>
-						</div>
-					</div>
+				<div class="actions">
+					<a class="primary" href="<?php echo esc_url( $slide2_btn1_url ); ?>"><?php echo esc_html( $slide2_btn1_text ); ?> <span>&rarr;</span></a>
+					<a class="secondary" href="<?php echo esc_url( $slide2_btn2_url ); ?>"><span class="play">&#9654;</span> <?php echo esc_html( $slide2_btn2_text ); ?></a>
 				</div>
+				<div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+					<button class="dot" aria-label="Slide 1"></button>
+					<button class="dot active" aria-label="Slide 2"></button>
+					<button class="dot" aria-label="Slide 3"></button>
+				</div>
+			</div>
+			<div class="visual">
+				<img
+					class="product-image"
+					src="<?php echo esc_url( $slide2_img ); ?>"
+					onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=1000&q=85';"
+					alt="<?php echo esc_attr( strip_tags( $slide2_title ) ); ?>"
+				/>
+				<div class="tagline"><?php echo wp_kses_post( $slide2_tagline ); ?></div>
 			</div>
 		</div>
 
-		<!-- Slide 3: Genuine Gear -->
-		<div class="hero-slide" data-slide-index="2">
-			<div class="wrap hero-biz-grid">
-				<div class="hero-biz-info">
-					<div class="hero-biz-dept-kicker">
-						<span class="kicker-num">03</span>
-						<span class="kicker-sep">/</span>
-						<span class="kicker-label"><?php echo esc_html( $slide3_kicker ); ?></span>
-					</div>
-
-					<h2 class="hero-biz-title"><?php echo esc_html( $slide3_title ); ?></h2>
-					<p class="hero-biz-description"><?php echo esc_html( $slide3_desc ); ?></p>
-
-					<div class="hero-biz-perks">
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide3_perk1 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide3_perk2 ); ?></span>
-						<span class="perk-item"><i class="fa-solid fa-check" aria-hidden="true"></i> <?php echo esc_html( $slide3_perk3 ); ?></span>
-					</div>
-
-					<div class="hero-biz-cta-group">
-						<a class="btn btn-primary btn-lg" href="<?php echo esc_url( $slide3_btn1_url ); ?>">
-							<span><?php echo esc_html( $slide3_btn1 ); ?></span>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-						</a>
-						<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( $slide3_btn2_url ); ?>" target="_blank" rel="noopener">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-							<span><?php echo esc_html( $slide3_btn2 ); ?></span>
-						</a>
-					</div>
+		<!-- Slide 3 -->
+		<div class="slide" data-slide="2">
+			<div class="copy">
+				<div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide3_trust ); ?></div>
+				<h1><?php echo wp_kses_post( $slide3_title ); ?></h1>
+				<p class="intro"><?php echo esc_html( $slide3_intro ); ?></p>
+				<div class="features">
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide3_f1_icon ); ?></span><?php echo wp_kses_post( $slide3_f1_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide3_f2_icon ); ?></span><?php echo wp_kses_post( $slide3_f2_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide3_f3_icon ); ?></span><?php echo wp_kses_post( $slide3_f3_text ); ?></div>
+					<div class="feature"><span class="feature-icon"><?php echo esc_html( $slide3_f4_icon ); ?></span><?php echo wp_kses_post( $slide3_f4_text ); ?></div>
 				</div>
-
-				<div class="hero-biz-stage">
-					<div class="hero-biz-media-frame">
-						<span class="biz-stock-tag"><i class="fa-solid fa-certificate" aria-hidden="true"></i> <?php echo esc_html( $slide3_stock_tag ); ?></span>
-						<img src="<?php echo esc_url( $slide3_img ); ?>" alt="<?php echo esc_attr( $slide3_title ); ?>" loading="lazy">
-						<div class="hero-biz-media-badge">
-							<small><?php echo esc_html( $slide3_badge_sub ); ?></small>
-							<strong><?php echo esc_html( $slide3_badge_title ); ?></strong>
-						</div>
-					</div>
+				<div class="actions">
+					<a class="primary" href="<?php echo esc_url( $slide3_btn1_url ); ?>"><?php echo esc_html( $slide3_btn1_text ); ?> <span>&rarr;</span></a>
+					<a class="secondary" href="<?php echo esc_url( $slide3_btn2_url ); ?>"><span class="play">&#9654;</span> <?php echo esc_html( $slide3_btn2_text ); ?></a>
 				</div>
+				<div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+					<button class="dot" aria-label="Slide 1"></button>
+					<button class="dot" aria-label="Slide 2"></button>
+					<button class="dot active" aria-label="Slide 3"></button>
+				</div>
+			</div>
+			<div class="visual">
+				<img
+					class="product-image"
+					src="<?php echo esc_url( $slide3_img ); ?>"
+					onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85';"
+					alt="<?php echo esc_attr( strip_tags( $slide3_title ) ); ?>"
+				/>
+				<div class="tagline"><?php echo wp_kses_post( $slide3_tagline ); ?></div>
 			</div>
 		</div>
 
-	</div>
-
-	<!-- Creative Business Department Switcher & Slide Controls -->
-	<div class="wrap hero-biz-dock-wrap">
-		<div class="hero-biz-dock" role="tablist" aria-label="<?php esc_attr_e( 'Retail Departments', 'mobile-pasal' ); ?>">
-			<button class="slider-dock-tab active" data-slide-to="0" role="tab" aria-selected="true" type="button">
-				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-				<span class="dock-tab-index">01</span>
-				<div class="dock-tab-text">
-					<strong><?php echo esc_html( mp_opt( 'hero_dock_tab1_title', 'Flagship Handsets' ) ); ?></strong>
-					<small><?php echo esc_html( mp_opt( 'hero_dock_tab1_sub', 'iPhone 16, S24 & Pixel 9' ) ); ?></small>
-				</div>
-			</button>
-			<button class="slider-dock-tab" data-slide-to="1" role="tab" aria-selected="false" type="button">
-				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-				<span class="dock-tab-index">02</span>
-				<div class="dock-tab-text">
-					<strong><?php echo esc_html( mp_opt( 'hero_dock_tab2_title', 'Apple Fix Lab' ) ); ?></strong>
-					<small><?php echo esc_html( mp_opt( 'hero_dock_tab2_sub', '30-Min On-Site Repairs' ) ); ?></small>
-				</div>
-			</button>
-			<button class="slider-dock-tab" data-slide-to="2" role="tab" aria-selected="false" type="button">
-				<div class="dock-tab-progress"><div class="dock-tab-progress-fill"></div></div>
-				<span class="dock-tab-index">03</span>
-				<div class="dock-tab-text">
-					<strong><?php echo esc_html( mp_opt( 'hero_dock_tab3_title', 'Original Gear' ) ); ?></strong>
-					<small><?php echo esc_html( mp_opt( 'hero_dock_tab3_sub', 'PD Chargers, Audio & Armor' ) ); ?></small>
-				</div>
-			</button>
-		</div>
-
-		<!-- Nav Arrows & Slide Counter -->
-		<div class="hero-biz-nav-tools">
-			<button id="slider-prev-btn" class="biz-nav-btn" aria-label="<?php esc_attr_e( 'Previous', 'mobile-pasal' ); ?>" type="button">
-				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
-			</button>
-			<div class="slider-counter">
-				<span class="current-slide">01</span>
-				<span class="counter-divider">/</span>
-				<span class="total-slides">03</span>
-			</div>
-			<button id="slider-next-btn" class="biz-nav-btn" aria-label="<?php esc_attr_e( 'Next', 'mobile-pasal' ); ?>" type="button">
-				<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
-			</button>
-		</div>
+		<div class="blue-swoosh"></div>
 	</div>
 </section>
 

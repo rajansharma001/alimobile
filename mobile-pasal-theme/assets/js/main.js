@@ -103,194 +103,110 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   /* ------------------------------------------------------------------------
-     4. Hero Slider (Creative Studio, Live Progress, 3D Tilt, Touch & Keys)
+     4. Hero Slider (Touch, Swipe, Keyboard, Auto-play & Dots)
      ------------------------------------------------------------------------ */
-  var heroSlides = document.querySelectorAll('.hero-slide');
-  var sliderDots = document.querySelectorAll('.slider-dot');
-  var sliderTabs = document.querySelectorAll('.slider-dock-tab');
-  var prevSlideBtn = document.getElementById('slider-prev-btn');
-  var nextSlideBtn = document.getElementById('slider-next-btn');
-  var heroContainer = document.querySelector('.hero-slider-section');
-  var counterCurrentEl = document.querySelector('.slider-counter .current-slide');
-  var progressBars = document.querySelectorAll('.dock-tab-progress-fill');
-  var currentSlideIdx = 0;
-  var slideTimer = null;
-  var progressRaf = null;
-  var progressStartTime = null;
-  var SLIDE_DURATION = 5500;
+  var heroSlider = document.getElementById('heroSlider');
+  if (heroSlider) {
+    var heroSlides = Array.from(heroSlider.querySelectorAll('.slide'));
+    var prevBtn = heroSlider.querySelector('.slider-arrow.prev');
+    var nextBtn = heroSlider.querySelector('.slider-arrow.next');
+    var currentSlide = 0;
+    var autoPlayTimer = null;
+    var SLIDE_DURATION = 6000;
 
-  function animateProgress(timestamp) {
-    if (!progressStartTime) progressStartTime = timestamp;
-    var elapsed = timestamp - progressStartTime;
-    var pct = Math.min(100, (elapsed / SLIDE_DURATION) * 100);
-    var activeTab = document.querySelector('.slider-dock-tab.active');
-    if (activeTab) {
-      var fill = activeTab.querySelector('.dock-tab-progress-fill');
-      if (fill) fill.style.width = pct + '%';
-    }
-    if (pct < 100 && slideTimer) {
-      progressRaf = requestAnimationFrame(animateProgress);
-    }
-  }
-
-  function resetProgress() {
-    if (progressRaf) {
-      cancelAnimationFrame(progressRaf);
-      progressRaf = null;
-    }
-    progressStartTime = null;
-    progressBars.forEach(function (bar) {
-      bar.style.width = '0%';
-    });
-  }
-
-  function startProgress() {
-    resetProgress();
-    progressRaf = requestAnimationFrame(animateProgress);
-  }
-
-  function showSlide(idx) {
-    if (!heroSlides.length) return;
-    if (idx >= heroSlides.length) idx = 0;
-    if (idx < 0) idx = heroSlides.length - 1;
-
-    heroSlides.forEach(function (s, i) {
-      s.classList.toggle('active', i === idx);
-    });
-
-    sliderDots.forEach(function (dot, i) {
-      dot.classList.toggle('active', i === idx);
-      dot.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-    });
-
-    sliderTabs.forEach(function (tab, i) {
-      tab.classList.toggle('active', i === idx);
-      tab.setAttribute('aria-selected', i === idx ? 'true' : 'false');
-    });
-
-    if (counterCurrentEl) {
-      counterCurrentEl.textContent = (idx + 1 < 10 ? '0' : '') + (idx + 1);
+    function showSlide(index) {
+      if (!heroSlides.length) return;
+      currentSlide = (index + heroSlides.length) % heroSlides.length;
+      heroSlides.forEach(function (slide, i) {
+        slide.classList.toggle('active', i === currentSlide);
+        var dots = slide.querySelectorAll('.dot');
+        dots.forEach(function (dot, dotIndex) {
+          dot.classList.toggle('active', dotIndex === currentSlide);
+        });
+      });
     }
 
-    currentSlideIdx = idx;
-    startProgress();
-  }
-
-  function nextSlide() {
-    showSlide(currentSlideIdx + 1);
-  }
-
-  function prevSlide() {
-    showSlide(currentSlideIdx - 1);
-  }
-
-  function startSlideShow() {
-    stopSlideShow();
-    slideTimer = setInterval(nextSlide, SLIDE_DURATION);
-    startProgress();
-  }
-
-  function stopSlideShow() {
-    if (slideTimer) {
-      clearInterval(slideTimer);
-      slideTimer = null;
+    function startAutoPlay() {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(function () {
+        showSlide(currentSlide + 1);
+      }, SLIDE_DURATION);
     }
-    if (progressRaf) {
-      cancelAnimationFrame(progressRaf);
-      progressRaf = null;
-    }
-  }
 
-  if (nextSlideBtn) {
-    nextSlideBtn.addEventListener('click', function () {
-      nextSlide();
-      startSlideShow();
-    });
-  }
-
-  if (prevSlideBtn) {
-    prevSlideBtn.addEventListener('click', function () {
-      prevSlide();
-      startSlideShow();
-    });
-  }
-
-  sliderDots.forEach(function (dot) {
-    dot.addEventListener('click', function () {
-      var slideNum = parseInt(this.getAttribute('data-slide-to'), 10);
-      if (!isNaN(slideNum)) {
-        showSlide(slideNum);
-        startSlideShow();
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+        autoPlayTimer = null;
       }
-    });
-  });
+    }
 
-  sliderTabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      var slideNum = parseInt(this.getAttribute('data-slide-to'), 10);
-      if (!isNaN(slideNum)) {
-        showSlide(slideNum);
-        startSlideShow();
-      }
-    });
-  });
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function () {
+        showSlide(currentSlide - 1);
+        startAutoPlay();
+      });
+    }
 
-  // 3D Perspective Mouse Tilt Stage
-  var mediaStages = document.querySelectorAll('.hero-media-stage');
-  mediaStages.forEach(function (stage) {
-    var viewport = stage.querySelector('.hero-media-viewport');
-    if (!viewport || !window.matchMedia('(pointer: fine)').matches) return;
-    stage.addEventListener('mousemove', function (e) {
-      var rect = stage.getBoundingClientRect();
-      var nx = ((e.clientX - rect.left) / rect.width) - 0.5;
-      var ny = ((e.clientY - rect.top) / rect.height) - 0.5;
-      var rotX = -ny * 10;
-      var rotY = nx * 10;
-      viewport.style.transform = 'perspective(900px) rotateX(' + rotX.toFixed(2) + 'deg) rotateY(' + rotY.toFixed(2) + 'deg) scale3d(1.02, 1.02, 1.02)';
-    });
-    stage.addEventListener('mouseleave', function () {
-      viewport.style.transform = '';
-    });
-  });
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function () {
+        showSlide(currentSlide + 1);
+        startAutoPlay();
+      });
+    }
 
-  if (heroContainer) {
-    heroContainer.addEventListener('mouseenter', stopSlideShow);
-    heroContainer.addEventListener('mouseleave', startSlideShow);
+    var allDots = heroSlider.querySelectorAll('.dot');
+    allDots.forEach(function (dot) {
+      dot.addEventListener('click', function () {
+        var label = dot.getAttribute('aria-label') || '';
+        var num = parseInt(label.replace('Slide ', ''), 10);
+        if (!isNaN(num)) {
+          showSlide(num - 1);
+          startAutoPlay();
+        }
+      });
+    });
 
-    // Keyboard Arrow navigation
-    heroContainer.addEventListener('keydown', function (e) {
+    heroSlider.addEventListener('mouseenter', stopAutoPlay);
+    heroSlider.addEventListener('mouseleave', startAutoPlay);
+
+    document.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft') {
-        prevSlide();
-        startSlideShow();
+        showSlide(currentSlide - 1);
+        startAutoPlay();
       } else if (e.key === 'ArrowRight') {
-        nextSlide();
-        startSlideShow();
+        showSlide(currentSlide + 1);
+        startAutoPlay();
       }
     });
 
-    // Touch swipe support for mobile
+    // Touch Swipe Support for Mobile & Tablet
     var touchStartX = 0;
     var touchEndX = 0;
 
-    heroContainer.addEventListener('touchstart', function (e) {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    heroContainer.addEventListener('touchend', function (e) {
-      touchEndX = e.changedTouches[0].screenX;
-      var diffX = touchEndX - touchStartX;
-      if (Math.abs(diffX) > 40) {
-        if (diffX < 0) {
-          nextSlide();
-        } else {
-          prevSlide();
-        }
-        startSlideShow();
+    heroSlider.addEventListener('touchstart', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchStartX = e.changedTouches[0].screenX;
       }
     }, { passive: true });
+
+    heroSlider.addEventListener('touchend', function (e) {
+      if (e.changedTouches && e.changedTouches[0]) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 45) {
+          if (diff > 0) {
+            showSlide(currentSlide + 1);
+          } else {
+            showSlide(currentSlide - 1);
+          }
+          startAutoPlay();
+        }
+      }
+    }, { passive: true });
+
+    startAutoPlay();
   }
 
-  startSlideShow();
 
   /* ------------------------------------------------------------------------
      5. Interactive Repair Counter Station (Live Diagnostic Docket)

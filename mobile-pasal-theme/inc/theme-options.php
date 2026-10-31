@@ -66,67 +66,61 @@ function mobile_pasal_options_defaults() {
 		'header_search_enabled'        => 1,
 
 		// ── 3. Home Hero Slider: Slide 1 ──
-		'hero_slide1_kicker'           => 'Authorized Smartphones & Flagships',
-		'hero_slide1_badge'            => '100% Genuine Sealed Stock',
-		'hero_slide1_title'            => 'Official NTA Smartphones & Genuine Gear.',
-		'hero_slide1_title_highlight'  => 'Genuine Gear.',
-		'hero_slide1_subtitle'         => 'Discover Gulariya\'s largest verified inventory of flagship handsets: Apple iPhone 16 Series, Samsung Galaxy S24 Ultra, Google Pixel 9, OnePlus 12, and Xiaomi 14. 100% genuine IMEI bill, warranty support, and free data setup.',
-		'hero_slide1_desc'             => 'Discover Gulariya\'s largest verified inventory of flagship handsets: Apple iPhone 16 Series, Samsung Galaxy S24 Ultra, Google Pixel 9, OnePlus 12, and Xiaomi 14. 100% genuine IMEI bill, warranty support, and free data setup.',
-		'hero_slide1_perk1'            => '100% Sealed Box',
-		'hero_slide1_perk2'            => 'VAT Bill & 1-Yr Warranty',
-		'hero_slide1_perk3'            => 'Free Data Migration',
-		'hero_slide1_btn1_text'        => 'Explore Handsets',
-		'hero_slide1_btn1_url'         => '#catalog',
-		'hero_slide1_btn2_text'        => 'Ask Today\'s Price',
-		'hero_slide1_btn2_url'         => 'https://wa.me/9779804530786?text=Namaste%20Ali%20Mobile%2C%20iPhone%2016%20ra%20Galaxy%20S24%20ko%20aaja%20ko%20counter%20price%20dinus',
-		'hero_slide1_stock_tag'        => 'In Stock in Gulariya',
-		'hero_slide1_badge_sub'        => 'Official Warranty',
-		'hero_slide1_badge_title'      => 'Authorized Nepal Stock',
-		'hero_slide1_telemetry_model'  => 'iPhone 16 Series',
-		'hero_slide1_telemetry_status' => 'In Stock Now',
-		'hero_slide1_image'            => $uri . '/assets/images/hero-iphone-hand.jpg',
+		'hero_slide1_trust'            => 'Trusted by 10,000+ Customers',
+		'hero_slide1_title'            => 'Expert <span class="accent">Mobile Repair</span> & Service',
+		'hero_slide1_intro'            => 'Your One-Stop Solution for Mobile Repair, Accessories and More.',
+		'hero_slide1_f1_icon'          => '◷',
+		'hero_slide1_f1_text'          => 'Fast<br>Service',
+		'hero_slide1_f2_icon'          => '⬟',
+		'hero_slide1_f2_text'          => 'Genuine<br>Parts',
+		'hero_slide1_f3_icon'          => '✹',
+		'hero_slide1_f3_text'          => 'Skilled<br>Technicians',
+		'hero_slide1_f4_icon'          => '♧',
+		'hero_slide1_f4_text'          => 'Affordable<br>Price',
+		'hero_slide1_btn1_text'        => 'Book a Repair',
+		'hero_slide1_btn1_url'         => '#contact',
+		'hero_slide1_btn2_text'        => 'Watch Video',
+		'hero_slide1_btn2_url'         => '#services',
+		'hero_slide1_tagline'          => 'Fix It.<br>Stay Connected!',
+		'hero_slide1_image'            => $uri . '/assets/images/hero-repair-lab.jpg',
 
 		// ── 3. Home Hero Slider: Slide 2 ──
-		'hero_slide2_kicker'           => 'On-Site Diagnostic & Repair Lab',
-		'hero_slide2_badge'            => 'Certified Apple Fix Lab',
-		'hero_slide2_title'            => 'Gulariya\'s Premier Apple Fix Laboratory.',
-		'hero_slide2_title_highlight'  => 'Apple Fix & Lab.',
-		'hero_slide2_subtitle'         => 'Screen broken, battery drained, or phone dropped in water? We repair right in front of you at our on-site workstation. Original-grade parts, TrueTone display calibration, and honest diagnostics with zero hidden costs.',
-		'hero_slide2_desc'             => 'Screen broken, battery drained, or phone dropped in water? We repair right in front of you at our on-site workstation. Original-grade parts, TrueTone display calibration, and honest diagnostics with zero hidden costs.',
-		'hero_slide2_perk1'            => '30–45 Min Screen Fix',
-		'hero_slide2_perk2'            => 'Original Service-Pack Parts',
-		'hero_slide2_perk3'            => 'Up to 90 Days Testing Warranty',
-		'hero_slide2_btn1_text'        => 'View Repair Services',
-		'hero_slide2_btn1_url'         => '#services',
-		'hero_slide2_btn2_text'        => 'Call Technician',
-		'hero_slide2_btn2_url'         => 'https://wa.me/9779804530786?text=Namaste%20Ali%20Mobile%2C%20malai%20iPhone%20repair%20barema%20bujhna%20chahanchhu',
-		'hero_slide2_stock_tag'        => 'ESD Bench Active',
-		'hero_slide2_badge_sub'        => 'Diagnosis Time',
-		'hero_slide2_badge_title'      => 'Instant Front Counter Check',
-		'hero_slide2_telemetry_time'   => '30–45 Mins Average',
-		'hero_slide2_telemetry_station'=> 'Counter Diagnostic',
-		'hero_slide2_image'            => $uri . '/assets/images/apple-fix-bench.jpg',
+		'hero_slide2_trust'            => 'Careful Repairs. Quality Parts.',
+		'hero_slide2_title'            => 'Cracked Screen? <span class="accent">We\'ve Got You.</span>',
+		'hero_slide2_intro'            => 'From screen replacement to battery problems, get your phone back in shape with reliable service.',
+		'hero_slide2_f1_icon'          => '▣',
+		'hero_slide2_f1_text'          => 'Screen<br>Replacement',
+		'hero_slide2_f2_icon'          => 'ϟ',
+		'hero_slide2_f2_text'          => 'Battery<br>Change',
+		'hero_slide2_f3_icon'          => '⌁',
+		'hero_slide2_f3_text'          => 'Water Damage<br>Check',
+		'hero_slide2_f4_icon'          => '⚙',
+		'hero_slide2_f4_text'          => 'Software<br>Support',
+		'hero_slide2_btn1_text'        => 'Get Your Phone Fixed',
+		'hero_slide2_btn1_url'         => '#contact',
+		'hero_slide2_btn2_text'        => 'Explore Services',
+		'hero_slide2_btn2_url'         => '#services',
+		'hero_slide2_tagline'          => 'Repair Right.<br>Relax More.',
+		'hero_slide2_image'            => $uri . '/assets/images/iphone-repair-hands.jpg',
 
 		// ── 3. Home Hero Slider: Slide 3 ──
-		'hero_slide3_kicker'           => 'Original Accessories & Power Systems',
-		'hero_slide3_badge'            => '100% Genuine Accessories',
-		'hero_slide3_title'            => 'Original Audio, PD Chargers & Gear.',
-		'hero_slide3_title_highlight'  => 'Power & Protection.',
-		'hero_slide3_subtitle'         => 'Power and protect your device with authentic Apple AirPods, Galaxy Buds, 20W/30W/65W PD Fast Chargers, 9H tempered glass, MagSafe protective armor, and instant eSewa merchant top-up services.',
-		'hero_slide3_desc'             => 'Power and protect your device with authentic Apple AirPods, Galaxy Buds, 20W/30W/65W PD Fast Chargers, 9H tempered glass, MagSafe protective armor, and instant eSewa merchant top-up services.',
-		'hero_slide3_perk1'            => 'Apple 20W/30W & Samsung 45W GaN',
-		'hero_slide3_perk2'            => 'Original AirPods & Galaxy Buds',
-		'hero_slide3_perk3'            => 'Free Counter Glass Installation',
-		'hero_slide3_btn1_text'        => 'Browse Accessories',
-		'hero_slide3_btn1_url'         => '#categories',
-		'hero_slide3_btn2_text'        => 'Order on WhatsApp',
-		'hero_slide3_btn2_url'         => 'https://wa.me/9779804530786?text=Namaste%20Ali%20Mobile%2C%20accessories%20stock%20barema%20bujhna%20chahanchhu',
-		'hero_slide3_stock_tag'        => '100% Genuine Sealed',
-		'hero_slide3_badge_sub'        => 'Brand Warranty',
-		'hero_slide3_badge_title'      => 'Official PD Fast Charging',
-		'hero_slide3_telemetry_brands' => 'Apple • Samsung • Anker',
-		'hero_slide3_telemetry_pay'    => 'Cash & Digital Pay',
-		'hero_slide3_image'            => $uri . '/assets/images/shop-accessories-shelf.jpg',
+		'hero_slide3_trust'            => 'Your Local Mobile Store',
+		'hero_slide3_title'            => 'Find Your <span class="accent">Next Phone.</span>',
+		'hero_slide3_intro'            => 'Explore popular smartphones, useful accessories and friendly advice — all in one place.',
+		'hero_slide3_f1_icon'          => '▣',
+		'hero_slide3_f1_text'          => 'Popular<br>Brands',
+		'hero_slide3_f2_icon'          => '◇',
+		'hero_slide3_f2_text'          => 'Accessories',
+		'hero_slide3_f3_icon'          => '♡',
+		'hero_slide3_f3_text'          => 'Helpful<br>Advice',
+		'hero_slide3_f4_icon'          => '✓',
+		'hero_slide3_f4_text'          => 'Trusted<br>Service',
+		'hero_slide3_btn1_text'        => 'Visit Our Store',
+		'hero_slide3_btn1_url'         => '#contact',
+		'hero_slide3_btn2_text'        => 'View Gallery',
+		'hero_slide3_btn2_url'         => '#gallery',
+		'hero_slide3_tagline'          => 'Discover More.<br>Stay Connected!',
+		'hero_slide3_image'            => $uri . '/assets/images/hero-accessories.jpg',
 
 		// ── Hero Dock Tabs (Retail Department Switcher) ──
 		'hero_dock_tab1_title'         => 'Flagship Handsets',
@@ -1401,14 +1395,14 @@ function mobile_pasal_options_render_dashboard() {
 						</div>
 
 						<!-- Slide 1 Content -->
-						<div class="bopt-subnav-content is-active" id="subtab-hero-1">
+						<div class="bopt-subnav-content active" id="subtab-hero-1">
 							<div class="bopt-card">
 								<div class="bopt-card-header">
 									<div class="bopt-card-header-left">
 										<div class="bopt-card-header-icon"><i class="fa-solid fa-mobile-screen"></i></div>
 										<div>
-											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 1: Flagship Handset Showcase', 'mobile-pasal' ); ?></h3>
-											<p class="bopt-card-desc"><?php esc_html_e( 'Highlights official NTA smartphones (iPhone 16, Galaxy S24, Pixel 9, OnePlus).', 'mobile-pasal' ); ?></p>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 1: Expert Mobile Repair & Service', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Headline, trust badge, 4 feature cards, action links, image & tagline.', 'mobile-pasal' ); ?></p>
 										</div>
 									</div>
 									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
@@ -1416,21 +1410,23 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
-										mp_render_field_text( 'hero_slide1_kicker', __( 'Slide 1 Kicker Label', 'mobile-pasal' ), __( 'Default: Authorized Smartphones & Flagships' ) );
-										mp_render_field_text( 'hero_slide1_badge', __( 'Slide 1 Top Tag Pill', 'mobile-pasal' ), __( 'Default: 100% Genuine Sealed Stock' ) );
-										mp_render_field_text( 'hero_slide1_title', __( 'Slide 1 Main Headline', 'mobile-pasal' ), __( 'Default: Experience Next-Gen Flagships & Precision Care.' ) );
-										mp_render_field_textarea( 'hero_slide1_desc', __( 'Slide 1 Subtitle / Description', 'mobile-pasal' ), __( 'Explains genuine IMEI bill, warranty support, and free data transfer.' ), 3 );
-										mp_render_field_text( 'hero_slide1_perk1', __( 'Retail Perk 1', 'mobile-pasal' ), __( 'Default: 100% Sealed Box' ) );
-										mp_render_field_text( 'hero_slide1_perk2', __( 'Retail Perk 2', 'mobile-pasal' ), __( 'Default: VAT Bill & 1-Yr Warranty' ) );
-										mp_render_field_text( 'hero_slide1_perk3', __( 'Retail Perk 3', 'mobile-pasal' ), __( 'Default: Free Data Migration' ) );
-										mp_render_field_text( 'hero_slide1_btn1_text', __( 'Button 1 Text', 'mobile-pasal' ), __( 'Default: Explore Handsets' ) );
-										mp_render_field_text( 'hero_slide1_btn1_url', __( 'Button 1 URL', 'mobile-pasal' ), __( 'Default: #catalog' ) );
-										mp_render_field_text( 'hero_slide1_btn2_text', __( 'Button 2 Text', 'mobile-pasal' ), __( 'Default: Ask Today\'s Price' ) );
-										mp_render_field_text( 'hero_slide1_btn2_url', __( 'Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp prefilled inquiry URL' ) );
-										mp_render_field_text( 'hero_slide1_stock_tag', __( 'Media Frame Badge Tag', 'mobile-pasal' ), __( 'Default: In Stock in Gulariya' ) );
-										mp_render_field_text( 'hero_slide1_badge_sub', __( 'Media Frame Badge Subtitle', 'mobile-pasal' ), __( 'Default: Official Warranty' ) );
-										mp_render_field_text( 'hero_slide1_badge_title', __( 'Media Frame Badge Title', 'mobile-pasal' ), __( 'Default: Authorized Nepal Stock' ) );
-										mp_render_field_image( 'hero_slide1_image', __( 'Slide 1 Showcase Image', 'mobile-pasal' ), __( 'Transparent PNG or JPG of flagship handset in hand.' ) );
+										mp_render_field_text( 'hero_slide1_trust', __( 'Slide 1 Trust Tag', 'mobile-pasal' ), __( 'Default: Trusted by 10,000+ Customers' ) );
+										mp_render_field_text( 'hero_slide1_title', __( 'Slide 1 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Expert <span class="accent">Mobile Repair</span> & Service' ) );
+										mp_render_field_textarea( 'hero_slide1_intro', __( 'Slide 1 Intro Subtitle', 'mobile-pasal' ), __( 'Default: Your One-Stop Solution for Mobile Repair, Accessories and More.' ), 2 );
+										mp_render_field_text( 'hero_slide1_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ◷' ) );
+										mp_render_field_text( 'hero_slide1_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Fast<br>Service' ) );
+										mp_render_field_text( 'hero_slide1_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ⬟' ) );
+										mp_render_field_text( 'hero_slide1_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Genuine<br>Parts' ) );
+										mp_render_field_text( 'hero_slide1_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ✹' ) );
+										mp_render_field_text( 'hero_slide1_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Skilled<br>Technicians' ) );
+										mp_render_field_text( 'hero_slide1_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ♧' ) );
+										mp_render_field_text( 'hero_slide1_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Affordable<br>Price' ) );
+										mp_render_field_text( 'hero_slide1_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Book a Repair' ) );
+										mp_render_field_text( 'hero_slide1_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
+										mp_render_field_text( 'hero_slide1_btn2_text', __( 'Secondary Button Text', 'mobile-pasal' ), __( 'Default: Watch Video' ) );
+										mp_render_field_text( 'hero_slide1_btn2_url', __( 'Secondary Button URL', 'mobile-pasal' ), __( 'Default: #services' ) );
+										mp_render_field_text( 'hero_slide1_tagline', __( 'Visual Floating Tagline', 'mobile-pasal' ), __( 'Default: Fix It.<br>Stay Connected!' ) );
+										mp_render_field_image( 'hero_slide1_image', __( 'Slide 1 Showcase Photo', 'mobile-pasal' ), __( 'High-resolution smartphone or lab image.' ) );
 										?>
 									</div>
 								</div>
@@ -1444,8 +1440,8 @@ function mobile_pasal_options_render_dashboard() {
 									<div class="bopt-card-header-left">
 										<div class="bopt-card-header-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
 										<div>
-											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 2: Certified Apple Fix Lab', 'mobile-pasal' ); ?></h3>
-											<p class="bopt-card-desc"><?php esc_html_e( 'Showcases microscope repair bench, true-tone calibrations, and screen swaps.', 'mobile-pasal' ); ?></p>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 2: Screen & Battery Care', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Cracked screen, battery swaps, water damage, diagnostic services.', 'mobile-pasal' ); ?></p>
 										</div>
 									</div>
 									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
@@ -1453,21 +1449,23 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
-										mp_render_field_text( 'hero_slide2_kicker', __( 'Slide 2 Kicker Label', 'mobile-pasal' ), __( 'Default: On-Site Diagnostic & Repair Lab' ) );
-										mp_render_field_text( 'hero_slide2_badge', __( 'Slide 2 Top Tag Pill', 'mobile-pasal' ), __( 'Default: Certified Apple Fix Lab' ) );
-										mp_render_field_text( 'hero_slide2_title', __( 'Slide 2 Main Headline', 'mobile-pasal' ), __( 'Default: Gulariya\'s Premier Apple Fix Laboratory.' ) );
-										mp_render_field_textarea( 'hero_slide2_desc', __( 'Slide 2 Subtitle / Description', 'mobile-pasal' ), __( 'Explains cleanroom microscope micro-soldering, true-tone OLED swaps, and battery health.' ), 3 );
-										mp_render_field_text( 'hero_slide2_perk1', __( 'Lab Perk 1', 'mobile-pasal' ), __( 'Default: 30–45 Min Screen Fix' ) );
-										mp_render_field_text( 'hero_slide2_perk2', __( 'Lab Perk 2', 'mobile-pasal' ), __( 'Default: Original Service-Pack Parts' ) );
-										mp_render_field_text( 'hero_slide2_perk3', __( 'Lab Perk 3', 'mobile-pasal' ), __( 'Default: Up to 90 Days Testing Warranty' ) );
-										mp_render_field_text( 'hero_slide2_btn1_text', __( 'Button 1 Text', 'mobile-pasal' ), __( 'Default: View Repair Services' ) );
-										mp_render_field_text( 'hero_slide2_btn1_url', __( 'Button 1 URL', 'mobile-pasal' ), __( 'Default: #services' ) );
-										mp_render_field_text( 'hero_slide2_btn2_text', __( 'Button 2 Text', 'mobile-pasal' ), __( 'Default: Call Technician' ) );
-										mp_render_field_text( 'hero_slide2_btn2_url', __( 'Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp consultation URL' ) );
-										mp_render_field_text( 'hero_slide2_stock_tag', __( 'Media Frame Badge Tag', 'mobile-pasal' ), __( 'Default: ESD Bench Active' ) );
-										mp_render_field_text( 'hero_slide2_badge_sub', __( 'Media Frame Badge Subtitle', 'mobile-pasal' ), __( 'Default: Diagnosis Time' ) );
-										mp_render_field_text( 'hero_slide2_badge_title', __( 'Media Frame Badge Title', 'mobile-pasal' ), __( 'Default: Instant Front Counter Check' ) );
-										mp_render_field_image( 'hero_slide2_image', __( 'Slide 2 Bench Image', 'mobile-pasal' ), __( 'High quality photo of technician bench or microscope.' ) );
+										mp_render_field_text( 'hero_slide2_trust', __( 'Slide 2 Trust Tag', 'mobile-pasal' ), __( 'Default: Careful Repairs. Quality Parts.' ) );
+										mp_render_field_text( 'hero_slide2_title', __( 'Slide 2 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Cracked Screen? <span class="accent">We\'ve Got You.</span>' ) );
+										mp_render_field_textarea( 'hero_slide2_intro', __( 'Slide 2 Intro Subtitle', 'mobile-pasal' ), __( 'Default: From screen replacement to battery problems, get your phone back in shape with reliable service.' ), 2 );
+										mp_render_field_text( 'hero_slide2_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ▣' ) );
+										mp_render_field_text( 'hero_slide2_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Screen<br>Replacement' ) );
+										mp_render_field_text( 'hero_slide2_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ϟ' ) );
+										mp_render_field_text( 'hero_slide2_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Battery<br>Change' ) );
+										mp_render_field_text( 'hero_slide2_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ⌁' ) );
+										mp_render_field_text( 'hero_slide2_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Water Damage<br>Check' ) );
+										mp_render_field_text( 'hero_slide2_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ⚙' ) );
+										mp_render_field_text( 'hero_slide2_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Software<br>Support' ) );
+										mp_render_field_text( 'hero_slide2_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Get Your Phone Fixed' ) );
+										mp_render_field_text( 'hero_slide2_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
+										mp_render_field_text( 'hero_slide2_btn2_text', __( 'Secondary Button Text', 'mobile-pasal' ), __( 'Default: Explore Services' ) );
+										mp_render_field_text( 'hero_slide2_btn2_url', __( 'Secondary Button URL', 'mobile-pasal' ), __( 'Default: #services' ) );
+										mp_render_field_text( 'hero_slide2_tagline', __( 'Visual Floating Tagline', 'mobile-pasal' ), __( 'Default: Repair Right.<br>Relax More.' ) );
+										mp_render_field_image( 'hero_slide2_image', __( 'Slide 2 Showcase Photo', 'mobile-pasal' ), __( 'Photo of phone repair in progress.' ) );
 										?>
 									</div>
 								</div>
@@ -1479,10 +1477,10 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card">
 								<div class="bopt-card-header">
 									<div class="bopt-card-header-left">
-										<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-halved"></i></div>
+										<div class="bopt-card-header-icon"><i class="fa-solid fa-shop"></i></div>
 										<div>
-											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 3: Original Audio, Power & Protection', 'mobile-pasal' ); ?></h3>
-											<p class="bopt-card-desc"><?php esc_html_e( 'Showcases AirPods Pro, MagSafe 20W/65W GaN adapters, and drop cases.', 'mobile-pasal' ); ?></p>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'Hero Slide 3: Handset Sales & Store Showcase', 'mobile-pasal' ); ?></h3>
+											<p class="bopt-card-desc"><?php esc_html_e( 'Smartphone retail, genuine accessories, friendly counter advice.', 'mobile-pasal' ); ?></p>
 										</div>
 									</div>
 									<button type="button" class="bopt-card-toggle-btn" aria-label="Toggle section"><i class="fa-solid fa-chevron-up"></i></button>
@@ -1490,21 +1488,23 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-card-body">
 									<div class="bopt-field-grid">
 										<?php
-										mp_render_field_text( 'hero_slide3_kicker', __( 'Slide 3 Kicker Label', 'mobile-pasal' ), __( 'Default: Original Accessories & Power Systems' ) );
-										mp_render_field_text( 'hero_slide3_badge', __( 'Slide 3 Top Tag Pill', 'mobile-pasal' ), __( 'Default: 100% Genuine Accessories' ) );
-										mp_render_field_text( 'hero_slide3_title', __( 'Slide 3 Main Headline', 'mobile-pasal' ), __( 'Default: Original Audio, PD Chargers & Gear.' ) );
-										mp_render_field_textarea( 'hero_slide3_desc', __( 'Slide 3 Subtitle / Description', 'mobile-pasal' ), __( 'Explains MagSafe chargers, 65W GaN dual-port adapters, and AirPods Pro 2.' ), 3 );
-										mp_render_field_text( 'hero_slide3_perk1', __( 'Accessory Perk 1', 'mobile-pasal' ), __( 'Default: Apple 20W/30W & Samsung 45W GaN' ) );
-										mp_render_field_text( 'hero_slide3_perk2', __( 'Accessory Perk 2', 'mobile-pasal' ), __( 'Default: Original AirPods & Galaxy Buds' ) );
-										mp_render_field_text( 'hero_slide3_perk3', __( 'Accessory Perk 3', 'mobile-pasal' ), __( 'Default: Free Counter Glass Installation' ) );
-										mp_render_field_text( 'hero_slide3_btn1_text', __( 'Button 1 Text', 'mobile-pasal' ), __( 'Default: Browse Accessories' ) );
-										mp_render_field_text( 'hero_slide3_btn1_url', __( 'Button 1 URL', 'mobile-pasal' ), __( 'Default: #categories' ) );
-										mp_render_field_text( 'hero_slide3_btn2_text', __( 'Button 2 Text', 'mobile-pasal' ), __( 'Default: Order on WhatsApp' ) );
-										mp_render_field_text( 'hero_slide3_btn2_url', __( 'Button 2 WhatsApp Link', 'mobile-pasal' ), __( 'Direct WhatsApp inquiry URL' ) );
-										mp_render_field_text( 'hero_slide3_stock_tag', __( 'Media Frame Badge Tag', 'mobile-pasal' ), __( 'Default: 100% Genuine Sealed' ) );
-										mp_render_field_text( 'hero_slide3_badge_sub', __( 'Media Frame Badge Subtitle', 'mobile-pasal' ), __( 'Default: Brand Warranty' ) );
-										mp_render_field_text( 'hero_slide3_badge_title', __( 'Media Frame Badge Title', 'mobile-pasal' ), __( 'Default: Official PD Fast Charging' ) );
-										mp_render_field_image( 'hero_slide3_image', __( 'Slide 3 Showcase Image', 'mobile-pasal' ), __( 'Photo of genuine accessories shelf or charging gear.' ) );
+										mp_render_field_text( 'hero_slide3_trust', __( 'Slide 3 Trust Tag', 'mobile-pasal' ), __( 'Default: Your Local Mobile Store' ) );
+										mp_render_field_text( 'hero_slide3_title', __( 'Slide 3 Main Headline (HTML allowed)', 'mobile-pasal' ), __( 'Default: Find Your <span class="accent">Next Phone.</span>' ) );
+										mp_render_field_textarea( 'hero_slide3_intro', __( 'Slide 3 Intro Subtitle', 'mobile-pasal' ), __( 'Default: Explore popular smartphones, useful accessories and friendly advice — all in one place.' ), 2 );
+										mp_render_field_text( 'hero_slide3_f1_icon', __( 'Feature 1 Icon', 'mobile-pasal' ), __( 'Default: ▣' ) );
+										mp_render_field_text( 'hero_slide3_f1_text', __( 'Feature 1 Title', 'mobile-pasal' ), __( 'Default: Popular<br>Brands' ) );
+										mp_render_field_text( 'hero_slide3_f2_icon', __( 'Feature 2 Icon', 'mobile-pasal' ), __( 'Default: ◇' ) );
+										mp_render_field_text( 'hero_slide3_f2_text', __( 'Feature 2 Title', 'mobile-pasal' ), __( 'Default: Accessories' ) );
+										mp_render_field_text( 'hero_slide3_f3_icon', __( 'Feature 3 Icon', 'mobile-pasal' ), __( 'Default: ♡' ) );
+										mp_render_field_text( 'hero_slide3_f3_text', __( 'Feature 3 Title', 'mobile-pasal' ), __( 'Default: Helpful<br>Advice' ) );
+										mp_render_field_text( 'hero_slide3_f4_icon', __( 'Feature 4 Icon', 'mobile-pasal' ), __( 'Default: ✓' ) );
+										mp_render_field_text( 'hero_slide3_f4_text', __( 'Feature 4 Title', 'mobile-pasal' ), __( 'Default: Trusted<br>Service' ) );
+										mp_render_field_text( 'hero_slide3_btn1_text', __( 'Primary Button Text', 'mobile-pasal' ), __( 'Default: Visit Our Store' ) );
+										mp_render_field_text( 'hero_slide3_btn1_url', __( 'Primary Button URL', 'mobile-pasal' ), __( 'Default: #contact' ) );
+										mp_render_field_text( 'hero_slide3_btn2_text', __( 'Secondary Button Text', 'mobile-pasal' ), __( 'Default: View Gallery' ) );
+										mp_render_field_text( 'hero_slide3_btn2_url', __( 'Secondary Button URL', 'mobile-pasal' ), __( 'Default: #gallery' ) );
+										mp_render_field_text( 'hero_slide3_tagline', __( 'Visual Floating Tagline', 'mobile-pasal' ), __( 'Default: Discover More.<br>Stay Connected!' ) );
+										mp_render_field_image( 'hero_slide3_image', __( 'Slide 3 Showcase Photo', 'mobile-pasal' ), __( 'Photo of new phones or accessories.' ) );
 										?>
 									</div>
 								</div>

@@ -71,7 +71,7 @@ function mp_enqueue_scripts() {
 	// Google Fonts
 	wp_enqueue_style(
 		'mp-google-fonts',
-		'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap',
+		'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap',
 		array(),
 		null
 	);
