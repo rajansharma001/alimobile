@@ -183,7 +183,10 @@
     if (nav) nav.classList.remove("open");
     if (menuToggle) {
       menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.textContent = "☰";
+      var burgerIcon = menuToggle.querySelector(".hamburger-icon");
+      var closeIcon = menuToggle.querySelector(".close-icon");
+      if (burgerIcon) burgerIcon.style.display = "";
+      if (closeIcon) closeIcon.style.display = "none";
     }
   }
 
@@ -192,7 +195,10 @@
       e.stopPropagation();
       var isOpen = nav.classList.toggle("open");
       menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕" : "☰";
+      var burgerIcon = menuToggle.querySelector(".hamburger-icon");
+      var closeIcon = menuToggle.querySelector(".close-icon");
+      if (burgerIcon) burgerIcon.style.display = isOpen ? "none" : "";
+      if (closeIcon) closeIcon.style.display = isOpen ? "" : "none";
     });
 
     nav.querySelectorAll("a").forEach(function (a) {
@@ -317,7 +323,10 @@
           '</div>' +
           '<div class="product-brand-row">' +
             '<span>' + item.brand + '</span>' +
-            '<span class="product-mdms-tag">🛡️ MDMS &amp; VAT</span>' +
+            '<span class="product-mdms-tag">' +
+              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px;margin-right:3px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
+              'MDMS &amp; VAT' +
+            '</span>' +
           '</div>' +
           '<h3 class="product-name">' + item.name + '</h3>' +
           '<div class="product-specs-list">' + specsHtml + '</div>' +
@@ -800,6 +809,172 @@
   }
 
   // -------------------------------------------------------------
+  // 10. REVIEWS CAROUSEL SLIDER
+  // -------------------------------------------------------------
+  function initReviewsCarousel() {
+    var viewport = document.getElementById("reviewsViewport");
+    var track = document.getElementById("reviewsTrack");
+    var prevBtn = document.getElementById("reviewsPrev");
+    var nextBtn = document.getElementById("reviewsNext");
+    var dotsContainer = document.getElementById("reviewsDots");
+
+    if (!viewport || !track) return;
+
+    var cards = track.querySelectorAll(".review-card");
+    if (!cards || cards.length === 0) return;
+
+    var currentIndex = 0;
+    var autoPlayTimer = null;
+    var isHovered = false;
+
+    function getItemsPerView() {
+      var w = window.innerWidth;
+      if (w <= 640) return 1;
+      if (w <= 960) return 2;
+      return 3;
+    }
+
+    function getMaxIndex() {
+      var perView = getItemsPerView();
+      return Math.max(0, cards.length - perView);
+    }
+
+    function updateDots() {
+      if (!dotsContainer) return;
+      var maxIdx = getMaxIndex();
+      var totalSteps = maxIdx + 1;
+
+      var existingDots = dotsContainer.querySelectorAll(".carousel-dot");
+      if (existingDots.length !== totalSteps) {
+        dotsContainer.innerHTML = "";
+        for (var i = 0; i < totalSteps; i++) {
+          (function (index) {
+            var dot = document.createElement("button");
+            dot.className = "carousel-dot" + (index === currentIndex ? " active" : "");
+            dot.setAttribute("type", "button");
+            dot.setAttribute("aria-label", "Go to review slide " + (index + 1));
+            dot.addEventListener("click", function () {
+              goToSlide(index);
+            });
+            dotsContainer.appendChild(dot);
+          })(i);
+        }
+      } else {
+        existingDots.forEach(function (dot, i) {
+          if (i === currentIndex) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+      }
+    }
+
+    function goToSlide(index) {
+      var maxIdx = getMaxIndex();
+      if (index < 0) index = 0;
+      if (index > maxIdx) index = maxIdx;
+      currentIndex = index;
+
+      var card = cards[0];
+      if (!card) return;
+
+      var cardWidth = card.getBoundingClientRect().width;
+      var gap = 24;
+      var offset = currentIndex * (cardWidth + gap);
+
+      track.style.transform = "translateX(-" + offset + "px)";
+
+      if (prevBtn) {
+        prevBtn.disabled = currentIndex === 0;
+        prevBtn.style.opacity = currentIndex === 0 ? "0.45" : "1";
+      }
+      if (nextBtn) {
+        nextBtn.disabled = currentIndex === maxIdx;
+        nextBtn.style.opacity = currentIndex === maxIdx ? "0.45" : "1";
+      }
+
+      updateDots();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", function () {
+        goToSlide(currentIndex - 1);
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", function () {
+        goToSlide(currentIndex + 1);
+      });
+    }
+
+    // Touch & Swipe Support
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    viewport.addEventListener("touchstart", function (e) {
+      isHovered = true;
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    viewport.addEventListener("touchend", function (e) {
+      isHovered = false;
+      touchEndX = e.changedTouches[0].screenX;
+      var diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 40) {
+        var maxIdx = getMaxIndex();
+        if (diff > 0) {
+          // Swiped left -> next
+          if (currentIndex < maxIdx) {
+            goToSlide(currentIndex + 1);
+          } else {
+            goToSlide(0);
+          }
+        } else {
+          // Swiped right -> prev
+          if (currentIndex > 0) {
+            goToSlide(currentIndex - 1);
+          } else {
+            goToSlide(maxIdx);
+          }
+        }
+      }
+    }, { passive: true });
+
+    // Mouse Pause AutoPlay
+    viewport.addEventListener("mouseenter", function () {
+      isHovered = true;
+    });
+    viewport.addEventListener("mouseleave", function () {
+      isHovered = false;
+    });
+
+    // Auto Play Interval
+    function startReviewAutoPlay() {
+      if (autoPlayTimer) clearInterval(autoPlayTimer);
+      autoPlayTimer = setInterval(function () {
+        if (!isHovered) {
+          var maxIdx = getMaxIndex();
+          if (currentIndex >= maxIdx) {
+            goToSlide(0);
+          } else {
+            goToSlide(currentIndex + 1);
+          }
+        }
+      }, 5000);
+    }
+
+    // Resize handler
+    window.addEventListener("resize", function () {
+      goToSlide(currentIndex);
+    });
+
+    goToSlide(0);
+    startReviewAutoPlay();
+  }
+
+  // -------------------------------------------------------------
   // 11. EXPOSE GLOBAL HANDLERS ON WINDOW
   // -------------------------------------------------------------
   window.setFinish = setFinish;
@@ -815,5 +990,6 @@
   // Initialize
   filterCatalog();
   startAutoPlay();
+  initReviewsCarousel();
 
 })();

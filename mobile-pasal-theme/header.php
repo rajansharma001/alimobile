@@ -60,12 +60,17 @@ $clean_p = mp_clean_phone( $phone );
       ?>
         <img src="<?php echo esc_url( $custom_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; object-fit: contain;">
       <?php else : ?>
-        <span class="brand-mark"><span>✦</span></span>
+        <span class="brand-mark">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+        </span>
         <span><?php echo esc_html( mp_opt( 'brand_name_line1', 'Ali Mobile' ) ); ?><br><?php echo esc_html( mp_opt( 'brand_name_line2', 'Center' ) ); ?></span>
       <?php endif; ?>
     </a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="<?php esc_attr_e( 'Open navigation', 'mobile-pasal' ); ?>" aria-expanded="false" type="button">☰</button>
+    <button class="menu-toggle" id="menuToggle" aria-label="<?php esc_attr_e( 'Toggle navigation menu', 'mobile-pasal' ); ?>" aria-expanded="false" type="button">
+      <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
 
     <nav class="nav" id="nav">
       <!-- Primary Core Nav Links (Concise, fit any desktop screen without overflow) -->
@@ -89,10 +94,16 @@ $clean_p = mp_clean_phone( $phone );
         <a href="<?php echo is_front_page() ? '#reviews' : esc_url( home_url( '/#reviews' ) ); ?>"><?php esc_html_e( 'Customer Reviews', 'mobile-pasal' ); ?></a>
       </div>
 
-      <a class="phone-link mobile-cta" href="tel:+<?php echo esc_attr( $clean_p ); ?>"><span class="phone-icon">☎</span> <?php printf( esc_html__( 'Call %s', 'mobile-pasal' ), esc_html( $phone ) ); ?></a>
+      <a class="phone-link mobile-cta" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+        <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span><?php printf( esc_html__( 'Call %s', 'mobile-pasal' ), esc_html( $phone ) ); ?></span>
+      </a>
     </nav>
 
-    <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>"><span class="phone-icon">☎</span> <?php echo esc_html( $phone ); ?></a>
+    <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+      <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+      <span><?php echo esc_html( $phone ); ?></span>
+    </a>
   </div>
 </header>
 

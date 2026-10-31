@@ -86,7 +86,7 @@ if ( empty( $slide3_img ) ) {
 }
 
 // Flagship Spotlight
-$spotlight_badge  = mp_opt( 'spotlight_badge', ' FEATURED FLAGSHIP IN GULARIYA' );
+$spotlight_badge  = mp_opt( 'spotlight_badge', 'FEATURED FLAGSHIP IN GULARIYA' );
 $spotlight_title  = mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' );
 $spotlight_tag    = mp_opt( 'spotlight_tagline', 'Built for Apple Intelligence • Grade 5 Titanium' );
 $spotlight_desc   = mp_opt( 'spotlight_desc', 'Grade 5 Titanium design with thinner borders, A18 Pro silicon chip, 48MP Fusion camera with 4K 120fps Dolby Vision, and revolutionary Camera Control button.' );
@@ -97,7 +97,7 @@ if ( empty( $spotlight_img ) ) {
 }
 
 // Lab Section
-$lab_badge   = mp_opt( 'lab_badge', '🔧 CLEANROOM BENCH SETUP' );
+$lab_badge   = mp_opt( 'lab_badge', 'CLEANROOM BENCH SETUP' );
 $lab_title   = mp_opt( 'lab_title', 'Precision Microscope Level Repairs Right in Gulariya' );
 $lab_desc    = mp_opt( 'lab_desc', 'We do not courier your valuable phone to Nepalgunj or Kathmandu. Repairs happen transparently inside our Gulariya counter laboratory with stereo zoom microscopes, anti-static thermal stations, and genuine parts.' );
 $lab_f1_h    = mp_opt( 'lab_feat1_title', '30-Minute Screen Replacement' );
@@ -130,7 +130,12 @@ if ( empty( $lab_img ) ) {
     <!-- Slide 1 -->
     <div class="slide active" data-slide="0">
       <div class="copy">
-        <div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide1_trust ); ?></div>
+        <div class="trust">
+          <span class="trust-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <?php echo esc_html( $slide1_trust ); ?>
+        </div>
         <h1><?php echo wp_kses_post( $slide1_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide1_intro ); ?></p>
         <div class="hero-features">
@@ -141,7 +146,12 @@ if ( empty( $lab_img ) ) {
         </div>
         <div class="actions">
           <a class="primary" href="<?php echo esc_url( $slide1_btn1_url ); ?>"><?php echo esc_html( $slide1_btn1_text ); ?> <span>→</span></a>
-          <a class="secondary" href="<?php echo esc_url( $slide1_btn2_url ); ?>"><span class="play">▶</span> <?php echo esc_html( $slide1_btn2_text ); ?></a>
+          <a class="secondary" href="<?php echo esc_url( $slide1_btn2_url ); ?>">
+            <span class="play">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </span>
+            <?php echo esc_html( $slide1_btn2_text ); ?>
+          </a>
         </div>
         <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
           <button class="dot active" aria-label="Slide 1" type="button"></button>
@@ -158,7 +168,12 @@ if ( empty( $lab_img ) ) {
     <!-- Slide 2 -->
     <div class="slide" data-slide="1">
       <div class="copy">
-        <div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide2_trust ); ?></div>
+        <div class="trust">
+          <span class="trust-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <?php echo esc_html( $slide2_trust ); ?>
+        </div>
         <h1><?php echo wp_kses_post( $slide2_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide2_intro ); ?></p>
         <div class="hero-features">
@@ -169,7 +184,12 @@ if ( empty( $lab_img ) ) {
         </div>
         <div class="actions">
           <button class="primary" onclick="openQuoteModal('Display &amp; Touch Screen Replacement')" type="button"><?php echo esc_html( $slide2_btn1_text ); ?> <span>→</span></button>
-          <a class="secondary" href="<?php echo esc_url( $slide2_btn2_url ); ?>"><span class="play">▶</span> <?php echo esc_html( $slide2_btn2_text ); ?></a>
+          <a class="secondary" href="<?php echo esc_url( $slide2_btn2_url ); ?>">
+            <span class="play">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </span>
+            <?php echo esc_html( $slide2_btn2_text ); ?>
+          </a>
         </div>
         <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
           <button class="dot" aria-label="Slide 1" type="button"></button>
@@ -186,7 +206,12 @@ if ( empty( $lab_img ) ) {
     <!-- Slide 3 -->
     <div class="slide" data-slide="2">
       <div class="copy">
-        <div class="trust"><span class="trust-icon">✓</span> <?php echo esc_html( $slide3_trust ); ?></div>
+        <div class="trust">
+          <span class="trust-icon">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </span>
+          <?php echo esc_html( $slide3_trust ); ?>
+        </div>
         <h1><?php echo wp_kses_post( $slide3_title ); ?></h1>
         <p class="intro"><?php echo esc_html( $slide3_intro ); ?></p>
         <div class="hero-features">
@@ -197,7 +222,12 @@ if ( empty( $lab_img ) ) {
         </div>
         <div class="actions">
           <a class="primary" href="<?php echo esc_url( $slide3_btn1_url ); ?>"><?php echo esc_html( $slide3_btn1_text ); ?> <span>→</span></a>
-          <a class="secondary" href="<?php echo esc_url( $slide3_btn2_url ); ?>"><span class="play">▶</span> <?php echo esc_html( $slide3_btn2_text ); ?></a>
+          <a class="secondary" href="<?php echo esc_url( $slide3_btn2_url ); ?>">
+            <span class="play">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </span>
+            <?php echo esc_html( $slide3_btn2_text ); ?>
+          </a>
         </div>
         <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
           <button class="dot" aria-label="Slide 1" type="button"></button>
@@ -389,8 +419,8 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
-<!-- ================= 4. REDESIGNED FEATURED FLAGSHIP SPOTLIGHT (DARK THEME) ================= -->
-<section class="section-wrap dark-theme flagship-section" id="flagship">
+<!-- ================= 4. REDESIGNED FEATURED FLAGSHIP SPOTLIGHT ================= -->
+<section class="section-wrap flagship-section" id="flagship">
   <div class="tech-bg-grid" aria-hidden="true"></div>
   <div class="tech-ring-accent" aria-hidden="true"></div>
 
@@ -399,7 +429,9 @@ if ( empty( $lab_img ) ) {
       <!-- Top Status Banner -->
       <div class="flagship-header-bar">
         <div class="flagship-pill-left">
-          <span class="apple-logo-glow"></span>
+          <span class="apple-logo-glow">
+            <svg width="15" height="15" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.06-7.7-7.85-12.04-14.36-6.19-9.35-11.06-19.78-14.61-31.29-3.56-11.51-5.34-22.37-5.34-32.57 0-14.34 3.65-26.31 10.96-35.91 7.3-9.6 16.59-14.48 27.84-14.65 4.35 0 9.29 1.14 14.82 3.42 5.54 2.28 9.38 3.48 11.53 3.61 1.95-.13 5.86-1.33 11.73-3.61 5.87-2.28 10.74-3.32 14.61-3.12 12.39.63 22.38 5.48 29.98 14.54-10.86 6.53-16.19 15.54-16 27.03.22 9.13 3.65 16.89 10.28 23.28 6.63 6.39 14.38 10.05 23.25 10.98-2.17 6.52-4.67 13.04-7.5 19.56zm-29.47-113.6c0 6.74-2.52 13.04-7.56 17.9-5.04 4.86-11.18 7.68-18.42 8.46-.22-.87-.33-1.84-.33-2.93 0-6.74 2.65-13.3 7.95-18.17 5.3-4.87 11.55-7.54 18.76-8.02.11 1.09.16 2.01.16 2.76z"/></svg>
+          </span>
           <span class="flagship-kicker-text"><?php echo esc_html( $spotlight_badge ); ?></span>
         </div>
         <div class="flagship-live-beacon">
@@ -421,19 +453,19 @@ if ( empty( $lab_img ) ) {
             <span class="finish-console-title"><?php esc_html_e( 'SELECT FINISH / COLOR:', 'mobile-pasal' ); ?></span>
             <div class="finish-chips-row" id="finishSelector">
               <button class="finish-chip active" data-finish="Desert Titanium" data-color="#c5a992" onclick="setFinish('Desert Titanium', '#c5a992')" type="button">
-                <span class="finish-circle" style="background: #c5a992; box-shadow: 0 0 10px rgba(197, 169, 146, 0.4);"></span>
+                <span class="finish-circle" style="background: #c5a992;"></span>
                 <span class="finish-name">Desert Titanium</span>
               </button>
               <button class="finish-chip" data-finish="Natural Titanium" data-color="#9a958e" onclick="setFinish('Natural Titanium', '#9a958e')" type="button">
-                <span class="finish-circle" style="background: #9a958e; box-shadow: 0 0 10px rgba(154, 149, 142, 0.4);"></span>
+                <span class="finish-circle" style="background: #9a958e;"></span>
                 <span class="finish-name">Natural Titanium</span>
               </button>
               <button class="finish-chip" data-finish="White Titanium" data-color="#f2f2ee" onclick="setFinish('White Titanium', '#f2f2ee')" type="button">
-                <span class="finish-circle" style="background: #f2f2ee; box-shadow: 0 0 10px rgba(242, 242, 238, 0.4);"></span>
+                <span class="finish-circle" style="background: #f2f2ee;"></span>
                 <span class="finish-name">White Titanium</span>
               </button>
               <button class="finish-chip" data-finish="Black Titanium" data-color="#3c3b3f" onclick="setFinish('Black Titanium', '#3c3b3f')" type="button">
-                <span class="finish-circle" style="background: #3c3b3f; box-shadow: 0 0 10px rgba(60, 59, 63, 0.4);"></span>
+                <span class="finish-circle" style="background: #3c3b3f;"></span>
                 <span class="finish-name">Black Titanium</span>
               </button>
             </div>
@@ -442,28 +474,36 @@ if ( empty( $lab_img ) ) {
           <!-- Bento Micro-Specs Grid -->
           <div class="flagship-bento-specs">
             <div class="spec-bento-pod">
-              <div class="spec-pod-icon">⚡</div>
+              <div class="spec-pod-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
               <div class="spec-pod-body">
                 <strong>A18 Pro Bionic</strong>
                 <small>3nm Silicon &amp; 6–Core GPU</small>
               </div>
             </div>
             <div class="spec-bento-pod">
-              <div class="spec-pod-icon">📷</div>
+              <div class="spec-pod-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+              </div>
               <div class="spec-pod-body">
                 <strong>Camera Control</strong>
                 <small>Haptic Slide &amp; Click</small>
               </div>
             </div>
             <div class="spec-bento-pod">
-              <div class="spec-pod-icon">🛡️</div>
+              <div class="spec-pod-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
               <div class="spec-pod-body">
                 <strong>Grade 5 Titanium</strong>
                 <small>Micro-Blasted Frame</small>
               </div>
             </div>
             <div class="spec-bento-pod">
-              <div class="spec-pod-icon">📄</div>
+              <div class="spec-pod-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+              </div>
               <div class="spec-pod-body">
                 <strong>NTA Approved IMEI</strong>
                 <small>Official Nepal VAT Bill</small>
@@ -478,7 +518,8 @@ if ( empty( $lab_img ) ) {
               <span class="btn-arrow">→</span>
             </a>
             <a class="btn-flagship-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-              <span>☎ Call Store: <?php echo esc_html( $phone ); ?></span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span>Call Store: <?php echo esc_html( $phone ); ?></span>
             </a>
           </div>
         </div>
@@ -495,10 +536,12 @@ if ( empty( $lab_img ) ) {
             </div>
             <div class="stage-footer-assurances">
               <div class="stage-assurance-pill">
-                <span> Apple Intelligence Ready</span>
+                <svg width="14" height="14" viewBox="0 0 170 170" fill="currentColor" aria-hidden="true" style="vertical-align: -2px; margin-right: 4px;"><path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.06-7.7-7.85-12.04-14.36-6.19-9.35-11.06-19.78-14.61-31.29-3.56-11.51-5.34-22.37-5.34-32.57 0-14.34 3.65-26.31 10.96-35.91 7.3-9.6 16.59-14.48 27.84-14.65 4.35 0 9.29 1.14 14.82 3.42 5.54 2.28 9.38 3.48 11.53 3.61 1.95-.13 5.86-1.33 11.73-3.61 5.87-2.28 10.74-3.32 14.61-3.12 12.39.63 22.38 5.48 29.98 14.54-10.86 6.53-16.19 15.54-16 27.03.22 9.13 3.65 16.89 10.28 23.28 6.63 6.39 14.38 10.05 23.25 10.98-2.17 6.52-4.67 13.04-7.5 19.56zm-29.47-113.6c0 6.74-2.52 13.04-7.56 17.9-5.04 4.86-11.18 7.68-18.42 8.46-.22-.87-.33-1.84-.33-2.93 0-6.74 2.65-13.3 7.95-18.17 5.3-4.87 11.55-7.54 18.76-8.02.11 1.09.16 2.01.16 2.76z"/></svg>
+                <span>Apple Intelligence Ready</span>
               </div>
               <div class="stage-assurance-pill pill-verified">
-                <span>✓ 1-Year Official Warranty</span>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -2px; margin-right: 4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>1-Year Official Warranty</span>
               </div>
             </div>
           </div>
@@ -520,7 +563,10 @@ if ( empty( $lab_img ) ) {
         <h2 class="section-title"><?php echo esc_html( mp_opt( 'catalog_title', 'Latest Smartphone Arrivals &amp; Top Models' ) ); ?></h2>
         <p class="section-subtitle"><?php echo esc_html( mp_opt( 'catalog_subtitle', 'Every handset is checked, unboxed or sealed-pack with official VAT bill &amp; warranty. Filter by brand or search your model.' ) ); ?></p>
       </div>
-      <button class="view-all-pill" onclick="resetCatalogFilters()" type="button">Reset Filters <span>↺</span></button>
+      <button class="view-all-pill" onclick="resetCatalogFilters()" type="button">
+        <span>Reset Filters</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1 4 1 10 7 10"></polyline><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path></svg>
+      </button>
     </div>
 
     <div class="catalog-layout">
@@ -534,7 +580,9 @@ if ( empty( $lab_img ) ) {
         <div class="filter-group">
           <div class="filter-label">SEARCH MODELS</div>
           <div class="search-input-wrap">
-            <span class="search-icon">🔍</span>
+            <span class="search-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </span>
             <input type="text" id="catalogSearch" placeholder="Search iPhone, Galaxy, Charger..." oninput="filterCatalog()" />
           </div>
         </div>
@@ -589,15 +637,15 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
-<!-- ================= 6. REDESIGNED CLEANROOM LAB BENCH SETUP (DARK THEME) ================= -->
-<section class="section-wrap dark-theme lab-section" id="lab">
+<!-- ================= 6. REDESIGNED CLEANROOM LAB BENCH SETUP ================= -->
+<section class="section-wrap lab-section" id="lab">
   <div class="tech-bg-grid" aria-hidden="true"></div>
   <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 
   <div class="container">
     <div class="lab-console-header">
       <div class="lab-console-badge">
-        <span class="lab-badge-pulse"></span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
         <span><?php echo esc_html( $lab_badge ); ?></span>
       </div>
       <h2 class="section-title lab-main-title"><?php echo esc_html( $lab_title ); ?></h2>
@@ -616,7 +664,9 @@ if ( empty( $lab_img ) ) {
           </div>
         </div>
         <div class="lab-card-body">
-          <div class="lab-card-icon-tag">👁️</div>
+          <div class="lab-card-icon-tag">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+          </div>
           <h3 class="lab-card-heading"><?php echo esc_html( $lab_f3_h ); ?></h3>
           <p class="lab-card-para"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
         </div>
@@ -624,7 +674,9 @@ if ( empty( $lab_img ) ) {
 
       <!-- Feature 2: 30-Min Screen Replacement -->
       <div class="lab-bento-card">
-        <div class="lab-card-icon-tag">⏱️</div>
+        <div class="lab-card-icon-tag">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+        </div>
         <h3 class="lab-card-heading"><?php echo esc_html( $lab_f1_h ); ?></h3>
         <p class="lab-card-para"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
         <div class="lab-card-highlight-badge">
@@ -634,7 +686,9 @@ if ( empty( $lab_img ) ) {
 
       <!-- Feature 3: Battery Health Calibration -->
       <div class="lab-bento-card">
-        <div class="lab-card-icon-tag">🔋</div>
+        <div class="lab-card-icon-tag">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
+        </div>
         <h3 class="lab-card-heading"><?php echo esc_html( $lab_f2_h ); ?></h3>
         <p class="lab-card-para"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
         <div class="lab-card-highlight-badge">
@@ -661,9 +715,11 @@ if ( empty( $lab_img ) ) {
       </div>
       <div class="telemetry-actions">
         <a class="btn-lab-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
-          <span>Consult Our Technician →</span>
+          <span>Consult Our Technician</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
         <a class="btn-lab-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
           <span>Call Counter (<?php echo esc_html( $phone ); ?>)</span>
         </a>
       </div>
@@ -690,7 +746,9 @@ if ( empty( $lab_img ) ) {
       <!-- 1. Charging Port -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">⚡</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+          </div>
           <span class="diag-time-pill">30–45 Minutes</span>
         </div>
         <h3 class="diag-title">Charging Port &amp; Lightning/Type-C Replacement</h3>
@@ -704,7 +762,9 @@ if ( empty( $lab_img ) ) {
       <!-- 2. Camera Module -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">📸</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          </div>
           <span class="diag-time-pill">60–90 Minutes</span>
         </div>
         <h3 class="diag-title">Camera Module &amp; OIS Sensor Repair</h3>
@@ -718,7 +778,9 @@ if ( empty( $lab_img ) ) {
       <!-- 3. Logic Board -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">🔬</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+          </div>
           <span class="diag-time-pill">2–3 Business Days</span>
         </div>
         <h3 class="diag-title">Logic Board &amp; Micro-Soldering (IC Overhaul)</h3>
@@ -732,7 +794,9 @@ if ( empty( $lab_img ) ) {
       <!-- 4. Water Damage -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">💧</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+          </div>
           <span class="diag-time-pill">24–48 Hours</span>
         </div>
         <h3 class="diag-title">Ultrasonic Water &amp; Liquid Damage De-Oxidation</h3>
@@ -746,7 +810,9 @@ if ( empty( $lab_img ) ) {
       <!-- 5. Battery Replacement -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">🔋</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
+          </div>
           <span class="diag-time-pill">30–45 Minutes</span>
         </div>
         <h3 class="diag-title">OEM High-Capacity Battery Replacement</h3>
@@ -760,7 +826,9 @@ if ( empty( $lab_img ) ) {
       <!-- 6. Display Replacement -->
       <article class="diag-card">
         <div class="diag-topbar">
-          <div class="diag-icon">📱</div>
+          <div class="diag-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+          </div>
           <span class="diag-time-pill">45–60 Minutes Express</span>
         </div>
         <h3 class="diag-title">Retina &amp; OLED Display Replacement</h3>
@@ -865,7 +933,7 @@ if ( empty( $lab_img ) ) {
   </div>
 </section>
 
-<!-- ================= 10. VERIFIED CUSTOMER REVIEWS ================= -->
+<!-- ================= 10. VERIFIED CUSTOMER REVIEWS (INTERACTIVE CAROUSEL) ================= -->
 <section class="section-wrap" id="reviews">
   <div class="tech-bg-grid" aria-hidden="true"></div>
   <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
@@ -877,58 +945,156 @@ if ( empty( $lab_img ) ) {
         <h2 class="section-title"><?php echo esc_html( mp_opt( 'reviews_title', 'What Gulariya Residents Say' ) ); ?></h2>
         <p class="section-subtitle"><?php echo esc_html( mp_opt( 'reviews_subtitle', 'Real feedback from local smartphone buyers and repair customers across Bardiya district.' ) ); ?></p>
       </div>
-      <div class="rating-header-badge">
-        <span>★ <?php echo esc_html( mp_opt( 'reviews_rating_score', '4.9 / 5.0' ) ); ?></span>
-        <span style="color:#78350f; font-weight:600;">(<?php echo esc_html( mp_opt( 'reviews_rating_count_text', '250+ Local Customer Reviews' ) ); ?>)</span>
-      </div>
-    </div>
-
-    <div class="reviews-grid">
-      <!-- Review 1 -->
-      <div class="review-card">
-        <div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"My battery health was down to 74% and causing phone slowdowns. They replaced it with original-grade cell and re-coded the BMS so there is no annoying battery error in settings. Lasts a full day and a half now!"</p>
+      <div class="reviews-header-actions">
+        <div class="rating-header-badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          <strong><?php echo esc_html( mp_opt( 'reviews_rating_score', '4.9 / 5.0' ) ); ?></strong>
+          <span style="color:#78350f; font-weight:600;">(<?php echo esc_html( mp_opt( 'reviews_rating_count_text', '250+ Local Customer Reviews' ) ); ?>)</span>
         </div>
-        <div class="reviewer-info">
-          <div class="reviewer-avatar">AC</div>
-          <div>
-            <h4 class="reviewer-name">Anil Chaudhary</h4>
-            <p class="reviewer-meta">Badhaiyatal, Bardiya • iPhone 13 Battery Replacement (Micro-welded)</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Review 2 -->
-      <div class="review-card">
-        <div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Honest pricing without hidden markup. They clearly explained the warranty difference between unverified grey imports and official NTA-registered models. Highly recommended for genuine phones in Western Nepal."</p>
-        </div>
-        <div class="reviewer-info">
-          <div class="reviewer-avatar">DY</div>
-          <div>
-            <h4 class="reviewer-name">Dharmendra Yadav</h4>
-            <p class="reviewer-meta">Rajapur, Bardiya • Samsung Galaxy A55 5G + Anker Fast Charger</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Review 3 -->
-      <div class="review-card">
-        <div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"My S24 Ultra screen shattered during a bike ride. Two shops in Nepalgunj told me I had to leave the phone for 5 days. Ali Mobile fixed it in their cleanroom lab in under an hour while I had tea next door. Touch and color are 100% perfect."</p>
-        </div>
-        <div class="reviewer-info">
-          <div class="reviewer-avatar">PS</div>
-          <div>
-            <h4 class="reviewer-name">Pooja Shrestha</h4>
-            <p class="reviewer-meta">Bansgadhi, Bardiya • Samsung Galaxy S24 Ultra Display Replacement</p>
-          </div>
+        <div class="reviews-nav-controls">
+          <button class="carousel-arrow carousel-prev" id="reviewsPrev" aria-label="<?php esc_attr_e( 'Previous customer reviews', 'mobile-pasal' ); ?>" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          </button>
+          <button class="carousel-arrow carousel-next" id="reviewsNext" aria-label="<?php esc_attr_e( 'Next customer reviews', 'mobile-pasal' ); ?>" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+          </button>
         </div>
       </div>
     </div>
+
+    <!-- Smooth Slider Carousel Viewport -->
+    <div class="reviews-carousel-viewport" id="reviewsViewport">
+      <div class="reviews-carousel-track" id="reviewsTrack">
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"My battery health was down to 74% and causing phone slowdowns. They replaced it with original-grade cell and re-coded the BMS so there is no annoying battery error in settings. Lasts a full day and a half now!"</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">AC</div>
+            <div>
+              <h4 class="reviewer-name">Anil Chaudhary</h4>
+              <p class="reviewer-meta">Badhaiyatal, Bardiya • iPhone 13 Battery Replacement</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"Honest pricing without hidden markup. They clearly explained the warranty difference between unverified grey imports and official NTA-registered models. Highly recommended for genuine phones in Western Nepal."</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">DY</div>
+            <div>
+              <h4 class="reviewer-name">Dharmendra Yadav</h4>
+              <p class="reviewer-meta">Rajapur, Bardiya • Samsung Galaxy A55 5G + Anker PD</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"My S24 Ultra screen shattered during a bike ride. Two shops in Nepalgunj told me I had to leave the phone for 5 days. Ali Mobile fixed it in their cleanroom lab in under an hour while I had tea next door. Touch and color are 100% perfect."</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">PS</div>
+            <div>
+              <h4 class="reviewer-name">Pooja Shrestha</h4>
+              <p class="reviewer-meta">Bansgadhi, Bardiya • Galaxy S24 Ultra OLED Screen</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 4 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"Bought Redmi Note 13 Pro 5G with official Nepal VAT bill. The technician at the counter helped register my MDMS on the spot with NTA SMS verification. Genuine sealed box with official warranty."</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">RT</div>
+            <div>
+              <h4 class="reviewer-name">Ramesh Thapa</h4>
+              <p class="reviewer-meta">Gulariya-04, Bardiya • Redmi Note 13 Pro (Official MDMS)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 5 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"My phone fell into an irrigation canal during field work. They dismantled the motherboard, cleaned every IC in their ultrasonic bath, and revived the phone completely without any data loss. Lifesavers!"</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">SB</div>
+            <div>
+              <h4 class="reviewer-name">Sunita BK</h4>
+              <p class="reviewer-meta">Madhuwan, Bardiya • Ultrasonic Liquid Damage De-Oxidation</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 6 -->
+        <div class="review-card">
+          <div>
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            </div>
+            <p class="review-text">"Loose Type-C port on OnePlus 12 was refusing 100W SuperVOOC charge. Replacement took exactly 35 minutes across the counter. Works at peak 100W flash charging speed again with zero heating issues."</p>
+          </div>
+          <div class="reviewer-info">
+            <div class="reviewer-avatar">BS</div>
+            <div>
+              <h4 class="reviewer-name">Bikash Sharma</h4>
+              <p class="reviewer-meta">Nepalgunj Road, Bardiya • OnePlus 12 Fast Charging Port Fix</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Indicator Dots -->
+    <div class="reviews-carousel-dots" id="reviewsDots"></div>
   </div>
 </section>
 
@@ -944,7 +1110,10 @@ if ( empty( $lab_img ) ) {
         <h2 class="section-title">Visit Us in Gulariya</h2>
         <p class="section-subtitle">Centrally located at Ji. Pra. Ka. Chowk. Walk in for brand-new phone purchases, immediate repair diagnostic, screen protectors, or honest technical advice.</p>
       </div>
-      <a class="view-all-pill" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">Get Directions <span>→</span></a>
+      <a class="view-all-pill" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">
+        <span>Get Directions</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
     </div>
 
     <div class="visit-grid">
@@ -952,7 +1121,9 @@ if ( empty( $lab_img ) ) {
       <div class="location-details-box">
         <div>
           <div class="loc-item">
-            <div class="loc-icon">📍</div>
+            <div class="loc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
             <div>
               <h4 class="loc-title">Ali Mobile Center &amp; Apple Fix</h4>
               <p class="loc-desc"><?php echo esc_html( $address ); ?>, Lumbini Province, Nepal</p>
@@ -960,7 +1131,9 @@ if ( empty( $lab_img ) ) {
           </div>
 
           <div class="loc-item">
-            <div class="loc-icon">📞</div>
+            <div class="loc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            </div>
             <div>
               <h4 class="loc-title">Direct Showroom Hotline</h4>
               <p class="loc-desc"><?php echo esc_html( $phone ); ?></p>
@@ -968,11 +1141,35 @@ if ( empty( $lab_img ) ) {
           </div>
 
           <div class="loc-item">
-            <div class="loc-icon">⏰</div>
+            <div class="loc-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
             <div>
               <h4 class="loc-title">Showroom &amp; Lab Hours</h4>
               <p class="loc-desc"><?php echo wp_kses_post( $hours ); ?></p>
             </div>
+          </div>
+        </div>
+
+        <!-- Social Media Direct Connect Strip -->
+        <div class="contact-social-connect">
+          <span class="contact-social-lbl"><?php esc_html_e( 'Official Social Channels:', 'mobile-pasal' ); ?></span>
+          <div class="social-icons-row">
+            <a class="social-icon-btn social-fb" href="https://facebook.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a class="social-icon-btn social-ig" href="https://instagram.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a class="social-icon-btn social-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.12c-.24.68-1.39 1.3-1.92 1.38-.49.08-1.12.11-3.23-.76-2.69-1.11-4.43-3.83-4.57-4.01-.13-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.54-.34.72-.34.18 0 .36.01.52.02.17.01.4-.06.62.48.24.58.8 1.95.87 2.1.07.14.12.31.02.5-.09.19-.14.3-.28.46-.14.16-.3.35-.43.47-.14.14-.29.3-.12.59.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.73-.85.92-1.15.2-.29.39-.24.66-.14.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.13.07.74-.17 1.42z"/></svg>
+            </a>
+            <a class="social-icon-btn social-tt" href="https://tiktok.com/@alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c-.01 2.21-.81 4.41-2.31 6.03-1.6 1.74-3.9 2.74-6.27 2.75-2.5 0-4.9-1.07-6.52-2.91-1.68-1.89-2.45-4.47-2.12-6.99.34-2.58 1.87-4.88 4.09-6.15 1.65-.95 3.58-1.33 5.48-1.09v4.11c-.99-.24-2.07-.12-2.98.34-.9.45-1.57 1.27-1.85 2.23-.29.98-.12 2.07.45 2.91.56.84 1.51 1.36 2.53 1.39 1.19.04 2.35-.55 2.99-1.55.43-.67.62-1.47.62-2.27V.02z"/></svg>
+            </a>
+            <a class="social-icon-btn social-gm" href="https://maps.google.com/?q=Ali+Mobile+Center+Gulariya" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 7 13 8 16 1-3 8-10.75 8-16 0-4.42-3.58-8-8-8zm0 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
+            </a>
           </div>
         </div>
 
