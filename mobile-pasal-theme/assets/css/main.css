@@ -820,50 +820,83 @@
       transform: rotate(-6deg);
     }
 
-    /* Modern Glassmorphic Slider Arrows */
+    /* Cleanroom Hero Slider Navigation Capsule (Zero Gradients - Solid Tech Theme) */
+    .hero-slider-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 32px;
+      background: #ffffff;
+      padding: 6px 14px 6px 18px;
+      border-radius: 999px;
+      border: 1.5px solid #e2eaf5;
+      box-shadow: 0 4px 16px rgba(7, 27, 59, 0.06);
+      width: fit-content;
+      position: relative;
+      z-index: 5;
+    }
+
+    .hero-slider-nav .dots {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .hero-nav-divider {
+      width: 1px;
+      height: 20px;
+      background-color: #e2eaf5;
+      flex-shrink: 0;
+    }
+
+    .hero-nav-arrows {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 52px;
-      height: 52px;
-      border: 1.5px solid rgba(8, 98, 233, 0.16);
+      position: static;
+      transform: none;
+      width: 36px;
+      height: 36px;
+      border: 1.5px solid #dce7f8;
       border-radius: 50%;
       color: var(--navy);
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      background: #f8fbff;
       cursor: pointer;
       display: grid;
       place-items: center;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 8px 24px rgba(7, 27, 59, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: none;
       padding: 0;
+      flex-shrink: 0;
     }
 
     .slider-arrow svg {
       display: block;
-      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.2s ease;
     }
 
     .slider-arrow:hover {
       background: var(--blue);
       color: #ffffff;
       border-color: var(--blue);
-      transform: translateY(-50%) scale(1.1);
-      box-shadow: 0 12px 30px rgba(8, 98, 233, 0.32);
+      transform: scale(1.08);
+      box-shadow: 0 4px 12px rgba(8, 98, 233, 0.28);
     }
 
-    .slider-arrow.prev { left: 16px; }
-    .slider-arrow.next { right: 16px; }
-
     .slider-arrow.prev:hover svg {
-      transform: translateX(-3px);
+      transform: translateX(-2px);
     }
 
     .slider-arrow.next:hover svg {
-      transform: translateX(3px);
+      transform: translateX(2px);
+    }
+
+    .slider-arrow:active {
+      transform: scale(0.94);
     }
 
     /* Slide Indicator Dots */
@@ -2877,15 +2910,9 @@
         order: 2;
         min-height: 320px;
       }
-      .slider-arrow {
-        top: auto;
-        bottom: 16px;
-        transform: none;
-        width: 44px;
-        height: 44px;
+      .hero-slider-nav {
+        margin: 24px auto 0;
       }
-      .slider-arrow.prev { left: auto; right: 68px; }
-      .slider-arrow.next { right: 16px; }
       .blue-swoosh { display: none; }
     }
 

@@ -144,12 +144,6 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
   <div class="tech-ring-accent" aria-hidden="true"></div>
 
   <div class="hero">
-    <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
 
     <div class="hero-slider-stage" id="heroSliderStage">
       <!-- Slide 1 -->
@@ -172,10 +166,21 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <?php echo esc_html( $slide1_btn2_text ); ?>
           </a>
         </div>
-        <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
-          <button class="dot active" aria-label="Slide 1" type="button"></button>
-          <button class="dot" aria-label="Slide 2" type="button"></button>
-          <button class="dot" aria-label="Slide 3" type="button"></button>
+                <div class="hero-slider-nav">
+          <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+            <button class="dot active" aria-label="Slide 1" type="button"></button>
+            <button class="dot" aria-label="Slide 2" type="button"></button>
+            <button class="dot" aria-label="Slide 3" type="button"></button>
+          </div>
+          <div class="hero-nav-divider" aria-hidden="true"></div>
+          <div class="hero-nav-arrows">
+            <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
       </div>
       <div class="visual">
@@ -204,10 +209,21 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <?php echo esc_html( $slide2_btn2_text ); ?>
           </a>
         </div>
-        <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
-          <button class="dot" aria-label="Slide 1" type="button"></button>
-          <button class="dot active" aria-label="Slide 2" type="button"></button>
-          <button class="dot" aria-label="Slide 3" type="button"></button>
+                <div class="hero-slider-nav">
+          <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+            <button class="dot" aria-label="Slide 1" type="button"></button>
+            <button class="dot active" aria-label="Slide 2" type="button"></button>
+            <button class="dot" aria-label="Slide 3" type="button"></button>
+          </div>
+          <div class="hero-nav-divider" aria-hidden="true"></div>
+          <div class="hero-nav-arrows">
+            <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
       </div>
       <div class="visual">
@@ -236,10 +252,21 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
             <?php echo esc_html( $slide3_btn2_text ); ?>
           </a>
         </div>
-        <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
-          <button class="dot" aria-label="Slide 1" type="button"></button>
-          <button class="dot" aria-label="Slide 2" type="button"></button>
-          <button class="dot active" aria-label="Slide 3" type="button"></button>
+                <div class="hero-slider-nav">
+          <div class="dots" aria-label="<?php esc_attr_e( 'Choose slide', 'mobile-pasal' ); ?>">
+            <button class="dot" aria-label="Slide 1" type="button"></button>
+            <button class="dot" aria-label="Slide 2" type="button"></button>
+            <button class="dot active" aria-label="Slide 3" type="button"></button>
+          </div>
+          <div class="hero-nav-divider" aria-hidden="true"></div>
+          <div class="hero-nav-arrows">
+            <button class="slider-arrow prev" aria-label="<?php esc_attr_e( 'Previous slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button class="slider-arrow next" aria-label="<?php esc_attr_e( 'Next slide', 'mobile-pasal' ); ?>" type="button">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
         </div>
       </div>
       <div class="visual">

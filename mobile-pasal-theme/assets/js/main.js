@@ -169,17 +169,35 @@
     }, TICK_INTERVAL_MS);
   }
 
-  if (prevBtn) {
-    prevBtn.addEventListener("click", function () {
+  // Bind click handlers to all Prev buttons across slides
+  document.querySelectorAll("#heroSlider .slider-arrow.prev").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
       showSlide(currentSlide - 1, "prev");
     });
-  }
+  });
 
-  if (nextBtn) {
-    nextBtn.addEventListener("click", function () {
+  // Bind click handlers to all Next buttons across slides
+  document.querySelectorAll("#heroSlider .slider-arrow.next").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
       showSlide(currentSlide + 1, "next");
     });
-  }
+  });
+
+  // Keyboard navigation for Hero slider
+  document.addEventListener("keydown", function (e) {
+    var hero = document.getElementById("heroSlider");
+    if (!hero) return;
+    var rect = hero.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom > 0) {
+      if (e.key === "ArrowLeft") {
+        showSlide(currentSlide - 1, "prev");
+      } else if (e.key === "ArrowRight") {
+        showSlide(currentSlide + 1, "next");
+      }
+    }
+  });
 
   // Bind click handlers to dot indicators across all slides
   document.querySelectorAll("#heroSlider .dot").forEach(function (dot) {
