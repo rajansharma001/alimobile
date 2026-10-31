@@ -651,85 +651,110 @@ if ( empty( $lab_img ) ) {
   <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 
   <div class="container">
-    <div class="lab-console-header">
-      <div class="lab-console-badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-        <span><?php echo esc_html( $lab_badge ); ?></span>
+    <div class="cleanroom-showcase-card">
+      <!-- Top Live Status Header -->
+      <div class="cleanroom-top-bar">
+        <div class="cleanroom-badge-pill">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+          <span><?php echo esc_html( $lab_badge ); ?></span>
+        </div>
+        <div class="cleanroom-live-pill">
+          <span class="cleanroom-pulse-dot"></span>
+          <span><?php esc_html_e( 'Live Gulariya Counter Cleanroom Lab', 'mobile-pasal' ); ?></span>
+        </div>
       </div>
-      <h2 class="section-title lab-main-title"><?php echo esc_html( $lab_title ); ?></h2>
-      <p class="section-subtitle lab-main-subtitle"><?php echo esc_html( $lab_desc ); ?></p>
-    </div>
 
-    <!-- 3-Card Laboratory Bento Layout -->
-    <div class="lab-bento-grid">
-      <!-- Feature 1: Cleanroom Live Bench Window -->
-      <div class="lab-bento-card lab-card-featured">
-        <div class="lab-card-media-wrap">
-          <img src="<?php echo esc_url( $lab_img ); ?>" alt="Cleanroom microscope repair lab technicians" />
-          <div class="lab-media-badge">
-            <span class="live-pulse"></span>
-            <span>Gulariya Counter Cleanroom Lab</span>
+      <!-- Main Split Grid -->
+      <div class="cleanroom-split-grid">
+        <!-- Left Column: Visual Laboratory Desk & Live Telemetry -->
+        <div class="cleanroom-visual-column">
+          <div class="cleanroom-photo-frame">
+            <img src="<?php echo esc_url( $lab_img ); ?>" alt="<?php esc_attr_e( 'Cleanroom microscope repair lab technicians', 'mobile-pasal' ); ?>" loading="lazy" />
+            <div class="cleanroom-photo-overlay-tag">
+              <span class="photo-tag-pulse"></span>
+              <span><?php esc_html_e( 'Stereo Zoom Microscope • Anti-Static ESD Station', 'mobile-pasal' ); ?></span>
+            </div>
+          </div>
+
+          <!-- Integrated 3-Stat Telemetry Pods -->
+          <div class="cleanroom-stats-grid">
+            <div class="cleanroom-stat-card">
+              <span class="stat-number-val"><?php echo esc_html( $lab_s1_n ); ?></span>
+              <span class="stat-label-text"><?php echo esc_html( $lab_s1_l ); ?></span>
+            </div>
+            <div class="cleanroom-stat-card">
+              <span class="stat-number-val"><?php echo esc_html( $lab_s2_n ); ?></span>
+              <span class="stat-label-text"><?php echo esc_html( $lab_s2_l ); ?></span>
+            </div>
+            <div class="cleanroom-stat-card">
+              <span class="stat-number-val"><?php echo esc_html( $lab_s3_n ); ?></span>
+              <span class="stat-label-text"><?php echo esc_html( $lab_s3_l ); ?></span>
+            </div>
           </div>
         </div>
-        <div class="lab-card-body">
-          <div class="lab-card-icon-tag">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+
+        <!-- Right Column: Precision Technical Experience & Features -->
+        <div class="cleanroom-content-column">
+          <h2 class="cleanroom-heading"><?php echo esc_html( $lab_title ); ?></h2>
+          <p class="cleanroom-lead-text"><?php echo esc_html( $lab_desc ); ?></p>
+
+          <div class="cleanroom-features-list">
+            <!-- Feature 1: Screen Replacement -->
+            <div class="cleanroom-feature-row">
+              <div class="feature-icon-pod">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </div>
+              <div class="feature-text-wrap">
+                <div class="feature-header-line">
+                  <h3 class="feature-title-item"><?php echo esc_html( $lab_f1_h ); ?></h3>
+                  <span class="feature-status-chip chip-green"><?php esc_html_e( 'TrueTone & 3D Touch Retained', 'mobile-pasal' ); ?></span>
+                </div>
+                <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
+              </div>
+            </div>
+
+            <!-- Feature 2: Battery Health Calibration -->
+            <div class="cleanroom-feature-row">
+              <div class="feature-icon-pod">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
+              </div>
+              <div class="feature-text-wrap">
+                <div class="feature-header-line">
+                  <h3 class="feature-title-item"><?php echo esc_html( $lab_f2_h ); ?></h3>
+                  <span class="feature-status-chip chip-blue"><?php esc_html_e( 'Zero Error BMS Micro-Welded', 'mobile-pasal' ); ?></span>
+                </div>
+                <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
+              </div>
+            </div>
+
+            <!-- Feature 3: In-Front-Of-You Transparency -->
+            <div class="cleanroom-feature-row">
+              <div class="feature-icon-pod">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div class="feature-text-wrap">
+                <div class="feature-header-line">
+                  <h3 class="feature-title-item"><?php echo esc_html( $lab_f3_h ); ?></h3>
+                  <span class="feature-status-chip chip-purple"><?php esc_html_e( '100% Privacy Protection', 'mobile-pasal' ); ?></span>
+                </div>
+                <p class="feature-desc-item"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
+              </div>
+            </div>
           </div>
-          <h3 class="lab-card-heading"><?php echo esc_html( $lab_f3_h ); ?></h3>
-          <p class="lab-card-para"><?php echo wp_kses_post( $lab_f3_d ); ?></p>
-        </div>
-      </div>
 
-      <!-- Feature 2: 30-Min Screen Replacement -->
-      <div class="lab-bento-card">
-        <div class="lab-card-icon-tag">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <!-- Action Buttons -->
+          <div class="cleanroom-actions-bar">
+            <a class="btn-cleanroom-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+              <span><?php esc_html_e( 'Consult Our Technician', 'mobile-pasal' ); ?></span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a class="btn-cleanroom-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <span><?php printf( esc_html__( 'Call Counter (%s)', 'mobile-pasal' ), esc_html( $phone ) ); ?></span>
+            </a>
+          </div>
         </div>
-        <h3 class="lab-card-heading"><?php echo esc_html( $lab_f1_h ); ?></h3>
-        <p class="lab-card-para"><?php echo wp_kses_post( $lab_f1_d ); ?></p>
-        <div class="lab-card-highlight-badge">
-          <span>TrueTone &amp; 3D Touch Retained</span>
-        </div>
-      </div>
-
-      <!-- Feature 3: Battery Health Calibration -->
-      <div class="lab-bento-card">
-        <div class="lab-card-icon-tag">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2" ry="2"></rect><line x1="23" y1="13" x2="23" y2="11"></line></svg>
-        </div>
-        <h3 class="lab-card-heading"><?php echo esc_html( $lab_f2_h ); ?></h3>
-        <p class="lab-card-para"><?php echo wp_kses_post( $lab_f2_d ); ?></p>
-        <div class="lab-card-highlight-badge">
-          <span>Zero Error BMS Micro-Welded</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Live Lab Telemetry Stats Bar -->
-    <div class="lab-telemetry-strip">
-      <div class="telemetry-box">
-        <span class="telemetry-val"><?php echo esc_html( $lab_s1_n ); ?></span>
-        <span class="telemetry-lbl"><?php echo esc_html( $lab_s1_l ); ?></span>
-      </div>
-      <div class="telemetry-divider"></div>
-      <div class="telemetry-box">
-        <span class="telemetry-val"><?php echo esc_html( $lab_s2_n ); ?></span>
-        <span class="telemetry-lbl"><?php echo esc_html( $lab_s2_l ); ?></span>
-      </div>
-      <div class="telemetry-divider"></div>
-      <div class="telemetry-box">
-        <span class="telemetry-val"><?php echo esc_html( $lab_s3_n ); ?></span>
-        <span class="telemetry-lbl"><?php echo esc_html( $lab_s3_l ); ?></span>
-      </div>
-      <div class="telemetry-actions">
-        <a class="btn-lab-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Lab,%20I%20would%20like%20to%20consult%20with%20your%20technician%20about%20a%20hardware%20issue." target="_blank" rel="noopener noreferrer">
-          <span>Consult Our Technician</span>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-        <a class="btn-lab-call" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-          <span>Call Counter (<?php echo esc_html( $phone ); ?>)</span>
-        </a>
       </div>
     </div>
   </div>
