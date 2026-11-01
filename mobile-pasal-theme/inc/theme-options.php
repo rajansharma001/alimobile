@@ -1173,15 +1173,23 @@ add_action( 'admin_menu', 'mobile_pasal_options_admin_menu' );
  */
 function mobile_pasal_options_admin_enqueue( $hook ) {
 	$current_page  = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-bulk-price-editor' );
+	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-repair-reports', 'mp-bulk-price-editor' );
 
-	if ( ! in_array( $current_page, $allowed_pages, true ) && strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false && strpos( $hook, 'mp-general-inquiries' ) === false && strpos( $hook, 'mp-bulk-price-editor' ) === false ) {
+	if ( ! in_array( $current_page, $allowed_pages, true ) && strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false && strpos( $hook, 'mp-general-inquiries' ) === false && strpos( $hook, 'mp-repair-reports' ) === false && strpos( $hook, 'mp-bulk-price-editor' ) === false ) {
 		return;
 	}
 
 	wp_enqueue_media();
 	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_script( 'wp-color-picker' );
+
+	// Google Fonts matching website frontend design pattern
+	wp_enqueue_style(
+		'mobile-pasal-google-fonts',
+		'https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap',
+		array(),
+		null
+	);
 
 	// Font Awesome 6 Icons for modern luxury dashboard
 	wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1' );
@@ -1209,7 +1217,7 @@ add_action( 'admin_enqueue_scripts', 'mobile_pasal_options_admin_enqueue' );
  */
 function mobile_pasal_admin_fullwidth_breakout_head() {
 	$current_page  = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
-	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-bulk-price-editor' );
+	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-repair-reports', 'mp-bulk-price-editor' );
 
 	if ( in_array( $current_page, $allowed_pages, true ) ) {
 		echo '<style id="mp-admin-fullwidth-reset">

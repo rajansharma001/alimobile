@@ -53,7 +53,9 @@ function mp_create_inquiries_table() {
 		KEY created_at (created_at)
 	) $charset_collate;";
 
-	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	if ( ! function_exists( 'dbDelta' ) && file_exists( ABSPATH . 'wp-admin/includes/upgrade.php' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+	}
 	dbDelta( $sql );
 }
 add_action( 'after_switch_theme', 'mp_create_inquiries_table' );
@@ -1288,29 +1290,46 @@ function mp_render_inquiries_admin_page() {
 	}
 	?>
 	<style>
-		/* Mobile-First Layout & Theme Variables */
+		/* Mobile-First Layout & Theme Variables (Matching main.css) */
 		:root {
-			--mp-admin-blue: #0066cc;
-			--mp-admin-blue-hover: #0052a3;
+			--mp-admin-blue: #0862e9;
+			--mp-admin-blue-hover: #074ec0;
 			--mp-admin-navy: #071b3b;
-			--mp-admin-dark: #0f172a;
-			--mp-admin-slate: #334155;
-			--mp-admin-muted: #475569;
-			--mp-admin-border: #cbd5e1;
-			--mp-admin-surface: #f8fafc;
-			--mp-admin-green: #16a34a;
-			--mp-admin-amber: #b45309;
+			--mp-admin-dark: #071b3b;
+			--mp-admin-slate: #1e293b;
+			--mp-admin-muted: #52627e;
+			--mp-admin-border: #dce7f8;
+			--mp-admin-surface: #f7faff;
+			--mp-admin-green: #1ea952;
+			--mp-admin-amber: #d97706;
 			--mp-admin-red: #dc2626;
+			--font-head: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+			--font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 		}
 		.bopt-app-wrap {
-			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			font-family: var(--font-body);
 			background: var(--mp-admin-surface);
 			color: var(--mp-admin-dark);
 			min-height: 100vh;
 			box-sizing: border-box;
+			-webkit-font-smoothing: antialiased;
+		}
+		.bopt-app-wrap h1,
+		.bopt-app-wrap h2,
+		.bopt-app-wrap h3,
+		.bopt-app-wrap h4,
+		.bopt-app-wrap h5,
+		.bopt-app-wrap h6,
+		.bopt-brand-title,
+		.mp-crm-tab-title,
+		.mp-report-card-title,
+		.mp-report-kpi-val,
+		.mp-report-kpi-title {
+			font-family: var(--font-head);
+			letter-spacing: -0.02em;
 		}
 		.bopt-topbar {
-			background: var(--mp-admin-dark);
+			background: #030d1d;
 			border-bottom: 3px solid var(--mp-admin-blue);
 			padding: 12px 24px;
 			display: flex;
@@ -1342,6 +1361,46 @@ function mp_render_inquiries_admin_page() {
 				flex-shrink: 0;
 			}
 		}
+		/* Unified High Contrast Buttons */
+		.bopt-btn-secondary {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 6px;
+			padding: 8px 14px;
+			border-radius: 8px;
+			background: #ffffff;
+			border: 1.5px solid var(--mp-admin-border);
+			color: var(--mp-admin-dark) !important;
+			font-size: 12.5px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: all 0.2s ease;
+			min-height: 38px;
+			cursor: pointer;
+		}
+		.bopt-btn-secondary:hover {
+			background: #edf4ff;
+			border-color: var(--mp-admin-blue);
+			color: var(--mp-admin-blue) !important;
+		}
+		.bopt-topbar .bopt-messages-btn {
+			color: #ffffff !important;
+			background: rgba(255, 255, 255, 0.08);
+			border: 1px solid rgba(255, 255, 255, 0.2);
+			font-weight: 600;
+		}
+		.bopt-topbar .bopt-messages-btn:hover {
+			color: #ffffff !important;
+			background: rgba(8, 98, 233, 0.35);
+			border-color: rgba(8, 98, 233, 0.6);
+		}
+		.bopt-topbar .bopt-messages-btn.is-active {
+			background: var(--mp-admin-blue) !important;
+			border-color: var(--mp-admin-blue) !important;
+			color: #ffffff !important;
+		}
+
 		.bopt-inquiries-container {
 			max-width: 1440px;
 			margin: 0 auto;
@@ -1981,7 +2040,7 @@ function mp_render_inquiries_admin_page() {
 					<i class="fa-solid fa-screwdriver-wrench"></i>
 					<span><?php esc_html_e( '+ New Repair Docket', 'mobile-pasal' ); ?></span>
 				</button>
-				<button type="button" class="bopt-messages-btn" onclick="mpOpenCreateForm('general_inquiry');" style="border-color:#93c5fd; color:#0066cc;">
+				<button type="button" class="bopt-messages-btn" onclick="mpOpenCreateForm('general_inquiry');">
 					<i class="fa-solid fa-comment-dots"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( '+ Log General Inquiry', 'mobile-pasal' ); ?></span>
 				</button>
@@ -2175,7 +2234,7 @@ function mp_render_inquiries_admin_page() {
 						</div>
 					</div>
 					<div style="display:flex; justify-content:flex-end; gap:10px; margin-top:8px;">
-						<button type="button" class="bopt-messages-btn" onclick="document.getElementById('mpWalkinFormCard').style.display='none';"><?php esc_html_e( 'Cancel', 'mobile-pasal' ); ?></button>
+						<button type="button" class="bopt-btn-secondary" onclick="document.getElementById('mpWalkinFormCard').style.display='none';"><?php esc_html_e( 'Cancel', 'mobile-pasal' ); ?></button>
 						<button type="submit" name="mp_create_record_submit" value="1" class="bopt-save-btn" style="padding:10px 22px;">
 							<i class="fa-solid fa-check"></i> <?php esc_html_e( 'Save Record & Generate Docket', 'mobile-pasal' ); ?>
 						</button>
@@ -2219,11 +2278,11 @@ function mp_render_inquiries_admin_page() {
 							<?php endforeach; ?>
 						</div>
 
-						<button type="button" onclick="window.print();" class="bopt-messages-btn" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd; font-weight:800;">
+						<button type="button" onclick="window.print();" class="bopt-btn-secondary">
 							<i class="fa-solid fa-print"></i> <span><?php esc_html_e( 'Print Report', 'mobile-pasal' ); ?></span>
 						</button>
-						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=repairs' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn">
-							<i class="fa-solid fa-file-csv"></i> <span><?php esc_html_e( 'Export Data', 'mobile-pasal' ); ?></span>
+						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=repairs' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-btn-secondary">
+							<i class="fa-solid fa-file-csv" style="color:var(--mp-admin-green);"></i> <span><?php esc_html_e( 'Export Data', 'mobile-pasal' ); ?></span>
 						</a>
 					</div>
 				</div>
@@ -3147,11 +3206,11 @@ function mp_render_inquiries_admin_page() {
 				</div>
 
 				<div class="mp-modal-sticky-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid #e2e8f0;">
-					<a href="#" id="mpEditModalPrintBtn" target="_blank" class="bopt-messages-btn" style="text-decoration:none;">
+					<a href="#" id="mpEditModalPrintBtn" target="_blank" class="bopt-btn-secondary" style="text-decoration:none;">
 						<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> <?php esc_html_e( 'Open Printable PDF Job Sheet', 'mobile-pasal' ); ?>
 					</a>
 					<div style="display:flex; gap:10px;">
-						<button type="button" class="bopt-messages-btn" onclick="mpCloseEditModal();"><?php esc_html_e( 'Cancel', 'mobile-pasal' ); ?></button>
+						<button type="button" class="bopt-btn-secondary" onclick="mpCloseEditModal();"><?php esc_html_e( 'Cancel', 'mobile-pasal' ); ?></button>
 						<button type="submit" name="mp_update_record_submit" value="1" class="bopt-save-btn" style="padding:10px 24px;">
 							<i class="fa-solid fa-floppy-disk"></i> <?php esc_html_e( 'Save Changes', 'mobile-pasal' ); ?>
 						</button>
@@ -3518,14 +3577,14 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 	.mp-tracker-widget { width: 100%; max-width: 720px; margin: 24px auto; font-family: inherit; }
 	.mp-tracker-card { background: var(--bg-card, #ffffff); border: 1px solid var(--border-color, #e2e8f0); border-radius: 20px; padding: clamp(24px, 4vw, 36px); box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
 	.mp-tracker-header { text-align: center; margin-bottom: 24px; }
-	.mp-tracker-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0, 102, 204, 0.08); color: var(--primary, #0066cc); padding: 5px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; }
-	.mp-tracker-title { font-size: clamp(1.3rem, 2.8vw, 1.7rem); font-weight: 900; color: var(--text-heading, #0f172a); margin: 0 0 8px; }
-	.mp-tracker-desc { font-size: 0.94rem; color: var(--text-muted, #64748b); margin: 0; }
-	.mp-tracker-input-group { display: flex; align-items: center; gap: 12px; background: var(--bg-surface, #f8fafc); border: 1.5px solid var(--border-color, #cbd5e1); border-radius: 14px; padding: 6px 6px 6px 16px; transition: border-color 0.2s, box-shadow 0.2s; }
-	.mp-tracker-input-group:focus-within { border-color: var(--primary, #0066cc); box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.12); background: #ffffff; }
-	.mp-tracker-input-group svg { color: var(--text-muted, #64748b); flex-shrink: 0; }
-	.mp-tracker-input { flex: 1; border: none; background: transparent; outline: none; font-size: 0.98rem; color: var(--text-heading, #0f172a); min-width: 0; }
-	.mp-tracker-submit-btn { background: var(--primary, #0066cc); color: #ffffff; border: none; border-radius: 10px; padding: 12px 22px; font-weight: 800; font-size: 0.94rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; }
+	.mp-tracker-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(8, 98, 233, 0.08); color: var(--blue, #0862e9); padding: 5px 14px; border-radius: 999px; font-size: 0.8rem; font-weight: 700; margin-bottom: 12px; }
+	.mp-tracker-title { font-size: clamp(1.3rem, 2.8vw, 1.7rem); font-weight: 900; color: var(--navy, #071b3b); margin: 0 0 8px; font-family: "Plus Jakarta Sans", sans-serif; }
+	.mp-tracker-desc { font-size: 0.94rem; color: var(--muted, #52627e); margin: 0; font-family: "DM Sans", sans-serif; }
+	.mp-tracker-input-group { display: flex; align-items: center; gap: 12px; background: #ffffff; border: 1.5px solid var(--line, #dce7f8); border-radius: 14px; padding: 6px 6px 6px 16px; transition: border-color 0.2s, box-shadow 0.2s; }
+	.mp-tracker-input-group:focus-within { border-color: var(--blue, #0862e9); box-shadow: 0 0 0 4px rgba(8, 98, 233, 0.15); background: #ffffff; }
+	.mp-tracker-input-group svg { color: var(--muted, #52627e); flex-shrink: 0; }
+	.mp-tracker-input { flex: 1; border: none; background: transparent; outline: none; font-size: 0.98rem; color: var(--navy, #071b3b); min-width: 0; font-family: "DM Sans", sans-serif; }
+	.mp-tracker-submit-btn { background: var(--blue, #0862e9); color: #ffffff; border: none; border-radius: 10px; padding: 12px 22px; font-weight: 800; font-size: 0.94rem; cursor: pointer; white-space: nowrap; flex-shrink: 0; font-family: "Plus Jakarta Sans", sans-serif; }
 	.mp-tracker-error { margin-top: 14px; padding: 12px 16px; background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; border-radius: 10px; font-size: 0.88rem; font-weight: 600; }
 	.mp-tracker-result { margin-top: 24px; padding-top: 24px; border-top: 1px dashed var(--border-color, #e2e8f0); }
 	.mp-docket-summary-box { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; background: var(--bg-surface, #f8fafc); border-radius: 12px; padding: 14px 18px; margin-bottom: 24px; }

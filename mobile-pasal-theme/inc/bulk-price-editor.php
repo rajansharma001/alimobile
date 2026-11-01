@@ -452,14 +452,14 @@ function mobile_pasal_render_bulk_price_editor() {
 				</div>
 			<?php endif; ?>
 
-			<div id="mpBpeCsvImportBox" class="bopt-card" style="display:none;margin-bottom:18px;border:1.5px dashed #0066cc;background:#f8fbff;">
+			<div id="mpBpeCsvImportBox" class="bopt-card" style="display:none;margin-bottom:18px;border:1.5px dashed var(--blue, #0862e9);background:var(--pale, #edf4ff);">
 				<div class="bopt-card-body">
 					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
 						<input type="hidden" name="action" value="mp_import_prices_csv" />
 						<?php wp_nonce_field( 'mp_bpe_csv_import', 'mp_bpe_csv_nonce' ); ?>
 						<div>
-							<strong style="display:block;font-size:14px;color:#0f172a;"><?php esc_html_e( 'Bulk Import Prices & Stock via CSV', 'mobile-pasal' ); ?></strong>
-							<span style="font-size:12.5px;color:#475569;"><?php esc_html_e( 'Tip: Click "Export CSV" first, edit prices in Excel or Google Sheets, and upload the saved CSV file here.', 'mobile-pasal' ); ?></span>
+							<strong style="display:block;font-size:14px;color:var(--navy, #071b3b);font-family:var(--font-head);"><?php esc_html_e( 'Bulk Import Prices & Stock via CSV', 'mobile-pasal' ); ?></strong>
+							<span style="font-size:12.5px;color:var(--muted, #52627e);"><?php esc_html_e( 'Tip: Click "Export CSV" first, edit prices in Excel or Google Sheets, and upload the saved CSV file here.', 'mobile-pasal' ); ?></span>
 						</div>
 						<div style="display:flex;align-items:center;gap:10px;">
 							<input type="file" name="mp_csv_file" accept=".csv,text/csv" required />
@@ -487,7 +487,7 @@ function mobile_pasal_render_bulk_price_editor() {
 					<div class="bopt-card-body">
 						<div style="display:grid;grid-template-columns:1fr 1.2fr 1.4fr;gap:18px;align-items:center;">
 							<div>
-								<label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-weight:700;color:#0f172a;font-size:14px;">
+								<label style="display:flex;align-items:center;gap:12px;cursor:pointer;font-weight:700;color:var(--navy, #071b3b);font-size:14px;">
 									<span class="bopt-switch">
 										<input type="hidden" name="global_show_price" value="0" />
 										<input type="checkbox" id="mpBpeGlobalShowPrice" name="global_show_price" value="1" <?php checked( ! empty( $global_show_price ) ); ?> />
@@ -512,7 +512,7 @@ function mobile_pasal_render_bulk_price_editor() {
 				</div>
 
 				<!-- Filter & Search Bar -->
-				<div class="bopt-filter-bar" style="background:#fff;padding:14px 18px;border-radius:12px;border:1px solid #e2e8f0;margin-bottom:18px;">
+				<div class="bopt-filter-bar" style="background:#fff;padding:14px 18px;border-radius:14px;border:1px solid var(--line, #dce7f8);margin-bottom:18px;">
 					<div class="bopt-filter-pills" id="mpBpeBrandPills">
 						<button type="button" class="bopt-filter-pill is-active" data-brand="all">
 							<?php esc_html_e( 'All Brands', 'mobile-pasal' ); ?>
@@ -581,11 +581,11 @@ function mobile_pasal_render_bulk_price_editor() {
 												<?php endif; ?>
 											</div>
 											<div>
-												<strong style="display:block;font-size:13.5px;color:#0f172a;"><?php echo esc_html( $h->post_title ); ?></strong>
-												<div style="display:flex;gap:8px;align-items:center;margin-top:3px;font-size:11.5px;color:#64748b;">
-													<span style="background:#eff6ff;color:#0066cc;padding:1px 7px;border-radius:4px;font-weight:700;"><?php echo esc_html( $brand_str ); ?></span>
-													<a href="<?php echo esc_url( get_edit_post_link( $pid ) ); ?>" style="color:#475569;text-decoration:none;"><i class="fa-solid fa-pen"></i> <?php esc_html_e( 'Edit Specs', 'mobile-pasal' ); ?></a>
-													<a href="<?php echo esc_url( get_permalink( $pid ) ); ?>" target="_blank" style="color:#0066cc;text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> <?php esc_html_e( 'View', 'mobile-pasal' ); ?></a>
+												<strong style="display:block;font-size:13.5px;color:var(--navy, #071b3b);font-family:var(--font-head);"><?php echo esc_html( $h->post_title ); ?></strong>
+												<div style="display:flex;gap:8px;align-items:center;margin-top:3px;font-size:11.5px;color:var(--muted, #52627e);">
+													<span style="background:var(--pale, #edf4ff);color:var(--blue, #0862e9);padding:1px 7px;border-radius:4px;font-weight:700;"><?php echo esc_html( $brand_str ); ?></span>
+													<a href="<?php echo esc_url( get_edit_post_link( $pid ) ); ?>" style="color:var(--muted, #52627e);text-decoration:none;"><i class="fa-solid fa-pen"></i> <?php esc_html_e( 'Edit Specs', 'mobile-pasal' ); ?></a>
+													<a href="<?php echo esc_url( get_permalink( $pid ) ); ?>" target="_blank" style="color:var(--blue, #0862e9);text-decoration:none;"><i class="fa-solid fa-arrow-up-right-from-square"></i> <?php esc_html_e( 'View', 'mobile-pasal' ); ?></a>
 												</div>
 											</div>
 										</div>
@@ -596,7 +596,7 @@ function mobile_pasal_render_bulk_price_editor() {
 											   value="<?php echo esc_attr( $price ); ?>"
 											   placeholder="Rs. 51,999"
 											   class="bopt-text-input"
-											   style="font-weight:700;color:#0f172a;" />
+											   style="font-weight:700;color:var(--navy, #071b3b);" />
 									</td>
 									<td>
 										<input type="text"
@@ -604,7 +604,7 @@ function mobile_pasal_render_bulk_price_editor() {
 											   value="<?php echo esc_attr( $old_price ); ?>"
 											   placeholder="Rs. 55,000"
 											   class="bopt-text-input"
-											   style="color:#64748b;" />
+											   style="color:var(--muted, #52627e);" />
 									</td>
 									<td>
 										<input type="text"
