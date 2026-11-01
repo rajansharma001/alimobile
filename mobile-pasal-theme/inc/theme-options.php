@@ -3943,15 +3943,6 @@ function mobile_pasal_options_render_dashboard() {
 							<button type="button" class="bopt-reset-tab-btn" id="boptResetCurrentTabBtn" title="<?php esc_attr_e( 'Reset only the fields in this tab back to default values', 'mobile-pasal' ); ?>">
 								<i class="fa-solid fa-rotate-left"></i> <?php esc_html_e( 'Reset Tab', 'mobile-pasal' ); ?>
 							</button>
-							<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-inbox-btn" title="<?php esc_attr_e( 'Open Bulk Handset Price & Stock Editor', 'mobile-pasal' ); ?>">
-								<i class="fa-solid fa-tags"></i> <?php esc_html_e( 'Bulk Prices', 'mobile-pasal' ); ?>
-							</a>
-							<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries' ) ); ?>" class="bopt-inbox-btn">
-								<i class="fa-solid fa-inbox"></i> <?php esc_html_e( 'Inquiries', 'mobile-pasal' ); ?>
-								<?php if ( $unread_inquiries > 0 ) : ?>
-									<span class="bopt-badge-pill"><?php echo esc_html( $unread_inquiries ); ?></span>
-								<?php endif; ?>
-							</a>
 							<button type="submit" class="bopt-save-btn" title="<?php esc_attr_e( 'Save All Settings (Ctrl+S)', 'mobile-pasal' ); ?>">
 								<i class="fa-solid fa-floppy-disk"></i>
 								<span class="bopt-btn-text-full"><?php esc_html_e( 'Save All Settings', 'mobile-pasal' ); ?></span>
