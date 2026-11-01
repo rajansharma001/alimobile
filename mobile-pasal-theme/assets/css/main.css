@@ -2838,6 +2838,56 @@
       font-size: 13px;
     }
 
+    .footer-bottom-right {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: #6d84a7;
+    }
+
+    .footer-credit-divider {
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    .footer-credit-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #9cb3d8;
+    }
+
+    .footer-credit-author {
+      color: #ffffff;
+      font-weight: 800;
+      text-decoration: none;
+      background: rgba(56, 189, 248, 0.14);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      letter-spacing: 0.01em;
+      transition: all 0.2s ease;
+    }
+
+    a.footer-credit-author:hover {
+      background: var(--blue, #0862e9);
+      border-color: var(--blue, #0862e9);
+      color: #ffffff;
+    }
+
+    @media (max-width: 767px) {
+      .footer-bottom,
+      .footer-bottom-right {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .footer-credit-divider {
+        display: none;
+      }
+    }
+
     /* =========================================================
        FLOATING ACTIONS & MODAL
        ========================================================= */

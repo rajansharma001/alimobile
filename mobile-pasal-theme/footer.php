@@ -75,12 +75,29 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="brand" style="color:#ffffff; margin-bottom:14px;">
-          <span class="brand-mark">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
-          </span>
-          <span><?php echo esc_html( mp_opt( 'brand_name_line1', 'Ali Mobile' ) ); ?><br><?php echo esc_html( mp_opt( 'brand_name_line2', 'Center' ) ); ?></span>
-        </div>
+        <a class="brand footer-brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php bloginfo( 'name' ); ?> Home" style="color:#ffffff; margin-bottom:14px; display:inline-flex; align-items:center; text-decoration:none;">
+          <?php
+          $footer_logo_url = mp_opt( 'footer_logo', '' );
+          if ( empty( $footer_logo_url ) ) {
+            $footer_logo_url = mp_opt( 'site_logo', '' );
+          }
+          if ( empty( $footer_logo_url ) ) {
+            $footer_logo_url = mp_opt( 'logo_image', '' );
+          }
+          if ( empty( $footer_logo_url ) && function_exists( 'has_custom_logo' ) && has_custom_logo() ) {
+            $custom_logo_id  = get_theme_mod( 'custom_logo' );
+            $footer_logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+          }
+          if ( ! empty( $footer_logo_url ) ) :
+          ?>
+            <img src="<?php echo esc_url( $footer_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="footer-logo-img" style="max-height: 48px; width: auto; object-fit: contain; display: block;">
+          <?php else : ?>
+            <span class="brand-mark">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>
+            </span>
+            <span><?php echo esc_html( mp_opt( 'brand_name_line1', 'Ali Mobile' ) ); ?><br><?php echo esc_html( mp_opt( 'brand_name_line2', 'Center' ) ); ?></span>
+          <?php endif; ?>
+        </a>
         <p style="color:#8fa7cb; line-height:1.6; margin:0 0 16px 0;">
           <?php echo esc_html( mp_opt( 'footer_brand_desc', 'Leading smartphone store & microscope-equipped certified repair center in Gulariya, Bardiya. Dedicated to genuine parts, NTA compliance, and honest service.' ) ); ?>
         </p>
@@ -155,9 +172,26 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
     </div>
 
+    <?php
+    $credit_name = mp_opt( 'footer_credit_name', 'Rajan Sharma' );
+    $credit_url  = mp_opt( 'footer_credit_url', '' );
+    ?>
     <div class="footer-bottom">
-      <div><?php echo esc_html( $copyright ); ?></div>
-      <div style="color: #6d84a7;"><?php echo esc_html( mp_opt( 'footer_mdms_badge', 'Gulariya, Bardiya, Nepal • Authorized Brand Warranty Partner' ) ); ?></div>
+      <div class="footer-copyright-text"><?php echo esc_html( $copyright ); ?></div>
+      <div class="footer-bottom-right">
+        <span class="footer-mdms-text"><?php echo esc_html( mp_opt( 'footer_mdms_badge', 'Gulariya, Bardiya, Nepal • Authorized Brand Warranty Partner' ) ); ?></span>
+        <?php if ( ! empty( $credit_name ) ) : ?>
+          <span class="footer-credit-divider" aria-hidden="true">&bull;</span>
+          <span class="footer-credit-badge">
+            <?php esc_html_e( 'Designed & Developed by', 'mobile-pasal' ); ?>
+            <?php if ( ! empty( $credit_url ) ) : ?>
+              <a href="<?php echo esc_url( $credit_url ); ?>" target="_blank" rel="noopener noreferrer" class="footer-credit-author"><?php echo esc_html( $credit_name ); ?></a>
+            <?php else : ?>
+              <strong class="footer-credit-author"><?php echo esc_html( $credit_name ); ?></strong>
+            <?php endif; ?>
+          </span>
+        <?php endif; ?>
+      </div>
     </div>
   </div>
 </footer>

@@ -103,9 +103,16 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
     <a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php bloginfo( 'name' ); ?> Home">
       <?php
       $custom_logo_url = mp_opt( 'site_logo', '' );
+      if ( empty( $custom_logo_url ) ) {
+        $custom_logo_url = mp_opt( 'logo_image', '' );
+      }
+      if ( empty( $custom_logo_url ) && function_exists( 'has_custom_logo' ) && has_custom_logo() ) {
+        $custom_logo_id  = get_theme_mod( 'custom_logo' );
+        $custom_logo_url = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+      }
       if ( ! empty( $custom_logo_url ) ) :
       ?>
-        <img src="<?php echo esc_url( $custom_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; object-fit: contain;">
+        <img src="<?php echo esc_url( $custom_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" class="header-logo-img" style="max-height: 48px; width: auto; object-fit: contain;">
       <?php else : ?>
         <span class="brand-mark">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z"/></svg>

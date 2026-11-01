@@ -32,6 +32,7 @@ function mobile_pasal_options_defaults() {
 		'brand_name_line1'             => 'Ali Mobile',
 		'brand_name_line2'             => 'Center',
 		'site_logo'                    => '',
+		'footer_logo'                  => '',
 		'logo_image'                   => '',
 		'site_favicon'                 => '',
 		'favicon_image'                => '',
@@ -546,6 +547,8 @@ function mobile_pasal_options_defaults() {
 		'footer_col2_title'            => 'Apple Fix Lab',
 		'footer_col3_title'            => 'Store Information',
 		'footer_copyright'             => '© 2026 Ali Mobile Center & Apple Fix. Gulariya-06, Bardiya, Nepal. All Rights Reserved.',
+		'footer_credit_name'           => 'Rajan Sharma',
+		'footer_credit_url'            => '',
 		'trust_box1_icon'              => 'shield',
 		'trust_box1_title'             => 'NTA Registered Devices',
 		'trust_box1_desc'              => '100% compliant with Nepal MDMS laws.',
@@ -1933,7 +1936,8 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card-body">
 								<div class="bopt-field-grid">
 									<?php
-									mp_render_field_image( 'site_logo', __( 'Custom Header Logo', 'mobile-pasal' ), __( 'Recommended size: 240x60px transparent PNG or SVG. If empty, the stylized brand typography renders automatically.' ) );
+									mp_render_field_image( 'site_logo', __( 'Global Brand Logo (Header & Footer)', 'mobile-pasal' ), __( 'Recommended size: 240x60px transparent PNG or SVG. Automatically used in both the header and footer.' ) );
+									mp_render_field_image( 'footer_logo', __( 'Custom Footer Logo (Optional Override)', 'mobile-pasal' ), __( 'Optional light/white logo specifically for the dark footer. Leave empty to use the Global Brand Logo above.' ) );
 									mp_render_field_image( 'site_favicon', __( 'Browser Favicon', 'mobile-pasal' ), __( 'Square 32x32px or 64x64px icon displayed in browser tabs.' ) );
 									?>
 								</div>
@@ -2027,6 +2031,8 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'footer_col2_title', __( 'Column 2 Title (Services)', 'mobile-pasal' ), __( 'Default: Apple Fix Lab.' ) );
 									mp_render_field_text( 'footer_col3_title', __( 'Column 3 Title (Location)', 'mobile-pasal' ), __( 'Default: Store Information.' ) );
 									mp_render_field_textarea( 'footer_copyright', __( 'Copyright Notice', 'mobile-pasal' ), __( 'Default: © 2026 Ali Mobile Center & Apple Fix. All Rights Reserved.' ), 2 );
+									mp_render_field_text( 'footer_credit_name', __( 'Developer Credit Name', 'mobile-pasal' ), __( 'Displayed in the footer bottom bar (Default: Rajan Sharma).' ), 'Rajan Sharma' );
+									mp_render_field_url( 'footer_credit_url', __( 'Developer Credit URL (Optional)', 'mobile-pasal' ), __( 'Optional portfolio or profile link for the developer credit.' ), 'https://' );
 									?>
 								</div>
 							</div>
