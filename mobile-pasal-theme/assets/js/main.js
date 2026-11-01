@@ -401,7 +401,7 @@
   var homePaginationInfo = document.getElementById("homePaginationInfo");
   var isShopPage = !!document.getElementById("shopProductsGrid");
   var homeCatalogPage = 1;
-  var HOME_CATALOG_PAGE_SIZE = 9; // 9 handsets per page (3 rows of 3 on desktop)
+  var HOME_CATALOG_PAGE_SIZE = 6; // 6 handsets per page (2 rows of 3 on desktop)
 
   function renderHomeCatalogPagination(totalMatches, totalPages, allFilteredItems) {
     if (!homePaginationControls || !homePaginationWrapper) return;
