@@ -287,8 +287,19 @@ body:has(.bopt-app-wrap) #wpfooter {
 }
 
 @media screen and (max-width: 782px) {
+	.bopt-topbar {
+		flex-wrap: wrap !important;
+	}
 	.bopt-topbar-right {
 		gap: 6px;
+		width: 100%;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		padding: 4px 0 6px;
+		scrollbar-width: thin;
+	}
+	.bopt-topbar-right > * {
+		flex-shrink: 0;
 	}
 }
 
@@ -2207,6 +2218,45 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 .mp-pay-badge.paid { background: #dcfce7; color: #166534; border: 1px solid #bbf7d0; }
 .mp-pay-badge.partial { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
 .mp-pay-badge.unpaid { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+
+/* Mobile-First Modal Drawer (< 782px) */
+@media screen and (max-width: 782px) {
+	.mp-admin-modal-backdrop {
+		padding: 0 !important;
+		align-items: flex-end !important;
+	}
+	.mp-admin-modal-box {
+		width: 100% !important;
+		max-width: 100% !important;
+		max-height: 94vh !important;
+		border-radius: 20px 20px 0 0 !important;
+		padding: 18px 16px 24px !important;
+		margin: 0 !important;
+	}
+	.mp-admin-form-grid {
+		grid-template-columns: 1fr !important;
+	}
+	.mp-modal-sticky-footer {
+		position: sticky;
+		bottom: -24px;
+		background: #ffffff;
+		padding: 14px 0 0;
+		border-top: 1px solid #e2e8f0;
+		z-index: 10;
+		margin-top: 14px;
+	}
+	.bopt-docket-card-actions {
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+	}
+}
+
+@media screen and (min-width: 783px) {
+	.bopt-docket-card-actions {
+		grid-template-columns: repeat(4, 1fr);
+		gap: 8px;
+	}
+}
 
 /* ══════════════════════════════════════════════════════════════
    13. COMPACT SUBNAV PILLS & MULTI-ITEM SWITCHERS (Zero-Scroll UX)

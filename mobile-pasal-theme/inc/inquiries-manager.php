@@ -164,11 +164,25 @@ function mp_register_inquiries_admin_menu() {
 		'mp-general-inquiries',
 		'mp_render_general_inquiries_submenu_redirect'
 	);
+
+	add_submenu_page(
+		'mp-inquiries',
+		esc_html__( 'Repair Reports & Revenue Analytics', 'mobile-pasal' ),
+		esc_html__( '📊 Repair Reports', 'mobile-pasal' ),
+		'manage_options',
+		'mp-repair-reports',
+		'mp_render_repair_reports_submenu_redirect'
+	);
 }
 add_action( 'admin_menu', 'mp_register_inquiries_admin_menu' );
 
 function mp_render_general_inquiries_submenu_redirect() {
 	$_GET['tab'] = 'general';
+	mp_render_inquiries_admin_page();
+}
+
+function mp_render_repair_reports_submenu_redirect() {
+	$_GET['tab'] = 'reports';
 	mp_render_inquiries_admin_page();
 }
 
@@ -982,6 +996,10 @@ add_action( 'admin_post_mp_print_docket', 'mp_print_repair_docket_receipt' );
 /**
  * 3. Render Separated Repair Lab Dockets & General Inquiries Admin Suite
  */
+/**
+ * 3. Render Separated Repair Lab Dockets, General Inquiries & Repair Reports Admin Suite
+ * Mobile-First Responsive, Executive Analytics & Advanced Filter System
+ */
 function mp_render_inquiries_admin_page() {
 	mp_ensure_inquiries_schema();
 
@@ -1102,24 +1120,18 @@ function mp_render_inquiries_admin_page() {
 		}
 	}
 
-	// Active Workspace Tab: 'repairs' (default), 'general', or 'all'
+	// Active Workspace Tab: 'repairs' (default), 'general', 'reports', or 'all'
 	$active_tab     = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'repairs';
 	$current_status = isset( $_GET['status'] ) ? sanitize_text_field( wp_unslash( $_GET['status'] ) ) : 'all';
+	$current_pay    = isset( $_GET['payment'] ) ? sanitize_text_field( wp_unslash( $_GET['payment'] ) ) : 'all';
+	$current_urgency = isset( $_GET['urgency'] ) ? sanitize_text_field( wp_unslash( $_GET['urgency'] ) ) : 'all';
+	$current_date   = isset( $_GET['date_filter'] ) ? sanitize_text_field( wp_unslash( $_GET['date_filter'] ) ) : ( 'reports' === $active_tab ? 'this_month' : 'all' );
+	$sort_by        = isset( $_GET['sort'] ) ? sanitize_text_field( wp_unslash( $_GET['sort'] ) ) : 'date_desc';
+	$search_query   = isset( $_GET['s'] ) ? sanitize_text_field( wp_unslash( $_GET['s'] ) ) : '';
+	$per_page       = isset( $_GET['per_page'] ) ? min( 100, max( 10, absint( $_GET['per_page'] ) ) ) : 25;
+	$paged          = isset( $_GET['paged'] ) ? max( 1, absint( $_GET['paged'] ) ) : 1;
 
-	$where = '1=1';
-	if ( 'repairs' === $active_tab ) {
-		$where .= " AND type IN ('repair_docket','walkin_docket','repair')";
-	} elseif ( 'general' === $active_tab ) {
-		$where .= " AND type NOT IN ('repair_docket','walkin_docket','repair')";
-	}
-
-	if ( 'all' !== $current_status ) {
-		$where .= $wpdb->prepare( ' AND status = %s', $current_status );
-	}
-
-	$items = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE {$where} ORDER BY created_at DESC LIMIT 150" );
-
-	// Counts for Separated Tabs
+	// Total Counts for Separated Tabs
 	$repairs_total   = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE type IN ('repair_docket','walkin_docket','repair')" );
 	$repairs_pending = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE type IN ('repair_docket','walkin_docket','repair') AND status IN ('pending','new')" );
 	$repairs_bench   = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE type IN ('repair_docket','walkin_docket','repair') AND status IN ('diagnosing','in_progress','waiting_parts','testing')" );
@@ -1129,79 +1141,714 @@ function mp_render_inquiries_admin_page() {
 	$general_pending = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE type NOT IN ('repair_docket','walkin_docket','repair') AND status IN ('pending','new')" );
 
 	$all_total       = $repairs_total + $general_total;
+
+	// Build Date Clause
+	$date_where = '';
+	if ( 'today' === $current_date ) {
+		$date_where = " AND DATE(created_at) = CURDATE()";
+	} elseif ( 'this_week' === $current_date ) {
+		$date_where = " AND YEARWEEK(created_at, 1) = YEARWEEK(CURDATE(), 1)";
+	} elseif ( 'this_month' === $current_date ) {
+		$date_where = " AND MONTH(created_at) = MONTH(CURDATE()) AND YEAR(created_at) = YEAR(CURDATE())";
+	} elseif ( 'last_month' === $current_date ) {
+		$date_where = " AND created_at >= DATE_SUB(DATE_FORMAT(NOW(), '%Y-%m-01'), INTERVAL 1 MONTH) AND created_at < DATE_FORMAT(NOW(), '%Y-%m-01')";
+	} elseif ( 'this_year' === $current_date ) {
+		$date_where = " AND YEAR(created_at) = YEAR(CURDATE())";
+	} elseif ( 'custom' === $current_date && ! empty( $_GET['start_date'] ) && ! empty( $_GET['end_date'] ) ) {
+		$s_date     = sanitize_text_field( wp_unslash( $_GET['start_date'] ) );
+		$e_date     = sanitize_text_field( wp_unslash( $_GET['end_date'] ) );
+		$date_where = $wpdb->prepare( " AND DATE(created_at) BETWEEN %s AND %s", $s_date, $e_date );
+	}
+
+	// -------------------------------------------------------------
+	// IF TAB === 'reports': Compute Comprehensive Business Intelligence
+	// -------------------------------------------------------------
+	if ( 'reports' === $active_tab ) {
+		$report_rows = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE type IN ('repair_docket','walkin_docket','repair') {$date_where} ORDER BY created_at DESC" );
+
+		$rep_kpi_rev      = 0.0;
+		$rep_kpi_adv      = 0.0;
+		$rep_kpi_bal      = 0.0;
+		$rep_status_cnt   = array();
+		$rep_brand_stats  = array();
+		$rep_service_stats = array();
+		$rep_tech_stats   = array();
+		$rep_pay_stats    = array();
+
+		foreach ( $report_rows as $row_item ) {
+			$raw_c    = (float) preg_replace( '/[^0-9.]/', '', str_replace( ',', '', (string) $row_item->repair_cost ) );
+			$raw_a    = (float) preg_replace( '/[^0-9.]/', '', str_replace( ',', '', (string) $row_item->advance_paid ) );
+			$raw_b    = max( 0.0, $raw_c - $raw_a );
+
+			$rep_kpi_rev += $raw_c;
+			$rep_kpi_adv += $raw_a;
+			$rep_kpi_bal += $raw_b;
+
+			// Status aggregation
+			$st_k = ! empty( $row_item->status ) ? $row_item->status : 'pending';
+			$rep_status_cnt[ $st_k ] = isset( $rep_status_cnt[ $st_k ] ) ? $rep_status_cnt[ $st_k ] + 1 : 1;
+
+			// Brand aggregation
+			$b_name = ! empty( $row_item->device_brand ) ? trim( $row_item->device_brand ) : 'Other / Generic';
+			if ( ! isset( $rep_brand_stats[ $b_name ] ) ) {
+				$rep_brand_stats[ $b_name ] = array( 'count' => 0, 'rev' => 0.0 );
+			}
+			$rep_brand_stats[ $b_name ]['count']++;
+			$rep_brand_stats[ $b_name ]['rev'] += $raw_c;
+
+			// Service category aggregation
+			$s_name = ! empty( $row_item->service_needed ) ? trim( $row_item->service_needed ) : 'General Diagnostic';
+			if ( ! isset( $rep_service_stats[ $s_name ] ) ) {
+				$rep_service_stats[ $s_name ] = array( 'count' => 0, 'rev' => 0.0 );
+			}
+			$rep_service_stats[ $s_name ]['count']++;
+			$rep_service_stats[ $s_name ]['rev'] += $raw_c;
+
+			// Technician productivity
+			$t_name = ! empty( $row_item->technician_name ) ? trim( $row_item->technician_name ) : 'Unassigned / Counter';
+			if ( ! isset( $rep_tech_stats[ $t_name ] ) ) {
+				$rep_tech_stats[ $t_name ] = array( 'assigned' => 0, 'completed' => 0, 'rev' => 0.0 );
+			}
+			$rep_tech_stats[ $t_name ]['assigned']++;
+			if ( in_array( $st_k, array( 'ready', 'completed' ), true ) ) {
+				$rep_tech_stats[ $t_name ]['completed']++;
+			}
+			$rep_tech_stats[ $t_name ]['rev'] += $raw_c;
+
+			// Payment method breakdown
+			$p_meth = ! empty( $row_item->payment_method ) ? trim( $row_item->payment_method ) : 'Cash at Counter';
+			if ( ! isset( $rep_pay_stats[ $p_meth ] ) ) {
+				$rep_pay_stats[ $p_meth ] = array( 'count' => 0, 'rev' => 0.0 );
+			}
+			$rep_pay_stats[ $p_meth ]['count']++;
+			$rep_pay_stats[ $p_meth ]['rev'] += $raw_c;
+		}
+
+		$rep_total_dockets = count( $report_rows );
+		$rep_completed_cnt = ( isset( $rep_status_cnt['ready'] ) ? $rep_status_cnt['ready'] : 0 ) + ( isset( $rep_status_cnt['completed'] ) ? $rep_status_cnt['completed'] : 0 );
+		$rep_bench_cnt     = ( isset( $rep_status_cnt['diagnosing'] ) ? $rep_status_cnt['diagnosing'] : 0 ) + ( isset( $rep_status_cnt['in_progress'] ) ? $rep_status_cnt['in_progress'] : 0 ) + ( isset( $rep_status_cnt['waiting_parts'] ) ? $rep_status_cnt['waiting_parts'] : 0 ) + ( isset( $rep_status_cnt['testing'] ) ? $rep_status_cnt['testing'] : 0 );
+		$rep_success_rate  = $rep_total_dockets > 0 ? round( ( $rep_completed_cnt / $rep_total_dockets ) * 100, 1 ) : 0;
+		$rep_avg_cost      = $rep_total_dockets > 0 ? round( $rep_kpi_rev / $rep_total_dockets, 2 ) : 0;
+
+		// Sort arrays descending by count
+		uasort( $rep_brand_stats, function( $a, $b ) { return $b['count'] - $a['count']; } );
+		uasort( $rep_service_stats, function( $a, $b ) { return $b['count'] - $a['count']; } );
+		uasort( $rep_tech_stats, function( $a, $b ) { return $b['assigned'] - $a['assigned']; } );
+		uasort( $rep_pay_stats, function( $a, $b ) { return $b['count'] - $a['count']; } );
+	} else {
+		// -------------------------------------------------------------
+		// RECORD TABLES: Apply Filters, Search & SQL Pagination
+		// -------------------------------------------------------------
+		$where = '1=1';
+		if ( 'repairs' === $active_tab ) {
+			$where .= " AND type IN ('repair_docket','walkin_docket','repair')";
+		} elseif ( 'general' === $active_tab ) {
+			$where .= " AND type NOT IN ('repair_docket','walkin_docket','repair')";
+		}
+
+		if ( 'all' !== $current_status ) {
+			$where .= $wpdb->prepare( ' AND status = %s', $current_status );
+		}
+		if ( 'all' !== $current_pay ) {
+			$where .= $wpdb->prepare( ' AND payment_status = %s', $current_pay );
+		}
+		if ( 'all' !== $current_urgency ) {
+			$where .= $wpdb->prepare( ' AND urgency = %s', $current_urgency );
+		}
+
+		$where .= $date_where;
+
+		if ( ! empty( $search_query ) ) {
+			$like = '%' . $wpdb->esc_like( $search_query ) . '%';
+			$where .= $wpdb->prepare(
+				" AND (docket_no LIKE %s OR customer_name LIKE %s OR phone LIKE %s OR email LIKE %s OR device_brand LIKE %s OR device_model LIKE %s OR imei_serial LIKE %s OR service_needed LIKE %s OR message LIKE %s OR notes LIKE %s)",
+				$like, $like, $like, $like, $like, $like, $like, $like, $like, $like
+			);
+		}
+
+		$order_clause = 'ORDER BY created_at DESC';
+		if ( 'date_asc' === $sort_by ) {
+			$order_clause = 'ORDER BY created_at ASC';
+		} elseif ( 'cost_desc' === $sort_by ) {
+			$order_clause = 'ORDER BY CAST(REPLACE(REPLACE(repair_cost, ",", ""), "NPR", "") AS DECIMAL(10,2)) DESC, created_at DESC';
+		} elseif ( 'cost_asc' === $sort_by ) {
+			$order_clause = 'ORDER BY CAST(REPLACE(REPLACE(repair_cost, ",", ""), "NPR", "") AS DECIMAL(10,2)) ASC, created_at DESC';
+		} elseif ( 'name_asc' === $sort_by ) {
+			$order_clause = 'ORDER BY customer_name ASC';
+		}
+
+		$total_items = (int) $wpdb->get_var( "SELECT COUNT(*) FROM {$table_name} WHERE {$where}" );
+		$total_pages = max( 1, (int) ceil( $total_items / $per_page ) );
+		if ( $paged > $total_pages ) {
+			$paged = $total_pages;
+		}
+		$offset = ( $paged - 1 ) * $per_page;
+
+		$items = $wpdb->get_results( "SELECT * FROM {$table_name} WHERE {$where} {$order_clause} LIMIT {$per_page} OFFSET {$offset}" );
+	}
 	?>
 	<style>
-		.mp-crm-tabs {
-			display: flex;
-			gap: 12px;
-			margin-bottom: 20px;
-			flex-wrap: wrap;
+		/* Mobile-First Layout & Theme Variables */
+		:root {
+			--mp-admin-blue: #0066cc;
+			--mp-admin-blue-hover: #0052a3;
+			--mp-admin-navy: #071b3b;
+			--mp-admin-dark: #0f172a;
+			--mp-admin-slate: #334155;
+			--mp-admin-muted: #475569;
+			--mp-admin-border: #cbd5e1;
+			--mp-admin-surface: #f8fafc;
+			--mp-admin-green: #16a34a;
+			--mp-admin-amber: #b45309;
+			--mp-admin-red: #dc2626;
 		}
-		.mp-crm-tab-card {
-			flex: 1;
-			min-width: 240px;
+		.bopt-app-wrap {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+			background: var(--mp-admin-surface);
+			color: var(--mp-admin-dark);
+			min-height: 100vh;
+			box-sizing: border-box;
+		}
+		.bopt-topbar {
+			background: var(--mp-admin-dark);
+			border-bottom: 3px solid var(--mp-admin-blue);
+			padding: 12px 24px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			padding: 16px 20px;
+			gap: 12px;
+			flex-wrap: wrap;
+			position: sticky;
+			top: 32px;
+			z-index: 1000;
+			box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+		}
+		@media screen and (max-width: 782px) {
+			.bopt-topbar {
+				top: 46px;
+				padding: 10px 14px;
+				gap: 10px;
+			}
+			.bopt-topbar-right {
+				width: 100%;
+				display: flex;
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+				padding-bottom: 4px;
+				gap: 8px;
+			}
+			.bopt-topbar-right button,
+			.bopt-topbar-right a {
+				flex-shrink: 0;
+			}
+		}
+		.bopt-inquiries-container {
+			max-width: 1440px;
+			margin: 0 auto;
+			padding: 24px 20px 80px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+		@media screen and (max-width: 782px) {
+			.bopt-inquiries-container {
+				padding: 16px 12px 80px;
+			}
+		}
+		/* 4 Workspace CRM Tabs */
+		.mp-crm-tabs {
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			gap: 14px;
+			margin-bottom: 22px;
+		}
+		@media screen and (max-width: 1024px) {
+			.mp-crm-tabs {
+				grid-template-columns: repeat(2, 1fr);
+			}
+		}
+		@media screen and (max-width: 540px) {
+			.mp-crm-tabs {
+				grid-template-columns: 1fr;
+				gap: 10px;
+			}
+		}
+		.mp-crm-tab-card {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: 15px 18px;
 			background: #ffffff;
 			border: 2px solid #e2e8f0;
 			border-radius: 14px;
 			text-decoration: none;
-			color: #0f172a;
+			color: var(--mp-admin-dark);
 			transition: all 0.2s ease;
+			box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
 		}
 		.mp-crm-tab-card:hover {
 			border-color: #93c5fd;
 			transform: translateY(-1px);
+			box-shadow: 0 6px 16px rgba(0, 102, 204, 0.08);
 		}
 		.mp-crm-tab-card.is-active {
-			border-color: #0066cc;
+			border-color: var(--mp-admin-blue);
 			background: #f0f7ff;
-			box-shadow: 0 8px 20px rgba(0, 102, 204, 0.1);
+			box-shadow: 0 8px 20px rgba(0, 102, 204, 0.12);
 		}
 		.mp-crm-tab-left {
 			display: flex;
 			align-items: center;
-			gap: 14px;
+			gap: 12px;
+			min-width: 0;
 		}
 		.mp-crm-tab-icon {
-			width: 44px;
-			height: 44px;
-			border-radius: 12px;
+			width: 42px;
+			height: 42px;
+			border-radius: 10px;
 			background: #eff6ff;
-			color: #0066cc;
+			color: var(--mp-admin-blue);
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 19px;
+			font-size: 18px;
+			flex-shrink: 0;
 		}
 		.mp-crm-tab-card.is-active .mp-crm-tab-icon {
-			background: #0066cc;
+			background: var(--mp-admin-blue);
 			color: #ffffff;
 		}
 		.mp-crm-tab-title {
 			display: block;
-			font-size: 15px;
+			font-size: 14px;
 			font-weight: 800;
-			color: #0f172a;
+			color: var(--mp-admin-dark);
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		.mp-crm-tab-sub {
 			display: block;
-			font-size: 12px;
-			color: #64748b;
+			font-size: 11.5px;
+			color: var(--mp-admin-muted);
 			margin-top: 2px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		.mp-crm-tab-count {
-			font-size: 20px;
+			font-size: 18px;
 			font-weight: 900;
-			color: #0066cc;
+			color: var(--mp-admin-blue);
 			background: #ffffff;
 			border: 1px solid #bfdbfe;
-			padding: 4px 12px;
+			padding: 3px 10px;
+			border-radius: 999px;
+			flex-shrink: 0;
+		}
+		.mp-crm-tab-card.is-active .mp-crm-tab-count {
+			background: var(--mp-admin-blue);
+			color: #ffffff;
+			border-color: var(--mp-admin-blue);
+		}
+
+		/* Filter Toolbar */
+		.bopt-filter-bar {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 14px;
+			padding: 16px 18px;
+			margin-bottom: 20px;
+			box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+		}
+		.bopt-filter-pills {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			margin-bottom: 14px;
+			padding-bottom: 12px;
+			border-bottom: 1px solid #f1f5f9;
+		}
+		.bopt-filter-pill {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+			padding: 7px 14px;
+			border-radius: 999px;
+			background: #f8fafc;
+			border: 1px solid #cbd5e1;
+			color: var(--mp-admin-slate);
+			font-size: 12.5px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: all 0.15s ease;
+		}
+		.bopt-filter-pill:hover {
+			border-color: #93c5fd;
+			color: var(--mp-admin-blue);
+			background: #eff6ff;
+		}
+		.bopt-filter-pill.is-active {
+			background: var(--mp-admin-blue);
+			color: #ffffff;
+			border-color: var(--mp-admin-blue);
+		}
+		.bopt-filter-pill .bopt-pill-count {
+			background: rgba(0, 0, 0, 0.08);
+			padding: 1px 7px;
+			border-radius: 999px;
+			font-size: 11px;
+		}
+		.bopt-filter-pill.is-active .bopt-pill-count {
+			background: rgba(255, 255, 255, 0.25);
+			color: #ffffff;
+		}
+
+		/* Secondary Filter Controls Grid */
+		.mp-filter-controls-row {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			flex-wrap: wrap;
+		}
+		.mp-filter-selects {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+		.mp-filter-select {
+			height: 38px;
+			padding: 6px 12px;
+			border-radius: 8px;
+			border: 1.5px solid #cbd5e1;
+			background: #ffffff;
+			color: var(--mp-admin-dark);
+			font-size: 12.5px;
+			font-weight: 600;
+			cursor: pointer;
+		}
+		.mp-filter-select:focus {
+			border-color: var(--mp-admin-blue);
+			outline: none;
+		}
+		.mp-search-form {
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			flex-grow: 1;
+			max-width: 440px;
+			min-width: 240px;
+		}
+		@media screen and (max-width: 782px) {
+			.mp-filter-controls-row {
+				flex-direction: column;
+				align-items: stretch;
+			}
+			.mp-filter-selects {
+				flex-direction: column;
+				align-items: stretch;
+			}
+			.mp-filter-select {
+				width: 100%;
+			}
+			.mp-search-form {
+				max-width: 100%;
+			}
+		}
+		.mp-search-input-wrap {
+			position: relative;
+			flex: 1;
+		}
+		.mp-search-input-wrap i {
+			position: absolute;
+			left: 12px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: #64748b;
+			font-size: 13px;
+		}
+		.mp-search-input-wrap input {
+			width: 100%;
+			height: 38px;
+			padding: 6px 12px 6px 36px !important;
+			border-radius: 8px !important;
+			border: 1.5px solid #cbd5e1 !important;
+			background: #ffffff !important;
+			color: var(--mp-admin-dark) !important;
+			font-size: 13px !important;
+		}
+		.mp-search-input-wrap input:focus {
+			border-color: var(--mp-admin-blue) !important;
+			outline: none !important;
+		}
+		.mp-search-btn {
+			height: 38px;
+			padding: 0 16px;
+			background: var(--mp-admin-blue);
+			color: #ffffff;
+			border: none;
+			border-radius: 8px;
+			font-size: 13px;
+			font-weight: 700;
+			cursor: pointer;
+			transition: background 0.15s ease;
+		}
+		.mp-search-btn:hover {
+			background: var(--mp-admin-blue-hover);
+		}
+		.mp-reset-filters-btn {
+			font-size: 12px;
+			font-weight: 700;
+			color: #dc2626;
+			text-decoration: none;
+			padding: 6px 10px;
+			border-radius: 6px;
+			background: #fef2f2;
+			border: 1px solid #fecaca;
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+		}
+		.mp-reset-filters-btn:hover {
+			background: #fee2e2;
+			color: #991b1b;
+		}
+
+		/* Pagination UI */
+		.mp-pagination-bar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 12px;
+			flex-wrap: wrap;
+			padding: 12px 16px;
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 12px;
+			margin: 16px 0;
+		}
+		.mp-pagination-info {
+			font-size: 13px;
+			color: var(--mp-admin-muted);
+			font-weight: 600;
+		}
+		.mp-pagination-info strong {
+			color: var(--mp-admin-dark);
+		}
+		.mp-pagination-links {
+			display: flex;
+			gap: 5px;
+			align-items: center;
+			flex-wrap: wrap;
+		}
+		.mp-page-btn {
+			min-width: 36px;
+			height: 36px;
+			padding: 0 10px;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 8px;
+			border: 1px solid #cbd5e1;
+			background: #ffffff;
+			color: var(--mp-admin-dark);
+			font-size: 13px;
+			font-weight: 700;
+			text-decoration: none;
+			transition: all 0.15s ease;
+		}
+		.mp-page-btn:hover {
+			border-color: var(--mp-admin-blue);
+			color: var(--mp-admin-blue);
+			background: #eff6ff;
+		}
+		.mp-page-btn.is-active {
+			background: var(--mp-admin-blue);
+			color: #ffffff;
+			border-color: var(--mp-admin-blue);
+		}
+		.mp-page-btn.disabled {
+			opacity: 0.4;
+			cursor: not-allowed;
+			pointer-events: none;
+		}
+
+		/* High Contrast Badges & Status */
+		.mp-cost-pill {
+			display: inline-block;
+			font-size: 12.5px;
+			font-weight: 800;
+			color: var(--mp-admin-dark);
+			background: #f1f5f9;
+			border: 1px solid #cbd5e1;
+			padding: 3px 8px;
+			border-radius: 6px;
+		}
+		.mp-pay-badge {
+			display: inline-block;
+			font-size: 10px;
+			font-weight: 800;
+			text-transform: uppercase;
+			padding: 2px 7px;
+			border-radius: 4px;
+			margin-top: 3px;
+			border: 1px solid transparent;
+		}
+		.mp-pay-badge.paid { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+		.mp-pay-badge.partial { background: #fef3c7; color: #92400e; border-color: #fde68a; }
+		.mp-pay-badge.unpaid { background: #fee2e2; color: #991b1b; border-color: #fecaca; }
+
+		/* Report Analytics View Styles */
+		.mp-report-toolbar {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 14px;
+			flex-wrap: wrap;
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 14px;
+			padding: 16px 20px;
+			margin-bottom: 22px;
+			box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+		}
+		.mp-report-date-pills {
+			display: flex;
+			gap: 8px;
+			flex-wrap: wrap;
+			align-items: center;
+		}
+		.mp-report-kpi-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 16px;
+			margin-bottom: 24px;
+		}
+		.mp-report-kpi-card {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 14px;
+			padding: 20px;
+			box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+			position: relative;
+			overflow: hidden;
+		}
+		.mp-report-kpi-card::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			height: 4px;
+			background: #cbd5e1;
+		}
+		.mp-report-kpi-card.blue::before { background: var(--mp-admin-blue); }
+		.mp-report-kpi-card.green::before { background: #16a34a; }
+		.mp-report-kpi-card.amber::before { background: #d97706; }
+		.mp-report-kpi-card.purple::before { background: #7c3aed; }
+		.mp-report-kpi-card.teal::before { background: #0d9488; }
+		.mp-report-kpi-card.red::before { background: #dc2626; }
+
+		.mp-report-kpi-header {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-start;
+			margin-bottom: 8px;
+		}
+		.mp-report-kpi-title {
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			color: var(--mp-admin-muted);
+		}
+		.mp-report-kpi-icon {
+			font-size: 18px;
+			color: var(--mp-admin-blue);
+		}
+		.mp-report-kpi-val {
+			font-size: 24px;
+			font-weight: 900;
+			color: var(--mp-admin-dark);
+			line-height: 1.2;
+			margin-bottom: 6px;
+		}
+		.mp-report-kpi-sub {
+			font-size: 12px;
+			color: var(--mp-admin-muted);
+			display: flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.mp-report-grid-2 {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			margin-bottom: 24px;
+		}
+		@media screen and (max-width: 900px) {
+			.mp-report-grid-2 {
+				grid-template-columns: 1fr;
+			}
+		}
+		.mp-report-card {
+			background: #ffffff;
+			border: 1px solid #e2e8f0;
+			border-radius: 14px;
+			padding: 22px;
+			box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
+		}
+		.mp-report-card-title {
+			font-size: 15px;
+			font-weight: 800;
+			color: var(--mp-admin-dark);
+			margin: 0 0 16px 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+		.mp-brand-bar-item {
+			margin-bottom: 14px;
+		}
+		.mp-brand-bar-head {
+			display: flex;
+			justify-content: space-between;
+			font-size: 13px;
+			font-weight: 700;
+			color: var(--mp-admin-dark);
+			margin-bottom: 5px;
+		}
+		.mp-progress-track {
+			height: 8px;
+			background: #f1f5f9;
+			border-radius: 999px;
+			overflow: hidden;
+		}
+		.mp-progress-fill {
+			height: 100%;
+			background: var(--mp-admin-blue);
 			border-radius: 999px;
 		}
-		/* Modal for Full Admin Edit */
+		.mp-tech-table {
+			width: 100%;
+			border-collapse: collapse;
+		}
+		.mp-tech-table th, .mp-tech-table td {
+			padding: 10px 12px;
+			border-bottom: 1px solid #f1f5f9;
+			text-align: left;
+			font-size: 12.5px;
+		}
+		.mp-tech-table th {
+			background: #f8fafc;
+			font-size: 11px;
+			font-weight: 800;
+			text-transform: uppercase;
+			color: var(--mp-admin-muted);
+		}
+
+		/* Modal Full Bottom-Sheet on Mobile (< 782px) */
 		.mp-admin-modal-backdrop {
 			position: fixed;
 			inset: 0;
@@ -1239,7 +1886,7 @@ function mp_render_inquiries_admin_page() {
 			font-weight: 800;
 			text-transform: uppercase;
 			letter-spacing: 0.04em;
-			color: #334155;
+			color: var(--mp-admin-slate);
 			margin-bottom: 5px;
 		}
 		.mp-admin-field input,
@@ -1250,49 +1897,70 @@ function mp_render_inquiries_admin_page() {
 			border: 1px solid #cbd5e1;
 			border-radius: 8px;
 			font-size: 13px;
-			color: #0f172a;
+			color: var(--mp-admin-dark);
 			background: #f8fafc;
 		}
 		.mp-admin-field input:focus,
 		.mp-admin-field select:focus,
 		.mp-admin-field textarea:focus {
-			border-color: #0066cc;
+			border-color: var(--mp-admin-blue);
 			background: #ffffff;
 			outline: none;
 			box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.12);
 		}
 		.mp-inline-status-select {
-			padding: 5px 8px;
+			padding: 6px 10px;
 			border-radius: 8px;
 			border: 1px solid #cbd5e1;
 			font-size: 12px;
 			font-weight: 700;
 			background: #f8fafc;
-			color: #0f172a;
+			color: var(--mp-admin-dark);
 			cursor: pointer;
 		}
-		.mp-cost-pill {
-			display: inline-block;
-			font-size: 12.5px;
-			font-weight: 800;
-			color: #0f172a;
-			background: #f1f5f9;
-			border: 1px solid #cbd5e1;
-			padding: 3px 8px;
-			border-radius: 6px;
+
+		@media screen and (max-width: 782px) {
+			.mp-admin-modal-backdrop {
+				padding: 0 !important;
+				align-items: flex-end !important;
+			}
+			.mp-admin-modal-box {
+				width: 100% !important;
+				max-width: 100% !important;
+				max-height: 94vh !important;
+				border-radius: 20px 20px 0 0 !important;
+				padding: 18px 16px 20px !important;
+			}
+			.mp-admin-form-grid {
+				grid-template-columns: 1fr !important;
+			}
+			.mp-modal-sticky-footer {
+				position: sticky;
+				bottom: -20px;
+				background: #ffffff;
+				padding: 12px 0 0;
+				border-top: 1px solid #e2e8f0;
+				z-index: 10;
+			}
 		}
-		.mp-pay-badge {
-			display: inline-block;
-			font-size: 10px;
-			font-weight: 800;
-			text-transform: uppercase;
-			padding: 2px 6px;
-			border-radius: 4px;
-			margin-top: 3px;
+
+		/* Print Styling for Executive Report */
+		@media print {
+			#wpadminbar, #adminmenumain, .bopt-topbar, .mp-crm-tabs, .mp-report-toolbar, .bopt-filter-bar, .mp-pagination-bar {
+				display: none !important;
+			}
+			body, #wpbody-content, .bopt-app-wrap, .bopt-inquiries-container {
+				background: #ffffff !important;
+				padding: 0 !important;
+				margin: 0 !important;
+				width: 100% !important;
+			}
+			.mp-report-kpi-card, .mp-report-card {
+				box-shadow: none !important;
+				border: 1px solid #cbd5e1 !important;
+				break-inside: avoid;
+			}
 		}
-		.mp-pay-badge.paid { background: #dcfce7; color: #166534; }
-		.mp-pay-badge.partial { background: #fef3c7; color: #92400e; }
-		.mp-pay-badge.unpaid { background: #fee2e2; color: #991b1b; }
 	</style>
 
 	<div class="bopt-app-wrap">
@@ -1300,10 +1968,10 @@ function mp_render_inquiries_admin_page() {
 		<header class="bopt-topbar">
 			<div class="bopt-topbar-left">
 				<div class="bopt-brand">
-					<div class="bopt-brand-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+					<div class="bopt-brand-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
 					<div class="bopt-brand-info">
 						<span class="bopt-brand-title"><?php echo esc_html( mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' ) ); ?></span>
-						<span class="bopt-brand-badge"><?php esc_html_e( 'Separated Repair Lab Dockets & General Inquiries CRM', 'mobile-pasal' ); ?></span>
+						<span class="bopt-brand-badge"><?php esc_html_e( 'Repair Lab Dockets, Inquiries & Revenue Analytics Suite', 'mobile-pasal' ); ?></span>
 					</div>
 				</div>
 			</div>
@@ -1317,6 +1985,10 @@ function mp_render_inquiries_admin_page() {
 					<i class="fa-solid fa-comment-dots"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( '+ Log General Inquiry', 'mobile-pasal' ); ?></span>
 				</button>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=reports' ) ); ?>" class="bopt-messages-btn <?php echo 'reports' === $active_tab ? 'is-active' : ''; ?>">
+					<i class="fa-solid fa-chart-line" style="color:#0284c7;"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Repair Report', 'mobile-pasal' ); ?></span>
+				</a>
 				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=' . $active_tab ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Export current view to CSV', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-file-csv"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Export CSV', 'mobile-pasal' ); ?></span>
@@ -1340,14 +2012,14 @@ function mp_render_inquiries_admin_page() {
 				</div>
 			<?php endif; ?>
 
-			<!-- Separated Workspace Switcher: Repair Lab Dockets vs General Inquiries -->
+			<!-- 4 CRM Workspace Tabs (Repairs, General Inquiries, Reports, All Combined) -->
 			<div class="mp-crm-tabs">
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=repairs' ) ); ?>" class="mp-crm-tab-card <?php echo 'repairs' === $active_tab ? 'is-active' : ''; ?>">
 					<div class="mp-crm-tab-left">
 						<div class="mp-crm-tab-icon"><i class="fa-solid fa-screwdriver-wrench"></i></div>
 						<div>
 							<span class="mp-crm-tab-title"><?php esc_html_e( 'Repair Lab Dockets', 'mobile-pasal' ); ?></span>
-							<span class="mp-crm-tab-sub"><?php printf( esc_html__( '%1$d Pending • %2$d On Bench • %3$d Ready/Done', 'mobile-pasal' ), $repairs_pending, $repairs_bench, $repairs_ready ); ?></span>
+							<span class="mp-crm-tab-sub"><?php printf( esc_html__( '%1$d Pending • %2$d Bench • %3$d Done', 'mobile-pasal' ), $repairs_pending, $repairs_bench, $repairs_ready ); ?></span>
 						</div>
 					</div>
 					<span class="mp-crm-tab-count"><?php echo esc_html( $repairs_total ); ?></span>
@@ -1357,19 +2029,30 @@ function mp_render_inquiries_admin_page() {
 					<div class="mp-crm-tab-left">
 						<div class="mp-crm-tab-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
 						<div>
-							<span class="mp-crm-tab-title"><?php esc_html_e( 'General Customer Inquiries', 'mobile-pasal' ); ?></span>
-							<span class="mp-crm-tab-sub"><?php printf( esc_html__( '%d Unread / Pending Follow-Up', 'mobile-pasal' ), $general_pending ); ?></span>
+							<span class="mp-crm-tab-title"><?php esc_html_e( 'General Inquiries', 'mobile-pasal' ); ?></span>
+							<span class="mp-crm-tab-sub"><?php printf( esc_html__( '%d Unread / Follow-Up', 'mobile-pasal' ), $general_pending ); ?></span>
 						</div>
 					</div>
 					<span class="mp-crm-tab-count"><?php echo esc_html( $general_total ); ?></span>
 				</a>
 
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=all' ) ); ?>" class="mp-crm-tab-card <?php echo 'all' === $active_tab ? 'is-active' : ''; ?>" style="flex:0.65;">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=reports' ) ); ?>" class="mp-crm-tab-card <?php echo 'reports' === $active_tab ? 'is-active' : ''; ?>">
+					<div class="mp-crm-tab-left">
+						<div class="mp-crm-tab-icon"><i class="fa-solid fa-chart-pie"></i></div>
+						<div>
+							<span class="mp-crm-tab-title"><?php esc_html_e( 'Repair Reports & Stats', 'mobile-pasal' ); ?></span>
+							<span class="mp-crm-tab-sub"><?php esc_html_e( 'Revenue & Volume Intelligence', 'mobile-pasal' ); ?></span>
+						</div>
+					</div>
+					<span class="mp-crm-tab-count" style="background:#0284c7; color:#fff; border-color:#0284c7;"><i class="fa-solid fa-arrow-trend-up"></i></span>
+				</a>
+
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=all' ) ); ?>" class="mp-crm-tab-card <?php echo 'all' === $active_tab ? 'is-active' : ''; ?>">
 					<div class="mp-crm-tab-left">
 						<div class="mp-crm-tab-icon"><i class="fa-solid fa-layer-group"></i></div>
 						<div>
 							<span class="mp-crm-tab-title"><?php esc_html_e( 'All Combined', 'mobile-pasal' ); ?></span>
-							<span class="mp-crm-tab-sub"><?php esc_html_e( 'Repairs + General', 'mobile-pasal' ); ?></span>
+							<span class="mp-crm-tab-sub"><?php esc_html_e( 'Repairs + General Records', 'mobile-pasal' ); ?></span>
 						</div>
 					</div>
 					<span class="mp-crm-tab-count"><?php echo esc_html( $all_total ); ?></span>
@@ -1500,210 +2183,753 @@ function mp_render_inquiries_admin_page() {
 				</form>
 			</div>
 
-			<!-- Status Sub-Filter Bar + Live Search -->
-			<div class="bopt-filter-bar">
-				<div class="bopt-filter-pills">
-					<?php
-					$base_tab_url = admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab );
-					if ( 'general' === $active_tab ) {
-						$status_filters = array(
-							'all'       => __( 'All General Inquiries', 'mobile-pasal' ),
-							'pending'   => __( 'New / Unread', 'mobile-pasal' ),
-							'contacted' => __( 'Contacted', 'mobile-pasal' ),
-							'quoted'    => __( 'Price Quoted', 'mobile-pasal' ),
-							'resolved'  => __( 'Resolved / Closed', 'mobile-pasal' ),
-						);
-					} else {
-						$status_filters = array(
-							'all'           => __( 'All Repair Dockets', 'mobile-pasal' ),
-							'pending'       => __( 'Pending Check-In', 'mobile-pasal' ),
-							'diagnosing'    => __( 'Diagnosing', 'mobile-pasal' ),
-							'in_progress'   => __( 'On Bench (In Progress)', 'mobile-pasal' ),
-							'waiting_parts' => __( 'Waiting Parts', 'mobile-pasal' ),
-							'ready'         => __( 'Ready for Pickup', 'mobile-pasal' ),
-							'completed'     => __( 'Completed / Delivered', 'mobile-pasal' ),
-						);
-					}
-					foreach ( $status_filters as $s_key => $s_label ) :
-						$pill_url = 'all' === $s_key ? $base_tab_url : add_query_arg( 'status', $s_key, $base_tab_url );
-						?>
-						<a href="<?php echo esc_url( $pill_url ); ?>" class="bopt-filter-pill <?php echo $current_status === $s_key ? 'is-active' : ''; ?>">
-							<span><?php echo esc_html( $s_label ); ?></span>
-						</a>
-					<?php endforeach; ?>
-				</div>
+			<?php if ( 'reports' === $active_tab ) : ?>
+				<!-- ========================================================= -->
+				<!-- REPAIR REPORTS & REVENUE ANALYTICS VIEW                   -->
+				<!-- ========================================================= -->
+				<div class="mp-report-toolbar">
+					<div>
+						<h3 style="margin:0 0 4px; font-size:18px; font-weight:900; color:#0f172a;">
+							<i class="fa-solid fa-chart-line" style="color:#0066cc; margin-right:6px;"></i>
+							<?php esc_html_e( 'Repair Lab Performance & Counter Revenue Intelligence', 'mobile-pasal' ); ?>
+						</h3>
+						<p style="margin:0; font-size:12px; color:#475569;">
+							<?php esc_html_e( 'Real-time financial metrics, device brand breakdown, technician efficiency & payment settlements.', 'mobile-pasal' ); ?>
+						</p>
+					</div>
 
-				<div class="bopt-inquiries-search">
-					<i class="fa-solid fa-magnifying-glass"></i>
-					<input type="text" id="boptInquiriesSearchInput" placeholder="<?php esc_attr_e( 'Search docket, customer, phone, IMEI, model...', 'mobile-pasal' ); ?>" autocomplete="off">
-				</div>
-			</div>
-
-			<!-- Main Records Table -->
-			<div class="bopt-table-wrap has-mobile-cards">
-				<table class="bopt-table">
-					<thead>
-						<tr>
-							<th style="width: 135px;"><?php esc_html_e( 'Docket / Ref', 'mobile-pasal' ); ?></th>
-							<th style="width: 175px;"><?php esc_html_e( 'Customer & Contact', 'mobile-pasal' ); ?></th>
-							<th><?php echo esc_html( 'general' === $active_tab ? __( 'Subject, Device & Message', 'mobile-pasal' ) : __( 'Device, Fault & Technician Notes', 'mobile-pasal' ) ); ?></th>
-							<th style="width: 145px;"><?php echo esc_html( 'general' === $active_tab ? __( 'Quoted Price', 'mobile-pasal' ) : __( 'Repair Cost & Pay', 'mobile-pasal' ) ); ?></th>
-							<th style="width: 165px;"><?php esc_html_e( 'Quick Status Change', 'mobile-pasal' ); ?></th>
-							<th style="width: 245px;"><?php esc_html_e( 'Admin Actions & PDF', 'mobile-pasal' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php if ( empty( $items ) ) : ?>
-							<tr>
-								<td colspan="6" style="text-align: center; padding: 44px; color: #64748b;">
-									<i class="fa-regular fa-folder-open" style="font-size: 28px; display: block; margin-bottom: 8px;"></i>
-									<?php echo esc_html( 'general' === $active_tab ? __( 'No general inquiries found.', 'mobile-pasal' ) : __( 'No repair lab dockets found.', 'mobile-pasal' ) ); ?>
-								</td>
-							</tr>
-						<?php else : ?>
-							<?php foreach ( $items as $row ) :
-								$is_rep      = mp_is_repair_record_type( $row->type );
-								$clean_phone = preg_replace( '/[^0-9]/', '', $row->phone );
-								if ( 10 === strlen( $clean_phone ) ) {
-									$clean_phone = '977' . $clean_phone;
-								}
-								$docket_num = ! empty( $row->docket_no ) ? $row->docket_no : ( ( $is_rep ? 'AF-' : 'INQ-' ) . $row->id );
-								$device_txt = trim( $row->device_brand . ' ' . $row->device_model );
-								$cost_val   = isset( $row->repair_cost ) ? trim( (string) $row->repair_cost ) : '';
-								$adv_val    = isset( $row->advance_paid ) ? trim( (string) $row->advance_paid ) : '0';
-								$pay_stat   = ! empty( $row->payment_status ) ? $row->payment_status : 'unpaid';
-								$track_link = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
-
-								if ( $is_rep ) {
-									$wa_reply_msg = sprintf(
-										"Namaste %s! Update from Ali Mobile Center & Apple Fix (Gulariya):\n• Docket No: %s\n• Device: %s\n• Service: %s\n• Current Status: %s%s%s\nTrack live status & warranty: %s",
-										$row->customer_name,
-										$docket_num,
-										$device_txt ?: 'Handset',
-										$row->service_needed,
-										strtoupper( str_replace( '_', ' ', $row->status ) ),
-										! empty( $cost_val ) ? "\n• Repair Cost: {$currency} {$cost_val}" : '',
-										! empty( $row->notes ) ? "\n• Technician Note: {$row->notes}" : '',
-										$track_link
-									);
-								} else {
-									$wa_reply_msg = sprintf(
-										"Namaste %s! Thank you for contacting Ali Mobile Center (Gulariya) regarding %s (%s).%s How can we help you today?",
-										$row->customer_name,
-										$row->service_needed,
-										$docket_num,
-										! empty( $cost_val ) ? " Counter Offer Price: {$currency} {$cost_val}." : ''
-									);
-								}
-								$wa_url = 'https://wa.me/' . $clean_phone . '?text=' . rawurlencode( $wa_reply_msg );
-
-								$edit_payload = wp_json_encode( array(
-									'id'                   => (int) $row->id,
-									'docket_no'            => $docket_num,
-									'type'                 => $row->type,
-									'status'               => $row->status,
-									'customer_name'        => $row->customer_name,
-									'phone'                => $row->phone,
-									'email'                => $row->email,
-									'device_brand'         => $row->device_brand,
-									'device_model'         => $row->device_model,
-									'imei_serial'          => isset( $row->imei_serial ) ? $row->imei_serial : '',
-									'device_passcode'      => isset( $row->device_passcode ) ? $row->device_passcode : '',
-									'accessories_received' => isset( $row->accessories_received ) ? $row->accessories_received : 'Device Only',
-									'service_needed'       => $row->service_needed,
-									'urgency'              => $row->urgency,
-									'repair_cost'          => $cost_val,
-									'advance_paid'         => $adv_val,
-									'payment_status'       => $pay_stat,
-									'payment_method'       => isset( $row->payment_method ) ? $row->payment_method : 'Cash',
-									'technician_name'      => isset( $row->technician_name ) ? $row->technician_name : '',
-									'estimated_delivery'   => isset( $row->estimated_delivery ) ? $row->estimated_delivery : '',
-									'warranty_days'        => isset( $row->warranty_days ) ? (int) $row->warranty_days : 90,
-									'message'              => $row->message,
-									'notes'                => isset( $row->notes ) ? $row->notes : '',
-									'internal_notes'       => isset( $row->internal_notes ) ? $row->internal_notes : '',
-								) );
+					<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+						<div class="mp-report-date-pills">
+							<?php
+							$date_options = array(
+								'today'      => __( 'Today', 'mobile-pasal' ),
+								'this_week'  => __( 'This Week', 'mobile-pasal' ),
+								'this_month' => __( 'This Month', 'mobile-pasal' ),
+								'last_month' => __( 'Last Month', 'mobile-pasal' ),
+								'this_year'  => __( 'This Year', 'mobile-pasal' ),
+								'all'        => __( 'All Time', 'mobile-pasal' ),
+							);
+							$rep_base_url = admin_url( 'admin.php?page=mp-inquiries&tab=reports' );
+							foreach ( $date_options as $d_k => $d_lbl ) :
+								$d_url = add_query_arg( 'date_filter', $d_k, $rep_base_url );
 								?>
+								<a href="<?php echo esc_url( $d_url ); ?>" class="bopt-filter-pill <?php echo $current_date === $d_k ? 'is-active' : ''; ?>">
+									<span><?php echo esc_html( $d_lbl ); ?></span>
+								</a>
+							<?php endforeach; ?>
+						</div>
+
+						<button type="button" onclick="window.print();" class="bopt-messages-btn" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd; font-weight:800;">
+							<i class="fa-solid fa-print"></i> <span><?php esc_html_e( 'Print Report', 'mobile-pasal' ); ?></span>
+						</button>
+						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=repairs' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn">
+							<i class="fa-solid fa-file-csv"></i> <span><?php esc_html_e( 'Export Data', 'mobile-pasal' ); ?></span>
+						</a>
+					</div>
+				</div>
+
+				<!-- Executive KPI Bento Grid -->
+				<div class="mp-report-kpi-grid">
+					<div class="mp-report-kpi-card blue">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Repair Turnover / Revenue', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-sack-dollar mp-report-kpi-icon"></i>
+						</div>
+						<div class="mp-report-kpi-val"><?php echo esc_html( $currency . ' ' . number_format( $rep_kpi_rev, 2 ) ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php printf( esc_html__( 'Avg %1$s %2$s / device', 'mobile-pasal' ), $currency, number_format( $rep_avg_cost, 0 ) ); ?></span>
+						</div>
+					</div>
+
+					<div class="mp-report-kpi-card green">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Advance / Cash Collected', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-circle-check mp-report-kpi-icon" style="color:#16a34a;"></i>
+						</div>
+						<div class="mp-report-kpi-val" style="color:#16a34a;"><?php echo esc_html( $currency . ' ' . number_format( $rep_kpi_adv, 2 ) ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php printf( esc_html__( '%d%% Collected Upfront', 'mobile-pasal' ), $rep_kpi_rev > 0 ? round( ( $rep_kpi_adv / $rep_kpi_rev ) * 100 ) : 0 ); ?></span>
+						</div>
+					</div>
+
+					<div class="mp-report-kpi-card amber">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Outstanding Receivables', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-hourglass-half mp-report-kpi-icon" style="color:#d97706;"></i>
+						</div>
+						<div class="mp-report-kpi-val" style="color:#d97706;"><?php echo esc_html( $currency . ' ' . number_format( $rep_kpi_bal, 2 ) ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php esc_html_e( 'Due on Counter Pickup / Delivery', 'mobile-pasal' ); ?></span>
+						</div>
+					</div>
+
+					<div class="mp-report-kpi-card purple">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Total Devices Intake', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-mobile-screen mp-report-kpi-icon" style="color:#7c3aed;"></i>
+						</div>
+						<div class="mp-report-kpi-val"><?php echo esc_html( number_format( $rep_total_dockets ) ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php printf( esc_html__( '%d Completed • %d On Bench', 'mobile-pasal' ), $rep_completed_cnt, $rep_bench_cnt ); ?></span>
+						</div>
+					</div>
+
+					<div class="mp-report-kpi-card teal">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Repair Success & QA Rate', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-shield-halved mp-report-kpi-icon" style="color:#0d9488;"></i>
+						</div>
+						<div class="mp-report-kpi-val" style="color:#0d9488;"><?php echo esc_html( $rep_success_rate . '%' ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php printf( esc_html__( '%d Fixed & Delivered Handsets', 'mobile-pasal' ), $rep_completed_cnt ); ?></span>
+						</div>
+					</div>
+
+					<div class="mp-report-kpi-card red">
+						<div class="mp-report-kpi-header">
+							<span class="mp-report-kpi-title"><?php esc_html_e( 'Active Work On Bench', 'mobile-pasal' ); ?></span>
+							<i class="fa-solid fa-microchip mp-report-kpi-icon" style="color:#dc2626;"></i>
+						</div>
+						<div class="mp-report-kpi-val" style="color:#dc2626;"><?php echo esc_html( number_format( $rep_bench_cnt ) ); ?></div>
+						<div class="mp-report-kpi-sub">
+							<span><?php esc_html_e( 'In Diagnosing, Bench & QA', 'mobile-pasal' ); ?></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- 2-Column Analytics: Brand Distribution & Common Services -->
+				<div class="mp-report-grid-2">
+					<!-- Brand Share -->
+					<div class="mp-report-card">
+						<h4 class="mp-report-card-title">
+							<span><i class="fa-solid fa-brands fa-apple" style="color:#0066cc; margin-right:6px;"></i> <?php esc_html_e( 'Device Brand Market Share', 'mobile-pasal' ); ?></span>
+							<small style="font-size:12px; color:#475569; font-weight:600;"><?php echo esc_html( count( $rep_brand_stats ) ); ?> <?php esc_html_e( 'Brands Handled', 'mobile-pasal' ); ?></small>
+						</h4>
+						<?php if ( empty( $rep_brand_stats ) ) : ?>
+							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No device repair data recorded in this period.', 'mobile-pasal' ); ?></p>
+						<?php else : ?>
+							<?php
+							$top_brands = array_slice( $rep_brand_stats, 0, 6, true );
+							foreach ( $top_brands as $b_name => $b_data ) :
+								$b_pct = $rep_total_dockets > 0 ? round( ( $b_data['count'] / $rep_total_dockets ) * 100, 1 ) : 0;
+								?>
+								<div class="mp-brand-bar-item">
+									<div class="mp-brand-bar-head">
+										<span><?php echo esc_html( $b_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $b_data['count'] ); ?> units)</small></span>
+										<span><?php echo esc_html( $b_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $b_data['rev'] ) ); ?></span>
+									</div>
+									<div class="mp-progress-track">
+										<div class="mp-progress-fill" style="width: <?php echo esc_attr( $b_pct ); ?>%;"></div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+
+					<!-- Most Common Repair Categories -->
+					<div class="mp-report-card">
+						<h4 class="mp-report-card-title">
+							<span><i class="fa-solid fa-screwdriver-wrench" style="color:#16a34a; margin-right:6px;"></i> <?php esc_html_e( 'Top Repair Services & Faults', 'mobile-pasal' ); ?></span>
+							<small style="font-size:12px; color:#475569; font-weight:600;"><?php echo esc_html( count( $rep_service_stats ) ); ?> <?php esc_html_e( 'Categories', 'mobile-pasal' ); ?></small>
+						</h4>
+						<?php if ( empty( $rep_service_stats ) ) : ?>
+							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No service repairs recorded in this period.', 'mobile-pasal' ); ?></p>
+						<?php else : ?>
+							<?php
+							$top_services = array_slice( $rep_service_stats, 0, 6, true );
+							foreach ( $top_services as $s_name => $s_data ) :
+								$s_pct = $rep_total_dockets > 0 ? round( ( $s_data['count'] / $rep_total_dockets ) * 100, 1 ) : 0;
+								?>
+								<div class="mp-brand-bar-item">
+									<div class="mp-brand-bar-head">
+										<span style="max-width:240px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><?php echo esc_html( $s_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $s_data['count'] ); ?>)</small></span>
+										<span><?php echo esc_html( $s_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $s_data['rev'] ) ); ?></span>
+									</div>
+									<div class="mp-progress-track">
+										<div class="mp-progress-fill" style="background:#16a34a; width: <?php echo esc_attr( $s_pct ); ?>%;"></div>
+									</div>
+								</div>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
+				</div>
+
+				<!-- 2-Column Analytics: Technician Productivity & Payment Settlements -->
+				<div class="mp-report-grid-2">
+					<!-- Technician Productivity Leaderboard -->
+					<div class="mp-report-card">
+						<h4 class="mp-report-card-title">
+							<span><i class="fa-solid fa-user-gear" style="color:#0284c7; margin-right:6px;"></i> <?php esc_html_e( 'Technician Productivity Leaderboard', 'mobile-pasal' ); ?></span>
+						</h4>
+						<?php if ( empty( $rep_tech_stats ) ) : ?>
+							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No assigned technician data in this period.', 'mobile-pasal' ); ?></p>
+						<?php else : ?>
+							<table class="mp-tech-table">
+								<thead>
+									<tr>
+										<th><?php esc_html_e( 'Technician', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Assigned', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Completed', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Efficiency', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Turnover', 'mobile-pasal' ); ?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ( $rep_tech_stats as $t_name => $t_data ) :
+										$t_eff = $t_data['assigned'] > 0 ? round( ( $t_data['completed'] / $t_data['assigned'] ) * 100 ) : 0;
+										?>
+										<tr>
+											<td><strong><?php echo esc_html( $t_name ); ?></strong></td>
+											<td><?php echo esc_html( $t_data['assigned'] ); ?></td>
+											<td style="color:#16a34a; font-weight:700;"><?php echo esc_html( $t_data['completed'] ); ?></td>
+											<td>
+												<span style="display:inline-block; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:800; background:<?php echo $t_eff >= 75 ? '#dcfce7' : '#fef3c7'; ?>; color:<?php echo $t_eff >= 75 ? '#166534' : '#92400e'; ?>;">
+													<?php echo esc_html( $t_eff . '%' ); ?>
+												</span>
+											</td>
+											<td style="font-weight:800; color:#0f172a;"><?php echo esc_html( $currency . ' ' . number_format( $t_data['rev'] ) ); ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						<?php endif; ?>
+					</div>
+
+					<!-- Settlement & Payment Modes -->
+					<div class="mp-report-card">
+						<h4 class="mp-report-card-title">
+							<span><i class="fa-solid fa-credit-card" style="color:#7c3aed; margin-right:6px;"></i> <?php esc_html_e( 'Payment Settlement Modes', 'mobile-pasal' ); ?></span>
+						</h4>
+						<?php if ( empty( $rep_pay_stats ) ) : ?>
+							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No payment settlement transactions recorded.', 'mobile-pasal' ); ?></p>
+						<?php else : ?>
+							<table class="mp-tech-table">
+								<thead>
+									<tr>
+										<th><?php esc_html_e( 'Payment Mode', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Transactions', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Share', 'mobile-pasal' ); ?></th>
+										<th><?php esc_html_e( 'Settled Value', 'mobile-pasal' ); ?></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php foreach ( $rep_pay_stats as $p_meth => $p_data ) :
+										$p_pct = $rep_total_dockets > 0 ? round( ( $p_data['count'] / $rep_total_dockets ) * 100, 1 ) : 0;
+										?>
+										<tr>
+											<td><strong><?php echo esc_html( $p_meth ); ?></strong></td>
+											<td><?php echo esc_html( $p_data['count'] ); ?></td>
+											<td><?php echo esc_html( $p_pct . '%' ); ?></td>
+											<td style="font-weight:800; color:#0f172a;"><?php echo esc_html( $currency . ' ' . number_format( $p_data['rev'] ) ); ?></td>
+										</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+						<?php endif; ?>
+					</div>
+				</div>
+
+			<?php else : ?>
+				<!-- ========================================================= -->
+				<!-- RECORD TABLES VIEW (REPAIRS, GENERAL INQUIRIES, ALL)     -->
+				<!-- ========================================================= -->
+
+				<!-- Filter & Search Bar with Live Pagination Support -->
+				<div class="bopt-filter-bar">
+					<!-- 1. Quick Status Pills -->
+					<div class="bopt-filter-pills">
+						<?php
+						$base_tab_url = admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab );
+						if ( 'general' === $active_tab ) {
+							$status_filters = array(
+								'all'       => __( 'All Inquiries', 'mobile-pasal' ),
+								'pending'   => __( 'New / Unread', 'mobile-pasal' ),
+								'contacted' => __( 'Contacted', 'mobile-pasal' ),
+								'quoted'    => __( 'Price Quoted', 'mobile-pasal' ),
+								'resolved'  => __( 'Resolved / Closed', 'mobile-pasal' ),
+							);
+						} else {
+							$status_filters = array(
+								'all'           => __( 'All Dockets', 'mobile-pasal' ),
+								'pending'       => __( 'Pending Check-In', 'mobile-pasal' ),
+								'diagnosing'    => __( 'Diagnosing', 'mobile-pasal' ),
+								'in_progress'   => __( 'On Bench (In Progress)', 'mobile-pasal' ),
+								'waiting_parts' => __( 'Waiting Parts', 'mobile-pasal' ),
+								'ready'         => __( 'Ready for Pickup', 'mobile-pasal' ),
+								'completed'     => __( 'Completed / Delivered', 'mobile-pasal' ),
+							);
+						}
+						foreach ( $status_filters as $s_key => $s_label ) :
+							$pill_url = 'all' === $s_key ? remove_query_arg( array( 'status', 'paged' ), $base_tab_url ) : add_query_arg( array( 'status' => $s_key, 'paged' => 1 ), $base_tab_url );
+							?>
+							<a href="<?php echo esc_url( $pill_url ); ?>" class="bopt-filter-pill <?php echo $current_status === $s_key ? 'is-active' : ''; ?>">
+								<span><?php echo esc_html( $s_label ); ?></span>
+							</a>
+						<?php endforeach; ?>
+					</div>
+
+					<!-- 2. Secondary Filter Controls & Live Search Form -->
+					<form method="get" action="" class="mp-filter-controls-row">
+						<input type="hidden" name="page" value="mp-inquiries">
+						<input type="hidden" name="tab" value="<?php echo esc_attr( $active_tab ); ?>">
+						<?php if ( 'all' !== $current_status ) : ?>
+							<input type="hidden" name="status" value="<?php echo esc_attr( $current_status ); ?>">
+						<?php endif; ?>
+
+						<div class="mp-filter-selects">
+							<!-- Payment Status Filter -->
+							<select name="payment" class="mp-filter-select" onchange="this.form.submit();">
+								<option value="all" <?php selected( $current_pay, 'all' ); ?>><?php esc_html_e( 'All Payments', 'mobile-pasal' ); ?></option>
+								<option value="paid" <?php selected( $current_pay, 'paid' ); ?>><?php esc_html_e( 'Paid in Full', 'mobile-pasal' ); ?></option>
+								<option value="partial" <?php selected( $current_pay, 'partial' ); ?>><?php esc_html_e( 'Advance / Partial', 'mobile-pasal' ); ?></option>
+								<option value="unpaid" <?php selected( $current_pay, 'unpaid' ); ?>><?php esc_html_e( 'Unpaid', 'mobile-pasal' ); ?></option>
+							</select>
+
+							<!-- Urgency / Priority Filter -->
+							<select name="urgency" class="mp-filter-select" onchange="this.form.submit();">
+								<option value="all" <?php selected( $current_urgency, 'all' ); ?>><?php esc_html_e( 'All Priorities', 'mobile-pasal' ); ?></option>
+								<option value="Express 45-Min" <?php selected( $current_urgency, 'Express 45-Min' ); ?>><?php esc_html_e( 'Express 45-Min', 'mobile-pasal' ); ?></option>
+								<option value="Urgent Same-Day" <?php selected( $current_urgency, 'Urgent Same-Day' ); ?>><?php esc_html_e( 'Urgent Same-Day', 'mobile-pasal' ); ?></option>
+								<option value="Normal" <?php selected( $current_urgency, 'Normal' ); ?>><?php esc_html_e( 'Normal Priority', 'mobile-pasal' ); ?></option>
+							</select>
+
+							<!-- Date Filter -->
+							<select name="date_filter" class="mp-filter-select" onchange="this.form.submit();">
+								<option value="all" <?php selected( $current_date, 'all' ); ?>><?php esc_html_e( 'All Dates', 'mobile-pasal' ); ?></option>
+								<option value="today" <?php selected( $current_date, 'today' ); ?>><?php esc_html_e( 'Today', 'mobile-pasal' ); ?></option>
+								<option value="this_week" <?php selected( $current_date, 'this_week' ); ?>><?php esc_html_e( 'This Week', 'mobile-pasal' ); ?></option>
+								<option value="this_month" <?php selected( $current_date, 'this_month' ); ?>><?php esc_html_e( 'This Month', 'mobile-pasal' ); ?></option>
+							</select>
+
+							<!-- Sort Dropdown -->
+							<select name="sort" class="mp-filter-select" onchange="this.form.submit();">
+								<option value="date_desc" <?php selected( $sort_by, 'date_desc' ); ?>><?php esc_html_e( 'Newest First', 'mobile-pasal' ); ?></option>
+								<option value="date_asc" <?php selected( $sort_by, 'date_asc' ); ?>><?php esc_html_e( 'Oldest First', 'mobile-pasal' ); ?></option>
+								<option value="cost_desc" <?php selected( $sort_by, 'cost_desc' ); ?>><?php esc_html_e( 'Cost: High to Low', 'mobile-pasal' ); ?></option>
+								<option value="cost_asc" <?php selected( $sort_by, 'cost_asc' ); ?>><?php esc_html_e( 'Cost: Low to High', 'mobile-pasal' ); ?></option>
+								<option value="name_asc" <?php selected( $sort_by, 'name_asc' ); ?>><?php esc_html_e( 'Name: A-Z', 'mobile-pasal' ); ?></option>
+							</select>
+
+							<!-- Per Page Dropdown -->
+							<select name="per_page" class="mp-filter-select" onchange="this.form.submit();">
+								<option value="25" <?php selected( $per_page, 25 ); ?>>25 <?php esc_html_e( '/ page', 'mobile-pasal' ); ?></option>
+								<option value="50" <?php selected( $per_page, 50 ); ?>>50 <?php esc_html_e( '/ page', 'mobile-pasal' ); ?></option>
+								<option value="100" <?php selected( $per_page, 100 ); ?>>100 <?php esc_html_e( '/ page', 'mobile-pasal' ); ?></option>
+							</select>
+						</div>
+
+						<!-- Search Input Form -->
+						<div class="mp-search-form">
+							<div class="mp-search-input-wrap">
+								<i class="fa-solid fa-magnifying-glass"></i>
+								<input type="text" name="s" id="boptInquiriesSearchInput" value="<?php echo esc_attr( $search_query ); ?>" placeholder="<?php esc_attr_e( 'Search docket, customer, phone, IMEI...', 'mobile-pasal' ); ?>" autocomplete="off">
+							</div>
+							<button type="submit" class="mp-search-btn"><?php esc_html_e( 'Search', 'mobile-pasal' ); ?></button>
+							<?php if ( ! empty( $search_query ) || 'all' !== $current_status || 'all' !== $current_pay || 'all' !== $current_urgency || 'all' !== $current_date || 'date_desc' !== $sort_by ) : ?>
+								<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab ) ); ?>" class="mp-reset-filters-btn" title="<?php esc_attr_e( 'Reset all filters', 'mobile-pasal' ); ?>">
+									<i class="fa-solid fa-xmark"></i> <?php esc_html_e( 'Reset', 'mobile-pasal' ); ?>
+								</a>
+							<?php endif; ?>
+						</div>
+					</form>
+				</div>
+
+				<!-- Top Pagination Bar -->
+				<?php if ( $total_items > 0 ) : ?>
+					<div class="mp-pagination-bar">
+						<div class="mp-pagination-info">
+							<?php
+							$from_item = $offset + 1;
+							$to_item   = min( $total_items, $offset + $per_page );
+							printf(
+								esc_html__( 'Showing %1$d–%2$d of %3$d records', 'mobile-pasal' ),
+								$from_item,
+								$to_item,
+								$total_items
+							);
+							?>
+						</div>
+
+						<?php if ( $total_pages > 1 ) : ?>
+							<div class="mp-pagination-links">
+								<?php
+								$base_paginate_url = add_query_arg(
+									array(
+										'page'        => 'mp-inquiries',
+										'tab'         => $active_tab,
+										'status'      => $current_status,
+										'payment'     => $current_pay,
+										'urgency'     => $current_urgency,
+										'date_filter' => $current_date,
+										'sort'        => $sort_by,
+										'per_page'    => $per_page,
+										's'           => $search_query,
+									),
+									admin_url( 'admin.php' )
+								);
+
+								// Previous button
+								if ( $paged > 1 ) {
+									echo '<a href="' . esc_url( add_query_arg( 'paged', $paged - 1, $base_paginate_url ) ) . '" class="mp-page-btn">&laquo; ' . esc_html__( 'Prev', 'mobile-pasal' ) . '</a>';
+								} else {
+									echo '<span class="mp-page-btn disabled">&laquo; ' . esc_html__( 'Prev', 'mobile-pasal' ) . '</span>';
+								}
+
+								// Numeric page links with sliding window
+								$start_p = max( 1, $paged - 2 );
+								$end_p   = min( $total_pages, $paged + 2 );
+
+								if ( $start_p > 1 ) {
+									echo '<a href="' . esc_url( add_query_arg( 'paged', 1, $base_paginate_url ) ) . '" class="mp-page-btn">1</a>';
+									if ( $start_p > 2 ) {
+										echo '<span class="mp-page-btn disabled">&hellip;</span>';
+									}
+								}
+
+								for ( $i = $start_p; $i <= $end_p; $i++ ) {
+									$cls = ( $i === $paged ) ? 'mp-page-btn is-active' : 'mp-page-btn';
+									echo '<a href="' . esc_url( add_query_arg( 'paged', $i, $base_paginate_url ) ) . '" class="' . esc_attr( $cls ) . '">' . esc_html( $i ) . '</a>';
+								}
+
+								if ( $end_p < $total_pages ) {
+									if ( $end_p < $total_pages - 1 ) {
+										echo '<span class="mp-page-btn disabled">&hellip;</span>';
+									}
+									echo '<a href="' . esc_url( add_query_arg( 'paged', $total_pages, $base_paginate_url ) ) . '" class="mp-page-btn">' . esc_html( $total_pages ) . '</a>';
+								}
+
+								// Next button
+								if ( $paged < $total_pages ) {
+									echo '<a href="' . esc_url( add_query_arg( 'paged', $paged + 1, $base_paginate_url ) ) . '" class="mp-page-btn">' . esc_html__( 'Next', 'mobile-pasal' ) . ' &raquo;</a>';
+								} else {
+									echo '<span class="mp-page-btn disabled">' . esc_html__( 'Next', 'mobile-pasal' ) . ' &raquo;</span>';
+								}
+								?>
+							</div>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+
+				<!-- Main Desktop Records Table -->
+				<div class="bopt-table-wrap has-mobile-cards">
+					<table class="bopt-table">
+						<thead>
+							<tr>
+								<th style="width: 140px;"><?php esc_html_e( 'Docket / Ref', 'mobile-pasal' ); ?></th>
+								<th style="width: 175px;"><?php esc_html_e( 'Customer & Contact', 'mobile-pasal' ); ?></th>
+								<th><?php echo esc_html( 'general' === $active_tab ? __( 'Subject, Device & Message', 'mobile-pasal' ) : __( 'Device, Fault & Technician Notes', 'mobile-pasal' ) ); ?></th>
+								<th style="width: 145px;"><?php echo esc_html( 'general' === $active_tab ? __( 'Quoted Price', 'mobile-pasal' ) : __( 'Repair Cost & Pay', 'mobile-pasal' ) ); ?></th>
+								<th style="width: 165px;"><?php esc_html_e( 'Quick Status', 'mobile-pasal' ); ?></th>
+								<th style="width: 245px;"><?php esc_html_e( 'Admin Actions & PDF', 'mobile-pasal' ); ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php if ( empty( $items ) ) : ?>
 								<tr>
-									<td>
-										<strong style="font-family: monospace; font-size: 13.5px; color: #0066cc;"><?php echo esc_html( $docket_num ); ?></strong><br>
-										<span style="display:inline-block; margin-top:3px; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; background:<?php echo $is_rep ? '#eff6ff' : '#f5f3ff'; ?>; color:<?php echo $is_rep ? '#1d4ed8' : '#6d28d9'; ?>;">
-											<?php echo esc_html( $is_rep ? '🔧 Repair Lab' : '💬 Inquiry' ); ?>
-										</span>
-										<div style="font-size:11px; color:#94a3b8; margin-top:4px;"><?php echo esc_html( date_i18n( 'M j, Y g:i A', strtotime( $row->created_at ) ) ); ?></div>
+									<td colspan="6" style="text-align: center; padding: 44px; color: #64748b;">
+										<i class="fa-regular fa-folder-open" style="font-size: 28px; display: block; margin-bottom: 8px;"></i>
+										<?php echo esc_html( 'general' === $active_tab ? __( 'No general inquiries found matching your filters.', 'mobile-pasal' ) : __( 'No repair lab dockets found matching your filters.', 'mobile-pasal' ) ); ?>
 									</td>
+								</tr>
+							<?php else : ?>
+								<?php foreach ( $items as $row ) :
+									$is_rep      = mp_is_repair_record_type( $row->type );
+									$clean_phone = preg_replace( '/[^0-9]/', '', $row->phone );
+									if ( 10 === strlen( $clean_phone ) ) {
+										$clean_phone = '977' . $clean_phone;
+									}
+									$docket_num = ! empty( $row->docket_no ) ? $row->docket_no : ( ( $is_rep ? 'AF-' : 'INQ-' ) . $row->id );
+									$device_txt = trim( $row->device_brand . ' ' . $row->device_model );
+									$cost_val   = isset( $row->repair_cost ) ? trim( (string) $row->repair_cost ) : '';
+									$adv_val    = isset( $row->advance_paid ) ? trim( (string) $row->advance_paid ) : '0';
+									$pay_stat   = ! empty( $row->payment_status ) ? $row->payment_status : 'unpaid';
+									$track_link = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
 
-									<td>
-										<strong style="color: #0f172a; font-size:13.5px;"><?php echo esc_html( $row->customer_name ); ?></strong><br>
-										<a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" style="font-weight: 700; color: #0066cc; text-decoration: none; font-size:12.5px;">
-											<i class="fa-solid fa-phone" style="font-size: 10px;"></i> <?php echo esc_html( $row->phone ); ?>
-										</a>
-										<?php if ( ! empty( $row->email ) ) : ?>
-											<br><small><a href="mailto:<?php echo esc_attr( $row->email ); ?>" style="color: #64748b;"><?php echo esc_html( $row->email ); ?></a></small>
-										<?php endif; ?>
-									</td>
+									if ( $is_rep ) {
+										$wa_reply_msg = sprintf(
+											"Namaste %s! Update from Ali Mobile Center & Apple Fix (Gulariya):\n• Docket No: %s\n• Device: %s\n• Service: %s\n• Current Status: %s%s%s\nTrack live status & warranty: %s",
+											$row->customer_name,
+											$docket_num,
+											$device_txt ?: 'Handset',
+											$row->service_needed,
+											strtoupper( str_replace( '_', ' ', $row->status ) ),
+											! empty( $cost_val ) ? "\n• Repair Cost: {$currency} {$cost_val}" : '',
+											! empty( $row->notes ) ? "\n• Technician Note: {$row->notes}" : '',
+											$track_link
+										);
+									} else {
+										$wa_reply_msg = sprintf(
+											"Namaste %s! Thank you for contacting Ali Mobile Center (Gulariya) regarding %s (%s).%s How can we help you today?",
+											$row->customer_name,
+											$row->service_needed,
+											$docket_num,
+											! empty( $cost_val ) ? " Counter Offer Price: {$currency} {$cost_val}." : ''
+										);
+									}
+									$wa_url = 'https://wa.me/' . $clean_phone . '?text=' . rawurlencode( $wa_reply_msg );
 
-									<td>
-										<?php if ( ! empty( $device_txt ) ) : ?>
-											<strong style="color:#071b3b;"><?php echo esc_html( $device_txt ); ?></strong> &bull;
-										<?php endif; ?>
-										<span style="font-weight:700; color:#0066cc;"><?php echo esc_html( $row->service_needed ); ?></span>
-										<?php if ( ! empty( $row->imei_serial ) ) : ?>
-											<span style="font-size:11px; color:#475569; background:#f1f5f9; padding:1px 6px; border-radius:4px; margin-left:4px;">IMEI: <?php echo esc_html( $row->imei_serial ); ?></span>
-										<?php endif; ?>
-										<?php if ( ! empty( $row->message ) ) : ?>
-											<div style="margin-top: 4px; color: #475569; font-size: 12px;">
-												<strong>Customer:</strong> <?php echo esc_html( wp_trim_words( $row->message, 16 ) ); ?>
-											</div>
-										<?php endif; ?>
-										<?php if ( ! empty( $row->notes ) ) : ?>
-											<div style="margin-top: 4px; color: #1e40af; background:#eff6ff; padding:4px 8px; border-radius:6px; font-size: 11.5px;">
-												<strong><i class="fa-solid fa-Clipboard-check"></i> Tech Note:</strong> <?php echo esc_html( wp_trim_words( $row->notes, 16 ) ); ?>
-											</div>
-										<?php endif; ?>
-										<?php if ( ! empty( $row->internal_notes ) ) : ?>
-											<div style="margin-top: 3px; color: #92400e; font-size: 11px;">
-												<i class="fa-solid fa-lock"></i> <em>Staff: <?php echo esc_html( wp_trim_words( $row->internal_notes, 12 ) ); ?></em>
-											</div>
-										<?php endif; ?>
-									</td>
+									$edit_payload = wp_json_encode( array(
+										'id'                   => (int) $row->id,
+										'docket_no'            => $docket_num,
+										'type'                 => $row->type,
+										'status'               => $row->status,
+										'customer_name'        => $row->customer_name,
+										'phone'                => $row->phone,
+										'email'                => $row->email,
+										'device_brand'         => $row->device_brand,
+										'device_model'         => $row->device_model,
+										'imei_serial'          => isset( $row->imei_serial ) ? $row->imei_serial : '',
+										'device_passcode'      => isset( $row->device_passcode ) ? $row->device_passcode : '',
+										'accessories_received' => isset( $row->accessories_received ) ? $row->accessories_received : 'Device Only',
+										'service_needed'       => $row->service_needed,
+										'urgency'              => $row->urgency,
+										'repair_cost'          => $cost_val,
+										'advance_paid'         => $adv_val,
+										'payment_status'       => $pay_stat,
+										'payment_method'       => isset( $row->payment_method ) ? $row->payment_method : 'Cash',
+										'technician_name'      => isset( $row->technician_name ) ? $row->technician_name : '',
+										'estimated_delivery'   => isset( $row->estimated_delivery ) ? $row->estimated_delivery : '',
+										'warranty_days'        => isset( $row->warranty_days ) ? (int) $row->warranty_days : 90,
+										'message'              => $row->message,
+										'notes'                => isset( $row->notes ) ? $row->notes : '',
+										'internal_notes'       => isset( $row->internal_notes ) ? $row->internal_notes : '',
+									) );
+									?>
+									<tr>
+										<td>
+											<strong style="font-family: monospace; font-size: 13.5px; color: #0066cc;"><?php echo esc_html( $docket_num ); ?></strong><br>
+											<span style="display:inline-block; margin-top:3px; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; background:<?php echo $is_rep ? '#eff6ff' : '#f5f3ff'; ?>; color:<?php echo $is_rep ? '#1d4ed8' : '#6d28d9'; ?>;">
+												<?php echo esc_html( $is_rep ? '🔧 Repair Lab' : '💬 Inquiry' ); ?>
+											</span>
+											<div style="font-size:11px; color:#64748b; margin-top:4px;"><?php echo esc_html( date_i18n( 'M j, Y g:i A', strtotime( $row->created_at ) ) ); ?></div>
+										</td>
 
-									<td>
-										<?php if ( ! empty( $cost_val ) ) : ?>
-											<span class="mp-cost-pill"><?php echo esc_html( $currency . ' ' . $cost_val ); ?></span><br>
-											<?php if ( (float) $adv_val > 0 ) : ?>
-												<small style="color:#475569; font-size:11px;">Adv: <?php echo esc_html( $currency . ' ' . $adv_val ); ?></small><br>
+										<td>
+											<strong style="color: #0f172a; font-size:13.5px;"><?php echo esc_html( $row->customer_name ); ?></strong><br>
+											<a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" style="font-weight: 700; color: #0066cc; text-decoration: none; font-size:12.5px;">
+												<i class="fa-solid fa-phone" style="font-size: 10px;"></i> <?php echo esc_html( $row->phone ); ?>
+											</a>
+											<?php if ( ! empty( $row->email ) ) : ?>
+												<br><small><a href="mailto:<?php echo esc_attr( $row->email ); ?>" style="color: #64748b;"><?php echo esc_html( $row->email ); ?></a></small>
 											<?php endif; ?>
-											<span class="mp-pay-badge <?php echo esc_attr( $pay_stat ); ?>"><?php echo esc_html( $pay_stat ); ?></span>
-										<?php else : ?>
-											<button type="button" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>" style="background:#f8fafc; border:1px dashed #94a3b8; color:#475569; border-radius:6px; padding:4px 8px; font-size:11.5px; font-weight:700; cursor:pointer;">
-												+ Set Cost
-											</button>
-										<?php endif; ?>
-									</td>
+										</td>
 
-									<td>
-										<select class="mp-inline-status-select" onchange="if(this.value) window.location.href=this.value;">
+										<td>
+											<?php if ( ! empty( $device_txt ) ) : ?>
+												<strong style="color:#071b3b;"><?php echo esc_html( $device_txt ); ?></strong> &bull;
+											<?php endif; ?>
+											<span style="font-weight:700; color:#0066cc;"><?php echo esc_html( $row->service_needed ); ?></span>
+											<?php if ( ! empty( $row->imei_serial ) ) : ?>
+												<span style="font-size:11px; color:#475569; background:#f1f5f9; padding:1px 6px; border-radius:4px; margin-left:4px;">IMEI: <?php echo esc_html( $row->imei_serial ); ?></span>
+											<?php endif; ?>
+											<?php if ( ! empty( $row->message ) ) : ?>
+												<div style="margin-top: 4px; color: #475569; font-size: 12px;">
+													<strong>Customer:</strong> <?php echo esc_html( wp_trim_words( $row->message, 16 ) ); ?>
+												</div>
+											<?php endif; ?>
+											<?php if ( ! empty( $row->notes ) ) : ?>
+												<div style="margin-top: 4px; color: #1e40af; background:#eff6ff; padding:4px 8px; border-radius:6px; font-size: 11.5px;">
+													<strong><i class="fa-solid fa-clipboard-check"></i> Tech Note:</strong> <?php echo esc_html( wp_trim_words( $row->notes, 16 ) ); ?>
+												</div>
+											<?php endif; ?>
+											<?php if ( ! empty( $row->internal_notes ) ) : ?>
+												<div style="margin-top: 3px; color: #92400e; font-size: 11px;">
+													<i class="fa-solid fa-lock"></i> <em>Staff: <?php echo esc_html( wp_trim_words( $row->internal_notes, 12 ) ); ?></em>
+												</div>
+											<?php endif; ?>
+										</td>
+
+										<td>
+											<?php if ( ! empty( $cost_val ) ) : ?>
+												<span class="mp-cost-pill"><?php echo esc_html( $currency . ' ' . $cost_val ); ?></span><br>
+												<?php if ( (float) $adv_val > 0 ) : ?>
+													<small style="color:#475569; font-size:11px;">Adv: <?php echo esc_html( $currency . ' ' . $adv_val ); ?></small><br>
+												<?php endif; ?>
+												<span class="mp-pay-badge <?php echo esc_attr( $pay_stat ); ?>"><?php echo esc_html( $pay_stat ); ?></span>
+											<?php else : ?>
+												<button type="button" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>" style="background:#f8fafc; border:1px dashed #94a3b8; color:#475569; border-radius:6px; padding:4px 8px; font-size:11.5px; font-weight:700; cursor:pointer;">
+													+ Set Cost
+												</button>
+											<?php endif; ?>
+										</td>
+
+										<td>
+											<select class="mp-inline-status-select" onchange="if(this.value) window.location.href=this.value;">
+												<?php
+												$status_options = $is_rep
+													? array(
+														'pending'       => 'Pending Check-In',
+														'diagnosing'    => 'Diagnosing',
+														'in_progress'   => 'In Progress (Bench)',
+														'waiting_parts' => 'Waiting for Parts',
+														'testing'       => 'Testing & QA',
+														'ready'         => 'Ready for Pickup',
+														'completed'     => 'Completed / Delivered',
+														'cancelled'     => 'Cancelled',
+													)
+													: array(
+														'pending'   => 'New / Unread',
+														'contacted' => 'Contacted',
+														'quoted'    => 'Price Quoted',
+														'resolved'  => 'Resolved / Closed',
+														'cancelled' => 'Cancelled',
+													);
+												foreach ( $status_options as $st_k => $st_v ) :
+													$st_url = wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab . '&action=' . $st_k . '&id=' . $row->id ), 'mp_inquiry_action' );
+													?>
+													<option value="<?php echo esc_url( $st_url ); ?>" <?php selected( $row->status, $st_k ); ?>>
+														<?php echo esc_html( $st_v ); ?>
+													</option>
+												<?php endforeach; ?>
+											</select>
+										</td>
+
+										<td>
+											<div style="display: flex; gap: 6px; flex-wrap: wrap;">
+												<button type="button" class="bopt-btn-call" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd; font-weight:800; cursor:pointer;" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>" title="<?php esc_attr_e( 'Edit Status, Repair Cost, Notes, IMEI & Warranty', 'mobile-pasal' ); ?>">
+													<i class="fa-solid fa-pen-to-square"></i> Edit
+												</button>
+												<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_print_docket&id=' . $row->id ), 'mp_print_docket' ) ); ?>" target="_blank" class="bopt-btn-call" style="color: #0f172a; border-color: #cbd5e1;" title="<?php esc_attr_e( 'Print Detailed PDF Job Sheet / Invoice', 'mobile-pasal' ); ?>">
+													<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> PDF
+												</a>
+												<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-wa-reply" title="<?php esc_attr_e( 'Send WhatsApp Update with Status & Cost', 'mobile-pasal' ); ?>">
+													<i class="fa-brands fa-whatsapp"></i> WA
+												</a>
+												<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab . '&action=delete&id=' . $row->id ), 'mp_inquiry_action' ) ); ?>" class="bopt-btn-call" style="color: #ef4444; border-color: #fecaca;" onclick="return confirm('Delete this record permanently?');" title="<?php esc_attr_e( 'Delete', 'mobile-pasal' ); ?>">
+													<i class="fa-solid fa-trash-can"></i>
+												</a>
+											</div>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							<?php endif; ?>
+						</tbody>
+					</table>
+				</div>
+
+				<!-- Mobile Responsive Cards List (100% Touch First for Phones) -->
+				<div class="bopt-dockets-mobile-list">
+					<?php if ( empty( $items ) ) : ?>
+						<div class="bopt-docket-mobile-card" style="text-align: center; color: #64748b; padding: 32px 16px;">
+							<i class="fa-regular fa-folder-open" style="font-size: 28px; display: block; margin-bottom: 8px;"></i>
+							<?php echo esc_html( 'general' === $active_tab ? __( 'No general inquiries found.', 'mobile-pasal' ) : __( 'No repair lab dockets found.', 'mobile-pasal' ) ); ?>
+						</div>
+					<?php else : ?>
+						<?php foreach ( $items as $row ) :
+							$is_rep      = mp_is_repair_record_type( $row->type );
+							$clean_phone = preg_replace( '/[^0-9]/', '', $row->phone );
+							if ( 10 === strlen( $clean_phone ) ) {
+								$clean_phone = '977' . $clean_phone;
+							}
+							$docket_num = ! empty( $row->docket_no ) ? $row->docket_no : ( ( $is_rep ? 'AF-' : 'INQ-' ) . $row->id );
+							$device_txt = trim( $row->device_brand . ' ' . $row->device_model );
+							$cost_val   = isset( $row->repair_cost ) ? trim( (string) $row->repair_cost ) : '';
+							$adv_val    = isset( $row->advance_paid ) ? trim( (string) $row->advance_paid ) : '0';
+							$pay_stat   = ! empty( $row->payment_status ) ? $row->payment_status : 'unpaid';
+							$track_link = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
+
+							if ( $is_rep ) {
+								$wa_reply_msg = sprintf(
+									"Namaste %s! Update from Ali Mobile Center & Apple Fix (Gulariya):\n• Docket No: %s\n• Device: %s\n• Service: %s\n• Current Status: %s%s%s\nTrack live status & warranty: %s",
+									$row->customer_name,
+									$docket_num,
+									$device_txt ?: 'Handset',
+									$row->service_needed,
+									strtoupper( str_replace( '_', ' ', $row->status ) ),
+									! empty( $cost_val ) ? "\n• Repair Cost: {$currency} {$cost_val}" : '',
+									! empty( $row->notes ) ? "\n• Technician Note: {$row->notes}" : '',
+									$track_link
+								);
+							} else {
+								$wa_reply_msg = sprintf(
+									"Namaste %s! Thank you for contacting Ali Mobile Center (Gulariya) regarding %s (%s).%s How can we help you today?",
+									$row->customer_name,
+									$row->service_needed,
+									$docket_num,
+									! empty( $cost_val ) ? " Counter Offer Price: {$currency} {$cost_val}." : ''
+								);
+							}
+							$wa_url = 'https://wa.me/' . $clean_phone . '?text=' . rawurlencode( $wa_reply_msg );
+
+							$edit_payload = wp_json_encode( array(
+								'id'                   => (int) $row->id,
+								'docket_no'            => $docket_num,
+								'type'                 => $row->type,
+								'status'               => $row->status,
+								'customer_name'        => $row->customer_name,
+								'phone'                => $row->phone,
+								'email'                => $row->email,
+								'device_brand'         => $row->device_brand,
+								'device_model'         => $row->device_model,
+								'imei_serial'          => isset( $row->imei_serial ) ? $row->imei_serial : '',
+								'device_passcode'      => isset( $row->device_passcode ) ? $row->device_passcode : '',
+								'accessories_received' => isset( $row->accessories_received ) ? $row->accessories_received : 'Device Only',
+								'service_needed'       => $row->service_needed,
+								'urgency'              => $row->urgency,
+								'repair_cost'          => $cost_val,
+								'advance_paid'         => $adv_val,
+								'payment_status'       => $pay_stat,
+								'payment_method'       => isset( $row->payment_method ) ? $row->payment_method : 'Cash',
+								'technician_name'      => isset( $row->technician_name ) ? $row->technician_name : '',
+								'estimated_delivery'   => isset( $row->estimated_delivery ) ? $row->estimated_delivery : '',
+								'warranty_days'        => isset( $row->warranty_days ) ? (int) $row->warranty_days : 90,
+								'message'              => $row->message,
+								'notes'                => isset( $row->notes ) ? $row->notes : '',
+								'internal_notes'       => isset( $row->internal_notes ) ? $row->internal_notes : '',
+							) );
+							?>
+							<div class="bopt-docket-mobile-card">
+								<div class="bopt-docket-card-top">
+									<div>
+										<span class="bopt-docket-card-num"><?php echo esc_html( $docket_num ); ?></span>
+										<span style="display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; background:<?php echo $is_rep ? '#eff6ff' : '#f5f3ff'; ?>; color:<?php echo $is_rep ? '#1d4ed8' : '#6d28d9'; ?>;">
+											<?php echo esc_html( $is_rep ? '🔧 Repair' : '💬 Inquiry' ); ?>
+										</span>
+									</div>
+									<span style="font-size:11px; color:#64748b;"><?php echo esc_html( date_i18n( 'M j, g:i A', strtotime( $row->created_at ) ) ); ?></span>
+								</div>
+
+								<div class="bopt-docket-card-body">
+									<h4><?php echo esc_html( $row->customer_name ); ?></h4>
+									<div class="bopt-docket-card-detail">
+										<span><i class="fa-solid fa-phone" style="font-size:11px;color:#0066cc;"></i> <strong>Phone:</strong> <a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" style="color:#0066cc;font-weight:700;text-decoration:none;"><?php echo esc_html( $row->phone ); ?></a></span>
+									</div>
+									<?php if ( ! empty( $device_txt ) ) : ?>
+										<div class="bopt-docket-card-detail">
+											<span><i class="fa-solid fa-mobile-screen" style="font-size:11px;color:#0066cc;"></i> <strong>Device:</strong> <?php echo esc_html( $device_txt ); ?></span>
+										</div>
+									<?php endif; ?>
+									<div class="bopt-docket-card-detail">
+										<span><i class="fa-solid fa-wrench" style="font-size:11px;color:#0066cc;"></i> <strong>Service:</strong> <?php echo esc_html( $row->service_needed ); ?></span>
+									</div>
+									<?php if ( ! empty( $cost_val ) ) : ?>
+										<div class="bopt-docket-card-detail" style="align-items:center; gap:8px;">
+											<span><strong>Cost:</strong> <?php echo esc_html( $currency . ' ' . $cost_val ); ?></span>
+											<span class="mp-pay-badge <?php echo esc_attr( $pay_stat ); ?>"><?php echo esc_html( $pay_stat ); ?></span>
+										</div>
+									<?php endif; ?>
+									<div style="margin-top:10px;">
+										<select class="mp-inline-status-select" style="width:100%;" onchange="if(this.value) window.location.href=this.value;">
 											<?php
-											$status_options = $is_rep
+											$m_status_options = $is_rep
 												? array(
-													'pending'       => 'Pending Check-In',
-													'diagnosing'    => 'Diagnosing',
-													'in_progress'   => 'In Progress (Bench)',
-													'waiting_parts' => 'Waiting for Parts',
-													'testing'       => 'Testing & QA',
-													'ready'         => 'Ready for Pickup',
-													'completed'     => 'Completed / Delivered',
-													'cancelled'     => 'Cancelled',
+													'pending'       => 'Status: Pending Check-In',
+													'diagnosing'    => 'Status: Diagnosing',
+													'in_progress'   => 'Status: In Progress (Bench)',
+													'waiting_parts' => 'Status: Waiting for Parts',
+													'testing'       => 'Status: Testing & QA',
+													'ready'         => 'Status: Ready for Pickup',
+													'completed'     => 'Status: Completed / Delivered',
+													'cancelled'     => 'Status: Cancelled',
 												)
 												: array(
-													'pending'   => 'New / Unread',
-													'contacted' => 'Contacted',
-													'quoted'    => 'Price Quoted',
-													'resolved'  => 'Resolved / Closed',
-													'cancelled' => 'Cancelled',
+													'pending'   => 'Status: New / Unread',
+													'contacted' => 'Status: Contacted',
+													'quoted'    => 'Status: Price Quoted',
+													'resolved'  => 'Status: Resolved / Closed',
+													'cancelled' => 'Status: Cancelled',
 												);
-											foreach ( $status_options as $st_k => $st_v ) :
+											foreach ( $m_status_options as $st_k => $st_v ) :
 												$st_url = wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab . '&action=' . $st_k . '&id=' . $row->id ), 'mp_inquiry_action' );
 												?>
 												<option value="<?php echo esc_url( $st_url ); ?>" <?php selected( $row->status, $st_k ); ?>>
@@ -1711,180 +2937,64 @@ function mp_render_inquiries_admin_page() {
 												</option>
 											<?php endforeach; ?>
 										</select>
-									</td>
-
-									<td>
-										<div style="display: flex; gap: 6px; flex-wrap: wrap;">
-											<button type="button" class="bopt-btn-call" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd; font-weight:800; cursor:pointer;" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>" title="<?php esc_attr_e( 'Edit Status, Repair Cost, Notes, IMEI & Warranty', 'mobile-pasal' ); ?>">
-												<i class="fa-solid fa-pen-to-square"></i> Edit / Cost / Notes
-											</button>
-											<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_print_docket&id=' . $row->id ), 'mp_print_docket' ) ); ?>" target="_blank" class="bopt-btn-call" style="color: #0f172a; border-color: #cbd5e1;" title="<?php esc_attr_e( 'Print Detailed PDF Job Sheet / Invoice', 'mobile-pasal' ); ?>">
-												<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> Print PDF
-											</a>
-											<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-wa-reply" title="<?php esc_attr_e( 'Send WhatsApp Update with Status & Cost', 'mobile-pasal' ); ?>">
-												<i class="fa-brands fa-whatsapp"></i> WhatsApp
-											</a>
-											<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab . '&action=delete&id=' . $row->id ), 'mp_inquiry_action' ) ); ?>" class="bopt-btn-call" style="color: #ef4444; border-color: #fecaca;" onclick="return confirm('Delete this record permanently?');" title="<?php esc_attr_e( 'Delete', 'mobile-pasal' ); ?>">
-												<i class="fa-solid fa-trash-can"></i>
-											</a>
-										</div>
-									</td>
-								</tr>
-							<?php endforeach; ?>
-						<?php endif; ?>
-					</tbody>
-				</table>
-			</div>
-
-			<!-- Mobile Responsive Dockets List (Touch-Friendly for Counter Phone View) -->
-			<div class="bopt-dockets-mobile-list">
-				<?php if ( empty( $items ) ) : ?>
-					<div class="bopt-docket-mobile-card" style="text-align: center; color: #64748b; padding: 32px 16px;">
-						<i class="fa-regular fa-folder-open" style="font-size: 28px; display: block; margin-bottom: 8px;"></i>
-						<?php echo esc_html( 'general' === $active_tab ? __( 'No general inquiries found.', 'mobile-pasal' ) : __( 'No repair lab dockets found.', 'mobile-pasal' ) ); ?>
-					</div>
-				<?php else : ?>
-					<?php foreach ( $items as $row ) :
-						$is_rep      = mp_is_repair_record_type( $row->type );
-						$clean_phone = preg_replace( '/[^0-9]/', '', $row->phone );
-						if ( 10 === strlen( $clean_phone ) ) {
-							$clean_phone = '977' . $clean_phone;
-						}
-						$docket_num = ! empty( $row->docket_no ) ? $row->docket_no : ( ( $is_rep ? 'AF-' : 'INQ-' ) . $row->id );
-						$device_txt = trim( $row->device_brand . ' ' . $row->device_model );
-						$cost_val   = isset( $row->repair_cost ) ? trim( (string) $row->repair_cost ) : '';
-						$adv_val    = isset( $row->advance_paid ) ? trim( (string) $row->advance_paid ) : '0';
-						$pay_stat   = ! empty( $row->payment_status ) ? $row->payment_status : 'unpaid';
-						$track_link = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
-
-						if ( $is_rep ) {
-							$wa_reply_msg = sprintf(
-								"Namaste %s! Update from Ali Mobile Center & Apple Fix (Gulariya):\n• Docket No: %s\n• Device: %s\n• Service: %s\n• Current Status: %s%s%s\nTrack live status & warranty: %s",
-								$row->customer_name,
-								$docket_num,
-								$device_txt ?: 'Handset',
-								$row->service_needed,
-								strtoupper( str_replace( '_', ' ', $row->status ) ),
-								! empty( $cost_val ) ? "\n• Repair Cost: {$currency} {$cost_val}" : '',
-								! empty( $row->notes ) ? "\n• Technician Note: {$row->notes}" : '',
-								$track_link
-							);
-						} else {
-							$wa_reply_msg = sprintf(
-								"Namaste %s! Thank you for contacting Ali Mobile Center (Gulariya) regarding %s (%s).%s How can we help you today?",
-								$row->customer_name,
-								$row->service_needed,
-								$docket_num,
-								! empty( $cost_val ) ? " Counter Offer Price: {$currency} {$cost_val}." : ''
-							);
-						}
-						$wa_url = 'https://wa.me/' . $clean_phone . '?text=' . rawurlencode( $wa_reply_msg );
-
-						$edit_payload = wp_json_encode( array(
-							'id'                   => (int) $row->id,
-							'docket_no'            => $docket_num,
-							'type'                 => $row->type,
-							'status'               => $row->status,
-							'customer_name'        => $row->customer_name,
-							'phone'                => $row->phone,
-							'email'                => $row->email,
-							'device_brand'         => $row->device_brand,
-							'device_model'         => $row->device_model,
-							'imei_serial'          => isset( $row->imei_serial ) ? $row->imei_serial : '',
-							'device_passcode'      => isset( $row->device_passcode ) ? $row->device_passcode : '',
-							'accessories_received' => isset( $row->accessories_received ) ? $row->accessories_received : 'Device Only',
-							'service_needed'       => $row->service_needed,
-							'urgency'              => $row->urgency,
-							'repair_cost'          => $cost_val,
-							'advance_paid'         => $adv_val,
-							'payment_status'       => $pay_stat,
-							'payment_method'       => isset( $row->payment_method ) ? $row->payment_method : 'Cash',
-							'technician_name'      => isset( $row->technician_name ) ? $row->technician_name : '',
-							'estimated_delivery'   => isset( $row->estimated_delivery ) ? $row->estimated_delivery : '',
-							'warranty_days'        => isset( $row->warranty_days ) ? (int) $row->warranty_days : 90,
-							'message'              => $row->message,
-							'notes'                => isset( $row->notes ) ? $row->notes : '',
-							'internal_notes'       => isset( $row->internal_notes ) ? $row->internal_notes : '',
-						) );
-						?>
-						<div class="bopt-docket-mobile-card">
-							<div class="bopt-docket-card-top">
-								<div>
-									<span class="bopt-docket-card-num"><?php echo esc_html( $docket_num ); ?></span>
-									<span style="display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; padding:2px 6px; border-radius:4px; background:<?php echo $is_rep ? '#eff6ff' : '#f5f3ff'; ?>; color:<?php echo $is_rep ? '#1d4ed8' : '#6d28d9'; ?>;">
-										<?php echo esc_html( $is_rep ? '🔧 Repair' : '💬 Inquiry' ); ?>
-									</span>
-								</div>
-								<span style="font-size:11px; color:#64748b;"><?php echo esc_html( date_i18n( 'M j, g:i A', strtotime( $row->created_at ) ) ); ?></span>
-							</div>
-							<div class="bopt-docket-card-body">
-								<h4><?php echo esc_html( $row->customer_name ); ?></h4>
-								<div class="bopt-docket-card-detail">
-									<span><i class="fa-solid fa-phone" style="font-size:11px;color:#0066cc;"></i> <strong>Phone:</strong> <a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" style="color:#0066cc;font-weight:700;text-decoration:none;"><?php echo esc_html( $row->phone ); ?></a></span>
-								</div>
-								<?php if ( ! empty( $device_txt ) ) : ?>
-									<div class="bopt-docket-card-detail">
-										<span><i class="fa-solid fa-mobile-screen" style="font-size:11px;color:#0066cc;"></i> <strong>Device:</strong> <?php echo esc_html( $device_txt ); ?></span>
 									</div>
-								<?php endif; ?>
-								<div class="bopt-docket-card-detail">
-									<span><i class="fa-solid fa-wrench" style="font-size:11px;color:#0066cc;"></i> <strong>Service:</strong> <?php echo esc_html( $row->service_needed ); ?></span>
 								</div>
-								<?php if ( ! empty( $cost_val ) ) : ?>
-									<div class="bopt-docket-card-detail" style="align-items:center; gap:8px;">
-										<span><strong>Cost:</strong> <?php echo esc_html( $currency . ' ' . $cost_val ); ?></span>
-										<span class="mp-pay-badge <?php echo esc_attr( $pay_stat ); ?>"><?php echo esc_html( $pay_stat ); ?></span>
-									</div>
-								<?php endif; ?>
-								<div style="margin-top:10px;">
-									<select class="mp-inline-status-select" style="width:100%;" onchange="if(this.value) window.location.href=this.value;">
-										<?php
-										$m_status_options = $is_rep
-											? array(
-												'pending'       => 'Status: Pending Check-In',
-												'diagnosing'    => 'Status: Diagnosing',
-												'in_progress'   => 'Status: In Progress (Bench)',
-												'waiting_parts' => 'Status: Waiting for Parts',
-												'testing'       => 'Status: Testing & QA',
-												'ready'         => 'Status: Ready for Pickup',
-												'completed'     => 'Status: Completed / Delivered',
-												'cancelled'     => 'Status: Cancelled',
-											)
-											: array(
-												'pending'   => 'Status: New / Unread',
-												'contacted' => 'Status: Contacted',
-												'quoted'    => 'Status: Price Quoted',
-												'resolved'  => 'Status: Resolved / Closed',
-												'cancelled' => 'Status: Cancelled',
-											);
-										foreach ( $m_status_options as $st_k => $st_v ) :
-											$st_url = wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . $active_tab . '&action=' . $st_k . '&id=' . $row->id ), 'mp_inquiry_action' );
-											?>
-											<option value="<?php echo esc_url( $st_url ); ?>" <?php selected( $row->status, $st_k ); ?>>
-												<?php echo esc_html( $st_v ); ?>
-											</option>
-										<?php endforeach; ?>
-									</select>
+
+								<div class="bopt-docket-card-actions">
+									<a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" class="bopt-btn-call">
+										<i class="fa-solid fa-phone"></i> <?php esc_html_e( 'Call', 'mobile-pasal' ); ?>
+									</a>
+									<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-wa-reply">
+										<i class="fa-brands fa-whatsapp"></i> <?php esc_html_e( 'WhatsApp', 'mobile-pasal' ); ?>
+									</a>
+									<button type="button" class="bopt-btn-call" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd;" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>">
+										<i class="fa-solid fa-pen-to-square"></i> <?php esc_html_e( 'Edit / Cost', 'mobile-pasal' ); ?>
+									</button>
+									<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_print_docket&id=' . $row->id ), 'mp_print_docket' ) ); ?>" target="_blank" class="bopt-btn-call">
+										<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> <?php esc_html_e( 'PDF Sheet', 'mobile-pasal' ); ?>
+									</a>
 								</div>
 							</div>
-							<div class="bopt-docket-card-actions">
-								<a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" class="bopt-btn-call">
-									<i class="fa-solid fa-phone"></i> <?php esc_html_e( 'Call', 'mobile-pasal' ); ?>
-								</a>
-								<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-wa-reply">
-									<i class="fa-brands fa-whatsapp"></i> <?php esc_html_e( 'WhatsApp', 'mobile-pasal' ); ?>
-								</a>
-								<button type="button" class="bopt-btn-call" style="background:#eff6ff; color:#0066cc; border-color:#93c5fd;" onclick="mpOpenEditModal(this);" data-record="<?php echo esc_attr( $edit_payload ); ?>">
-									<i class="fa-solid fa-pen-to-square"></i> <?php esc_html_e( 'Edit / Cost', 'mobile-pasal' ); ?>
-								</button>
-								<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_print_docket&id=' . $row->id ), 'mp_print_docket' ) ); ?>" target="_blank" class="bopt-btn-call">
-									<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> <?php esc_html_e( 'PDF Sheet', 'mobile-pasal' ); ?>
-								</a>
-							</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
+
+				<!-- Bottom Pagination Bar -->
+				<?php if ( $total_items > 0 && $total_pages > 1 ) : ?>
+					<div class="mp-pagination-bar" style="margin-top:20px;">
+						<div class="mp-pagination-info">
+							<?php
+							printf(
+								esc_html__( 'Page %1$d of %2$d (%3$d total dockets)', 'mobile-pasal' ),
+								$paged,
+								$total_pages,
+								$total_items
+							);
+							?>
 						</div>
-					<?php endforeach; ?>
+
+						<div class="mp-pagination-links">
+							<?php
+							// Previous button
+							if ( $paged > 1 ) {
+								echo '<a href="' . esc_url( add_query_arg( 'paged', $paged - 1, $base_paginate_url ) ) . '" class="mp-page-btn">&laquo; ' . esc_html__( 'Prev', 'mobile-pasal' ) . '</a>';
+							}
+
+							for ( $i = $start_p; $i <= $end_p; $i++ ) {
+								$cls = ( $i === $paged ) ? 'mp-page-btn is-active' : 'mp-page-btn';
+								echo '<a href="' . esc_url( add_query_arg( 'paged', $i, $base_paginate_url ) ) . '" class="' . esc_attr( $cls ) . '">' . esc_html( $i ) . '</a>';
+							}
+
+							// Next button
+							if ( $paged < $total_pages ) {
+								echo '<a href="' . esc_url( add_query_arg( 'paged', $paged + 1, $base_paginate_url ) ) . '" class="mp-page-btn">' . esc_html__( 'Next', 'mobile-pasal' ) . ' &raquo;</a>';
+							}
+							?>
+						</div>
+					</div>
 				<?php endif; ?>
-			</div>
+
+			<?php endif; ?>
 		</div>
 	</div>
 
@@ -2036,7 +3146,7 @@ function mp_render_inquiries_admin_page() {
 					</div>
 				</div>
 
-				<div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid #e2e8f0;">
+				<div class="mp-modal-sticky-footer" style="display:flex; justify-content:space-between; align-items:center; margin-top:16px; padding-top:14px; border-top:1px solid #e2e8f0;">
 					<a href="#" id="mpEditModalPrintBtn" target="_blank" class="bopt-messages-btn" style="text-decoration:none;">
 						<i class="fa-solid fa-file-pdf" style="color:#dc2626;"></i> <?php esc_html_e( 'Open Printable PDF Job Sheet', 'mobile-pasal' ); ?>
 					</a>
@@ -2057,7 +3167,7 @@ function mp_render_inquiries_admin_page() {
 		var sel = document.getElementById('mpCreateTypeSelect');
 		if (card) card.style.display = 'block';
 		if (sel && typeVal) sel.value = typeVal;
-		card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+		if (card) card.scrollIntoView({ behavior: 'smooth', block: 'start' });
 	}
 	function mpOpenEditModal(btn) {
 		var raw = btn.getAttribute('data-record');
@@ -2120,6 +3230,7 @@ function mp_render_inquiries_admin_page() {
 	</script>
 	<?php
 }
+
 
 /**
  * 4. AJAX Submission: Repair Estimator & Single Service Docket (`mp_submit_repair_docket` & `mp_submit_inquiry`)
