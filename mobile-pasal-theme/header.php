@@ -25,7 +25,23 @@ $clean_p = mp_clean_phone( $phone );
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="default">
 	<meta name="apple-mobile-web-app-title" content="Ali Mobile">
-	<link rel="apple-touch-icon" href="<?php echo esc_url( MP_THEME_URI . '/assets/images/logo-icon.png' ); ?>">
+	<?php
+	$custom_favicon = mp_opt( 'site_favicon', '' );
+	if ( empty( $custom_favicon ) ) {
+		$custom_favicon = mp_opt( 'favicon_image', '' );
+	}
+	if ( empty( $custom_favicon ) && function_exists( 'get_site_icon_url' ) ) {
+		$custom_favicon = get_site_icon_url( 32 );
+	}
+	if ( empty( $custom_favicon ) ) {
+		$custom_favicon = MP_THEME_URI . '/assets/images/logo-icon.png';
+	}
+	?>
+	<link rel="shortcut icon" href="<?php echo esc_url( $custom_favicon ); ?>">
+	<link rel="icon" type="image/x-icon" href="<?php echo esc_url( $custom_favicon ); ?>">
+	<link rel="icon" type="image/png" sizes="32x32" href="<?php echo esc_url( $custom_favicon ); ?>">
+	<link rel="icon" type="image/png" sizes="192x192" href="<?php echo esc_url( $custom_favicon ); ?>">
+	<link rel="apple-touch-icon" href="<?php echo esc_url( $custom_favicon ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

@@ -205,3 +205,32 @@ function mp_inject_footer_scripts() {
 }
 add_action( 'wp_footer', 'mp_inject_footer_scripts', 99 );
 
+/**
+ * 10. Custom Favicon Filter for WordPress Site Icon & Admin/Login
+ */
+function mp_filter_custom_site_icon_url( $url, $size, $blog_id ) {
+	$custom = mp_opt( 'site_favicon', '' );
+	if ( empty( $custom ) ) {
+		$custom = mp_opt( 'favicon_image', '' );
+	}
+	if ( ! empty( $custom ) ) {
+		return $custom;
+	}
+	return $url;
+}
+add_filter( 'get_site_icon_url', 'mp_filter_custom_site_icon_url', 99, 3 );
+
+function mp_inject_admin_and_login_favicon() {
+	$custom = mp_opt( 'site_favicon', '' );
+	if ( empty( $custom ) ) {
+		$custom = mp_opt( 'favicon_image', '' );
+	}
+	if ( ! empty( $custom ) ) {
+		echo '<link rel="shortcut icon" href="' . esc_url( $custom ) . '" />' . "\n";
+		echo '<link rel="icon" type="image/png" sizes="32x32" href="' . esc_url( $custom ) . '" />' . "\n";
+	}
+}
+add_action( 'login_head', 'mp_inject_admin_and_login_favicon' );
+add_action( 'admin_head', 'mp_inject_admin_and_login_favicon' );
+
+

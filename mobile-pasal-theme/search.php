@@ -12,37 +12,57 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
 ?>
 
 <main>
-  <!-- Page Hero Banner -->
-  <section class="page-hero-banner">
-    <div class="wrap">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-          <span>Home</span>
-        </a>
-        <span class="crumb-divider">/</span>
-        <span class="crumb-active"><?php esc_html_e( 'Search Results', 'mobile-pasal' ); ?></span>
-      </nav>
+  <!-- Redesigned Page Hero Banner -->
+  <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Search Results Header', 'mobile-pasal' ); ?>">
+    <div class="page-hero-container">
+      <div class="page-hero-content">
+        <div class="page-breadcrumb-wrap">
+          <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+            </a>
+            <span class="crumb-divider">/</span>
+            <span class="crumb-active"><?php esc_html_e( 'Search', 'mobile-pasal' ); ?></span>
+          </nav>
+        </div>
+        <div class="page-hero-kicker">
+          <span class="page-hero-kicker-dot"></span>
+          <span><?php esc_html_e( 'Store & Lab Search', 'mobile-pasal' ); ?></span>
+        </div>
+        <h1 class="page-hero-title">
+          <?php
+          $search_title_fmt = mp_opt( 'search_results_title', 'Search: %s' );
+          printf( esc_html( $search_title_fmt ), '<span class="accent">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
+          ?>
+        </h1>
+        <p class="page-hero-desc">
+          <?php
+          global $wp_query;
+          printf( esc_html__( 'Found %d result(s) across our smartphone catalog and repair solutions docket.', 'mobile-pasal' ), (int) $wp_query->found_posts );
+          ?>
+        </p>
+        <div class="page-hero-chips">
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
+            <span><?php esc_html_e( 'Handset Inventory', 'mobile-pasal' ); ?></span>
+          </div>
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'wrench', 14, 14 ); ?>
+            <span><?php esc_html_e( 'Apple Fix Lab Services', 'mobile-pasal' ); ?></span>
+          </div>
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'phone', 14, 14 ); ?>
+            <span><?php esc_html_e( 'Live WhatsApp Counter Help', 'mobile-pasal' ); ?></span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Search Results Section -->
-  <section class="search-results-section" style="padding: 40px 0 60px;">
+  <section class="search-results-section" style="padding: 36px 0 60px;">
     <div class="wrap">
-      <div class="sec-head" style="margin-bottom: 32px;">
-        <h1 class="sec-title" style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-heading); margin-bottom: 8px;">
-          <?php
-          $search_title_fmt = mp_opt( 'search_results_title', 'Search: %s' );
-          printf( esc_html( $search_title_fmt ), '<span class="text-gradient">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
-          ?>
-        </h1>
-        <p class="sec-desc" style="color: var(--text-muted); font-size: 1rem; max-width: 720px;">
-          <?php
-          global $wp_query;
-          printf( esc_html__( 'Found %d result(s) matching your inquiry.', 'mobile-pasal' ), (int) $wp_query->found_posts );
-          ?>
-        </p>
-      </div>
 
       <?php if ( have_posts() ) : ?>
         <div class="handsets-grid">

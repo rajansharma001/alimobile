@@ -12,31 +12,55 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
 ?>
 
 <main>
-  <!-- Page Hero Banner -->
-  <section class="page-hero-banner">
-    <div class="wrap">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-          <span>Home</span>
-        </a>
-        <span class="crumb-divider">/</span>
-        <?php if ( $is_handset_archive ) : ?>
-          <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>">Shop</a>
-          <span class="crumb-divider">/</span>
+  <!-- Redesigned Page Hero Banner -->
+  <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Archive Header', 'mobile-pasal' ); ?>">
+    <div class="page-hero-container">
+      <div class="page-hero-content">
+        <div class="page-breadcrumb-wrap">
+          <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+            </a>
+            <span class="crumb-divider">/</span>
+            <?php if ( $is_handset_archive ) : ?>
+              <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Shop', 'mobile-pasal' ); ?></a>
+              <span class="crumb-divider">/</span>
+            <?php endif; ?>
+            <span class="crumb-active"><?php the_archive_title(); ?></span>
+          </nav>
+        </div>
+        <div class="page-hero-kicker">
+          <span class="page-hero-kicker-dot"></span>
+          <span><?php esc_html_e( 'Inventory Archive', 'mobile-pasal' ); ?></span>
+        </div>
+        <h1 class="page-hero-title"><?php the_archive_title(); ?></h1>
+        <?php if ( get_the_archive_description() ) : ?>
+          <div class="page-hero-desc"><?php the_archive_description(); ?></div>
+        <?php else : ?>
+          <p class="page-hero-desc"><?php esc_html_e( 'Explore verified genuine mobile devices and services available at Ali Mobile counter in Gulariya.', 'mobile-pasal' ); ?></p>
         <?php endif; ?>
-        <span class="crumb-active"><?php the_archive_title(); ?></span>
-      </nav>
+        <div class="page-hero-chips">
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'shield', 14, 14 ); ?>
+            <span><?php esc_html_e( '100% NTA MDMS Compliant', 'mobile-pasal' ); ?></span>
+          </div>
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'receipt', 14, 14 ); ?>
+            <span><?php esc_html_e( 'Genuine Nepal VAT Invoicing', 'mobile-pasal' ); ?></span>
+          </div>
+          <div class="page-hero-chip">
+            <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
+            <span><?php esc_html_e( 'Gulariya Showroom Handover', 'mobile-pasal' ); ?></span>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
   <!-- Archive Content Section -->
-  <section class="archive-section" style="padding: 40px 0 60px;">
+  <section class="archive-section" style="padding: 36px 0 60px;">
     <div class="wrap">
-      <div class="sec-head" style="margin-bottom: 32px;">
-        <h1 class="sec-title" style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-heading); margin-bottom: 8px;"><?php the_archive_title(); ?></h1>
-        <?php the_archive_description( '<div class="sec-desc" style="color: var(--text-muted); font-size: 1rem; max-width: 720px;">', '</div>' ); ?>
-      </div>
 
       <?php if ( have_posts() ) : ?>
 

@@ -337,7 +337,7 @@
        ========================================================= */
     .hero-section {
       position: relative;
-      min-height: clamp(660px, 86vh, 920px);
+      min-height: clamp(480px, 62vh, 620px);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -364,7 +364,7 @@
       width: 100%;
       max-width: 1540px;
       margin: 0 auto;
-      padding: clamp(36px, 4.5vw, 64px) clamp(20px, 4vw, 56px) clamp(54px, 5.5vw, 88px);
+      padding: clamp(22px, 2.5vw, 36px) clamp(20px, 3.5vw, 48px) clamp(26px, 3vw, 40px);
       position: relative;
     }
 
@@ -374,7 +374,7 @@
       grid-template-rows: auto;
       width: 100%;
       position: relative;
-      min-height: clamp(560px, 66vh, 740px);
+      min-height: clamp(380px, 48vh, 480px);
       align-items: center;
     }
 
@@ -743,7 +743,7 @@
     }
 
     .visual {
-      min-height: clamp(380px, 50vw, 650px);
+      min-height: clamp(280px, 34vw, 420px);
       position: relative;
       display: flex;
       align-items: center;
@@ -779,7 +779,7 @@
 
     .product-image {
       width: min(100%, 680px);
-      max-height: clamp(360px, 48vw, 600px);
+      max-height: clamp(280px, 34vw, 420px);
       object-fit: cover;
       filter: drop-shadow(0 24px 28px rgba(7,27,59,.14));
       border-radius: 28px;
@@ -2908,7 +2908,7 @@
       }
       .visual {
         order: 2;
-        min-height: 320px;
+        min-height: 230px;
       }
       .hero-slider-nav {
         margin: 24px auto 0;
@@ -5946,24 +5946,29 @@ html, body {
   box-shadow: 0 0 0 45px rgba(255, 255, 255, 0.018), 0 0 0 90px rgba(255, 255, 255, 0.009);
 }
 
+/* =========================================================
+   REDESIGNED PAGE HERO BANNER & HEADER SECTION
+   ========================================================= */
 .page-hero-banner {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(110deg, #ffffff 0%, #fbfdff 45%, #eff5ff 100%);
-  border-bottom: 1px solid var(--line);
-  padding: clamp(28px, 4vw, 44px) 0;
+  background:
+    radial-gradient(ellipse at 85% 20%, rgba(0, 102, 204, 0.08), transparent 50%),
+    linear-gradient(110deg, #ffffff 0%, #fbfdff 45%, #eff5ff 100%);
+  border-bottom: 1px solid #e2eaf5;
+  padding: clamp(28px, 4vw, 48px) 0 clamp(24px, 3.5vw, 40px);
 }
 
 .page-hero-banner::before {
   content: "";
   position: absolute;
-  width: 420px;
-  height: 420px;
-  right: -200px;
-  top: -80px;
-  border: 1px solid rgba(8, 98, 233, 0.07);
+  width: 440px;
+  height: 440px;
+  right: -160px;
+  top: -120px;
+  border: 1px solid rgba(0, 102, 204, 0.07);
   border-radius: 50%;
-  box-shadow: 0 0 0 45px rgba(8, 98, 233, 0.025), 0 0 0 90px rgba(8, 98, 233, 0.015);
+  box-shadow: 0 0 0 40px rgba(0, 102, 204, 0.025), 0 0 0 85px rgba(0, 102, 204, 0.015);
   pointer-events: none;
 }
 
@@ -5972,10 +5977,266 @@ html, body {
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(to right, rgba(8, 98, 233, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(8, 98, 233, 0.035) 1px, transparent 1px);
-  background-size: 34px 34px;
+    linear-gradient(to right, rgba(0, 102, 204, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 102, 204, 0.035) 1px, transparent 1px);
+  background-size: 32px 32px;
   pointer-events: none;
+}
+
+.page-hero-container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3.5vw, 36px);
+  position: relative;
+  z-index: 2;
+}
+
+.page-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
+  gap: clamp(24px, 4vw, 44px);
+  align-items: center;
+}
+
+@media (max-width: 960px) {
+  .page-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.page-hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Breadcrumbs Pill */
+.page-breadcrumb-wrap {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+.page-breadcrumb-nav,
+.page-hero-banner .breadcrumb-nav {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e2eaf5;
+  border-radius: 999px;
+  padding: 5px 14px;
+  box-shadow: 0 1px 3px rgba(7, 27, 59, 0.04);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.page-breadcrumb-nav a,
+.page-breadcrumb-nav .crumb-link,
+.page-hero-banner .breadcrumb-nav a,
+.page-hero-banner .breadcrumb-nav .crumb-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.page-breadcrumb-nav a:hover,
+.page-breadcrumb-nav .crumb-link:hover,
+.page-hero-banner .breadcrumb-nav a:hover,
+.page-hero-banner .breadcrumb-nav .crumb-link:hover {
+  color: #0066cc;
+}
+
+.page-breadcrumb-nav .crumb-divider,
+.page-hero-banner .breadcrumb-nav .crumb-divider {
+  color: #cbd5e1;
+  font-size: 11px;
+}
+
+.page-breadcrumb-nav .crumb-active,
+.page-hero-banner .breadcrumb-nav .crumb-active {
+  color: #0066cc;
+  font-weight: 700;
+}
+
+/* Eyebrow Kicker Badge */
+.page-hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  background: #eff6ff;
+  border: 1px solid rgba(0, 102, 204, 0.18);
+  color: #0066cc;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.page-hero-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0066cc;
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+}
+
+/* Main Heading */
+.page-hero-title {
+  margin: 0;
+  font-size: clamp(24px, 3.2vw, 38px);
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: #071b3b;
+}
+
+.page-hero-title .accent {
+  color: #0066cc;
+}
+
+/* Subtitle */
+.page-hero-desc {
+  margin: 0;
+  font-size: clamp(14px, 1.1vw, 15.5px);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 720px;
+}
+
+/* Trust / Feature Highlight Chips */
+.page-hero-chips {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.page-hero-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid #e2eaf5;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 650;
+  color: #1e293b;
+  box-shadow: 0 1px 2px rgba(7, 27, 59, 0.03);
+  transition: all 0.15s ease;
+}
+
+.page-hero-chip svg {
+  width: 14px;
+  height: 14px;
+  color: #0066cc;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  flex-shrink: 0;
+}
+
+.page-hero-chip:hover {
+  border-color: #0066cc;
+  background: #f8faff;
+  transform: translateY(-1px);
+}
+
+/* Right-Side Action Card / Quick Widget */
+.page-hero-card {
+  background: #ffffff;
+  border: 1px solid #e2eaf5;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(7, 27, 59, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+}
+
+.page-hero-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.page-hero-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: #eff6ff;
+  border: 1px solid rgba(0, 102, 204, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0066cc;
+  flex-shrink: 0;
+}
+
+.page-hero-card-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+}
+
+.page-hero-card-meta h4 {
+  margin: 0 0 2px;
+  font-size: 13.5px;
+  font-weight: 750;
+  color: #071b3b;
+}
+
+.page-hero-card-meta p {
+  margin: 0;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.page-hero-card-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #0066cc;
+  color: #ffffff !important;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  width: 100%;
+  box-sizing: border-box;
+  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.25);
+}
+
+.page-hero-card-action:hover {
+  background: #004c99;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.35);
+}
+
+.page-hero-card-action.btn-wa {
+  background: #16a34a;
+  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
+}
+
+.page-hero-card-action.btn-wa:hover {
+  background: #15803d;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
 }
 
 

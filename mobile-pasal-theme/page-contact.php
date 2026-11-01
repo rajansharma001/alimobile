@@ -14,23 +14,72 @@ $store_phone     = mp_opt( 'store_phone', '+977 9804530786' );
 $store_phone_raw = preg_replace( '/[^0-9]/', '', $store_phone );
 $wa_number       = mp_opt( 'whatsapp_number', '9779804530786' );
 $map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14088.751310111166!2d81.332356!3d28.239327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399859f1e16f391f%3A0xb35a0fec1d7e2507!2sGulariya%2C%20Bardiya!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp' );
+
+$contact_badge   = mp_opt( 'contact_hero_badge', 'Gulariya Counter & Lab' );
+$contact_title   = mp_opt( 'contact_hero_title', 'Visit Our Counter or Send a Direct Inquiry.' );
+$contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purchase a new flagship handset, need an urgent screen replacement, or want trade-in pricing, visit our counter at Ji. Pra. Ka. Chowk.' );
 ?>
 
 <main>
 
   <!-- ====================================================================
-       PAGE HERO BANNER (Standard Breadcrumb Bar)
+       PAGE HERO BANNER (Redesigned High-Tech Studio Header)
        ==================================================================== -->
-  <section class="page-hero-banner">
-    <div class="wrap">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-          <span>Home</span>
-        </a>
-        <span class="crumb-divider">/</span>
-        <span class="crumb-active">Contact</span>
-      </nav>
+  <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Contact Header', 'mobile-pasal' ); ?>">
+    <div class="page-hero-container">
+      <div class="page-hero-grid">
+        <div class="page-hero-content">
+          <div class="page-breadcrumb-wrap">
+            <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+              <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+              </a>
+              <span class="crumb-divider">/</span>
+              <span class="crumb-active"><?php esc_html_e( 'Contact & Location', 'mobile-pasal' ); ?></span>
+            </nav>
+          </div>
+          <div class="page-hero-kicker">
+            <span class="page-hero-kicker-dot"></span>
+            <span><?php echo esc_html( $contact_badge ); ?></span>
+          </div>
+          <h1 class="page-hero-title"><?php echo wp_kses_post( $contact_title ); ?></h1>
+          <p class="page-hero-desc"><?php echo esc_html( $contact_desc ); ?></p>
+          <div class="page-hero-chips">
+            <div class="page-hero-chip">
+              <?php echo mp_get_icon_svg( 'location', 14, 14 ); ?>
+              <span><?php echo esc_html( $store_address ); ?></span>
+            </div>
+            <div class="page-hero-chip">
+              <?php echo mp_get_icon_svg( 'clock', 14, 14 ); ?>
+              <span><?php echo esc_html( $store_hours ); ?></span>
+            </div>
+            <div class="page-hero-chip">
+              <?php echo mp_get_icon_svg( 'phone', 14, 14 ); ?>
+              <span><?php echo esc_html( $store_phone ); ?></span>
+            </div>
+            <div class="page-hero-chip">
+              <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
+              <span><?php esc_html_e( 'Direct Showroom Counter', 'mobile-pasal' ); ?></span>
+            </div>
+          </div>
+        </div>
+        <div class="page-hero-card">
+          <div class="page-hero-card-header">
+            <div class="page-hero-card-icon">
+              <?php echo mp_get_icon_svg( 'phone', 20, 20 ); ?>
+            </div>
+            <div class="page-hero-card-meta">
+              <h4><?php esc_html_e( 'Direct Call Helpline', 'mobile-pasal' ); ?></h4>
+              <p><?php echo esc_html( $store_phone ); ?></p>
+            </div>
+          </div>
+          <a class="page-hero-card-action" href="tel:+<?php echo esc_attr( $store_phone_raw ); ?>">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+            <span><?php esc_html_e( 'Call Counter Directly', 'mobile-pasal' ); ?></span>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

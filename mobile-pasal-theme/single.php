@@ -9,30 +9,54 @@ get_header();
 ?>
 
 <main>
-  <?php while ( have_posts() ) : the_post(); ?>
-    <!-- Post Hero Banner -->
-    <section class="page-hero-banner">
-      <div class="wrap">
-        <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-          <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-            <span>Home</span>
-          </a>
-          <span class="crumb-divider">/</span>
-          <?php
-          $categories = get_the_category();
-          if ( ! empty( $categories ) ) :
-          ?>
-            <a class="crumb-link" href="<?php echo esc_url( get_category_link( $categories[0]->term_id ) ); ?>"><?php echo esc_html( $categories[0]->name ); ?></a>
-            <span class="crumb-divider">/</span>
-          <?php endif; ?>
-          <span class="crumb-active"><?php the_title(); ?></span>
-        </nav>
+  <?php while ( have_posts() ) : the_post(); 
+    $categories = get_the_category();
+    $cat_name   = ! empty( $categories ) ? $categories[0]->name : __( 'Blog Article', 'mobile-pasal' );
+    $cat_link   = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : '';
+  ?>
+    <!-- Redesigned Post Hero Banner -->
+    <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Article Header', 'mobile-pasal' ); ?>">
+      <div class="page-hero-container">
+        <div class="page-hero-content">
+          <div class="page-breadcrumb-wrap">
+            <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+              <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+                <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+              </a>
+              <span class="crumb-divider">/</span>
+              <?php if ( ! empty( $cat_link ) ) : ?>
+                <a class="crumb-link" href="<?php echo esc_url( $cat_link ); ?>"><?php echo esc_html( $cat_name ); ?></a>
+                <span class="crumb-divider">/</span>
+              <?php endif; ?>
+              <span class="crumb-active"><?php the_title(); ?></span>
+            </nav>
+          </div>
+          <div class="page-hero-kicker">
+            <span class="page-hero-kicker-dot"></span>
+            <span><?php echo esc_html( $cat_name ); ?></span>
+          </div>
+          <h1 class="page-hero-title"><?php the_title(); ?></h1>
+          <div class="page-hero-chips">
+            <div class="page-hero-chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span><?php the_author(); ?></span>
+            </div>
+            <div class="page-hero-chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+              <span><?php echo get_the_date(); ?></span>
+            </div>
+            <div class="page-hero-chip">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              <span><?php printf( esc_html__( '%d min read', 'mobile-pasal' ), max( 1, round( str_word_count( strip_tags( get_the_content() ) ) / 200 ) ) ); ?></span>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- Post Article Content -->
-    <section class="single-post-section" style="padding: 60px 0;">
+    <section class="single-post-section" style="padding: 40px 0 60px;">
       <div class="wrap" style="max-width: 860px;">
         <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-entry-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.85; color: var(--text-body);">
           <header class="entry-header" style="margin-bottom: 24px;">
