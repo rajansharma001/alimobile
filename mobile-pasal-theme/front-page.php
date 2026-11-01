@@ -53,7 +53,7 @@ $slide2_f2_text   = mp_opt( 'hero_slide2_f2_text', 'Certified<br>Battery Swap' )
 $slide2_f3_icon   = mp_opt( 'hero_slide2_f3_icon', 'droplet' );
 $slide2_f3_text   = mp_opt( 'hero_slide2_f3_text', 'Water Soak<br>Restoration' );
 $slide2_f4_icon   = mp_opt( 'hero_slide2_f4_icon', 'cpu' );
-$slide2_f4_text   = mp_opt( 'hero_slide2_f4_text', 'Motherboard<br>Micro-Soldering' );
+$slide2_f4_text   = mp_opt( 'hero_slide2_f4_text', 'Motherboard<br>&amp; Chip Repair' );
 $slide2_btn1_text = mp_opt( 'hero_slide2_btn1_text', 'Book Counter Fix' );
 $slide2_btn2_text = mp_opt( 'hero_slide2_btn2_text', 'Explore Services' );
 $slide2_btn2_url  = mp_opt( 'hero_slide2_btn2_url', '#repairs' );
@@ -97,9 +97,9 @@ if ( empty( $spotlight_img ) ) {
 }
 
 // Lab Section
-$lab_badge   = mp_opt( 'lab_badge', 'CLEANROOM BENCH SETUP' );
-$lab_title   = mp_opt( 'lab_title', 'Precision Microscope Level Repairs Right in Gulariya' );
-$lab_desc    = mp_opt( 'lab_desc', 'We do not courier your valuable phone to Nepalgunj or Kathmandu. Repairs happen transparently inside our Gulariya counter laboratory with stereo zoom microscopes, anti-static thermal stations, and genuine parts.' );
+$lab_badge   = mp_opt( 'lab_badge', 'PROFESSIONAL REPAIR BENCH' );
+$lab_title   = mp_opt( 'lab_title', 'Fast & Reliable Mobile Repairs in Gulariya' );
+$lab_desc    = mp_opt( 'lab_desc', 'All repairs happen right in front of you in our Gulariya shop. We never send your phone away to Nepalgunj or Kathmandu. Quick service, genuine parts, and honest pricing.' );
 $lab_feat1_icon = mp_opt( 'lab_feat1_icon', 'screen' );
 $lab_f1_h    = mp_opt( 'lab_feat1_title', '30-Minute Screen Replacement' );
 $lab_f1_d    = mp_opt( 'lab_feat1_desc', 'Fast OLED and glass restoration with TrueTone &amp; 3D touch programming.' );
@@ -129,17 +129,17 @@ $trust_feat2_icon  = mp_opt( 'trust_feat2_icon', 'screen' );
 $trust_feat2_title = mp_opt( 'trust_feat2_title', 'Genuine OLED Parts' );
 $trust_feat2_desc  = mp_opt( 'trust_feat2_desc', 'TrueTone & 3D Touch programming retained' );
 $trust_feat3_icon  = mp_opt( 'trust_feat3_icon', 'wrench' );
-$trust_feat3_title = mp_opt( 'trust_feat3_title', 'Level 4 Technicians' );
-$trust_feat3_desc  = mp_opt( 'trust_feat3_desc', 'Micro-soldering & stereo microscope cleanroom lab' );
+$trust_feat3_title = mp_opt( 'trust_feat3_title', 'Expert Technicians' );
+$trust_feat3_desc  = mp_opt( 'trust_feat3_desc', 'Professional tools, genuine parts & warranty' );
 $trust_feat4_icon  = mp_opt( 'trust_feat4_icon', 'tag' );
 $trust_feat4_title = mp_opt( 'trust_feat4_title', 'Affordable Pricing' );
 $trust_feat4_desc  = mp_opt( 'trust_feat4_desc', 'Transparent rates with warranty & official VAT bill' );
 
 // Cleanroom Lab Bench Enhancements
-$lab_live_status   = mp_opt( 'lab_live_status', 'Live Gulariya Counter Cleanroom Lab' );
-$lab_tagline       = mp_opt( 'lab_tagline', 'Stereo Zoom Microscope • Anti-Static ESD Station' );
+$lab_live_status   = mp_opt( 'lab_live_status', 'Gulariya Counter Repair Bench' );
+$lab_tagline       = mp_opt( 'lab_tagline', 'Professional Tools • Genuine Parts • In-Shop Service' );
 $lab_feat1_chip    = mp_opt( 'lab_feat1_chip', 'TrueTone & 3D Touch Retained' );
-$lab_feat2_chip    = mp_opt( 'lab_feat2_chip', 'Zero Error BMS Micro-Welded' );
+$lab_feat2_chip    = mp_opt( 'lab_feat2_chip', '100% Genuine Battery Health' );
 $lab_feat3_chip    = mp_opt( 'lab_feat3_chip', '100% Privacy Protection' );
 $lab_btn1_text     = mp_opt( 'lab_btn1_text', 'Consult Our Technician' );
 $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
@@ -866,7 +866,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <!-- Left Column: Visual Laboratory Desk & Live Telemetry -->
         <div class="cleanroom-visual-column">
           <div class="cleanroom-photo-frame">
-            <img src="<?php echo esc_url( $lab_img ); ?>" alt="<?php esc_attr_e( 'Cleanroom microscope repair lab technicians', 'mobile-pasal' ); ?>" loading="lazy" />
+            <img src="<?php echo esc_url( $lab_img ); ?>" alt="<?php esc_attr_e( 'Professional mobile repair bench technicians', 'mobile-pasal' ); ?>" loading="lazy" />
             <div class="cleanroom-photo-overlay-tag">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
               <span><?php echo esc_html( $lab_tagline ); ?></span>

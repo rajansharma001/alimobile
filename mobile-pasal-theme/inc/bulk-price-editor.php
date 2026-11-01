@@ -304,7 +304,7 @@ function mobile_pasal_print_price_sheet() {
 	</head>
 	<body>
 		<div class="no-print">
-			<button type="button" class="print-btn" onclick="window.print();">🖨️ Print A4 Counter Rate Sheet</button>
+			<button type="button" class="print-btn" onclick="window.print();"><i class="fa-solid fa-print"></i> Print A4 Counter Rate Sheet</button>
 		</div>
 		<div class="sheet">
 			<div class="sheet-head">

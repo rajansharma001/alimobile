@@ -132,7 +132,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 							</div>
 						</button>
 
-						<button type="button" class="fault-select-card" data-issue="Water Damage (Dropped in water / ultrasonic clean / IC)" data-time="1–2 Hours" data-warranty="Component Warranty">
+						<button type="button" class="fault-select-card" data-issue="Water Damage (Water cleaning & repair)" data-time="1–2 Hours" data-warranty="Component Warranty">
 							<div class="fault-card-icon">
 								<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
 							</div>
@@ -141,7 +141,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 									<strong><?php esc_html_e( 'Water Damage', 'mobile-pasal' ); ?></strong>
 									<span class="fault-time-tag"><svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg> 1–2h</span>
 								</div>
-								<small><?php esc_html_e( 'Dropped in water, ultrasonic clean, IC', 'mobile-pasal' ); ?></small>
+								<small><?php esc_html_e( 'Dropped in water, cleaning & repair', 'mobile-pasal' ); ?></small>
 							</div>
 						</button>
 
@@ -302,7 +302,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line></svg>
 				</div>
-				<h3><?php esc_html_e( 'Battery Calibration & BMS Swap', 'mobile-pasal' ); ?></h3>
+				<h3><?php esc_html_e( 'Battery Replacement & Health Check', 'mobile-pasal' ); ?></h3>
 				<p><?php esc_html_e( 'Fresh 0-cycle OEM grade batteries with battery health monitoring, zero "Important Battery Message" error codes, and certified thermal tape installation.', 'mobile-pasal' ); ?></p>
 				<span class="service-badge">20–30 Mins &bull; 6 Mo. Warranty</span>
 			</div>
@@ -311,7 +311,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
 				</div>
-				<h3><?php esc_html_e( 'Logic Board Micro-Soldering', 'mobile-pasal' ); ?></h3>
+				<h3><?php esc_html_e( 'Motherboard & Chip Repair', 'mobile-pasal' ); ?></h3>
 				<p><?php esc_html_e( 'Component-level diagnosis under stereo microscope. Repairing U2 Tristar charging ICs, shorted capacitors, backlight diode lines, and audio IC faults.', 'mobile-pasal' ); ?></p>
 				<span class="service-badge">Same-Day / 24h &bull; IC Lab</span>
 			</div>
@@ -320,7 +320,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
 				</div>
-				<h3><?php esc_html_e( 'Ultrasonic Water Damage Bath', 'mobile-pasal' ); ?></h3>
+				<h3><?php esc_html_e( 'Water Damage Treatment & Cleaning', 'mobile-pasal' ); ?></h3>
 				<p><?php esc_html_e( 'Immediate digital chemical cleaning to dissolve moisture oxidation, rust, and salt corrosion. Restores dead circuit traces and saves vital photos & contacts.', 'mobile-pasal' ); ?></p>
 				<span class="service-badge">2–4 Hours &bull; Ultrasonic</span>
 			</div>
@@ -330,7 +330,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
 				</div>
 				<h3><?php esc_html_e( 'Port & Charging Module Rework', 'mobile-pasal' ); ?></h3>
-				<p><?php esc_html_e( 'Fixing loose lightning or USB-C connectors, micro-soldering bent contacts, removing broken cable tips, and repairing fast-charging power delivery circuits.', 'mobile-pasal' ); ?></p>
+				<p><?php esc_html_e( 'Fixing loose USB-C and charging ports, bent contacts, removing broken cable tips, and restoring fast charging.', 'mobile-pasal' ); ?></p>
 				<span class="service-badge">25–35 Mins &bull; Tested Port</span>
 			</div>
 
@@ -422,7 +422,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 								<div class="pricing-fault-icon">
 									<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
 								</div>
-								<span><?php esc_html_e( 'Ultrasonic Water Ingress Bath', 'mobile-pasal' ); ?></span>
+								<span><?php esc_html_e( 'Water Damage Cleaning', 'mobile-pasal' ); ?></span>
 							</div>
 						</td>
 						<td>All smartphones, feature phones, smartwatches & AirPods</td>
@@ -436,7 +436,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 								<div class="pricing-fault-icon">
 									<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
 								</div>
-								<span><?php esc_html_e( 'Micro-Soldering & Logic IC', 'mobile-pasal' ); ?></span>
+								<span><?php esc_html_e( 'Motherboard & IC Repair', 'mobile-pasal' ); ?></span>
 							</div>
 						</td>
 						<td>iPhone U2, Power IC, Audio IC, short-circuit diode lines</td>
@@ -490,7 +490,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 
 			<div class="flow-step-card">
 				<div class="flow-step-num">03</div>
-				<h3><?php esc_html_e( 'Cleanroom Bench Repair', 'mobile-pasal' ); ?></h3>
+				<h3><?php esc_html_e( 'In-Shop Counter Repair', 'mobile-pasal' ); ?></h3>
 				<p><?php esc_html_e( 'Performed with ESD grounding mats, calibrated heating plates, and stereomicroscopes. Your internal data and photos remain 100% untouched and confidential.', 'mobile-pasal' ); ?></p>
 			</div>
 
@@ -547,7 +547,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php echo esc_html( mp_opt( 'services_faq3_a', 'Yes. We offer up to 90 days counter warranty on display assemblies and micro-soldering, and up to 6 months replacement warranty on OEM batteries. If any manufacturing defect occurs during the warranty period, we fix or replace it free of charge.' ) ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq3_a', 'Yes. We offer up to 90 days counter warranty on display assemblies and motherboard repairs, and up to 6 months replacement warranty on OEM batteries. If any manufacturing defect occurs during the warranty period, we fix or replace it free of charge.' ) ); ?></p>
 				</div>
 			</div>
 
@@ -559,7 +559,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php echo esc_html( mp_opt( 'services_faq4_a', 'Power it OFF immediately! Do NOT connect it to a charger, and do not put it in uncooked rice (rice dust clogs ports and accelerates internal short circuits). Bring it directly to our Gulariya counter for an immediate ultrasonic chemical bath to prevent motherboard trace oxidation.' ) ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq4_a', 'Power it OFF immediately! Do NOT connect it to a charger, and do not put it in uncooked rice (rice dust clogs ports and accelerates internal short circuits). Bring it directly to our Gulariya shop for deep cleaning and moisture removal before the motherboard gets damaged.' ) ); ?></p>
 				</div>
 			</div>
 

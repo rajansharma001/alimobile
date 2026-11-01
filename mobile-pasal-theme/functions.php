@@ -617,19 +617,20 @@ function mp_admin_bar_quick_menu( $wp_admin_bar ) {
 
 	$wp_admin_bar->add_node( array(
 		'id'    => 'mp-store-hub',
-		'title' => '📱 Ali Mobile Admin',
+		'title' => '<span class="ab-icon dashicons dashicons-smartphone" style="margin-top:2px;"></span><span class="ab-label">' . esc_html__( 'Ali Mobile Admin', 'mobile-pasal' ) . '</span>',
 		'href'  => admin_url( 'admin.php?page=mobile-pasal-options' ),
 	) );
 
 	$links = array(
-		'mp-hub-repairs'  => array( '🔧 Repair Lab Dockets', admin_url( 'admin.php?page=mp-inquiries&tab=repairs' ) ),
-		'mp-hub-general'  => array( '💬 General Inquiries', admin_url( 'admin.php?page=mp-inquiries&tab=general' ) ),
-		'mp-hub-prices'   => array( '🏷️ Bulk Handset Price Editor', admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
-		'mp-hub-logo'     => array( '🖼️ Change Logo & Brand Name', admin_url( 'admin.php?page=mobile-pasal-options&tab=identity' ) ),
-		'mp-hub-contact'  => array( '📞 Change Phone, Email & Address', admin_url( 'admin.php?page=mobile-pasal-options&tab=contact_coords_tab' ) ),
-		'mp-hub-colors'   => array( '🎨 Theme Colors & Presets', admin_url( 'admin.php?page=mobile-pasal-options&tab=colors' ) ),
-		'mp-hub-newphone' => array( '➕ Add New Smartphone', admin_url( 'post-new.php?post_type=handset' ) ),
-		'mp-hub-newrep'   => array( '🛠️ Add New Repair Service', admin_url( 'post-new.php?post_type=repair_service' ) ),
+		'mp-hub-repairs'  => array( '<span class="dashicons dashicons-hammer" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Repair Orders', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-inquiries&tab=repairs' ) ),
+		'mp-hub-general'  => array( '<span class="dashicons dashicons-email-alt" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'General Inquiries', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-inquiries&tab=general' ) ),
+		'mp-hub-reports'  => array( '<span class="dashicons dashicons-chart-bar" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Repair Reports', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-inquiries&tab=reports' ) ),
+		'mp-hub-prices'   => array( '<span class="dashicons dashicons-tag" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Bulk Price Editor', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
+		'mp-hub-logo'     => array( '<span class="dashicons dashicons-format-image" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Logo & Brand Name', 'mobile-pasal' ), admin_url( 'admin.php?page=mobile-pasal-options&tab=identity' ) ),
+		'mp-hub-contact'  => array( '<span class="dashicons dashicons-phone" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Shop Phone & Location', 'mobile-pasal' ), admin_url( 'admin.php?page=mobile-pasal-options&tab=contact_coords_tab' ) ),
+		'mp-hub-colors'   => array( '<span class="dashicons dashicons-art" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Theme Colors', 'mobile-pasal' ), admin_url( 'admin.php?page=mobile-pasal-options&tab=colors' ) ),
+		'mp-hub-newphone' => array( '<span class="dashicons dashicons-plus-alt" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Add New Smartphone', 'mobile-pasal' ), admin_url( 'post-new.php?post_type=handset' ) ),
+		'mp-hub-newrep'   => array( '<span class="dashicons dashicons-admin-tools" style="font-size:16px;line-height:1.4;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Add Repair Service', 'mobile-pasal' ), admin_url( 'post-new.php?post_type=repair_service' ) ),
 	);
 
 	foreach ( $links as $id => $item ) {

@@ -55,12 +55,12 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 			<!-- Story Content -->
 			<div class="about-story-content">
 				<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_story_kicker', 'Our Heritage' ) ); ?></span>
-				<h2><?php echo esc_html( mp_opt( 'about_story_head', 'Built on Genuine Handsets & Microscope Precision' ) ); ?></h2>
+				<h2><?php echo esc_html( mp_opt( 'about_story_head', 'Built on Genuine Phones & Expert Repairs' ) ); ?></h2>
 				<p style="color: var(--text-body); font-size: 1.02rem; line-height: 1.7; margin-bottom: 16px;">
 					<?php echo nl2br( esc_html( mp_opt( 'about_story_p1', 'Ali Mobile Center was founded with a singular conviction: residents of Gulariya and wider Bardiya should not have to compromise on smartphone authenticity or travel 40km to Nepalgunj for skilled iPhone repairs. From day one, every handset on our shelves is 100% NTA approved with an official VAT bill.' ) ) ); ?>
 				</p>
 				<p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 24px;">
-					<?php echo nl2br( esc_html( mp_opt( 'about_story_p2', 'Over eight years of service, we invested in German stereomicroscopes, programmable thermal rework stations, and ultrasonic liquid cleaning baths. Today, whether you need a sealed iPhone 16 Pro Max or precision BGA micro-soldering, our counter provides five-star reliability.' ) ) ); ?>
+					<?php echo nl2br( esc_html( mp_opt( 'about_story_p2', 'Over the years, we invested in professional repair equipment, precision tools, and genuine spare parts. Today, whether you are buying a new sealed smartphone with official bill or need your phone fixed quickly, our shop delivers honest, top-quality service you can trust.' ) ) ); ?>
 				</p>
 
 				<!-- Stats Dock -->
@@ -113,7 +113,7 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
-			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_tooling_kicker', 'Cleanroom Tooling' ) ); ?></span>
+			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_tooling_kicker', 'Professional Tools' ) ); ?></span>
 			<h2><?php echo esc_html( mp_opt( 'about_tooling_head', 'Professional Hardware Equipment on Our Bench' ) ); ?></h2>
 			<p><?php echo esc_html( mp_opt( 'about_tooling_desc', 'We invest in industrial-grade diagnostic equipment so your premium smartphone is treated with laboratory care.' ) ); ?></p>
 		</div>
@@ -123,16 +123,16 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
 				</div>
-				<h3><?php echo esc_html( mp_opt( 'about_tool1_title', 'Stereo Optical Microscope' ) ); ?></h3>
-				<p><?php echo esc_html( mp_opt( 'about_tool1_desc', '45x continuous zoom trinocular microscope for precision inspection of 0201 SMD resistors, broken circuit jumper wires, and logic board BGA pads.' ) ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_tool1_title', 'Precision Repair Microscope' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_tool1_desc', 'High-definition microscope for inspecting tiny circuit traces, loose connectors, and intricate motherboard components.' ) ); ?></p>
 			</div>
 
 			<div class="service-card">
 				<div class="service-icon-wrap">
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
 				</div>
-				<h3><?php echo esc_html( mp_opt( 'about_tool2_title', 'Digital Ultrasonic Sonicator' ) ); ?></h3>
-				<p><?php echo esc_html( mp_opt( 'about_tool2_desc', 'Multi-frequency heated ultrasonic chemical bath specifically designed to dislodge liquid oxidation and electrolytic crystals from water-damaged logic boards.' ) ); ?></p>
+				<h3><?php echo esc_html( mp_opt( 'about_tool2_title', 'Water Damage Cleaning Machine' ) ); ?></h3>
+				<p><?php echo esc_html( mp_opt( 'about_tool2_desc', 'Specialized cleaning tank that removes moisture, liquid corrosion, and dust from water-damaged mobile phones.' ) ); ?></p>
 			</div>
 
 			<div class="service-card">
@@ -140,7 +140,7 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 					<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
 				</div>
 				<h3><?php echo esc_html( mp_opt( 'about_tool3_title', 'Programmable Rework & Micro-Pencil' ) ); ?></h3>
-				<p><?php echo esc_html( mp_opt( 'about_tool3_desc', 'Micro-soldering station with rapid temperature recovery, anti-static ESD earthing, and custom nozzles to protect adjacent motherboard IC components.' ) ); ?></p>
+				<p><?php echo esc_html( mp_opt( 'about_tool3_desc', 'Precision temperature soldering station with anti-static protection to safely repair motherboards and charging connectors without overheating delicate parts.' ) ); ?></p>
 			</div>
 		</div>
 	</div>

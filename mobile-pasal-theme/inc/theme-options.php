@@ -141,7 +141,7 @@ function mobile_pasal_options_defaults() {
 		'trust_feat2_desc'             => 'TrueTone & 3D Touch programming retained',
 		'trust_feat3_icon'             => 'wrench',
 		'trust_feat3_title'            => 'Level 4 Technicians',
-		'trust_feat3_desc'             => 'Micro-soldering & stereo microscope cleanroom lab',
+		'trust_feat3_desc'             => 'Professional tools, genuine parts & warranty',
 		'trust_feat4_icon'             => 'shield',
 		'trust_feat4_title'            => 'Affordable Pricing',
 		'trust_feat4_desc'             => 'Transparent rates with warranty & official VAT bill',
@@ -251,12 +251,12 @@ function mobile_pasal_options_defaults() {
 		'lab_btn1_text'                => 'Consult Our Technician',
 		'lab_btn2_prefix'              => 'Call Counter',
 		'lab_image'                    => $uri . '/assets/images/apple-fix-bench.jpg',
-		'lab_live_status'              => 'Live Gulariya Counter Cleanroom Lab',
+		'lab_live_status'              => 'Gulariya Counter Repair Bench',
 		'lab_tagline'                  => 'Stereo Zoom Microscope • Anti-Static ESD Station',
 		'lab_feat1_icon'               => 'clock',
 		'lab_feat1_chip'               => 'TrueTone & 3D Touch Retained',
 		'lab_feat2_icon'               => 'battery',
-		'lab_feat2_chip'               => 'Zero Error BMS Micro-Welded',
+		'lab_feat2_chip'               => 'Genuine Battery Health',
 		'lab_feat3_icon'               => 'shield',
 		'lab_feat3_chip'               => '100% Privacy Protection',
 
@@ -321,7 +321,7 @@ function mobile_pasal_options_defaults() {
 		'shop_hero_badge'              => 'Gulariya Verified Showroom',
 		'shop_hero_title'              => 'Official NTA Smartphones & Genuine Gear.',
 		'shop_hero_desc'               => 'Discover Gulariya\'s largest verified inventory of flagship handsets: Apple iPhone 16 Series, Samsung Galaxy S24 Ultra, Google Pixel 9, OnePlus 12, and Xiaomi 14. 100% genuine IMEI bill, warranty support, and free data setup.',
-		'assurance_kicker'             => 'Zero-Risk Purchase',
+		'assurance_kicker'             => 'Guaranteed Purchase',
 		'assurance_title'              => 'The Ali Mobile Handset Assurance',
 		'assurance_subtitle'           => 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.',
 		'assurance1_icon'              => 'shield',
@@ -362,7 +362,7 @@ function mobile_pasal_options_defaults() {
 		'about_story_kicker'           => 'Our Heritage',
 		'about_story_head'             => 'Built on Genuine Handsets & Microscope Precision',
 		'about_story_p1'               => 'Ali Mobile Center was founded with a singular conviction: residents of Gulariya and wider Bardiya should not have to compromise on smartphone authenticity or travel 40km to Nepalgunj for skilled iPhone repairs. From day one, every handset on our shelves is 100% NTA approved with an official VAT bill.',
-		'about_story_p2'               => 'Over eight years of service, we invested in German stereomicroscopes, programmable thermal rework stations, and ultrasonic liquid cleaning baths. Today, whether you need a sealed iPhone 16 Pro Max or precision BGA micro-soldering, our counter provides five-star reliability.',
+		'about_story_p2'               => 'Over the years, we invested in professional repair equipment, precision tools, and genuine spare parts. Today, whether you are buying a new sealed smartphone with official bill or need your phone fixed quickly, our shop delivers honest, top-quality service you can trust.',
 		'about_founder_quote'          => 'A smartphone connects you to family, livelihood, and emergency aid. When you buy from us or bring a damaged phone to our bench, we treat it with the utmost responsibility and skill.',
 		'about_stat1_num'              => '8+ Years',
 		'about_stat1_label'            => 'Serving Gulariya & Bardiya',
@@ -373,13 +373,13 @@ function mobile_pasal_options_defaults() {
 		'about_stat4_num'              => '90 Days',
 		'about_stat4_label'            => 'Repair Warranty Support',
 		'about_story_image'            => $uri . '/assets/images/hero-repair-lab.jpg',
-		'about_tooling_kicker'         => 'Cleanroom Tooling',
+		'about_tooling_kicker'         => 'Professional Tools',
 		'about_tooling_head'           => 'Professional Hardware Equipment on Our Bench',
 		'about_tooling_desc'           => 'We invest in industrial-grade diagnostic equipment so your premium smartphone is treated with laboratory care.',
 		'about_tool1_title'            => 'Stereo Optical Microscope',
-		'about_tool1_desc'             => '45x continuous zoom trinocular microscope for precision inspection of 0201 SMD resistors, broken circuit jumper wires, and logic board BGA pads.',
-		'about_tool2_title'            => 'Digital Ultrasonic Sonicator',
-		'about_tool2_desc'             => 'Multi-frequency heated ultrasonic chemical bath specifically designed to dislodge liquid oxidation and electrolytic crystals from water-damaged logic boards.',
+		'about_tool1_desc'             => 'High-definition microscope for inspecting tiny circuit traces, loose connectors, and intricate motherboard components.',
+		'about_tool2_title'            => 'Water Damage Cleaning Machine',
+		'about_tool2_desc'             => 'Specialized cleaning tank that removes moisture, liquid corrosion, and dust from water-damaged mobile phones.',
 		'about_tool3_title'            => 'Programmable Rework & Micro-Pencil',
 		'about_tool3_desc'             => 'Micro-soldering station with rapid temperature recovery, anti-static ESD earthing, and custom nozzles to protect adjacent motherboard IC components.',
 		'about_commitments_kicker'     => 'Integrity First',
@@ -939,28 +939,28 @@ function mobile_pasal_admin_bar_customize_menu( $wp_admin_bar ) {
 	// Context-aware top link when viewing frontend pages
 	if ( ! is_admin() ) {
 		$ctx_tab   = 'colors';
-		$ctx_label = '⚡ Edit Current Page Settings';
+		$ctx_label = '<span class="dashicons dashicons-admin-generic" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Page Settings';
 		if ( is_front_page() || is_home() ) {
 			$ctx_tab   = 'hero';
-			$ctx_label = '⚡ Edit Homepage Showcase & Hero';
+			$ctx_label = '<span class="dashicons dashicons-admin-home" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Homepage Hero';
 		} elseif ( is_singular( 'handset' ) || is_page( 'shop' ) || is_post_type_archive( 'handset' ) ) {
 			$ctx_tab   = 'shop_hero_tab';
-			$ctx_label = '⚡ Edit Showroom & Handset Catalog';
+			$ctx_label = '<span class="dashicons dashicons-smartphone" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Handset Catalog';
 		} elseif ( is_page( 'services' ) ) {
 			$ctx_tab   = 'services_hero_tab';
-			$ctx_label = '⚡ Edit Apple Fix Lab & Services Page';
+			$ctx_label = '<span class="dashicons dashicons-hammer" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Repair Services';
 		} elseif ( is_page( 'about' ) ) {
 			$ctx_tab   = 'about_story_tab';
-			$ctx_label = '⚡ Edit Heritage & About Us Page';
+			$ctx_label = '<span class="dashicons dashicons-info" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit About Us';
 		} elseif ( is_page( 'contact' ) ) {
 			$ctx_tab   = 'contact_coords_tab';
-			$ctx_label = '⚡ Edit Contact & Location Desk';
+			$ctx_label = '<span class="dashicons dashicons-phone" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Contact Info';
 		} elseif ( is_404() ) {
 			$ctx_tab   = 'error_404_tab';
-			$ctx_label = '⚡ Edit 404 Page Settings';
+			$ctx_label = '<span class="dashicons dashicons-warning" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit 404 Page';
 		} elseif ( is_search() ) {
 			$ctx_tab   = 'search_page_tab';
-			$ctx_label = '⚡ Edit Search Results Settings';
+			$ctx_label = '<span class="dashicons dashicons-search" style="font-size:16px;vertical-align:text-bottom;margin-right:4px;"></span> Edit Search Page';
 		}
 
 		$wp_admin_bar->add_node(
@@ -974,13 +974,13 @@ function mobile_pasal_admin_bar_customize_menu( $wp_admin_bar ) {
 	}
 
 	$quick_links = array(
-		'mp-qc-bulk-prices' => array( '💰 Bulk Handset Price & Stock Editor', admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
-		'mp-qc-inquiries'   => array( '📥 Customer Repair & Order Inquiries', admin_url( 'admin.php?page=mp-inquiries' ) ),
-		'mp-qc-identity'    => array( '🎨 Brand Identity, Logo & Price Visibility', add_query_arg( 'tab', 'identity', $base_url ) ),
-		'mp-qc-header'      => array( '📞 Header, Hotline & WhatsApp Setup', add_query_arg( 'tab', 'header_nav', $base_url ) ),
-		'mp-qc-home-cats'   => array( '📱 Homepage Categories & Handsets', add_query_arg( 'tab', 'categories_brands_sec', $base_url ) ),
-		'mp-qc-seo'         => array( '🚀 SEO, Local Maps & AI Ranking (AEO)', add_query_arg( 'tab', 'seo_meta_tab', $base_url ) ),
-		'mp-qc-backup'      => array( '🛡️ Backup, Export & Health Check', add_query_arg( 'tab', 'backup_health_tab', $base_url ) ),
+		'mp-qc-bulk-prices' => array( '<span class="dashicons dashicons-tag" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Bulk Price Editor', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
+		'mp-qc-inquiries'   => array( '<span class="dashicons dashicons-clipboard" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Customer Inquiries & Orders', 'mobile-pasal' ), admin_url( 'admin.php?page=mp-inquiries' ) ),
+		'mp-qc-identity'    => array( '<span class="dashicons dashicons-format-image" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Logo & Brand Identity', 'mobile-pasal' ), add_query_arg( 'tab', 'identity', $base_url ) ),
+		'mp-qc-header'      => array( '<span class="dashicons dashicons-phone" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Header & Contact Setup', 'mobile-pasal' ), add_query_arg( 'tab', 'header_nav', $base_url ) ),
+		'mp-qc-home-cats'   => array( '<span class="dashicons dashicons-smartphone" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Homepage Handsets & Brands', 'mobile-pasal' ), add_query_arg( 'tab', 'categories_brands_sec', $base_url ) ),
+		'mp-qc-seo'         => array( '<span class="dashicons dashicons-search" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'SEO & Google Maps', 'mobile-pasal' ), add_query_arg( 'tab', 'seo_meta_tab', $base_url ) ),
+		'mp-qc-backup'      => array( '<span class="dashicons dashicons-shield" style="font-size:16px;vertical-align:text-bottom;margin-right:6px;"></span>' . esc_html__( 'Backup & System Health', 'mobile-pasal' ), add_query_arg( 'tab', 'backup_health_tab', $base_url ) ),
 	);
 
 	foreach ( $quick_links as $node_id => $info ) {
@@ -1111,11 +1111,11 @@ function mp_get_available_icons() {
 		// Repair & Lab Hardware
 		'clock'         => array( 'label' => __( 'Clock / Fast Turnaround', 'mobile-pasal' ), 'category' => __( 'Repair & Speed', 'mobile-pasal' ) ),
 		'screen'        => array( 'label' => __( 'OLED Screen / Display Glass', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
-		'wrench'        => array( 'label' => __( 'Precision Tool / Cleanroom Wrench', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'wrench'        => array( 'label' => __( 'Precision Repair Tool', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 		'screwdriver'   => array( 'label' => __( 'Micro-Tools / Screwdriver', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 		'microscope'    => array( 'label' => __( 'Stereo Zoom Microscope', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 		'microchip'     => array( 'label' => __( 'IC Motherboard Micro-Soldering', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
-		'battery'       => array( 'label' => __( 'Battery / 100% Health BMS', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
+		'battery'       => array( 'label' => __( 'Battery Replacement', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 		'water'         => array( 'label' => __( 'Water Soak / Ultrasonic Cleaning', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 		'camera'        => array( 'label' => __( 'Camera Lens & 48MP OIS Sensor', 'mobile-pasal' ), 'category' => __( 'Hardware & Lab', 'mobile-pasal' ) ),
 
@@ -1507,7 +1507,7 @@ function mobile_pasal_options_render_dashboard() {
 			'icon'        => 'fa-store',
 			'items'       => array(
 				'shop_hero_tab'      => array( 'label' => __( 'Shop Catalog Page Hero', 'mobile-pasal' ), 'icon' => 'fa-store' ),
-				'shop_assurance_tab' => array( 'label' => __( '4 Zero-Risk Assurance Cards', 'mobile-pasal' ), 'icon' => 'fa-shield-halved' ),
+				'shop_assurance_tab' => array( 'label' => __( '4 Customer Assurance Cards', 'mobile-pasal' ), 'icon' => 'fa-shield-halved' ),
 			),
 		),
 		'services_group' => array(
@@ -1524,7 +1524,7 @@ function mobile_pasal_options_render_dashboard() {
 			'items'       => array(
 				'about_story_tab'       => array( 'label' => __( 'About Us Hero & Story', 'mobile-pasal' ), 'icon' => 'fa-book-open' ),
 				'about_stats_tab'       => array( 'label' => __( '4 Milestone Stat Counters', 'mobile-pasal' ), 'icon' => 'fa-chart-line' ),
-				'about_cleanroom_tab'   => array( 'label' => __( 'Cleanroom Tooling & Standards', 'mobile-pasal' ), 'icon' => 'fa-wrench' ),
+				'about_cleanroom_tab'   => array( 'label' => __( 'Professional Repair Tools', 'mobile-pasal' ), 'icon' => 'fa-wrench' ),
 				'about_commitments_tab' => array( 'label' => __( '4 Core Commitments', 'mobile-pasal' ), 'icon' => 'fa-handshake-angle' ),
 			),
 		),
@@ -1811,14 +1811,14 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card-header">
 								<div class="bopt-card-header-icon"><i class="fa-solid fa-spinner"></i></div>
 								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Cleanroom Preloader & Currency Settings', 'mobile-pasal' ); ?></h3>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Preloader & Currency Settings', 'mobile-pasal' ); ?></h3>
 									<p class="bopt-card-desc"><?php esc_html_e( 'Configure the smooth 1-second pulse preloader and store currency prefix.', 'mobile-pasal' ); ?></p>
 								</div>
 							</div>
 							<div class="bopt-card-body">
 								<div class="bopt-field-grid">
 									<?php
-									mp_render_field_toggle( 'preloader_enabled', __( 'Enable Cleanroom Preloader', 'mobile-pasal' ), __( 'Displays a sleek pulse logo loading mask while core assets initialize.' ) );
+									mp_render_field_toggle( 'preloader_enabled', __( 'Enable Website Preloader', 'mobile-pasal' ), __( 'Displays a sleek pulse logo loading mask while core assets initialize.' ) );
 									mp_render_field_text( 'preloader_duration', __( 'Preloader Timeout (ms)', 'mobile-pasal' ), __( 'Default: 1000ms (1 second). Keeps page load responsive and fast.' ), '1000' );
 									mp_render_field_text( 'currency_symbol', __( 'Currency Code / Symbol', 'mobile-pasal' ), __( 'Default: NPR or Rs. Used on product cards and repair tables.' ), 'NPR' );
 									?>
@@ -2497,7 +2497,7 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card-header">
 								<div class="bopt-card-header-icon"><i class="fa-solid fa-microscope"></i></div>
 								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Apple Fix Precision Cleanroom Showcase', 'mobile-pasal' ); ?></h3>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Mobile Repair Bench Showcase', 'mobile-pasal' ); ?></h3>
 									<p class="bopt-card-desc"><?php esc_html_e( 'Highlight local repair capabilities: no courier delays to Nepalgunj, stereo microscopes, and SLA metrics.', 'mobile-pasal' ); ?></p>
 								</div>
 							</div>
@@ -2849,7 +2849,7 @@ function mobile_pasal_options_render_dashboard() {
 					<!-- 3.2 4 Zero-Risk Assurance Cards -->
 					<div class="bopt-tab-pane <?php echo $active_tab === 'shop_assurance_tab' ? 'is-active' : ''; ?>" id="tab-pane-shop_assurance_tab">
 						<div class="bopt-pane-header">
-							<h2><?php esc_html_e( 'The Ali Mobile Handset Assurance (4 Zero-Risk Cards)', 'mobile-pasal' ); ?></h2>
+							<h2><?php esc_html_e( 'The Ali Mobile Customer Assurance (4 Cards)', 'mobile-pasal' ); ?></h2>
 							<p><?php esc_html_e( 'Complete fine-grained control over the 4 handset assurance cards (100% NTA Approved, Official VAT Bill, Free Data Transfer, Trade-In Counter).', 'mobile-pasal' ); ?></p>
 						</div>
 
@@ -3113,7 +3113,7 @@ function mobile_pasal_options_render_dashboard() {
 									<div class="bopt-card-header-left">
 										<div class="bopt-card-header-icon"><i class="fa-solid fa-circle-question"></i></div>
 										<div>
-											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 3: iPhone Battery Health & BMS Transplants', 'mobile-pasal' ); ?></h3>
+											<h3 class="bopt-card-title"><?php esc_html_e( 'FAQ 3: iPhone Battery Health & Replacement', 'mobile-pasal' ); ?></h3>
 											<p class="bopt-card-desc"><?php esc_html_e( 'Explains 100% maximum capacity calibration without unknown part warnings.', 'mobile-pasal' ); ?></p>
 										</div>
 									</div>
@@ -3270,7 +3270,7 @@ function mobile_pasal_options_render_dashboard() {
 					<!-- 5.3 Cleanroom Standards -->
 					<div class="bopt-tab-pane <?php echo $active_tab === 'about_cleanroom_tab' ? 'is-active' : ''; ?>" id="tab-pane-about_cleanroom_tab">
 						<div class="bopt-pane-header">
-							<h2><?php esc_html_e( 'Cleanroom Tooling & Technician Standards', 'mobile-pasal' ); ?></h2>
+							<h2><?php esc_html_e( 'Professional Repair Tools & Standards', 'mobile-pasal' ); ?></h2>
 							<p><?php esc_html_e( 'Highlight specialized hardware: stereomicroscopes, programmable hot air rework, and ultrasonic tanks.', 'mobile-pasal' ); ?></p>
 						</div>
 
@@ -3286,8 +3286,8 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-field-grid">
 									<?php
 									mp_render_field_text( 'about_tooling_kicker', __( 'Section Kicker', 'mobile-pasal' ), __( 'Default: Cleanroom Tooling' ) );
-									mp_render_field_text( 'about_tooling_head', __( 'Cleanroom Tooling Heading', 'mobile-pasal' ), __( 'Default: Professional Hardware Equipment on Our Bench' ) );
-									mp_render_field_textarea( 'about_tooling_desc', __( 'Cleanroom Tooling Description', 'mobile-pasal' ), __( 'Details regarding stereo zoom microscope, anti-static thermal stations, and genuine original components.' ), 3 );
+									mp_render_field_text( 'about_tooling_head', __( 'Repair Tools Heading', 'mobile-pasal' ), __( 'Default: Professional Hardware Equipment on Our Bench' ) );
+									mp_render_field_textarea( 'about_tooling_desc', __( 'Repair Tools Description', 'mobile-pasal' ), __( 'Details regarding stereo zoom microscope, anti-static thermal stations, and genuine original components.' ), 3 );
 									?>
 								</div>
 							</div>
@@ -3297,7 +3297,7 @@ function mobile_pasal_options_render_dashboard() {
 							<div class="bopt-card-header">
 								<div class="bopt-card-header-icon"><i class="fa-solid fa-microscope"></i></div>
 								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( '3 Cleanroom Diagnostic & Repair Tools', 'mobile-pasal' ); ?></h3>
+									<h3 class="bopt-card-title"><?php esc_html_e( '3 Repair Bench Tools', 'mobile-pasal' ); ?></h3>
 									<p class="bopt-card-desc"><?php esc_html_e( 'Cards displayed on /about detailing workbench hardware.', 'mobile-pasal' ); ?></p>
 								</div>
 							</div>

@@ -99,7 +99,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
           <?php endif; ?>
         </a>
         <p style="color:#8fa7cb; line-height:1.6; margin:0 0 16px 0;">
-          <?php echo esc_html( mp_opt( 'footer_brand_desc', 'Leading smartphone store & microscope-equipped certified repair center in Gulariya, Bardiya. Dedicated to genuine parts, NTA compliance, and honest service.' ) ); ?>
+          <?php echo esc_html( mp_opt( 'footer_brand_desc', 'Leading smartphone store and trusted repair center in Gulariya, Bardiya. Dedicated to genuine phones, original parts, and honest service.' ) ); ?>
         </p>
 
         <!-- Social Media Icons Bar -->
@@ -155,10 +155,10 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       <div>
         <h4 class="footer-col-title"><?php echo esc_html( mp_opt( 'footer_col2_title', 'Repair Lab Services' ) ); ?></h4>
         <ul class="footer-links">
-          <li><a href="<?php echo is_front_page() ? '#lab' : esc_url( home_url( '/#lab' ) ); ?>">Microscope IC Overhaul</a></li>
+          <li><a href="<?php echo is_front_page() ? '#lab' : esc_url( home_url( '/#lab' ) ); ?>">Motherboard Repair</a></li>
           <li><a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>">OLED Screen Replacement</a></li>
-          <li><a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>">Battery BMS Micro-Welding</a></li>
-          <li><a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>">Ultrasonic Water Treatment</a></li>
+          <li><a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>">Battery Replacement</a></li>
+          <li><a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>">Water Damage Repair</a></li>
           <li><a href="<?php echo esc_url( home_url( '/services/' ) ); ?>">Complete Services &amp; Rates</a></li>
           <li><a href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>">Track Live Repair Status</a></li>
           <li><a href="<?php echo is_front_page() ? '#workflow' : esc_url( home_url( '/#workflow' ) ); ?>">3-Step Counter Process</a></li>
@@ -234,7 +234,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
           <option value="Charging Port / Not Charging"><?php esc_html_e( 'Charging Port / Not Charging', 'mobile-pasal' ); ?></option>
           <option value="Camera Lens & Sensor Problem"><?php esc_html_e( 'Camera Lens & Sensor Problem', 'mobile-pasal' ); ?></option>
           <option value="Liquid / Water Damage Rescue"><?php esc_html_e( 'Liquid / Water Damage Rescue', 'mobile-pasal' ); ?></option>
-          <option value="Motherboard Micro-Soldering"><?php esc_html_e( 'Motherboard Micro-Soldering', 'mobile-pasal' ); ?></option>
+          <option value="Motherboard Repair"><?php esc_html_e( 'Motherboard Repair', 'mobile-pasal' ); ?></option>
           <option value="New Sealed Phone Price Inquiry"><?php esc_html_e( 'New Sealed Phone Price Inquiry', 'mobile-pasal' ); ?></option>
         </select>
       </div>
@@ -325,7 +325,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
       <div class="form-group">
         <label for="mpRevContent"><?php esc_html_e( 'Your Review *', 'mobile-pasal' ); ?></label>
-        <textarea id="mpRevContent" rows="3" placeholder="<?php esc_attr_e( 'How was our pricing, NTA MDMS support, or cleanroom lab repair service?', 'mobile-pasal' ); ?>" required style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:10px; font-size:13.5px; font-family:inherit;"></textarea>
+        <textarea id="mpRevContent" rows="3" placeholder="<?php esc_attr_e( 'How was our pricing, genuine phones, or repair service?', 'mobile-pasal' ); ?>" required style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:10px; font-size:13.5px; font-family:inherit;"></textarea>
       </div>
       <button type="submit" id="mpRevSubmitBtn" class="whatsapp-action-btn" style="width:100%; justify-content:center; margin-top:6px; border:none; cursor:pointer;">
         <span><?php esc_html_e( 'Submit Verified Review', 'mobile-pasal' ); ?></span>
