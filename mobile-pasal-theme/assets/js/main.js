@@ -415,36 +415,75 @@
       catalogCount.textContent = items.length + " " + (items.length === 1 ? "Model" : "Models") + " Found";
     }
 
+    var activeData = (window.mpCatalogData && Array.isArray(window.mpCatalogData) && window.mpCatalogData.length > 0)
+      ? window.mpCatalogData
+      : catalogData;
+
     productsGrid.innerHTML = items.map(function (item) {
-      var specsHtml = item.specs.map(function (spec) {
+      var specsHtml = (item.specs || []).map(function (spec) {
         return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + spec + '</span></div>';
       }).join("");
 
-      var waLink = "https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20interested%20in%20buying%20" + encodeURIComponent(item.name) + ".%20Please%20share%20today's%20counter%20price%20and%20availability.";
+      var itemUrl = item.url || '#';
+      var waLink = item.waUrl || ("https://wa.me/" + SHOP_PHONE + "?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20interested%20in%20buying%20" + encodeURIComponent(item.name) + ".%20Please%20share%20today's%20counter%20price%20and%20availability.");
+
+      var pricingHtml = '';
+      if (item.isPriceVisible !== false && item.priceFmt) {
+        pricingHtml =
+          '<div class="product-pricing-row">' +
+            '<div class="price-wrap">' +
+              '<span class="current-price">' + item.priceFmt + '</span>' +
+              (item.oldPriceFmt ? '<span class="old-price">' + item.oldPriceFmt + '</span>' : '') +
+            '</div>' +
+            '<span class="vat-tag">VAT Included</span>' +
+          '</div>';
+      } else if (item.price && !item.priceFmt) {
+        pricingHtml =
+          '<div class="product-pricing-row">' +
+            '<div class="price-wrap">' +
+              '<span class="current-price">Rs. ' + Number(item.price).toLocaleString() + '</span>' +
+              (item.oldPrice ? '<span class="old-price">Rs. ' + Number(item.oldPrice).toLocaleString() + '</span>' : '') +
+            '</div>' +
+            '<span class="vat-tag">VAT Included</span>' +
+          '</div>';
+      } else {
+        pricingHtml =
+          '<div class="product-pricing-row">' +
+            '<span class="product-card-quote-pill" style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:750;color:#1d4ed8;background:#eff6ff;padding:4px 9px;border-radius:6px;border:1px solid #bfdbfe;">' +
+              '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' +
+              'Contact for Price' +
+            '</span>' +
+          '</div>';
+      }
 
       return (
         '<article class="product-card">' +
           '<div class="product-card-topbar">' +
-            '<span class="product-tag">' + item.tag + '</span>' +
-            '<span class="product-cat-tag">' + item.categoryTag + '</span>' +
+            '<span class="product-tag">' + (item.tag || 'Official VAT Bill') + '</span>' +
+            '<span class="product-cat-tag">' + (item.categoryTag || item.brand || 'Handset') + '</span>' +
           '</div>' +
-          '<div class="product-img-box">' +
+          '<a class="product-img-box" href="' + itemUrl + '" aria-label="' + item.name + '">' +
             '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy" />' +
-          '</div>' +
+          '</a>' +
           '<div class="product-brand-row">' +
-            '<span>' + item.brand + '</span>' +
+            '<span>' + (item.brand || 'Handset') + '</span>' +
             '<span class="product-mdms-tag">' +
               '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px;margin-right:3px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
               'MDMS &amp; VAT' +
             '</span>' +
           '</div>' +
-          '<h3 class="product-name">' + item.name + '</h3>' +
+          '<h3 class="product-name">' +
+            '<a href="' + itemUrl + '">' + item.name + '</a>' +
+          '</h3>' +
+          pricingHtml +
           '<div class="product-specs-list">' + specsHtml + '</div>' +
           '<div class="product-actions">' +
             '<a class="card-wa-btn" href="' + waLink + '" target="_blank" rel="noopener noreferrer">' +
               '<span>WhatsApp Rate</span>' +
             '</a>' +
-            '<button class="card-specs-btn" onclick="openQuoteModal(\'' + item.name.replace(/'/g, "\\'") + '\')" type="button">Specs ›</button>' +
+            '<a class="card-specs-btn" href="' + itemUrl + '#specs-matrix" title="View Full Specifications">' +
+              '<span>Specs ›</span>' +
+            '</a>' +
           '</div>' +
         '</article>'
       );
@@ -467,20 +506,27 @@
       if (radio.parentElement) radio.parentElement.classList.toggle("active", radio.checked);
     });
 
-    var filtered = catalogData.filter(function (item) {
+    var activeData = (window.mpCatalogData && Array.isArray(window.mpCatalogData) && window.mpCatalogData.length > 0)
+      ? window.mpCatalogData
+      : catalogData;
+
+    var filtered = activeData.filter(function (item) {
       var matchesQuery = !query || 
         item.name.toLowerCase().includes(query) || 
-        item.brand.toLowerCase().includes(query) || 
-        item.tag.toLowerCase().includes(query) ||
-        item.specs.some(function (s) { return s.toLowerCase().includes(query); });
+        (item.brand && item.brand.toLowerCase().includes(query)) || 
+        (item.tag && item.tag.toLowerCase().includes(query)) ||
+        (item.specs && item.specs.some(function (s) { return s.toLowerCase().includes(query); }));
 
-      var matchesBrand = (selectedBrand === "all") || (item.brand === selectedBrand);
+      var matchesBrand = (selectedBrand === "all") || 
+        (item.brand && item.brand.toLowerCase() === selectedBrand.toLowerCase()) ||
+        (item.brandSlug && item.brandSlug.toLowerCase() === selectedBrand.toLowerCase());
 
       var matchesPrice = true;
-      if (selectedPrice === "under-30k") matchesPrice = item.price < 30000;
-      else if (selectedPrice === "30k-75k") matchesPrice = item.price >= 30000 && item.price <= 75000;
-      else if (selectedPrice === "75k-150k") matchesPrice = item.price > 75000 && item.price <= 150000;
-      else if (selectedPrice === "above-150k") matchesPrice = item.price > 150000;
+      var numPrice = typeof item.price === 'number' ? item.price : Number(item.price) || 0;
+      if (selectedPrice === "under-30k") matchesPrice = numPrice < 30000;
+      else if (selectedPrice === "30k-75k") matchesPrice = numPrice >= 30000 && numPrice <= 75000;
+      else if (selectedPrice === "75k-150k") matchesPrice = numPrice > 75000 && numPrice <= 150000;
+      else if (selectedPrice === "above-150k") matchesPrice = numPrice > 150000;
 
       return matchesQuery && matchesBrand && matchesPrice;
     });
@@ -1027,18 +1073,18 @@
   }
 
   // -------------------------------------------------------------
-  // 10. REVIEWS CAROUSEL SLIDER
+  // 10. UNIVERSAL TOUCH-FIRST RESPONSIVE CAROUSEL ENGINE
   // -------------------------------------------------------------
-  function initReviewsCarousel() {
-    var viewport = document.getElementById("reviewsViewport");
-    var track = document.getElementById("reviewsTrack");
-    var prevBtn = document.getElementById("reviewsPrev");
-    var nextBtn = document.getElementById("reviewsNext");
-    var dotsContainer = document.getElementById("reviewsDots");
+  function setupGenericCarousel(config) {
+    var viewport = document.getElementById(config.viewportId);
+    var track = document.getElementById(config.trackId);
+    var prevBtn = document.getElementById(config.prevId);
+    var nextBtn = document.getElementById(config.nextId);
+    var dotsContainer = document.getElementById(config.dotsId);
 
     if (!viewport || !track) return;
 
-    var cards = track.querySelectorAll(".review-card");
+    var cards = track.children;
     if (!cards || cards.length === 0) return;
 
     var currentIndex = 0;
@@ -1049,7 +1095,7 @@
       var w = window.innerWidth;
       if (w <= 640) return 1;
       if (w <= 960) return 2;
-      return 3;
+      return config.itemsPerViewDesktop || 3;
     }
 
     function getMaxIndex() {
@@ -1070,7 +1116,7 @@
             var dot = document.createElement("button");
             dot.className = "carousel-dot" + (index === currentIndex ? " active" : "");
             dot.setAttribute("type", "button");
-            dot.setAttribute("aria-label", "Go to review slide " + (index + 1));
+            dot.setAttribute("aria-label", "Go to slide " + (index + 1));
             dot.addEventListener("click", function () {
               goToSlide(index);
             });
@@ -1098,18 +1144,18 @@
       if (!card) return;
 
       var cardWidth = card.getBoundingClientRect().width;
-      var gap = 24;
+      var gap = config.gap || 24;
       var offset = currentIndex * (cardWidth + gap);
 
       track.style.transform = "translateX(-" + offset + "px)";
 
       if (prevBtn) {
         prevBtn.disabled = currentIndex === 0;
-        prevBtn.style.opacity = currentIndex === 0 ? "0.45" : "1";
+        prevBtn.style.opacity = currentIndex === 0 ? "0.4" : "1";
       }
       if (nextBtn) {
         nextBtn.disabled = currentIndex === maxIdx;
-        nextBtn.style.opacity = currentIndex === maxIdx ? "0.45" : "1";
+        nextBtn.style.opacity = currentIndex === maxIdx ? "0.4" : "1";
       }
 
       updateDots();
@@ -1127,7 +1173,7 @@
       });
     }
 
-    // Touch & Swipe Support
+    // Touch & Swipe Support (Mobile First)
     var touchStartX = 0;
     var touchEndX = 0;
 
@@ -1143,14 +1189,12 @@
       if (Math.abs(diff) > 40) {
         var maxIdx = getMaxIndex();
         if (diff > 0) {
-          // Swiped left -> next
           if (currentIndex < maxIdx) {
             goToSlide(currentIndex + 1);
           } else {
             goToSlide(0);
           }
         } else {
-          // Swiped right -> prev
           if (currentIndex > 0) {
             goToSlide(currentIndex - 1);
           } else {
@@ -1160,7 +1204,6 @@
       }
     }, { passive: true });
 
-    // Mouse Pause AutoPlay
     viewport.addEventListener("mouseenter", function () {
       isHovered = true;
     });
@@ -1168,9 +1211,9 @@
       isHovered = false;
     });
 
-    // Auto Play Interval
-    function startReviewAutoPlay() {
+    function startAutoPlay() {
       if (autoPlayTimer) clearInterval(autoPlayTimer);
+      if (config.autoPlay === false) return;
       autoPlayTimer = setInterval(function () {
         if (!isHovered) {
           var maxIdx = getMaxIndex();
@@ -1180,16 +1223,53 @@
             goToSlide(currentIndex + 1);
           }
         }
-      }, 5000);
+      }, config.interval || 4500);
     }
 
-    // Resize handler
     window.addEventListener("resize", function () {
       goToSlide(currentIndex);
     });
 
     goToSlide(0);
-    startReviewAutoPlay();
+    startAutoPlay();
+  }
+
+  function initAllCarousels() {
+    // 1. Homepage Reviews
+    setupGenericCarousel({
+      viewportId: "reviewsViewport",
+      trackId: "reviewsTrack",
+      prevId: "reviewsPrev",
+      nextId: "reviewsNext",
+      dotsId: "reviewsDots",
+      autoPlay: true,
+      gap: 24,
+      itemsPerViewDesktop: 3
+    });
+
+    // 2. About Page Reviews
+    setupGenericCarousel({
+      viewportId: "aboutReviewsViewport",
+      trackId: "aboutReviewsTrack",
+      prevId: "aboutReviewsPrev",
+      nextId: "aboutReviewsNext",
+      dotsId: "aboutReviewsDots",
+      autoPlay: true,
+      gap: 24,
+      itemsPerViewDesktop: 3
+    });
+
+    // 3. Single Handset Similar Smartphone Models
+    setupGenericCarousel({
+      viewportId: "relatedViewport",
+      trackId: "relatedTrack",
+      prevId: "relatedPrev",
+      nextId: "relatedNext",
+      dotsId: "relatedDots",
+      autoPlay: true,
+      gap: 24,
+      itemsPerViewDesktop: 3
+    });
   }
 
   // -------------------------------------------------------------
@@ -1210,6 +1290,6 @@
     filterCatalog();
   }
   startAutoPlay();
-  initReviewsCarousel();
+  initAllCarousels();
 
 })();

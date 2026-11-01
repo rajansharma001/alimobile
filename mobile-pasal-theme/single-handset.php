@@ -698,40 +698,79 @@ while ( have_posts() ) :
 	})();
 	</script>
 
-	<!-- 7. Similar / Related Handsets Section Consistent with Home Page Grid -->
+	<!-- 7. Similar / Related Handsets Carousel -->
 	<?php
-	$related_args = array(
-		'post_type'           => 'handset',
-		'posts_per_page'      => 3,
-		'post__not_in'        => array( $post_id ),
-		'ignore_sticky_posts' => 1,
-	);
+	$primary_ids = array();
+	$exclude_ids = array( $post_id );
+
 	if ( ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ) {
-		$related_args['tax_query'] = array(
-			array(
-				'taxonomy' => 'device_brand',
-				'field'    => 'term_id',
-				'terms'    => $brand_terms[0]->term_id,
+		$brand_query = new WP_Query( array(
+			'post_type'           => 'handset',
+			'posts_per_page'      => 8,
+			'fields'              => 'ids',
+			'post__not_in'        => $exclude_ids,
+			'ignore_sticky_posts' => 1,
+			'tax_query'           => array(
+				array(
+					'taxonomy' => 'device_brand',
+					'field'    => 'term_id',
+					'terms'    => $brand_terms[0]->term_id,
+				),
 			),
-		);
+		) );
+		if ( ! empty( $brand_query->posts ) ) {
+			$primary_ids = $brand_query->posts;
+			$exclude_ids = array_merge( $exclude_ids, $primary_ids );
+		}
 	}
-	$related_query = new WP_Query( $related_args );
-	if ( ! $related_query->have_posts() && isset( $related_args['tax_query'] ) ) {
-		unset( $related_args['tax_query'] );
-		$related_query = new WP_Query( $related_args );
+
+	$needed = 8 - count( $primary_ids );
+	if ( $needed > 0 ) {
+		$supplement_query = new WP_Query( array(
+			'post_type'           => 'handset',
+			'posts_per_page'      => $needed,
+			'fields'              => 'ids',
+			'post__not_in'        => $exclude_ids,
+			'ignore_sticky_posts' => 1,
+		) );
+		if ( ! empty( $supplement_query->posts ) ) {
+			$primary_ids = array_merge( $primary_ids, $supplement_query->posts );
+		}
+	}
+
+	if ( ! empty( $primary_ids ) ) {
+		$related_query = new WP_Query( array(
+			'post_type'      => 'handset',
+			'post__in'       => $primary_ids,
+			'orderby'        => 'post__in',
+			'posts_per_page' => count( $primary_ids ),
+		) );
+	} else {
+		$related_query = new WP_Query( array( 'post__in' => array( 0 ) ) );
 	}
 
 	if ( $related_query->have_posts() ) :
 		?>
-		<section id="related-handsets" class="section-wrap" style="padding: 20px 0 60px;">
+		<section id="related-handsets" class="section-wrap" style="padding: 30px 0 60px; background: #fafcff; border-top: 1px solid #eef3fb;">
 			<div class="container">
-				<div class="section-header" style="margin-bottom: 28px;">
-					<span class="section-badge"><?php esc_html_e( 'EXPLORE MORE OPTIONS', 'mobile-pasal' ); ?></span>
-					<h2 class="section-title"><?php esc_html_e( 'Similar Smartphone Models', 'mobile-pasal' ); ?></h2>
-					<p class="section-desc"><?php esc_html_e( 'Compare related handsets available at our Gulariya counter showroom.', 'mobile-pasal' ); ?></p>
+				<div class="section-header" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 28px;">
+					<div class="section-header-copy">
+						<span class="section-badge"><?php esc_html_e( 'EXPLORE MORE OPTIONS', 'mobile-pasal' ); ?></span>
+						<h2 class="section-title"><?php esc_html_e( 'Similar Smartphone Models', 'mobile-pasal' ); ?></h2>
+						<p class="section-desc"><?php esc_html_e( 'Compare related handsets available at our Gulariya counter showroom.', 'mobile-pasal' ); ?></p>
+					</div>
+					<div class="carousel-nav-controls" style="display: flex; align-items: center; gap: 8px;">
+						<button class="carousel-arrow carousel-prev" id="relatedPrev" aria-label="<?php esc_attr_e( 'Previous models', 'mobile-pasal' ); ?>" type="button">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+						</button>
+						<button class="carousel-arrow carousel-next" id="relatedNext" aria-label="<?php esc_attr_e( 'Next models', 'mobile-pasal' ); ?>" type="button">
+							<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+						</button>
+					</div>
 				</div>
 
-				<div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+				<div class="related-carousel-viewport" id="relatedViewport">
+					<div class="related-carousel-track" id="relatedTrack">
 					<?php
 					while ( $related_query->have_posts() ) :
 						$related_query->the_post();
@@ -818,7 +857,7 @@ while ( have_posts() ) :
 									<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
 									<span><?php echo $rel_show_price ? esc_html__( 'WhatsApp Rate', 'mobile-pasal' ) : esc_html__( 'Inquire Rate', 'mobile-pasal' ); ?></span>
 								</a>
-								<a class="card-specs-btn" href="<?php echo esc_url( $rel_permalink ); ?>" title="<?php esc_attr_e( 'View Specifications', 'mobile-pasal' ); ?>">
+								<a class="card-specs-btn" href="<?php echo esc_url( $rel_permalink ); ?>#specs-matrix" title="<?php esc_attr_e( 'View Specifications', 'mobile-pasal' ); ?>">
 									<span><?php esc_html_e( 'Specs ›', 'mobile-pasal' ); ?></span>
 								</a>
 							</div>
@@ -827,7 +866,9 @@ while ( have_posts() ) :
 					endwhile;
 					wp_reset_postdata();
 					?>
+					</div>
 				</div>
+				<div class="reviews-carousel-dots" id="relatedDots" style="margin-top: 24px;"></div>
 			</div>
 		</section>
 		<?php

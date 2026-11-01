@@ -185,77 +185,101 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 	</div>
 </section>
 
-<!-- Community Reviews Section -->
-<section class="section-wrap reviews-section">
+<!-- Community Reviews Section (Interactive Dynamic Carousel) -->
+<section class="section-wrap reviews-section" id="community-reviews">
 	<div class="tech-bg-grid" aria-hidden="true"></div>
 	<div class="tech-ring-accent" aria-hidden="true"></div>
-	<div class="wrap">
-		<div class="sec-head sec-head-center fade-up">
-			<span class="sec-kicker"><?php esc_html_e( 'Community Feedback', 'mobile-pasal' ); ?></span>
-			<h2><?php esc_html_e( 'What Gulariya Phone Owners Say', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'Real feedback from local residents, students, and professionals across Bardiya.', 'mobile-pasal' ); ?></p>
+	<div class="container">
+		<div class="section-header" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+			<div class="section-header-copy">
+				<span class="section-badge"><?php esc_html_e( 'COMMUNITY FEEDBACK', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title"><?php esc_html_e( 'What Gulariya Phone Owners Say', 'mobile-pasal' ); ?></h2>
+				<p class="section-desc"><?php esc_html_e( 'Real verified feedback from local residents, students, and professionals across Bardiya.', 'mobile-pasal' ); ?></p>
+			</div>
+			<div class="reviews-header-actions" style="display: flex; align-items: center; gap: 14px;">
+				<div class="rating-header-badge">
+					<svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+					<strong>4.9 / 5.0</strong>
+					<span style="color:#78350f; font-weight:600;">(250+ Verified Reviews)</span>
+				</div>
+				<div class="reviews-nav-controls">
+					<button class="carousel-arrow carousel-prev" id="aboutReviewsPrev" aria-label="<?php esc_attr_e( 'Previous reviews', 'mobile-pasal' ); ?>" type="button">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+					</button>
+					<button class="carousel-arrow carousel-next" id="aboutReviewsNext" aria-label="<?php esc_attr_e( 'Next reviews', 'mobile-pasal' ); ?>" type="button">
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+					</button>
+				</div>
+			</div>
 		</div>
 
-		<div class="reviews-grid fade-up">
-			<?php
-			$about_reviews = new WP_Query( array(
-				'post_type'      => 'mp_review',
-				'posts_per_page' => 3,
-				'post_status'    => 'publish',
-			) );
+		<!-- Smooth Slider Carousel Viewport -->
+		<div class="reviews-carousel-viewport" id="aboutReviewsViewport">
+			<div class="reviews-carousel-track" id="aboutReviewsTrack">
+				<?php
+				$about_reviews = get_posts( array(
+					'post_type'      => 'mp_review',
+					'posts_per_page' => 12,
+					'post_status'    => 'publish',
+				) );
 
-			if ( $about_reviews->have_posts() ) :
-				while ( $about_reviews->have_posts() ) :
-					$about_reviews->the_post();
-					$r_id      = get_the_ID();
-					$location  = get_post_meta( $r_id, '_mp_review_location', true ) ?: 'Gulariya, Bardiya';
-					$initials  = mb_substr( get_the_title(), 0, 2 );
-					?>
-					<div class="review-card">
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+				$about_reviews_data = array();
+				if ( ! empty( $about_reviews ) ) {
+					foreach ( $about_reviews as $arv ) {
+						$author   = $arv->post_title;
+						$content  = strip_tags( $arv->post_content );
+						$loc      = get_post_meta( $arv->ID, '_mp_review_location', true ) ?: 'Gulariya, Bardiya';
+						$prod     = get_post_meta( $arv->ID, '_mp_review_product', true );
+						$rating   = intval( get_post_meta( $arv->ID, '_mp_review_rating', true ) ?: 5 );
+						$meta_str = $loc . ( $prod ? ' • ' . $prod : '' );
+						$initials = mb_substr( $author, 0, 2 );
+
+						$about_reviews_data[] = array(
+							'text'     => '"' . $content . '"',
+							'name'     => $author,
+							'meta'     => $meta_str,
+							'initials' => strtoupper( $initials ),
+							'rating'   => $rating,
+						);
+					}
+				} else {
+					$default_testimonials = mp_get_default_testimonials_data();
+					foreach ( $default_testimonials as $t ) {
+						$about_reviews_data[] = array(
+							'text'     => '"' . $t['content'] . '"',
+							'name'     => $t['name'],
+							'meta'     => $t['location'],
+							'initials' => strtoupper( mb_substr( $t['name'], 0, 2 ) ),
+							'rating'   => 5,
+						);
+					}
+				}
+
+				foreach ( $about_reviews_data as $rv_item ) :
+				?>
+				<div class="review-card">
+					<div>
+						<div class="review-stars" aria-label="<?php echo esc_attr( $rv_item['rating'] ); ?> out of 5 stars">
+							<?php for ( $s = 0; $s < 5; $s++ ) : ?>
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="<?php echo $s < $rv_item['rating'] ? '#f59e0b' : '#cbd5e1'; ?>" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+							<?php endfor; ?>
 						</div>
-						<p class="review-quote">"<?php echo esc_html( get_the_content() ); ?>"</p>
-						<div class="reviewer-meta">
-							<div class="reviewer-avatar"><?php echo esc_html( strtoupper( $initials ) ); ?></div>
-							<div>
-								<strong><?php the_title(); ?></strong>
-								<small><?php echo esc_html( $location ); ?></small>
-							</div>
+						<p class="review-text"><?php echo esc_html( $rv_item['text'] ); ?></p>
+					</div>
+					<div class="reviewer-info">
+						<div class="reviewer-avatar"><?php echo esc_html( $rv_item['initials'] ); ?></div>
+						<div>
+							<h4 class="reviewer-name"><?php echo esc_html( $rv_item['name'] ); ?></h4>
+							<p class="reviewer-meta"><?php echo esc_html( $rv_item['meta'] ); ?></p>
 						</div>
 					</div>
-				<?php endwhile;
-				wp_reset_postdata();
-			else :
-				$default_testimonials = mp_get_default_testimonials_data();
-				foreach ( $default_testimonials as $t ) :
-					$initials = mb_substr( $t['name'], 0, 2 );
-					?>
-					<div class="review-card">
-						<div class="review-stars">
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-							<svg viewBox="0 0 24 24" width="16" height="16" fill="#f59e0b"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-						</div>
-						<p class="review-quote">"<?php echo esc_html( $t['content'] ); ?>"</p>
-						<div class="reviewer-meta">
-							<div class="reviewer-avatar"><?php echo esc_html( strtoupper( $initials ) ); ?></div>
-							<div>
-								<strong><?php echo esc_html( $t['name'] ); ?></strong>
-								<small><?php echo esc_html( $t['location'] ); ?></small>
-							</div>
-						</div>
-					</div>
-				<?php endforeach;
-			endif;
-			?>
+				</div>
+				<?php endforeach; ?>
+			</div>
 		</div>
+
+		<!-- Carousel Indicator Dots -->
+		<div class="reviews-carousel-dots" id="aboutReviewsDots"></div>
 	</div>
 </section>
 

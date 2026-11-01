@@ -687,15 +687,22 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
 
         <div class="filter-group">
-          <div class="filter-label">BRAND &amp; ECOSYSTEM</div>
+          <div class="filter-label"><?php esc_html_e( 'BRAND & ECOSYSTEM', 'mobile-pasal' ); ?></div>
           <div class="filter-options">
-            <label class="filter-radio-label active"><input type="radio" name="brandFilter" value="all" checked onchange="filterCatalog()"> All Handsets</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="Apple iPhone" onchange="filterCatalog()"> Apple iPhone</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="Samsung Galaxy" onchange="filterCatalog()"> Samsung Galaxy</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="Xiaomi / Redmi" onchange="filterCatalog()"> Xiaomi / Redmi</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="OnePlus" onchange="filterCatalog()"> OnePlus</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="Google Pixel" onchange="filterCatalog()"> Google Pixel</label>
-            <label class="filter-radio-label"><input type="radio" name="brandFilter" value="Accessories & Gear" onchange="filterCatalog()"> Accessories &amp; Gear</label>
+            <label class="filter-radio-label active"><input type="radio" name="brandFilter" value="all" checked onchange="filterCatalog()"> <?php esc_html_e( 'All Handsets', 'mobile-pasal' ); ?></label>
+            <?php
+            $hp_brands = get_terms( array(
+                'taxonomy'   => 'device_brand',
+                'hide_empty' => true,
+            ) );
+            if ( ! empty( $hp_brands ) && ! is_wp_error( $hp_brands ) ) :
+                foreach ( $hp_brands as $hb ) :
+                ?>
+                <label class="filter-radio-label"><input type="radio" name="brandFilter" value="<?php echo esc_attr( $hb->name ); ?>" onchange="filterCatalog()"> <?php echo esc_html( $hb->name ); ?></label>
+                <?php
+                endforeach;
+            endif;
+            ?>
           </div>
         </div>
 
@@ -731,6 +738,74 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <div class="products-grid" id="productsGrid">
           <!-- Live catalog rendered via JavaScript with instant filtering -->
         </div>
+
+        <?php
+        $hp_handsets_query = new WP_Query( array(
+            'post_type'           => 'handset',
+            'posts_per_page'      => 48,
+            'post_status'         => 'publish',
+            'ignore_sticky_posts' => 1,
+        ) );
+
+        $hp_catalog_items = array();
+        if ( $hp_handsets_query->have_posts() ) {
+            while ( $hp_handsets_query->have_posts() ) {
+                $hp_handsets_query->the_post();
+                $h_id       = get_the_ID();
+                $h_title    = get_the_title();
+                $permalink  = get_permalink( $h_id );
+                $badge      = get_post_meta( $h_id, '_mp_badge', true ) ?: __( 'Official VAT Bill', 'mobile-pasal' );
+                $price      = get_post_meta( $h_id, '_mp_price', true );
+                $old_price  = get_post_meta( $h_id, '_mp_old_price', true );
+                $per_hide   = get_post_meta( $h_id, '_mp_hide_price', true );
+                $img_url    = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $h_id ) : get_the_post_thumbnail_url( $h_id, 'medium' );
+
+                $is_price_visible = ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $per_hide ) && ! empty( $price );
+                $price_fmt        = is_numeric( $price ) ? 'Rs. ' . number_format( (float) $price ) : $price;
+                $old_price_fmt    = ( is_numeric( $old_price ) && (float) $old_price > (float) $price ) ? 'Rs. ' . number_format( (float) $old_price ) : ( ( ! empty( $old_price ) && $old_price !== $price ) ? $old_price : '' );
+                $numeric_price    = (int) preg_replace( '/[^0-9]/', '', (string) $price );
+
+                $spec_screen   = get_post_meta( $h_id, '_mp_spec_screen', true ) ?: get_post_meta( $h_id, '_mp_display', true );
+                $spec_chip     = get_post_meta( $h_id, '_mp_spec_chip', true ) ?: get_post_meta( $h_id, '_mp_processor', true );
+                $storage_meta  = get_post_meta( $h_id, '_mp_spec_storage', true );
+                $specs_arr     = array_values( array_filter( array( $spec_screen, $spec_chip, $storage_meta ) ) );
+
+                $brand_terms = get_the_terms( $h_id, 'device_brand' );
+                $brand_name  = ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ? $brand_terms[0]->name : ( get_post_meta( $h_id, '_mp_brand', true ) ?: 'Handset' );
+                $brand_slug  = ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ? $brand_terms[0]->slug : 'all';
+
+                $cat_terms   = get_the_terms( $h_id, 'device_category' );
+                $cat_name    = ! empty( $cat_terms ) && ! is_wp_error( $cat_terms ) ? $cat_terms[0]->name : $brand_name;
+
+                $wa_msg = sprintf(
+                    __( 'Namaste Ali Mobile, ma tapaiharuko website ma %s herera aako chhu. Gulariya counter ma availability ra rate confirm gardinus na.', 'mobile-pasal' ),
+                    $h_title
+                );
+                $wa_url = 'https://wa.me/' . esc_attr( $clean_p ) . '?text=' . rawurlencode( $wa_msg );
+
+                $hp_catalog_items[] = array(
+                    'id'             => $h_id,
+                    'name'           => $h_title,
+                    'url'            => $permalink,
+                    'img'            => $img_url,
+                    'brand'          => $brand_name,
+                    'brandSlug'      => $brand_slug,
+                    'categoryTag'    => $cat_name,
+                    'tag'            => $badge,
+                    'specs'          => $specs_arr,
+                    'price'          => $numeric_price,
+                    'priceFmt'       => $price_fmt,
+                    'oldPriceFmt'    => $old_price_fmt,
+                    'isPriceVisible' => $is_price_visible,
+                    'waUrl'          => $wa_url,
+                );
+            }
+            wp_reset_postdata();
+        }
+        ?>
+        <script>
+        window.mpCatalogData = <?php echo json_encode( $hp_catalog_items ); ?>;
+        </script>
       </div>
     </div>
   </div>
