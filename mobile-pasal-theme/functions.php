@@ -440,14 +440,14 @@ function mp_ajax_live_search() {
 	$repairs = array();
 	foreach ( $repair_posts as $rp ) {
 		$rid        = $rp->ID;
-		$rate       = get_post_meta( $rid, '_mp_repair_price', true ) ?: __( 'Free Diagnostic', 'mobile-pasal' );
-		$turnaround = get_post_meta( $rid, '_mp_repair_time', true ) ?: '45 Mins';
+		$rate       = get_post_meta( $rid, '_mp_service_price', true ) ?: ( get_post_meta( $rid, '_mp_repair_price', true ) ?: ( get_post_meta( $rid, '_mp_price_est', true ) ?: __( 'Free Diagnostic', 'mobile-pasal' ) ) );
+		$turnaround = get_post_meta( $rid, '_mp_service_turnaround', true ) ?: ( get_post_meta( $rid, '_mp_repair_time', true ) ?: ( get_post_meta( $rid, '_mp_turnaround', true ) ?: '45 Mins' ) );
 		$repairs[]  = array(
 			'id'         => (int) $rid,
 			'title'      => get_the_title( $rid ),
 			'rate'       => $rate,
 			'turnaround' => $turnaround,
-			'url'        => home_url( '/services/#repairs' ),
+			'url'        => get_permalink( $rid ) ?: home_url( '/services/#repairs' ),
 		);
 	}
 
@@ -459,6 +459,69 @@ function mp_ajax_live_search() {
 }
 add_action( 'wp_ajax_mp_live_search', 'mp_ajax_live_search' );
 add_action( 'wp_ajax_nopriv_mp_live_search', 'mp_ajax_live_search' );
+
+/**
+ * 13. Public Customer Review Submission AJAX Endpoint (Creates Pending mp_review Post)
+ */
+function mp_ajax_submit_customer_review() {
+	$nonce   = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	$is_ok   = wp_verify_nonce( $nonce, 'mp_public_nonce' ) || wp_verify_nonce( $nonce, 'mp_theme_nonce' );
+	if ( ! $is_ok ) {
+		wp_send_json_error( array( 'message' => __( 'Security check failed. Please refresh and try again.', 'mobile-pasal' ) ), 403 );
+	}
+
+	$name     = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
+	$location = isset( $_POST['location'] ) ? sanitize_text_field( wp_unslash( $_POST['location'] ) ) : 'Gulariya, Bardiya';
+	$product  = isset( $_POST['product'] ) ? sanitize_text_field( wp_unslash( $_POST['product'] ) ) : '';
+	$content  = isset( $_POST['content'] ) ? sanitize_textarea_field( wp_unslash( $_POST['content'] ) ) : '';
+	$rating   = isset( $_POST['rating'] ) ? max( 1, min( 5, absint( $_POST['rating'] ) ) ) : 5;
+
+	if ( empty( $name ) || empty( $content ) ) {
+		wp_send_json_error( array( 'message' => __( 'Please enter your name and review feedback.', 'mobile-pasal' ) ), 400 );
+	}
+
+	$post_id = wp_insert_post( array(
+		'post_type'    => 'mp_review',
+		'post_title'   => $name,
+		'post_content' => $content,
+		'post_status'  => 'pending',
+	) );
+
+	if ( is_wp_error( $post_id ) || ! $post_id ) {
+		wp_send_json_error( array( 'message' => __( 'Unable to save review right now.', 'mobile-pasal' ) ), 500 );
+	}
+
+	update_post_meta( $post_id, '_mp_review_location', $location ?: 'Gulariya, Bardiya' );
+	update_post_meta( $post_id, '_mp_review_product', $product );
+	update_post_meta( $post_id, '_mp_review_rating', $rating );
+	update_post_meta( $post_id, '_mp_review_verified', '1' );
+
+	wp_send_json_success( array(
+		'message' => __( 'Dhanyabad! Your review has been submitted and will appear after showroom verification.', 'mobile-pasal' ),
+	) );
+}
+add_action( 'wp_ajax_mp_submit_customer_review', 'mp_ajax_submit_customer_review' );
+add_action( 'wp_ajax_nopriv_mp_submit_customer_review', 'mp_ajax_submit_customer_review' );
+
+/**
+ * 14. Show Pending Reviews Count Bubble in WP Admin Menu
+ */
+function mp_pending_reviews_menu_bubble() {
+	global $menu;
+	$counts = wp_count_posts( 'mp_review' );
+	if ( empty( $counts->pending ) ) {
+		return;
+	}
+	$pending = (int) $counts->pending;
+	foreach ( $menu as $key => $item ) {
+		if ( isset( $item[2] ) && 'edit.php?post_type=mp_review' === $item[2] ) {
+			$menu[ $key ][0] .= sprintf( ' <span class="awaiting-mod count-%1$d"><span class="pending-count">%1$d</span></span>', $pending );
+			break;
+		}
+	}
+}
+add_action( 'admin_menu', 'mp_pending_reviews_menu_bubble', 99 );
+
 
 
 

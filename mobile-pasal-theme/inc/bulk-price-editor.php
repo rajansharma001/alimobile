@@ -121,6 +121,238 @@ function mobile_pasal_ajax_bulk_save_handsets() {
 add_action( 'wp_ajax_mp_bulk_save_handsets', 'mobile_pasal_ajax_bulk_save_handsets' );
 
 /**
+ * Export Handset Prices & Stock to CSV
+ */
+function mobile_pasal_export_prices_csv() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+	check_admin_referer( 'mp_bpe_csv_export' );
+
+	$handsets = get_posts( array(
+		'post_type'      => 'handset',
+		'posts_per_page' => -1,
+		'post_status'    => array( 'publish', 'draft' ),
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	) );
+
+	$filename = 'ali-mobile-handset-prices-' . gmdate( 'Y-m-d' ) . '.csv';
+	header( 'Content-Type: text/csv; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+
+	$out = fopen( 'php://output', 'w' );
+	fputcsv( $out, array( 'ID', 'Model_Name', 'Brand', 'Price', 'Old_Price', 'Badge', 'Stock_Status', 'Price_Visibility' ) );
+
+	foreach ( $handsets as $h ) {
+		$pid        = $h->ID;
+		$terms      = wp_get_post_terms( $pid, 'device_brand', array( 'fields' => 'names' ) );
+		$brand_str  = ! empty( $terms ) && ! is_wp_error( $terms ) ? implode( ', ', $terms ) : 'Handset';
+		$price      = get_post_meta( $pid, '_mp_price', true );
+		$old_price  = get_post_meta( $pid, '_mp_old_price', true );
+		$badge      = get_post_meta( $pid, '_mp_badge', true );
+		$stock      = get_post_meta( $pid, '_mp_stock_status', true ) ?: 'in_stock';
+		$show_price = get_post_meta( $pid, '_mp_show_price', true ) ?: 'inherit';
+
+		fputcsv( $out, array( $pid, $h->post_title, $brand_str, $price, $old_price, $badge, $stock, $show_price ) );
+	}
+	fclose( $out );
+	exit;
+}
+add_action( 'admin_post_mp_export_prices_csv', 'mobile_pasal_export_prices_csv' );
+
+/**
+ * Import Handset Prices & Stock from CSV
+ */
+function mobile_pasal_import_prices_csv() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+	check_admin_referer( 'mp_bpe_csv_import', 'mp_bpe_csv_nonce' );
+
+	if ( empty( $_FILES['mp_csv_file']['tmp_name'] ) ) {
+		wp_safe_redirect( admin_url( 'admin.php?page=mp-bulk-price-editor&csv_err=1' ) );
+		exit;
+	}
+
+	$handle = fopen( $_FILES['mp_csv_file']['tmp_name'], 'r' );
+	if ( ! $handle ) {
+		wp_safe_redirect( admin_url( 'admin.php?page=mp-bulk-price-editor&csv_err=1' ) );
+		exit;
+	}
+
+	$allowed_stock = array( 'in_stock', 'low_stock', 'pre_order', 'out_of_stock' );
+	$allowed_vis   = array( 'inherit', 'show', 'hide' );
+	$updated       = 0;
+	$row_num       = 0;
+
+	while ( ( $row = fgetcsv( $handle ) ) !== false ) {
+		$row_num++;
+		if ( 1 === $row_num && ! is_numeric( $row[0] ) ) {
+			continue; // Skip header row
+		}
+		$pid = isset( $row[0] ) ? absint( $row[0] ) : 0;
+		if ( ! $pid || 'handset' !== get_post_type( $pid ) ) {
+			continue;
+		}
+		if ( isset( $row[3] ) ) {
+			update_post_meta( $pid, '_mp_price', sanitize_text_field( $row[3] ) );
+		}
+		if ( isset( $row[4] ) ) {
+			update_post_meta( $pid, '_mp_old_price', sanitize_text_field( $row[4] ) );
+		}
+		if ( isset( $row[5] ) ) {
+			update_post_meta( $pid, '_mp_badge', sanitize_text_field( $row[5] ) );
+		}
+		if ( isset( $row[6] ) ) {
+			$st = sanitize_key( $row[6] );
+			if ( in_array( $st, $allowed_stock, true ) ) {
+				update_post_meta( $pid, '_mp_stock_status', $st );
+			}
+		}
+		if ( isset( $row[7] ) ) {
+			$vis = sanitize_key( $row[7] );
+			if ( in_array( $vis, $allowed_vis, true ) ) {
+				update_post_meta( $pid, '_mp_show_price', $vis );
+				update_post_meta( $pid, '_mp_hide_price', 'hide' === $vis ? '1' : '0' );
+			}
+		}
+		$updated++;
+	}
+	fclose( $handle );
+
+	wp_safe_redirect( admin_url( 'admin.php?page=mp-bulk-price-editor&csv_imported=' . $updated ) );
+	exit;
+}
+add_action( 'admin_post_mp_import_prices_csv', 'mobile_pasal_import_prices_csv' );
+
+/**
+ * Printable A4 Showroom Counter Rate Sheet
+ */
+function mobile_pasal_print_price_sheet() {
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+
+	$store_name  = mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' );
+	$store_phone = mp_opt( 'contact_phone', '+977 9804530786' );
+	$store_addr  = mp_opt( 'contact_address', 'Ji. Pra. Ka. Chowk, Gulariya-06, Bardiya' );
+	$shop_url    = home_url( '/shop/' );
+	$qr_src      = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=' . rawurlencode( $shop_url );
+
+	$handsets = get_posts( array(
+		'post_type'      => 'handset',
+		'posts_per_page' => -1,
+		'post_status'    => 'publish',
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	) );
+
+	$grouped = array();
+	foreach ( $handsets as $h ) {
+		$terms     = wp_get_post_terms( $h->ID, 'device_brand', array( 'fields' => 'names' ) );
+		$brand_str = ! empty( $terms ) && ! is_wp_error( $terms ) ? $terms[0] : 'Other Handsets';
+		$grouped[ $brand_str ][] = $h;
+	}
+	ksort( $grouped );
+	?>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title><?php echo esc_html( $store_name . ' — Daily Counter Rate Sheet' ); ?></title>
+		<style>
+			* { box-sizing: border-box; }
+			body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #0f172a; margin: 0; padding: 24px; background: #f1f5f9; }
+			.sheet { max-width: 840px; margin: 0 auto; background: #fff; padding: 32px 36px; border-radius: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
+			.sheet-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0066cc; padding-bottom: 18px; margin-bottom: 22px; }
+			.sheet-title { margin: 0 0 4px; font-size: 24px; font-weight: 900; color: #071b3b; }
+			.sheet-sub { margin: 0; font-size: 13px; color: #475569; font-weight: 600; }
+			.brand-block { margin-bottom: 22px; page-break-inside: avoid; }
+			.brand-heading { margin: 0 0 8px; font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; color: #0066cc; background: #eff6ff; padding: 6px 12px; border-radius: 6px; border-left: 4px solid #0066cc; }
+			table { width: 100%; border-collapse: collapse; font-size: 13px; }
+			th, td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; text-align: left; }
+			th { font-size: 11px; text-transform: uppercase; color: #64748b; background: #f8fafc; }
+			.price-col { font-weight: 800; color: #0066cc; font-size: 13.5px; }
+			.stock-tag { display: inline-block; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 700; }
+			.st-in_stock { background: #dcfce7; color: #166534; }
+			.st-low_stock { background: #fef3c7; color: #92400e; }
+			.st-pre_order { background: #dbeafe; color: #1e40af; }
+			.st-out_of_stock { background: #fee2e2; color: #991b1b; }
+			.no-print { text-align: center; margin-bottom: 16px; }
+			.print-btn { background: #0066cc; color: #fff; border: none; padding: 10px 22px; border-radius: 8px; font-weight: 800; cursor: pointer; font-size: 14px; }
+			@media print {
+				body { background: #fff; padding: 0; }
+				.sheet { box-shadow: none; padding: 10px; max-width: 100%; }
+				.no-print { display: none !important; }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="no-print">
+			<button type="button" class="print-btn" onclick="window.print();">🖨️ Print A4 Counter Rate Sheet</button>
+		</div>
+		<div class="sheet">
+			<div class="sheet-head">
+				<div>
+					<h1 class="sheet-title"><?php echo esc_html( $store_name ); ?></h1>
+					<p class="sheet-sub"><?php echo esc_html( $store_addr . ' • Hotline: ' . $store_phone ); ?></p>
+					<p class="sheet-sub" style="margin-top:4px;color:#059669;">✓ 100% NTA MDMS Registered &bull; Official 13% VAT Bill &bull;Updated: <?php echo esc_html( date_i18n( 'F j, Y' ) ); ?></p>
+				</div>
+				<div style="text-align:center;">
+					<img src="<?php echo esc_url( $qr_src ); ?>" alt="QR" width="76" height="76" style="border:1px solid #cbd5e1;padding:3px;border-radius:8px;" />
+					<div style="font-size:10px;font-weight:700;color:#475569;margin-top:2px;">Scan Live Catalog</div>
+				</div>
+			</div>
+
+			<?php foreach ( $grouped as $brand_name => $items ) : ?>
+				<div class="brand-block">
+					<h2 class="brand-heading"><?php echo esc_html( $brand_name ); ?> (<?php echo count( $items ); ?>)</h2>
+					<table>
+						<thead>
+							<tr>
+								<th style="width:36%;">Handset Model</th>
+								<th style="width:28%;">Key Specs / Storage</th>
+								<th style="width:20%;">Counter Price</th>
+								<th style="width:16%;">Availability</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php foreach ( $items as $item ) :
+								$pid    = $item->ID;
+								$price  = get_post_meta( $pid, '_mp_price', true );
+								$p_fmt  = is_numeric( $price ) ? 'NPR ' . number_format( (float) $price ) : ( $price ?: 'Inquire' );
+								$stock  = get_post_meta( $pid, '_mp_stock_status', true ) ?: 'in_stock';
+								$chip   = get_post_meta( $pid, '_mp_spec_chip', true ) ?: get_post_meta( $pid, '_mp_processor', true );
+								$stor   = get_post_meta( $pid, '_mp_spec_storage', true );
+								$specs  = implode( ' • ', array_filter( array( $chip, $stor ) ) );
+								$st_lbl = array(
+									'in_stock'     => 'In Stock',
+									'low_stock'    => 'Low Stock',
+									'pre_order'    => 'Pre-Order',
+									'out_of_stock' => 'Out of Stock',
+								);
+							?>
+							<tr>
+								<td><strong><?php echo esc_html( $item->post_title ); ?></strong></td>
+								<td style="color:#475569;font-size:12px;"><?php echo esc_html( $specs ?: 'Official Sealed Unit' ); ?></td>
+								<td class="price-col"><?php echo esc_html( $p_fmt ); ?></td>
+								<td><span class="stock-tag st-<?php echo esc_attr( $stock ); ?>"><?php echo esc_html( isset( $st_lbl[ $stock ] ) ? $st_lbl[ $stock ] : 'In Stock' ); ?></span></td>
+							</tr>
+							<?php endforeach; ?>
+						</tbody>
+					</table>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	</body>
+	</html>
+	<?php
+	exit;
+}
+add_action( 'admin_post_mp_print_price_sheet', 'mobile_pasal_print_price_sheet' );
+
+/**
  * Render the Spreadsheet-Style Bulk Handset Price & Stock Editor
  */
 function mobile_pasal_render_bulk_price_editor() {
@@ -164,10 +396,18 @@ function mobile_pasal_render_bulk_price_editor() {
 				</div>
 			</div>
 			<div class="bopt-topbar-right">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn">
-					<i class="fa-solid fa-sliders"></i>
-					<span class="bopt-btn-text"><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
+				<a href="<?php echo esc_url( admin_url( 'admin-post.php?action=mp_print_price_sheet' ) ); ?>" target="_blank" class="bopt-messages-btn" title="<?php esc_attr_e( 'Print A4 Showroom Rate Sheet', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-print"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Print Rate Sheet', 'mobile-pasal' ); ?></span>
 				</a>
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_prices_csv' ), 'mp_bpe_csv_export' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Download Prices as CSV', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-file-csv"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Export CSV', 'mobile-pasal' ); ?></span>
+				</a>
+				<button type="button" class="bopt-messages-btn" onclick="document.getElementById('mpBpeCsvImportBox').style.display = document.getElementById('mpBpeCsvImportBox').style.display === 'none' ? 'block' : 'none';">
+					<i class="fa-solid fa-file-import"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Import CSV', 'mobile-pasal' ); ?></span>
+				</button>
 				<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=handset' ) ); ?>" class="bopt-messages-btn">
 					<i class="fa-solid fa-plus"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Add Handset', 'mobile-pasal' ); ?></span>
@@ -185,6 +425,30 @@ function mobile_pasal_render_bulk_price_editor() {
 		</header>
 
 		<div class="bopt-inquiries-container" style="max-width:1480px;">
+			<?php if ( isset( $_GET['csv_imported'] ) ) : ?>
+				<div style="background:#ecfdf5;border:1px solid #a7f3d0;color:#065f46;padding:12px 18px;border-radius:10px;margin-bottom:16px;font-weight:700;">
+					✓ <?php printf( esc_html__( 'Successfully imported & updated %d handsets from CSV!', 'mobile-pasal' ), absint( $_GET['csv_imported'] ) ); ?>
+				</div>
+			<?php endif; ?>
+
+			<div id="mpBpeCsvImportBox" class="bopt-card" style="display:none;margin-bottom:18px;border:1.5px dashed #0066cc;background:#f8fbff;">
+				<div class="bopt-card-body">
+					<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" enctype="multipart/form-data" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;">
+						<input type="hidden" name="action" value="mp_import_prices_csv" />
+						<?php wp_nonce_field( 'mp_bpe_csv_import', 'mp_bpe_csv_nonce' ); ?>
+						<div>
+							<strong style="display:block;font-size:14px;color:#0f172a;"><?php esc_html_e( 'Bulk Import Prices & Stock via CSV', 'mobile-pasal' ); ?></strong>
+							<span style="font-size:12.5px;color:#475569;"><?php esc_html_e( 'Tip: Click "Export CSV" first, edit prices in Excel or Google Sheets, and upload the saved CSV file here.', 'mobile-pasal' ); ?></span>
+						</div>
+						<div style="display:flex;align-items:center;gap:10px;">
+							<input type="file" name="mp_csv_file" accept=".csv,text/csv" required />
+							<button type="submit" class="bopt-save-btn" style="padding:8px 18px;">
+								<i class="fa-solid fa-upload"></i> <?php esc_html_e( 'Upload & Apply CSV', 'mobile-pasal' ); ?>
+							</button>
+						</div>
+					</form>
+				</div>
+			</div>
 			<form id="mpBpeForm" onsubmit="return false;">
 				<input type="hidden" name="nonce" value="<?php echo esc_attr( $nonce ); ?>" />
 

@@ -948,18 +948,38 @@ function mp_ajax_track_repair_docket() {
 	);
 	$wa_url   = 'https://wa.me/' . $wa_phone . '?text=' . rawurlencode( $wa_msg );
 
+	// Calculate 90-Day Repair Lab Warranty Coverage
+	$created_ts         = strtotime( $docket->created_at ) ?: current_time( 'timestamp' );
+	$expiry_ts          = $created_ts + ( 90 * DAY_IN_SECONDS );
+	$now_ts             = current_time( 'timestamp' );
+	$days_remaining     = max( 0, (int) ceil( ( $expiry_ts - $now_ts ) / DAY_IN_SECONDS ) );
+	$warranty_expiry    = date_i18n( 'M j, Y', $expiry_ts );
+	$is_warranty_active = ( $days_remaining > 0 && 'cancelled' !== $docket->status );
+
+	if ( 'completed' === $docket->status && $is_warranty_active ) {
+		$warranty_badge = sprintf( __( 'Active 90-Day Lab Warranty • %d Days Remaining', 'mobile-pasal' ), $days_remaining );
+	} elseif ( $is_warranty_active ) {
+		$warranty_badge = sprintf( __( '90-Day Lab Warranty Pre-Registered (Valid until %s)', 'mobile-pasal' ), $warranty_expiry );
+	} else {
+		$warranty_badge = sprintf( __( 'Warranty Period Ended on %s', 'mobile-pasal' ), $warranty_expiry );
+	}
+
 	wp_send_json_success( array(
-		'docket_no'    => $docket->docket_no,
-		'customer'     => $masked_name,
-		'device'       => trim( $docket->device_brand . ' ' . $docket->device_model ) ?: __( 'Handset', 'mobile-pasal' ),
-		'service'      => $docket->service_needed ?: __( 'Precision Repair', 'mobile-pasal' ),
-		'date'         => date_i18n( get_option( 'date_format' ) . ' • g:i A', strtotime( $docket->created_at ) ),
-		'stage'        => $stage,
-		'status_label' => $status_label,
-		'status_desc'  => $status_desc,
-		'status_color' => $status_color,
-		'notes'        => ! empty( $docket->notes ) ? $docket->notes : '',
-		'wa_url'       => $wa_url,
+		'docket_no'       => $docket->docket_no,
+		'customer'        => $masked_name,
+		'device'          => trim( $docket->device_brand . ' ' . $docket->device_model ) ?: __( 'Handset', 'mobile-pasal' ),
+		'service'         => $docket->service_needed ?: __( 'Precision Repair', 'mobile-pasal' ),
+		'date'            => date_i18n( get_option( 'date_format' ) . ' • g:i A', $created_ts ),
+		'stage'           => $stage,
+		'status_label'    => $status_label,
+		'status_desc'     => $status_desc,
+		'status_color'    => $status_color,
+		'notes'           => ! empty( $docket->notes ) ? $docket->notes : '',
+		'wa_url'          => $wa_url,
+		'warranty_active' => $is_warranty_active,
+		'warranty_days'   => $days_remaining,
+		'warranty_expiry' => $warranty_expiry,
+		'warranty_badge'  => $warranty_badge,
 	) );
 }
 add_action( 'wp_ajax_mp_track_repair_docket', 'mp_ajax_track_repair_docket' );
@@ -978,10 +998,10 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 			<div class="mp-tracker-header">
 				<div class="mp-tracker-badge">
 					<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-					<span><?php esc_html_e( 'Live Lab Bench Telemetry', 'mobile-pasal' ); ?></span>
+					<span><?php esc_html_e( 'Live Lab Bench Telemetry & 90-Day Warranty Checker', 'mobile-pasal' ); ?></span>
 				</div>
-				<h3 class="mp-tracker-title"><?php esc_html_e( 'Track Your Device Repair Status', 'mobile-pasal' ); ?></h3>
-				<p class="mp-tracker-desc"><?php esc_html_e( 'Enter your Docket ID (e.g., ALI-2610-1234) or registered 10-digit mobile number.', 'mobile-pasal' ); ?></p>
+				<h3 class="mp-tracker-title"><?php esc_html_e( 'Track Device Repair Status & Digital Warranty', 'mobile-pasal' ); ?></h3>
+				<p class="mp-tracker-desc"><?php esc_html_e( 'Enter your Docket ID (e.g., AF-2026-8419) or registered 10-digit mobile number to view live bench progress and remaining 90-day warranty days.', 'mobile-pasal' ); ?></p>
 			</div>
 
 			<form class="mp-tracker-form" id="mpTrackerForm" onsubmit="mpHandleTrackerSubmit(event);">
@@ -1373,6 +1393,20 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 
 			var safeColor = /^#[0-9a-fA-F]{3,6}$/.test(d.status_color || '') ? d.status_color : '#0066cc';
 
+			var warrantyHtml = '';
+			if (d.warranty_badge) {
+				var wBg = d.warranty_active ? '#ecfdf5' : '#f8fafc';
+				var wBorder = d.warranty_active ? '#a7f3d0' : '#cbd5e1';
+				var wColor = d.warranty_active ? '#047857' : '#475569';
+				warrantyHtml = '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;padding:13px 16px;border-radius:12px;background:' + wBg + ';border:1px solid ' + wBorder + ';color:' + wColor + ';margin-bottom:18px;font-size:0.88rem;">' +
+					'<div style="display:flex;align-items:center;gap:8px;font-weight:800;">' +
+						'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
+						'<span>' + mpEscHtml(d.warranty_badge) + '</span>' +
+					'</div>' +
+					'<span style="font-size:0.78rem;font-weight:700;opacity:0.9;">Valid Until: ' + mpEscHtml(d.warranty_expiry || '') + '</span>' +
+				'</div>';
+			}
+
 			var html = '<div class="mp-docket-summary-box">' +
 				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Docket No', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.docket_no) + '</span></div>' +
 				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Customer', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.customer) + '</span></div>' +
@@ -1384,6 +1418,7 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 				'<h4 class="mp-status-banner-title">' + mpEscHtml(d.status_label) + '</h4>' +
 				'<p class="mp-status-banner-desc" style="color:var(--text-heading, #0f172a);">' + mpEscHtml(d.status_desc) + '</p>' +
 				'</div>' +
+				warrantyHtml +
 				noteHtml +
 				'<a href="' + mpEscHtml(d.wa_url) + '" target="_blank" rel="noopener" class="mp-tracker-wa-btn">' +
 				'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>' +
@@ -1407,7 +1442,7 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 			var docketParam = params.get('docket');
 			if (docketParam) {
 				var input = document.getElementById('mpTrackerQuery');
-				var form = document.getElementById('mpRepairTrackerForm');
+				var form = document.getElementById('mpTrackerForm') || document.getElementById('mpRepairTrackerForm');
 				if (input && form) {
 					input.value = docketParam;
 					mpHandleTrackerSubmit({ preventDefault: function(){} });

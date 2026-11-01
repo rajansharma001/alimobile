@@ -1773,11 +1773,198 @@
   });
 
   // -------------------------------------------------------------
-  // 13. EXPOSE GLOBAL HANDLERS ON WINDOW
+  // 13. PROMO BAR DISMISS, CUSTOMER REVIEW MODAL & EN/NEPALI TOGGLE
+  // -------------------------------------------------------------
+  var promoBar = document.getElementById("mpPromoTopbar");
+  var promoDismiss = document.getElementById("mpPromoDismissBtn");
+  if (promoBar && promoDismiss) {
+    try {
+      if (sessionStorage.getItem("mp_promo_dismissed") === "1") {
+        promoBar.style.display = "none";
+      }
+    } catch (e) {}
+    promoDismiss.addEventListener("click", function () {
+      promoBar.style.display = "none";
+      try { sessionStorage.setItem("mp_promo_dismissed", "1"); } catch (e) {}
+    });
+  }
+
+  // Verified Customer Review Modal
+  var revModal = document.getElementById("mpReviewModal");
+  var revForm = document.getElementById("mpReviewSubmitForm");
+  var starPicker = document.getElementById("mpStarPicker");
+  var revRatingInput = document.getElementById("mpRevRating");
+  var starLabel = document.getElementById("mpStarRatingLabel");
+
+  function openReviewModal() {
+    if (!revModal) return;
+    revModal.classList.add("open");
+    revModal.setAttribute("aria-hidden", "false");
+  }
+
+  function closeReviewModal() {
+    if (!revModal) return;
+    revModal.classList.remove("open");
+    revModal.setAttribute("aria-hidden", "true");
+  }
+
+  if (revModal) {
+    revModal.addEventListener("click", function (e) {
+      if (e.target === revModal) closeReviewModal();
+    });
+  }
+
+  if (starPicker) {
+    var starBtns = starPicker.querySelectorAll(".mp-star-btn");
+    starBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var val = parseInt(this.getAttribute("data-val"), 10) || 5;
+        if (revRatingInput) revRatingInput.value = val;
+        if (starLabel) starLabel.textContent = val + " / 5 Stars";
+        starBtns.forEach(function (b) {
+          var bVal = parseInt(b.getAttribute("data-val"), 10) || 0;
+          b.classList.toggle("active", bVal <= val);
+        });
+      });
+    });
+  }
+
+  if (revForm) {
+    revForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var submitBtn = document.getElementById("mpRevSubmitBtn");
+      var msgBox = document.getElementById("mpRevMsgBox");
+      var name = (document.getElementById("mpRevName") || {}).value || "";
+      var loc = (document.getElementById("mpRevLocation") || {}).value || "Gulariya, Bardiya";
+      var prod = (document.getElementById("mpRevProduct") || {}).value || "";
+      var content = (document.getElementById("mpRevContent") || {}).value || "";
+      var rating = (revRatingInput && revRatingInput.value) ? revRatingInput.value : "5";
+
+      if (!name.trim() || !content.trim()) return;
+      if (submitBtn) submitBtn.disabled = true;
+
+      var fd = new FormData();
+      fd.append("action", "mp_submit_customer_review");
+      fd.append("nonce", (window.mpAjax && window.mpAjax.nonce) ? window.mpAjax.nonce : "");
+      fd.append("name", name.trim());
+      fd.append("location", loc.trim());
+      fd.append("product", prod.trim());
+      fd.append("content", content.trim());
+      fd.append("rating", rating);
+
+      var ajaxEndpoint = (window.mpAjax && window.mpAjax.ajaxurl)
+        ? window.mpAjax.ajaxurl
+        : "/wp-admin/admin-ajax.php";
+
+      fetch(ajaxEndpoint, { method: "POST", body: fd })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (submitBtn) submitBtn.disabled = false;
+          if (msgBox) {
+            msgBox.style.display = "block";
+            if (res && res.success) {
+              msgBox.style.background = "#ecfdf5";
+              msgBox.style.color = "#065f46";
+              msgBox.style.border = "1px solid #a7f3d0";
+              msgBox.textContent = (res.data && res.data.message) ? res.data.message : "Thank you! Your review was submitted.";
+              revForm.reset();
+              setTimeout(function () {
+                closeReviewModal();
+                msgBox.style.display = "none";
+              }, 2400);
+            } else {
+              msgBox.style.background = "#fef2f2";
+              msgBox.style.color = "#991b1b";
+              msgBox.style.border = "1px solid #fecaca";
+              msgBox.textContent = (res && res.data && res.data.message) ? res.data.message : "Submission failed.";
+            }
+          }
+        })
+        .catch(function () {
+          if (submitBtn) submitBtn.disabled = false;
+        });
+    });
+  }
+
+  // Instant EN | नेपाली (Nepali) UI Switcher
+  var langToggle = document.getElementById("mpLangToggle");
+  var currentLang = "en";
+  try {
+    currentLang = localStorage.getItem("mp_site_lang") || "en";
+  } catch (e) {}
+
+  var npPhraseMap = {
+    "Home": "गृहपृष्ठ",
+    "Services": "मर्मत सेवा",
+    "Shop": "मोबाइल पसल",
+    "Shop Handsets": "मोबाइल किन्नुहोस्",
+    "About": "हाम्रो बारेमा",
+    "Contact": "सम्पर्क",
+    "WhatsApp Rate": "व्हाट्सएप दर",
+    "Inquire Rate": "दर सोध्नुहोस्",
+    "Specs ›": "विवरण ›",
+    "+ Compare": "+ तुलना",
+    "✓ Added": "✓ छानियो",
+    "Direct WhatsApp Order": "व्हाट्सएप अर्डर",
+    "Inquire Rate on WhatsApp": "व्हाट्सएपमा दर सोध्नुहोस्",
+    "Write a Review": "समीक्षा लेख्नुहोस्",
+    "Track Repair": "मर्मत स्थिति",
+    "Reset Filters": "फिल्टर रिसेट",
+    "VAT Included": "भ्याट सहित"
+  };
+
+  function applySiteLanguage(lang) {
+    currentLang = (lang === "np") ? "np" : "en";
+    try { localStorage.setItem("mp_site_lang", currentLang); } catch (e) {}
+
+    if (langToggle) {
+      var enOpt = langToggle.querySelector(".lang-en");
+      var npOpt = langToggle.querySelector(".lang-np");
+      if (enOpt) enOpt.classList.toggle("active", currentLang === "en");
+      if (npOpt) npOpt.classList.toggle("active", currentLang === "np");
+    }
+
+    // 1. Elements with explicit data-i18n-np attribute
+    document.querySelectorAll("[data-i18n-np]").forEach(function (el) {
+      if (!el.hasAttribute("data-i18n-en")) {
+        el.setAttribute("data-i18n-en", el.textContent);
+      }
+      el.textContent = (currentLang === "np") ? el.getAttribute("data-i18n-np") : el.getAttribute("data-i18n-en");
+    });
+
+    // 2. Navigation & Action Button Labels
+    var selectors = ".nav a, .card-wa-btn span, .card-specs-btn span, .card-compare-btn span, .btn-flagship-wa span:first-of-type, .vat-tag";
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (el.children.length > 0) return; // only leaf text nodes
+      var orig = el.getAttribute("data-orig-en");
+      if (!orig) {
+        orig = el.textContent.trim();
+        if (npPhraseMap[orig]) {
+          el.setAttribute("data-orig-en", orig);
+        }
+      }
+      if (orig && npPhraseMap[orig]) {
+        el.textContent = (currentLang === "np") ? npPhraseMap[orig] : orig;
+      }
+    });
+  }
+
+  if (langToggle) {
+    langToggle.addEventListener("click", function () {
+      var nextLang = (currentLang === "en") ? "np" : "en";
+      applySiteLanguage(nextLang);
+      triggerToast(nextLang === "np" ? "नेपाली भाषा सक्रिय गरियो" : "Switched to English");
+    });
+  }
+
+  // -------------------------------------------------------------
+  // 14. EXPOSE GLOBAL HANDLERS ON WINDOW
   // -------------------------------------------------------------
   window.setFinish = setFinish;
   window.openQuoteModal = openQuoteModal;
   window.closeQuoteModal = closeQuoteModal;
+  window.openReviewModal = openReviewModal;
+  window.closeReviewModal = closeReviewModal;
   window.handleQuoteSubmit = handleQuoteSubmit;
   window.triggerToast = triggerToast;
   window.filterCatalogByBrand = filterCatalogByBrand;
@@ -1791,6 +1978,9 @@
     filterCatalog();
   }
   renderCompareBarAndModal();
+  if (currentLang === "np") {
+    applySiteLanguage("np");
+  }
   startAutoPlay();
   initAllCarousels();
 

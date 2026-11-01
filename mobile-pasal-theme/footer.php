@@ -316,6 +316,53 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
   </div>
 </div>
 
+<!-- Verified Customer Review Submission Modal -->
+<div class="modal-backdrop" id="mpReviewModal" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Submit Verified Customer Review', 'mobile-pasal' ); ?>">
+  <div class="modal-box" style="max-width:480px;">
+    <button class="modal-close-btn" onclick="closeReviewModal()" aria-label="<?php esc_attr_e( 'Close', 'mobile-pasal' ); ?>" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+    <h3 class="modal-title"><?php esc_html_e( 'Share Your Showroom Experience', 'mobile-pasal' ); ?></h3>
+    <p class="modal-desc"><?php esc_html_e( 'Bought a phone or repaired your device at Ali Mobile Gulariya? Leave your feedback for the Bardiya community.', 'mobile-pasal' ); ?></p>
+    <form class="modal-form" id="mpReviewSubmitForm">
+      <div class="form-group">
+        <label><?php esc_html_e( 'Your Star Rating', 'mobile-pasal' ); ?></label>
+        <div class="mp-star-picker" id="mpStarPicker" data-rating="5">
+          <button type="button" class="mp-star-btn active" data-val="1">★</button>
+          <button type="button" class="mp-star-btn active" data-val="2">★</button>
+          <button type="button" class="mp-star-btn active" data-val="3">★</button>
+          <button type="button" class="mp-star-btn active" data-val="4">★</button>
+          <button type="button" class="mp-star-btn active" data-val="5">★</button>
+          <span class="mp-star-label" id="mpStarRatingLabel">5 / 5 Stars</span>
+        </div>
+        <input type="hidden" id="mpRevRating" value="5" />
+      </div>
+      <div class="form-group">
+        <label for="mpRevName"><?php esc_html_e( 'Your Full Name *', 'mobile-pasal' ); ?></label>
+        <input type="text" id="mpRevName" placeholder="<?php esc_attr_e( 'e.g., Anil Chaudhary', 'mobile-pasal' ); ?>" required />
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <div class="form-group">
+          <label for="mpRevLocation"><?php esc_html_e( 'Town / Municipality', 'mobile-pasal' ); ?></label>
+          <input type="text" id="mpRevLocation" placeholder="<?php esc_attr_e( 'e.g., Gulariya, Bardiya', 'mobile-pasal' ); ?>" value="Gulariya, Bardiya" />
+        </div>
+        <div class="form-group">
+          <label for="mpRevProduct"><?php esc_html_e( 'Phone / Repair Service', 'mobile-pasal' ); ?></label>
+          <input type="text" id="mpRevProduct" placeholder="<?php esc_attr_e( 'e.g., iPhone 15 / Screen Fix', 'mobile-pasal' ); ?>" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="mpRevContent"><?php esc_html_e( 'Your Review *', 'mobile-pasal' ); ?></label>
+        <textarea id="mpRevContent" rows="3" placeholder="<?php esc_attr_e( 'How was our pricing, NTA MDMS support, or cleanroom lab repair service?', 'mobile-pasal' ); ?>" required style="width:100%; padding:10px 12px; border:1px solid #cbd5e1; border-radius:10px; font-size:13.5px; font-family:inherit;"></textarea>
+      </div>
+      <button type="submit" id="mpRevSubmitBtn" class="whatsapp-action-btn" style="width:100%; justify-content:center; margin-top:6px; border:none; cursor:pointer;">
+        <span><?php esc_html_e( 'Submit Verified Review', 'mobile-pasal' ); ?></span>
+      </button>
+      <div id="mpRevMsgBox" style="display:none; margin-top:10px; padding:10px 12px; border-radius:8px; font-size:12.5px; font-weight:700;"></div>
+    </form>
+  </div>
+</div>
+
 <?php wp_footer(); ?>
 </body>
 </html>

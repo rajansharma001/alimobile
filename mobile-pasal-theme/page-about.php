@@ -196,7 +196,11 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 				<h2 class="section-title"><?php echo esc_html( mp_opt( 'reviews_title', 'What Gulariya Phone Owners Say' ) ); ?></h2>
 				<p class="section-desc"><?php echo esc_html( mp_opt( 'reviews_subtitle', 'Real verified feedback from local residents, students, and professionals across Bardiya.' ) ); ?></p>
 			</div>
-			<div class="reviews-header-actions" style="display: flex; align-items: center; gap: 14px;">
+			<div class="reviews-header-actions" style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+				<button type="button" class="mp-write-review-btn" onclick="openReviewModal()">
+					<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+					<span data-i18n-np="समीक्षा लेख्नुहोस्"><?php esc_html_e( 'Write a Review', 'mobile-pasal' ); ?></span>
+				</button>
 				<div class="rating-header-badge">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
 					<strong><?php echo esc_html( mp_opt( 'reviews_rating_score', '4.9 / 5.0' ) ); ?></strong>

@@ -1176,6 +1176,10 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <p class="section-subtitle"><?php echo esc_html( mp_opt( 'reviews_subtitle', 'Real feedback from local smartphone buyers and repair customers across Bardiya district.' ) ); ?></p>
       </div>
       <div class="reviews-header-actions">
+        <button type="button" class="mp-write-review-btn" onclick="openReviewModal()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+          <span data-i18n-np="समीक्षा लेख्नुहोस्"><?php esc_html_e( 'Write a Review', 'mobile-pasal' ); ?></span>
+        </button>
         <div class="rating-header-badge">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
           <strong><?php echo esc_html( mp_opt( 'reviews_rating_score', '4.9 / 5.0' ) ); ?></strong>

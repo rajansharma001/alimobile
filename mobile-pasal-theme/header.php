@@ -96,6 +96,34 @@ $preloader_color = mp_opt( 'color_primary', '#0066cc' );
 </div>
 <?php endif; ?>
 
+<!-- Festive Offer & Promotional Top Announcement Bar -->
+<?php
+$promo_bar_enabled  = mp_opt( 'promo_bar_enabled', 1 );
+$promo_bar_badge    = mp_opt( 'promo_bar_badge', 'SHOWROOM OFFER' );
+$promo_bar_text     = mp_opt( 'promo_bar_text', 'Free Original Tempered Glass, Back Case & Data Migration with Every New Smartphone Purchase!' );
+$promo_bar_cta_text = mp_opt( 'promo_bar_cta_text', 'Browse Handsets →' );
+$promo_bar_cta_url  = mp_opt( 'promo_bar_cta_url', home_url( '/shop/' ) );
+if ( 0 === strpos( $promo_bar_cta_url, '/' ) && 0 !== strpos( $promo_bar_cta_url, '//' ) ) {
+	$promo_bar_cta_url = home_url( $promo_bar_cta_url );
+}
+if ( ! empty( $promo_bar_enabled ) && '0' !== (string) $promo_bar_enabled && ! empty( $promo_bar_text ) ) :
+?>
+<div class="mp-promo-topbar" id="mpPromoTopbar" role="region" aria-label="<?php esc_attr_e( 'Showroom Promotional Announcement', 'mobile-pasal' ); ?>">
+	<div class="container mp-promo-topbar-inner">
+		<div class="mp-promo-copy">
+			<?php if ( ! empty( $promo_bar_badge ) ) : ?>
+				<span class="mp-promo-badge"><?php echo esc_html( $promo_bar_badge ); ?></span>
+			<?php endif; ?>
+			<span class="mp-promo-text" data-i18n-np="हरेक नयाँ स्मार्टफोन खरिदमा सक्कली टेम्पर्ड ग्लास, कभर र डाटा ट्रान्सफर पूर्ण निःशुल्क!"><?php echo esc_html( $promo_bar_text ); ?></span>
+			<?php if ( ! empty( $promo_bar_cta_text ) ) : ?>
+				<a href="<?php echo esc_url( $promo_bar_cta_url ); ?>" class="mp-promo-link" data-i18n-np="मोबाइल हेर्नुहोस् →"><?php echo esc_html( $promo_bar_cta_text ); ?></a>
+			<?php endif; ?>
+		</div>
+		<button type="button" class="mp-promo-dismiss" id="mpPromoDismissBtn" aria-label="<?php esc_attr_e( 'Dismiss announcement', 'mobile-pasal' ); ?>">&times;</button>
+	</div>
+</div>
+<?php endif; ?>
+
 <!-- Modern Sticky Header Bar -->
 <?php
 $header_sticky = mp_opt( 'header_sticky', 1 );
@@ -165,13 +193,19 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
     </nav>
 
     <div class="header-right-actions">
+      <button type="button" class="header-lang-btn" id="mpLangToggle" aria-label="<?php esc_attr_e( 'Switch Language EN / Nepali', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Switch Language (English / नेपाली)', 'mobile-pasal' ); ?>">
+        <span class="lang-opt lang-en active">EN</span>
+        <span class="lang-sep">|</span>
+        <span class="lang-opt lang-np">नेपाली</span>
+      </button>
+
       <button type="button" class="header-search-btn" id="mpQuickSearchOpen" aria-label="<?php esc_attr_e( 'Search Handsets & Repairs', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Search Handsets & Repairs (Ctrl+K)', 'mobile-pasal' ); ?>">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
       </button>
 
       <a class="header-track-pill" href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>" title="<?php esc_attr_e( 'Track Live Repair Status', 'mobile-pasal' ); ?>">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-        <span><?php esc_html_e( 'Track Repair', 'mobile-pasal' ); ?></span>
+        <span data-i18n-np="मर्मत स्थिति"><?php esc_html_e( 'Track Repair', 'mobile-pasal' ); ?></span>
       </a>
 
       <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
