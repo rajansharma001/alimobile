@@ -116,14 +116,21 @@ $preloader_color = mp_opt( 'color_primary', '#0066cc' );
       <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
 
-    <nav class="nav" id="nav">
-      <!-- Primary Core Nav Links (Concise, fit any desktop screen without overflow) -->
-      <a class="<?php echo is_front_page() ? 'active' : ''; ?>" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>" class="<?php echo is_page( 'shop' ) ? 'active' : ''; ?>"><?php esc_html_e( 'Shop Handsets', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo esc_url( home_url( '/services/' ) ); ?>" class="<?php echo is_page( 'services' ) ? 'active' : ''; ?>"><?php esc_html_e( 'Services & Lab', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo is_front_page() ? '#flagship' : esc_url( home_url( '/#flagship' ) ); ?>"><?php esc_html_e( 'iPhone 16 Pro', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>" class="<?php echo is_page( 'about' ) ? 'active' : ''; ?>"><?php esc_html_e( 'About', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo esc_url( home_url( '/contact/' ) ); ?>" class="<?php echo is_page( 'contact' ) ? 'active' : ''; ?>"><?php esc_html_e( 'Contact', 'mobile-pasal' ); ?></a>
+    <nav class="nav" id="nav" aria-label="<?php esc_attr_e( 'Main Navigation', 'mobile-pasal' ); ?>">
+      <?php
+      if ( has_nav_menu( 'primary' ) ) {
+        wp_nav_menu( array(
+          'theme_location' => 'primary',
+          'container'      => false,
+          'menu_class'     => 'primary-menu-list',
+          'fallback_cb'    => 'mp_nav_fallback',
+          'walker'         => new MP_Nav_Walker(),
+          'depth'          => 3,
+        ) );
+      } else {
+        mp_nav_fallback();
+      }
+      ?>
 
       <!-- Mobile-only Deep Section Shortcuts inside Dropdown Drawer -->
       <div class="nav-drawer-extras">

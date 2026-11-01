@@ -278,8 +278,34 @@
       if (closeIcon) closeIcon.style.display = isOpen ? "" : "none";
     });
 
+    // Mobile submenu toggle buttons
+    nav.querySelectorAll(".mobile-dropdown-btn").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parentLi = btn.closest(".menu-item-has-children");
+        if (parentLi) {
+          var isExpanded = parentLi.classList.toggle("open-sub");
+          btn.setAttribute("aria-expanded", String(isExpanded));
+        }
+      });
+    });
+
     nav.querySelectorAll("a").forEach(function (a) {
-      a.addEventListener("click", closeNav);
+      a.addEventListener("click", function (e) {
+        var href = a.getAttribute("href");
+        var parentLi = a.closest(".menu-item-has-children");
+        // If it's a mobile dummy parent link, toggle submenu instead of closing
+        if (window.innerWidth <= 1140 && parentLi && (!href || href === "#" || href === "javascript:void(0)")) {
+          e.preventDefault();
+          e.stopPropagation();
+          var isExpanded = parentLi.classList.toggle("open-sub");
+          var btn = parentLi.querySelector(".mobile-dropdown-btn");
+          if (btn) btn.setAttribute("aria-expanded", String(isExpanded));
+          return;
+        }
+        closeNav();
+      });
     });
 
     document.addEventListener("click", function (e) {
