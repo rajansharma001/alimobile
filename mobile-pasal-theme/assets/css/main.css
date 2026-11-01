@@ -5345,7 +5345,8 @@
 
 @media (max-width: 420px) {
   .shop-category-cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 }
 
@@ -8253,9 +8254,10 @@ html, body {
   gap: 12px;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .fault-cards-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 }
 
@@ -8575,9 +8577,29 @@ html, body {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .services-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    gap: 14px;
+    padding: 8px 16px 20px;
+    margin: 0 -16px;
+    scrollbar-width: none;
+  }
+  .services-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .service-card {
+    flex: 0 0 82vw;
+    max-width: 82vw;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    border-radius: 16px;
+    box-sizing: border-box;
   }
 }
 
@@ -8669,9 +8691,31 @@ html, body {
   }
 }
 
-@media (max-width: 600px) {
-  .steps-flow-grid {
-    grid-template-columns: 1fr;
+@media (max-width: 768px) {
+  .steps-flow-grid,
+  .flow-steps-grid {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    gap: 14px;
+    padding: 8px 16px 20px;
+    margin: 0 -16px;
+    scrollbar-width: none;
+  }
+  .steps-flow-grid::-webkit-scrollbar,
+  .flow-steps-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .flow-step-card {
+    flex: 0 0 78vw;
+    max-width: 78vw;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    border-radius: 16px;
+    box-sizing: border-box;
   }
 }
 
@@ -10543,11 +10587,46 @@ html, body {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .related-carousel-viewport {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    padding: 8px 16px 20px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .related-carousel-viewport::-webkit-scrollbar {
+    display: none !important;
+  }
+  .related-carousel-track {
+    display: flex !important;
+    gap: 12px !important;
+    width: max-content !important;
+    padding-right: 16px !important;
+    transition: none !important;
+  }
   .related-carousel-track .product-card {
-    flex: 0 0 100%;
-    min-width: 100%;
-    max-width: 100%;
+    flex: 0 0 calc(50% - 6px) !important;
+    min-width: calc(50% - 6px) !important;
+    max-width: calc(50% - 6px) !important;
+    scroll-snap-align: start !important;
+    scroll-snap-stop: normal !important;
+    box-sizing: border-box !important;
+  }
+  .related-handsets-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+}
+@media (max-width: 480px) {
+  .related-carousel-track .product-card {
+    flex: 0 0 74vw !important;
+    min-width: 74vw !important;
+    max-width: 74vw !important;
+    scroll-snap-align: center !important;
   }
 }
 
@@ -11028,10 +11107,29 @@ html, body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .assurance-pillars-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     gap: 14px;
+    padding: 8px 16px 20px;
+    margin: 0 -16px;
+    scrollbar-width: none;
+  }
+  .assurance-pillars-grid::-webkit-scrollbar {
+    display: none;
+  }
+  .assurance-pillar-card {
+    flex: 0 0 78vw;
+    max-width: 78vw;
+    scroll-snap-align: center;
+    scroll-snap-stop: normal;
+    border-radius: 16px;
+    box-sizing: border-box;
   }
   .assurance-pillar-card {
     padding: 20px 18px 18px;
@@ -13040,5 +13138,45 @@ body {
   /* On narrow screens, keep max 2 specs so all product cards have balanced height */
   .product-specs-list .spec-item:nth-child(n+3) {
     display: none !important;
+  }
+}
+/* -------------------------------------------------------------
+   SUPPLEMENTARY ALL-PAGES MOBILE-FIRST TWEAKS
+   ------------------------------------------------------------- */
+@media (max-width: 768px) {
+  /* Services Page Device Selector Strip */
+  .device-pills-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    flex-wrap: nowrap !important;
+    gap: 8px !important;
+    padding: 4px 16px 10px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .device-pills-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .device-pills-grid .dev-pill-btn {
+    flex: 0 0 auto !important;
+    white-space: nowrap !important;
+  }
+
+  /* About Page 2x2 Stats Grid */
+  .about-stats-dock {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
+  }
+
+  /* Contact Page Info Cards */
+  .contact-page-grid {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .contact-info-cards-row {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 10px !important;
   }
 }
