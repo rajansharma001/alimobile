@@ -1172,7 +1172,10 @@ add_action( 'admin_menu', 'mobile_pasal_options_admin_menu' );
  * Enqueue Admin Scripts & Styles for Theme Options
  */
 function mobile_pasal_options_admin_enqueue( $hook ) {
-	if ( strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false && strpos( $hook, 'mp-bulk-price-editor' ) === false ) {
+	$current_page  = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-bulk-price-editor' );
+
+	if ( ! in_array( $current_page, $allowed_pages, true ) && strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false && strpos( $hook, 'mp-general-inquiries' ) === false && strpos( $hook, 'mp-bulk-price-editor' ) === false ) {
 		return;
 	}
 
@@ -1200,6 +1203,25 @@ function mobile_pasal_options_admin_enqueue( $hook ) {
 	) );
 }
 add_action( 'admin_enqueue_scripts', 'mobile_pasal_options_admin_enqueue' );
+
+/**
+ * Early Admin Head Reset: Enforce Full-Width Bleed, Zero Side-Padding & No Footer Gap
+ */
+function mobile_pasal_admin_fullwidth_breakout_head() {
+	$current_page  = isset( $_GET['page'] ) ? sanitize_text_field( wp_unslash( $_GET['page'] ) ) : '';
+	$allowed_pages = array( 'mobile-pasal-options', 'mp-inquiries', 'mp-general-inquiries', 'mp-bulk-price-editor' );
+
+	if ( in_array( $current_page, $allowed_pages, true ) ) {
+		echo '<style id="mp-admin-fullwidth-reset">
+			html.wp-toolbar { padding-top: 32px !important; }
+			@media screen and (max-width: 782px) { html.wp-toolbar { padding-top: 46px !important; } }
+			body #wpcontent { padding-left: 0 !important; padding-right: 0 !important; padding-top: 0 !important; }
+			body #wpbody-content { padding-bottom: 0 !important; padding-top: 0 !important; }
+			body #wpfooter { display: none !important; }
+		</style>';
+	}
+}
+add_action( 'admin_head', 'mobile_pasal_admin_fullwidth_breakout_head', 1 );
 
 /**
  * Form Field Renderers
