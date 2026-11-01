@@ -595,14 +595,22 @@ function mp_print_repair_docket_receipt() {
 			.pdf-service-card {
 				border: 1px solid #e2e8f0;
 				border-radius: 14px;
-				padding: 18px 22px;
-				margin-bottom: 20px;
+				padding: 14px 20px;
+				margin-bottom: 14px;
+				background: #ffffff;
 			}
 			.pdf-service-head {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				margin-bottom: 8px;
+			}
+			.pdf-service-subtitle {
+				font-size: 10px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: #64748b;
+				font-weight: 700;
+				margin-bottom: 2px;
 			}
 			.pdf-service-name {
 				font-size: 15px;
@@ -619,26 +627,61 @@ function mp_print_repair_docket_receipt() {
 				font-size: 11px;
 				font-weight: 800;
 			}
-			.pdf-customer-msg {
-				font-size: 12.5px;
-				color: #475569;
-				margin: 6px 0 0;
+
+			/* Customer Original Message / Reported Symptoms */
+			.pdf-customer-note {
+				background: rgba(0, 102, 204, 0.04);
+				border: 1px solid rgba(0, 102, 204, 0.16);
+				border-left: 3.5px solid #0066cc;
+				border-radius: 12px;
+				padding: 11px 16px;
+				margin-bottom: 14px;
+				font-size: 12px;
 				line-height: 1.45;
+			}
+			.pdf-customer-note .pdf-note-title {
+				font-size: 10.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: #0066cc;
+				font-weight: 800;
+				margin-bottom: 4px;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+			}
+			.pdf-customer-note .pdf-note-body {
+				color: #0f172a;
+				font-size: 12.5px;
+				font-weight: 500;
 			}
 
 			/* Website .mp-technician-note Component */
 			.pdf-tech-note {
 				background: rgba(245, 158, 11, 0.08);
 				border: 1px solid rgba(245, 158, 11, 0.25);
+				border-left: 3.5px solid #f59e0b;
 				border-radius: 12px;
-				padding: 12px 18px;
-				margin-bottom: 20px;
+				padding: 11px 16px;
+				margin-bottom: 18px;
 				font-size: 12px;
-				color: #92400e;
 				line-height: 1.45;
 			}
-			.pdf-tech-note strong {
+			.pdf-tech-note .pdf-note-title {
+				font-size: 10.5px;
+				text-transform: uppercase;
+				letter-spacing: 0.5px;
+				color: #92400e;
+				font-weight: 800;
+				margin-bottom: 4px;
+				display: flex;
+				align-items: center;
+				gap: 5px;
+			}
+			.pdf-tech-note .pdf-note-body {
 				color: #78350f;
+				font-size: 12.5px;
+				font-weight: 500;
 			}
 
 			/* 2-Column: QR Online Tracker + Financial Summary */
@@ -841,20 +884,40 @@ function mp_print_repair_docket_receipt() {
 			<!-- Service Requested Card -->
 			<div class="pdf-service-card">
 				<div class="pdf-service-head">
-					<h3 class="pdf-service-name"><?php echo esc_html( $row->service_needed ?: ( $is_repair ? __( 'General Inspection', 'mobile-pasal' ) : __( 'General Inquiry', 'mobile-pasal' ) ) ); ?></h3>
+					<div>
+						<div class="pdf-service-subtitle"><?php echo esc_html( $is_repair ? __( 'Service Requested', 'mobile-pasal' ) : __( 'Inquiry Subject', 'mobile-pasal' ) ); ?></div>
+						<h3 class="pdf-service-name"><?php echo esc_html( $row->service_needed ?: ( $is_repair ? __( 'General Inspection & Diagnostics', 'mobile-pasal' ) : __( 'General Inquiry', 'mobile-pasal' ) ) ); ?></h3>
+					</div>
 					<?php if ( $is_repair && $warranty_days > 0 ) : ?>
 						<span class="pdf-warranty-tag">✓ <?php echo esc_html( $warranty_days ); ?>-Day Warranty</span>
 					<?php endif; ?>
 				</div>
-				<?php if ( ! empty( $row->message ) ) : ?>
-					<div class="pdf-customer-msg"><strong><?php echo esc_html( $is_repair ? __( 'Reported Symptoms: ', 'mobile-pasal' ) : __( 'Inquiry Details: ', 'mobile-pasal' ) ); ?></strong><?php echo esc_html( $row->message ); ?></div>
-				<?php endif; ?>
 			</div>
 
-			<!-- Technician Diagnostic Note (Matching .mp-technician-note) -->
+			<!-- Customer Original Message / Reported Symptoms -->
+			<?php $customer_msg = ! empty( $row->message ) ? trim( $row->message ) : ''; ?>
+			<div class="pdf-customer-note">
+				<div class="pdf-note-title">
+					<span>💬</span> <?php esc_html_e( 'Customer Original Message / Reported Symptoms', 'mobile-pasal' ); ?>
+				</div>
+				<div class="pdf-note-body">
+					<?php if ( ! empty( $customer_msg ) ) : ?>
+						<?php echo nl2br( esc_html( $customer_msg ) ); ?>
+					<?php else : ?>
+						<span style="color: #64748b; font-style: italic;"><?php esc_html_e( 'No specific symptoms noted at intake (Standard intake inspection).', 'mobile-pasal' ); ?></span>
+					<?php endif; ?>
+				</div>
+			</div>
+
+			<!-- Technician Diagnostic Report (Matching .mp-technician-note) -->
 			<?php if ( ! empty( $row->notes ) ) : ?>
 				<div class="pdf-tech-note">
-					<strong><?php echo esc_html( $is_repair ? __( 'Technician Diagnostic Note: ', 'mobile-pasal' ) : __( 'Counter Response: ', 'mobile-pasal' ) ); ?></strong><?php echo esc_html( $row->notes ); ?>
+					<div class="pdf-note-title">
+						<span>🔬</span> <?php echo esc_html( $is_repair ? __( 'Technician Diagnostic Report / Findings', 'mobile-pasal' ) : __( 'Counter Response / Staff Remarks', 'mobile-pasal' ) ); ?>
+					</div>
+					<div class="pdf-note-body">
+						<?php echo nl2br( esc_html( $row->notes ) ); ?>
+					</div>
 				</div>
 			<?php endif; ?>
 
