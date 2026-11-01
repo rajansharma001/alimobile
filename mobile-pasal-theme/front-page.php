@@ -745,7 +745,17 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
           <!-- Live catalog rendered via JavaScript with instant filtering -->
         </div>
 
+        <!-- Homepage Handset Catalog Pagination System -->
+        <div class="shop-pagination-wrapper" id="homePaginationWrapper" style="display: none; margin-top: 36px;">
+          <div class="shop-pagination" id="homePaginationControls"></div>
+          <div class="shop-pagination-info" id="homePaginationInfo"></div>
+        </div>
+
         <?php
+        $hp_global_show_price = mp_opt( 'handset_show_price', '1' );
+        $hp_wa_number         = mp_opt( 'whatsapp_number', '9779804530786' );
+        $hp_clean_p           = preg_replace( '/[^0-9]/', '', $hp_wa_number );
+
         $hp_handsets_query = new WP_Query( array(
             'post_type'           => 'handset',
             'posts_per_page'      => 48,
@@ -766,7 +776,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
                 $per_hide   = get_post_meta( $h_id, '_mp_hide_price', true );
                 $img_url    = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $h_id ) : get_the_post_thumbnail_url( $h_id, 'medium' );
 
-                $is_price_visible = ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $per_hide ) && ! empty( $price );
+                $is_price_visible = ( $hp_global_show_price == '1' || $hp_global_show_price === 1 || $hp_global_show_price === true ) && empty( $per_hide ) && ! empty( $price );
                 $price_fmt        = is_numeric( $price ) ? 'Rs. ' . number_format( (float) $price ) : $price;
                 $old_price_fmt    = ( is_numeric( $old_price ) && (float) $old_price > (float) $price ) ? 'Rs. ' . number_format( (float) $old_price ) : ( ( ! empty( $old_price ) && $old_price !== $price ) ? $old_price : '' );
                 $numeric_price    = (int) preg_replace( '/[^0-9]/', '', (string) $price );
@@ -787,7 +797,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
                     __( 'Namaste Ali Mobile, ma tapaiharuko website ma %s herera aako chhu. Gulariya counter ma availability ra rate confirm gardinus na.', 'mobile-pasal' ),
                     $h_title
                 );
-                $wa_url = 'https://wa.me/' . esc_attr( $clean_p ) . '?text=' . rawurlencode( $wa_msg );
+                $wa_url = 'https://wa.me/' . esc_attr( $hp_clean_p ) . '?text=' . rawurlencode( $wa_msg );
 
                 $hp_catalog_items[] = array(
                     'id'             => $h_id,

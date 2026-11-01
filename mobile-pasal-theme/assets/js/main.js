@@ -396,11 +396,95 @@
   var catalogCount = document.getElementById("catalogCount");
   var catalogSearch = document.getElementById("catalogSearch");
   var catalogSort = document.getElementById("catalogSort");
+  var homePaginationWrapper = document.getElementById("homePaginationWrapper");
+  var homePaginationControls = document.getElementById("homePaginationControls");
+  var homePaginationInfo = document.getElementById("homePaginationInfo");
   var isShopPage = !!document.getElementById("shopProductsGrid");
+  var homeCatalogPage = 1;
+  var HOME_CATALOG_PAGE_SIZE = 9; // 9 handsets per page (3 rows of 3 on desktop)
 
-  function renderCatalog(items) {
+  function renderHomeCatalogPagination(totalMatches, totalPages, allFilteredItems) {
+    if (!homePaginationControls || !homePaginationWrapper) return;
+
+    if (totalMatches <= HOME_CATALOG_PAGE_SIZE) {
+      homePaginationControls.innerHTML = "";
+      if (homePaginationInfo) {
+        homePaginationInfo.textContent = totalMatches > 0 ? "Showing all " + totalMatches + " models" : "";
+      }
+      homePaginationWrapper.style.display = totalMatches > 0 ? "flex" : "none";
+      return;
+    }
+
+    homePaginationWrapper.style.display = "flex";
+    homePaginationControls.innerHTML = "";
+
+    // Prev Button
+    var pBtn = document.createElement("button");
+    pBtn.type = "button";
+    pBtn.className = "page-btn" + (homeCatalogPage === 1 ? " disabled" : "");
+    pBtn.innerHTML = "‹ Prev";
+    pBtn.disabled = (homeCatalogPage === 1);
+    pBtn.addEventListener("click", function () {
+      if (homeCatalogPage > 1) {
+        homeCatalogPage--;
+        renderCatalog(allFilteredItems, false);
+        var catalogSec = document.getElementById("catalog");
+        if (catalogSec) catalogSec.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+    homePaginationControls.appendChild(pBtn);
+
+    // Number Buttons
+    for (var p = 1; p <= totalPages; p++) {
+      var numBtn = document.createElement("button");
+      numBtn.type = "button";
+      numBtn.className = "page-btn" + (p === homeCatalogPage ? " active" : "");
+      numBtn.textContent = p;
+      (function (pageIndex) {
+        numBtn.addEventListener("click", function () {
+          if (homeCatalogPage !== pageIndex) {
+            homeCatalogPage = pageIndex;
+            renderCatalog(allFilteredItems, false);
+            var catalogSec = document.getElementById("catalog");
+            if (catalogSec) catalogSec.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      })(p);
+      homePaginationControls.appendChild(numBtn);
+    }
+
+    // Next Button
+    var nBtn = document.createElement("button");
+    nBtn.type = "button";
+    nBtn.className = "page-btn" + (homeCatalogPage === totalPages ? " disabled" : "");
+    nBtn.innerHTML = "Next ›";
+    nBtn.disabled = (homeCatalogPage === totalPages);
+    nBtn.addEventListener("click", function () {
+      if (homeCatalogPage < totalPages) {
+        homeCatalogPage++;
+        renderCatalog(allFilteredItems, false);
+        var catalogSec = document.getElementById("catalog");
+        if (catalogSec) catalogSec.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+    homePaginationControls.appendChild(nBtn);
+
+    // Info Label
+    if (homePaginationInfo) {
+      var sIdx = (homeCatalogPage - 1) * HOME_CATALOG_PAGE_SIZE + 1;
+      var eIdx = Math.min(homeCatalogPage * HOME_CATALOG_PAGE_SIZE, totalMatches);
+      homePaginationInfo.textContent = "Showing " + sIdx + "–" + eIdx + " of " + totalMatches + " models (Page " + homeCatalogPage + " of " + totalPages + ")";
+    }
+  }
+
+  function renderCatalog(items, resetPage) {
     if (!productsGrid || isShopPage) return;
-    if (items.length === 0) {
+
+    if (resetPage !== false) {
+      homeCatalogPage = 1;
+    }
+
+    if (!items || items.length === 0) {
       productsGrid.innerHTML = 
         '<div class="catalog-empty">' +
           '<h3 style="font-size:18px; margin:0 0 8px 0; color:var(--navy);">No matching models found</h3>' +
@@ -408,18 +492,23 @@
           '<button class="view-all-pill" onclick="resetCatalogFilters()" type="button">Reset All Filters</button>' +
         '</div>';
       if (catalogCount) catalogCount.textContent = "0 Models Found";
+      if (homePaginationWrapper) homePaginationWrapper.style.display = "none";
       return;
     }
 
+    var totalMatches = items.length;
     if (catalogCount) {
-      catalogCount.textContent = items.length + " " + (items.length === 1 ? "Model" : "Models") + " Found";
+      catalogCount.textContent = totalMatches + " " + (totalMatches === 1 ? "Model" : "Models") + " Found";
     }
 
-    var activeData = (window.mpCatalogData && Array.isArray(window.mpCatalogData) && window.mpCatalogData.length > 0)
-      ? window.mpCatalogData
-      : catalogData;
+    var totalPages = Math.ceil(totalMatches / HOME_CATALOG_PAGE_SIZE) || 1;
+    if (homeCatalogPage > totalPages) homeCatalogPage = 1;
+    if (homeCatalogPage < 1) homeCatalogPage = 1;
 
-    productsGrid.innerHTML = items.map(function (item) {
+    var startIndex = (homeCatalogPage - 1) * HOME_CATALOG_PAGE_SIZE;
+    var pagedItems = items.slice(startIndex, startIndex + HOME_CATALOG_PAGE_SIZE);
+
+    productsGrid.innerHTML = pagedItems.map(function (item) {
       var specsHtml = (item.specs || []).map(function (spec) {
         return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + spec + '</span></div>';
       }).join("");
@@ -488,9 +577,11 @@
         '</article>'
       );
     }).join("");
+
+    renderHomeCatalogPagination(totalMatches, totalPages, items);
   }
 
-  function filterCatalog() {
+  function filterCatalog(resetPage) {
     if (!productsGrid || isShopPage) return;
     var query = (catalogSearch ? catalogSearch.value : '').trim().toLowerCase();
     var checkedBrand = document.querySelector('input[name="brandFilter"]:checked');
@@ -541,18 +632,18 @@
       filtered.sort(function (a, b) { return a.featured - b.featured; });
     }
 
-    renderCatalog(filtered);
+    renderCatalog(filtered, resetPage !== false);
   }
 
   function sortCatalog() {
-    filterCatalog();
+    filterCatalog(true);
   }
 
   function filterCatalogByBrand(brandName) {
     var targetRadio = document.querySelector('input[name="brandFilter"][value="' + brandName + '"]');
     if (targetRadio) {
       targetRadio.checked = true;
-      filterCatalog();
+      filterCatalog(true);
       var catalogSec = document.getElementById("catalog");
       if (catalogSec) catalogSec.scrollIntoView({ behavior: "smooth" });
       triggerToast("Filtering showroom: " + brandName);
@@ -566,7 +657,7 @@
     if (allBrandRadio) allBrandRadio.checked = true;
     if (allPriceRadio) allPriceRadio.checked = true;
     if (catalogSort) catalogSort.value = "featured";
-    filterCatalog();
+    filterCatalog(true);
     triggerToast("All filters reset");
   }
 
