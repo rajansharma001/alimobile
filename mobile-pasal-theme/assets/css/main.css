@@ -1281,18 +1281,34 @@
       }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       .hero-trust-bar {
-        padding: 16px 0;
+        padding: 12px 0 16px;
       }
       .hero-trust-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        gap: 12px;
+        padding: 4px 16px 8px;
+        margin: 0 -16px;
+        scrollbar-width: none;
+      }
+      .hero-trust-grid::-webkit-scrollbar {
+        display: none;
       }
       .hero-trust-card {
+        flex: 0 0 74vw;
+        max-width: 74vw;
+        scroll-snap-align: center;
+        scroll-snap-stop: normal;
         padding: 12px 14px;
         gap: 12px;
         border-radius: 14px;
+        box-sizing: border-box;
       }
       .hero-trust-card .trust-card-icon {
         width: 40px;
@@ -3335,13 +3351,6 @@
     }
 
     @media (max-width: 640px) {
-      .category-grid,
-      .brand-grid,
-      .products-grid,
-      .diagnostics-grid,
-      .workflow-grid,
-      .guides-grid,
-      .reviews-grid,
       .trust-strip-grid,
       .footer-grid,
       .flagship-features-grid {
@@ -5972,10 +5981,10 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .shop-products-main .products-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 }
 
@@ -7505,10 +7514,10 @@ html, body {
   }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .reviews-carousel-track .review-card {
-    flex: 0 0 100%;
-    max-width: 100%;
+    flex: 0 0 84vw;
+    max-width: 84vw;
   }
 }
 
@@ -9509,10 +9518,10 @@ html, body {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .shop-products-main .products-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 }
 
@@ -12695,3 +12704,341 @@ body {
 
 
 
+
+/* ==========================================================================
+   MOBILE-FIRST HOME PAGE & CATALOG: 2-CARDS PER ROW & HORIZONTAL CAROUSELS
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* 1. Showroom Catalog, Shop & Archives: Exactly 2 cards per row */
+  .products-grid,
+  .shop-products-main .products-grid,
+  #productsGrid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 2.5vw, 12px) !important;
+  }
+
+  /* 2. Device Categories & Verified Brands: 2 cards per row */
+  .category-grid,
+  .brand-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: clamp(8px, 2.5vw, 12px) !important;
+  }
+
+  /* Balanced, Mobile-Proportioned Product Card */
+  .product-card {
+    padding: 10px 10px 12px 10px !important;
+    border-radius: 14px !important;
+    min-width: 0 !important;
+    box-shadow: 0 4px 14px rgba(7, 27, 59, 0.05) !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  .product-card-topbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 4px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .product-tag {
+    font-size: 9px !important;
+    padding: 2px 5px !important;
+    letter-spacing: 0.2px !important;
+    border-radius: 4px !important;
+    white-space: nowrap !important;
+  }
+
+  .product-cat-tag {
+    font-size: 9.5px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 72px !important;
+    text-align: right !important;
+  }
+
+  .product-img-box {
+    height: 122px !important;
+    margin-bottom: 8px !important;
+    border-radius: 10px !important;
+    background: #f8faff !important;
+  }
+
+  .product-img-box img {
+    padding: 6px !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+  }
+
+  .product-brand-row {
+    font-size: 10.5px !important;
+    margin-bottom: 4px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .product-mdms-tag {
+    font-size: 9px !important;
+    gap: 2px !important;
+  }
+
+  .product-name {
+    font-size: 13px !important;
+    line-height: 1.25 !important;
+    min-height: 32px !important;
+    margin: 0 0 6px 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+  }
+
+  .product-pricing-row {
+    padding-top: 6px !important;
+    margin-bottom: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 2px !important;
+    border-top: 1px solid var(--line) !important;
+  }
+
+  .current-price {
+    font-size: 14px !important;
+    font-weight: 850 !important;
+  }
+
+  .old-price {
+    font-size: 10px !important;
+  }
+
+  .vat-tag {
+    font-size: 8.5px !important;
+    padding: 1px 4px !important;
+  }
+
+  .product-card-quote-pill {
+    font-size: 9.5px !important;
+    padding: 3px 6px !important;
+  }
+
+  .product-specs-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 3px !important;
+    margin-bottom: 8px !important;
+    flex-grow: 1 !important;
+  }
+
+  .spec-item {
+    font-size: 10.5px !important;
+    line-height: 1.25 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 4px !important;
+  }
+
+  .spec-item-bullet {
+    width: 3px !important;
+    height: 3px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* 3 Standardized Product Buttons for 2-column mobile cards */
+  .product-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px !important;
+    margin-top: auto !important;
+    padding-top: 8px !important;
+    border-top: 1px solid var(--line) !important;
+  }
+
+  .card-wa-btn {
+    grid-column: 1 / -1 !important;
+    height: 32px !important;
+    padding: 0 6px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    border-radius: 8px !important;
+    gap: 4px !important;
+  }
+
+  .card-compare-btn,
+  .card-specs-btn {
+    height: 28px !important;
+    padding: 0 4px !important;
+    font-size: 10.5px !important;
+    font-weight: 750 !important;
+    border-radius: 8px !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  /* Compact Category & Brand Cards */
+  .cat-card,
+  .brand-card {
+    padding: 14px 10px 12px !important;
+    border-radius: 14px !important;
+  }
+
+  .cat-visual,
+  .brand-logo-pod {
+    width: 44px !important;
+    height: 44px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .cat-title,
+  .brand-name {
+    font-size: 13px !important;
+    margin-bottom: 4px !important;
+  }
+
+  .cat-desc,
+  .brand-models {
+    font-size: 11px !important;
+    line-height: 1.3 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    min-height: 28px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .cat-link,
+  .brand-btn {
+    font-size: 11px !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+  }
+
+  /* -------------------------------------------------------------
+     3. HORIZONTAL SCROLL CAROUSELS (REVIEWS & SIMILAR SECTIONS)
+     ------------------------------------------------------------- */
+
+  /* Reviews Carousel Viewport & Track */
+  .reviews-carousel-viewport {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    padding: 8px 16px 20px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .reviews-carousel-viewport::-webkit-scrollbar {
+    display: none !important;
+  }
+  .reviews-carousel-track {
+    display: flex !important;
+    gap: 14px !important;
+    width: max-content !important;
+    padding-right: 16px !important;
+    transition: none !important;
+  }
+  .reviews-carousel-track .review-card {
+    flex: 0 0 84vw !important;
+    max-width: 84vw !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: normal !important;
+    padding: 20px 16px !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Care Guides Horizontal Carousel */
+  .guides-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    gap: 14px !important;
+    padding: 8px 16px 20px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .guides-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .guides-grid .guide-card {
+    flex: 0 0 82vw !important;
+    max-width: 82vw !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: normal !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Workflow 3-Step Counter Service Carousel */
+  .workflow-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    gap: 14px !important;
+    padding: 8px 16px 20px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .workflow-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .workflow-grid .step-card {
+    flex: 0 0 78vw !important;
+    max-width: 78vw !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: normal !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Complete Counter Repair Services Carousel */
+  .diagnostics-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+    gap: 14px !important;
+    padding: 8px 16px 20px !important;
+    margin: 0 -16px !important;
+    scrollbar-width: none !important;
+  }
+  .diagnostics-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  .diagnostics-grid .diag-card {
+    flex: 0 0 82vw !important;
+    max-width: 82vw !important;
+    scroll-snap-align: center !important;
+    scroll-snap-stop: normal !important;
+    border-radius: 16px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* On narrow screens, keep max 2 specs so all product cards have balanced height */
+  .product-specs-list .spec-item:nth-child(n+3) {
+    display: none !important;
+  }
+}

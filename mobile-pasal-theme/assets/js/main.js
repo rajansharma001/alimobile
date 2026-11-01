@@ -1228,9 +1228,13 @@
     var autoPlayTimer = null;
     var isHovered = false;
 
+    function isMobileMode() {
+      return window.innerWidth <= 768;
+    }
+
     function getItemsPerView() {
       var w = window.innerWidth;
-      if (w <= 640) return 1;
+      if (w <= 768) return 1;
       if (w <= 960) return 2;
       return config.itemsPerViewDesktop || 3;
     }
@@ -1281,10 +1285,15 @@
       if (!card) return;
 
       var cardWidth = card.getBoundingClientRect().width;
-      var gap = config.gap || 24;
+      var gap = isMobileMode() ? 14 : (config.gap || 24);
       var offset = currentIndex * (cardWidth + gap);
 
-      track.style.transform = "translateX(-" + offset + "px)";
+      if (isMobileMode()) {
+        track.style.transform = "none";
+        viewport.scrollTo({ left: offset, behavior: "smooth" });
+      } else {
+        track.style.transform = "translateX(-" + offset + "px)";
+      }
 
       if (prevBtn) {
         prevBtn.disabled = currentIndex === 0;
@@ -1310,6 +1319,35 @@
       });
     }
 
+    // Scroll listener on mobile for real-time swipe dot sync
+    var scrollSyncTimer = null;
+    viewport.addEventListener("scroll", function () {
+      if (!isMobileMode()) return;
+      if (scrollSyncTimer) clearTimeout(scrollSyncTimer);
+      scrollSyncTimer = setTimeout(function () {
+        var card = cards[0];
+        if (!card) return;
+        var cardWidth = card.getBoundingClientRect().width;
+        var gap = 14;
+        var newIdx = Math.round(viewport.scrollLeft / (cardWidth + gap));
+        var maxIdx = getMaxIndex();
+        if (newIdx > maxIdx) newIdx = maxIdx;
+        if (newIdx < 0) newIdx = 0;
+        if (newIdx !== currentIndex) {
+          currentIndex = newIdx;
+          if (prevBtn) {
+            prevBtn.disabled = currentIndex === 0;
+            prevBtn.style.opacity = currentIndex === 0 ? "0.4" : "1";
+          }
+          if (nextBtn) {
+            nextBtn.disabled = currentIndex === maxIdx;
+            nextBtn.style.opacity = currentIndex === maxIdx ? "0.4" : "1";
+          }
+          updateDots();
+        }
+      }, 50);
+    }, { passive: true });
+
     // Touch & Swipe Support (Mobile First)
     var touchStartX = 0;
     var touchEndX = 0;
@@ -1323,7 +1361,7 @@
       isHovered = false;
       touchEndX = e.changedTouches[0].screenX;
       var diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 40) {
+      if (!isMobileMode() && Math.abs(diff) > 40) {
         var maxIdx = getMaxIndex();
         if (diff > 0) {
           if (currentIndex < maxIdx) {
@@ -1352,7 +1390,7 @@
       if (autoPlayTimer) clearInterval(autoPlayTimer);
       if (config.autoPlay === false) return;
       autoPlayTimer = setInterval(function () {
-        if (!isHovered) {
+        if (!isHovered && !isMobileMode()) {
           var maxIdx = getMaxIndex();
           if (currentIndex >= maxIdx) {
             goToSlide(0);
@@ -1364,6 +1402,11 @@
     }
 
     window.addEventListener("resize", function () {
+      if (isMobileMode()) {
+        track.style.transform = "none";
+      } else {
+        viewport.scrollLeft = 0;
+      }
       goToSlide(currentIndex);
     });
 
