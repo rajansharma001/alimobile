@@ -105,22 +105,97 @@ function mp_enqueue_scripts() {
 	// Master Main stylesheet
 	wp_enqueue_style( 'mp-main-style', $css_uri, array( 'mp-google-fonts', 'mp-theme-root' ), $css_ver );
 
-	// Dynamic Inline CSS from Theme Options (Restrained, matching light studio palette)
-	$primary       = esc_attr( mp_opt( 'color_primary', '#0066cc' ) );
-	$primary_dark  = esc_attr( mp_opt( 'color_primary_dark', '#004c99' ) );
-	$primary_light = esc_attr( mp_opt( 'color_primary_light', '#eff6ff' ) );
+	// Dynamic Inline CSS from Theme Options (Complete Frontend Brand Color Engine)
+	$primary       = esc_attr( mp_opt( 'color_primary', '#0862e9' ) );
+	$primary_dark  = esc_attr( mp_opt( 'color_primary_dark', '#074ec0' ) );
+	$primary_light = esc_attr( mp_opt( 'color_primary_light', '#edf4ff' ) );
 	$wa_green      = esc_attr( mp_opt( 'color_green', '#25d366' ) );
 	$star_gold     = esc_attr( mp_opt( 'color_amber', '#f59e0b' ) );
 	$custom_css    = wp_strip_all_tags( (string) mp_opt( 'custom_css', '' ) );
 
+	// Calculate RGB for transparent tints and glow rings
+	$hex = ltrim( $primary, '#' );
+	if ( strlen( $hex ) === 3 ) {
+		$r = hexdec( substr( $hex, 0, 1 ) . substr( $hex, 0, 1 ) );
+		$g = hexdec( substr( $hex, 1, 1 ) . substr( $hex, 1, 1 ) );
+		$b = hexdec( substr( $hex, 2, 1 ) . substr( $hex, 2, 1 ) );
+	} elseif ( strlen( $hex ) === 6 ) {
+		$r = hexdec( substr( $hex, 0, 2 ) );
+		$g = hexdec( substr( $hex, 2, 2 ) );
+		$b = hexdec( substr( $hex, 4, 2 ) );
+	} else {
+		$r = 8; $g = 98; $b = 233;
+	}
+	$blue_glow = "rgba({$r}, {$g}, {$b}, 0.22)";
+	$blue_tint = "rgba({$r}, {$g}, {$b}, 0.08)";
+	$blue_bdr  = "rgba({$r}, {$g}, {$b}, 0.18)";
+
 	$inline_styles = "
 	:root {
-		--primary: {$primary};
-		--primary-hover: {$primary_dark};
-		--primary-light: {$primary_light};
-		--border-focus: {$primary};
-		--wa-green: {$wa_green};
-		--star-gold: {$star_gold};
+		--primary: {$primary} !important;
+		--primary-hover: {$primary_dark} !important;
+		--primary-light: {$primary_light} !important;
+		--border-focus: {$primary} !important;
+		--blue: {$primary} !important;
+		--blue2: {$primary_dark} !important;
+		--blue-glow: {$blue_glow} !important;
+		--pale: {$primary_light} !important;
+		--pale-hover: {$primary_light} !important;
+		--wa-green: {$wa_green} !important;
+		--green: {$wa_green} !important;
+		--star-gold: {$star_gold} !important;
+		--gold: {$star_gold} !important;
+	}
+	/* Direct Component Color Overrides for 100% Theme Options Sync */
+	.primary,
+	.btn-primary,
+	.button-primary,
+	.hero-cta-btn,
+	.cta-btn-primary,
+	.service-booking-btn,
+	.p-nav-pill.active,
+	.filter-btn.active,
+	.brand-pill.active,
+	.filter-pill.is-active,
+	.mp-search-btn {
+		background: {$primary} !important;
+		background-color: {$primary} !important;
+		border-color: {$primary} !important;
+		color: #ffffff !important;
+	}
+	.primary:hover,
+	.btn-primary:hover,
+	.hero-cta-btn:hover,
+	.service-booking-btn:hover {
+		background: {$primary_dark} !important;
+		background-color: {$primary_dark} !important;
+		border-color: {$primary_dark} !important;
+		color: #ffffff !important;
+	}
+	.view-all-pill:hover,
+	.view-all-btn:hover {
+		background: {$primary} !important;
+		border-color: {$primary} !important;
+		color: #ffffff !important;
+	}
+	.section-badge,
+	.eyebrow {
+		color: {$primary} !important;
+		background: {$blue_tint} !important;
+		border-color: {$blue_bdr} !important;
+	}
+	.hero-feature:hover {
+		border-color: {$primary} !important;
+		box-shadow: 0 14px 28px {$blue_glow} !important;
+	}
+	.hero-feature-icon,
+	.flagship-stat-icon,
+	.card-rating-star,
+	.price-current,
+	.service-card-price,
+	.nav-link.active,
+	.brand-accent {
+		color: {$primary} !important;
 	}
 	" . $custom_css;
 

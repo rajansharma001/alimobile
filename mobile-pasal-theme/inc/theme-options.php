@@ -1222,8 +1222,27 @@ function mobile_pasal_admin_fullwidth_breakout_head() {
 	if ( in_array( $current_page, $allowed_pages, true ) ) {
 		echo '<style id="mp-admin-fullwidth-reset">
 			html.wp-toolbar { padding-top: 32px !important; }
-			@media screen and (max-width: 782px) { html.wp-toolbar { padding-top: 46px !important; } }
+			@media screen and (max-width: 782px), screen and (max-width: 600px) {
+				html.wp-toolbar { padding-top: 46px !important; }
+				#wpbody,
+				body #wpbody,
+				div#wpbody,
+				body.toplevel_page_mobile-pasal-options #wpbody,
+				body.toplevel_page_mp-inquiries #wpbody {
+					padding-top: 0 !important;
+					margin-top: 0 !important;
+				}
+				#wpcontent,
+				body #wpcontent,
+				#wpbody-content,
+				body #wpbody-content {
+					padding-top: 0 !important;
+					margin-top: 0 !important;
+				}
+			}
 			body #wpcontent { padding-left: 0 !important; padding-right: 0 !important; padding-top: 0 !important; }
+			#wpbody,
+			body #wpbody { padding-top: 0 !important; margin-top: 0 !important; }
 			body #wpbody-content { padding-bottom: 0 !important; padding-top: 0 !important; }
 			body #wpfooter { display: none !important; }
 		</style>';

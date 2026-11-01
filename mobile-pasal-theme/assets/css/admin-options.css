@@ -311,7 +311,14 @@ body:has(.bopt-app-wrap) #wpfooter {
 
 @media screen and (max-width: 640px) {
 	.bopt-brand-title {
-		display: none !important;
+		display: block !important;
+		font-size: 13px !important;
+		font-weight: 800 !important;
+		max-width: 120px !important;
+		white-space: nowrap !important;
+		overflow: hidden !important;
+		text-overflow: ellipsis !important;
+		color: #ffffff !important;
 	}
 	.bopt-brand-icon {
 		width: 34px;
@@ -3133,6 +3140,32 @@ body.bopt-drawer-active .bopt-drawer-overlay {
 /* ══════════════════════════════════════════════════════════════
    22. MOBILE-FIRST RESPONSIVE SUITE ENHANCEMENTS (Zero-Overflow UX)
    ══════════════════════════════════════════════════════════════ */
+@media screen and (max-width: 782px), screen and (max-width: 600px) {
+	html.wp-toolbar {
+		padding-top: 46px !important;
+	}
+	#wpbody,
+	body #wpbody,
+	div#wpbody,
+	body.toplevel_page_mobile-pasal-options #wpbody,
+	body[class*="mobile-pasal-options"] #wpbody,
+	body.toplevel_page_mp-inquiries #wpbody,
+	body[class*="mp-inquiries"] #wpbody,
+	body[class*="mp-general-inquiries"] #wpbody,
+	body[class*="mp-bulk-price-editor"] #wpbody,
+	body:has(.bopt-app-wrap) #wpbody {
+		padding-top: 0 !important;
+		margin-top: 0 !important;
+	}
+	body #wpcontent,
+	div#wpcontent,
+	body #wpbody-content,
+	div#wpbody-content {
+		padding-top: 0 !important;
+		margin-top: 0 !important;
+	}
+}
+
 body.toplevel_page_mobile-pasal-options,
 body.mobile-pasal_page_mp-inquiries,
 body.mobile-pasal_page_mp-repair-reports,

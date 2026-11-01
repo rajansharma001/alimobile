@@ -898,8 +898,8 @@
       padding: 16px 28px;
       border-radius: 40px;
       color: white;
-      background: #0862e9;
-      box-shadow: 0 10px 24px rgba(8,98,233,.25);
+      background: var(--blue, #0862e9);
+      box-shadow: 0 10px 24px var(--blue-glow, rgba(8,98,233,.25));
       font-weight: 800;
       font-size: clamp(15px, 1.1vw, 17px);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
@@ -908,9 +908,9 @@
     }
 
     .primary:hover {
-      background: #0754cb;
+      background: var(--blue2, #0754cb);
       transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 30px rgba(8,98,233,.35);
+      box-shadow: 0 14px 30px var(--blue-glow, rgba(8,98,233,.35));
       color: white;
     }
 

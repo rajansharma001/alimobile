@@ -1328,39 +1328,119 @@ function mp_render_inquiries_admin_page() {
 			font-family: var(--font-head);
 			letter-spacing: -0.02em;
 		}
+		/* WordPress Core Mobile White Space Fix */
+		@media screen and (max-width: 782px), screen and (max-width: 600px) {
+			html.wp-toolbar { padding-top: 46px !important; }
+			#wpbody, body #wpbody, div#wpbody, body.toplevel_page_mp-inquiries #wpbody {
+				padding-top: 0 !important;
+				margin-top: 0 !important;
+			}
+			body #wpcontent, div#wpcontent, body #wpbody-content, div#wpbody-content {
+				padding-top: 0 !important;
+				margin-top: 0 !important;
+			}
+		}
+
 		.bopt-topbar {
 			background: #030d1d;
 			border-bottom: 3px solid var(--mp-admin-blue);
-			padding: 12px 24px;
+			padding: 10px 24px;
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			gap: 12px;
-			flex-wrap: wrap;
 			position: sticky;
 			top: 32px;
 			z-index: 1000;
 			box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+			flex-wrap: nowrap;
+			box-sizing: border-box;
+		}
+		.bopt-btn-text-short {
+			display: none;
+		}
+		.bopt-btn-text-full {
+			display: inline;
 		}
 		@media screen and (max-width: 782px) {
 			.bopt-topbar {
-				top: 46px;
-				padding: 10px 14px;
-				gap: 10px;
+				top: 46px !important;
+				padding: 8px 12px !important;
+				gap: 8px !important;
+				flex-wrap: nowrap !important;
+				min-height: 50px !important;
+			}
+			.bopt-topbar-left {
+				flex: 1 1 auto !important;
+				min-width: 0 !important;
+				overflow: hidden !important;
+			}
+			.bopt-brand {
+				display: flex !important;
+				align-items: center !important;
+				gap: 8px !important;
+				min-width: 0 !important;
+			}
+			.bopt-brand-icon {
+				width: 32px !important;
+				height: 32px !important;
+				font-size: 14px !important;
+				flex-shrink: 0 !important;
+			}
+			.bopt-brand-info {
+				min-width: 0 !important;
+				overflow: hidden !important;
+			}
+			.bopt-brand-title {
+				display: block !important;
+				font-size: 13px !important;
+				font-weight: 800 !important;
+				color: #ffffff !important;
+				white-space: nowrap !important;
+				overflow: hidden !important;
+				text-overflow: ellipsis !important;
+				max-width: 120px !important;
+			}
+			.bopt-brand-badge {
+				display: none !important;
 			}
 			.bopt-topbar-right {
-				width: 100%;
-				display: flex;
-				overflow-x: auto;
-				-webkit-overflow-scrolling: touch;
-				padding-bottom: 4px;
-				gap: 8px;
+				display: flex !important;
+				align-items: center !important;
+				gap: 6px !important;
+				flex-shrink: 0 !important;
+				width: auto !important;
 			}
 			.bopt-topbar-right button,
 			.bopt-topbar-right a {
-				flex-shrink: 0;
+				flex-shrink: 0 !important;
+				font-size: 11.5px !important;
+				padding: 6px 10px !important;
+				min-height: 34px !important;
+				height: 34px !important;
+			}
+			.bopt-btn-text-full {
+				display: none !important;
+			}
+			.bopt-btn-text-short {
+				display: inline !important;
+			}
+			.bopt-desk-only {
+				display: none !important;
 			}
 		}
+		@media screen and (max-width: 400px) {
+			.bopt-brand-title {
+				max-width: 85px !important;
+				font-size: 12px !important;
+			}
+			.bopt-topbar-right button,
+			.bopt-topbar-right a {
+				padding: 5px 8px !important;
+				font-size: 11px !important;
+			}
+		}
+
 		/* Unified High Contrast Buttons */
 		.bopt-btn-secondary {
 			display: inline-flex;
@@ -2205,28 +2285,30 @@ function mp_render_inquiries_admin_page() {
 
 			<div class="bopt-topbar-right">
 				<button type="button" class="bopt-save-btn" onclick="mpOpenCreateForm('walkin_docket');" style="padding: 8px 14px; font-size: 13px;">
-					<i class="fa-solid fa-screwdriver-wrench"></i>
-					<span><?php esc_html_e( '+ New Repair Docket', 'mobile-pasal' ); ?></span>
+					<i class="fa-solid fa-plus"></i>
+					<span class="bopt-btn-text-full"><?php esc_html_e( '+ New Repair Docket', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text-short"><?php esc_html_e( '+ Docket', 'mobile-pasal' ); ?></span>
 				</button>
 				<button type="button" class="bopt-messages-btn" onclick="mpOpenCreateForm('general_inquiry');">
 					<i class="fa-solid fa-comment-dots"></i>
-					<span class="bopt-btn-text"><?php esc_html_e( '+ Log General Inquiry', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text-full"><?php esc_html_e( '+ Log General Inquiry', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text-short"><?php esc_html_e( '+ Inquiry', 'mobile-pasal' ); ?></span>
 				</button>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=reports' ) ); ?>" class="bopt-messages-btn <?php echo 'reports' === $active_tab ? 'is-active' : ''; ?>">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=reports' ) ); ?>" class="bopt-messages-btn bopt-desk-only <?php echo 'reports' === $active_tab ? 'is-active' : ''; ?>">
 					<i class="fa-solid fa-chart-line" style="color:#0284c7;"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Repair Report', 'mobile-pasal' ); ?></span>
 				</a>
-				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=' . $active_tab ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Export current view to CSV', 'mobile-pasal' ); ?>">
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=' . $active_tab ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn bopt-desk-only" title="<?php esc_attr_e( 'Export current view to CSV', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-file-csv"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Export CSV', 'mobile-pasal' ); ?></span>
 				</a>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-messages-btn">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-messages-btn bopt-desk-only">
 					<i class="fa-solid fa-tags"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Bulk Prices', 'mobile-pasal' ); ?></span>
 				</a>
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn">
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Theme Options', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-sliders"></i>
-					<span class="bopt-btn-text"><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
+					<span class="bopt-btn-text bopt-desk-only"><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
 				</a>
 			</div>
 		</header>
