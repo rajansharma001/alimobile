@@ -268,8 +268,11 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
     </div>
     <div class="mp-compare-slots" id="mpCompareSlots"></div>
     <div class="mp-compare-actions">
-      <button type="button" class="mp-compare-clear-btn" id="mpCompareClearBtn"><?php esc_html_e( 'Clear', 'mobile-pasal' ); ?></button>
-      <button type="button" class="mp-compare-open-btn" id="mpCompareOpenBtn"><?php esc_html_e( 'Compare Side-by-Side', 'mobile-pasal' ); ?> &rarr;</button>
+      <button type="button" class="mp-compare-clear-btn" id="mpCompareClearBtn" title="<?php esc_attr_e( 'Clear comparison selection', 'mobile-pasal' ); ?>"><?php esc_html_e( 'Clear', 'mobile-pasal' ); ?></button>
+      <button type="button" class="mp-compare-open-btn" id="mpCompareOpenBtn">
+        <span class="comp-open-text-desktop"><?php esc_html_e( 'Compare Side-by-Side', 'mobile-pasal' ); ?> &rarr;</span>
+        <span class="comp-open-text-mobile"><?php esc_html_e( 'Compare', 'mobile-pasal' ); ?> (<span class="comp-count-mobile">0</span>) &rarr;</span>
+      </button>
     </div>
   </div>
 </div>
@@ -277,10 +280,16 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
 <!-- Side-by-Side Handset Comparison Modal -->
 <div class="mp-compare-modal-backdrop" id="mpCompareModal" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Handset Side-by-Side Comparison', 'mobile-pasal' ); ?>">
   <div class="mp-compare-modal-box">
+    <div class="mp-compare-sheet-handle" aria-hidden="true"></div>
     <div class="mp-compare-modal-header">
       <div>
         <span class="eyebrow" style="margin-bottom:4px;"><?php esc_html_e( 'SHOWROOM HARDWARE COMPARISON', 'mobile-pasal' ); ?></span>
         <h3 class="mp-compare-modal-title"><?php esc_html_e( 'Side-by-Side Handset Specification Matrix', 'mobile-pasal' ); ?></h3>
+        <div class="mp-compare-mobile-hint">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          <span><?php esc_html_e( 'Swipe horizontally to compare specifications', 'mobile-pasal' ); ?></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
       </div>
       <button type="button" class="mp-compare-modal-close" id="mpCompareModalClose" aria-label="<?php esc_attr_e( 'Close Comparison', 'mobile-pasal' ); ?>">&times;</button>
     </div>

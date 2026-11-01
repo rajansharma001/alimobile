@@ -1475,6 +1475,7 @@
     if (compareList.length === 0) {
       bar.classList.remove("visible");
       bar.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("mp-compare-active");
       var modal = document.getElementById("mpCompareModal");
       if (modal) modal.classList.remove("open");
       return;
@@ -1482,9 +1483,13 @@
 
     bar.classList.add("visible");
     bar.setAttribute("aria-hidden", "false");
+    document.body.classList.add("mp-compare-active");
     if (countText) {
       countText.textContent = compareList.length + " / 3 Selected";
     }
+    document.querySelectorAll(".comp-count-mobile").forEach(function (el) {
+      el.textContent = compareList.length;
+    });
 
     var slotsHtml = "";
     for (var i = 0; i < 3; i++) {
@@ -1502,7 +1507,8 @@
       } else {
         slotsHtml +=
           '<div class="mp-compare-slot empty">' +
-            '<span>+ Select Phone ' + (i + 1) + '</span>' +
+            '<span class="empty-text-desktop">+ Select Phone ' + (i + 1) + '</span>' +
+            '<span class="empty-text-mobile">+</span>' +
           '</div>';
       }
     }
