@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<main>
+<div class="site-main">
   <?php while ( have_posts() ) : the_post(); ?>
     <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
     <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Page Header', 'mobile-pasal' ); ?>">
@@ -64,6 +64,6 @@ get_header();
       </div>
     </section>
   <?php endwhile; ?>
-</main>
+</div>
 
 <?php get_footer(); ?>

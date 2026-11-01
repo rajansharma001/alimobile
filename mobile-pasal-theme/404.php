@@ -16,11 +16,11 @@ $btn2_text  = mp_opt( 'error404_btn2_text', 'Browse Handsets' );
 $btn3_text  = mp_opt( 'error404_btn3_text', 'Ask Counter Help' );
 ?>
 
-<main>
+<div class="site-main">
   <section class="section-wrap not-found-section" style="padding: clamp(60px, 10vw, 120px) 0; text-align: center;">
     <div class="tech-bg-grid" aria-hidden="true"></div>
     <div class="tech-ring-accent" aria-hidden="true"></div>
-    <div class="wrap" style="max-width: 640px;">
+    <div class="container wrap" style="max-width: 640px;">
       
       <div style="font-size: clamp(4.5rem, 12vw, 8rem); font-weight: 900; line-height: 1; color: var(--primary); letter-spacing: -2px; margin-bottom: 16px;">
         <?php echo esc_html( $code_text ); ?>
@@ -50,6 +50,6 @@ $btn3_text  = mp_opt( 'error404_btn3_text', 'Ask Counter Help' );
 
     </div>
   </section>
-</main>
+</div>
 
 <?php get_footer(); ?>

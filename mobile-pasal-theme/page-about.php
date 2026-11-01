@@ -192,15 +192,15 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 	<div class="container">
 		<div class="section-header" style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
 			<div class="section-header-copy">
-				<span class="section-badge"><?php esc_html_e( 'COMMUNITY FEEDBACK', 'mobile-pasal' ); ?></span>
-				<h2 class="section-title"><?php esc_html_e( 'What Gulariya Phone Owners Say', 'mobile-pasal' ); ?></h2>
-				<p class="section-desc"><?php esc_html_e( 'Real verified feedback from local residents, students, and professionals across Bardiya.', 'mobile-pasal' ); ?></p>
+				<span class="section-badge"><?php echo esc_html( mp_opt( 'reviews_kicker', 'COMMUNITY FEEDBACK' ) ); ?></span>
+				<h2 class="section-title"><?php echo esc_html( mp_opt( 'reviews_title', 'What Gulariya Phone Owners Say' ) ); ?></h2>
+				<p class="section-desc"><?php echo esc_html( mp_opt( 'reviews_subtitle', 'Real verified feedback from local residents, students, and professionals across Bardiya.' ) ); ?></p>
 			</div>
 			<div class="reviews-header-actions" style="display: flex; align-items: center; gap: 14px;">
 				<div class="rating-header-badge">
 					<svg width="16" height="16" viewBox="0 0 24 24" fill="#f59e0b" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-					<strong>4.9 / 5.0</strong>
-					<span style="color:#78350f; font-weight:600;">(250+ Verified Reviews)</span>
+					<strong><?php echo esc_html( mp_opt( 'reviews_rating_score', '4.9 / 5.0' ) ); ?></strong>
+					<span style="color:#78350f; font-weight:600;"><?php echo esc_html( mp_opt( 'reviews_rating_count_text', '(250+ Verified Reviews)' ) ); ?></span>
 				</div>
 				<div class="reviews-nav-controls">
 					<button class="carousel-arrow carousel-prev" id="aboutReviewsPrev" aria-label="<?php esc_attr_e( 'Previous reviews', 'mobile-pasal' ); ?>" type="button">

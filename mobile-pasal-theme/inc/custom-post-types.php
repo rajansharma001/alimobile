@@ -268,7 +268,8 @@ function mp_render_handset_meta_box( $post ) {
 
 	$price         = get_post_meta( $post->ID, '_mp_price', true );
 	$old_price     = get_post_meta( $post->ID, '_mp_old_price', true );
-	$hide_price    = get_post_meta( $post->ID, '_mp_hide_price', true );
+	$show_price    = get_post_meta( $post->ID, '_mp_show_price', true );
+	$hide_price    = ( 'hide' === $show_price || '1' === get_post_meta( $post->ID, '_mp_hide_price', true ) ) ? '1' : '0';
 	$badge         = get_post_meta( $post->ID, '_mp_badge', true );
 	$stock_status  = get_post_meta( $post->ID, '_mp_stock_status', true ) ?: 'in_stock';
 	$rating        = get_post_meta( $post->ID, '_mp_rating', true ) ?: '4.9';
@@ -433,7 +434,6 @@ function mp_save_handset_meta( $post_id ) {
 	$fields = array(
 		'_mp_price',
 		'_mp_old_price',
-		'_mp_hide_price',
 		'_mp_badge',
 		'_mp_stock_status',
 		'_mp_rating',
@@ -452,6 +452,15 @@ function mp_save_handset_meta( $post_id ) {
 		if ( isset( $_POST[ $f ] ) ) {
 			update_post_meta( $post_id, $f, sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
 		}
+	}
+
+	$is_hidden = isset( $_POST['_mp_hide_price'] ) && '1' === (string) $_POST['_mp_hide_price'];
+	update_post_meta( $post_id, '_mp_hide_price', $is_hidden ? '1' : '0' );
+	$current_show = get_post_meta( $post_id, '_mp_show_price', true );
+	if ( $is_hidden ) {
+		update_post_meta( $post_id, '_mp_show_price', 'hide' );
+	} elseif ( 'hide' === $current_show ) {
+		update_post_meta( $post_id, '_mp_show_price', 'inherit' );
 	}
 }
 add_action( 'save_post_handset', 'mp_save_handset_meta' );

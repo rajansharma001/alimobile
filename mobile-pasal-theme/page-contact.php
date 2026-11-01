@@ -13,14 +13,16 @@ $store_hours     = mp_opt( 'store_hours', 'Sun–Fri: 9:00 AM – 8:00 PM | Sat:
 $store_phone     = mp_opt( 'store_phone', '+977 9804530786' );
 $store_phone_raw = preg_replace( '/[^0-9]/', '', $store_phone );
 $wa_number       = mp_opt( 'whatsapp_number', '9779804530786' );
-$map_embed       = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14088.751310111166!2d81.332356!3d28.239327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399859f1e16f391f%3A0xb35a0fec1d7e2507!2sGulariya%2C%20Bardiya!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp' );
+$map_embed_raw   = mp_opt( 'store_map_embed', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14088.751310111166!2d81.332356!3d28.239327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399859f1e16f391f%3A0xb35a0fec1d7e2507!2sGulariya%2C%20Bardiya!5e0!3m2!1sen!2snp!4v1700000000000!5m2!1sen!2snp' );
+$map_embed       = function_exists( 'mp_extract_map_iframe_src' ) ? mp_extract_map_iframe_src( $map_embed_raw ) : $map_embed_raw;
+$counter_map_url = mp_opt( 'counter_map_url', 'https://www.google.com/maps/search/?api=1&query=Ali+Mobile+Center+Gulariya+Bardiya' );
 
 $contact_badge   = mp_opt( 'contact_hero_badge', 'Gulariya Counter & Lab' );
 $contact_title   = mp_opt( 'contact_hero_title', 'Visit Our Counter or Send a Direct Inquiry.' );
 $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purchase a new flagship handset, need an urgent screen replacement, or want trade-in pricing, visit our counter at Ji. Pra. Ka. Chowk.' );
 ?>
 
-<main>
+<div class="site-main">
 
   <!-- ====================================================================
        PAGE HERO BANNER: Breadcrumbs, Title & Pure Graphics
@@ -159,7 +161,7 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
           </div>
 
           <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 10px;">
-            <a class="btn btn-primary btn-block" href="https://www.google.com/maps/search/?api=1&query=Ali+Mobile+Center+Gulariya+Bardiya" target="_blank" rel="noopener">
+            <a class="btn btn-primary btn-block" href="<?php echo esc_url( $counter_map_url ); ?>" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><polygon points="3 11 22 2 13 21 11 13 3 11"></polygon></svg>
               <span>Open in Google Maps</span>
             </a>
@@ -241,6 +243,6 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
     </div>
   </section>
 
-</main>
+</div>
 
 <?php get_footer(); ?>

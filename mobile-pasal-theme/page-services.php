@@ -38,6 +38,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 	</div>
 </section>
 
+<?php if ( mp_opt( 'estimator_enabled', '1' ) ) : ?>
 <!-- Interactive Repair Diagnostic Console -->
 <section id="repair-builder" class="section-wrap repair-builder-section" style="margin-top: 36px;">
 	<div class="tech-bg-grid" aria-hidden="true"></div>
@@ -46,10 +47,10 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker">
 				<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-				<?php esc_html_e( 'Apple Fix Counter Diagnostic Console', 'mobile-pasal' ); ?>
+				<?php echo esc_html( mp_opt( 'repair_kicker', 'Apple Fix Counter Diagnostic Console' ) ); ?>
 			</span>
-			<h2><?php esc_html_e( 'Phone Problem? Get a Direct Counter Estimate', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'Select your device and fault below. Your live repair docket is prepared in real-time. Dispatch directly to our Gulariya technician on WhatsApp for instant counter quotes.', 'mobile-pasal' ); ?></p>
+			<h2><?php echo esc_html( mp_opt( 'repair_title', 'Phone Problem? Get a Direct Counter Estimate' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'repair_subtitle', 'Select your device and fault below. Your live repair docket is prepared in real-time. Dispatch directly to our Gulariya technician on WhatsApp for instant counter quotes.' ) ); ?></p>
 		</div>
 
 		<div class="repair-station-layout fade-up">
@@ -267,6 +268,7 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 		</div>
 	</div>
 </section>
+<?php endif; ?>
 
 <!-- In-Depth Lab Capabilities Section -->
 <section class="section-wrap services-section">
@@ -274,9 +276,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
-			<span class="sec-kicker"><?php esc_html_e( 'Lab Bench Specialties', 'mobile-pasal' ); ?></span>
-			<h2><?php esc_html_e( 'Component-Level Engineering & Certified Repairs', 'mobile-pasal' ); ?></h2>
-			<p><?php esc_html_e( 'We don\'t outsource to other cities. Every repair is performed on-site at our Gulariya workstation with specialized calibration tools.', 'mobile-pasal' ); ?></p>
+			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'services_labs_kicker', 'Lab Bench Specialties' ) ); ?></span>
+			<h2><?php echo esc_html( mp_opt( 'services_labs_title', 'Component-Level Engineering & Certified Repairs' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'services_labs_desc', 'We don\'t outsource to other cities. Every repair is performed on-site at our Gulariya workstation with specialized calibration tools.' ) ); ?></p>
 		</div>
 
 		<div class="services-grid fade-up">
@@ -508,61 +510,61 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 		<div class="faq-grid fade-up">
 			<div class="faq-item active">
 				<button type="button" class="faq-question-btn" aria-expanded="true">
-					<span><?php esc_html_e( 'Will my phone data (photos, contacts, apps) be erased during repair?', 'mobile-pasal' ); ?></span>
+					<span><?php echo esc_html( mp_opt( 'services_faq1_q', 'Will my phone data (photos, contacts, apps) be erased during repair?' ) ); ?></span>
 					<span class="faq-toggle-icon">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php esc_html_e( 'No. For standard hardware repairs like screen replacement, battery swap, charging port rework, and camera module replacements, your data remains completely intact and untouched. We never format your phone unless you specifically request an OS reset or firmware reinstall.', 'mobile-pasal' ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq1_a', 'No. For standard hardware repairs like screen replacement, battery swap, charging port rework, and camera module replacements, your data remains completely intact and untouched. We never format your phone unless you specifically request an OS reset or firmware reinstall.' ) ); ?></p>
 				</div>
 			</div>
 
 			<div class="faq-item">
 				<button type="button" class="faq-question-btn" aria-expanded="false">
-					<span><?php esc_html_e( 'How long does a screen or battery replacement take?', 'mobile-pasal' ); ?></span>
+					<span><?php echo esc_html( mp_opt( 'services_faq2_q', 'How long does a screen or battery replacement take?' ) ); ?></span>
 					<span class="faq-toggle-icon">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php esc_html_e( 'For most iPhone models and popular Samsung / Xiaomi phones, screen and battery swaps take only 20 to 45 minutes. You can relax at our counter while our technician completes the repair in front of you.', 'mobile-pasal' ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq2_a', 'For most iPhone models and popular Samsung / Xiaomi phones, screen and battery swaps take only 20 to 45 minutes. You can relax at our counter while our technician completes the repair in front of you.' ) ); ?></p>
 				</div>
 			</div>
 
 			<div class="faq-item">
 				<button type="button" class="faq-question-btn" aria-expanded="false">
-					<span><?php esc_html_e( 'Do you provide warranty on replaced parts?', 'mobile-pasal' ); ?></span>
+					<span><?php echo esc_html( mp_opt( 'services_faq3_q', 'Do you provide warranty on replaced parts?' ) ); ?></span>
 					<span class="faq-toggle-icon">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php esc_html_e( 'Yes. We offer up to 90 days counter warranty on display assemblies and micro-soldering, and up to 6 months replacement warranty on OEM batteries. If any manufacturing defect occurs during the warranty period, we fix or replace it free of charge.', 'mobile-pasal' ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq3_a', 'Yes. We offer up to 90 days counter warranty on display assemblies and micro-soldering, and up to 6 months replacement warranty on OEM batteries. If any manufacturing defect occurs during the warranty period, we fix or replace it free of charge.' ) ); ?></p>
 				</div>
 			</div>
 
 			<div class="faq-item">
 				<button type="button" class="faq-question-btn" aria-expanded="false">
-					<span><?php esc_html_e( 'What should I do if my phone falls in water?', 'mobile-pasal' ); ?></span>
+					<span><?php echo esc_html( mp_opt( 'services_faq4_q', 'What should I do if my phone falls in water?' ) ); ?></span>
 					<span class="faq-toggle-icon">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php esc_html_e( 'Power it OFF immediately! Do NOT connect it to a charger, and do not put it in uncooked rice (rice dust clogs ports and accelerates internal short circuits). Bring it directly to our Gulariya counter for an immediate ultrasonic chemical bath to prevent motherboard trace oxidation.', 'mobile-pasal' ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq4_a', 'Power it OFF immediately! Do NOT connect it to a charger, and do not put it in uncooked rice (rice dust clogs ports and accelerates internal short circuits). Bring it directly to our Gulariya counter for an immediate ultrasonic chemical bath to prevent motherboard trace oxidation.' ) ); ?></p>
 				</div>
 			</div>
 
 			<div class="faq-item">
 				<button type="button" class="faq-question-btn" aria-expanded="false">
-					<span><?php esc_html_e( 'Do I need an appointment or can I walk in directly?', 'mobile-pasal' ); ?></span>
+					<span><?php echo esc_html( mp_opt( 'services_faq5_q', 'Do I need an appointment or can I walk in directly?' ) ); ?></span>
 					<span class="faq-toggle-icon">
 						<svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
 					</span>
 				</button>
 				<div class="faq-answer-panel">
-					<p><?php esc_html_e( 'Walk-ins are always welcome anytime between 9:00 AM and 8:00 PM every day! If you prefer, you can also send us a message on WhatsApp beforehand so we can ensure the exact model parts are pre-allocated at the bench.', 'mobile-pasal' ); ?></p>
+					<p><?php echo esc_html( mp_opt( 'services_faq5_a', 'Walk-ins are always welcome anytime between 9:00 AM and 8:00 PM every day! If you prefer, you can also send us a message on WhatsApp beforehand so we can ensure the exact model parts are pre-allocated at the bench.' ) ); ?></p>
 				</div>
 			</div>
 		</div>

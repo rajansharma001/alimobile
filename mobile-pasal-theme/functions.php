@@ -98,12 +98,12 @@ function mp_enqueue_scripts() {
 	wp_enqueue_style( 'mp-main-style', MP_THEME_URI . '/assets/css/main.css', array( 'mp-google-fonts', 'mp-theme-root' ), $css_ver );
 
 	// Dynamic Inline CSS from Theme Options (Restrained, matching light studio palette)
-	$primary       = mp_opt( 'color_primary', '#0066cc' );
-	$primary_dark  = mp_opt( 'color_primary_dark', '#004c99' );
-	$primary_light = mp_opt( 'color_primary_light', '#eff6ff' );
-	$wa_green      = mp_opt( 'color_green', '#25d366' );
-	$star_gold     = mp_opt( 'color_amber', '#f59e0b' );
-	$custom_css    = mp_opt( 'custom_css', '' );
+	$primary       = esc_attr( mp_opt( 'color_primary', '#0066cc' ) );
+	$primary_dark  = esc_attr( mp_opt( 'color_primary_dark', '#004c99' ) );
+	$primary_light = esc_attr( mp_opt( 'color_primary_light', '#eff6ff' ) );
+	$wa_green      = esc_attr( mp_opt( 'color_green', '#25d366' ) );
+	$star_gold     = esc_attr( mp_opt( 'color_amber', '#f59e0b' ) );
+	$custom_css    = wp_strip_all_tags( (string) mp_opt( 'custom_css', '' ) );
 
 	$inline_styles = "
 	:root {
@@ -155,6 +155,65 @@ function mp_get_whatsapp_link( $custom_message = '' ) {
 		$custom_message = mp_opt( 'whatsapp_default_message', 'Hello Ali Mobile! I have an inquiry about smartphones / repairs.' );
 	}
 	return 'https://wa.me/' . $clean . '?text=' . rawurlencode( $custom_message );
+}
+
+/**
+ * 5b. Helper: Unified Handset Price Visibility Check
+ * Respects per-product `_mp_show_price` ('show' / 'hide' / 'inherit'),
+ * legacy `_mp_hide_price` ('1'), and global `handset_show_price` master toggle.
+ *
+ * @param int $post_id Handset post ID.
+ * @return bool True if price should be displayed publicly, false if hidden.
+ */
+function mp_is_handset_price_visible( $post_id ) {
+	$price = get_post_meta( $post_id, '_mp_price', true );
+	if ( '' === trim( (string) $price ) ) {
+		return false;
+	}
+
+	$per_show = get_post_meta( $post_id, '_mp_show_price', true );
+	if ( 'hide' === $per_show ) {
+		return false;
+	}
+	if ( 'show' === $per_show ) {
+		return true;
+	}
+
+	$per_hide = get_post_meta( $post_id, '_mp_hide_price', true );
+	if ( '1' === (string) $per_hide || true === $per_hide ) {
+		return false;
+	}
+
+	$global_show = mp_opt( 'handset_show_price', '1' );
+	return ( '1' === (string) $global_show || 1 === $global_show || true === $global_show );
+}
+
+/**
+ * 5c. Helper: Safely Extract Google Maps Iframe SRC URL
+ * Handles both full `<iframe src="..."></iframe>` embed tags and raw map URLs.
+ *
+ * @param string $raw_embed_or_url Map embed HTML or URL string.
+ * @return string Valid URL for iframe `src`.
+ */
+function mp_extract_map_iframe_src( $raw_embed_or_url ) {
+	$default_map = 'https://maps.google.com/maps?q=Gulariya%2C%20Bardiya%2C%20Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed';
+	$raw         = trim( (string) $raw_embed_or_url );
+	if ( empty( $raw ) ) {
+		return $default_map;
+	}
+
+	if ( false !== stripos( $raw, '<iframe' ) ) {
+		if ( preg_match( '/src=["\']([^"\']+)["\']/i', $raw, $matches ) && ! empty( $matches[1] ) ) {
+			return html_entity_decode( $matches[1], ENT_QUOTES, 'UTF-8' );
+		}
+		return $default_map;
+	}
+
+	if ( 0 === strpos( $raw, 'http://' ) || 0 === strpos( $raw, 'https://' ) || 0 === strpos( $raw, '//' ) ) {
+		return $raw;
+	}
+
+	return $default_map;
 }
 
 /**

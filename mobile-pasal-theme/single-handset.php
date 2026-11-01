@@ -81,8 +81,10 @@ while ( have_posts() ) :
 	// Handset Showcase Image
 	$img_url = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $post_id ) : get_the_post_thumbnail_url( $post_id, 'large' );
 
-	// Price Visibility Calculation
-	$is_price_visible = ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $per_product_hide ) && ! empty( $price );
+	// Price Visibility Calculation (unified helper respects Bulk Price Editor _mp_show_price, _mp_hide_price, and global toggle)
+	$is_price_visible = function_exists( 'mp_is_handset_price_visible' )
+		? mp_is_handset_price_visible( $post_id )
+		: ( ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $per_product_hide ) && ! empty( $price ) );
 
 	// Format Price Strings
 	$price_formatted     = is_numeric( $price ) ? 'NPR ' . number_format( (float) $price ) : $price;
@@ -123,7 +125,7 @@ while ( have_posts() ) :
 	$wa_url = 'https://wa.me/' . esc_attr( $wa_number ) . '?text=' . rawurlencode( $wa_message );
 	?>
 
-<main id="primary" class="site-main">
+<div id="primary" class="site-main">
 
 	<!-- 1. Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
 	<section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Handset Header', 'mobile-pasal' ); ?>">
@@ -178,7 +180,7 @@ while ( have_posts() ) :
 							
 							<!-- Floating Top Badge -->
 							<div class="stage-floating-chip">
-								<span class="chip-dot"></span>
+								<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
 								<span><?php echo esc_html( $badge ); ?> • 100% NTA MDMS</span>
 							</div>
 
@@ -769,7 +771,9 @@ while ( have_posts() ) :
 						$rel_permalink  = get_permalink( $rel_id );
 
 						// Show/Hide check for related card
-						$rel_show_price = ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $rel_hide_price ) && ! empty( $rel_price );
+						$rel_show_price = function_exists( 'mp_is_handset_price_visible' )
+							? mp_is_handset_price_visible( $rel_id )
+							: ( ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $rel_hide_price ) && ! empty( $rel_price ) );
 						$rel_price_fmt  = is_numeric( $rel_price ) ? 'NPR ' . number_format( (float) $rel_price ) : $rel_price;
 						$rel_old_fmt    = ( is_numeric( $rel_old_price ) && (float) $rel_old_price > (float) $rel_price ) ? 'NPR ' . number_format( (float) $rel_old_price ) : ( ( ! empty( $rel_old_price ) && $rel_old_price !== $rel_price ) ? $rel_old_price : '' );
 
@@ -859,7 +863,7 @@ while ( have_posts() ) :
 	endif;
 	?>
 
-</main>
+</div>
 
 	<?php
 endwhile;

@@ -545,7 +545,6 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <?php if ( ! empty( $spotlight_status ) && 'Sealed Stock Handover Ready at Gulariya Showroom Counter' !== $spotlight_status ) : ?>
         <div class="flagship-live-beacon">
-          <span class="beacon-dot"></span>
           <span><?php echo esc_html( $spotlight_status ); ?></span>
         </div>
         <?php endif; ?>
@@ -639,7 +638,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <div class="flagship-stage-column">
           <div class="stage-pedestal-card">
             <div class="stage-floating-chip">
-              <span class="chip-dot"></span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
               <span>48MP Fusion • 4K 120fps Dolby Vision</span>
             </div>
             <div class="stage-device-frame">
@@ -759,6 +758,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
 
         <?php
         $hp_global_show_price = mp_opt( 'handset_show_price', '1' );
+        $hp_hidden_price_text = mp_opt( 'handset_hidden_price_text', __( 'Contact for Counter Price', 'mobile-pasal' ) );
         $hp_wa_number         = mp_opt( 'whatsapp_number', '9779804530786' );
         $hp_clean_p           = preg_replace( '/[^0-9]/', '', $hp_wa_number );
 
@@ -779,10 +779,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
                 $badge      = get_post_meta( $h_id, '_mp_badge', true ) ?: __( 'Official VAT Bill', 'mobile-pasal' );
                 $price      = get_post_meta( $h_id, '_mp_price', true );
                 $old_price  = get_post_meta( $h_id, '_mp_old_price', true );
-                $per_hide   = get_post_meta( $h_id, '_mp_hide_price', true );
                 $img_url    = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $h_id ) : get_the_post_thumbnail_url( $h_id, 'medium' );
 
-                $is_price_visible = ( $hp_global_show_price == '1' || $hp_global_show_price === 1 || $hp_global_show_price === true ) && empty( $per_hide ) && ! empty( $price );
+                $is_price_visible = function_exists( 'mp_is_handset_price_visible' ) ? mp_is_handset_price_visible( $h_id ) : ! empty( $price );
                 $price_fmt        = is_numeric( $price ) ? 'Rs. ' . number_format( (float) $price ) : $price;
                 $old_price_fmt    = ( is_numeric( $old_price ) && (float) $old_price > (float) $price ) ? 'Rs. ' . number_format( (float) $old_price ) : ( ( ! empty( $old_price ) && $old_price !== $price ) ? $old_price : '' );
                 $numeric_price    = (int) preg_replace( '/[^0-9]/', '', (string) $price );
@@ -806,20 +805,21 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
                 $wa_url = 'https://wa.me/' . esc_attr( $hp_clean_p ) . '?text=' . rawurlencode( $wa_msg );
 
                 $hp_catalog_items[] = array(
-                    'id'             => $h_id,
-                    'name'           => $h_title,
-                    'url'            => $permalink,
-                    'img'            => $img_url,
-                    'brand'          => $brand_name,
-                    'brandSlug'      => $brand_slug,
-                    'categoryTag'    => $cat_name,
-                    'tag'            => $badge,
-                    'specs'          => $specs_arr,
-                    'price'          => $numeric_price,
-                    'priceFmt'       => $price_fmt,
-                    'oldPriceFmt'    => $old_price_fmt,
-                    'isPriceVisible' => $is_price_visible,
-                    'waUrl'          => $wa_url,
+                    'id'              => $h_id,
+                    'name'            => $h_title,
+                    'url'             => $permalink,
+                    'img'             => $img_url,
+                    'brand'           => $brand_name,
+                    'brandSlug'       => $brand_slug,
+                    'categoryTag'     => $cat_name,
+                    'tag'             => $badge,
+                    'specs'           => $specs_arr,
+                    'price'           => $numeric_price,
+                    'priceFmt'        => $price_fmt,
+                    'oldPriceFmt'     => $old_price_fmt,
+                    'isPriceVisible'  => $is_price_visible,
+                    'hiddenPriceText' => $hp_hidden_price_text,
+                    'waUrl'           => $wa_url,
                 );
             }
             wp_reset_postdata();
@@ -847,7 +847,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
           <span><?php echo esc_html( $lab_badge ); ?></span>
         </div>
         <div class="cleanroom-live-pill">
-          <span class="cleanroom-pulse-dot"></span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
           <span><?php echo esc_html( $lab_live_status ); ?></span>
         </div>
       </div>
@@ -859,7 +859,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
           <div class="cleanroom-photo-frame">
             <img src="<?php echo esc_url( $lab_img ); ?>" alt="<?php esc_attr_e( 'Cleanroom microscope repair lab technicians', 'mobile-pasal' ); ?>" loading="lazy" />
             <div class="cleanroom-photo-overlay-tag">
-              <span class="photo-tag-pulse"></span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
               <span><?php echo esc_html( $lab_tagline ); ?></span>
             </div>
           </div>
@@ -1396,7 +1396,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <div class="map-inner-frame">
           <iframe
             title="<?php echo esc_attr__( 'Ali Mobile Center Location in Gulariya', 'mobile-pasal' ); ?>"
-            src="<?php echo esc_url( mp_opt( 'visit_map_url', 'https://maps.google.com/maps?q=Gulariya%2C%20Bardiya%2C%20Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed' ) ); ?>"
+            src="<?php echo esc_url( mp_extract_map_iframe_src( mp_opt( 'visit_map_url', mp_opt( 'counter_map_embed', '' ) ) ) ); ?>"
             loading="lazy">
           </iframe>
         </div>

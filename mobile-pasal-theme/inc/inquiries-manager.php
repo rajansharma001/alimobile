@@ -405,7 +405,10 @@ function mp_render_inquiries_admin_page() {
  * 4. AJAX Submission: Repair Estimator Docket
  */
 function mp_ajax_submit_repair_docket() {
-	check_ajax_referer( 'mp_theme_nonce', 'nonce' );
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	if ( ! wp_verify_nonce( $nonce, 'mp_theme_nonce' ) && ! wp_verify_nonce( $nonce, 'mp_public_nonce' ) ) {
+		wp_send_json_error( array( 'message' => esc_html__( 'Security verification failed. Please refresh and try again.', 'mobile-pasal' ) ), 403 );
+	}
 
 	$name     = isset( $_POST['customer_name'] ) ? sanitize_text_field( wp_unslash( $_POST['customer_name'] ) ) : '';
 	$phone    = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
@@ -464,15 +467,19 @@ add_action( 'wp_ajax_nopriv_mp_submit_repair_docket', 'mp_ajax_submit_repair_doc
  * 5. AJAX Submission: General Contact Form
  */
 function mp_ajax_submit_contact_form() {
-	check_ajax_referer( 'mp_theme_nonce', 'nonce' );
+	$nonce = isset( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+	if ( ! wp_verify_nonce( $nonce, 'mp_theme_nonce' ) && ! wp_verify_nonce( $nonce, 'mp_public_nonce' ) ) {
+		wp_send_json_error( array( 'message' => esc_html__( 'Security verification failed. Please refresh and try again.', 'mobile-pasal' ) ), 403 );
+	}
 
 	$name    = isset( $_POST['name'] ) ? sanitize_text_field( wp_unslash( $_POST['name'] ) ) : '';
 	$phone   = isset( $_POST['phone'] ) ? sanitize_text_field( wp_unslash( $_POST['phone'] ) ) : '';
 	$email   = isset( $_POST['email'] ) ? sanitize_email( wp_unslash( $_POST['email'] ) ) : '';
-	$subject = isset( $_POST['subject'] ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : 'General Inquiry';
-	$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : '';
+	$device  = isset( $_POST['device'] ) ? sanitize_text_field( wp_unslash( $_POST['device'] ) ) : '';
+	$subject = isset( $_POST['service'] ) ? sanitize_text_field( wp_unslash( $_POST['service'] ) ) : ( isset( $_POST['subject'] ) ? sanitize_text_field( wp_unslash( $_POST['subject'] ) ) : 'General Inquiry' );
+	$message = isset( $_POST['message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['message'] ) ) : ( isset( $_POST['notes'] ) ? sanitize_textarea_field( wp_unslash( $_POST['notes'] ) ) : '' );
 
-	if ( empty( $name ) || empty( $phone ) || empty( $message ) ) {
+	if ( empty( $name ) || empty( $phone ) ) {
 		wp_send_json_error( array( 'message' => esc_html__( 'Please complete all required fields.', 'mobile-pasal' ) ) );
 	}
 
@@ -488,12 +495,13 @@ function mp_ajax_submit_contact_form() {
 			'customer_name'  => $name,
 			'phone'          => $phone,
 			'email'          => $email,
+			'device_model'   => $device,
 			'service_needed' => $subject,
 			'message'        => $message,
 			'status'         => 'pending',
 			'created_at'     => current_time( 'mysql' ),
 		),
-		array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+		array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
 	);
 
 	if ( false === $result ) {
@@ -627,7 +635,7 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 		<div class="mp-tracker-card">
 			<div class="mp-tracker-header">
 				<div class="mp-tracker-badge">
-					<span class="mp-tracker-dot"></span>
+					<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
 					<span><?php esc_html_e( 'Live Lab Bench Telemetry', 'mobile-pasal' ); ?></span>
 				</div>
 				<h3 class="mp-tracker-title"><?php esc_html_e( 'Track Your Device Repair Status', 'mobile-pasal' ); ?></h3>
@@ -951,6 +959,11 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 	</style>
 
 	<script>
+	function mpEscHtml(str) {
+		var div = document.createElement('div');
+		div.textContent = (str === null || str === undefined) ? '' : String(str);
+		return div.innerHTML;
+	}
 	function mpHandleTrackerSubmit(e) {
 		e.preventDefault();
 		var query = document.getElementById('mpTrackerQuery').value.trim();
@@ -1013,22 +1026,24 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 
 			var noteHtml = '';
 			if (d.notes) {
-				noteHtml = '<div class="mp-technician-note"><strong><?php echo esc_js( __( 'Technician Counter Note: ', 'mobile-pasal' ) ); ?></strong>' + d.notes + '</div>';
+				noteHtml = '<div class="mp-technician-note"><strong><?php echo esc_js( __( 'Technician Counter Note: ', 'mobile-pasal' ) ); ?></strong>' + mpEscHtml(d.notes) + '</div>';
 			}
 
+			var safeColor = /^#[0-9a-fA-F]{3,6}$/.test(d.status_color || '') ? d.status_color : '#0066cc';
+
 			var html = '<div class="mp-docket-summary-box">' +
-				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Docket No', 'mobile-pasal' ) ); ?></strong><span>' + d.docket_no + '</span></div>' +
-				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Customer', 'mobile-pasal' ) ); ?></strong><span>' + d.customer + '</span></div>' +
-				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Device Model', 'mobile-pasal' ) ); ?></strong><span>' + d.device + '</span></div>' +
-				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Service', 'mobile-pasal' ) ); ?></strong><span>' + d.service + '</span></div>' +
+				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Docket No', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.docket_no) + '</span></div>' +
+				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Customer', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.customer) + '</span></div>' +
+				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Device Model', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.device) + '</span></div>' +
+				'<div class="mp-docket-prop"><strong><?php echo esc_js( __( 'Service', 'mobile-pasal' ) ); ?></strong><span>' + mpEscHtml(d.service) + '</span></div>' +
 				'</div>' +
 				stepperHtml +
-				'<div class="mp-status-banner" style="background:' + d.status_color + '15; border-color:' + d.status_color + '; color:' + d.status_color + ';">' +
-				'<h4 class="mp-status-banner-title">' + d.status_label + '</h4>' +
-				'<p class="mp-status-banner-desc" style="color:var(--text-heading, #0f172a);">' + d.status_desc + '</p>' +
+				'<div class="mp-status-banner" style="background:' + safeColor + '15; border-color:' + safeColor + '; color:' + safeColor + ';">' +
+				'<h4 class="mp-status-banner-title">' + mpEscHtml(d.status_label) + '</h4>' +
+				'<p class="mp-status-banner-desc" style="color:var(--text-heading, #0f172a);">' + mpEscHtml(d.status_desc) + '</p>' +
 				'</div>' +
 				noteHtml +
-				'<a href="' + d.wa_url + '" target="_blank" rel="noopener" class="mp-tracker-wa-btn">' +
+				'<a href="' + mpEscHtml(d.wa_url) + '" target="_blank" rel="noopener" class="mp-tracker-wa-btn">' +
 				'<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2"/></svg>' +
 				'<span><?php echo esc_js( __( 'Inquire About This Docket on WhatsApp', 'mobile-pasal' ) ); ?></span>' +
 				'</a>';

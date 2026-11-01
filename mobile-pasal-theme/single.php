@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<main>
+<div class="site-main">
   <?php while ( have_posts() ) : the_post(); 
     $categories = get_the_category();
     $cat_name   = ! empty( $categories ) ? $categories[0]->name : __( 'Blog Article', 'mobile-pasal' );
@@ -100,6 +100,6 @@ get_header();
       </div>
     </section>
   <?php endwhile; ?>
-</main>
+</div>
 
 <?php get_footer(); ?>

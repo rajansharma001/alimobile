@@ -10587,3 +10587,87 @@ html, body {
     width: 35%;
   }
 }
+
+/* ==========================================================================
+   UNIVERSAL LAYOUT CONTAINERS, WORDPRESS PAGINATION & ACTION ROWS
+   ========================================================================== */
+.wrap {
+  width: min(var(--container), calc(100% - 48px));
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .wrap {
+    width: calc(100% - 28px);
+  }
+}
+
+.error-action-btns {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+@media (max-width: 575px) {
+  .error-action-btns {
+    flex-direction: column;
+    width: 100%;
+  }
+  .error-action-btns .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Standard WordPress Pagination (the_posts_pagination) */
+.pagination .nav-links {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line, #e2e8f0);
+  background: #ffffff;
+  color: var(--navy, #0f172a);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.pagination .page-numbers:hover {
+  border-color: var(--blue, #0862e9);
+  color: var(--blue, #0862e9);
+  background: #eff6ff;
+}
+
+.pagination .page-numbers.current {
+  background: var(--blue, #0862e9);
+  border-color: var(--blue, #0862e9);
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(8, 98, 233, 0.25);
+}
+
+/* Enforce zero green pulsing dots site-wide */
+.beacon-dot,
+.chip-dot,
+.cleanroom-pulse-dot,
+.photo-tag-pulse,
+.mp-tracker-dot,
+.pulse-dot {
+  display: none !important;
+  animation: none !important;
+}
+

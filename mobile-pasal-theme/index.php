@@ -8,7 +8,7 @@
 get_header();
 ?>
 
-<main>
+<div class="site-main">
   <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Blog Updates Header', 'mobile-pasal' ); ?>">
     <div class="tech-bg-grid" aria-hidden="true"></div>
@@ -90,6 +90,6 @@ get_header();
       <?php endif; ?>
     </div>
   </section>
-</main>
+</div>
 
 <?php get_footer(); ?>

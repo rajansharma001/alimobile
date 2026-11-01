@@ -99,6 +99,7 @@ function mobile_pasal_ajax_bulk_save_handsets() {
 				$vis = sanitize_key( $fields['show_price'] );
 				if ( in_array( $vis, $allowed_vis, true ) ) {
 					update_post_meta( $post_id, '_mp_show_price', $vis );
+					update_post_meta( $post_id, '_mp_hide_price', 'hide' === $vis ? '1' : '0' );
 				}
 			}
 

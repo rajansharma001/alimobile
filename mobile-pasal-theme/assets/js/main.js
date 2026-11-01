@@ -508,9 +508,19 @@
     var startIndex = (homeCatalogPage - 1) * HOME_CATALOG_PAGE_SIZE;
     var pagedItems = items.slice(startIndex, startIndex + HOME_CATALOG_PAGE_SIZE);
 
+    function escHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     productsGrid.innerHTML = pagedItems.map(function (item) {
       var specsHtml = (item.specs || []).map(function (spec) {
-        return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + spec + '</span></div>';
+        return '<div class="spec-item"><span class="spec-item-bullet"></span><span>' + escHtml(spec) + '</span></div>';
       }).join("");
 
       var itemUrl = item.url || '#';
@@ -521,12 +531,12 @@
         pricingHtml =
           '<div class="product-pricing-row">' +
             '<div class="price-wrap">' +
-              '<span class="current-price">' + item.priceFmt + '</span>' +
-              (item.oldPriceFmt ? '<span class="old-price">' + item.oldPriceFmt + '</span>' : '') +
+              '<span class="current-price">' + escHtml(item.priceFmt) + '</span>' +
+              (item.oldPriceFmt ? '<span class="old-price">' + escHtml(item.oldPriceFmt) + '</span>' : '') +
             '</div>' +
             '<span class="vat-tag">VAT Included</span>' +
           '</div>';
-      } else if (item.price && !item.priceFmt) {
+      } else if (item.isPriceVisible !== false && item.price && !item.priceFmt) {
         pricingHtml =
           '<div class="product-pricing-row">' +
             '<div class="price-wrap">' +
@@ -540,7 +550,7 @@
           '<div class="product-pricing-row">' +
             '<span class="product-card-quote-pill" style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:750;color:#1d4ed8;background:#eff6ff;padding:4px 9px;border-radius:6px;border:1px solid #bfdbfe;">' +
               '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>' +
-              'Contact for Price' +
+              escHtml(item.hiddenPriceText || 'Contact for Counter Price') +
             '</span>' +
           '</div>';
       }
@@ -548,29 +558,30 @@
       return (
         '<article class="product-card">' +
           '<div class="product-card-topbar">' +
-            '<span class="product-tag">' + (item.tag || 'Official VAT Bill') + '</span>' +
-            '<span class="product-cat-tag">' + (item.categoryTag || item.brand || 'Handset') + '</span>' +
+            '<span class="product-tag">' + escHtml(item.tag || 'Official VAT Bill') + '</span>' +
+            '<span class="product-cat-tag">' + escHtml(item.categoryTag || item.brand || 'Handset') + '</span>' +
           '</div>' +
-          '<a class="product-img-box" href="' + itemUrl + '" aria-label="' + item.name + '">' +
-            '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy" />' +
+          '<a class="product-img-box" href="' + escHtml(itemUrl) + '" aria-label="' + escHtml(item.name) + '">' +
+            '<img src="' + escHtml(item.img) + '" alt="' + escHtml(item.name) + '" loading="lazy" />' +
           '</a>' +
           '<div class="product-brand-row">' +
-            '<span>' + (item.brand || 'Handset') + '</span>' +
+            '<span>' + escHtml(item.brand || 'Handset') + '</span>' +
             '<span class="product-mdms-tag">' +
               '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px;margin-right:3px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>' +
               'MDMS &amp; VAT' +
             '</span>' +
           '</div>' +
           '<h3 class="product-name">' +
-            '<a href="' + itemUrl + '">' + item.name + '</a>' +
+            '<a href="' + escHtml(itemUrl) + '">' + escHtml(item.name) + '</a>' +
           '</h3>' +
           pricingHtml +
           '<div class="product-specs-list">' + specsHtml + '</div>' +
           '<div class="product-actions">' +
-            '<a class="card-wa-btn" href="' + waLink + '" target="_blank" rel="noopener noreferrer">' +
-              '<span>WhatsApp Rate</span>' +
+            '<a class="card-wa-btn" href="' + escHtml(waLink) + '" target="_blank" rel="noopener noreferrer">' +
+              '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>' +
+              '<span>' + (item.isPriceVisible !== false ? 'WhatsApp Rate' : 'Inquire Rate') + '</span>' +
             '</a>' +
-            '<a class="card-specs-btn" href="' + itemUrl + '#specs-matrix" title="View Full Specifications">' +
+            '<a class="card-specs-btn" href="' + escHtml(itemUrl) + '#specs-matrix" title="View Full Specifications">' +
               '<span>Specs ›</span>' +
             '</a>' +
           '</div>' +
