@@ -97,9 +97,11 @@
 	 */
 	function initActiveTabFromUrl() {
 		var hash = window.location.hash;
-		var initialTab = $( '#boptCurrentTabInput' ).val() || 'colors';
+		var urlParams = window.URLSearchParams ? new URLSearchParams( window.location.search ) : null;
+		var tabFromQuery = urlParams ? urlParams.get( 'tab' ) : '';
+		var initialTab = tabFromQuery || $( '#boptCurrentTabInput' ).val() || 'colors';
 
-		if ( hash && hash.indexOf( '#tab-' ) === 0 ) {
+		if ( ! tabFromQuery && hash && hash.indexOf( '#tab-' ) === 0 ) {
 			var tabFromHash = hash.replace( '#tab-', '' );
 			if ( $( '#tab-pane-' + tabFromHash ).length ) {
 				initialTab = tabFromHash;
@@ -318,7 +320,7 @@
 			$resultsBox.hide();
 			$( '.bopt-field, .bopt-card' ).show();
 
-			switchTab( tabSlug, true );
+			window.boptSwitchTab( tabSlug );
 
 			setTimeout( function () {
 				var $pane = $( '#tab-pane-' + tabSlug );

@@ -1552,6 +1552,10 @@ function mp_render_field_image( $key, $label, $desc = '' ) {
 	<?php
 }
 
+function mp_render_field_url( $key, $label, $desc = '', $placeholder = 'https://' ) {
+	mp_render_field_text( $key, $label, $desc, $placeholder );
+}
+
 // Aliases for backwards compatibility with any existing calls
 function mp_render_text( $key, $label, $desc = '', $placeholder = '' ) {
 	mp_render_field_text( $key, $label, $desc, $placeholder );
@@ -1774,7 +1778,7 @@ function mobile_pasal_options_render_dashboard() {
 							<ul class="bopt-nav-list">
 								<?php foreach ( $group_data['items'] as $tab_key => $tab_data ) : ?>
 									<li class="bopt-nav-item <?php echo $active_tab === $tab_key ? 'is-active' : ''; ?>" data-tab-target="<?php echo esc_attr( $tab_key ); ?>">
-										<a href="#tab-<?php echo esc_attr( $tab_key ); ?>" class="bopt-nav-link" data-tab="<?php echo esc_attr( $tab_key ); ?>">
+										<a href="<?php echo esc_url( add_query_arg( 'tab', $tab_key, admin_url( 'admin.php?page=mobile-pasal-options' ) ) ); ?>#tab-<?php echo esc_attr( $tab_key ); ?>" class="bopt-nav-link" data-tab="<?php echo esc_attr( $tab_key ); ?>" onclick="if(window.boptSwitchTab){window.boptSwitchTab('<?php echo esc_js( $tab_key ); ?>', event);return false;}">
 											<i class="fa-solid <?php echo esc_attr( $tab_data['icon'] ); ?>"></i>
 											<span class="bopt-nav-label"><?php echo esc_html( $tab_data['label'] ); ?></span>
 										</a>
