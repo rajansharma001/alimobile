@@ -360,6 +360,12 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
     </div>
 
     <div class="category-grid">
+      <?php
+      $clean_cat_hint = function( $key, $fallback ) {
+          $val = mp_opt( $key, $fallback );
+          return trim( preg_replace( '/\s*(→|&rarr;|&#8594;|->)+$/u', '', (string) $val ) );
+      };
+      ?>
       <!-- 1. Flagship Smartphones -->
       <article class="cat-card" style="--card-tint: rgba(8, 98, 233, 0.08); --card-border-hover: #0862e9;" onclick="filterCatalogByBrand('Apple iPhone')">
         <span class="cat-badge" style="--badge-bg: #e8f0ff; --badge-color: #073d9c;">NTA Sealed</span>
@@ -368,7 +374,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat1_title', 'Flagship Smartphones' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat1_sub', 'iPhone 16 / 15 / 14, Samsung Galaxy S & Pixel' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat1_hint', 'Browse Showroom' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat1_hint', 'Browse Showroom' ) ); ?> <span>&rarr;</span></span>
       </article>
 
       <!-- 2. Certified Apple Fix -->
@@ -379,7 +385,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat2_title', 'Certified Apple Fix' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat2_sub', 'iPhone Screen, Battery & IC Lab' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat2_hint', 'View Repair Board' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat2_hint', 'View Repair Board' ) ); ?> <span>&rarr;</span></span>
       </article>
 
       <!-- 3. Audio & Power Gear -->
@@ -390,7 +396,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat3_title', 'Audio & Power Gear' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat3_sub', 'AirPods, Neckbands & ANC Studio Sound' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat3_hint', 'Explore Studio' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat3_hint', 'Explore Studio' ) ); ?> <span>&rarr;</span></span>
       </article>
 
       <!-- 4. iPads & Tablets -->
@@ -401,7 +407,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat4_title', 'iPads & Tablets' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat4_sub', 'Calling, AMOLED Tabs & Fitness Wearables' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat4_hint', 'Discover Watches' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat4_hint', 'Discover Watches' ) ); ?> <span>&rarr;</span></span>
       </article>
 
       <!-- 5. Chargers & Glass -->
@@ -412,7 +418,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat5_title', 'Chargers & Glass' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat5_sub', '20W–120W Adapters & 9H Armor Glass' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat5_hint', 'View Protection' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat5_hint', 'View Protection' ) ); ?> <span>&rarr;</span></span>
       </article>
 
       <!-- 6. eSewa & Banking -->
@@ -423,7 +429,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
         <h3 class="cat-title"><?php echo esc_html( mp_opt( 'cat6_title', 'eSewa & Banking' ) ); ?></h3>
         <p class="cat-desc"><?php echo esc_html( mp_opt( 'cat6_sub', 'Instant Top-Up, Utility Bills & Money Transfer' ) ); ?></p>
-        <span class="cat-link"><?php echo esc_html( mp_opt( 'cat6_hint', 'Counter Agent' ) ); ?> <span>→</span></span>
+        <span class="cat-link"><?php echo esc_html( $clean_cat_hint( 'cat6_hint', 'Counter Agent' ) ); ?> <span>&rarr;</span></span>
       </article>
     </div>
   </div>

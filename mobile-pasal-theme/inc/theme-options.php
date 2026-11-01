@@ -165,37 +165,37 @@ function mobile_pasal_options_defaults() {
 		'cat1_count'                   => '50+ Handsets',
 		'cat1_title'                   => 'Smartphones',
 		'cat1_sub'                     => 'iPhone, Samsung, Pixel & Redmi',
-		'cat1_hint'                    => 'Browse Showroom →',
+		'cat1_hint'                    => 'Browse Showroom',
 		'cat1_url'                     => '#catalog',
 		'cat1_image'                   => $uri . '/assets/images/hero-iphone-hand.jpg',
 		'cat2_count'                   => 'Screen • Battery',
 		'cat2_title'                   => 'Apple Fix Lab',
 		'cat2_sub'                     => 'iPhone Screen, Battery & IC Lab',
-		'cat2_hint'                    => 'View Repair Board →',
+		'cat2_hint'                    => 'View Repair Board',
 		'cat2_url'                     => '#services',
 		'cat2_image'                   => $uri . '/assets/images/apple-fix-bench.jpg',
 		'cat3_count'                   => 'Original Buds',
 		'cat3_title'                   => 'Audio & Buds',
 		'cat3_sub'                     => 'AirPods, Neckbands & ANC Sound',
-		'cat3_hint'                    => 'Explore Studio →',
+		'cat3_hint'                    => 'Explore Studio',
 		'cat3_url'                     => '#catalog',
 		'cat3_image'                   => $uri . '/assets/images/hero-accessories.jpg',
 		'cat4_count'                   => 'AMOLED Calling',
 		'cat4_title'                   => 'Smartwatches',
 		'cat4_sub'                     => 'Calling, AMOLED & Fitness Wear',
-		'cat4_hint'                    => 'Discover Watches →',
+		'cat4_hint'                    => 'Discover Watches',
 		'cat4_url'                     => '#catalog',
 		'cat4_image'                   => $uri . '/assets/images/ipad-air.jpg',
 		'cat5_count'                   => 'PD 20W–120W',
 		'cat5_title'                   => 'Chargers & Glass',
 		'cat5_sub'                     => '20W–120W Adapters & 9H Glass',
-		'cat5_hint'                    => 'View Protection →',
+		'cat5_hint'                    => 'View Protection',
 		'cat5_url'                     => '#catalog',
 		'cat5_image'                   => $uri . '/assets/images/shop-accessories-shelf.jpg',
 		'cat6_count'                   => 'Merchant Top-Up',
 		'cat6_title'                   => 'eSewa & Banking',
 		'cat6_sub'                     => 'Top-Up, Bills & Money Transfer',
-		'cat6_hint'                    => 'Counter Agent →',
+		'cat6_hint'                    => 'Counter Agent',
 		'cat6_url'                     => 'https://wa.me/9779804530786?text=Namaste%2C%20eSewa%20recharge%20sewa%20barema%20bujhna%20chahanchhu',
 		'cat6_image'                   => '',
 
@@ -1992,7 +1992,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat1_title', __( 'Card 1 Title', 'mobile-pasal' ), __( 'Default: Smartphones' ) );
 									mp_render_field_text( 'cat1_sub', __( 'Card 1 Subtitle', 'mobile-pasal' ), __( 'Default: iPhone, Samsung, Pixel & Redmi' ) );
 									mp_render_field_text( 'cat1_count', __( 'Card 1 Count Tag', 'mobile-pasal' ), __( 'Default: 50+ Handsets' ) );
-									mp_render_field_text( 'cat1_hint', __( 'Card 1 Explore Hint', 'mobile-pasal' ), __( 'Default: Browse Showroom →' ) );
+									mp_render_field_text( 'cat1_hint', __( 'Card 1 Explore Hint', 'mobile-pasal' ), __( 'Default: Browse Showroom' ) );
 									mp_render_field_text( 'cat1_url', __( 'Card 1 Link URL', 'mobile-pasal' ), __( 'Default: #catalog' ) );
 									?>
 
@@ -2001,7 +2001,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat2_title', __( 'Card 2 Title', 'mobile-pasal' ), __( 'Default: Apple Fix Lab' ) );
 									mp_render_field_text( 'cat2_sub', __( 'Card 2 Subtitle', 'mobile-pasal' ), __( 'Default: iPhone Screen, Battery & IC Lab' ) );
 									mp_render_field_text( 'cat2_count', __( 'Card 2 Count Tag', 'mobile-pasal' ), __( 'Default: Screen • Battery' ) );
-									mp_render_field_text( 'cat2_hint', __( 'Card 2 Explore Hint', 'mobile-pasal' ), __( 'Default: View Repair Board →' ) );
+									mp_render_field_text( 'cat2_hint', __( 'Card 2 Explore Hint', 'mobile-pasal' ), __( 'Default: View Repair Board' ) );
 									mp_render_field_text( 'cat2_url', __( 'Card 2 Link URL', 'mobile-pasal' ), __( 'Default: #services' ) );
 									?>
 
@@ -2010,7 +2010,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat3_title', __( 'Card 3 Title', 'mobile-pasal' ), __( 'Default: Audio & Buds' ) );
 									mp_render_field_text( 'cat3_sub', __( 'Card 3 Subtitle', 'mobile-pasal' ), __( 'Default: AirPods, Neckbands & ANC Sound' ) );
 									mp_render_field_text( 'cat3_count', __( 'Card 3 Count Tag', 'mobile-pasal' ), __( 'Default: Original Buds' ) );
-									mp_render_field_text( 'cat3_hint', __( 'Card 3 Explore Hint', 'mobile-pasal' ), __( 'Default: Explore Studio →' ) );
+									mp_render_field_text( 'cat3_hint', __( 'Card 3 Explore Hint', 'mobile-pasal' ), __( 'Default: Explore Studio' ) );
 									mp_render_field_text( 'cat3_url', __( 'Card 3 Link URL', 'mobile-pasal' ), __( 'Default: #catalog' ) );
 									?>
 
@@ -2019,7 +2019,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat4_title', __( 'Card 4 Title', 'mobile-pasal' ), __( 'Default: Smartwatches' ) );
 									mp_render_field_text( 'cat4_sub', __( 'Card 4 Subtitle', 'mobile-pasal' ), __( 'Default: Calling, AMOLED & Fitness Wear' ) );
 									mp_render_field_text( 'cat4_count', __( 'Card 4 Count Tag', 'mobile-pasal' ), __( 'Default: AMOLED Calling' ) );
-									mp_render_field_text( 'cat4_hint', __( 'Card 4 Explore Hint', 'mobile-pasal' ), __( 'Default: Discover Watches →' ) );
+									mp_render_field_text( 'cat4_hint', __( 'Card 4 Explore Hint', 'mobile-pasal' ), __( 'Default: Discover Watches' ) );
 									mp_render_field_text( 'cat4_url', __( 'Card 4 Link URL', 'mobile-pasal' ), __( 'Default: #catalog' ) );
 									?>
 
@@ -2028,7 +2028,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat5_title', __( 'Card 5 Title', 'mobile-pasal' ), __( 'Default: Chargers & Glass' ) );
 									mp_render_field_text( 'cat5_sub', __( 'Card 5 Subtitle', 'mobile-pasal' ), __( 'Default: 20W–120W Adapters & 9H Glass' ) );
 									mp_render_field_text( 'cat5_count', __( 'Card 5 Count Tag', 'mobile-pasal' ), __( 'Default: PD 20W–120W' ) );
-									mp_render_field_text( 'cat5_hint', __( 'Card 5 Explore Hint', 'mobile-pasal' ), __( 'Default: View Protection →' ) );
+									mp_render_field_text( 'cat5_hint', __( 'Card 5 Explore Hint', 'mobile-pasal' ), __( 'Default: View Protection' ) );
 									mp_render_field_text( 'cat5_url', __( 'Card 5 Link URL', 'mobile-pasal' ), __( 'Default: #catalog' ) );
 									?>
 
@@ -2037,7 +2037,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'cat6_title', __( 'Card 6 Title', 'mobile-pasal' ), __( 'Default: eSewa & Banking' ) );
 									mp_render_field_text( 'cat6_sub', __( 'Card 6 Subtitle', 'mobile-pasal' ), __( 'Default: Top-Up, Bills & Money Transfer' ) );
 									mp_render_field_text( 'cat6_count', __( 'Card 6 Count Tag', 'mobile-pasal' ), __( 'Default: Merchant Top-Up' ) );
-									mp_render_field_text( 'cat6_hint', __( 'Card 6 Explore Hint', 'mobile-pasal' ), __( 'Default: Counter Agent →' ) );
+									mp_render_field_text( 'cat6_hint', __( 'Card 6 Explore Hint', 'mobile-pasal' ), __( 'Default: Counter Agent' ) );
 									mp_render_field_text( 'cat6_url', __( 'Card 6 Link URL', 'mobile-pasal' ), __( 'WhatsApp or service URL' ) );
 									?>
 								</div>
