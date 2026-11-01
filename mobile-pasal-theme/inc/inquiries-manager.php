@@ -247,8 +247,7 @@ add_action( 'admin_post_mp_export_inquiries_csv', 'mp_export_inquiries_csv' );
 
 /**
  * 2c. Executive Printable A4 PDF Job Sheet, Service Invoice & Customer Inquiry Receipt
- * Includes Brand Logo, Complete Business Contact Details, Website, Email, Cost Breakdown & QR Code
- * Redesigned for Pixel-Perfect 1-Page A4 Precision & High-End Apple Lab Aesthetics
+ * Designed to Exactly Match the Website's Clean Apple-Style UI/UX Design System
  */
 function mp_print_repair_docket_receipt() {
 	$valid_nonce = isset( $_GET['_wpnonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'mp_print_docket' );
@@ -273,13 +272,10 @@ function mp_print_repair_docket_receipt() {
 
 	// Store Brand & Contact Details from Theme Options
 	$store_name    = mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' );
-	$store_tagline = mp_opt( 'site_tagline', 'Official NTA Smartphones, Genuine Gear & Apple Fix Precision Lab' );
 	$store_addr    = mp_opt( 'counter_address', mp_opt( 'store_address', 'Gulariya-06, Ji. Pra. Ka. Chowk, Bardiya, Nepal' ) );
 	$store_phone   = mp_opt( 'contact_phone', mp_opt( 'store_phone', '+977 9804530786' ) );
-	$store_wa      = mp_opt( 'whatsapp_number', '9779804530786' );
 	$store_email   = mp_opt( 'counter_email', get_option( 'admin_email', 'alimobilecenter@gmail.com' ) );
 	$store_website = home_url( '/' );
-	$store_hours   = mp_opt( 'store_hours', 'Sun–Fri: 9:00 AM – 8:00 PM | Sat: Open' );
 	$currency      = mp_opt( 'currency_symbol', 'NPR' );
 
 	// Resolve Brand Logo with Multiple Fallbacks
@@ -305,26 +301,47 @@ function mp_print_repair_docket_receipt() {
 	$pay_status  = ! empty( $row->payment_status ) ? strtolower( $row->payment_status ) : 'unpaid';
 	$pay_method  = ! empty( $row->payment_method ) ? $row->payment_method : 'Cash at Counter / Fonepay QR';
 
-	$cost_display    = $cost_num > 0 ? $currency . ' ' . number_format( $cost_num, 2 ) : ( ! empty( $raw_cost ) ? $raw_cost : 'Assessment / Quote Pending' );
+	$cost_display    = $cost_num > 0 ? $currency . ' ' . number_format( $cost_num, 2 ) : ( ! empty( $raw_cost ) ? $raw_cost : __( 'To Be Confirmed', 'mobile-pasal' ) );
 	$advance_display = $adv_num > 0 ? $currency . ' ' . number_format( $adv_num, 2 ) : $currency . ' 0.00';
-	$balance_display = $cost_num > 0 ? ( 'paid' === $pay_status ? $currency . ' 0.00 (PAID IN FULL)' : $currency . ' ' . number_format( $balance_num, 2 ) ) : 'To Be Confirmed';
+	$balance_display = $cost_num > 0 ? ( 'paid' === $pay_status ? $currency . ' 0.00 (PAID)' : $currency . ' ' . number_format( $balance_num, 2 ) ) : __( 'To Be Confirmed', 'mobile-pasal' );
 
 	// Warranty Calculation
 	$warranty_days   = isset( $row->warranty_days ) ? (int) $row->warranty_days : 90;
 	$created_ts      = strtotime( $row->created_at ) ?: current_time( 'timestamp' );
-	$warranty_expiry = $warranty_days > 0 ? date_i18n( 'M j, Y', $created_ts + ( $warranty_days * DAY_IN_SECONDS ) ) : 'No Warranty / Inspection Only';
+	$warranty_expiry = $warranty_days > 0 ? date_i18n( 'M j, Y', $created_ts + ( $warranty_days * DAY_IN_SECONDS ) ) : '';
 
 	// Live Online Tracking URL & QR Code
 	$track_url  = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
-	$qr_img_url = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=3&data=' . rawurlencode( $track_url );
+	$qr_img_url = 'https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=2&data=' . rawurlencode( $track_url );
 
-	// Document Title & Sub-heading
-	$doc_title    = $is_repair
-		? __( 'OFFICIAL REPAIR JOB SHEET & SERVICE INVOICE', 'mobile-pasal' )
-		: __( 'OFFICIAL CUSTOMER INQUIRY & COUNTER QUOTATION', 'mobile-pasal' );
-	$doc_subtitle = $is_repair
-		? __( 'Apple Fix Precision Cleanroom Lab • Authorized Hardware Service Docket', 'mobile-pasal' )
-		: __( 'Official Showroom Sales & Technical Consultation Record', 'mobile-pasal' );
+	// Map status to 5-stage progress stepper (exactly matching website shortcode)
+	$stage = 1;
+	if ( in_array( $row->status, array( 'pending', 'new' ), true ) ) {
+		$stage = 1;
+	} elseif ( in_array( $row->status, array( 'diagnosing' ), true ) ) {
+		$stage = 2;
+	} elseif ( in_array( $row->status, array( 'in_progress', 'waiting_parts' ), true ) ) {
+		$stage = 3;
+	} elseif ( in_array( $row->status, array( 'testing' ), true ) ) {
+		$stage = 4;
+	} elseif ( in_array( $row->status, array( 'ready', 'completed' ), true ) ) {
+		$stage = 5;
+	}
+
+	$status_labels = array(
+		'pending'       => __( 'Checked In', 'mobile-pasal' ),
+		'diagnosing'    => __( 'Diagnosing', 'mobile-pasal' ),
+		'in_progress'   => __( 'Bench Repair', 'mobile-pasal' ),
+		'waiting_parts' => __( 'Waiting for Parts', 'mobile-pasal' ),
+		'testing'       => __( 'Testing & QA', 'mobile-pasal' ),
+		'ready'         => __( 'Ready for Pickup', 'mobile-pasal' ),
+		'completed'     => __( 'Completed / Delivered', 'mobile-pasal' ),
+		'contacted'     => __( 'Contacted', 'mobile-pasal' ),
+		'quoted'        => __( 'Price Quoted', 'mobile-pasal' ),
+		'resolved'      => __( 'Resolved', 'mobile-pasal' ),
+		'cancelled'     => __( 'Cancelled', 'mobile-pasal' ),
+	);
+	$status_title = isset( $status_labels[ $row->status ] ) ? $status_labels[ $row->status ] : ucwords( str_replace( '_', ' ', $row->status ) );
 
 	nocache_headers();
 	header( 'Content-Type: text/html; charset=utf-8' );
@@ -334,11 +351,14 @@ function mp_print_repair_docket_receipt() {
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title><?php echo esc_html( $docket_num . ' — ' . $store_name . ' Invoice & Job Sheet' ); ?></title>
+		<title><?php echo esc_html( $docket_num . ' — ' . $store_name ); ?></title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..800;1,9..40,400..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 		<style>
 			@page {
 				size: A4 portrait;
-				margin: 8mm 10mm 8mm 10mm;
+				margin: 10mm 12mm;
 			}
 			*, *::before, *::after {
 				box-sizing: border-box;
@@ -346,872 +366,547 @@ function mp_print_repair_docket_receipt() {
 				print-color-adjust: exact !important;
 			}
 			body {
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-				background: #e2e8f0;
-				color: #0f172a;
+				font-family: "DM Sans", "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+				background: #f7faff;
+				color: #071b3b;
 				margin: 0;
-				padding: 24px 16px 40px;
-				font-size: 12px;
-				line-height: 1.45;
+				padding: 24px 16px 48px;
+				font-size: 13px;
+				line-height: 1.5;
 			}
-			/* Screen Floating Action Toolbar */
 			.pdf-toolbar {
-				max-width: 820px;
+				max-width: 780px;
 				margin: 0 auto 16px;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				flex-wrap: wrap;
-				gap: 12px;
 				background: #071b3b;
 				color: #ffffff;
 				padding: 12px 20px;
-				border-radius: 12px;
-				box-shadow: 0 10px 25px rgba(7, 27, 59, 0.25);
+				border-radius: 14px;
+				box-shadow: 0 10px 25px rgba(7, 27, 59, 0.18);
 			}
-			.pdf-toolbar-left {
-				display: flex;
-				align-items: center;
-				gap: 10px;
-				flex-wrap: wrap;
-			}
-			.pdf-toolbar-left strong {
+			.pdf-toolbar strong {
 				font-size: 15px;
 				color: #38bdf8;
 				font-family: monospace;
-				background: rgba(255, 255, 255, 0.08);
-				padding: 4px 10px;
-				border-radius: 6px;
-				border: 1px solid rgba(56, 189, 248, 0.35);
-			}
-			.pdf-toolbar-actions {
-				display: flex;
-				gap: 8px;
 			}
 			.pdf-btn {
 				display: inline-flex;
 				align-items: center;
-				gap: 7px;
+				gap: 6px;
 				background: #0066cc;
 				color: #ffffff;
-				border: 1px solid #38bdf8;
+				border: none;
 				padding: 9px 18px;
 				border-radius: 8px;
-				font-weight: 800;
+				font-weight: 700;
 				cursor: pointer;
 				font-size: 13px;
 				text-decoration: none;
-				transition: all 0.2s ease;
-				box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-			}
-			.pdf-btn:hover {
-				background: #0052a3;
-				transform: translateY(-1px);
 			}
 			.pdf-btn.secondary {
 				background: rgba(255, 255, 255, 0.12);
-				border-color: rgba(255, 255, 255, 0.25);
 				color: #e2e8f0;
-				box-shadow: none;
 			}
-			.pdf-btn.secondary:hover {
-				background: rgba(255, 255, 255, 0.2);
-				color: #ffffff;
-			}
-
-			/* Main A4 Document Sheet Canvas */
+			/* Website Matching Card Canvas */
 			.pdf-sheet {
-				max-width: 820px;
+				max-width: 780px;
 				margin: 0 auto;
 				background: #ffffff;
-				border: 1px solid #cbd5e1;
-				border-radius: 14px;
-				box-shadow: 0 16px 40px rgba(15, 23, 42, 0.1);
-				position: relative;
-				overflow: hidden;
-				padding: 24px 28px 20px;
+				border: 1px solid #e2e8f0;
+				border-radius: 20px;
+				padding: 32px 36px;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 			}
-
-			/* Top Luxury Multi-Tone Accent Stripe */
-			.pdf-accent-stripe {
-				position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				height: 5px;
-				background: linear-gradient(90deg, #071b3b 0%, #0066cc 40%, #0284c7 75%, #38bdf8 100%);
-			}
-
-			/* ── 1. Header Section: Brand + Official Document Metadata ── */
+			/* Header matching Ali Mobile Center navbar & brand */
 			.pdf-header {
 				display: flex;
 				justify-content: space-between;
 				align-items: flex-start;
+				border-bottom: 1px solid #e2e8f0;
+				padding-bottom: 20px;
+				margin-bottom: 22px;
 				gap: 20px;
-				border-bottom: 2px solid #071b3b;
-				padding-bottom: 14px;
-				margin-bottom: 12px;
 			}
 			.pdf-brand-col {
 				display: flex;
 				align-items: center;
 				gap: 16px;
-				flex: 1.35;
-			}
-			.pdf-logo-wrap {
-				flex-shrink: 0;
 			}
 			.pdf-logo-img {
-				max-height: 56px;
-				max-width: 175px;
+				max-height: 52px;
+				max-width: 160px;
 				width: auto;
 				object-fit: contain;
 				display: block;
 			}
-			.pdf-logo-fallback {
-				width: 52px;
-				height: 52px;
-				border-radius: 12px;
-				background: linear-gradient(135deg, #071b3b, #0066cc);
-				color: #ffffff;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				font-weight: 900;
+			.pdf-brand-title {
+				margin: 0 0 4px;
 				font-size: 22px;
-				box-shadow: 0 4px 10px rgba(7, 27, 59, 0.2);
-			}
-			.pdf-company-info h1 {
-				margin: 0 0 2px;
-				font-size: 19px;
 				font-weight: 900;
 				color: #071b3b;
 				letter-spacing: -0.02em;
-				line-height: 1.2;
 			}
-			.pdf-company-tagline {
+			.pdf-brand-sub {
 				margin: 0 0 6px;
-				font-size: 11px;
-				font-weight: 700;
+				font-size: 12.5px;
 				color: #0066cc;
-				letter-spacing: 0.01em;
+				font-weight: 700;
 			}
-			.pdf-trust-badges {
-				display: flex;
-				gap: 6px;
-				flex-wrap: wrap;
+			.pdf-brand-contact {
+				font-size: 11.5px;
+				color: #52627e;
+				line-height: 1.45;
 			}
-			.pdf-trust-pill {
-				display: inline-flex;
-				align-items: center;
-				gap: 4px;
-				background: #f1f5f9;
-				border: 1px solid #cbd5e1;
-				color: #334155;
-				font-size: 9.5px;
+			.pdf-meta-right {
+				text-align: right;
+			}
+			.pdf-docket-badge {
+				display: inline-block;
+				background: rgba(0, 102, 204, 0.08);
+				border: 1px solid #bfdbfe;
+				color: #0066cc;
+				font-family: monospace;
+				font-size: 16px;
 				font-weight: 800;
-				padding: 2px 7px;
-				border-radius: 4px;
+				padding: 6px 14px;
+				border-radius: 999px;
+				margin-bottom: 8px;
+			}
+			.pdf-meta-date {
+				font-size: 11.5px;
+				color: #64748b;
+				margin-bottom: 6px;
+			}
+			.pdf-status-pill {
+				display: inline-block;
+				padding: 4px 12px;
+				border-radius: 999px;
+				font-size: 11px;
+				font-weight: 800;
 				text-transform: uppercase;
 				letter-spacing: 0.03em;
 			}
-			.pdf-trust-pill.blue {
-				background: #eff6ff;
-				border-color: #bfdbfe;
-				color: #1d4ed8;
+			.pdf-status-pill.ready, .pdf-status-pill.completed, .pdf-status-pill.paid {
+				background: #e8f9ee;
+				color: #1ea952;
+			}
+			.pdf-status-pill.in_progress, .pdf-status-pill.partial {
+				background: #fffbeb;
+				color: #b45309;
+			}
+			.pdf-status-pill.pending, .pdf-status-pill.unpaid {
+				background: #edf4ff;
+				color: #0862e9;
 			}
 
-			/* Document Metadata Right Column */
-			.pdf-doc-meta {
-				text-align: right;
-				flex: 0.85;
-				min-width: 230px;
-			}
-			.pdf-doc-type-badge {
-				display: inline-block;
-				background: #071b3b;
-				color: #ffffff;
-				font-size: 9.5px;
-				font-weight: 900;
-				letter-spacing: 0.08em;
-				text-transform: uppercase;
-				padding: 4px 9px;
-				border-radius: 5px;
-				margin-bottom: 6px;
-			}
-			.pdf-docket-id-box {
+			/* Website 5-Stage Repair Progress Stepper */
+			.pdf-stepper {
 				display: flex;
 				align-items: center;
-				justify-content: flex-end;
-				gap: 8px;
-				margin-bottom: 6px;
+				justify-content: space-between;
+				position: relative;
+				margin: 0 0 24px;
+				padding: 0 8px;
 			}
-			.pdf-docket-id {
-				font-family: "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
-				font-size: 18px;
-				font-weight: 900;
-				color: #0066cc;
-				background: #f0f7ff;
-				border: 1.5px solid #93c5fd;
-				padding: 4px 10px;
-				border-radius: 6px;
-				letter-spacing: 0.05em;
+			.pdf-stepper::before {
+				content: '';
+				position: absolute;
+				top: 15px;
+				left: 6%;
+				right: 6%;
+				height: 2.5px;
+				background: #e2e8f0;
+				z-index: 1;
 			}
-			.pdf-meta-row {
-				font-size: 11px;
-				color: #475569;
-				margin: 2px 0;
+			.pdf-step-item {
+				position: relative;
+				z-index: 2;
+				text-align: center;
+				flex: 1;
+			}
+			.pdf-step-circle {
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				background: #f8fafc;
+				color: #94a3b8;
+				border: 2px solid #cbd5e1;
 				display: flex;
-				justify-content: flex-end;
-				gap: 6px;
+				align-items: center;
+				justify-content: center;
+				margin: 0 auto 6px;
+				font-size: 11px;
+				font-weight: 800;
 			}
-			.pdf-meta-row strong {
-				color: #0f172a;
+			.pdf-step-item.is-completed .pdf-step-circle {
+				background: #16a34a;
+				border-color: #16a34a;
+				color: #ffffff;
 			}
-
-			/* Status & Payment Stamp Badges */
-			.pdf-stamp-badge {
-				display: inline-block;
-				padding: 2.5px 8px;
-				border-radius: 4px;
-				font-size: 10px;
-				font-weight: 900;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
+			.pdf-step-item.is-active .pdf-step-circle {
+				background: #0066cc;
+				border-color: #0066cc;
+				color: #ffffff;
+				box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.15);
 			}
-			.pdf-stamp-badge.ready, .pdf-stamp-badge.completed, .pdf-stamp-badge.paid {
-				background: #dcfce7;
-				color: #166534;
-				border: 1px solid #86efac;
+			.pdf-step-label {
+				font-size: 11px;
+				font-weight: 700;
+				color: #64748b;
 			}
-			.pdf-stamp-badge.in_progress, .pdf-stamp-badge.diagnosing, .pdf-stamp-badge.partial {
-				background: #fef3c7;
-				color: #92400e;
-				border: 1px solid #fde68a;
-			}
-			.pdf-stamp-badge.pending, .pdf-stamp-badge.waiting_parts {
-				background: #eff6ff;
-				color: #1e40af;
-				border: 1px solid #bfdbfe;
-			}
-			.pdf-stamp-badge.cancelled, .pdf-stamp-badge.unpaid {
-				background: #fee2e2;
-				color: #991b1b;
-				border: 1px solid #fca5a5;
+			.pdf-step-item.is-active .pdf-step-label {
+				color: #0066cc;
+				font-weight: 800;
 			}
 
-			/* ── 2. Business Coordinates 4-Cell Matrix ── */
-			.pdf-coords-bar {
+			/* Website .mp-docket-summary-box Component */
+			.pdf-summary-box {
 				display: grid;
 				grid-template-columns: repeat(4, 1fr);
-				gap: 8px;
+				gap: 12px;
 				background: #f8fafc;
 				border: 1px solid #e2e8f0;
-				border-radius: 8px;
-				padding: 7px 12px;
-				margin-bottom: 12px;
+				border-radius: 14px;
+				padding: 16px 20px;
+				margin-bottom: 20px;
 			}
-			.pdf-coord-cell {
-				font-size: 10.5px;
-				color: #334155;
-				line-height: 1.35;
-			}
-			.pdf-coord-cell strong {
-				color: #071b3b;
+			.pdf-prop strong {
 				display: block;
 				font-size: 10px;
 				text-transform: uppercase;
-				letter-spacing: 0.04em;
-				margin-bottom: 1px;
-			}
-
-			/* ── 3. Customer Profile & Device Intake Bento Dossier ── */
-			.pdf-dossier-grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 12px;
-				margin-bottom: 12px;
-			}
-			.pdf-card {
-				background: #ffffff;
-				border: 1.5px solid #cbd5e1;
-				border-radius: 10px;
-				padding: 10px 14px;
-			}
-			.pdf-card-title {
-				margin: 0 0 6px;
-				font-size: 11px;
-				font-weight: 900;
-				text-transform: uppercase;
-				letter-spacing: 0.06em;
-				color: #071b3b;
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				border-bottom: 1.5px solid #e2e8f0;
-				padding-bottom: 4px;
-			}
-			.pdf-card-badge {
-				font-size: 9.5px;
-				font-weight: 800;
-				background: #eff6ff;
-				color: #0066cc;
-				padding: 1px 6px;
-				border-radius: 4px;
-				border: 1px solid #bfdbfe;
-			}
-			.pdf-card-table {
-				width: 100%;
-				border-collapse: collapse;
-			}
-			.pdf-card-table tr td {
-				padding: 3px 0;
-				font-size: 11.5px;
-				vertical-align: top;
-				border-bottom: 1px dashed #f1f5f9;
-			}
-			.pdf-card-table tr:last-child td {
-				border-bottom: none;
-			}
-			.pdf-card-table .td-label {
-				width: 44%;
+				letter-spacing: 0.5px;
 				color: #64748b;
-				font-weight: 600;
-			}
-			.pdf-card-table .td-val {
-				width: 56%;
-				color: #0f172a;
-				font-weight: 700;
-				text-align: right;
-			}
-			.pdf-card-table .mono {
-				font-family: "SF Mono", "Cascadia Code", "Roboto Mono", Consolas, monospace;
-				font-size: 11px;
-				color: #0066cc;
-				background: #f8fafc;
-				padding: 1px 5px;
-				border-radius: 3px;
-				border: 1px solid #e2e8f0;
-			}
-
-			/* ── 4. Itemized Work, Diagnostic Findings & Service Table ── */
-			.pdf-table-wrap {
-				border: 1.5px solid #cbd5e1;
-				border-radius: 10px;
-				overflow: hidden;
-				margin-bottom: 12px;
-			}
-			.pdf-work-table {
-				width: 100%;
-				border-collapse: collapse;
-				font-size: 11.5px;
-			}
-			.pdf-work-table thead th {
-				background: #071b3b;
-				color: #ffffff;
-				padding: 7px 12px;
-				font-size: 10.5px;
-				font-weight: 800;
-				text-transform: uppercase;
-				letter-spacing: 0.05em;
-				text-align: left;
-			}
-			.pdf-work-table thead th.text-right {
-				text-align: right;
-			}
-			.pdf-work-table tbody td {
-				padding: 8px 12px;
-				border-bottom: 1px solid #e2e8f0;
-				vertical-align: top;
-			}
-			.pdf-work-table tbody tr:last-child td {
-				border-bottom: none;
-			}
-			.pdf-work-table tbody tr:nth-child(even) {
-				background: #f8fafc;
-			}
-			.service-title {
-				font-size: 12.5px;
-				font-weight: 800;
-				color: #071b3b;
 				margin-bottom: 3px;
 			}
-			.service-warranty-pill {
-				display: inline-block;
-				background: #ecfdf5;
-				color: #047857;
-				border: 1px solid #a7f3d0;
-				font-size: 10px;
+			.pdf-prop span {
+				font-size: 13px;
 				font-weight: 800;
-				padding: 1px 6px;
-				border-radius: 4px;
-				margin-top: 3px;
+				color: #071b3b;
+			}
+			.pdf-prop .mono {
+				font-family: monospace;
+				font-size: 12px;
+				color: #0066cc;
 			}
 
-			/* ── 5. Live Online QR Tracker + Executive Invoice Billing ── */
-			.pdf-finance-row {
-				display: grid;
-				grid-template-columns: 1.15fr 0.85fr;
-				gap: 12px;
-				margin-bottom: 12px;
+			/* Service Details Section */
+			.pdf-service-card {
+				border: 1px solid #e2e8f0;
+				border-radius: 14px;
+				padding: 18px 22px;
+				margin-bottom: 20px;
 			}
-			.pdf-qr-box {
-				background: #f0f7ff;
-				border: 1.5px dashed #0066cc;
-				border-radius: 10px;
-				padding: 10px 12px;
+			.pdf-service-head {
 				display: flex;
-				align-items: center;
 				justify-content: space-between;
-				gap: 12px;
+				align-items: center;
+				margin-bottom: 8px;
 			}
-			.pdf-qr-text h4 {
-				margin: 0 0 3px;
-				font-size: 12px;
-				font-weight: 900;
+			.pdf-service-name {
+				font-size: 15px;
+				font-weight: 800;
 				color: #071b3b;
+				margin: 0;
+			}
+			.pdf-warranty-tag {
+				background: #e8f9ee;
+				color: #1ea952;
+				border: 1px solid #bbf7d0;
+				padding: 3px 10px;
+				border-radius: 999px;
+				font-size: 11px;
+				font-weight: 800;
+			}
+			.pdf-customer-msg {
+				font-size: 12.5px;
+				color: #475569;
+				margin: 6px 0 0;
+				line-height: 1.45;
+			}
+
+			/* Website .mp-technician-note Component */
+			.pdf-tech-note {
+				background: rgba(245, 158, 11, 0.08);
+				border: 1px solid rgba(245, 158, 11, 0.25);
+				border-radius: 12px;
+				padding: 12px 18px;
+				margin-bottom: 20px;
+				font-size: 12px;
+				color: #92400e;
+				line-height: 1.45;
+			}
+			.pdf-tech-note strong {
+				color: #78350f;
+			}
+
+			/* 2-Column: QR Online Tracker + Financial Summary */
+			.pdf-bottom-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 16px;
+				margin-bottom: 24px;
+			}
+			.pdf-card {
+				border: 1px solid #e2e8f0;
+				border-radius: 14px;
+				padding: 18px 20px;
+				background: #ffffff;
+			}
+			.pdf-qr-wrap {
 				display: flex;
 				align-items: center;
-				gap: 5px;
+				gap: 16px;
 			}
-			.pdf-qr-text p {
+			.pdf-qr-wrap img {
+				width: 80px;
+				height: 80px;
+				border-radius: 8px;
+				border: 1px solid #cbd5e1;
+				padding: 3px;
+				background: #fff;
+				flex-shrink: 0;
+			}
+			.pdf-qr-info h4 {
 				margin: 0 0 4px;
-				font-size: 10.5px;
-				color: #334155;
-				line-height: 1.35;
+				font-size: 13px;
+				font-weight: 800;
+				color: #071b3b;
 			}
-			.pdf-qr-url {
-				font-size: 9.5px;
+			.pdf-qr-info p {
+				margin: 0 0 4px;
+				font-size: 11.5px;
+				color: #64748b;
+				line-height: 1.4;
+			}
+			.pdf-qr-info .url {
+				font-size: 10px;
 				color: #0066cc;
 				font-weight: 700;
 				word-break: break-all;
-				background: #ffffff;
-				border: 1px solid #bfdbfe;
-				padding: 2px 6px;
-				border-radius: 4px;
-				display: inline-block;
-				margin-bottom: 4px;
-			}
-			.pdf-warranty-highlight {
-				font-size: 10.5px;
-				font-weight: 800;
-				color: #047857;
-			}
-			.pdf-qr-img {
-				width: 84px;
-				height: 84px;
-				border-radius: 8px;
-				border: 1.5px solid #93c5fd;
-				background: #ffffff;
-				padding: 3px;
-				flex-shrink: 0;
 			}
 
-			/* Billing Breakdown Box */
-			.pdf-billing-box {
-				background: #ffffff;
-				border: 1.5px solid #071b3b;
-				border-radius: 10px;
-				padding: 10px 14px;
-			}
-			.pdf-billing-title {
-				margin: 0 0 6px;
-				font-size: 11px;
-				font-weight: 900;
-				text-transform: uppercase;
-				color: #071b3b;
-				border-bottom: 1.5px solid #e2e8f0;
-				padding-bottom: 4px;
-			}
-			.pdf-billing-row {
+			/* Financial Table */
+			.pdf-calc-row {
 				display: flex;
 				justify-content: space-between;
-				font-size: 11.5px;
-				padding: 3px 0;
-				border-bottom: 1px dashed #f1f5f9;
-			}
-			.pdf-billing-row span {
-				color: #64748b;
-			}
-			.pdf-billing-row strong {
-				color: #0f172a;
-			}
-			.pdf-balance-row {
-				display: flex;
-				justify-content: space-between;
-				align-items: center;
-				margin-top: 6px;
-				padding-top: 6px;
-				border-top: 2px solid #071b3b;
-				font-size: 13px;
-				font-weight: 900;
-				color: #071b3b;
-			}
-			.pdf-balance-val {
-				color: #0066cc;
-				font-size: 14.5px;
-			}
-
-			/* ── 6. Official Terms, Conditions & Warranty Protocol ── */
-			.pdf-terms-wrap {
-				background: #f8fafc;
-				border: 1px solid #cbd5e1;
-				border-radius: 8px;
-				padding: 8px 12px;
-				font-size: 9.5px;
+				font-size: 12.5px;
+				padding: 4px 0;
 				color: #475569;
-				line-height: 1.45;
-				margin-bottom: 16px;
 			}
-			.pdf-terms-wrap strong {
-				color: #0f172a;
+			.pdf-calc-row strong {
+				color: #071b3b;
 			}
-			.pdf-terms-list {
-				margin: 3px 0 0;
-				padding-left: 14px;
-			}
-			.pdf-terms-list li {
-				margin-bottom: 2px;
-			}
-
-			/* ── 7. Dual Signature Blocks ── */
-			.pdf-signatures-row {
-				display: flex;
-				justify-content: space-between;
-				gap: 40px;
-				margin-bottom: 10px;
-				padding-top: 6px;
-			}
-			.pdf-sig-box {
-				flex: 1;
-				border-top: 1.5px solid #334155;
-				padding-top: 5px;
-				text-align: center;
-				font-size: 10.5px;
-				font-weight: 700;
-				color: #1e293b;
-			}
-			.pdf-sig-sub {
-				display: block;
-				font-size: 9px;
-				color: #64748b;
-				font-weight: 500;
-				margin-top: 2px;
-			}
-
-			/* ── 8. Footer Audit Strip ── */
-			.pdf-footer-audit {
-				border-top: 1px solid #e2e8f0;
-				padding-top: 8px;
+			.pdf-calc-total {
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
-				flex-wrap: wrap;
-				gap: 8px;
-				font-size: 9.5px;
-				color: #64748b;
-			}
-			.pdf-barcode-sim {
-				font-family: monospace;
-				letter-spacing: 0.15em;
+				margin-top: 8px;
+				padding-top: 8px;
+				border-top: 1.5px solid #e2e8f0;
+				font-size: 14px;
+				font-weight: 800;
 				color: #071b3b;
+			}
+			.pdf-calc-total .val {
+				color: #0066cc;
+				font-size: 16px;
 				font-weight: 900;
-				background: #f1f5f9;
-				padding: 2px 8px;
-				border-radius: 4px;
-				border: 1px solid #cbd5e1;
 			}
 
-			/* Print Optimization: Exactly 1 Page Fit */
+			/* Signatures & Footer */
+			.pdf-signatures {
+				display: flex;
+				justify-content: space-between;
+				gap: 48px;
+				margin-top: 28px;
+				margin-bottom: 20px;
+			}
+			.pdf-sig-col {
+				flex: 1;
+				border-top: 1px solid #cbd5e1;
+				padding-top: 6px;
+				text-align: center;
+				font-size: 11px;
+				font-weight: 700;
+				color: #475569;
+			}
+			.pdf-footer {
+				border-top: 1px solid #f1f5f9;
+				padding-top: 12px;
+				text-align: center;
+				font-size: 11px;
+				color: #94a3b8;
+			}
 			@media print {
-				body {
-					background: #ffffff !important;
-					padding: 0 !important;
-					margin: 0 !important;
-				}
-				.pdf-toolbar {
-					display: none !important;
-				}
-				.pdf-sheet {
-					box-shadow: none !important;
-					border: none !important;
-					max-width: 100% !important;
-					border-radius: 0 !important;
-					padding: 0 !important;
-					margin: 0 !important;
-				}
+				body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
+				.pdf-toolbar { display: none !important; }
+				.pdf-sheet { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; border-radius: 0 !important; }
 			}
 		</style>
 	</head>
 	<body>
-		<!-- Screen Control Bar (Hidden when printed) -->
 		<div class="pdf-toolbar">
-			<div class="pdf-toolbar-left">
-				<strong><?php echo esc_html( $docket_num ); ?></strong>
-				<span>&bull; <?php echo esc_html( $row->customer_name ); ?></span>
-				<span>&bull; <?php echo esc_html( ! empty( $device_str ) ? $device_str : 'Device Check-In' ); ?></span>
+			<div>
+				<strong><?php echo esc_html( $docket_num ); ?></strong> &bull; <?php echo esc_html( $row->customer_name ); ?>
 			</div>
-			<div class="pdf-toolbar-actions">
-				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . ( $is_repair ? 'repairs' : 'general' ) ) ); ?>" class="pdf-btn secondary">&larr; Back to Admin Desk</a>
-				<button type="button" class="pdf-btn" onclick="window.print();">🖨️ Print / Save as PDF</button>
+			<div>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=' . ( $is_repair ? 'repairs' : 'general' ) ) ); ?>" class="pdf-btn secondary">&larr; <?php esc_html_e( 'Back to Admin Desk', 'mobile-pasal' ); ?></a>
+				<button type="button" class="pdf-btn" onclick="window.print();">🖨️ <?php esc_html_e( 'Print Receipt', 'mobile-pasal' ); ?></button>
 			</div>
 		</div>
 
-		<!-- Main Executive A4 Document Canvas -->
 		<div class="pdf-sheet">
-			<div class="pdf-accent-stripe"></div>
-
-			<!-- 1. Brand Logo, Coordinates & Official Docket Metadata Header -->
+			<!-- Header -->
 			<div class="pdf-header">
 				<div class="pdf-brand-col">
-					<div class="pdf-logo-wrap">
-						<?php if ( ! empty( $logo_url ) ) : ?>
-							<img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $store_name ); ?>" class="pdf-logo-img" />
-						<?php else : ?>
-							<div class="pdf-logo-fallback">AM</div>
-						<?php endif; ?>
+					<?php if ( ! empty( $logo_url ) ) : ?>
+						<img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $store_name ); ?>" class="pdf-logo-img" />
+					<?php endif; ?>
+					<div>
+						<h1 class="pdf-brand-title"><?php echo esc_html( $store_name ); ?></h1>
+						<div class="pdf-brand-sub"><?php echo esc_html( $is_repair ? __( 'Smartphone Showroom & Apple Fix Precision Lab', 'mobile-pasal' ) : __( 'Official Smartphone Showroom & Inquiries', 'mobile-pasal' ) ); ?></div>
+						<div class="pdf-brand-contact">
+							<?php echo esc_html( $store_addr ); ?><br>
+							Phone: <?php echo esc_html( $store_phone ); ?> &bull; Web: <?php echo esc_html( preg_replace( '(^https?://|/$)', '', $store_website ) ); ?> &bull; Email: <?php echo esc_html( $store_email ); ?>
+						</div>
 					</div>
-					<div class="pdf-company-info">
-						<h1><?php echo esc_html( $store_name ); ?></h1>
-						<p class="pdf-company-tagline"><?php echo esc_html( $store_tagline ); ?></p>
-						<div class="pdf-trust-badges">
-							<span class="pdf-trust-pill blue">✓ NTA MDMS Authorized</span>
-							<span class="pdf-trust-pill">✓ Official 13% VAT Bill</span>
-							<span class="pdf-trust-pill">✓ Level 4 Lab Cleanroom</span>
+				</div>
+				<div class="pdf-meta-right">
+					<div class="pdf-docket-badge"><?php echo esc_html( $docket_num ); ?></div>
+					<div class="pdf-meta-date"><?php echo esc_html( date_i18n( 'M j, Y • g:i A', $created_ts ) ); ?></div>
+					<span class="pdf-status-pill <?php echo esc_attr( $row->status ); ?>"><?php echo esc_html( $status_title ); ?></span>
+				</div>
+			</div>
+
+			<!-- Website 5-Stage Stepper (Only for Repairs) -->
+			<?php if ( $is_repair ) : ?>
+				<div class="pdf-stepper">
+					<?php
+					$steps = array(
+						__( 'Checked In', 'mobile-pasal' ),
+						__( 'Diagnostic', 'mobile-pasal' ),
+						__( 'Bench Repair', 'mobile-pasal' ),
+						__( 'Quality QA', 'mobile-pasal' ),
+						__( 'Ready for Pickup', 'mobile-pasal' ),
+					);
+					for ( $i = 1; $i <= 5; $i++ ) :
+						$cls = $i < $stage ? 'is-completed' : ( $i === $stage ? 'is-active' : '' );
+						?>
+						<div class="pdf-step-item <?php echo esc_attr( $cls ); ?>">
+							<div class="pdf-step-circle"><?php echo $i < $stage ? '✓' : $i; ?></div>
+							<div class="pdf-step-label"><?php echo esc_html( $steps[ $i - 1 ] ); ?></div>
+						</div>
+					<?php endfor; ?>
+				</div>
+			<?php endif; ?>
+
+			<!-- Summary Grid (Matching .mp-docket-summary-box) -->
+			<div class="pdf-summary-box">
+				<div class="pdf-prop">
+					<strong><?php esc_html_e( 'Customer Name', 'mobile-pasal' ); ?></strong>
+					<span><?php echo esc_html( $row->customer_name ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php esc_html_e( 'Mobile Number', 'mobile-pasal' ); ?></strong>
+					<span><?php echo esc_html( $row->phone ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php echo esc_html( $is_repair ? __( 'Handset Model', 'mobile-pasal' ) : __( 'Device / Model', 'mobile-pasal' ) ); ?></strong>
+					<span><?php echo esc_html( $device_str ?: 'Handset' ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php esc_html_e( 'IMEI / Serial', 'mobile-pasal' ); ?></strong>
+					<span class="mono"><?php echo esc_html( ! empty( $row->imei_serial ) ? $row->imei_serial : 'Recorded at Counter' ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php echo esc_html( $is_repair ? __( 'Technician', 'mobile-pasal' ) : __( 'Staff Assigned', 'mobile-pasal' ) ); ?></strong>
+					<span><?php echo esc_html( ! empty( $row->technician_name ) ? $row->technician_name : 'Counter Team' ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php echo esc_html( $is_repair ? __( 'Estimated Delivery', 'mobile-pasal' ) : __( 'Follow-Up Date', 'mobile-pasal' ) ); ?></strong>
+					<span><?php echo esc_html( ! empty( $row->estimated_delivery ) ? $row->estimated_delivery : 'Same-Day' ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php esc_html_e( 'Accessories', 'mobile-pasal' ); ?></strong>
+					<span><?php echo esc_html( ! empty( $row->accessories_received ) ? $row->accessories_received : 'Device Only' ); ?></span>
+				</div>
+				<div class="pdf-prop">
+					<strong><?php esc_html_e( 'Priority', 'mobile-pasal' ); ?></strong>
+					<span><?php echo esc_html( ! empty( $row->urgency ) ? $row->urgency : 'Normal' ); ?></span>
+				</div>
+			</div>
+
+			<!-- Service Requested Card -->
+			<div class="pdf-service-card">
+				<div class="pdf-service-head">
+					<h3 class="pdf-service-name"><?php echo esc_html( $row->service_needed ?: ( $is_repair ? __( 'General Inspection', 'mobile-pasal' ) : __( 'General Inquiry', 'mobile-pasal' ) ) ); ?></h3>
+					<?php if ( $is_repair && $warranty_days > 0 ) : ?>
+						<span class="pdf-warranty-tag">✓ <?php echo esc_html( $warranty_days ); ?>-Day Warranty</span>
+					<?php endif; ?>
+				</div>
+				<?php if ( ! empty( $row->message ) ) : ?>
+					<div class="pdf-customer-msg"><strong><?php echo esc_html( $is_repair ? __( 'Reported Symptoms: ', 'mobile-pasal' ) : __( 'Inquiry Details: ', 'mobile-pasal' ) ); ?></strong><?php echo esc_html( $row->message ); ?></div>
+				<?php endif; ?>
+			</div>
+
+			<!-- Technician Diagnostic Note (Matching .mp-technician-note) -->
+			<?php if ( ! empty( $row->notes ) ) : ?>
+				<div class="pdf-tech-note">
+					<strong><?php echo esc_html( $is_repair ? __( 'Technician Diagnostic Note: ', 'mobile-pasal' ) : __( 'Counter Response: ', 'mobile-pasal' ) ); ?></strong><?php echo esc_html( $row->notes ); ?>
+				</div>
+			<?php endif; ?>
+
+			<!-- 2-Column: QR Code + Billing -->
+			<div class="pdf-bottom-grid">
+				<!-- QR Code Card -->
+				<div class="pdf-card">
+					<div class="pdf-qr-wrap">
+						<img src="<?php echo esc_url( $qr_img_url ); ?>" alt="Track QR">
+						<div class="pdf-qr-info">
+							<h4><?php esc_html_e( 'Scan to Track Online', 'mobile-pasal' ); ?></h4>
+							<p><?php esc_html_e( 'Scan with your phone camera to view live progress and warranty verification:', 'mobile-pasal' ); ?></p>
+							<span class="url"><?php echo esc_html( $track_url ); ?></span>
+							<?php if ( $is_repair && $warranty_days > 0 && ! empty( $warranty_expiry ) ) : ?>
+								<div style="font-size: 11px; color: #1ea952; font-weight: 700; margin-top: 4px;">
+									Valid Until: <?php echo esc_html( $warranty_expiry ); ?>
+								</div>
+							<?php endif; ?>
 						</div>
 					</div>
 				</div>
 
-				<div class="pdf-doc-meta">
-					<span class="pdf-doc-type-badge"><?php echo esc_html( $doc_title ); ?></span>
-					<div class="pdf-docket-id-box">
-						<span class="pdf-docket-id"><?php echo esc_html( $docket_num ); ?></span>
-					</div>
-					<div class="pdf-meta-row">
-						<span>Issue Date:</span>
-						<strong><?php echo esc_html( date_i18n( 'M j, Y • g:i A', $created_ts ) ); ?></strong>
-					</div>
-					<div class="pdf-meta-row">
-						<span>Work Status:</span>
-						<span class="pdf-stamp-badge <?php echo esc_attr( $row->status ); ?>">
-							<?php echo esc_html( strtoupper( str_replace( '_', ' ', $row->status ) ) ); ?>
-						</span>
-					</div>
-					<div class="pdf-meta-row">
-						<span>Payment:</span>
-						<span class="pdf-stamp-badge <?php echo esc_attr( $pay_status ); ?>">
-							<?php echo esc_html( strtoupper( $pay_status ) ); ?>
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<!-- 2. Store Coordinates & Helplines Strip -->
-			<div class="pdf-coords-bar">
-				<div class="pdf-coord-cell">
-					<strong>📍 Lab &amp; Showroom Counter</strong>
-					<span><?php echo esc_html( $store_addr ); ?></span>
-				</div>
-				<div class="pdf-coord-cell">
-					<strong>📞 Phone &amp; WhatsApp</strong>
-					<span><?php echo esc_html( $store_phone ); ?> &bull; +<?php echo esc_html( $store_wa ); ?></span>
-				</div>
-				<div class="pdf-coord-cell">
-					<strong>🌐 Web &amp; Official Email</strong>
-					<span><?php echo esc_html( preg_replace( '(^https?://|/$)', '', $store_website ) ); ?> &bull; <?php echo esc_html( $store_email ); ?></span>
-				</div>
-				<div class="pdf-coord-cell">
-					<strong>🕒 Showroom Hours</strong>
-					<span><?php echo esc_html( $store_hours ); ?></span>
-				</div>
-			</div>
-
-			<!-- 3. Customer Profile & Device Hardware Intake Dossier -->
-			<div class="pdf-dossier-grid">
-				<!-- Customer Details -->
+				<!-- Financial Summary -->
 				<div class="pdf-card">
-					<h3 class="pdf-card-title">
-						<span>Customer Profile</span>
-						<span class="pdf-card-badge">Intake Dossier</span>
-					</h3>
-					<table class="pdf-card-table">
-						<tr>
-							<td class="td-label">Customer Name:</td>
-							<td class="td-val"><?php echo esc_html( $row->customer_name ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Mobile / WhatsApp:</td>
-							<td class="td-val"><?php echo esc_html( $row->phone ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Customer Email:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $row->email ) ? $row->email : '—' ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Intake Category:</td>
-							<td class="td-val"><?php echo esc_html( $is_repair ? 'Repair Lab Check-In' : 'Showroom General Inquiry' ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Priority / Urgency:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $row->urgency ) ? $row->urgency : 'Standard Counter' ); ?></td>
-						</tr>
-					</table>
-				</div>
-
-				<!-- Device Hardware Specs -->
-				<div class="pdf-card">
-					<h3 class="pdf-card-title">
-						<span><?php echo esc_html( $is_repair ? 'Hardware & Cleanroom Lab Intake' : 'Product & Inquiry Dossier' ); ?></span>
-						<span class="pdf-card-badge"><?php echo esc_html( $is_repair ? 'Cleanroom Lab' : 'Showroom' ); ?></span>
-					</h3>
-					<table class="pdf-card-table">
-						<tr>
-							<td class="td-label">Device Brand &amp; Model:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $device_str ) ? $device_str : 'Confirmed at Inspection' ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">IMEI / Serial Number:</td>
-							<td class="td-val">
-								<?php if ( ! empty( $row->imei_serial ) ) : ?>
-									<span class="mono"><?php echo esc_html( $row->imei_serial ); ?></span>
-								<?php else : ?>
-									<span style="color:#94a3b8;">Recorded at bench</span>
-								<?php endif; ?>
-							</td>
-						</tr>
-						<tr>
-							<td class="td-label">Accessories Received:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $row->accessories_received ) ? $row->accessories_received : 'Device Only' ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Lead Technician:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $row->technician_name ) ? $row->technician_name : 'Senior Apple Lab Engineer' ); ?></td>
-						</tr>
-						<tr>
-							<td class="td-label">Target Completion:</td>
-							<td class="td-val"><?php echo esc_html( ! empty( $row->estimated_delivery ) ? $row->estimated_delivery : 'Same-Day / Upon Approval' ); ?></td>
-						</tr>
-					</table>
-				</div>
-			</div>
-
-			<!-- 4. Itemized Work, Reported Symptoms & Diagnostic Report Table -->
-			<div class="pdf-table-wrap">
-				<table class="pdf-work-table">
-					<thead>
-						<tr>
-							<th style="width: 28%;"><?php echo esc_html( $is_repair ? 'Service / Procedure' : 'Inquiry Subject / Product' ); ?></th>
-							<th style="width: 32%;"><?php echo esc_html( $is_repair ? 'Customer Reported Fault' : 'Customer Inquiry Details' ); ?></th>
-							<th style="width: 26%;"><?php echo esc_html( $is_repair ? 'Technician Diagnostic & Lab Report' : 'Counter Recommendation / Note' ); ?></th>
-							<th style="width: 14%;" class="text-right"><?php esc_html_e( 'Amount', 'mobile-pasal' ); ?></th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>
-								<div class="service-title"><?php echo esc_html( ! empty( $row->service_needed ) ? $row->service_needed : 'Comprehensive Lab Diagnosis' ); ?></div>
-								<?php if ( $is_repair && $warranty_days > 0 ) : ?>
-									<span class="service-warranty-pill">✓ <?php echo esc_html( $warranty_days . '-Day Lab Warranty' ); ?></span>
-								<?php endif; ?>
-							</td>
-							<td>
-								<?php if ( ! empty( $row->message ) ) : ?>
-									<?php echo nl2br( esc_html( $row->message ) ); ?>
-								<?php else : ?>
-									<span style="color:#94a3b8;">Standard counter check-in inspection.</span>
-								<?php endif; ?>
-							</td>
-							<td>
-								<?php if ( ! empty( $row->notes ) ) : ?>
-									<strong style="color:#1d4ed8;"><?php echo nl2br( esc_html( $row->notes ) ); ?></strong>
-								<?php else : ?>
-									<span style="color:#64748b;">Cleanroom microscopic inspection, genuine parts calibration &amp; current draw QA protocol applied.</span>
-								<?php endif; ?>
-							</td>
-							<td class="text-right">
-								<strong style="font-size:13px; color:#071b3b;"><?php echo esc_html( $cost_display ); ?></strong>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-			<!-- 5. Live Online QR Tracking Card + Official Invoice Billing Breakdown -->
-			<div class="pdf-finance-row">
-				<!-- Online Tracking QR Card -->
-				<div class="pdf-qr-box">
-					<div class="pdf-qr-text">
-						<h4>
-							<span>📱</span>
-							<span><?php echo esc_html( $is_repair ? 'Live Repair Status & Warranty QR' : 'Online Docket Verification' ); ?></span>
-						</h4>
-						<p>Point phone camera at this QR code to track live repair bench updates, photos &amp; warranty certificate online:</p>
-						<span class="pdf-qr-url"><?php echo esc_html( $track_url ); ?></span>
-						<?php if ( $is_repair ) : ?>
-							<div class="pdf-warranty-highlight">
-								🛡️ Warranty Expiry: <?php echo esc_html( $warranty_days > 0 ? $warranty_days . ' Days (Valid until ' . $warranty_expiry . ')' : 'No Warranty' ); ?>
-							</div>
-						<?php endif; ?>
-					</div>
-					<img src="<?php echo esc_url( $qr_img_url ); ?>" alt="Docket QR" class="pdf-qr-img" />
-				</div>
-
-				<!-- Financial Breakdown -->
-				<div class="pdf-billing-box">
-					<h3 class="pdf-billing-title"><?php esc_html_e( 'Invoice & Payment Breakdown', 'mobile-pasal' ); ?></h3>
-					<div class="pdf-billing-row">
-						<span>Total <?php echo esc_html( $is_repair ? 'Repair Service Cost' : 'Quoted Price' ); ?>:</span>
+					<div class="pdf-calc-row">
+						<span><?php echo esc_html( $is_repair ? __( 'Total Service Cost:', 'mobile-pasal' ) : __( 'Quoted Price:', 'mobile-pasal' ) ); ?></span>
 						<strong><?php echo esc_html( $cost_display ); ?></strong>
 					</div>
-					<div class="pdf-billing-row">
-						<span>Advance / Deposit Received:</span>
-						<strong style="color:#047857;"><?php echo esc_html( $advance_display ); ?></strong>
+					<div class="pdf-calc-row">
+						<span><?php esc_html_e( 'Advance Received:', 'mobile-pasal' ); ?></span>
+						<strong style="color: #1ea952;"><?php echo esc_html( $advance_display ); ?></strong>
 					</div>
-					<div class="pdf-billing-row">
-						<span>Payment Mode:</span>
+					<div class="pdf-calc-row">
+						<span><?php esc_html_e( 'Payment Method:', 'mobile-pasal' ); ?></span>
 						<strong><?php echo esc_html( $pay_method ); ?></strong>
 					</div>
-					<div class="pdf-balance-row">
-						<span>Net Balance Due:</span>
-						<span class="pdf-balance-val"><?php echo esc_html( $balance_display ); ?></span>
+					<div class="pdf-calc-total">
+						<span><?php esc_html_e( 'Balance Due:', 'mobile-pasal' ); ?></span>
+						<span class="val"><?php echo esc_html( $balance_display ); ?></span>
 					</div>
 				</div>
 			</div>
 
-			<!-- 6. Official Terms, Conditions & Warranty Protocol -->
-			<div class="pdf-terms-wrap">
-				<strong>Official Counter Service Terms &amp; Warranty Guidelines:</strong>
-				<ol class="pdf-terms-list">
-					<li><strong>Device Handover:</strong> Present this physical docket or reference Docket ID <strong><?php echo esc_html( $docket_num ); ?></strong> when claiming your handset at our Gulariya counter.</li>
-					<li><strong>Lab Warranty Scope:</strong> Replaced screens and batteries carry a <?php echo esc_html( $warranty_days > 0 ? $warranty_days . '-day' : 'counter' ); ?> technical testing warranty against component defects. Physical impact damage, screen cracks, water ingress, or unauthorized third-party intervention automatically voids coverage.</li>
-					<li><strong>Data Confidentiality:</strong> Ali Mobile Center respects customer privacy. Passcodes are used solely for post-repair hardware QA. We advise backing up personal data prior to board-level micro-soldering.</li>
-					<li><strong>Storage &amp; Disposal:</strong> Completed devices uncollected after 60 days of pickup notification may incur nominal storage charges as per showroom policy.</li>
-				</ol>
+			<!-- Signatures -->
+			<div class="pdf-signatures">
+				<div class="pdf-sig-col"><?php esc_html_e( 'Customer Signature', 'mobile-pasal' ); ?></div>
+				<div class="pdf-sig-col"><?php echo esc_html( sprintf( __( 'Authorized Signature (%s)', 'mobile-pasal' ), $store_name ) ); ?></div>
 			</div>
 
-			<!-- 7. Dual Authorization Signatures -->
-			<div class="pdf-signatures-row">
-				<div class="pdf-sig-box">
-					Customer Signature &amp; Acceptance
-					<span class="pdf-sig-sub">I accept the terms &amp; verify receipt of above device / quote</span>
-				</div>
-				<div class="pdf-sig-box">
-					Authorized Lab Engineer &amp; Stamp
-					<span class="pdf-sig-sub"><?php echo esc_html( $store_name ); ?> &bull; Cleanroom QA Verification</span>
-				</div>
-			</div>
-
-			<!-- 8. Footer Audit Strip -->
-			<div class="pdf-footer-audit">
-				<div>
-					<strong><?php echo esc_html( $store_name ); ?></strong> &bull; <?php echo esc_html( $store_addr ); ?>
-				</div>
-				<div>
-					<span class="pdf-barcode-sim">||| <?php echo esc_html( $docket_num ); ?> |||</span>
-				</div>
-				<div>
-					Web: <?php echo esc_html( preg_replace( '(^https?://|/$)', '', $store_website ) ); ?> &bull; Tel: <?php echo esc_html( $store_phone ); ?>
-				</div>
+			<!-- Minimal Footer -->
+			<div class="pdf-footer">
+				<?php echo esc_html( sprintf( __( 'Thank you for choosing %1$s • %2$s • Tel: %3$s', 'mobile-pasal' ), $store_name, $store_addr, $store_phone ) ); ?>
 			</div>
 		</div>
 	</body>
