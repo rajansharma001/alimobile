@@ -268,6 +268,7 @@ function mp_render_handset_meta_box( $post ) {
 
 	$price         = get_post_meta( $post->ID, '_mp_price', true );
 	$old_price     = get_post_meta( $post->ID, '_mp_old_price', true );
+	$hide_price    = get_post_meta( $post->ID, '_mp_hide_price', true );
 	$badge         = get_post_meta( $post->ID, '_mp_badge', true );
 	$stock_status  = get_post_meta( $post->ID, '_mp_stock_status', true ) ?: 'in_stock';
 	$rating        = get_post_meta( $post->ID, '_mp_rating', true ) ?: '4.9';
@@ -304,6 +305,14 @@ function mp_render_handset_meta_box( $post ) {
 			<div class="mp-meta-field">
 				<label for="mp_badge"><i class="fa-solid fa-award"></i> <?php esc_html_e( 'Showcase Badge', 'mobile-pasal' ); ?></label>
 				<input type="text" id="mp_badge" name="_mp_badge" value="<?php echo esc_attr( $badge ); ?>" placeholder="Official NTA Approved">
+			</div>
+
+			<div class="mp-meta-field">
+				<label for="mp_hide_price"><i class="fa-solid fa-eye-slash"></i> <?php esc_html_e( 'Price Visibility', 'mobile-pasal' ); ?></label>
+				<label style="display:inline-flex;align-items:center;gap:8px;font-weight:600;cursor:pointer;margin-top:8px;">
+					<input type="checkbox" id="mp_hide_price" name="_mp_hide_price" value="1" <?php checked( $hide_price, '1' ); ?>>
+					<span><?php esc_html_e( 'Hide price on this product (show "Inquire for Price")', 'mobile-pasal' ); ?></span>
+				</label>
 			</div>
 
 			<div class="mp-meta-field">
@@ -424,6 +433,7 @@ function mp_save_handset_meta( $post_id ) {
 	$fields = array(
 		'_mp_price',
 		'_mp_old_price',
+		'_mp_hide_price',
 		'_mp_badge',
 		'_mp_stock_status',
 		'_mp_rating',

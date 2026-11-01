@@ -39,6 +39,9 @@ function mobile_pasal_options_defaults() {
 		'enable_preloader'             => 1,
 		'preloader_duration'           => '1000',
 		'currency_symbol'              => 'NPR',
+		'handset_show_price'           => 1,
+		'handset_hidden_price_text'    => 'Inquire for Today\'s Best Counter Rate',
+		'handset_hidden_price_note'    => 'Official NTA stock. Contact our counter directly for today\'s cash/card offer.',
 
 		// ── 2. Header & Counter Desk Coordinates ──
 		'counter_phone'                => '+977 9804530786',
@@ -2788,6 +2791,26 @@ function mobile_pasal_options_render_dashboard() {
 								<a href="<?php echo esc_url( admin_url( 'edit.php?post_type=handset' ) ); ?>" class="bopt-btn-gold-action" style="background:#1e293b;border:1px solid #334155;">
 									<i class="fa-solid fa-list"></i> <?php esc_html_e( 'View All Handsets', 'mobile-pasal' ); ?>
 								</a>
+							</div>
+						</div>
+
+						<!-- Handset Pricing Visibility Control -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-tag"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Handset Pricing Visibility Settings', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Control whether handset retail prices are shown or hidden across single handset product pages.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-field-grid">
+									<?php
+									mp_render_field_toggle( 'handset_show_price', __( 'Display Handset Prices Globally', 'mobile-pasal' ), __( 'Turn ON to display numerical retail prices (e.g. NPR 1,94,999). Turn OFF to hide prices and show direct counter quotation instead.' ) );
+									mp_render_field_text( 'handset_hidden_price_text', __( 'Hidden Price Badge / Label', 'mobile-pasal' ), __( 'Default: Inquire for Today\'s Best Counter Rate' ) );
+									mp_render_field_text( 'handset_hidden_price_note', __( 'Hidden Price Explanation Note', 'mobile-pasal' ), __( 'Default: Official NTA stock. Contact our counter directly for today\'s cash/card offer.' ) );
+									?>
+								</div>
 							</div>
 						</div>
 
