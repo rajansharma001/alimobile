@@ -258,7 +258,7 @@ function mobile_pasal_options_defaults() {
 		'spotlight_spec2'              => 'Camera Control',
 		'spotlight_spec3'              => 'Grade 5 Titanium',
 		'spotlight_spec4'              => 'NTA Approved • 100% Legal IMEI',
-		'spotlight_status_text'        => 'Sealed Stock Handover Ready at Gulariya Showroom Counter',
+		'spotlight_status_text'        => '',
 		'spotlight_btn1_text'          => 'Ask Today\'s Price on WhatsApp',
 		'spotlight_btn2_prefix'        => 'Call Store Direct',
 		'spotlight_image'              => $uri . '/assets/images/iphone-16-pro.jpg',
@@ -2208,7 +2208,7 @@ function mobile_pasal_options_render_dashboard() {
 									mp_render_field_text( 'spotlight_spec2', __( 'Hardware Spec Pill 2', 'mobile-pasal' ), __( 'Default: Camera Control' ) );
 									mp_render_field_text( 'spotlight_spec3', __( 'Hardware Spec Pill 3', 'mobile-pasal' ), __( 'Default: Grade 5 Titanium' ) );
 									mp_render_field_text( 'spotlight_spec4', __( 'Hardware Spec Pill 4', 'mobile-pasal' ), __( 'Default: NTA Approved • 100% Legal IMEI' ) );
-									mp_render_field_text( 'spotlight_status_text', __( 'Stock Handover Status Text', 'mobile-pasal' ), __( 'Default: Sealed Stock Handover Ready at Gulariya Showroom Counter' ) );
+									mp_render_field_text( 'spotlight_status_text', __( 'Stock Handover Status Text', 'mobile-pasal' ), __( 'Optional live beacon text. Leave empty to hide.' ) );
 									mp_render_field_text( 'spotlight_btn1_text', __( 'Button 1 Text', 'mobile-pasal' ), __( 'Default: Ask Today\'s Price on WhatsApp' ) );
 									mp_render_field_text( 'spotlight_btn2_prefix', __( 'Button 2 Call Store Prefix', 'mobile-pasal' ), __( 'Default: Call Store Direct' ) );
 									mp_render_field_image( 'spotlight_image', __( 'Spotlight Handset Image', 'mobile-pasal' ), __( 'Photo of iPhone 16 Pro / Pro Max' ) );

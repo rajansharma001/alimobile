@@ -90,7 +90,7 @@ $spotlight_badge  = mp_opt( 'spotlight_badge', 'FEATURED FLAGSHIP IN GULARIYA' )
 $spotlight_title  = mp_opt( 'spotlight_title', 'iPhone 16 Pro & Pro Max' );
 $spotlight_tag    = mp_opt( 'spotlight_tagline', 'Built for Apple Intelligence • Grade 5 Titanium' );
 $spotlight_desc   = mp_opt( 'spotlight_desc', 'Grade 5 Titanium design with thinner borders, A18 Pro silicon chip, 48MP Fusion camera with 4K 120fps Dolby Vision, and revolutionary Camera Control button.' );
-$spotlight_status = mp_opt( 'spotlight_status_text', 'Sealed Stock Handover Ready at Gulariya Showroom Counter' );
+$spotlight_status = mp_opt( 'spotlight_status_text', '' );
 $spotlight_img    = mp_opt( 'spotlight_image', '' );
 if ( empty( $spotlight_img ) ) {
 	$spotlight_img = 'https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=900&q=85';
@@ -531,10 +531,12 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
           </span>
           <span class="flagship-kicker-text"><?php echo esc_html( $spotlight_badge ); ?></span>
         </div>
+        <?php if ( ! empty( $spotlight_status ) && 'Sealed Stock Handover Ready at Gulariya Showroom Counter' !== $spotlight_status ) : ?>
         <div class="flagship-live-beacon">
           <span class="beacon-dot"></span>
           <span><?php echo esc_html( $spotlight_status ); ?></span>
         </div>
+        <?php endif; ?>
       </div>
 
       <!-- Main Bento Grid -->
