@@ -407,10 +407,10 @@ while ( have_posts() ) :
 		<div class="container">
 
 			<!-- Section Header -->
-			<div class="section-header center" style="margin-bottom: 28px;">
-				<span class="section-badge"><?php esc_html_e( 'DEVICE INTELLIGENCE & SHOWROOM ASSURANCE', 'mobile-pasal' ); ?></span>
-				<h2 class="section-title"><?php esc_html_e( 'Technical Specifications & Counter Assurance', 'mobile-pasal' ); ?></h2>
-				<p class="section-desc"><?php printf( esc_html__( 'Verified hardware architecture, showroom highlights, and our 4-pillar buyer protection for %s.', 'mobile-pasal' ), get_the_title() ); ?></p>
+			<div class="section-header center" style="margin-bottom: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+				<span class="eyebrow" style="margin: 0 auto 12px;"><?php esc_html_e( 'DEVICE INTELLIGENCE & SHOWROOM ASSURANCE', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title" style="text-align: center; margin: 0 auto 10px; max-width: 820px;"><?php esc_html_e( 'Technical Specifications & Counter Assurance', 'mobile-pasal' ); ?></h2>
+				<p class="section-subtitle" style="text-align: center; margin: 0 auto; max-width: 680px;"><?php printf( esc_html__( 'Verified hardware architecture, showroom highlights, and our 4-pillar buyer protection for %s.', 'mobile-pasal' ), get_the_title() ); ?></p>
 			</div>
 
 			<!-- Interactive Segmented Tab Controls -->
