@@ -167,10 +167,6 @@ while ( have_posts() ) :
 						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
 						<span><?php echo esc_html( $brand_name ?: __( 'Official Handset', 'mobile-pasal' ) ); ?> <?php esc_html_e( 'Showroom Unit', 'mobile-pasal' ); ?></span>
 					</div>
-					<div class="flagship-live-beacon">
-						<span class="beacon-dot"></span>
-						<span><?php echo esc_html( $stock_label ); ?></span>
-					</div>
 				</div>
 
 				<!-- Main Bento Split Grid -->
@@ -271,18 +267,6 @@ while ( have_posts() ) :
 									<p class="product-quote-note"><?php echo esc_html( $hidden_price_note ); ?></p>
 								</div>
 							<?php endif; ?>
-
-							<!-- Live Showroom Counter Stock Status -->
-							<div class="product-stock-banner">
-								<div class="product-stock-status">
-									<span class="product-pulse-dot <?php echo esc_attr( $stock_status ); ?>" aria-hidden="true"></span>
-									<span><?php echo esc_html( $stock_label ); ?></span>
-								</div>
-								<span class="product-counter-loc">
-									<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-									Gulariya-06, Bardiya Showroom
-								</span>
-							</div>
 						</div>
 
 						<!-- 6 Quick Bento Hardware Spec Pods Matching Home Page -->
