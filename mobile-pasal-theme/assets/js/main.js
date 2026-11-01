@@ -555,6 +555,21 @@
           '</div>';
       }
 
+      var comparePayload = JSON.stringify({
+        id: item.id || item.name,
+        title: item.name || 'Handset',
+        brand: item.brand || 'Handset',
+        img: item.img || '',
+        url: itemUrl,
+        priceFmt: (item.isPriceVisible !== false && item.priceFmt) ? item.priceFmt : (item.hiddenPriceText || 'Contact for Counter Price'),
+        screen: item.screen || (item.specs && item.specs[0]) || '—',
+        chip: item.chip || (item.specs && item.specs[1]) || '—',
+        camera: item.camera || '—',
+        battery: item.battery || '—',
+        storage: item.storage || (item.specs && item.specs[2]) || '—',
+        warranty: item.warranty || '1 Year Official Warranty'
+      });
+
       return (
         '<article class="product-card">' +
           '<div class="product-card-topbar">' +
@@ -581,6 +596,9 @@
               '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>' +
               '<span>' + (item.isPriceVisible !== false ? 'WhatsApp Rate' : 'Inquire Rate') + '</span>' +
             '</a>' +
+            '<button type="button" class="card-compare-btn" data-id="' + escHtml(item.id || item.name) + '" data-compare="' + escHtml(comparePayload) + '" title="Compare Handset Specs">' +
+              '<span>+ Compare</span>' +
+            '</button>' +
             '<a class="card-specs-btn" href="' + escHtml(itemUrl) + '#specs-matrix" title="View Full Specifications">' +
               '<span>Specs ›</span>' +
             '</a>' +
@@ -588,6 +606,10 @@
         '</article>'
       );
     }).join("");
+
+    if (typeof syncCompareButtonsState === "function") {
+      syncCompareButtonsState();
+    }
 
     renderHomeCatalogPagination(totalMatches, totalPages, items);
   }
@@ -1375,7 +1397,383 @@
   }
 
   // -------------------------------------------------------------
-  // 11. EXPOSE GLOBAL HANDLERS ON WINDOW
+  // 11. SIDE-BY-SIDE HANDSET COMPARISON ENGINE (Up to 3 Phones)
+  // -------------------------------------------------------------
+  var COMPARE_STORAGE_KEY = "mp_compare_handsets_v1";
+  var compareList = [];
+
+  try {
+    var savedCompare = sessionStorage.getItem(COMPARE_STORAGE_KEY);
+    if (savedCompare) {
+      var parsedCompare = JSON.parse(savedCompare);
+      if (Array.isArray(parsedCompare)) {
+        compareList = parsedCompare.slice(0, 3);
+      }
+    }
+  } catch (err) {
+    compareList = [];
+  }
+
+  function saveCompareList() {
+    try {
+      sessionStorage.setItem(COMPARE_STORAGE_KEY, JSON.stringify(compareList));
+    } catch (err) {}
+  }
+
+  function escSafe(str) {
+    if (str === null || str === undefined) return "";
+    return String(str)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function syncCompareButtonsState() {
+    var selectedIds = compareList.map(function (c) { return String(c.id); });
+    document.querySelectorAll(".card-compare-btn").forEach(function (btn) {
+      var cid = String(btn.getAttribute("data-id") || "");
+      var isSelected = selectedIds.indexOf(cid) !== -1;
+      btn.classList.toggle("active", isSelected);
+      var lbl = btn.querySelector(".compare-btn-label") || btn.querySelector("span");
+      if (lbl) {
+        if (btn.classList.contains("btn-flagship-compare")) {
+          lbl.textContent = isSelected ? "✓ In Compare" : "+ Compare Specs";
+        } else {
+          lbl.textContent = isSelected ? "✓ Added" : "+ Compare";
+        }
+      }
+    });
+  }
+
+  function renderCompareBarAndModal() {
+    var bar = document.getElementById("mpCompareBar");
+    var slotsWrap = document.getElementById("mpCompareSlots");
+    var countText = document.getElementById("mpCompareCountText");
+    var tableWrap = document.getElementById("mpCompareTableWrap");
+
+    syncCompareButtonsState();
+
+    if (!bar || !slotsWrap) return;
+
+    if (compareList.length === 0) {
+      bar.classList.remove("visible");
+      bar.setAttribute("aria-hidden", "true");
+      var modal = document.getElementById("mpCompareModal");
+      if (modal) modal.classList.remove("open");
+      return;
+    }
+
+    bar.classList.add("visible");
+    bar.setAttribute("aria-hidden", "false");
+    if (countText) {
+      countText.textContent = compareList.length + " / 3 Selected";
+    }
+
+    var slotsHtml = "";
+    for (var i = 0; i < 3; i++) {
+      var item = compareList[i];
+      if (item) {
+        slotsHtml +=
+          '<div class="mp-compare-slot filled">' +
+            '<img src="' + escSafe(item.img) + '" alt="" />' +
+            '<div class="mp-compare-slot-meta">' +
+              '<strong>' + escSafe(item.title) + '</strong>' +
+              '<span>' + escSafe(item.priceFmt) + '</span>' +
+            '</div>' +
+            '<button type="button" class="mp-compare-remove" data-remove-id="' + escSafe(item.id) + '" aria-label="Remove">&times;</button>' +
+          '</div>';
+      } else {
+        slotsHtml +=
+          '<div class="mp-compare-slot empty">' +
+            '<span>+ Select Phone ' + (i + 1) + '</span>' +
+          '</div>';
+      }
+    }
+    slotsWrap.innerHTML = slotsHtml;
+
+    if (tableWrap) {
+      var rows = [
+        { label: "Counter Price / Quote", key: "priceFmt", bold: true },
+        { label: "Brand & Ecosystem", key: "brand" },
+        { label: "Display Architecture", key: "screen" },
+        { label: "Processor / Silicon", key: "chip" },
+        { label: "Camera & Optics", key: "camera" },
+        { label: "Battery & Charging", key: "battery" },
+        { label: "RAM & Storage", key: "storage" },
+        { label: "Warranty & MDMS", key: "warranty" }
+      ];
+
+      var theadCols = compareList.map(function (c) {
+        var waHref = "https://wa.me/" + SHOP_PHONE + "?text=" + encodeURIComponent("Namaste Ali Mobile, ma " + c.title + " (" + c.priceFmt + ") compare garera herdaichhu. Availability confirm gardinus na.");
+        return (
+          '<th>' +
+            '<div class="mp-comp-th-card">' +
+              '<button type="button" class="mp-comp-th-remove" data-remove-id="' + escSafe(c.id) + '" title="Remove">&times;</button>' +
+              '<a href="' + escSafe(c.url) + '" class="mp-comp-th-img"><img src="' + escSafe(c.img) + '" alt="' + escSafe(c.title) + '" /></a>' +
+              '<a href="' + escSafe(c.url) + '" class="mp-comp-th-title">' + escSafe(c.title) + '</a>' +
+              '<div class="mp-comp-th-actions">' +
+                '<a href="' + escSafe(waHref) + '" target="_blank" rel="noopener noreferrer" class="mp-comp-wa-btn">WhatsApp</a>' +
+                '<a href="' + escSafe(c.url) + '" class="mp-comp-view-btn">Details ›</a>' +
+              '</div>' +
+            '</div>' +
+          '</th>'
+        );
+      }).join("");
+
+      var tbodyRows = rows.map(function (r) {
+        var tds = compareList.map(function (c) {
+          var val = c[r.key] || "—";
+          return '<td class="' + (r.bold ? 'mp-comp-price-cell' : '') + '">' + escSafe(val) + '</td>';
+        }).join("");
+        return '<tr><th scope="row">' + escSafe(r.label) + '</th>' + tds + '</tr>';
+      }).join("");
+
+      tableWrap.innerHTML =
+        '<table class="mp-compare-table">' +
+          '<thead><tr><th>Specification</th>' + theadCols + '</tr></thead>' +
+          '<tbody>' + tbodyRows + '</tbody>' +
+        '</table>';
+    }
+  }
+
+  document.addEventListener("click", function (e) {
+    var compBtn = e.target.closest(".card-compare-btn");
+    if (compBtn) {
+      e.preventDefault();
+      var raw = compBtn.getAttribute("data-compare");
+      if (!raw) return;
+      try {
+        var data = JSON.parse(raw);
+        var existingIdx = -1;
+        for (var i = 0; i < compareList.length; i++) {
+          if (String(compareList[i].id) === String(data.id)) {
+            existingIdx = i;
+            break;
+          }
+        }
+        if (existingIdx !== -1) {
+          compareList.splice(existingIdx, 1);
+          triggerToast("Removed from comparison: " + data.title);
+        } else {
+          if (compareList.length >= 3) {
+            triggerToast("Maximum 3 phones can be compared at once.");
+            var cModal = document.getElementById("mpCompareModal");
+            if (cModal) cModal.classList.add("open");
+            return;
+          }
+          compareList.push(data);
+          triggerToast("Added to compare: " + data.title);
+        }
+        saveCompareList();
+        renderCompareBarAndModal();
+      } catch (err) {}
+      return;
+    }
+
+    var remBtn = e.target.closest("[data-remove-id]");
+    if (remBtn) {
+      e.preventDefault();
+      var remId = String(remBtn.getAttribute("data-remove-id"));
+      compareList = compareList.filter(function (c) { return String(c.id) !== remId; });
+      saveCompareList();
+      renderCompareBarAndModal();
+      return;
+    }
+  });
+
+  var compClearBtn = document.getElementById("mpCompareClearBtn");
+  if (compClearBtn) {
+    compClearBtn.addEventListener("click", function () {
+      compareList = [];
+      saveCompareList();
+      renderCompareBarAndModal();
+    });
+  }
+
+  var compOpenBtn = document.getElementById("mpCompareOpenBtn");
+  var compModal = document.getElementById("mpCompareModal");
+  var compCloseBtn = document.getElementById("mpCompareModalClose");
+
+  if (compOpenBtn && compModal) {
+    compOpenBtn.addEventListener("click", function () {
+      renderCompareBarAndModal();
+      compModal.classList.add("open");
+      compModal.setAttribute("aria-hidden", "false");
+    });
+  }
+  if (compCloseBtn && compModal) {
+    compCloseBtn.addEventListener("click", function () {
+      compModal.classList.remove("open");
+      compModal.setAttribute("aria-hidden", "true");
+    });
+  }
+  if (compModal) {
+    compModal.addEventListener("click", function (e) {
+      if (e.target === compModal) {
+        compModal.classList.remove("open");
+        compModal.setAttribute("aria-hidden", "true");
+      }
+    });
+  }
+
+  // -------------------------------------------------------------
+  // 12. LIVE AJAX QUICK SEARCH & AUTOCOMPLETE MODAL (Ctrl+K)
+  // -------------------------------------------------------------
+  var qsModal = document.getElementById("mpQuickSearchModal");
+  var qsOpenBtn = document.getElementById("mpQuickSearchOpen");
+  var qsCloseBtn = document.getElementById("mpQuickSearchClose");
+  var qsInput = document.getElementById("mpQuickSearchInput");
+  var qsResults = document.getElementById("mpQuickSearchResults");
+  var qsTimer = null;
+  var qsDefaultHtml = qsResults ? qsResults.innerHTML : "";
+
+  function openQuickSearch() {
+    if (!qsModal) return;
+    qsModal.classList.add("open");
+    qsModal.setAttribute("aria-hidden", "false");
+    if (qsInput) {
+      setTimeout(function () { qsInput.focus(); }, 60);
+    }
+  }
+
+  function closeQuickSearch() {
+    if (!qsModal) return;
+    qsModal.classList.remove("open");
+    qsModal.setAttribute("aria-hidden", "true");
+  }
+
+  if (qsOpenBtn) {
+    qsOpenBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      openQuickSearch();
+    });
+  }
+  if (qsCloseBtn) {
+    qsCloseBtn.addEventListener("click", closeQuickSearch);
+  }
+  if (qsModal) {
+    qsModal.addEventListener("click", function (e) {
+      if (e.target === qsModal) closeQuickSearch();
+    });
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      openQuickSearch();
+    }
+    if (e.key === "Escape") {
+      closeQuickSearch();
+      if (compModal && compModal.classList.contains("open")) {
+        compModal.classList.remove("open");
+      }
+    }
+  });
+
+  function runLiveSearch(query) {
+    if (!qsResults) return;
+    var q = (query || "").trim();
+    if (q.length < 2) {
+      qsResults.innerHTML = qsDefaultHtml;
+      return;
+    }
+
+    qsResults.innerHTML = '<div class="mp-qsearch-loading">Searching Gulariya Showroom &amp; Repair Lab...</div>';
+
+    var ajaxEndpoint = (window.mpAjax && window.mpAjax.ajaxurl)
+      ? window.mpAjax.ajaxurl
+      : ((window.mp_ajax && window.mp_ajax.ajax_url) ? window.mp_ajax.ajax_url : "/wp-admin/admin-ajax.php");
+
+    fetch(ajaxEndpoint + "?action=mp_live_search&q=" + encodeURIComponent(q))
+      .then(function (r) { return r.json(); })
+      .then(function (res) {
+        if (!res || !res.success || !res.data) {
+          qsResults.innerHTML = '<div class="mp-qsearch-loading">No matching results found.</div>';
+          return;
+        }
+        var d = res.data;
+        var html = "";
+
+        if (d.docket) {
+          html +=
+            '<div class="mp-qsearch-group">' +
+              '<div class="mp-qsearch-group-label">LIVE REPAIR DOCKET TRACKER</div>' +
+              '<a href="' + escSafe(d.docket.url) + '" class="mp-qsearch-docket-item">' +
+                '<strong>' + escSafe(d.docket.label) + '</strong>' +
+                '<span>Open Live Status →</span>' +
+              '</a>' +
+            '</div>';
+        }
+
+        if (d.handsets && d.handsets.length > 0) {
+          html += '<div class="mp-qsearch-group"><div class="mp-qsearch-group-label">VERIFIED HANDSETS (' + d.handsets.length + ')</div>';
+          d.handsets.forEach(function (h) {
+            html +=
+              '<a href="' + escSafe(h.url) + '" class="mp-qsearch-item">' +
+                '<img src="' + escSafe(h.img) + '" alt="" class="mp-qsearch-thumb" />' +
+                '<div class="mp-qsearch-meta">' +
+                  '<strong>' + escSafe(h.title) + '</strong>' +
+                  '<span>' + escSafe(h.brand) + (h.specs ? ' • ' + escSafe(h.specs) : '') + '</span>' +
+                '</div>' +
+                '<div class="mp-qsearch-price">' + escSafe(h.priceFmt) + '</div>' +
+              '</a>';
+          });
+          html += '</div>';
+        }
+
+        if (d.repairs && d.repairs.length > 0) {
+          html += '<div class="mp-qsearch-group"><div class="mp-qsearch-group-label">APPLE FIX REPAIR SERVICES (' + d.repairs.length + ')</div>';
+          d.repairs.forEach(function (rp) {
+            html +=
+              '<a href="' + escSafe(rp.url) + '" class="mp-qsearch-item">' +
+                '<div class="mp-qsearch-repair-icon">🔧</div>' +
+                '<div class="mp-qsearch-meta">' +
+                  '<strong>' + escSafe(rp.title) + '</strong>' +
+                  '<span>Turnaround: ' + escSafe(rp.turnaround) + '</span>' +
+                '</div>' +
+                '<div class="mp-qsearch-price">' + escSafe(rp.rate) + '</div>' +
+              '</a>';
+          });
+          html += '</div>';
+        }
+
+        if (!html) {
+          html =
+            '<div class="mp-qsearch-empty-hint">' +
+              '<p>No exact matches for "<strong>' + escSafe(q) + '</strong>". Inquire directly on WhatsApp for custom stock or repair quotes.</p>' +
+            '</div>';
+        }
+
+        qsResults.innerHTML = html;
+      })
+      .catch(function () {
+        qsResults.innerHTML = '<div class="mp-qsearch-loading">Unable to reach search service right now.</div>';
+      });
+  }
+
+  if (qsInput) {
+    qsInput.addEventListener("input", function () {
+      var val = this.value;
+      if (qsTimer) clearTimeout(qsTimer);
+      qsTimer = setTimeout(function () {
+        runLiveSearch(val);
+      }, 220);
+    });
+  }
+
+  document.addEventListener("click", function (e) {
+    var qTag = e.target.closest(".mp-qsearch-tag");
+    if (qTag && qsInput) {
+      var qVal = qTag.getAttribute("data-query") || "";
+      qsInput.value = qVal;
+      runLiveSearch(qVal);
+    }
+  });
+
+  // -------------------------------------------------------------
+  // 13. EXPOSE GLOBAL HANDLERS ON WINDOW
   // -------------------------------------------------------------
   window.setFinish = setFinish;
   window.openQuoteModal = openQuoteModal;
@@ -1386,11 +1784,13 @@
   window.resetCatalogFilters = resetCatalogFilters;
   window.filterCatalog = filterCatalog;
   window.sortCatalog = sortCatalog;
+  window.openQuickSearch = openQuickSearch;
 
   // Initialize
   if (productsGrid && !isShopPage) {
     filterCatalog();
   }
+  renderCompareBarAndModal();
   startAutoPlay();
   initAllCarousels();
 

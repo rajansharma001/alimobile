@@ -86,16 +86,24 @@ function mp_enqueue_scripts() {
 		'6.5.1'
 	);
 
-	$css_file = MP_THEME_DIR . '/assets/css/main.css';
-	$js_file  = MP_THEME_DIR . '/assets/js/main.js';
-	$css_ver  = file_exists( $css_file ) ? (string) filemtime( $css_file ) : MP_VERSION;
-	$js_ver   = file_exists( $js_file ) ? (string) filemtime( $js_file ) : MP_VERSION;
+	$css_file     = MP_THEME_DIR . '/assets/css/main.css';
+	$css_min_file = MP_THEME_DIR . '/assets/css/main.min.css';
+	$js_file      = MP_THEME_DIR . '/assets/js/main.js';
+	$js_min_file  = MP_THEME_DIR . '/assets/js/main.min.js';
+
+	$use_css_min = file_exists( $css_min_file ) && ( ! file_exists( $css_file ) || filemtime( $css_min_file ) >= filemtime( $css_file ) );
+	$use_js_min  = file_exists( $js_min_file ) && ( ! file_exists( $js_file ) || filemtime( $js_min_file ) >= filemtime( $js_file ) );
+
+	$css_uri = $use_css_min ? MP_THEME_URI . '/assets/css/main.min.css' : MP_THEME_URI . '/assets/css/main.css';
+	$js_uri  = $use_js_min ? MP_THEME_URI . '/assets/js/main.min.js' : MP_THEME_URI . '/assets/js/main.js';
+	$css_ver = file_exists( $css_file ) ? (string) filemtime( $css_file ) : MP_VERSION;
+	$js_ver  = file_exists( $js_file ) ? (string) filemtime( $js_file ) : MP_VERSION;
 
 	// Root stylesheet (theme header metadata)
 	wp_enqueue_style( 'mp-theme-root', get_stylesheet_uri(), array(), $css_ver );
 
 	// Master Main stylesheet
-	wp_enqueue_style( 'mp-main-style', MP_THEME_URI . '/assets/css/main.css', array( 'mp-google-fonts', 'mp-theme-root' ), $css_ver );
+	wp_enqueue_style( 'mp-main-style', $css_uri, array( 'mp-google-fonts', 'mp-theme-root' ), $css_ver );
 
 	// Dynamic Inline CSS from Theme Options (Restrained, matching light studio palette)
 	$primary       = esc_attr( mp_opt( 'color_primary', '#0066cc' ) );
@@ -119,13 +127,15 @@ function mp_enqueue_scripts() {
 	wp_add_inline_style( 'mp-main-style', $inline_styles );
 
 	// Frontend JavaScript
-	wp_enqueue_script( 'mp-main-script', MP_THEME_URI . '/assets/js/main.js', array( 'jquery' ), $js_ver, true );
+	wp_enqueue_script( 'mp-main-script', $js_uri, array( 'jquery' ), $js_ver, true );
 
 	// Localize AJAX parameters for forms
 	wp_localize_script( 'mp-main-script', 'mpAjax', array(
-		'ajaxurl'   => admin_url( 'admin-ajax.php' ),
-		'nonce'     => wp_create_nonce( 'mp_public_nonce' ),
-		'wa_number' => mp_opt( 'whatsapp_number', '9779804530786' ),
+		'ajaxurl'      => admin_url( 'admin-ajax.php' ),
+		'nonce'        => wp_create_nonce( 'mp_public_nonce' ),
+		'wa_number'    => mp_opt( 'whatsapp_number', '9779804530786' ),
+		'services_url' => home_url( '/services/' ),
+		'shop_url'     => home_url( '/shop/' ),
 	) );
 	wp_localize_script( 'mp-main-script', 'mp_ajax', array(
 		'ajax_url' => admin_url( 'admin-ajax.php' ),
@@ -331,6 +341,125 @@ function mp_render_page_hero_graphic() {
 	</div>
 	<?php
 }
+
+/**
+ * 12. Live AJAX Search Autocomplete Endpoint (Handsets, Repair Services & Docket Shortcut)
+ */
+function mp_ajax_live_search() {
+	$query = isset( $_REQUEST['q'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['q'] ) ) : '';
+	$query = trim( $query );
+
+	if ( strlen( $query ) < 2 ) {
+		wp_send_json_success( array(
+			'handsets' => array(),
+			'repairs'  => array(),
+			'docket'   => null,
+		) );
+	}
+
+	$docket_shortcut = null;
+	if ( preg_match( '/^#?(AF-\d{4}-[A-Z0-9]+|AF\d+)/i', $query, $m ) ) {
+		$clean_docket    = strtoupper( ltrim( $m[0], '#' ) );
+		$docket_shortcut = array(
+			'docket' => $clean_docket,
+			'url'    => home_url( '/services/?docket=' . rawurlencode( $clean_docket ) . '#repair-tracker' ),
+			'label'  => sprintf( __( 'Track Live Repair Status for Docket #%s', 'mobile-pasal' ), $clean_docket ),
+		);
+	}
+
+	$hidden_price_text = mp_opt( 'handset_hidden_price_text', __( 'Contact for Counter Price', 'mobile-pasal' ) );
+
+	// 1. Search Handsets (title match + meta / taxonomy fallback)
+	$handset_ids = get_posts( array(
+		'post_type'      => 'handset',
+		'post_status'    => 'publish',
+		'posts_per_page' => 6,
+		's'              => $query,
+		'fields'         => 'ids',
+	) );
+
+	if ( count( $handset_ids ) < 6 ) {
+		$meta_ids = get_posts( array(
+			'post_type'      => 'handset',
+			'post_status'    => 'publish',
+			'posts_per_page' => 6 - count( $handset_ids ),
+			'post__not_in'   => $handset_ids,
+			'fields'         => 'ids',
+			'meta_query'     => array(
+				'relation' => 'OR',
+				array(
+					'key'     => '_mp_spec_chip',
+					'value'   => $query,
+					'compare' => 'LIKE',
+				),
+				array(
+					'key'     => '_mp_spec_screen',
+					'value'   => $query,
+					'compare' => 'LIKE',
+				),
+				array(
+					'key'     => '_mp_brand',
+					'value'   => $query,
+					'compare' => 'LIKE',
+				),
+			),
+		) );
+		$handset_ids = array_values( array_unique( array_merge( $handset_ids, $meta_ids ) ) );
+	}
+
+	$handsets = array();
+	foreach ( $handset_ids as $hid ) {
+		$price       = get_post_meta( $hid, '_mp_price', true );
+		$is_visible  = mp_is_handset_price_visible( $hid );
+		$price_fmt   = $is_visible ? ( is_numeric( $price ) ? 'NPR ' . number_format( (float) $price ) : $price ) : $hidden_price_text;
+		$brand_terms = wp_get_post_terms( $hid, 'device_brand', array( 'fields' => 'names' ) );
+		$brand_name  = ! empty( $brand_terms ) && ! is_wp_error( $brand_terms ) ? $brand_terms[0] : ( get_post_meta( $hid, '_mp_brand', true ) ?: 'Handset' );
+		$chip        = get_post_meta( $hid, '_mp_spec_chip', true ) ?: get_post_meta( $hid, '_mp_processor', true );
+		$storage     = get_post_meta( $hid, '_mp_spec_storage', true );
+		$img         = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $hid ) : get_the_post_thumbnail_url( $hid, 'thumbnail' );
+
+		$handsets[] = array(
+			'id'       => (int) $hid,
+			'title'    => get_the_title( $hid ),
+			'brand'    => $brand_name,
+			'priceFmt' => $price_fmt,
+			'specs'    => implode( ' • ', array_filter( array( $chip, $storage ) ) ),
+			'img'      => $img,
+			'url'      => get_permalink( $hid ),
+		);
+	}
+
+	// 2. Search Repair Services
+	$repair_posts = get_posts( array(
+		'post_type'      => 'repair_service',
+		'post_status'    => 'publish',
+		'posts_per_page' => 4,
+		's'              => $query,
+	) );
+
+	$repairs = array();
+	foreach ( $repair_posts as $rp ) {
+		$rid        = $rp->ID;
+		$rate       = get_post_meta( $rid, '_mp_repair_price', true ) ?: __( 'Free Diagnostic', 'mobile-pasal' );
+		$turnaround = get_post_meta( $rid, '_mp_repair_time', true ) ?: '45 Mins';
+		$repairs[]  = array(
+			'id'         => (int) $rid,
+			'title'      => get_the_title( $rid ),
+			'rate'       => $rate,
+			'turnaround' => $turnaround,
+			'url'        => home_url( '/services/#repairs' ),
+		);
+	}
+
+	wp_send_json_success( array(
+		'handsets' => $handsets,
+		'repairs'  => $repairs,
+		'docket'   => $docket_shortcut,
+	) );
+}
+add_action( 'wp_ajax_mp_live_search', 'mp_ajax_live_search' );
+add_action( 'wp_ajax_nopriv_mp_live_search', 'mp_ajax_live_search' );
+
 
 
 

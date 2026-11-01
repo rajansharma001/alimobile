@@ -270,6 +270,13 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 <?php endif; ?>
 
+<!-- Live Repair Status Tracker Section -->
+<section id="repair-tracker" class="section-wrap" style="padding: 16px 0 44px;">
+	<div class="container wrap">
+		<?php echo do_shortcode( '[mp_repair_tracker]' ); ?>
+	</div>
+</section>
+
 <!-- In-Depth Lab Capabilities Section -->
 <section class="section-wrap services-section">
 	<div class="tech-bg-grid" aria-hidden="true"></div>

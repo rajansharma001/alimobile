@@ -118,6 +118,256 @@ function mp_export_inquiries_csv() {
 add_action( 'admin_post_mp_export_inquiries_csv', 'mp_export_inquiries_csv' );
 
 /**
+ * 2c. Printable Repair Job Sheet & Counter Handover Receipt (with Live Tracker QR Code)
+ */
+function mp_print_repair_docket_receipt() {
+	if ( ! isset( $_GET['_wpnonce'], $_GET['id'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'mp_print_docket' ) ) {
+		wp_die( esc_html__( 'Security check failed.', 'mobile-pasal' ) );
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'mp_inquiries';
+	$item_id    = absint( $_GET['id'] );
+	$row        = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM {$table_name} WHERE id = %d", $item_id ) );
+
+	if ( ! $row ) {
+		wp_die( esc_html__( 'Repair docket not found.', 'mobile-pasal' ) );
+	}
+
+	$docket_num  = ! empty( $row->docket_no ) ? $row->docket_no : ( 'ALI-' . $row->id );
+	$store_name  = mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' );
+	$store_addr  = mp_opt( 'store_address', 'Ji. Pra. Ka. Chowk, Gulariya-06, Bardiya, Nepal' );
+	$store_phone = mp_opt( 'contact_phone', '+977 9804530786' );
+	$device_str  = trim( $row->device_brand . ' ' . $row->device_model );
+	$track_url   = home_url( '/services/?docket=' . rawurlencode( $docket_num ) . '#repair-tracker' );
+	$qr_img_url  = 'https://api.qrserver.com/v1/create-qr-code/?size=130x130&margin=4&data=' . rawurlencode( $track_url );
+
+	nocache_headers();
+	header( 'Content-Type: text/html; charset=utf-8' );
+	?>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title><?php echo esc_html( $docket_num . ' — ' . $store_name . ' Job Sheet' ); ?></title>
+		<style>
+			* { box-sizing: border-box; }
+			body {
+				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+				background: #f1f5f9;
+				color: #0f172a;
+				margin: 0;
+				padding: 28px 16px;
+			}
+			.print-toolbar {
+				max-width: 760px;
+				margin: 0 auto 16px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				background: #0f172a;
+				color: #fff;
+				padding: 12px 20px;
+				border-radius: 12px;
+			}
+			.print-btn {
+				background: #0066cc;
+				color: #fff;
+				border: none;
+				padding: 9px 18px;
+				border-radius: 8px;
+				font-weight: 700;
+				cursor: pointer;
+				font-size: 13.5px;
+			}
+			.sheet-card {
+				max-width: 760px;
+				margin: 0 auto;
+				background: #fff;
+				border: 1.5px solid #cbd5e1;
+				border-radius: 16px;
+				padding: 32px;
+			}
+			.sheet-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				border-bottom: 2px solid #0f172a;
+				padding-bottom: 18px;
+				margin-bottom: 22px;
+			}
+			.sheet-brand h1 {
+				margin: 0 0 4px;
+				font-size: 22px;
+				font-weight: 900;
+				color: #071b3b;
+			}
+			.sheet-brand p {
+				margin: 2px 0;
+				font-size: 12.5px;
+				color: #475569;
+			}
+			.sheet-docket-box {
+				text-align: right;
+			}
+			.sheet-docket-pill {
+				display: inline-block;
+				background: #eff6ff;
+				border: 1.5px solid #93c5fd;
+				color: #1d4ed8;
+				font-family: monospace;
+				font-size: 17px;
+				font-weight: 900;
+				padding: 6px 14px;
+				border-radius: 8px;
+				margin-bottom: 6px;
+			}
+			.sheet-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 16px;
+				margin-bottom: 20px;
+			}
+			.sheet-box {
+				border: 1px solid #e2e8f0;
+				border-radius: 10px;
+				padding: 14px 16px;
+				background: #f8fafc;
+			}
+			.sheet-box h3 {
+				margin: 0 0 8px;
+				font-size: 11px;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: #64748b;
+			}
+			.sheet-row {
+				display: flex;
+				justify-content: space-between;
+				font-size: 13px;
+				padding: 4px 0;
+				border-bottom: 1px dashed #e2e8f0;
+			}
+			.sheet-row:last-child { border-bottom: none; }
+			.sheet-qr-section {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				border: 1.5px dashed #93c5fd;
+				background: #f8fbff;
+				border-radius: 12px;
+				padding: 14px 18px;
+				margin-bottom: 20px;
+			}
+			.sheet-terms {
+				font-size: 11px;
+				color: #64748b;
+				line-height: 1.55;
+				margin-bottom: 28px;
+			}
+			.sheet-signatures {
+				display: flex;
+				justify-content: space-between;
+				gap: 40px;
+				margin-top: 36px;
+			}
+			.sig-line {
+				flex: 1;
+				border-top: 1px solid #64748b;
+				padding-top: 6px;
+				text-align: center;
+				font-size: 12px;
+				font-weight: 700;
+				color: #334155;
+			}
+			@media print {
+				body { background: #fff; padding: 0; }
+				.print-toolbar { display: none !important; }
+				.sheet-card { border: 1px solid #94a3b8; box-shadow: none; max-width: 100%; }
+			}
+		</style>
+	</head>
+	<body>
+		<div class="print-toolbar">
+			<span><strong><?php echo esc_html( $docket_num ); ?></strong> &bull; Counter Handover Job Sheet</span>
+			<div>
+				<button type="button" class="print-btn" onclick="window.print();">🖨️ Print Job Sheet / Save PDF</button>
+			</div>
+		</div>
+		<div class="sheet-card">
+			<div class="sheet-header">
+				<div class="sheet-brand">
+					<h1><?php echo esc_html( $store_name ); ?></h1>
+					<p><?php echo esc_html( $store_addr ); ?></p>
+					<p><strong>Counter Helpline:</strong> <?php echo esc_html( $store_phone ); ?></p>
+				</div>
+				<div class="sheet-docket-box">
+					<div class="sheet-docket-pill"><?php echo esc_html( $docket_num ); ?></div>
+					<div style="font-size:12px;color:#475569;"><strong>Date:</strong> <?php echo esc_html( date_i18n( 'M j, Y g:i A', strtotime( $row->created_at ) ) ); ?></div>
+					<div style="font-size:12px;color:#0f172a;margin-top:2px;"><strong>Status:</strong> <?php echo esc_html( strtoupper( str_replace( '_', ' ', $row->status ) ) ); ?></div>
+				</div>
+			</div>
+
+			<div class="sheet-grid">
+				<div class="sheet-box">
+					<h3>Customer Details</h3>
+					<div class="sheet-row"><span>Customer Name:</span><strong><?php echo esc_html( $row->customer_name ); ?></strong></div>
+					<div class="sheet-row"><span>Phone / WhatsApp:</span><strong><?php echo esc_html( $row->phone ); ?></strong></div>
+					<div class="sheet-row"><span>Booking Type:</span><strong><?php echo esc_html( ucfirst( str_replace( '_', ' ', $row->type ) ) ); ?></strong></div>
+				</div>
+				<div class="sheet-box">
+					<h3>Device &amp; Lab Assignment</h3>
+					<div class="sheet-row"><span>Device Model:</span><strong><?php echo esc_html( $device_str ?: 'Specified at Counter' ); ?></strong></div>
+					<div class="sheet-row"><span>Reported Fault:</span><strong><?php echo esc_html( $row->service_needed ); ?></strong></div>
+					<div class="sheet-row"><span>Priority:</span><strong><?php echo esc_html( $row->urgency ?: 'Normal' ); ?></strong></div>
+				</div>
+			</div>
+
+			<?php if ( ! empty( $row->message ) || ! empty( $row->notes ) ) : ?>
+			<div class="sheet-box" style="margin-bottom: 18px;">
+				<h3>Diagnostic Notes &amp; Customer Remarks</h3>
+				<?php if ( ! empty( $row->message ) ) : ?>
+					<p style="margin:0 0 6px;font-size:13px;"><strong>Customer Note:</strong> <?php echo esc_html( $row->message ); ?></p>
+				<?php endif; ?>
+				<?php if ( ! empty( $row->notes ) ) : ?>
+					<p style="margin:0;font-size:13px;color:#1e40af;"><strong>Technician Note:</strong> <?php echo esc_html( $row->notes ); ?></p>
+				<?php endif; ?>
+			</div>
+			<?php endif; ?>
+
+			<div class="sheet-qr-section">
+				<div>
+					<strong style="font-size:14px;color:#071b3b;display:block;margin-bottom:4px;">📱 Scan to Track Live Repair Status Online</strong>
+					<p style="margin:0 0 4px;font-size:12.5px;color:#475569;">Scan the QR code with your phone camera or enter Docket <strong><?php echo esc_html( $docket_num ); ?></strong> at:</p>
+					<code style="font-size:11.5px;color:#0066cc;"><?php echo esc_html( $track_url ); ?></code>
+				</div>
+				<img src="<?php echo esc_url( $qr_img_url ); ?>" alt="QR Code" width="96" height="96" style="border-radius:8px;border:1px solid #bfdbfe;background:#fff;padding:4px;" />
+			</div>
+
+			<div class="sheet-terms">
+				<strong>Counter Assurance &amp; Warranty Terms:</strong>
+				1. Please present this docket slip (or Docket ID) when collecting your device at the Gulariya counter.
+				2. Replaced OEM displays and batteries carry our counter testing warranty as specified on your invoice (physical or liquid damage post-handover is excluded).
+				3. Devices not collected within 60 days of repair completion notice may incur storage handling charges.
+			</div>
+
+			<div class="sheet-signatures">
+				<div class="sig-line">Customer Signature</div>
+				<div class="sig-line">Authorized Technician (<?php echo esc_html( $store_name ); ?>)</div>
+			</div>
+		</div>
+	</body>
+	</html>
+	<?php
+	exit;
+}
+add_action( 'admin_post_mp_print_docket', 'mp_print_repair_docket_receipt' );
+
+/**
  * 3. Render Luxury Full-Width Inquiries Dashboard
  */
 function mp_render_inquiries_admin_page() {
@@ -126,13 +376,48 @@ function mp_render_inquiries_admin_page() {
 
 	$notice = '';
 
+	// Handle Manual Walk-In Repair Docket Creation
+	if ( isset( $_POST['mp_walkin_submit'], $_POST['mp_walkin_nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['mp_walkin_nonce'] ) ), 'mp_create_walkin_docket' ) ) {
+		$w_name    = isset( $_POST['w_name'] ) ? sanitize_text_field( wp_unslash( $_POST['w_name'] ) ) : '';
+		$w_phone   = isset( $_POST['w_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['w_phone'] ) ) : '';
+		$w_brand   = isset( $_POST['w_brand'] ) ? sanitize_text_field( wp_unslash( $_POST['w_brand'] ) ) : '';
+		$w_model   = isset( $_POST['w_model'] ) ? sanitize_text_field( wp_unslash( $_POST['w_model'] ) ) : '';
+		$w_service = isset( $_POST['w_service'] ) ? sanitize_text_field( wp_unslash( $_POST['w_service'] ) ) : '';
+		$w_status  = isset( $_POST['w_status'] ) ? sanitize_text_field( wp_unslash( $_POST['w_status'] ) ) : 'in_progress';
+		$w_notes   = isset( $_POST['w_notes'] ) ? sanitize_textarea_field( wp_unslash( $_POST['w_notes'] ) ) : '';
+
+		if ( ! empty( $w_name ) && ! empty( $w_phone ) ) {
+			$new_docket = 'AF-' . gmdate( 'Y' ) . '-' . wp_rand( 1000, 9999 );
+			$wpdb->insert(
+				$table_name,
+				array(
+					'docket_no'      => $new_docket,
+					'type'           => 'walkin_docket',
+					'customer_name'  => $w_name,
+					'phone'          => $w_phone,
+					'email'          => '',
+					'device_brand'   => $w_brand,
+					'device_model'   => $w_model,
+					'service_needed' => $w_service ?: 'Counter Walk-In Diagnosis',
+					'urgency'        => 'Counter Walk-In',
+					'message'        => $w_notes,
+					'status'         => $w_status,
+					'notes'          => $w_notes,
+					'created_at'     => current_time( 'mysql' ),
+				),
+				array( '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s' )
+			);
+			$notice = sprintf( esc_html__( 'Walk-In Repair Docket %s created successfully!', 'mobile-pasal' ), $new_docket );
+		}
+	}
+
 	// Handle status update & deletion
 	if ( isset( $_GET['action'], $_GET['id'] ) && check_admin_referer( 'mp_inquiry_action' ) ) {
 		$item_id = absint( $_GET['id'] );
 		if ( 'delete' === $_GET['action'] ) {
 			$wpdb->delete( $table_name, array( 'id' => $item_id ), array( '%d' ) );
 			$notice = esc_html__( 'Inquiry record deleted successfully.', 'mobile-pasal' );
-		} elseif ( in_array( $_GET['action'], array( 'pending', 'contacted', 'in_progress', 'completed', 'cancelled' ), true ) ) {
+		} elseif ( in_array( $_GET['action'], array( 'pending', 'contacted', 'in_progress', 'ready', 'completed', 'cancelled' ), true ) ) {
 			$wpdb->update( $table_name, array( 'status' => sanitize_text_field( $_GET['action'] ) ), array( 'id' => $item_id ), array( '%s' ), array( '%d' ) );
 			$notice = esc_html__( 'Status updated successfully.', 'mobile-pasal' );
 		}
@@ -165,6 +450,10 @@ function mp_render_inquiries_admin_page() {
 			</div>
 
 			<div class="bopt-topbar-right">
+				<button type="button" class="bopt-save-btn" onclick="var el=document.getElementById('mpWalkinFormCard');el.style.display=(el.style.display==='none'?'block':'none');" style="padding: 8px 14px; font-size: 13px;">
+					<i class="fa-solid fa-plus"></i>
+					<span><?php esc_html_e( 'New Walk-In Docket', 'mobile-pasal' ); ?></span>
+				</button>
 				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Download all inquiries as CSV spreadsheet', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-file-csv"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Export CSV', 'mobile-pasal' ); ?></span>
@@ -192,6 +481,54 @@ function mp_render_inquiries_admin_page() {
 					<span><?php echo esc_html( $notice ); ?></span>
 				</div>
 			<?php endif; ?>
+
+			<!-- Quick Walk-In Repair Docket Creator Card -->
+			<div id="mpWalkinFormCard" style="display:none; background:#ffffff; border:1.5px solid #93c5fd; border-radius:16px; padding:22px 24px; margin-bottom:22px; box-shadow:0 10px 25px rgba(0,102,204,0.08);">
+				<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+					<h3 style="margin:0; font-size:16px; color:#0f172a;"><i class="fa-solid fa-screwdriver-wrench" style="color:#0066cc; margin-right:6px;"></i> <?php esc_html_e( 'Register Counter Walk-In Repair Docket', 'mobile-pasal' ); ?></h3>
+					<button type="button" onclick="document.getElementById('mpWalkinFormCard').style.display='none';" style="background:none;border:none;font-size:18px;cursor:pointer;color:#64748b;">&times;</button>
+				</div>
+				<form method="post" action="">
+					<?php wp_nonce_field( 'mp_create_walkin_docket', 'mp_walkin_nonce' ); ?>
+					<div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:12px; margin-bottom:12px;">
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Customer Name *', 'mobile-pasal' ); ?></label>
+							<input type="text" name="w_name" required placeholder="e.g. Suman Tharu" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+						</div>
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Customer Phone *', 'mobile-pasal' ); ?></label>
+							<input type="text" name="w_phone" required placeholder="98XXXXXXXX" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+						</div>
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Brand', 'mobile-pasal' ); ?></label>
+							<input type="text" name="w_brand" placeholder="Apple / Samsung" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+						</div>
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Device Model *', 'mobile-pasal' ); ?></label>
+							<input type="text" name="w_model" required placeholder="e.g. iPhone 14 Pro" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+						</div>
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Repair Service / Fault *', 'mobile-pasal' ); ?></label>
+							<input type="text" name="w_service" required placeholder="e.g. OLED Display Swap" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+						</div>
+						<div>
+							<label style="display:block;font-size:12px;font-weight:700;margin-bottom:4px;"><?php esc_html_e( 'Initial Lab Status', 'mobile-pasal' ); ?></label>
+							<select name="w_status" style="width:100%;padding:8px 10px;border:1px solid #cbd5e1;border-radius:8px;">
+								<option value="in_progress"><?php esc_html_e( 'In Progress (On Bench)', 'mobile-pasal' ); ?></option>
+								<option value="pending"><?php esc_html_e( 'Checked In (Pending)', 'mobile-pasal' ); ?></option>
+								<option value="ready"><?php esc_html_e( 'Ready for Pickup', 'mobile-pasal' ); ?></option>
+								<option value="completed"><?php esc_html_e( 'Completed / Delivered', 'mobile-pasal' ); ?></option>
+							</select>
+						</div>
+					</div>
+					<div style="display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+						<input type="text" name="w_notes" placeholder="<?php esc_attr_e( 'Technician notes, estimated price (e.g. NPR 8,500), or IMEI/Passcode notes...', 'mobile-pasal' ); ?>" style="flex:1; min-width:240px; padding:9px 12px; border:1px solid #cbd5e1; border-radius:8px;">
+						<button type="submit" name="mp_walkin_submit" value="1" class="bopt-save-btn" style="padding:9px 20px;">
+							<i class="fa-solid fa-check"></i> <?php esc_html_e( 'Create Docket & Generate ID', 'mobile-pasal' ); ?>
+						</button>
+					</div>
+				</form>
+			</div>
 
 			<!-- Filter Bar -->
 			<div class="bopt-filter-bar">
@@ -296,9 +633,14 @@ function mp_render_inquiries_admin_page() {
 											<a href="<?php echo esc_url( $wa_url ); ?>" target="_blank" class="bopt-btn-wa-reply" title="<?php esc_attr_e( 'Reply on WhatsApp', 'mobile-pasal' ); ?>">
 												<i class="fa-brands fa-whatsapp"></i> WhatsApp
 											</a>
-											<a href="tel:+<?php echo esc_attr( $clean_phone ); ?>" class="bopt-btn-call" title="<?php esc_attr_e( 'Call Customer', 'mobile-pasal' ); ?>">
-												<i class="fa-solid fa-phone"></i> Call
+											<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_print_docket&id=' . $row->id ), 'mp_print_docket' ) ); ?>" target="_blank" class="bopt-btn-call" style="color: #0066cc; border-color: #bfdbfe;" title="<?php esc_attr_e( 'Print Job Sheet / Customer Receipt', 'mobile-pasal' ); ?>">
+												<i class="fa-solid fa-print"></i> Receipt
 											</a>
+											<?php if ( 'in_progress' !== $row->status && 'completed' !== $row->status ) : ?>
+												<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&action=in_progress&id=' . $row->id ), 'mp_inquiry_action' ) ); ?>" class="bopt-btn-call" style="color: #d97706; border-color: #fde68a;" title="<?php esc_attr_e( 'Mark In Progress (On Bench)', 'mobile-pasal' ); ?>">
+													<i class="fa-solid fa-screwdriver-wrench"></i>
+												</a>
+											<?php endif; ?>
 											<?php if ( 'completed' !== $row->status ) : ?>
 												<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin.php?page=mp-inquiries&action=completed&id=' . $row->id ), 'mp_inquiry_action' ) ); ?>" class="bopt-btn-call" style="color: #16a34a; border-color: #bbf7d0;" title="<?php esc_attr_e( 'Mark Done', 'mobile-pasal' ); ?>">
 													<i class="fa-solid fa-check"></i>
@@ -1059,6 +1401,20 @@ function mp_shortcode_repair_tracker( $atts = array() ) {
 			errBox.style.display = 'block';
 		});
 	}
+	document.addEventListener('DOMContentLoaded', function() {
+		try {
+			var params = new URLSearchParams(window.location.search);
+			var docketParam = params.get('docket');
+			if (docketParam) {
+				var input = document.getElementById('mpTrackerQuery');
+				var form = document.getElementById('mpRepairTrackerForm');
+				if (input && form) {
+					input.value = docketParam;
+					mpHandleTrackerSubmit({ preventDefault: function(){} });
+				}
+			}
+		} catch (e) {}
+	});
 	</script>
 	<?php
 	return ob_get_clean();

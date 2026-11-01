@@ -191,7 +191,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
       </div>
       <div class="visual">
-        <img class="product-image" src="<?php echo esc_url( $slide1_img ); ?>" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide1_title ) ); ?>" />
+        <img class="product-image" src="<?php echo esc_url( $slide1_img ); ?>" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide1_title ) ); ?>" />
         <div class="tagline"><?php echo wp_kses_post( $slide1_tagline ); ?></div>
       </div>
     </div>
@@ -234,7 +234,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
       </div>
       <div class="visual">
-        <img class="product-image" src="<?php echo esc_url( $slide2_img ); ?>" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide2_title ) ); ?>" />
+        <img class="product-image" src="<?php echo esc_url( $slide2_img ); ?>" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1597733336794-12d05021d510?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide2_title ) ); ?>" />
         <div class="tagline"><?php echo wp_kses_post( $slide2_tagline ); ?></div>
       </div>
     </div>
@@ -277,7 +277,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         </div>
       </div>
       <div class="visual">
-        <img class="product-image" src="<?php echo esc_url( $slide3_img ); ?>" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide3_title ) ); ?>" />
+        <img class="product-image" src="<?php echo esc_url( $slide3_img ); ?>" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=85';" alt="<?php echo esc_attr( strip_tags( $slide3_title ) ); ?>" />
         <div class="tagline"><?php echo wp_kses_post( $slide3_tagline ); ?></div>
       </div>
     </div><!-- /#heroSliderStage -->
@@ -788,7 +788,10 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
 
                 $spec_screen   = get_post_meta( $h_id, '_mp_spec_screen', true ) ?: get_post_meta( $h_id, '_mp_display', true );
                 $spec_chip     = get_post_meta( $h_id, '_mp_spec_chip', true ) ?: get_post_meta( $h_id, '_mp_processor', true );
+                $spec_camera   = get_post_meta( $h_id, '_mp_spec_camera', true ) ?: get_post_meta( $h_id, '_mp_camera', true );
+                $spec_battery  = get_post_meta( $h_id, '_mp_spec_battery', true ) ?: get_post_meta( $h_id, '_mp_battery', true );
                 $storage_meta  = get_post_meta( $h_id, '_mp_spec_storage', true );
+                $spec_warranty = get_post_meta( $h_id, '_mp_spec_warranty', true ) ?: __( '1 Year Official Warranty', 'mobile-pasal' );
                 $specs_arr     = array_values( array_filter( array( $spec_screen, $spec_chip, $storage_meta ) ) );
 
                 $brand_terms = get_the_terms( $h_id, 'device_brand' );
@@ -814,6 +817,12 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
                     'categoryTag'     => $cat_name,
                     'tag'             => $badge,
                     'specs'           => $specs_arr,
+                    'screen'          => $spec_screen ?: '—',
+                    'chip'            => $spec_chip ?: '—',
+                    'camera'          => $spec_camera ?: '—',
+                    'battery'         => $spec_battery ?: '—',
+                    'storage'         => $storage_meta ?: '—',
+                    'warranty'        => $spec_warranty,
                     'price'           => $numeric_price,
                     'priceFmt'        => $price_fmt,
                     'oldPriceFmt'     => $old_price_fmt,

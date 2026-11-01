@@ -78,13 +78,26 @@ while ( have_posts() ) :
 	$colors_raw = get_post_meta( $post_id, '_mp_color_tag', true ) ?: get_post_meta( $post_id, '_mp_colors', true );
 	$color_list = ! empty( $colors_raw ) ? array_filter( array_map( 'trim', explode( ',', (string) $colors_raw ) ) ) : array();
 
-	// Handset Showcase Image
-	$img_url = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $post_id ) : get_the_post_thumbnail_url( $post_id, 'large' );
+	// Handset Showcase Image & Multi-Angle Gallery
+	$img_url      = function_exists( 'mp_get_handset_img_url' ) ? mp_get_handset_img_url( $post_id ) : get_the_post_thumbnail_url( $post_id, 'large' );
+	$gallery_raw  = get_post_meta( $post_id, '_mp_gallery_urls', true );
+	$gallery_urls = array( $img_url );
+	if ( ! empty( $gallery_raw ) ) {
+		$extra_imgs = preg_split( '/[\r\n,]+/', (string) $gallery_raw );
+		foreach ( $extra_imgs as $ex_url ) {
+			$ex_url = trim( $ex_url );
+			if ( ! empty( $ex_url ) && ! in_array( $ex_url, $gallery_urls, true ) ) {
+				$gallery_urls[] = $ex_url;
+			}
+		}
+	}
 
 	// Price Visibility Calculation (unified helper respects Bulk Price Editor _mp_show_price, _mp_hide_price, and global toggle)
 	$is_price_visible = function_exists( 'mp_is_handset_price_visible' )
 		? mp_is_handset_price_visible( $post_id )
 		: ( ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $per_product_hide ) && ! empty( $price ) );
+
+	$numeric_price = (float) preg_replace( '/[^0-9.]/', '', (string) $price );
 
 	// Format Price Strings
 	$price_formatted     = is_numeric( $price ) ? 'NPR ' . number_format( (float) $price ) : $price;
@@ -184,9 +197,37 @@ while ( have_posts() ) :
 								<span><?php echo esc_html( $badge ); ?> • 100% NTA MDMS</span>
 							</div>
 
-							<!-- Device Image Frame with Subtle Drop Shadow & Hover Zoom -->
-							<div class="stage-device-frame">
-								<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="eager" />
+							<!-- Device Image Frame with Subtle Drop Shadow, Gallery Switcher & Lightbox Zoom -->
+							<div class="stage-device-frame" id="mpMainStageFrame" role="button" tabindex="0" aria-label="<?php esc_attr_e( 'Click to zoom handset image', 'mobile-pasal' ); ?>" style="cursor: zoom-in; position: relative;">
+								<img id="mpMainStageImg" src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="eager" style="transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;" />
+								<button type="button" class="stage-zoom-trigger" id="mpLightboxOpenBtn" aria-label="<?php esc_attr_e( 'Open Fullscreen Zoom', 'mobile-pasal' ); ?>">
+									<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+									<span><?php esc_html_e( 'Click to Zoom', 'mobile-pasal' ); ?></span>
+								</button>
+							</div>
+
+							<!-- Interactive Multi-Angle / Studio Gallery Strip -->
+							<div class="stage-gallery-strip" role="region" aria-label="<?php esc_attr_e( 'Product Gallery Views', 'mobile-pasal' ); ?>">
+								<?php if ( count( $gallery_urls ) > 1 ) : ?>
+									<?php foreach ( $gallery_urls as $g_idx => $g_url ) : ?>
+										<button type="button" class="stage-gallery-thumb <?php echo 0 === $g_idx ? 'active' : ''; ?>" data-img="<?php echo esc_url( $g_url ); ?>" data-scale="1" data-origin="center center" aria-label="<?php echo esc_attr( sprintf( __( 'Gallery photo %d', 'mobile-pasal' ), $g_idx + 1 ) ); ?>">
+											<img src="<?php echo esc_url( $g_url ); ?>" alt="" loading="lazy" />
+										</button>
+									<?php endforeach; ?>
+								<?php else : ?>
+									<button type="button" class="stage-gallery-thumb active" data-img="<?php echo esc_url( $img_url ); ?>" data-scale="1" data-origin="center center">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="" loading="lazy" />
+										<span><?php esc_html_e( 'Full View', 'mobile-pasal' ); ?></span>
+									</button>
+									<button type="button" class="stage-gallery-thumb" data-img="<?php echo esc_url( $img_url ); ?>" data-scale="1.32" data-origin="center 28%">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="" loading="lazy" style="transform:scale(1.35); transform-origin:center 28%;" />
+										<span><?php esc_html_e( 'Optics Close-Up', 'mobile-pasal' ); ?></span>
+									</button>
+									<button type="button" class="stage-gallery-thumb" data-img="<?php echo esc_url( $img_url ); ?>" data-scale="1.25" data-origin="center 72%">
+										<img src="<?php echo esc_url( $img_url ); ?>" alt="" loading="lazy" style="transform:scale(1.28); transform-origin:center 72%;" />
+										<span><?php esc_html_e( 'Chassis & Frame', 'mobile-pasal' ); ?></span>
+									</button>
+								<?php endif; ?>
 							</div>
 
 							<!-- Official Color Finishes Swatches -->
@@ -347,7 +388,23 @@ while ( have_posts() ) :
 						</div>
 
 						<!-- Action Buttons Row Consistent with Home Page -->
-						<div class="flagship-action-row" style="margin-bottom: 24px;">
+						<?php
+						$main_compare_payload = wp_json_encode( array(
+							'id'       => (int) $post_id,
+							'title'    => get_the_title(),
+							'brand'    => $brand_name ?: 'Handset',
+							'img'      => $img_url,
+							'url'      => get_permalink( $post_id ),
+							'priceFmt' => $is_price_visible ? $price_formatted : $hidden_price_text,
+							'screen'   => $spec_screen ?: '—',
+							'chip'     => $spec_chip ?: '—',
+							'camera'   => $spec_camera ?: '—',
+							'battery'  => $spec_battery ?: '—',
+							'storage'  => $spec_storage ?: '—',
+							'warranty' => $spec_warranty ?: '1 Year Official Warranty',
+						) );
+						?>
+						<div class="flagship-action-row" style="margin-bottom: 24px; flex-wrap: wrap;">
 							<a class="btn-flagship-wa" href="<?php echo esc_url( $wa_url ); ?>" target="_blank" rel="noopener noreferrer">
 								<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
 								<span><?php echo $is_price_visible ? esc_html__( 'Direct WhatsApp Order', 'mobile-pasal' ) : esc_html__( 'Inquire Rate on WhatsApp', 'mobile-pasal' ); ?></span>
@@ -357,7 +414,67 @@ while ( have_posts() ) :
 								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
 								<span><?php printf( esc_html__( 'Call Store: %s', 'mobile-pasal' ), esc_html( $phone_number ) ); ?></span>
 							</a>
+							<button type="button" class="btn-flagship-compare card-compare-btn" data-id="<?php echo esc_attr( $post_id ); ?>" data-compare="<?php echo esc_attr( $main_compare_payload ); ?>">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+								<span class="compare-btn-label"><?php esc_html_e( '+ Compare Specs', 'mobile-pasal' ); ?></span>
+							</button>
 						</div>
+
+						<?php if ( $is_price_visible && $numeric_price >= 15000 ) : ?>
+							<!-- Interactive EMI / Monthly Installment Estimator Card -->
+							<div class="handset-emi-card" id="mpEmiCalculator" data-price="<?php echo esc_attr( $numeric_price ); ?>" data-title="<?php the_title_attribute(); ?>" data-wa="<?php echo esc_attr( $wa_number ); ?>">
+								<div class="handset-emi-header">
+									<div class="handset-emi-title-wrap">
+										<span class="handset-emi-icon">
+											<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line></svg>
+										</span>
+										<div>
+											<h3 class="handset-emi-title"><?php esc_html_e( 'Flexible EMI & Downpayment Estimator', 'mobile-pasal' ); ?></h3>
+											<p class="handset-emi-subtitle"><?php esc_html_e( 'Instant counter financing estimation for credit card & partner bank EMI plans', 'mobile-pasal' ); ?></p>
+										</div>
+									</div>
+									<div class="handset-emi-monthly-box">
+										<span class="emi-monthly-label"><?php esc_html_e( 'Estimated Monthly', 'mobile-pasal' ); ?></span>
+										<strong class="emi-monthly-value" id="mpEmiMonthlyVal">NPR <?php echo esc_html( number_format( round( ( $numeric_price * 0.60 ) / 12 ) ) ); ?><span>/mo</span></strong>
+									</div>
+								</div>
+
+								<div class="handset-emi-controls">
+									<div class="emi-control-col">
+										<div class="emi-label-row">
+											<label for="mpEmiDownSlider"><?php esc_html_e( 'Downpayment Percentage', 'mobile-pasal' ); ?></label>
+											<strong id="mpEmiDownPctLabel">40% (NPR <?php echo esc_html( number_format( round( $numeric_price * 0.40 ) ) ); ?>)</strong>
+										</div>
+										<input type="range" id="mpEmiDownSlider" min="20" max="70" step="5" value="40" class="emi-range-slider" />
+										<div class="emi-range-Notches">
+											<span>20% Min</span>
+											<span>40% Standard</span>
+											<span>70% Max</span>
+										</div>
+									</div>
+
+									<div class="emi-control-col">
+										<div class="emi-label-row">
+											<span><?php esc_html_e( 'Installment Tenure', 'mobile-pasal' ); ?></span>
+											<strong id="mpEmiFinancedLabel"><?php esc_html_e( 'Loan:', 'mobile-pasal' ); ?> NPR <?php echo esc_html( number_format( round( $numeric_price * 0.60 ) ) ); ?></strong>
+										</div>
+										<div class="emi-tenure-pills" role="group" aria-label="<?php esc_attr_e( 'Select EMI Months', 'mobile-pasal' ); ?>">
+											<button type="button" class="emi-tenure-btn" data-months="6">6 <?php esc_html_e( 'Months', 'mobile-pasal' ); ?></button>
+											<button type="button" class="emi-tenure-btn active" data-months="12">12 <?php esc_html_e( 'Months', 'mobile-pasal' ); ?></button>
+											<button type="button" class="emi-tenure-btn" data-months="18">18 <?php esc_html_e( 'Months', 'mobile-pasal' ); ?></button>
+										</div>
+									</div>
+								</div>
+
+								<div class="handset-emi-footer">
+									<span class="emi-note"><?php esc_html_e( '*0% to low-interest partner bank & showroom EMI subject to citizenship / card verification at Gulariya counter.', 'mobile-pasal' ); ?></span>
+									<a href="<?php echo esc_url( $wa_url ); ?>" id="mpEmiWaBtn" target="_blank" rel="noopener noreferrer" class="emi-wa-apply-btn">
+										<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+										<span><?php esc_html_e( 'Inquire EMI Plan on WhatsApp', 'mobile-pasal' ); ?></span>
+									</a>
+								</div>
+							</div>
+						<?php endif; ?>
 
 						<!-- Counter Perks Strip -->
 						<div class="product-perks-strip">
@@ -656,44 +773,178 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
+	<!-- Fullscreen Lightbox Zoom Modal -->
+	<div id="mpLightboxModal" class="mp-lightbox-modal" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Handset Fullscreen Zoom', 'mobile-pasal' ); ?>">
+		<div class="mp-lightbox-backdrop" id="mpLightboxBackdrop"></div>
+		<div class="mp-lightbox-content">
+			<button type="button" class="mp-lightbox-close" id="mpLightboxClose" aria-label="<?php esc_attr_e( 'Close Zoom', 'mobile-pasal' ); ?>">&times;</button>
+			<div class="mp-lightbox-stage">
+				<img id="mpLightboxImg" src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" />
+			</div>
+			<div class="mp-lightbox-caption">
+				<strong><?php the_title(); ?></strong>
+				<span><?php echo esc_html( $badge ); ?> &bull; Ali Mobile Gulariya</span>
+			</div>
+		</div>
+	</div>
+
 	<script>
 	(function() {
 		function initHandsetHub() {
 			var tabs = document.querySelectorAll('.handset-hub-tab');
 			var panes = document.querySelectorAll('.handset-hub-pane');
-			if (!tabs.length || !panes.length) return;
+			if (tabs.length && panes.length) {
+				function activateTab(targetId) {
+					tabs.forEach(function(t) {
+						var match = t.getAttribute('data-target') === targetId;
+						t.classList.toggle('active', match);
+						t.setAttribute('aria-selected', match ? 'true' : 'false');
+					});
+					panes.forEach(function(p) {
+						p.classList.toggle('active', p.id === targetId);
+					});
+				}
 
-			function activateTab(targetId) {
-				tabs.forEach(function(t) {
-					var match = t.getAttribute('data-target') === targetId;
-					t.classList.toggle('active', match);
-					t.setAttribute('aria-selected', match ? 'true' : 'false');
+				tabs.forEach(function(btn) {
+					btn.addEventListener('click', function(e) {
+						e.preventDefault();
+						var targetId = this.getAttribute('data-target');
+						activateTab(targetId);
+						if (history.replaceState) {
+							var hashName = targetId === 'pane-specs' ? 'specs-matrix' : (targetId === 'pane-overview' ? 'editorial-overview' : 'counter-assurance');
+							history.replaceState(null, '', '#' + hashName);
+						}
+					});
 				});
-				panes.forEach(function(p) {
-					p.classList.toggle('active', p.id === targetId);
+
+				// Handle deep links from URL hash
+				var hash = window.location.hash;
+				if (hash === '#specs-matrix' || hash === '#specs') {
+					activateTab('pane-specs');
+				} else if (hash === '#editorial-overview' || hash === '#overview') {
+					activateTab('pane-overview');
+				} else if (hash === '#counter-assurance' || hash === '#assurance') {
+					activateTab('pane-assurance');
+				}
+			}
+
+			// Gallery Thumbnail Switcher & Lightbox Zoom
+			var mainImg = document.getElementById('mpMainStageImg');
+			var mainFrame = document.getElementById('mpMainStageFrame');
+			var thumbs = document.querySelectorAll('.stage-gallery-thumb');
+			var lbModal = document.getElementById('mpLightboxModal');
+			var lbImg = document.getElementById('mpLightboxImg');
+			var lbClose = document.getElementById('mpLightboxClose');
+			var lbBackdrop = document.getElementById('mpLightboxBackdrop');
+
+			if (mainImg && thumbs.length) {
+				thumbs.forEach(function(thumb) {
+					thumb.addEventListener('click', function() {
+						thumbs.forEach(function(t) { t.classList.remove('active'); });
+						this.classList.add('active');
+						var newSrc = this.getAttribute('data-img');
+						var scale = this.getAttribute('data-scale') || '1';
+						var origin = this.getAttribute('data-origin') || 'center center';
+						if (newSrc && mainImg.getAttribute('src') !== newSrc) {
+							mainImg.style.opacity = '0.35';
+							setTimeout(function() {
+								mainImg.setAttribute('src', newSrc);
+								if (lbImg) lbImg.setAttribute('src', newSrc);
+								mainImg.style.opacity = '1';
+							}, 120);
+						}
+						mainImg.style.transformOrigin = origin;
+						mainImg.style.transform = 'scale(' + scale + ')';
+					});
 				});
 			}
 
-			tabs.forEach(function(btn) {
-				btn.addEventListener('click', function(e) {
-					e.preventDefault();
-					var targetId = this.getAttribute('data-target');
-					activateTab(targetId);
-					if (history.replaceState) {
-						var hashName = targetId === 'pane-specs' ? 'specs-matrix' : (targetId === 'pane-overview' ? 'editorial-overview' : 'counter-assurance');
-						history.replaceState(null, '', '#' + hashName);
+			function openLightbox() {
+				if (!lbModal) return;
+				if (lbImg && mainImg) {
+					lbImg.setAttribute('src', mainImg.getAttribute('src'));
+				}
+				lbModal.classList.add('active');
+				lbModal.setAttribute('aria-hidden', 'false');
+				document.body.style.overflow = 'hidden';
+			}
+
+			function closeLightbox() {
+				if (!lbModal) return;
+				lbModal.classList.remove('active');
+				lbModal.setAttribute('aria-hidden', 'true');
+				document.body.style.overflow = '';
+			}
+
+			if (mainFrame) {
+				mainFrame.addEventListener('click', openLightbox);
+				mainFrame.addEventListener('keydown', function(e) {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						openLightbox();
 					}
 				});
+			}
+			if (lbClose) lbClose.addEventListener('click', closeLightbox);
+			if (lbBackdrop) lbBackdrop.addEventListener('click', closeLightbox);
+			document.addEventListener('keydown', function(e) {
+				if (e.key === 'Escape' && lbModal && lbModal.classList.contains('active')) {
+					closeLightbox();
+				}
 			});
 
-			// Handle deep links from URL hash
-			var hash = window.location.hash;
-			if (hash === '#specs-matrix' || hash === '#specs') {
-				activateTab('pane-specs');
-			} else if (hash === '#editorial-overview' || hash === '#overview') {
-				activateTab('pane-overview');
-			} else if (hash === '#counter-assurance' || hash === '#assurance') {
-				activateTab('pane-assurance');
+			// Interactive EMI / Downpayment Calculator
+			var emiCard = document.getElementById('mpEmiCalculator');
+			if (emiCard) {
+				var basePrice = parseFloat(emiCard.getAttribute('data-price') || '0');
+				var phoneTitle = emiCard.getAttribute('data-title') || 'Handset';
+				var waNum = emiCard.getAttribute('data-wa') || '9779804530786';
+				var slider = document.getElementById('mpEmiDownSlider');
+				var tenureBtns = emiCard.querySelectorAll('.emi-tenure-btn');
+				var downLabel = document.getElementById('mpEmiDownPctLabel');
+				var financedLabel = document.getElementById('mpEmiFinancedLabel');
+				var monthlyVal = document.getElementById('mpEmiMonthlyVal');
+				var waBtn = document.getElementById('mpEmiWaBtn');
+				var selectedMonths = 12;
+
+				function formatNpr(n) {
+					return 'NPR ' + Math.round(n).toLocaleString('en-US');
+				}
+
+				function updateEmi() {
+					if (!basePrice || !slider) return;
+					var pct = parseInt(slider.value, 10) || 40;
+					var downAmt = Math.round(basePrice * (pct / 100));
+					var loanAmt = Math.max(0, basePrice - downAmt);
+					var monthly = Math.round(loanAmt / selectedMonths);
+
+					if (downLabel) {
+						downLabel.textContent = pct + '% (' + formatNpr(downAmt) + ')';
+					}
+					if (financedLabel) {
+						financedLabel.textContent = 'Loan: ' + formatNpr(loanAmt);
+					}
+					if (monthlyVal) {
+						monthlyVal.innerHTML = formatNpr(monthly) + '<span>/mo</span>';
+					}
+					if (waBtn) {
+						var msg = 'Namaste Ali Mobile, ma ' + phoneTitle + ' (' + formatNpr(basePrice) + ') EMI plan ma lina chahanchhu. Downpayment ' + pct + '% (' + formatNpr(downAmt) + ') ra ' + selectedMonths + ' months (' + formatNpr(monthly) + '/mo) ko EMI process bare jankari dinus na.';
+						waBtn.setAttribute('href', 'https://wa.me/' + waNum + '?text=' + encodeURIComponent(msg));
+					}
+				}
+
+				if (slider) {
+					slider.addEventListener('input', updateEmi);
+				}
+				tenureBtns.forEach(function(btn) {
+					btn.addEventListener('click', function() {
+						tenureBtns.forEach(function(b) { b.classList.remove('active'); });
+						this.classList.add('active');
+						selectedMonths = parseInt(this.getAttribute('data-months'), 10) || 12;
+						updateEmi();
+					});
+				});
+				updateEmi();
 			}
 		}
 		if (document.readyState === 'loading') {
@@ -797,9 +1048,26 @@ while ( have_posts() ) :
 						$rel_price_fmt  = is_numeric( $rel_price ) ? 'NPR ' . number_format( (float) $rel_price ) : $rel_price;
 						$rel_old_fmt    = ( is_numeric( $rel_old_price ) && (float) $rel_old_price > (float) $rel_price ) ? 'NPR ' . number_format( (float) $rel_old_price ) : ( ( ! empty( $rel_old_price ) && $rel_old_price !== $rel_price ) ? $rel_old_price : '' );
 
-						$rel_screen  = get_post_meta( $rel_id, '_mp_spec_screen', true ) ?: get_post_meta( $rel_id, '_mp_display', true );
-						$rel_chip    = get_post_meta( $rel_id, '_mp_spec_chip', true ) ?: get_post_meta( $rel_id, '_mp_processor', true );
-						$rel_storage = get_post_meta( $rel_id, '_mp_spec_storage', true );
+						$rel_screen   = get_post_meta( $rel_id, '_mp_spec_screen', true ) ?: get_post_meta( $rel_id, '_mp_display', true );
+						$rel_chip     = get_post_meta( $rel_id, '_mp_spec_chip', true ) ?: get_post_meta( $rel_id, '_mp_processor', true );
+						$rel_camera   = get_post_meta( $rel_id, '_mp_spec_camera', true ) ?: get_post_meta( $rel_id, '_mp_camera', true );
+						$rel_battery  = get_post_meta( $rel_id, '_mp_spec_battery', true ) ?: get_post_meta( $rel_id, '_mp_battery', true );
+						$rel_storage  = get_post_meta( $rel_id, '_mp_spec_storage', true );
+						$rel_warranty = get_post_meta( $rel_id, '_mp_spec_warranty', true ) ?: __( '1 Year Official Warranty', 'mobile-pasal' );
+						$rel_compare  = wp_json_encode( array(
+							'id'       => (int) $rel_id,
+							'title'    => get_the_title( $rel_id ),
+							'brand'    => $rel_brand_str ?: 'Handset',
+							'img'      => $rel_img,
+							'url'      => $rel_permalink,
+							'priceFmt' => $rel_show_price ? $rel_price_fmt : $hidden_price_text,
+							'screen'   => $rel_screen ?: '—',
+							'chip'     => $rel_chip ?: '—',
+							'camera'   => $rel_camera ?: '—',
+							'battery'  => $rel_battery ?: '—',
+							'storage'  => $rel_storage ?: '—',
+							'warranty' => $rel_warranty,
+						) );
 						?>
 						<article class="product-card">
 							
@@ -865,6 +1133,9 @@ while ( have_posts() ) :
 									<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
 									<span><?php echo $rel_show_price ? esc_html__( 'WhatsApp Rate', 'mobile-pasal' ) : esc_html__( 'Inquire Rate', 'mobile-pasal' ); ?></span>
 								</a>
+								<button type="button" class="card-compare-btn" data-id="<?php echo esc_attr( $rel_id ); ?>" data-compare="<?php echo esc_attr( $rel_compare ); ?>" title="<?php esc_attr_e( 'Compare Handset Specs', 'mobile-pasal' ); ?>">
+									<span><?php esc_html_e( '+ Compare', 'mobile-pasal' ); ?></span>
+								</button>
 								<a class="card-specs-btn" href="<?php echo esc_url( $rel_permalink ); ?>#specs-matrix" title="<?php esc_attr_e( 'View Specifications', 'mobile-pasal' ); ?>">
 									<span><?php esc_html_e( 'Specs ›', 'mobile-pasal' ); ?></span>
 								</a>

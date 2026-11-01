@@ -176,6 +176,7 @@ function mp_admin_cpt_enqueue( $hook ) {
 
 	$target_types = array( 'handset', 'repair_service', 'mp_review' );
 	if ( in_array( $screen->post_type, $target_types, true ) ) {
+		wp_enqueue_media();
 		wp_enqueue_style( 'font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css', array(), '6.5.1' );
 
 		$css_path = get_template_directory() . '/assets/css/admin-cpt.css';
@@ -284,6 +285,7 @@ function mp_render_handset_meta_box( $post ) {
 	$spec_storage  = get_post_meta( $post->ID, '_mp_spec_storage', true );
 	$spec_warranty = get_post_meta( $post->ID, '_mp_spec_warranty', true );
 	$whatsapp_msg  = get_post_meta( $post->ID, '_mp_whatsapp_msg', true );
+	$gallery_urls  = get_post_meta( $post->ID, '_mp_gallery_urls', true );
 	?>
 
 	<!-- Section 1: Pricing & Stock Availability -->
@@ -406,7 +408,58 @@ function mp_render_handset_meta_box( $post ) {
 		</div>
 	</div>
 
-	<!-- Section 4: WhatsApp Direct Order Message -->
+	<!-- Section 4: Multi-Angle Product Gallery Photos -->
+	<div class="mp-meta-section">
+		<div class="mp-meta-section-header">
+			<div class="mp-meta-section-icon" style="background:#eff6ff; color:#1d4ed8;"><i class="fa-solid fa-images"></i></div>
+			<h3 class="mp-meta-section-title"><?php esc_html_e( 'Multi-Angle Product Gallery & Lightbox Photos', 'mobile-pasal' ); ?></h3>
+		</div>
+		<div class="mp-meta-field span-full">
+			<label for="mp_gallery_urls"><i class="fa-solid fa-camera-retro"></i> <?php esc_html_e( 'Additional Gallery Image URLs (One URL per line or comma-separated)', 'mobile-pasal' ); ?></label>
+			<div style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap; margin-top:6px;">
+				<textarea id="mp_gallery_urls" name="_mp_gallery_urls" rows="3" style="flex:1; min-width:280px; padding:10px 12px; border:1px solid #cbd5e1; border-radius:8px; font-size:13px; font-family:monospace;" placeholder="https://example.com/back-angle.jpg&#10;https://example.com/side-profile.jpg&#10;https://example.com/retail-box.jpg"><?php echo esc_textarea( $gallery_urls ); ?></textarea>
+				<button type="button" id="mpAddGalleryMediaBtn" class="button button-secondary" style="height:40px; display:inline-flex; align-items:center; gap:6px; font-weight:600; padding:0 14px; border-radius:8px;">
+					<i class="fa-solid fa-folder-plus"></i> <?php esc_html_e( 'Select / Add Gallery Photos', 'mobile-pasal' ); ?>
+				</button>
+			</div>
+			<p style="margin:6px 0 0; font-size:12px; color:#64748b;"><?php esc_html_e( 'The Featured Image is automatically shown first. Any additional URLs added here appear as interactive thumbnails with fullscreen Lightbox Zoom on the product page.', 'mobile-pasal' ); ?></p>
+		</div>
+	</div>
+	<script>
+	jQuery(function($){
+		var mediaFrame;
+		$('#mpAddGalleryMediaBtn').on('click', function(e){
+			e.preventDefault();
+			if (mediaFrame) {
+				mediaFrame.open();
+				return;
+			}
+			mediaFrame = wp.media({
+				title: 'Select Handset Gallery Photos',
+				button: { text: 'Add to Gallery' },
+				multiple: true
+			});
+			mediaFrame.on('select', function(){
+				var selection = mediaFrame.state().get('selection');
+				var urls = [];
+				var existing = $.trim($('#mp_gallery_urls').val());
+				if (existing) {
+					urls.push(existing);
+				}
+				selection.map(function(attachment){
+					var att = attachment.toJSON();
+					if (att && att.url) {
+						urls.push(att.url);
+					}
+				});
+				$('#mp_gallery_urls').val(urls.join('\n'));
+			});
+			mediaFrame.open();
+		});
+	});
+	</script>
+
+	<!-- Section 5: WhatsApp Direct Order Message -->
 	<div class="mp-meta-section">
 		<div class="mp-meta-section-header">
 			<div class="mp-meta-section-icon" style="background:#ecfdf5; color:#059669;"><i class="fa-brands fa-whatsapp"></i></div>
@@ -452,6 +505,10 @@ function mp_save_handset_meta( $post_id ) {
 		if ( isset( $_POST[ $f ] ) ) {
 			update_post_meta( $post_id, $f, sanitize_text_field( wp_unslash( $_POST[ $f ] ) ) );
 		}
+	}
+
+	if ( isset( $_POST['_mp_gallery_urls'] ) ) {
+		update_post_meta( $post_id, '_mp_gallery_urls', sanitize_textarea_field( wp_unslash( $_POST['_mp_gallery_urls'] ) ) );
 	}
 
 	$is_hidden = isset( $_POST['_mp_hide_price'] ) && '1' === (string) $_POST['_mp_hide_price'];

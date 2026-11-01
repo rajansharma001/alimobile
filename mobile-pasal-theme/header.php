@@ -20,6 +20,8 @@ $clean_p = mp_clean_phone( $phone );
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta name="theme-color" content="#ffffff">
 	<meta name="color-scheme" content="light">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="manifest" href="<?php echo esc_url( MP_THEME_URI . '/assets/manifest.json' ); ?>">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
@@ -152,6 +154,7 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
         <a href="<?php echo is_front_page() ? '#lab' : esc_url( home_url( '/#lab' ) ); ?>"><?php esc_html_e( 'Cleanroom Lab', 'mobile-pasal' ); ?></a>
         <a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>"><?php esc_html_e( 'Repairs & Rates', 'mobile-pasal' ); ?></a>
         <a href="<?php echo is_front_page() ? '#workflow' : esc_url( home_url( '/#workflow' ) ); ?>"><?php esc_html_e( 'Service Workflow', 'mobile-pasal' ); ?></a>
+        <a href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>"><?php esc_html_e( 'Track Repair Status', 'mobile-pasal' ); ?></a>
         <a href="<?php echo is_front_page() ? '#reviews' : esc_url( home_url( '/#reviews' ) ); ?>"><?php esc_html_e( 'Customer Reviews', 'mobile-pasal' ); ?></a>
       </div>
 
@@ -161,10 +164,21 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
       </a>
     </nav>
 
-    <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-      <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-      <span><?php echo esc_html( $phone ); ?></span>
-    </a>
+    <div class="header-right-actions">
+      <button type="button" class="header-search-btn" id="mpQuickSearchOpen" aria-label="<?php esc_attr_e( 'Search Handsets & Repairs', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Search Handsets & Repairs (Ctrl+K)', 'mobile-pasal' ); ?>">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </button>
+
+      <a class="header-track-pill" href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>" title="<?php esc_attr_e( 'Track Live Repair Status', 'mobile-pasal' ); ?>">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+        <span><?php esc_html_e( 'Track Repair', 'mobile-pasal' ); ?></span>
+      </a>
+
+      <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+        <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span><?php echo esc_html( $phone ); ?></span>
+      </a>
+    </div>
   </div>
 </header>
 
