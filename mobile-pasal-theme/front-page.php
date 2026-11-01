@@ -367,8 +367,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       };
       ?>
       <!-- 1. Flagship Smartphones -->
-      <article class="cat-card" style="--card-tint: rgba(8, 98, 233, 0.08); --card-border-hover: #0862e9;" onclick="filterCatalogByBrand('Apple iPhone')">
-        <span class="cat-badge" style="--badge-bg: #e8f0ff; --badge-color: #073d9c;">NTA Sealed</span>
+      <?php $cat1_url = mp_opt( 'cat1_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(8, 98, 233, 0.08); --card-border-hover: #0862e9;" onclick="<?php echo ( ! empty( $cat1_url ) && '#catalog' !== $cat1_url ) ? 'window.location.href=\'' . esc_js( $cat1_url ) . '\'' : 'filterCatalogByBrand(\'Apple iPhone\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #e8f0ff; --badge-color: #073d9c;"><?php echo esc_html( mp_opt( 'cat1_count', 'NTA Sealed' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #edf4ff; --icon-border: rgba(8, 98, 233, 0.18); --icon-color: #0862e9;">
           <svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="3" ry="3"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="9" y1="5" x2="15" y2="5"></line></svg>
         </div>
@@ -378,8 +379,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       </article>
 
       <!-- 2. Certified Apple Fix -->
-      <article class="cat-card" style="--card-tint: rgba(2, 132, 199, 0.08); --card-border-hover: #0284c7;" onclick="openQuoteModal('Apple iPhone Precision Repair')">
-        <span class="cat-badge" style="--badge-bg: #e0f2fe; --badge-color: #0369a1;">Level 4 Lab</span>
+      <?php $cat2_url = mp_opt( 'cat2_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(2, 132, 199, 0.08); --card-border-hover: #0284c7;" onclick="<?php echo ( ! empty( $cat2_url ) && '#services' !== $cat2_url ) ? 'window.location.href=\'' . esc_js( $cat2_url ) . '\'' : 'openQuoteModal(\'Apple iPhone Precision Repair\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #e0f2fe; --badge-color: #0369a1;"><?php echo esc_html( mp_opt( 'cat2_count', 'Level 4 Lab' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #f0f9ff; --icon-border: rgba(2, 132, 199, 0.2); --icon-color: #0284c7;">
           <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
         </div>
@@ -389,8 +391,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       </article>
 
       <!-- 3. Audio & Power Gear -->
-      <article class="cat-card" style="--card-tint: rgba(99, 102, 241, 0.08); --card-border-hover: #6366f1;" onclick="filterCatalogByBrand('Accessories & Gear')">
-        <span class="cat-badge" style="--badge-bg: #eef2ff; --badge-color: #4338ca;">Hi-Res Audio</span>
+      <?php $cat3_url = mp_opt( 'cat3_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(99, 102, 241, 0.08); --card-border-hover: #6366f1;" onclick="<?php echo ( ! empty( $cat3_url ) && '#catalog' !== $cat3_url ) ? 'window.location.href=\'' . esc_js( $cat3_url ) . '\'' : 'filterCatalogByBrand(\'Accessories & Gear\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #eef2ff; --badge-color: #4338ca;"><?php echo esc_html( mp_opt( 'cat3_count', 'Hi-Res Audio' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #f5f7ff; --icon-border: rgba(99, 102, 241, 0.2); --icon-color: #6366f1;">
           <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>
         </div>
@@ -400,8 +403,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       </article>
 
       <!-- 4. iPads & Tablets -->
-      <article class="cat-card" style="--card-tint: rgba(13, 148, 136, 0.08); --card-border-hover: #0d9488;" onclick="triggerToast('Viewing Tablets & Smartwatches')">
-        <span class="cat-badge" style="--badge-bg: #ccfbf1; --badge-color: #0f766e;">Retina Display</span>
+      <?php $cat4_url = mp_opt( 'cat4_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(13, 148, 136, 0.08); --card-border-hover: #0d9488;" onclick="<?php echo ( ! empty( $cat4_url ) && '#catalog' !== $cat4_url ) ? 'window.location.href=\'' . esc_js( $cat4_url ) . '\'' : 'triggerToast(\'Viewing Tablets & Smartwatches\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #ccfbf1; --badge-color: #0f766e;"><?php echo esc_html( mp_opt( 'cat4_count', 'Retina Display' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #f0fdfa; --icon-border: rgba(13, 148, 136, 0.2); --icon-color: #0d9488;">
           <svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"></rect><circle cx="12" cy="14" r="4"></circle><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line></svg>
         </div>
@@ -411,8 +415,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       </article>
 
       <!-- 5. Chargers & Glass -->
-      <article class="cat-card" style="--card-tint: rgba(245, 158, 11, 0.08); --card-border-hover: #f59e0b;" onclick="triggerToast('GaN Chargers & 9H Armor Glass')">
-        <span class="cat-badge" style="--badge-bg: #fef3c7; --badge-color: #b45309;">GaN Fast Charge</span>
+      <?php $cat5_url = mp_opt( 'cat5_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(245, 158, 11, 0.08); --card-border-hover: #f59e0b;" onclick="<?php echo ( ! empty( $cat5_url ) && '#catalog' !== $cat5_url ) ? 'window.location.href=\'' . esc_js( $cat5_url ) . '\'' : 'triggerToast(\'GaN Chargers & 9H Armor Glass\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #fef3c7; --badge-color: #b45309;"><?php echo esc_html( mp_opt( 'cat5_count', 'GaN Fast Charge' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #fffbeb; --icon-border: rgba(245, 158, 11, 0.25); --icon-color: #d97706;">
           <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
         </div>
@@ -422,8 +427,9 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       </article>
 
       <!-- 6. eSewa & Banking -->
-      <article class="cat-card" style="--card-tint: rgba(16, 185, 129, 0.08); --card-border-hover: #10b981;" onclick="triggerToast('Connecting to Gulariya Banking Counter')">
-        <span class="cat-badge" style="--badge-bg: #d1fae5; --badge-color: #047857;">Verified Merchant</span>
+      <?php $cat6_url = mp_opt( 'cat6_url', '' ); ?>
+      <article class="cat-card" style="--card-tint: rgba(16, 185, 129, 0.08); --card-border-hover: #10b981;" onclick="<?php echo ( ! empty( $cat6_url ) && '#contact' !== $cat6_url ) ? 'window.location.href=\'' . esc_js( $cat6_url ) . '\'' : 'triggerToast(\'Connecting to Gulariya Banking Counter\')'; ?>">
+        <span class="cat-badge" style="--badge-bg: #d1fae5; --badge-color: #047857;"><?php echo esc_html( mp_opt( 'cat6_count', 'Verified Merchant' ) ); ?></span>
         <div class="cat-visual" style="--icon-bg: #ecfdf5; --icon-border: rgba(16, 185, 129, 0.2); --icon-color: #10b981;">
           <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"></rect><line x1="2" y1="10" x2="22" y2="10"></line><line x1="6" y1="15" x2="8" y2="15"></line></svg>
         </div>
@@ -950,11 +956,11 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
-        <span class="eyebrow"><?php echo esc_html( mp_opt( 'repair_kicker', 'DIAGNOSTICS &amp; SOLUTIONS' ) ); ?></span>
-        <h2 class="section-title"><?php echo esc_html( mp_opt( 'repair_title', 'Complete Counter Repair Services' ) ); ?></h2>
-        <p class="section-subtitle"><?php echo esc_html( mp_opt( 'repair_subtitle', 'From Apple iPhone to Samsung Galaxy and Xiaomi devices, all repairs are performed with original-grade parts and live customer inspection.' ) ); ?></p>
+        <span class="eyebrow"><?php echo esc_html( mp_opt( 'services_kicker', 'DIAGNOSTICS & SOLUTIONS' ) ); ?></span>
+        <h2 class="section-title"><?php echo esc_html( mp_opt( 'services_title', 'Complete Counter Repair Services' ) ); ?></h2>
+        <p class="section-subtitle"><?php echo esc_html( mp_opt( 'services_subtitle', 'From Apple iPhone to Samsung Galaxy and Xiaomi devices, all repairs are performed with original-grade parts and live customer inspection.' ) ); ?></p>
       </div>
-      <button class="view-all-pill" onclick="openQuoteModal('General Mobile Repair Service')" type="button">Ask Instant Quote <span>→</span></button>
+      <button class="view-all-pill" onclick="openQuoteModal('General Mobile Repair Service')" type="button"><?php echo esc_html( mp_opt( 'services_header_btn_text', 'Ask Instant Quote' ) ); ?> <span>→</span></button>
     </div>
 
     <div class="diagnostics-grid">
@@ -1105,15 +1111,15 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <h2 class="section-title"><?php echo esc_html( mp_opt( 'guides_title', 'Phone First–Aid &amp; Care Guides' ) ); ?></h2>
         <p class="section-subtitle"><?php echo esc_html( mp_opt( 'guides_subtitle', 'Practical guidance from our certified technicians on protecting your smartphone before bringing it to our counter.' ) ); ?></p>
       </div>
-      <button class="view-all-pill" onclick="triggerToast('Opening Technician Emergency Advice')" type="button">Ask Technician Advice <span>→</span></button>
+      <button class="view-all-pill" onclick="triggerToast('Opening Technician Emergency Advice')" type="button"><?php echo esc_html( mp_opt( 'guides_header_btn_text', 'Ask Technician Advice' ) ); ?> <span>→</span></button>
     </div>
 
     <div class="guides-grid">
       <!-- Guide 1 -->
       <article class="guide-card" onclick="triggerToast('Guide: Handling Shattered Screens')">
         <div class="guide-img-box">
-          <span class="guide-badge">DISPLAY EMERGENCY</span>
-          <img src="https://images.unsplash.com/photo-1563206767-5b18f218e8de?auto=format&fit=crop&w=800&q=80" alt="Cracked phone screen display protocol" loading="lazy" />
+          <span class="guide-badge"><?php echo esc_html( mp_opt( 'guide1_tag', 'DISPLAY EMERGENCY' ) ); ?></span>
+          <img src="<?php echo esc_url( mp_opt( 'guide1_img', 'https://images.unsplash.com/photo-1563206767-5b18f218e8de?auto=format&fit=crop&w=800&q=80' ) ); ?>" alt="Cracked phone screen display protocol" loading="lazy" />
         </div>
         <div class="guide-body">
           <h3 class="guide-title"><?php echo esc_html( mp_opt( 'guide1_title', 'Cracked OLED? Prevent Digitizer Failure' ) ); ?></h3>
@@ -1124,8 +1130,8 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- Guide 2 -->
       <article class="guide-card" onclick="triggerToast('Guide: Liquid Emergency Protocols')">
         <div class="guide-img-box">
-          <span class="guide-badge">LIQUID PROTOCOL</span>
-          <img src="https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=800&q=80" alt="Water damaged smartphone rescue guide" loading="lazy" />
+          <span class="guide-badge"><?php echo esc_html( mp_opt( 'guide2_tag', 'LIQUID PROTOCOL' ) ); ?></span>
+          <img src="<?php echo esc_url( mp_opt( 'guide2_img', 'https://images.unsplash.com/photo-1512499617640-c74ae3a79d37?auto=format&fit=crop&w=800&q=80' ) ); ?>" alt="Water damaged smartphone rescue guide" loading="lazy" />
         </div>
         <div class="guide-body">
           <h3 class="guide-title"><?php echo esc_html( mp_opt( 'guide2_title', 'Never Put Wet Phones in Rice' ) ); ?></h3>
@@ -1136,8 +1142,8 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- Guide 3 -->
       <article class="guide-card" onclick="triggerToast('Guide: Battery Health Preservation')">
         <div class="guide-img-box">
-          <span class="guide-badge">BATTERY HEALTH</span>
-          <img src="https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=800&q=80" alt="Smartphone battery calibration habits" loading="lazy" />
+          <span class="guide-badge"><?php echo esc_html( mp_opt( 'guide3_tag', 'BATTERY HEALTH' ) ); ?></span>
+          <img src="<?php echo esc_url( mp_opt( 'guide3_img', 'https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?auto=format&fit=crop&w=800&q=80' ) ); ?>" alt="Smartphone battery calibration habits" loading="lazy" />
         </div>
         <div class="guide-body">
           <h3 class="guide-title"><?php echo esc_html( mp_opt( 'guide3_title', 'The 20% to 80% Rule for Li-Ion Cells' ) ); ?></h3>
@@ -1301,12 +1307,12 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
   <div class="container">
     <div class="section-header">
       <div class="section-header-copy">
-        <span class="eyebrow">WALK IN ANYTIME</span>
-        <h2 class="section-title">Visit Us in Gulariya</h2>
-        <p class="section-subtitle">Centrally located at Ji. Pra. Ka. Chowk. Walk in for brand-new phone purchases, immediate repair diagnostic, screen protectors, or honest technical advice.</p>
+        <span class="eyebrow"><?php echo esc_html( mp_opt( 'visit_kicker', 'WALK IN ANYTIME' ) ); ?></span>
+        <h2 class="section-title"><?php echo esc_html( mp_opt( 'visit_title', 'Visit Us in Gulariya' ) ); ?></h2>
+        <p class="section-subtitle"><?php echo esc_html( mp_opt( 'visit_desc', 'Centrally located at Ji. Pra. Ka. Chowk. Walk in for brand-new phone purchases, immediate repair diagnostic, screen protectors, or honest technical advice.' ) ); ?></p>
       </div>
       <a class="view-all-pill" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">
-        <span>Get Directions</span>
+        <span><?php echo esc_html( mp_opt( 'visit_btn3_text', 'Get Directions' ) ); ?></span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </a>
     </div>
@@ -1320,7 +1326,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
             </div>
             <div>
-              <h4 class="loc-title">Ali Mobile Center &amp; Apple Fix</h4>
+              <h4 class="loc-title"><?php echo esc_html( mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' ) ); ?></h4>
               <p class="loc-desc"><?php echo esc_html( $address ); ?>, Lumbini Province, Nepal</p>
             </div>
           </div>
@@ -1330,7 +1336,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
             </div>
             <div>
-              <h4 class="loc-title">Direct Showroom Hotline</h4>
+              <h4 class="loc-title"><?php echo esc_html( mp_opt( 'visit_phone_sub', 'Direct Showroom Hotline' ) ); ?></h4>
               <p class="loc-desc"><?php echo esc_html( $phone ); ?></p>
             </div>
           </div>
@@ -1340,7 +1346,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
             <div>
-              <h4 class="loc-title">Showroom &amp; Lab Hours</h4>
+              <h4 class="loc-title"><?php echo esc_html( mp_opt( 'visit_hours_title', 'Showroom & Lab Hours' ) ); ?></h4>
               <p class="loc-desc"><?php echo wp_kses_post( $hours ); ?></p>
             </div>
           </div>
@@ -1350,19 +1356,19 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <div class="contact-social-connect">
           <span class="contact-social-lbl"><?php esc_html_e( 'Official Social Channels:', 'mobile-pasal' ); ?></span>
           <div class="social-icons-row">
-            <a class="social-icon-btn social-fb" href="https://facebook.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a class="social-icon-btn social-fb" href="<?php echo esc_url( mp_opt( 'social_facebook', 'https://facebook.com/alimobilecenter' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
             </a>
-            <a class="social-icon-btn social-ig" href="https://instagram.com/alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a class="social-icon-btn social-ig" href="<?php echo esc_url( mp_opt( 'social_instagram', 'https://instagram.com/alimobilecenter' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
             </a>
             <a class="social-icon-btn social-wa" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.12c-.24.68-1.39 1.3-1.92 1.38-.49.08-1.12.11-3.23-.76-2.69-1.11-4.43-3.83-4.57-4.01-.13-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.54-.34.72-.34.18 0 .36.01.52.02.17.01.4-.06.62.48.24.58.8 1.95.87 2.1.07.14.12.31.02.5-.09.19-.14.3-.28.46-.14.16-.3.35-.43.47-.14.14-.29.3-.12.59.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.73-.85.92-1.15.2-.29.39-.24.66-.14.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.13.07.74-.17 1.42z"/></svg>
             </a>
-            <a class="social-icon-btn social-tt" href="https://tiktok.com/@alimobilecenter" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <a class="social-icon-btn social-tt" href="<?php echo esc_url( mp_opt( 'social_tiktok', 'https://tiktok.com/@alimobilecenter' ) ); ?>" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.54c-.01 2.21-.81 4.41-2.31 6.03-1.6 1.74-3.9 2.74-6.27 2.75-2.5 0-4.9-1.07-6.52-2.91-1.68-1.89-2.45-4.47-2.12-6.99.34-2.58 1.87-4.88 4.09-6.15 1.65-.95 3.58-1.33 5.48-1.09v4.11c-.99-.24-2.07-.12-2.98.34-.9.45-1.57 1.27-1.85 2.23-.29.98-.12 2.07.45 2.91.56.84 1.51 1.36 2.53 1.39 1.19.04 2.35-.55 2.99-1.55.43-.67.62-1.47.62-2.27V.02z"/></svg>
             </a>
-            <a class="social-icon-btn social-gm" href="https://maps.google.com/?q=Ali+Mobile+Center+Gulariya" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+            <a class="social-icon-btn social-gm" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C7.58 0 4 3.58 4 8c0 5.25 7 13 8 16 1-3 8-10.75 8-16 0-4.42-3.58-8-8-8zm0 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"/></svg>
             </a>
           </div>
@@ -1370,10 +1376,10 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
 
         <div class="actions" style="margin-top: 24px;">
           <a class="whatsapp-action-btn" href="https://wa.me/<?php echo esc_attr( $clean_p ); ?>?text=Hello%20Ali%20Mobile%20Center,%20I%20am%20visiting%20your%20counter%20today." target="_blank" rel="noopener noreferrer">
-            <span>Message on WhatsApp</span>
+            <span><?php echo esc_html( mp_opt( 'visit_btn2_text', 'Message on WhatsApp' ) ); ?></span>
           </a>
           <a class="direct-call-btn" style="color:var(--navy); border-color:var(--line); background:#f8faff;" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-            <span>Call Counter</span>
+            <span><?php echo esc_html( mp_opt( 'visit_btn1_text', 'Call Counter' ) ); ?></span>
           </a>
         </div>
       </div>
@@ -1381,7 +1387,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
       <!-- Right Map Embed -->
       <div class="map-preview-card">
         <div class="map-overlay-badge">
-          <div class="map-overlay-title">Ali Mobile Center</div>
+          <div class="map-overlay-title"><?php echo esc_html( mp_opt( 'site_brand_name', 'Ali Mobile Center' ) ); ?></div>
           <div class="map-overlay-addr"><?php echo esc_html( $address ); ?></div>
           <a class="open-maps-link" href="<?php echo esc_url( $map_url ); ?>" target="_blank" rel="noopener noreferrer">
             <span>Open in Maps ↗</span>
@@ -1390,7 +1396,7 @@ $lab_btn2_prefix   = mp_opt( 'lab_btn2_prefix', 'Call Counter' );
         <div class="map-inner-frame">
           <iframe
             title="<?php echo esc_attr__( 'Ali Mobile Center Location in Gulariya', 'mobile-pasal' ); ?>"
-            src="https://maps.google.com/maps?q=Gulariya%2C%20Bardiya%2C%20Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="<?php echo esc_url( mp_opt( 'visit_map_url', 'https://maps.google.com/maps?q=Gulariya%2C%20Bardiya%2C%20Nepal&t=&z=15&ie=UTF8&iwloc=&output=embed' ) ); ?>"
             loading="lazy">
           </iframe>
         </div>

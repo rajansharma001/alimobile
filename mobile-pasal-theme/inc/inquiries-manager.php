@@ -69,6 +69,55 @@ function mp_register_inquiries_admin_menu() {
 add_action( 'admin_menu', 'mp_register_inquiries_admin_menu' );
 
 /**
+ * 2b. Export All Inquiries / Repair Dockets to CSV
+ */
+function mp_export_inquiries_csv() {
+	if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'mp_export_inquiries_csv' ) ) {
+		wp_die( esc_html__( 'Security check failed.', 'mobile-pasal' ) );
+	}
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+
+	global $wpdb;
+	$table_name = $wpdb->prefix . 'mp_inquiries';
+	$rows       = $wpdb->get_results( "SELECT * FROM {$table_name} ORDER BY created_at DESC", ARRAY_A );
+
+	$filename = 'ali-mobile-inquiries-' . gmdate( 'Y-m-d-His' ) . '.csv';
+	nocache_headers();
+	header( 'Content-Type: text/csv; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+
+	$out = fopen( 'php://output', 'w' );
+	fputcsv( $out, array( 'ID', 'Docket No', 'Type', 'Customer Name', 'Phone', 'Email', 'Brand', 'Model', 'Service Needed', 'Urgency', 'Message', 'Status', 'Created At' ) );
+	if ( ! empty( $rows ) ) {
+		foreach ( $rows as $r ) {
+			fputcsv(
+				$out,
+				array(
+					$r['id'],
+					$r['docket_no'],
+					$r['type'],
+					$r['customer_name'],
+					$r['phone'],
+					$r['email'],
+					$r['device_brand'],
+					$r['device_model'],
+					$r['service_needed'],
+					$r['urgency'],
+					$r['message'],
+					$r['status'],
+					$r['created_at'],
+				)
+			);
+		}
+	}
+	fclose( $out );
+	exit;
+}
+add_action( 'admin_post_mp_export_inquiries_csv', 'mp_export_inquiries_csv' );
+
+/**
  * 3. Render Luxury Full-Width Inquiries Dashboard
  */
 function mp_render_inquiries_admin_page() {
@@ -116,6 +165,14 @@ function mp_render_inquiries_admin_page() {
 			</div>
 
 			<div class="bopt-topbar-right">
+				<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Download all inquiries as CSV spreadsheet', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-file-csv"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Export CSV', 'mobile-pasal' ); ?></span>
+				</a>
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Bulk Handset Price Editor', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-tags"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Bulk Prices', 'mobile-pasal' ); ?></span>
+				</a>
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mobile-pasal-options' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Theme Options', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-sliders"></i>
 					<span class="bopt-btn-text"><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>

@@ -12,12 +12,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Master Theme Options Defaults Dictionary
+ * Master Theme Options Defaults Dictionary (Per-Request Static Cached)
  */
 function mobile_pasal_options_defaults() {
+	static $cached_defaults = null;
+	if ( null !== $cached_defaults ) {
+		return $cached_defaults;
+	}
+
 	$uri = get_template_directory_uri();
 
-	return array(
+	$cached_defaults = array(
 		// ── 1. Global Brand & Palette ──
 		'site_brand_name'              => 'Ali Mobile Center & Apple Fix',
 		'store_name'                   => 'Ali Mobile Center & Apple Fix',
@@ -619,17 +624,56 @@ function mobile_pasal_options_defaults() {
 		'custom_header_scripts'        => '',
 		'custom_footer_scripts'        => '',
 	);
+
+	return $cached_defaults;
 }
 
 /**
- * Retrieve Theme Option with Safe Fallback and Bidirectional Aliasing
+ * Flush in-memory cached theme options when updated
+ */
+function mobile_pasal_flush_options_cache() {
+	$GLOBALS['mp_cached_options_array'] = null;
+}
+add_action( 'update_option_mobile_pasal_options', 'mobile_pasal_flush_options_cache' );
+add_action( 'add_option_mobile_pasal_options', 'mobile_pasal_flush_options_cache' );
+
+/**
+ * Canonical Alias Dictionary (Admin Canonical Key => Array of Legacy/Template Alias Keys)
+ */
+function mobile_pasal_get_canonical_alias_groups() {
+	return array(
+		'site_logo'           => array( 'logo_image' ),
+		'site_favicon'        => array( 'favicon_image' ),
+		'site_brand_name'     => array( 'store_name' ),
+		'site_tagline'        => array( 'footer_brand_desc' ),
+		'counter_phone'       => array( 'store_phone', 'contact_phone' ),
+		'whatsapp_number'     => array( 'contact_whatsapp_number' ),
+		'counter_address'     => array( 'store_address', 'contact_address' ),
+		'counter_hours'       => array( 'store_hours', 'contact_hours' ),
+		'counter_map_embed'   => array( 'store_map_embed' ),
+		'counter_map_url'     => array( 'google_maps_link' ),
+		'topbar_enabled'      => array( 'topbar_show' ),
+		'preloader_enabled'   => array( 'enable_preloader' ),
+		'spotlight_subtitle'  => array( 'spotlight_desc' ),
+		'lab_subtitle'        => array( 'lab_desc' ),
+		'lab_kicker'          => array( 'lab_badge' ),
+		'contact_map_desc'    => array( 'visit_desc' ),
+	);
+}
+
+/**
+ * Retrieve Theme Option with Per-Request Cache, Safe Fallback, and Canonical Aliasing
  */
 function mobile_pasal_get_option( $key, $default = null ) {
-	$options  = get_option( 'mobile_pasal_options', array() );
+	if ( ! isset( $GLOBALS['mp_cached_options_array'] ) || null === $GLOBALS['mp_cached_options_array'] ) {
+		$loaded = get_option( 'mobile_pasal_options', array() );
+		$GLOBALS['mp_cached_options_array'] = is_array( $loaded ) ? $loaded : array();
+	}
+	$options  = $GLOBALS['mp_cached_options_array'];
 	$defaults = mobile_pasal_options_defaults();
 
-	// Alias dictionary for cross-compatibility
-	$aliases = array(
+	// Alias dictionary for cross-compatibility (maps any alias to its canonical admin field key)
+	static $aliases = array(
 		'logo_image'              => 'site_logo',
 		'site_logo'               => 'logo_image',
 		'favicon_image'           => 'site_favicon',
@@ -664,24 +708,49 @@ function mobile_pasal_get_option( $key, $default = null ) {
 		'contact_whatsapp_number' => 'whatsapp_number',
 		'spotlight_desc'          => 'spotlight_subtitle',
 		'spotlight_subtitle'      => 'spotlight_desc',
-		'lab_desc'                 => 'lab_subtitle',
-		'lab_subtitle'             => 'lab_desc',
-		'lab_badge'                => 'lab_kicker',
-		'lab_kicker'               => 'lab_badge',
-		'visit_desc'               => 'contact_map_desc',
+		'lab_desc'                => 'lab_subtitle',
+		'lab_subtitle'            => 'lab_desc',
+		'lab_badge'               => 'lab_kicker',
+		'lab_kicker'              => 'lab_badge',
+		'visit_desc'              => 'contact_map_desc',
 	);
 
-	// 1. Direct saved option
-	if ( is_array( $options ) && array_key_exists( $key, $options ) && '' !== $options[ $key ] && null !== $options[ $key ] ) {
-		// If option is '0' or 0, but its active alias was set to 1, return the active alias value
-		if ( ( '0' === (string) $options[ $key ] || 0 === $options[ $key ] ) && isset( $aliases[ $key ] ) && isset( $options[ $aliases[ $key ] ] ) && ! empty( $options[ $aliases[ $key ] ] ) && '0' !== (string) $options[ $aliases[ $key ] ] ) {
-			return $options[ $aliases[ $key ] ];
+	// 0. If requesting a legacy alias whose canonical admin key has a saved non-empty value, prefer the canonical admin key
+	$canonical_lookup = array(
+		'logo_image'              => 'site_logo',
+		'favicon_image'           => 'site_favicon',
+		'store_name'              => 'site_brand_name',
+		'footer_brand_desc'       => 'site_tagline',
+		'store_phone'             => 'counter_phone',
+		'contact_phone'           => 'counter_phone',
+		'contact_whatsapp_number' => 'whatsapp_number',
+		'store_address'           => 'counter_address',
+		'contact_address'         => 'counter_address',
+		'store_hours'             => 'counter_hours',
+		'contact_hours'           => 'counter_hours',
+		'store_map_embed'         => 'counter_map_embed',
+		'google_maps_link'        => 'counter_map_url',
+		'topbar_show'             => 'topbar_enabled',
+		'enable_preloader'        => 'preloader_enabled',
+		'spotlight_desc'          => 'spotlight_subtitle',
+		'lab_desc'                => 'lab_subtitle',
+		'lab_badge'               => 'lab_kicker',
+		'visit_desc'              => 'contact_map_desc',
+	);
+	if ( isset( $canonical_lookup[ $key ] ) ) {
+		$canon_key = $canonical_lookup[ $key ];
+		if ( array_key_exists( $canon_key, $options ) && '' !== $options[ $canon_key ] && null !== $options[ $canon_key ] ) {
+			return $options[ $canon_key ];
 		}
+	}
+
+	// 1. Direct saved option
+	if ( array_key_exists( $key, $options ) && '' !== $options[ $key ] && null !== $options[ $key ] ) {
 		return $options[ $key ];
 	}
 
 	// 2. Check alias in saved options
-	if ( isset( $aliases[ $key ] ) && is_array( $options ) && array_key_exists( $aliases[ $key ], $options ) && '' !== $options[ $aliases[ $key ] ] && null !== $options[ $aliases[ $key ] ] ) {
+	if ( isset( $aliases[ $key ] ) && array_key_exists( $aliases[ $key ], $options ) && '' !== $options[ $aliases[ $key ] ] && null !== $options[ $aliases[ $key ] ] ) {
 		return $options[ $aliases[ $key ] ];
 	}
 
@@ -711,7 +780,118 @@ function mp_opt( $key, $default = null ) {
 }
 
 /**
- * Handle Theme Options Save Action (admin-post.php)
+ * Record a Rolling 5-Snapshot Backup before modifying Theme Options
+ */
+function mobile_pasal_record_options_backup( $snapshot_data, $reason = 'Manual Save' ) {
+	if ( empty( $snapshot_data ) || ! is_array( $snapshot_data ) ) {
+		return;
+	}
+	$backups = get_option( 'mobile_pasal_options_backups', array() );
+	if ( ! is_array( $backups ) ) {
+		$backups = array();
+	}
+	$user = wp_get_current_user();
+	array_unshift(
+		$backups,
+		array(
+			'id'        => uniqid( 'mp_bak_' ),
+			'timestamp' => current_time( 'mysql' ),
+			'user'      => ( $user && $user->exists() ) ? $user->user_login : 'admin',
+			'reason'    => sanitize_text_field( $reason ),
+			'count'     => count( $snapshot_data ),
+			'data'      => $snapshot_data,
+		)
+	);
+	$backups = array_slice( $backups, 0, 5 );
+	update_option( 'mobile_pasal_options_backups', $backups, false );
+}
+
+/**
+ * Shared Core Save Processor for Theme Options (Used by both admin-post and AJAX save)
+ */
+function mobile_pasal_process_options_save( $raw_mp_opt, $active_tab = 'colors' ) {
+	$existing = get_option( 'mobile_pasal_options', array() );
+	if ( ! is_array( $existing ) || empty( $existing ) ) {
+		$existing = mobile_pasal_options_defaults();
+	}
+
+	// Record automatic backup snapshot before applying changes
+	mobile_pasal_record_options_backup( $existing, sprintf( 'Saved tab: %s', $active_tab ) );
+
+	$toggle_keys = array(
+		'handset_show_price',
+		'seo_robots_index',
+		'aeo_enable_faq_schema',
+		'aeo_enable_llms_txt',
+		'estimator_enabled',
+		'floating_wa_enabled',
+		'header_search_enabled',
+		'header_sticky',
+		'mobile_bar_enabled',
+		'preloader_enabled',
+		'enable_preloader',
+		'topbar_enabled',
+		'topbar_show',
+		'trust_bar_enabled',
+	);
+
+	$color_keys = array(
+		'color_primary',
+		'color_primary_dark',
+		'color_primary_light',
+		'color_green',
+		'color_amber',
+	);
+
+	$raw_code_keys = array(
+		'counter_map_embed',
+		'store_map_embed',
+		'custom_css',
+		'custom_header_scripts',
+		'custom_footer_scripts',
+	);
+
+	if ( is_array( $raw_mp_opt ) ) {
+		foreach ( $raw_mp_opt as $key => $val ) {
+			$key = sanitize_key( $key );
+			if ( is_array( $val ) ) {
+				$existing[ $key ] = array_map( 'sanitize_text_field', wp_unslash( $val ) );
+			} elseif ( in_array( $key, $toggle_keys, true ) ) {
+				$existing[ $key ] = ( '1' === (string) $val || 1 === $val ) ? 1 : 0;
+			} elseif ( in_array( $key, $color_keys, true ) ) {
+				$clean_hex        = sanitize_hex_color( wp_unslash( $val ) );
+				$existing[ $key ] = $clean_hex ? $clean_hex : wp_unslash( $val );
+			} elseif ( in_array( $key, $raw_code_keys, true ) ) {
+				$unslashed = wp_unslash( $val );
+				if ( current_user_can( 'unfiltered_html' ) ) {
+					$existing[ $key ] = $unslashed;
+				} else {
+					$existing[ $key ] = wp_kses_post( $unslashed );
+				}
+			} else {
+				$existing[ $key ] = str_replace( '&amp;', '&', wp_kses_post( wp_unslash( $val ) ) );
+			}
+		}
+	}
+
+	// Sync all canonical admin keys to their legacy template alias keys so they never diverge
+	$canonical_groups = mobile_pasal_get_canonical_alias_groups();
+	foreach ( $canonical_groups as $canon_key => $alias_list ) {
+		if ( array_key_exists( $canon_key, $existing ) ) {
+			foreach ( $alias_list as $alias_key ) {
+				$existing[ $alias_key ] = $existing[ $canon_key ];
+			}
+		}
+	}
+
+	update_option( 'mobile_pasal_options', $existing );
+	mobile_pasal_flush_options_cache();
+
+	return $existing;
+}
+
+/**
+ * Handle Theme Options Save Action (admin-post.php fallback)
  */
 function mobile_pasal_options_save() {
 	if ( ! isset( $_POST['mp_options_nonce'] ) || ! wp_verify_nonce( $_POST['mp_options_nonce'], 'mobile_pasal_save_theme_options' ) ) {
@@ -721,49 +901,11 @@ function mobile_pasal_options_save() {
 		wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'mobile-pasal' ) );
 	}
 
-	$existing = get_option( 'mobile_pasal_options', array() );
-	if ( ! is_array( $existing ) ) {
-		$existing = mobile_pasal_options_defaults();
-	}
-
-	if ( isset( $_POST['mp_opt'] ) && is_array( $_POST['mp_opt'] ) ) {
-		foreach ( $_POST['mp_opt'] as $key => $val ) {
-			if ( is_array( $val ) ) {
-				$existing[ $key ] = $val;
-			} elseif ( in_array( $key, array( 'counter_map_embed', 'custom_css', 'custom_header_scripts', 'custom_footer_scripts' ), true ) ) {
-				$existing[ $key ] = wp_unslash( $val );
-			} else {
-				$existing[ $key ] = wp_unslash( $val );
-			}
-		}
-	}
-
-	// Normalize unchecked toggle checkboxes
-	$all_defaults = mobile_pasal_options_defaults();
-	foreach ( $all_defaults as $d_key => $d_val ) {
-		if ( strpos( $d_key, '_enabled' ) !== false || strpos( $d_key, 'enable_' ) !== false || strpos( $d_key, '_sticky' ) !== false || strpos( $d_key, 'topbar_show' ) !== false ) {
-			if ( ! isset( $_POST['mp_opt'][ $d_key ] ) ) {
-				$existing[ $d_key ] = 0;
-			}
-		}
-	}
-
-	// Bidirectional alias sync for toggle pairs (e.g. preloader_enabled <=> enable_preloader)
-	$alias_sync_pairs = array(
-		'preloader_enabled' => 'enable_preloader',
-		'enable_preloader'  => 'preloader_enabled',
-		'topbar_show'       => 'topbar_enabled',
-		'topbar_enabled'    => 'topbar_show',
-	);
-	foreach ( $alias_sync_pairs as $src_k => $dst_k ) {
-		if ( isset( $_POST['mp_opt'][ $src_k ] ) ) {
-			$existing[ $dst_k ] = $existing[ $src_k ];
-		}
-	}
-
-	update_option( 'mobile_pasal_options', $existing );
-
 	$active_tab = isset( $_POST['current_tab'] ) ? sanitize_text_field( $_POST['current_tab'] ) : 'colors';
+	$raw_mp_opt = isset( $_POST['mp_opt'] ) && is_array( $_POST['mp_opt'] ) ? $_POST['mp_opt'] : array();
+
+	mobile_pasal_process_options_save( $raw_mp_opt, $active_tab );
+
 	$redirect_url = add_query_arg(
 		array(
 			'page'  => 'mobile-pasal-options',
@@ -776,6 +918,236 @@ function mobile_pasal_options_save() {
 	exit;
 }
 add_action( 'admin_post_mobile_pasal_save_options', 'mobile_pasal_options_save' );
+
+/**
+ * Handle Instant AJAX Save of Theme Options (No Page Reload)
+ */
+function mobile_pasal_ajax_save_options() {
+	check_ajax_referer( 'mobile_pasal_save_theme_options', 'mp_options_nonce' );
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'mobile-pasal' ) ), 403 );
+	}
+
+	$active_tab = isset( $_POST['current_tab'] ) ? sanitize_text_field( $_POST['current_tab'] ) : 'colors';
+	$raw_mp_opt = isset( $_POST['mp_opt'] ) && is_array( $_POST['mp_opt'] ) ? $_POST['mp_opt'] : array();
+
+	mobile_pasal_process_options_save( $raw_mp_opt, $active_tab );
+
+	$backups = get_option( 'mobile_pasal_options_backups', array() );
+	$backup_summaries = array();
+	if ( is_array( $backups ) ) {
+		foreach ( $backups as $b ) {
+			$backup_summaries[] = array(
+				'id'        => $b['id'],
+				'timestamp' => $b['timestamp'],
+				'user'      => $b['user'],
+				'reason'    => $b['reason'],
+			);
+		}
+	}
+
+	wp_send_json_success(
+		array(
+			'message'   => __( 'All changes saved & synced to live site!', 'mobile-pasal' ),
+			'timestamp' => current_time( 'H:i:s' ),
+			'backups'   => $backup_summaries,
+		)
+	);
+}
+add_action( 'wp_ajax_mobile_pasal_ajax_save_options', 'mobile_pasal_ajax_save_options' );
+
+/**
+ * Handle AJAX Reset (Current Tab or All Options to Factory Defaults)
+ */
+function mobile_pasal_ajax_reset_options() {
+	check_ajax_referer( 'mobile_pasal_save_theme_options', 'nonce' );
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'mobile-pasal' ) ), 403 );
+	}
+
+	$scope      = isset( $_POST['reset_scope'] ) ? sanitize_text_field( $_POST['reset_scope'] ) : 'tab';
+	$field_keys = isset( $_POST['field_keys'] ) && is_array( $_POST['field_keys'] ) ? array_map( 'sanitize_key', $_POST['field_keys'] ) : array();
+	$defaults   = mobile_pasal_options_defaults();
+	$existing   = get_option( 'mobile_pasal_options', array() );
+	if ( ! is_array( $existing ) ) {
+		$existing = $defaults;
+	}
+
+	if ( 'all' === $scope ) {
+		mobile_pasal_record_options_backup( $existing, 'Pre-Factory Reset Backup' );
+		update_option( 'mobile_pasal_options', $defaults );
+		mobile_pasal_flush_options_cache();
+		wp_send_json_success( array( 'message' => __( 'All Theme Options have been restored to factory defaults.', 'mobile-pasal' ) ) );
+	} else {
+		mobile_pasal_record_options_backup( $existing, 'Pre-Tab Reset Backup' );
+		foreach ( $field_keys as $k ) {
+			if ( array_key_exists( $k, $defaults ) ) {
+				$existing[ $k ] = $defaults[ $k ];
+			}
+		}
+		// Sync canonical aliases
+		foreach ( mobile_pasal_get_canonical_alias_groups() as $canon_key => $alias_list ) {
+			if ( array_key_exists( $canon_key, $existing ) ) {
+				foreach ( $alias_list as $alias_key ) {
+					$existing[ $alias_key ] = $existing[ $canon_key ];
+				}
+			}
+		}
+		update_option( 'mobile_pasal_options', $existing );
+		mobile_pasal_flush_options_cache();
+		wp_send_json_success( array( 'message' => __( 'Active tab settings restored to factory defaults.', 'mobile-pasal' ) ) );
+	}
+}
+add_action( 'wp_ajax_mobile_pasal_reset_options', 'mobile_pasal_ajax_reset_options' );
+
+/**
+ * Handle AJAX Restore from Snapshot Backup or JSON Import
+ */
+function mobile_pasal_ajax_restore_backup() {
+	check_ajax_referer( 'mobile_pasal_save_theme_options', 'nonce' );
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_send_json_error( array( 'message' => __( 'Permission denied.', 'mobile-pasal' ) ), 403 );
+	}
+
+	$existing = get_option( 'mobile_pasal_options', array() );
+	$mode     = isset( $_POST['restore_mode'] ) ? sanitize_text_field( $_POST['restore_mode'] ) : 'snapshot';
+
+	if ( 'json' === $mode ) {
+		$raw_json = isset( $_POST['import_json'] ) ? wp_unslash( $_POST['import_json'] ) : '';
+		$decoded  = json_decode( $raw_json, true );
+		if ( ! is_array( $decoded ) || empty( $decoded ) ) {
+			wp_send_json_error( array( 'message' => __( 'Invalid JSON payload. Please check the file or JSON string.', 'mobile-pasal' ) ) );
+		}
+		$options_payload = isset( $decoded['options'] ) && is_array( $decoded['options'] ) ? $decoded['options'] : $decoded;
+		mobile_pasal_record_options_backup( $existing, 'Pre-JSON Import Backup' );
+		update_option( 'mobile_pasal_options', $options_payload );
+		mobile_pasal_flush_options_cache();
+		wp_send_json_success( array( 'message' => __( 'Theme Options successfully imported from JSON!', 'mobile-pasal' ) ) );
+	} else {
+		$backup_id = isset( $_POST['backup_id'] ) ? sanitize_text_field( $_POST['backup_id'] ) : '';
+		$backups   = get_option( 'mobile_pasal_options_backups', array() );
+		if ( is_array( $backups ) ) {
+			foreach ( $backups as $b ) {
+				if ( isset( $b['id'] ) && $b['id'] === $backup_id && ! empty( $b['data'] ) && is_array( $b['data'] ) ) {
+					mobile_pasal_record_options_backup( $existing, 'Pre-Rollback Backup' );
+					update_option( 'mobile_pasal_options', $b['data'] );
+					mobile_pasal_flush_options_cache();
+					wp_send_json_success( array( 'message' => sprintf( __( 'Restored snapshot from %s!', 'mobile-pasal' ), $b['timestamp'] ) ) );
+				}
+			}
+		}
+		wp_send_json_error( array( 'message' => __( 'Snapshot not found.', 'mobile-pasal' ) ) );
+	}
+}
+add_action( 'wp_ajax_mobile_pasal_restore_backup', 'mobile_pasal_ajax_restore_backup' );
+
+/**
+ * Handle 1-Click JSON Export Download (admin-post.php)
+ */
+function mobile_pasal_export_options_json() {
+	if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( $_GET['_wpnonce'], 'mobile_pasal_export_options' ) ) {
+		wp_die( esc_html__( 'Security check failed.', 'mobile-pasal' ) );
+	}
+	if ( ! current_user_can( 'edit_theme_options' ) ) {
+		wp_die( esc_html__( 'Permission denied.', 'mobile-pasal' ) );
+	}
+
+	$options = get_option( 'mobile_pasal_options', mobile_pasal_options_defaults() );
+	$export  = array(
+		'site'        => home_url(),
+		'theme'       => 'mobile-pasal',
+		'version'     => '3.1.0',
+		'exported_at' => current_time( 'mysql' ),
+		'options'     => $options,
+	);
+
+	$filename = 'ali-mobile-theme-options-' . gmdate( 'Y-m-d-His' ) . '.json';
+	nocache_headers();
+	header( 'Content-Type: application/json; charset=utf-8' );
+	header( 'Content-Disposition: attachment; filename=' . $filename );
+	echo wp_json_encode( $export, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+	exit;
+}
+add_action( 'admin_post_mobile_pasal_export_options', 'mobile_pasal_export_options_json' );
+
+/**
+ * Frontend & Admin WP Admin Bar Context-Aware Quick-Customize Menu
+ */
+function mobile_pasal_admin_bar_customize_menu( $wp_admin_bar ) {
+	if ( ! current_user_can( 'edit_theme_options' ) || ! is_admin_bar_showing() ) {
+		return;
+	}
+
+	$base_url = admin_url( 'admin.php?page=mobile-pasal-options' );
+
+	$wp_admin_bar->add_node(
+		array(
+			'id'    => 'mp-quick-customize',
+			'title' => '<span class="ab-icon dashicons dashicons-smartphone" style="margin-top:2px;"></span><span class="ab-label">Ali Mobile Controls</span>',
+			'href'  => $base_url,
+			'meta'  => array( 'title' => __( 'Quick-Customize Ali Mobile Center Theme Options', 'mobile-pasal' ) ),
+		)
+	);
+
+	// Context-aware top link when viewing frontend pages
+	if ( ! is_admin() ) {
+		$ctx_tab   = 'colors';
+		$ctx_label = '⚡ Edit Current Page Settings';
+		if ( is_front_page() || is_home() ) {
+			$ctx_tab   = 'hero';
+			$ctx_label = '⚡ Edit Homepage Showcase & Hero';
+		} elseif ( is_singular( 'handset' ) || is_page( 'shop' ) || is_post_type_archive( 'handset' ) ) {
+			$ctx_tab   = 'shop_hero_tab';
+			$ctx_label = '⚡ Edit Showroom & Handset Catalog';
+		} elseif ( is_page( 'services' ) ) {
+			$ctx_tab   = 'services_hero_tab';
+			$ctx_label = '⚡ Edit Apple Fix Lab & Services Page';
+		} elseif ( is_page( 'about' ) ) {
+			$ctx_tab   = 'about_story_tab';
+			$ctx_label = '⚡ Edit Heritage & About Us Page';
+		} elseif ( is_page( 'contact' ) ) {
+			$ctx_tab   = 'contact_coords_tab';
+			$ctx_label = '⚡ Edit Contact & Location Desk';
+		} elseif ( is_404() ) {
+			$ctx_tab   = 'error_404_tab';
+			$ctx_label = '⚡ Edit 404 Page Settings';
+		} elseif ( is_search() ) {
+			$ctx_tab   = 'search_page_tab';
+			$ctx_label = '⚡ Edit Search Results Settings';
+		}
+
+		$wp_admin_bar->add_node(
+			array(
+				'id'     => 'mp-qc-context',
+				'parent' => 'mp-quick-customize',
+				'title'  => $ctx_label,
+				'href'   => add_query_arg( 'tab', $ctx_tab, $base_url ),
+			)
+		);
+	}
+
+	$quick_links = array(
+		'mp-qc-bulk-prices' => array( '💰 Bulk Handset Price & Stock Editor', admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
+		'mp-qc-inquiries'   => array( '📥 Customer Repair & Order Inquiries', admin_url( 'admin.php?page=mp-inquiries' ) ),
+		'mp-qc-identity'    => array( '🎨 Brand Identity, Logo & Price Visibility', add_query_arg( 'tab', 'identity', $base_url ) ),
+		'mp-qc-header'      => array( '📞 Header, Hotline & WhatsApp Setup', add_query_arg( 'tab', 'header_nav', $base_url ) ),
+		'mp-qc-home-cats'   => array( '📱 Homepage Categories & Handsets', add_query_arg( 'tab', 'categories_brands_sec', $base_url ) ),
+		'mp-qc-seo'         => array( '🚀 SEO, Local Maps & AI Ranking (AEO)', add_query_arg( 'tab', 'seo_meta_tab', $base_url ) ),
+		'mp-qc-backup'      => array( '🛡️ Backup, Export & Health Check', add_query_arg( 'tab', 'backup_health_tab', $base_url ) ),
+	);
+
+	foreach ( $quick_links as $node_id => $info ) {
+		$wp_admin_bar->add_node(
+			array(
+				'id'     => $node_id,
+				'parent' => 'mp-quick-customize',
+				'title'  => $info[0],
+				'href'   => $info[1],
+			)
+		);
+	}
+}
+add_action( 'admin_bar_menu', 'mobile_pasal_admin_bar_customize_menu', 95 );
 
 /**
  * Register Admin Menu Pages
@@ -797,7 +1169,7 @@ add_action( 'admin_menu', 'mobile_pasal_options_admin_menu' );
  * Enqueue Admin Scripts & Styles for Theme Options
  */
 function mobile_pasal_options_admin_enqueue( $hook ) {
-	if ( strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false ) {
+	if ( strpos( $hook, 'mobile-pasal-options' ) === false && strpos( $hook, 'mp-inquiries' ) === false && strpos( $hook, 'mp-bulk-price-editor' ) === false ) {
 		return;
 	}
 
@@ -810,13 +1182,15 @@ function mobile_pasal_options_admin_enqueue( $hook ) {
 
 	$css_path = get_template_directory() . '/assets/css/admin-options.css';
 	$js_path  = get_template_directory() . '/assets/js/admin-options.js';
-	$css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : '3.0.0';
-	$js_ver   = file_exists( $js_path ) ? filemtime( $js_path ) : '3.0.0';
+	$css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : '3.1.0';
+	$js_ver   = file_exists( $js_path ) ? filemtime( $js_path ) : '3.1.0';
 
 	wp_enqueue_style( 'mobile-pasal-admin-options', get_template_directory_uri() . '/assets/css/admin-options.css', array(), $css_ver );
 	wp_enqueue_script( 'mobile-pasal-admin-options', get_template_directory_uri() . '/assets/js/admin-options.js', array( 'jquery', 'wp-color-picker' ), $js_ver, true );
 
 	wp_localize_script( 'mobile-pasal-admin-options', 'mobilePasalOptions', array(
+		'ajax_url'     => admin_url( 'admin-ajax.php' ),
+		'nonce'        => wp_create_nonce( 'mobile_pasal_save_theme_options' ),
 		'choose_image' => __( 'Select or Upload Store Image', 'mobile-pasal' ),
 		'use_image'    => __( 'Use This Media Asset', 'mobile-pasal' ),
 		'icons'        => mp_get_all_icons_svg_map(),
@@ -1100,6 +1474,7 @@ function mp_render_field_toggle( $key, $label, $desc = '' ) {
 		</div>
 		<div class="bopt-input-wrap bopt-toggle-wrap">
 			<label class="bopt-switch">
+				<input type="hidden" name="mp_opt[<?php echo esc_attr( $key ); ?>]" value="0" />
 				<input type="checkbox"
 					   id="opt_<?php echo esc_attr( $key ); ?>"
 					   name="mp_opt[<?php echo esc_attr( $key ); ?>]"
@@ -1284,12 +1659,13 @@ function mobile_pasal_options_render_dashboard() {
 			),
 		),
 		'mobile_group' => array(
-			'group_title' => __( 'Mobile UX & Chat Widget', 'mobile-pasal' ),
+			'group_title' => __( 'Mobile UX, System & Backup', 'mobile-pasal' ),
 			'icon'        => 'fa-mobile-screen-button',
 			'items'       => array(
 				'mobile_bottom_bar_tab' => array( 'label' => __( 'Sticky Mobile Bottom Bar', 'mobile-pasal' ), 'icon' => 'fa-mobile-screen-button' ),
 				'floating_wa_widget_tab'=> array( 'label' => __( 'Floating WhatsApp Widget', 'mobile-pasal' ), 'icon' => 'fa-comments' ),
 				'custom_code_tab'       => array( 'label' => __( 'Custom CSS & Header Scripts', 'mobile-pasal' ), 'icon' => 'fa-code' ),
+				'backup_health_tab'     => array( 'label' => __( 'Backup, Export & Health', 'mobile-pasal' ), 'icon' => 'fa-shield-heart' ),
 			),
 		),
 	);
@@ -1315,7 +1691,7 @@ function mobile_pasal_options_render_dashboard() {
 					<div class="bopt-brand-icon"><i class="fa-solid fa-mobile-screen"></i></div>
 					<div class="bopt-brand-info">
 						<span class="bopt-brand-title"><?php echo esc_html( mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' ) ); ?></span>
-						<span class="bopt-brand-badge"><?php esc_html_e( 'Theme Options Suite 3.0', 'mobile-pasal' ); ?></span>
+						<span class="bopt-brand-badge"><?php esc_html_e( 'Theme Options Suite 3.1', 'mobile-pasal' ); ?></span>
 					</div>
 				</div>
 			</div>
@@ -1332,6 +1708,11 @@ function mobile_pasal_options_render_dashboard() {
 						<span><?php esc_html_e( 'Changes saved successfully!', 'mobile-pasal' ); ?></span>
 					</div>
 				<?php endif; ?>
+
+				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Bulk Edit Handset Prices, Stock & Price Visibility', 'mobile-pasal' ); ?>">
+					<i class="fa-solid fa-tags"></i>
+					<span class="bopt-btn-text"><?php esc_html_e( 'Bulk Prices', 'mobile-pasal' ); ?></span>
+				</a>
 
 				<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries' ) ); ?>" class="bopt-messages-btn" title="<?php esc_attr_e( 'Customer Repair Dockets & Inquiries', 'mobile-pasal' ); ?>">
 					<i class="fa-solid fa-envelope"></i>
@@ -1367,10 +1748,11 @@ function mobile_pasal_options_render_dashboard() {
 
 				<div class="bopt-search-box">
 					<i class="fa-solid fa-magnifying-glass"></i>
-					<input type="text" id="boptSearchInput" placeholder="<?php esc_attr_e( 'Filter settings (e.g. WhatsApp, Slider, iPhone)...', 'mobile-pasal' ); ?>" autocomplete="off" />
+					<input type="text" id="boptSearchInput" placeholder="<?php esc_attr_e( 'Search all settings (Ctrl+K)...', 'mobile-pasal' ); ?>" autocomplete="off" />
 					<button type="button" id="boptSearchClear" class="bopt-search-clear" style="display:none;" title="<?php esc_attr_e( 'Clear filter', 'mobile-pasal' ); ?>">
 						<i class="fa-solid fa-xmark"></i>
 					</button>
+					<div class="bopt-global-search-results" id="boptGlobalSearchResults" style="display:none;"></div>
 				</div>
 
 				<nav class="bopt-nav">
@@ -2785,6 +3167,9 @@ function mobile_pasal_options_render_dashboard() {
 								</div>
 							</div>
 							<div class="bopt-cpt-action-links">
+								<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-btn-gold-action" style="background:#0066cc;border:1px solid #0052a3;color:#fff;">
+									<i class="fa-solid fa-tags"></i> <?php esc_html_e( 'Bulk Price & Stock Editor', 'mobile-pasal' ); ?>
+								</a>
 								<a href="<?php echo esc_url( admin_url( 'post-new.php?post_type=handset' ) ); ?>" class="bopt-btn-gold-action">
 									<i class="fa-solid fa-plus"></i> <?php esc_html_e( 'Add New Handset', 'mobile-pasal' ); ?>
 								</a>
@@ -4464,6 +4849,181 @@ function mobile_pasal_options_render_dashboard() {
 						</div>
 					</div>
 
+					<!-- 7.4 Backup, Export & Health Check -->
+					<?php
+					$health_logo     = mp_opt( 'site_logo' );
+					$health_favicon  = mp_opt( 'site_favicon' );
+					$health_wa       = mp_opt( 'whatsapp_number' );
+					$health_phone    = mp_opt( 'counter_phone' );
+					$health_map      = mp_opt( 'counter_map_embed' );
+					$health_price_on = mp_opt( 'handset_show_price', 1 );
+					$health_seo_on   = mp_opt( 'seo_robots_index', 1 );
+					$handset_counts  = wp_count_posts( 'handset' );
+					$total_handsets  = isset( $handset_counts->publish ) ? (int) $handset_counts->publish : 0;
+					$saved_backups   = get_option( 'mobile_pasal_options_backups', array() );
+					if ( ! is_array( $saved_backups ) ) {
+						$saved_backups = array();
+					}
+					$export_url = wp_nonce_url( admin_url( 'admin-post.php?action=mobile_pasal_export_options' ), 'mobile_pasal_export_options' );
+					?>
+					<div class="bopt-tab-pane <?php echo $active_tab === 'backup_health_tab' ? 'is-active' : ''; ?>" id="tab-pane-backup_health_tab">
+						<div class="bopt-pane-header">
+							<h2><?php esc_html_e( 'System Backup, JSON Export/Import & Store Health Check', 'mobile-pasal' ); ?></h2>
+							<p><?php esc_html_e( 'Audit store configuration readiness, export or import complete JSON settings backups, or roll back to any of the last 5 automatic snapshots.', 'mobile-pasal' ); ?></p>
+						</div>
+
+						<!-- Store Configuration Health Check -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-shield-heart"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Live Store Configuration Health Check', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Real-time diagnostic audit of critical store coordinates, branding, and catalog state.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-health-grid">
+									<div class="bopt-health-item <?php echo ! empty( $health_wa ) && ! empty( $health_phone ) ? 'is-ok' : 'is-warn'; ?>">
+										<div class="bopt-health-icon"><i class="fa-brands fa-whatsapp"></i></div>
+										<div class="bopt-health-meta">
+											<strong><?php esc_html_e( 'WhatsApp & Counter Hotline', 'mobile-pasal' ); ?></strong>
+											<span><?php echo ! empty( $health_wa ) ? esc_html( 'WA: +' . $health_wa . ' • Tel: ' . $health_phone ) : esc_html__( 'Missing WhatsApp number', 'mobile-pasal' ); ?></span>
+										</div>
+										<span class="bopt-health-badge"><?php echo ! empty( $health_wa ) ? esc_html__( 'Verified', 'mobile-pasal' ) : esc_html__( 'Action Needed', 'mobile-pasal' ); ?></span>
+									</div>
+
+									<div class="bopt-health-item <?php echo $total_handsets > 0 ? 'is-ok' : 'is-warn'; ?>">
+										<div class="bopt-health-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+										<div class="bopt-health-meta">
+											<strong><?php esc_html_e( 'Showroom Handset Catalog', 'mobile-pasal' ); ?></strong>
+											<span><?php echo esc_html( sprintf( '%d Published Handsets • Global Prices: %s', $total_handsets, ! empty( $health_price_on ) ? 'Visible' : 'Hidden (Inquiry Mode)' ) ); ?></span>
+										</div>
+										<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-health-link"><?php esc_html_e( 'Bulk Price Editor →', 'mobile-pasal' ); ?></a>
+									</div>
+
+									<div class="bopt-health-item <?php echo ! empty( $health_map ) && strpos( $health_map, '<iframe' ) !== false ? 'is-ok' : 'is-warn'; ?>">
+										<div class="bopt-health-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+										<div class="bopt-health-meta">
+											<strong><?php esc_html_e( 'Google Maps Showroom Embed', 'mobile-pasal' ); ?></strong>
+											<span><?php echo ! empty( $health_map ) && strpos( $health_map, '<iframe' ) !== false ? esc_html__( 'Interactive map iframe configured', 'mobile-pasal' ) : esc_html__( 'Missing valid <iframe> embed', 'mobile-pasal' ); ?></span>
+										</div>
+										<span class="bopt-health-badge"><?php echo ! empty( $health_map ) ? esc_html__( 'Active', 'mobile-pasal' ) : esc_html__( 'Check Map', 'mobile-pasal' ); ?></span>
+									</div>
+
+									<div class="bopt-health-item <?php echo ! empty( $health_seo_on ) ? 'is-ok' : 'is-warn'; ?>">
+										<div class="bopt-health-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+										<div class="bopt-health-meta">
+											<strong><?php esc_html_e( 'Google Search & AI Indexing (SEO/AEO)', 'mobile-pasal' ); ?></strong>
+											<span><?php echo ! empty( $health_seo_on ) ? esc_html__( 'Indexing enabled (index, follow) + Schema active', 'mobile-pasal' ) : esc_html__( 'Search indexing is currently disabled (noindex)', 'mobile-pasal' ); ?></span>
+										</div>
+										<span class="bopt-health-badge"><?php echo ! empty( $health_seo_on ) ? esc_html__( 'Indexing On', 'mobile-pasal' ) : esc_html__( 'Noindex', 'mobile-pasal' ); ?></span>
+									</div>
+
+									<div class="bopt-health-item <?php echo ! empty( $health_logo ) ? 'is-ok' : 'is-info'; ?>">
+										<div class="bopt-health-icon"><i class="fa-solid fa-image"></i></div>
+										<div class="bopt-health-meta">
+											<strong><?php esc_html_e( 'Brand Logo & Favicon Asset', 'mobile-pasal' ); ?></strong>
+											<span><?php echo ! empty( $health_logo ) ? esc_html__( 'Custom image logo uploaded', 'mobile-pasal' ) : esc_html__( 'Using crisp typography brand emblem (Upload optional)', 'mobile-pasal' ); ?></span>
+										</div>
+										<span class="bopt-health-badge"><?php echo ! empty( $health_logo ) ? esc_html__( 'Custom Logo', 'mobile-pasal' ) : esc_html__( 'Text Emblem', 'mobile-pasal' ); ?></span>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- 1-Click Export & Import JSON -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-file-export"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( '1-Click JSON Backup Export & Import', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Download a complete portable JSON file of all 639+ theme settings, or restore from a saved JSON file.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div class="bopt-backup-actions-row">
+									<div class="bopt-backup-col">
+										<h4><?php esc_html_e( 'Export Current Settings', 'mobile-pasal' ); ?></h4>
+										<p class="bopt-desc"><?php esc_html_e( 'Downloads a timestamped .json file containing all your custom text, colors, slides, and SEO settings.', 'mobile-pasal' ); ?></p>
+										<a href="<?php echo esc_url( $export_url ); ?>" class="button bopt-btn-gold" style="margin-top:10px;display:inline-flex;align-items:center;gap:8px;">
+											<i class="fa-solid fa-download"></i> <?php esc_html_e( 'Download JSON Backup File', 'mobile-pasal' ); ?>
+										</a>
+									</div>
+									<div class="bopt-backup-col">
+										<h4><?php esc_html_e( 'Import Settings from JSON', 'mobile-pasal' ); ?></h4>
+										<p class="bopt-desc"><?php esc_html_e( 'Select a previously exported .json file or paste its contents below to restore.', 'mobile-pasal' ); ?></p>
+										<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+											<input type="file" id="boptImportFileInput" accept=".json,application/json" style="font-size:12px;" />
+										</div>
+										<textarea id="boptImportJsonTextarea" class="bopt-textarea" rows="3" placeholder='{"options": { ... }}' style="margin-top:8px;"></textarea>
+										<button type="button" class="button bopt-btn-gold" id="boptImportJsonBtn" style="margin-top:8px;">
+											<i class="fa-solid fa-file-import"></i> <?php esc_html_e( 'Import & Restore JSON', 'mobile-pasal' ); ?>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Automatic 5-Snapshot Time Machine -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Automatic 5-Snapshot Time Machine', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Every time you save or reset settings, the previous configuration is automatically preserved here.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<div id="boptSnapshotsTableWrap">
+									<?php if ( empty( $saved_backups ) ) : ?>
+										<p class="bopt-desc"><?php esc_html_e( 'No automatic snapshots recorded yet. Snapshots are created automatically whenever you click Save Changes.', 'mobile-pasal' ); ?></p>
+									<?php else : ?>
+										<table class="bopt-snapshots-table">
+											<thead>
+												<tr>
+													<th><?php esc_html_e( 'Snapshot Timestamp', 'mobile-pasal' ); ?></th>
+													<th><?php esc_html_e( 'Action / Tab', 'mobile-pasal' ); ?></th>
+													<th><?php esc_html_e( 'Admin User', 'mobile-pasal' ); ?></th>
+													<th style="text-align:right;"><?php esc_html_e( 'Rollback', 'mobile-pasal' ); ?></th>
+												</tr>
+											</thead>
+											<tbody id="boptSnapshotsTbody">
+												<?php foreach ( $saved_backups as $bak ) : ?>
+													<tr>
+														<td><strong><?php echo esc_html( $bak['timestamp'] ); ?></strong></td>
+														<td><?php echo esc_html( $bak['reason'] ); ?></td>
+														<td><code><?php echo esc_html( $bak['user'] ); ?></code></td>
+														<td style="text-align:right;">
+															<button type="button" class="button bopt-restore-snapshot-btn" data-backup-id="<?php echo esc_attr( $bak['id'] ); ?>">
+																<i class="fa-solid fa-rotate-left"></i> <?php esc_html_e( 'Restore This Snapshot', 'mobile-pasal' ); ?>
+															</button>
+														</td>
+													</tr>
+												<?php endforeach; ?>
+											</tbody>
+										</table>
+									<?php endif; ?>
+								</div>
+							</div>
+						</div>
+
+						<!-- Factory Reset Controls -->
+						<div class="bopt-card">
+							<div class="bopt-card-header">
+								<div class="bopt-card-header-icon"><i class="fa-solid fa-triangle-exclamation" style="color:#dc2626;"></i></div>
+								<div>
+									<h3 class="bopt-card-title"><?php esc_html_e( 'Factory Reset Controls', 'mobile-pasal' ); ?></h3>
+									<p class="bopt-card-desc"><?php esc_html_e( 'Restore all settings to the theme\'s original out-of-the-box defaults. An automatic snapshot is taken before resetting.', 'mobile-pasal' ); ?></p>
+								</div>
+							</div>
+							<div class="bopt-card-body">
+								<button type="button" class="button bopt-reset-all-btn" id="boptFactoryResetAllBtn" style="border-color:#dc2626;color:#dc2626;">
+									<i class="fa-solid fa-rotate"></i> <?php esc_html_e( 'Factory Reset All Theme Options to Defaults', 'mobile-pasal' ); ?>
+								</button>
+							</div>
+						</div>
+					</div>
+
 					<!-- Sticky Bottom Floating Action Dock -->
 					<div class="bopt-floating-save-bar">
 						<div class="bopt-floating-left">
@@ -4472,8 +5032,14 @@ function mobile_pasal_options_render_dashboard() {
 							<span class="bopt-floating-tab" id="boptActiveTabLabel"><?php esc_html_e( 'Color Palette & System', 'mobile-pasal' ); ?></span>
 						</div>
 						<div class="bopt-floating-right">
+							<button type="button" class="bopt-reset-tab-btn" id="boptResetCurrentTabBtn" title="<?php esc_attr_e( 'Reset only the fields in this tab back to default values', 'mobile-pasal' ); ?>">
+								<i class="fa-solid fa-rotate-left"></i> <?php esc_html_e( 'Reset Tab', 'mobile-pasal' ); ?>
+							</button>
+							<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-bulk-price-editor' ) ); ?>" class="bopt-inbox-btn" title="<?php esc_attr_e( 'Open Bulk Handset Price & Stock Editor', 'mobile-pasal' ); ?>">
+								<i class="fa-solid fa-tags"></i> <?php esc_html_e( 'Bulk Prices', 'mobile-pasal' ); ?>
+							</a>
 							<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries' ) ); ?>" class="bopt-inbox-btn">
-								<i class="fa-solid fa-inbox"></i> <?php esc_html_e( 'View Inquiries', 'mobile-pasal' ); ?>
+								<i class="fa-solid fa-inbox"></i> <?php esc_html_e( 'Inquiries', 'mobile-pasal' ); ?>
 								<?php if ( $unread_inquiries > 0 ) : ?>
 									<span class="bopt-badge-pill"><?php echo esc_html( $unread_inquiries ); ?></span>
 								<?php endif; ?>
@@ -4499,6 +5065,12 @@ function mobile_pasal_options_render_dashboard() {
 					</div>
 
 				</form>
+
+				<!-- Instant Save Toast Notification -->
+				<div class="bopt-toast" id="boptToast" style="display:none;" role="status" aria-live="polite">
+					<i class="fa-solid fa-circle-check bopt-toast-icon"></i>
+					<span class="bopt-toast-msg" id="boptToastMsg"><?php esc_html_e( 'Settings saved!', 'mobile-pasal' ); ?></span>
+				</div>
 
 			</main>
 

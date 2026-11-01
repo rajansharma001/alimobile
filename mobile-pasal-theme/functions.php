@@ -22,6 +22,7 @@ define( 'MP_THEME_URI', get_template_directory_uri() );
  */
 require_once MP_THEME_DIR . '/inc/theme-options.php';
 require_once MP_THEME_DIR . '/inc/custom-post-types.php';
+require_once MP_THEME_DIR . '/inc/bulk-price-editor.php';
 require_once MP_THEME_DIR . '/inc/inquiries-manager.php';
 require_once MP_THEME_DIR . '/inc/sample-data.php';
 require_once MP_THEME_DIR . '/inc/seo-geo-aeo.php';

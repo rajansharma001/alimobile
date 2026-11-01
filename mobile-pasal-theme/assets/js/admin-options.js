@@ -199,13 +199,44 @@
 	}
 
 	/**
-	 * 6. Live Search & Real-Time Filter
+	 * 6. Live Cross-Tab Global Search & Real-Time Filter (Ctrl+K)
 	 */
 	function initSearchFilter() {
-		var $input    = $( '#boptSearchInput' );
-		var $clearBtn = $( '#boptSearchClear' );
+		var $input      = $( '#boptSearchInput' );
+		var $clearBtn   = $( '#boptSearchClear' );
+		var $resultsBox = $( '#boptGlobalSearchResults' );
 
 		if ( ! $input.length ) return;
+
+		// Build a fast in-memory index of all fields across all 31 tabs once on load
+		var globalFieldIndex = [];
+		$( '.bopt-tab-pane' ).each( function () {
+			var $pane    = $( this );
+			var paneId   = $pane.attr( 'id' ) || '';
+			var tabSlug  = paneId.replace( 'tab-pane-', '' );
+			var $navLink = $( '.bopt-nav-item[data-tab-target="' + tabSlug + '"]' );
+			var tabTitle = $navLink.length ? $navLink.text().trim() : ( $pane.find( '.bopt-pane-header h2' ).text().trim() || tabSlug );
+
+			$pane.find( '.bopt-field' ).each( function () {
+				var $field     = $( this );
+				var key        = $field.data( 'field-key' ) || '';
+				var label      = $field.find( '.bopt-label' ).first().text().trim() || key;
+				var desc       = $field.find( '.bopt-desc' ).first().text().trim() || '';
+				var subtabPane = $field.closest( '.bopt-subnav-content' );
+				var subtabId   = subtabPane.length ? subtabPane.attr( 'id' ) : '';
+
+				globalFieldIndex.push( {
+					tabSlug:    tabSlug,
+					tabTitle:   tabTitle,
+					key:        key,
+					label:      label,
+					desc:       desc,
+					subtabId:   subtabId,
+					searchText: ( tabTitle + ' ' + label + ' ' + desc + ' ' + key ).toLowerCase(),
+					$field:     $field
+				} );
+			} );
+		} );
 
 		$input.on( 'input keyup', function () {
 			var query = $( this ).val().toLowerCase().trim();
@@ -214,6 +245,7 @@
 				$clearBtn.show();
 			} else {
 				$clearBtn.hide();
+				$resultsBox.hide().empty();
 			}
 
 			if ( ! query ) {
@@ -224,18 +256,47 @@
 				return;
 			}
 
-			// 1. Filter sidebar nav items
+			// 1. Render Cross-Tab Global Search Dropdown (up to 15 instant matches across all tabs)
+			var matches = [];
+			for ( var i = 0; i < globalFieldIndex.length; i++ ) {
+				if ( globalFieldIndex[ i ].searchText.indexOf( query ) !== -1 ) {
+					matches.push( globalFieldIndex[ i ] );
+					if ( matches.length >= 15 ) break;
+				}
+			}
+
+			if ( matches.length > 0 ) {
+				var html = '<div class="bopt-gs-header">Found across tabs (' + matches.length + ( matches.length === 15 ? '+' : '' ) + ')</div>';
+				for ( var m = 0; m < matches.length; m++ ) {
+					var item = matches[ m ];
+					html += '<button type="button" class="bopt-gs-item" data-tab="' + item.tabSlug + '" data-key="' + item.key + '" data-subtab="' + item.subtabId + '">' +
+						'<span class="bopt-gs-item-label">' + $( '<div>' ).text( item.label ).html() + '</span>' +
+						'<span class="bopt-gs-item-meta"><i class="fa-solid fa-folder-tree"></i> ' + $( '<div>' ).text( item.tabTitle ).html() + ' <code>' + item.key + '</code></span>' +
+						'</button>';
+				}
+				$resultsBox.html( html ).show();
+			} else {
+				$resultsBox.html( '<div class="bopt-gs-empty">No matching fields found for "' + $( '<div>' ).text( query ).html() + '"</div>' ).show();
+			}
+
+			// 2. Also filter sidebar nav items that match tab title OR contain matching fields
+			var matchingTabs = {};
+			for ( var j = 0; j < globalFieldIndex.length; j++ ) {
+				if ( globalFieldIndex[ j ].searchText.indexOf( query ) !== -1 ) {
+					matchingTabs[ globalFieldIndex[ j ].tabSlug ] = true;
+				}
+			}
+
 			$( '.bopt-nav-item' ).each( function () {
-				var text = $( this ).text().toLowerCase();
+				var text   = $( this ).text().toLowerCase();
 				var target = $( this ).data( 'tab-target' ) || '';
-				if ( text.indexOf( query ) !== -1 || target.toLowerCase().indexOf( query ) !== -1 ) {
+				if ( text.indexOf( query ) !== -1 || target.toLowerCase().indexOf( query ) !== -1 || matchingTabs[ target ] ) {
 					$( this ).show();
 				} else {
 					$( this ).hide();
 				}
 			} );
 
-			// 2. Expand & show groups with matching items
 			$( '.bopt-nav-group' ).each( function () {
 				var visibleCount = $( this ).find( '.bopt-nav-item:visible' ).length;
 				if ( visibleCount > 0 ) {
@@ -245,28 +306,44 @@
 					$( this ).hide();
 				}
 			} );
+		} );
 
-			// 3. Filter fields in currently active tab pane
-			var $activePane = $( '.bopt-tab-pane.is-active' );
-			$activePane.find( '.bopt-field' ).each( function () {
-				var fieldText = $( this ).text().toLowerCase();
-				var key = $( this ).data( 'field-key' ) || '';
-				if ( fieldText.indexOf( query ) !== -1 || key.toLowerCase().indexOf( query ) !== -1 ) {
-					$( this ).show();
-				} else {
-					$( this ).hide();
-				}
-			} );
+		// Click on a Cross-Tab Global Search Result -> Switch Tab, Open Subtab, Scroll & Highlight Field
+		$( document ).on( 'click', '.bopt-gs-item', function ( e ) {
+			e.preventDefault();
+			var tabSlug  = $( this ).data( 'tab' );
+			var fieldKey = $( this ).data( 'key' );
+			var subtabId = $( this ).data( 'subtab' );
 
-			// Also show/hide cards based on whether they have visible fields
-			$activePane.find( '.bopt-card' ).each( function () {
-				var visibleFields = $( this ).find( '.bopt-field:visible' ).length;
-				if ( visibleFields > 0 ) {
-					$( this ).show();
-				} else {
-					$( this ).hide();
+			$resultsBox.hide();
+			$( '.bopt-field, .bopt-card' ).show();
+
+			switchTab( tabSlug, true );
+
+			setTimeout( function () {
+				var $pane = $( '#tab-pane-' + tabSlug );
+				if ( subtabId ) {
+					$pane.find( '.bopt-subnav-pill[data-subtab="' + subtabId + '"]' ).trigger( 'click' );
 				}
-			} );
+				var $targetField = $pane.find( '.bopt-field[data-field-key="' + fieldKey + '"]' );
+				if ( $targetField.length ) {
+					$targetField.closest( '.bopt-card' ).removeClass( 'is-collapsed' );
+					$( 'html, body' ).animate( {
+						scrollTop: Math.max( 0, $targetField.offset().top - 110 )
+					}, 250 );
+					$targetField.addClass( 'bopt-field-highlight' );
+					setTimeout( function () {
+						$targetField.removeClass( 'bopt-field-highlight' );
+					}, 2200 );
+				}
+			}, 80 );
+		} );
+
+		// Hide search results dropdown when clicking outside
+		$( document ).on( 'click', function ( e ) {
+			if ( ! $( e.target ).closest( '.bopt-search-box' ).length ) {
+				$resultsBox.hide();
+			}
 		} );
 
 		// Clear search button
@@ -274,6 +351,7 @@
 			e.preventDefault();
 			$input.val( '' ).trigger( 'input' ).focus();
 			$clearBtn.hide();
+			$resultsBox.hide();
 		} );
 	}
 
@@ -413,7 +491,7 @@
 	}
 
 	/**
-	 * 10. Unsaved Changes Floating Badge
+	 * 10. Unsaved Changes Floating Badge & Instant Toast Helper
 	 */
 	function triggerUnsavedChange() {
 		var $badge = $( '#boptUnsavedPill' );
@@ -424,18 +502,203 @@
 		$badge.fadeIn( 250 );
 	}
 
+	function showBoptToast( message, isError ) {
+		var $toast = $( '#boptToast' );
+		if ( ! $toast.length ) {
+			$toast = $( '<div class="bopt-toast" id="boptToast"><i class="fa-solid fa-circle-check bopt-toast-icon"></i><span class="bopt-toast-msg" id="boptToastMsg"></span></div>' );
+			$( 'body' ).append( $toast );
+		}
+		$toast.toggleClass( 'is-error', !! isError );
+		$toast.find( '.bopt-toast-icon' )
+			.attr( 'class', isError ? 'fa-solid fa-triangle-exclamation bopt-toast-icon' : 'fa-solid fa-circle-check bopt-toast-icon' );
+		$( '#boptToastMsg' ).text( message );
+		$toast.stop( true, true ).fadeIn( 200 );
+		setTimeout( function () {
+			$toast.fadeOut( 350 );
+		}, 3800 );
+	}
+
 	function initUnsavedTracker() {
 		$( document ).on( 'input change', '#bopt-main-form input, #bopt-main-form textarea, #bopt-main-form select', function () {
 			triggerUnsavedChange();
 		} );
+	}
 
-		$( document ).on( 'submit', '#bopt-main-form', function () {
-			$( '#boptUnsavedPill' ).fadeOut( 150 );
+	/**
+	 * 10b. Instant AJAX Save, Tab Reset, Factory Reset, JSON Import & Snapshot Rollback
+	 */
+	function initAjaxSaveAndBackupActions() {
+		var isSaving = false;
+
+		$( document ).on( 'submit', '#bopt-main-form', function ( e ) {
+			if ( ! window.mobilePasalOptions || ! window.mobilePasalOptions.ajax_url ) {
+				return true; // fallback to normal submit
+			}
+			e.preventDefault();
+			if ( isSaving ) return false;
+			isSaving = true;
+
+			var $form       = $( this );
+			var $saveBtns   = $( '.bopt-save-btn' );
+			var $mobSaveBtn = $( '#boptMobileSaveBtn' );
+
+			$saveBtns.addClass( 'is-saving' ).prop( 'disabled', true );
+			$mobSaveBtn.html( '<i class="fa-solid fa-spinner fa-spin"></i> <span>Saving...</span>' ).prop( 'disabled', true );
+
+			var payload = $form.serialize() + '&action=mobile_pasal_ajax_save_options';
+
+			$.post( window.mobilePasalOptions.ajax_url, payload )
+				.done( function ( res ) {
+					if ( res && res.success ) {
+						$( '#boptUnsavedPill' ).fadeOut( 150 );
+						showBoptToast( ( res.data && res.data.message ) ? res.data.message : 'All changes saved!', false );
+					} else {
+						showBoptToast( ( res && res.data && res.data.message ) ? res.data.message : 'Could not save changes.', true );
+					}
+				} )
+				.fail( function () {
+					// Fallback to normal submit if AJAX fails
+					$form.off( 'submit' ).trigger( 'submit' );
+				} )
+				.always( function () {
+					isSaving = false;
+					$saveBtns.removeClass( 'is-saving' ).prop( 'disabled', false );
+					$saveBtns.each( function () {
+						if ( $( this ).attr( 'id' ) === 'boptTopbarSaveBtn' ) {
+							$( this ).html( '<i class="fa-solid fa-floppy-disk"></i><span class="bopt-btn-text-full">Save Changes</span><span class="bopt-btn-text-short">Save</span><span class="bopt-key-hint">Ctrl+S</span>' );
+						} else {
+							$( this ).html( '<i class="fa-solid fa-floppy-disk"></i><span class="bopt-btn-text-full">Save All Settings</span><span class="bopt-btn-text-short">Save</span><span class="bopt-key-hint">Ctrl+S</span>' );
+						}
+					} );
+					$mobSaveBtn.html( '<i class="fa-solid fa-floppy-disk"></i> <span>Save All Settings</span>' ).prop( 'disabled', false );
+				} );
+
+			return false;
+		} );
+
+		// Reset Current Active Tab to Defaults
+		$( document ).on( 'click', '#boptResetCurrentTabBtn', function ( e ) {
+			e.preventDefault();
+			var $activePane = $( '.bopt-tab-pane.is-active' );
+			var keys = [];
+			$activePane.find( '.bopt-field[data-field-key]' ).each( function () {
+				var k = $( this ).data( 'field-key' );
+				if ( k ) keys.push( k );
+			} );
+			if ( ! keys.length ) {
+				showBoptToast( 'No resettable fields in this tab.', true );
+				return;
+			}
+			var tabName = $( '#boptActiveTabLabel' ).text() || 'this tab';
+			if ( ! window.confirm( 'Reset all ' + keys.length + ' settings in "' + tabName + '" back to their factory defaults? (An automatic snapshot backup will be saved first.)' ) ) {
+				return;
+			}
+			var $btn = $( this );
+			$btn.prop( 'disabled', true ).html( '<i class="fa-solid fa-spinner fa-spin"></i> Resetting...' );
+			$.post( window.mobilePasalOptions.ajax_url, {
+				action:      'mobile_pasal_reset_options',
+				nonce:       window.mobilePasalOptions.nonce,
+				reset_scope: 'tab',
+				field_keys:  keys
+			} ).done( function ( res ) {
+				if ( res && res.success ) {
+					showBoptToast( res.data.message || 'Tab reset to defaults!', false );
+					setTimeout( function () { window.location.reload(); }, 700 );
+				} else {
+					showBoptToast( 'Reset failed.', true );
+					$btn.prop( 'disabled', false ).html( '<i class="fa-solid fa-rotate-left"></i> Reset Tab' );
+				}
+			} );
+		} );
+
+		// Factory Reset All Theme Options
+		$( document ).on( 'click', '#boptFactoryResetAllBtn', function ( e ) {
+			e.preventDefault();
+			if ( ! window.confirm( 'Are you sure you want to restore ALL 639+ Theme Options to factory defaults? Your current settings will be backed up in the 5-Snapshot Time Machine.' ) ) {
+				return;
+			}
+			var $btn = $( this );
+			$btn.prop( 'disabled', true ).html( '<i class="fa-solid fa-spinner fa-spin"></i> Restoring Factory Defaults...' );
+			$.post( window.mobilePasalOptions.ajax_url, {
+				action:      'mobile_pasal_reset_options',
+				nonce:       window.mobilePasalOptions.nonce,
+				reset_scope: 'all'
+			} ).done( function ( res ) {
+				if ( res && res.success ) {
+					showBoptToast( res.data.message || 'Factory defaults restored!', false );
+					setTimeout( function () { window.location.reload(); }, 800 );
+				} else {
+					showBoptToast( 'Factory reset failed.', true );
+					$btn.prop( 'disabled', false );
+				}
+			} );
+		} );
+
+		// Restore Snapshot from Time Machine
+		$( document ).on( 'click', '.bopt-restore-snapshot-btn', function ( e ) {
+			e.preventDefault();
+			var backupId = $( this ).data( 'backup-id' );
+			if ( ! backupId || ! window.confirm( 'Restore this configuration snapshot? Your current state will also be backed up automatically.' ) ) {
+				return;
+			}
+			var $btn = $( this );
+			$btn.prop( 'disabled', true ).html( '<i class="fa-solid fa-spinner fa-spin"></i> Restoring...' );
+			$.post( window.mobilePasalOptions.ajax_url, {
+				action:       'mobile_pasal_restore_backup',
+				nonce:        window.mobilePasalOptions.nonce,
+				restore_mode: 'snapshot',
+				backup_id:    backupId
+			} ).done( function ( res ) {
+				if ( res && res.success ) {
+					showBoptToast( res.data.message || 'Snapshot restored!', false );
+					setTimeout( function () { window.location.reload(); }, 800 );
+				} else {
+					showBoptToast( ( res && res.data && res.data.message ) ? res.data.message : 'Restore failed.', true );
+					$btn.prop( 'disabled', false ).html( '<i class="fa-solid fa-rotate-left"></i> Restore This Snapshot' );
+				}
+			} );
+		} );
+
+		// Read JSON File into Import Textarea
+		$( document ).on( 'change', '#boptImportFileInput', function ( e ) {
+			var file = e.target.files && e.target.files[ 0 ];
+			if ( ! file ) return;
+			var reader = new FileReader();
+			reader.onload = function ( evt ) {
+				$( '#boptImportJsonTextarea' ).val( evt.target.result );
+			};
+			reader.readAsText( file );
+		} );
+
+		// Import JSON Button
+		$( document ).on( 'click', '#boptImportJsonBtn', function ( e ) {
+			e.preventDefault();
+			var rawJson = $( '#boptImportJsonTextarea' ).val().trim();
+			if ( ! rawJson ) {
+				showBoptToast( 'Please select a .json file or paste JSON content first.', true );
+				return;
+			}
+			var $btn = $( this );
+			$btn.prop( 'disabled', true ).html( '<i class="fa-solid fa-spinner fa-spin"></i> Importing...' );
+			$.post( window.mobilePasalOptions.ajax_url, {
+				action:       'mobile_pasal_restore_backup',
+				nonce:        window.mobilePasalOptions.nonce,
+				restore_mode: 'json',
+				import_json:  rawJson
+			} ).done( function ( res ) {
+				if ( res && res.success ) {
+					showBoptToast( res.data.message || 'JSON imported successfully!', false );
+					setTimeout( function () { window.location.reload(); }, 800 );
+				} else {
+					showBoptToast( ( res && res.data && res.data.message ) ? res.data.message : 'Invalid JSON.', true );
+					$btn.prop( 'disabled', false ).html( '<i class="fa-solid fa-file-import"></i> Import & Restore JSON' );
+				}
+			} );
 		} );
 	}
 
 	/**
-	 * 11. Keyboard Shortcut Ctrl+S / Cmd+S
+	 * 11. Keyboard Shortcuts: Ctrl+S (Save) & Ctrl+K (Global Search)
 	 */
 	function initKeyboardShortcuts() {
 		$( document ).on( 'keydown', function ( e ) {
@@ -443,9 +706,14 @@
 				e.preventDefault();
 				var $form = $( '#bopt-main-form' );
 				if ( $form.length ) {
-					var $btn = $( '.bopt-save-btn' ).first();
-					$btn.html( '<i class="fa-solid fa-spinner fa-spin"></i> Saving...' );
 					$form.trigger( 'submit' );
+				}
+			}
+			if ( ( e.ctrlKey || e.metaKey ) && ( e.key === 'k' || e.keyCode === 75 ) ) {
+				var $search = $( '#boptSearchInput' );
+				if ( $search.length ) {
+					e.preventDefault();
+					$search.focus().select();
 				}
 			}
 		} );
@@ -625,6 +893,7 @@ $( document ).ready( function () {
 		initColorPickers();
 		initToggleSwitches();
 		initUnsavedTracker();
+		initAjaxSaveAndBackupActions();
 		initKeyboardShortcuts();
 		initSaveAlertAutoDismiss();
 		initInquiriesFilter();

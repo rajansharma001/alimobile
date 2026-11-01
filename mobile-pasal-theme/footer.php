@@ -148,7 +148,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
       </div>
 
       <div>
-        <h4 class="footer-col-title"><?php esc_html_e( 'Showroom Contact', 'mobile-pasal' ); ?></h4>
+        <h4 class="footer-col-title"><?php echo esc_html( mp_opt( 'footer_col3_title', 'Showroom Contact' ) ); ?></h4>
         <p style="margin:0 0 10px 0; color:#cbd9ed;"><strong>Location:</strong> <?php echo esc_html( $address ); ?></p>
         <p style="margin:0 0 10px 0; color:#cbd9ed;"><strong>Hotline:</strong> <a href="tel:+<?php echo esc_attr( $clean_p ); ?>" style="color:#ffffff;"><?php echo esc_html( $phone ); ?></a></p>
         <p style="margin:0; color:#cbd9ed;"><strong>MDMS Support:</strong> 100% Legal IMEI Registration Assistance</p>
@@ -157,7 +157,7 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
 
     <div class="footer-bottom">
       <div><?php echo esc_html( $copyright ); ?></div>
-      <div style="color: #6d84a7;">Gulariya, Bardiya, Nepal • Authorized Brand Warranty Partner</div>
+      <div style="color: #6d84a7;"><?php echo esc_html( mp_opt( 'footer_mdms_badge', 'Gulariya, Bardiya, Nepal • Authorized Brand Warranty Partner' ) ); ?></div>
     </div>
   </div>
 </footer>
@@ -168,9 +168,14 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"></polyline></svg>
   </button>
 
+  <?php
+  $floating_wa_on = mp_opt( 'floating_wa_enabled', 1 );
+  if ( ! empty( $floating_wa_on ) && '0' !== (string) $floating_wa_on ) :
+  ?>
   <a class="whatsapp-btn" href="<?php echo esc_url( mp_get_whatsapp_link() ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php esc_attr_e( 'Chat with Ali Mobile Center on WhatsApp', 'mobile-pasal' ); ?>">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.79 14.12c-.24.68-1.39 1.3-1.92 1.38-.49.08-1.12.11-3.23-.76-2.69-1.11-4.43-3.83-4.57-4.01-.13-.19-1.11-1.48-1.11-2.82 0-1.34.7-2 .95-2.27.24-.27.54-.34.72-.34.18 0 .36.01.52.02.17.01.4-.06.62.48.24.58.8 1.95.87 2.1.07.14.12.31.02.5-.09.19-.14.3-.28.46-.14.16-.3.35-.43.47-.14.14-.29.3-.12.59.17.29.75 1.24 1.62 2.01 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.19.73-.85.92-1.15.2-.29.39-.24.66-.14.27.1 1.72.81 2.02.96.29.15.49.22.56.34.07.13.07.74-.17 1.42z"/></svg>
   </a>
+  <?php endif; ?>
 </div>
 
 <!-- Interactive Counter Service Quote Modal -->

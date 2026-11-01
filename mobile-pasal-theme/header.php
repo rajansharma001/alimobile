@@ -95,11 +95,14 @@ $preloader_color = mp_opt( 'color_primary', '#0066cc' );
 <?php endif; ?>
 
 <!-- Modern Sticky Header Bar -->
-<header class="header-bar" id="topHeader">
+<?php
+$header_sticky = mp_opt( 'header_sticky', 1 );
+?>
+<header class="header-bar" id="topHeader"<?php echo ( empty( $header_sticky ) || '0' === (string) $header_sticky ) ? ' style="position:relative;"' : ''; ?>>
   <div class="container header">
     <a class="brand" href="<?php echo esc_url( home_url( '/' ) ); ?>" aria-label="<?php bloginfo( 'name' ); ?> Home">
       <?php
-      $custom_logo_url = mp_opt( 'logo_image', '' );
+      $custom_logo_url = mp_opt( 'site_logo', '' );
       if ( ! empty( $custom_logo_url ) ) :
       ?>
         <img src="<?php echo esc_url( $custom_logo_url ); ?>" alt="<?php bloginfo( 'name' ); ?>" style="max-height: 48px; width: auto; object-fit: contain;">
