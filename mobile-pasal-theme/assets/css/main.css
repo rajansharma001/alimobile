@@ -9919,13 +9919,47 @@ html, body {
   flex-shrink: 0;
 }
 
+.single-handset-bento-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: clamp(28px, 4vw, 52px);
+  align-items: start;
+}
+
+@media (max-width: 960px) {
+  .single-handset-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stage-device-frame {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+
+.stage-device-frame img {
+  max-height: 320px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 30px rgba(7, 27, 59, 0.12));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.stage-pedestal-card:hover .stage-device-frame img {
+  transform: scale(1.05) translateY(-4px);
+}
+
 /* Full Specs Table Architecture */
 .handset-specs-table-card {
   background: #ffffff;
-  border: 1px solid #e2eaf5;
-  border-radius: 20px;
+  border: 1.5px solid #dce7f8;
+  border-radius: 24px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(7, 27, 59, 0.04);
+  box-shadow: 0 10px 30px rgba(8, 98, 233, 0.05);
 }
 
 .specs-table-group-header {
@@ -10021,10 +10055,11 @@ html, body {
 /* Handset Editorial Description Card */
 .handset-description-card {
   background: #ffffff;
-  border: 1px solid #e2eaf5;
-  border-radius: 20px;
+  border: 1.5px solid #dce7f8;
+  border-radius: 24px;
   padding: clamp(24px, 3.5vw, 36px);
-  box-shadow: 0 4px 20px rgba(7, 27, 59, 0.04);
+  box-shadow: 0 10px 30px rgba(8, 98, 233, 0.05);
+  border-left: 5px solid #0862e9;
   color: #334155;
   line-height: 1.8;
   font-size: 15.5px;
@@ -10065,22 +10100,25 @@ html, body {
 .handset-anchor-link {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 7px;
+  padding: 9px 18px;
   border-radius: 999px;
-  background: #f1f5f9;
-  color: #475569;
+  background: #edf5ff;
+  border: 1px solid #d0e2fc;
+  color: #0862e9;
   font-size: 13px;
   font-weight: 750;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   white-space: nowrap;
 }
 
 .handset-anchor-link:hover,
 .handset-anchor-link.active {
-  background: #0066cc;
+  background: #0862e9;
+  border-color: #0862e9;
   color: #ffffff;
+  box-shadow: 0 4px 14px rgba(8, 98, 233, 0.25);
 }
 
 .entry-header {

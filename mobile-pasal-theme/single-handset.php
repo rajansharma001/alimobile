@@ -138,7 +138,7 @@ while ( have_posts() ) :
 							<span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
 						</a>
 						<span class="crumb-divider">/</span>
-						<a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Smartphones', 'mobile-pasal' ); ?></a>
+						<a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Shop Handsets', 'mobile-pasal' ); ?></a>
 						<?php if ( ! empty( $brand_name ) ) : ?>
 							<span class="crumb-divider">/</span>
 							<span class="crumb-link"><?php echo esc_html( $brand_name ); ?></span>
@@ -153,209 +153,223 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
-	<!-- 2. Creative Studio Product Showcase Section -->
-	<section class="section-wrap single-product-section" style="padding: 36px 0 60px;">
+	<!-- 2. Creative Bento Studio Showcase Section Consistent with Home Page -->
+	<section class="section-wrap" style="padding: 36px 0 50px;">
 		<div class="tech-bg-grid" aria-hidden="true"></div>
 		<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
-		<div class="wrap">
-
-			<div class="single-product-grid">
-
-				<!-- Left Column: Studio Visual Card -->
-				<div class="product-studio-card">
-					<?php if ( ! empty( $badge ) ) : ?>
-						<span class="product-badge-pill"><?php echo esc_html( $badge ); ?></span>
-					<?php endif; ?>
-
-					<div class="product-verified-badge" title="<?php esc_attr_e( 'Verified with Nepal Telecommunications Authority MDMS System', 'mobile-pasal' ); ?>">
-						<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-						<span><?php esc_html_e( '100% NTA MDMS', 'mobile-pasal' ); ?></span>
+		
+		<div class="container">
+			<div class="flagship-bento-hero">
+				
+				<!-- Top Header Status Bar Consistent with Home Page -->
+				<div class="flagship-header-bar">
+					<div class="flagship-pill-left">
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+						<span><?php echo esc_html( $brand_name ?: __( 'Official Handset', 'mobile-pasal' ) ); ?> <?php esc_html_e( 'Showroom Unit', 'mobile-pasal' ); ?></span>
 					</div>
-
-					<!-- Visual Stage Pedestal -->
-					<div class="product-studio-stage">
-						<img class="product-studio-img" src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="eager">
-					</div>
-
-					<!-- Color Swatches Dock -->
-					<?php if ( ! empty( $color_list ) ) : ?>
-						<div class="product-swatches-dock">
-							<span class="product-swatch-label"><?php esc_html_e( 'Official Color Finishes', 'mobile-pasal' ); ?></span>
-							<div class="product-swatch-list">
-								<?php foreach ( $color_list as $c_name ) : ?>
-									<div class="product-swatch-chip">
-										<span class="product-swatch-dot" style="background-color: <?php echo esc_attr( mp_get_color_dot_style( $c_name ) ); ?>;"></span>
-										<span><?php echo esc_html( $c_name ); ?></span>
-									</div>
-								<?php endforeach; ?>
-							</div>
-						</div>
-					<?php endif; ?>
-
-					<!-- In-Box Items Retail Preview -->
-					<div class="product-inbox-dock">
-						<div class="product-inbox-title">
-							<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-							<span><?php esc_html_e( "What's Included in the Retail Box", 'mobile-pasal' ); ?></span>
-						</div>
-						<div class="product-inbox-tags">
-							<span class="product-inbox-tag">
-								<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
-								<?php the_title(); ?> Handset
-							</span>
-							<span class="product-inbox-tag">
-								<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
-								Type-C Cable
-							</span>
-							<span class="product-inbox-tag">
-								<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
-								SIM Ejector Pin
-							</span>
-							<span class="product-inbox-tag">
-								<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-								Official VAT Warranty Card
-							</span>
-						</div>
+					<div class="flagship-live-beacon">
+						<span class="beacon-dot"></span>
+						<span><?php echo esc_html( $stock_label ); ?></span>
 					</div>
 				</div>
 
-				<!-- Right Column: Device Telemetry & Commercial Hub -->
-				<div class="product-telemetry-panel">
+				<!-- Main Bento Split Grid -->
+				<div class="single-handset-bento-grid">
 					
-					<div class="product-header-block">
-						<?php if ( ! empty( $brand_name ) ) : ?>
-							<span class="product-brand-kicker">
-								<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-								<?php echo esc_html( $brand_name ); ?> <?php esc_html_e( 'Official Showroom Unit', 'mobile-pasal' ); ?>
-							</span>
-						<?php endif; ?>
-						<h1 class="product-main-title"><?php the_title(); ?></h1>
-					</div>
+					<!-- Column 1: Stage Pedestal Showcase (Left) -->
+					<div class="flagship-stage-column">
+						<div class="stage-pedestal-card">
+							
+							<!-- Floating Top Badge -->
+							<div class="stage-floating-chip">
+								<span class="chip-dot"></span>
+								<span><?php echo esc_html( $badge ); ?> • 100% NTA MDMS</span>
+							</div>
 
-					<!-- Pricing & Quotation Hub -->
-					<div class="product-price-hub">
-						<?php if ( $is_price_visible ) : ?>
-							<div class="product-price-row">
-								<span class="product-selling-price"><?php echo esc_html( $price_formatted ); ?></span>
-								<?php if ( ! empty( $old_price_formatted ) ) : ?>
-									<span class="product-regular-price"><?php echo esc_html( $old_price_formatted ); ?></span>
-								<?php endif; ?>
-								<?php if ( ! empty( $savings_text ) ) : ?>
-									<span class="product-savings-badge">
-										<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
-										<?php echo esc_html( $savings_text ); ?>
-									</span>
-								<?php endif; ?>
+							<!-- Device Image Frame with Subtle Drop Shadow & Hover Zoom -->
+							<div class="stage-device-frame">
+								<img src="<?php echo esc_url( $img_url ); ?>" alt="<?php the_title_attribute(); ?>" loading="eager" />
 							</div>
-							<div class="product-price-meta">
-								<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-								<span><?php esc_html_e( 'Includes 13% Official VAT Bill • 100% Tax Compliant', 'mobile-pasal' ); ?></span>
-							</div>
-						<?php else : ?>
-							<!-- Creative Hidden Price Quotation Card -->
-							<div class="product-quote-card">
-								<div class="product-quote-pill">
-									<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-									<span><?php echo esc_html( $hidden_price_text ); ?></span>
+
+							<!-- Official Color Finishes Swatches -->
+							<?php if ( ! empty( $color_list ) ) : ?>
+								<div class="finish-interactive-console" style="width: 100%; margin-top: 20px; margin-bottom: 0;">
+									<span class="finish-console-title"><?php esc_html_e( 'OFFICIAL COLOR FINISHES:', 'mobile-pasal' ); ?></span>
+									<div class="finish-chips-row">
+										<?php foreach ( $color_list as $c_name ) : ?>
+											<div class="finish-chip">
+												<span class="finish-circle" style="background: <?php echo esc_attr( mp_get_color_dot_style( $c_name ) ); ?>;"></span>
+												<span class="finish-name"><?php echo esc_html( $c_name ); ?></span>
+											</div>
+										<?php endforeach; ?>
+									</div>
 								</div>
-								<p class="product-quote-note"><?php echo esc_html( $hidden_price_note ); ?></p>
-							</div>
-						<?php endif; ?>
+							<?php endif; ?>
 
-						<!-- Live Showroom Counter Stock Status -->
-						<div class="product-stock-banner">
-							<div class="product-stock-status">
-								<span class="product-pulse-dot <?php echo esc_attr( $stock_status ); ?>" aria-hidden="true"></span>
-								<span><?php echo esc_html( $stock_label ); ?></span>
+							<!-- In-Box Retail Items Preview -->
+							<div class="product-inbox-dock" style="width: 100%; margin-top: 16px;">
+								<div class="product-inbox-title">
+									<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+									<span><?php esc_html_e( 'Included in Retail Box', 'mobile-pasal' ); ?></span>
+								</div>
+								<div class="product-inbox-tags">
+									<span class="product-inbox-tag"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg> <?php echo esc_html( wp_trim_words( get_the_title(), 3, '' ) ); ?></span>
+									<span class="product-inbox-tag"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg> Type-C Cable</span>
+									<span class="product-inbox-tag"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg> SIM Pin</span>
+									<span class="product-inbox-tag"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg> VAT Warranty Bill</span>
+								</div>
 							</div>
-							<span class="product-counter-loc">
-								<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-								Main Road, Gulariya
-							</span>
+
+							<!-- Stage Footer Assurances -->
+							<div class="stage-footer-assurances" style="width: 100%; margin-top: 16px;">
+								<div class="stage-assurance-pill pill-verified">
+									<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -2px; margin-right: 4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+									<span>100% Tax Compliant</span>
+								</div>
+								<div class="stage-assurance-pill">
+									<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align: -2px; margin-right: 4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+									<span>Official 1-Year Warranty</span>
+								</div>
+							</div>
+
 						</div>
 					</div>
 
-					<!-- 6 Quick Hardware Spec Cards -->
-					<div class="product-specs-grid">
-						
-						<!-- Processor -->
-						<?php if ( ! empty( $spec_chip ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
-									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
-									<span><?php esc_html_e( 'Processor', 'mobile-pasal' ); ?></span>
-								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_chip ); ?></div>
-							</div>
-						<?php endif; ?>
+					<!-- Column 2: Core Details, Pricing & Action Hub (Right) -->
+					<div class="flagship-core-column">
+						<h1 class="flagship-title-hero" style="font-size: clamp(28px, 3.2vw, 42px);"><?php the_title(); ?></h1>
+						<div class="flagship-tagline-chip">
+							<?php echo esc_html( $spec_chip ?: ( $brand_name . ' ' . __( 'Verified Nepal Handset', 'mobile-pasal' ) ) ); ?>
+						</div>
 
-						<!-- Display -->
-						<?php if ( ! empty( $spec_screen ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
-									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-									<span><?php esc_html_e( 'Display', 'mobile-pasal' ); ?></span>
+						<!-- Pricing Terminal Box -->
+						<div class="product-price-hub" style="margin-bottom: 24px;">
+							<?php if ( $is_price_visible ) : ?>
+								<div class="product-price-row" style="align-items: baseline; gap: 14px;">
+									<span class="product-selling-price" style="font-size: clamp(30px, 3.8vw, 42px); color: var(--blue); font-weight: 900;"><?php echo esc_html( $price_formatted ); ?></span>
+									<?php if ( ! empty( $old_price_formatted ) ) : ?>
+										<span class="product-regular-price" style="font-size: 17px;"><?php echo esc_html( $old_price_formatted ); ?></span>
+									<?php endif; ?>
+									<?php if ( ! empty( $savings_text ) ) : ?>
+										<span class="product-savings-badge">
+											<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7.01" y2="7"></line></svg>
+											<?php echo esc_html( $savings_text ); ?>
+										</span>
+									<?php endif; ?>
 								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_screen ); ?></div>
-							</div>
-						<?php endif; ?>
-
-						<!-- Camera -->
-						<?php if ( ! empty( $spec_camera ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
-									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-									<span><?php esc_html_e( 'Camera Optics', 'mobile-pasal' ); ?></span>
-								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_camera ); ?></div>
-							</div>
-						<?php endif; ?>
-
-						<!-- Battery -->
-						<?php if ( ! empty( $spec_battery ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
-									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line><line x1="6" y1="10" x2="6" y2="14"></line><line x1="10" y1="10" x2="10" y2="14"></line><line x1="14" y1="10" x2="14" y2="14"></line></svg>
-									<span><?php esc_html_e( 'Battery', 'mobile-pasal' ); ?></span>
-								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_battery ); ?></div>
-							</div>
-						<?php endif; ?>
-
-						<!-- Storage / RAM -->
-						<?php if ( ! empty( $spec_storage ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
-									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="10" y1="16" x2="10.01" y2="16"></line></svg>
-									<span><?php esc_html_e( 'Memory', 'mobile-pasal' ); ?></span>
-								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_storage ); ?></div>
-							</div>
-						<?php endif; ?>
-
-						<!-- Warranty -->
-						<?php if ( ! empty( $spec_warranty ) ) : ?>
-							<div class="product-spec-card">
-								<div class="product-spec-card-head">
+								<div class="product-price-meta">
 									<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-									<span><?php esc_html_e( 'Warranty', 'mobile-pasal' ); ?></span>
+									<span><?php esc_html_e( 'Includes 13% Official VAT Bill • 100% Tax Compliant', 'mobile-pasal' ); ?></span>
 								</div>
-								<div class="product-spec-card-val"><?php echo esc_html( $spec_warranty ); ?></div>
+							<?php else : ?>
+								<!-- Creative Hidden Price Quotation Card -->
+								<div class="product-quote-card">
+									<div class="product-quote-pill">
+										<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+										<span><?php echo esc_html( $hidden_price_text ); ?></span>
+									</div>
+									<p class="product-quote-note"><?php echo esc_html( $hidden_price_note ); ?></p>
+								</div>
+							<?php endif; ?>
+
+							<!-- Live Showroom Counter Stock Status -->
+							<div class="product-stock-banner">
+								<div class="product-stock-status">
+									<span class="product-pulse-dot <?php echo esc_attr( $stock_status ); ?>" aria-hidden="true"></span>
+									<span><?php echo esc_html( $stock_label ); ?></span>
+								</div>
+								<span class="product-counter-loc">
+									<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+									Gulariya-06, Bardiya Showroom
+								</span>
 							</div>
-						<?php endif; ?>
+						</div>
 
-					</div>
+						<!-- 6 Quick Bento Hardware Spec Pods Matching Home Page -->
+						<div class="flagship-bento-specs">
+							<?php if ( ! empty( $spec_chip ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_chip, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Processor & Chipset', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
 
-					<!-- Action Hub: WhatsApp & Hotline -->
-					<div class="product-actions-hub">
-						<div class="product-actions-row">
-							<a class="btn btn-whatsapp btn-lg" href="<?php echo esc_url( $wa_url ); ?>" target="_blank" rel="noopener">
-								<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-								<span><?php echo $is_price_visible ? esc_html__( 'Direct WhatsApp Order', 'mobile-pasal' ) : esc_html__( 'Inquire Counter Rate on WhatsApp', 'mobile-pasal' ); ?></span>
+							<?php if ( ! empty( $spec_screen ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_screen, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Display Architecture', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( ! empty( $spec_camera ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_camera, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Optics & Camera', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( ! empty( $spec_battery ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line><line x1="6" y1="10" x2="6" y2="14"></line><line x1="10" y1="10" x2="10" y2="14"></line><line x1="14" y1="10" x2="14" y2="14"></line></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_battery, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Battery Endurance', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( ! empty( $spec_storage ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="12" x2="2" y2="12"></line><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path><line x1="6" y1="16" x2="6.01" y2="16"></line><line x1="10" y1="16" x2="10.01" y2="16"></line></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_storage, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Memory & RAM', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
+
+							<?php if ( ! empty( $spec_warranty ) ) : ?>
+								<div class="spec-bento-pod">
+									<div class="spec-pod-icon">
+										<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+									</div>
+									<div class="spec-pod-body">
+										<strong><?php echo esc_html( wp_trim_words( $spec_warranty, 3, '' ) ); ?></strong>
+										<small><?php esc_html_e( 'Warranty Coverage', 'mobile-pasal' ); ?></small>
+									</div>
+								</div>
+							<?php endif; ?>
+						</div>
+
+						<!-- Action Buttons Row Consistent with Home Page -->
+						<div class="flagship-action-row" style="margin-bottom: 24px;">
+							<a class="btn-flagship-wa" href="<?php echo esc_url( $wa_url ); ?>" target="_blank" rel="noopener noreferrer">
+								<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+								<span><?php echo $is_price_visible ? esc_html__( 'Direct WhatsApp Order', 'mobile-pasal' ) : esc_html__( 'Inquire Rate on WhatsApp', 'mobile-pasal' ); ?></span>
+								<span class="btn-arrow">→</span>
 							</a>
-							<a class="btn btn-secondary btn-lg" href="tel:+<?php echo esc_attr( $phone_raw ); ?>" title="<?php esc_attr_e( 'Call Ali Mobile Showroom', 'mobile-pasal' ); ?>">
-								<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/></svg>
-								<span><?php esc_html_e( 'Call Hotline', 'mobile-pasal' ); ?></span>
+							<a class="btn-flagship-call" href="tel:+<?php echo esc_attr( $phone_raw ); ?>">
+								<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+								<span><?php printf( esc_html__( 'Call Store: %s', 'mobile-pasal' ), esc_html( $phone_number ) ); ?></span>
 							</a>
 						</div>
 
@@ -378,18 +392,18 @@ while ( have_posts() ) :
 								<span>Trade-In Old Phone Facility</span>
 							</div>
 						</div>
+
 					</div>
 
 				</div>
 
 			</div>
-
 		</div>
 	</section>
 
 	<!-- 3. Technical Anchor Navigation Strip -->
 	<section class="section-wrap" style="padding: 0 0 20px;">
-		<div class="wrap">
+		<div class="container">
 			<nav class="handset-section-anchor-nav" aria-label="<?php esc_attr_e( 'Handset Sections Navigation', 'mobile-pasal' ); ?>">
 				<a class="handset-anchor-link active" href="#specs-matrix">
 					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
@@ -397,7 +411,7 @@ while ( have_posts() ) :
 				</a>
 				<a class="handset-anchor-link" href="#editorial-overview">
 					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-					<span><?php esc_html_e( 'Overview & Insights', 'mobile-pasal' ); ?></span>
+					<span><?php esc_html_e( 'Overview & Highlights', 'mobile-pasal' ); ?></span>
 				</a>
 				<a class="handset-anchor-link" href="#counter-assurance">
 					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -414,11 +428,11 @@ while ( have_posts() ) :
 	<!-- 4. Deep Full Specifications Matrix Section -->
 	<section id="specs-matrix" class="section-wrap" style="padding: 20px 0 50px;">
 		<div class="tech-bg-grid" aria-hidden="true"></div>
-		<div class="wrap">
-			<div class="sec-head" style="margin-bottom: 24px;">
-				<span class="sec-kicker"><?php esc_html_e( 'Detailed Hardware Telemetry', 'mobile-pasal' ); ?></span>
-				<h2><?php esc_html_e( 'Full Technical Specifications Matrix', 'mobile-pasal' ); ?></h2>
-				<p><?php esc_html_e( 'Verified technical architecture and compliance data direct from official brand specifications.', 'mobile-pasal' ); ?></p>
+		<div class="container">
+			<div class="section-header" style="margin-bottom: 24px;">
+				<span class="section-badge"><?php esc_html_e( 'DETAILED HARDWARE TELEMETRY', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title"><?php esc_html_e( 'Full Technical Specifications Matrix', 'mobile-pasal' ); ?></h2>
+				<p class="section-desc"><?php esc_html_e( 'Verified technical architecture and compliance data direct from official brand specifications.', 'mobile-pasal' ); ?></p>
 			</div>
 
 			<div class="handset-specs-table-card">
@@ -530,10 +544,11 @@ while ( have_posts() ) :
 
 	<!-- 5. Editorial Overview & Counter Insights -->
 	<section id="editorial-overview" class="section-wrap" style="padding: 20px 0 50px;">
-		<div class="wrap">
-			<div class="sec-head" style="margin-bottom: 24px;">
-				<span class="sec-kicker"><?php esc_html_e( 'Expert Evaluation', 'mobile-pasal' ); ?></span>
-				<h2><?php esc_html_e( 'Device Overview & Highlights', 'mobile-pasal' ); ?></h2>
+		<div class="container">
+			<div class="section-header" style="margin-bottom: 24px;">
+				<span class="section-badge"><?php esc_html_e( 'EXPERT EVALUATION', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title"><?php esc_html_e( 'Device Overview & Highlights', 'mobile-pasal' ); ?></h2>
+				<p class="section-desc"><?php printf( esc_html__( 'Comprehensive overview of features and counter performance for %s.', 'mobile-pasal' ), get_the_title() ); ?></p>
 			</div>
 
 			<div class="handset-description-card">
@@ -555,58 +570,70 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
-	<!-- 6. Assurance Ribbon: The Ali Mobile 4-Pillar Handset Guarantee -->
+	<!-- 6. Assurance Ribbon: The Ali Mobile 4-Pillar Handset Guarantee Consistent with Home Page -->
 	<section id="counter-assurance" class="section-wrap trust-features-section" style="padding: 40px 0 60px;">
 		<div class="tech-bg-grid" aria-hidden="true"></div>
 		<div class="tech-ring-accent" aria-hidden="true"></div>
-		<div class="wrap">
-			<div class="sec-head sec-head-center" style="margin-bottom: 32px;">
-				<span class="sec-kicker"><?php esc_html_e( 'Guaranteed Genuine', 'mobile-pasal' ); ?></span>
-				<h2><?php esc_html_e( 'The Ali Mobile Assurance', 'mobile-pasal' ); ?></h2>
-				<p><?php esc_html_e( 'Every smartphone sold at our counter comes backed with legitimate consumer protections and technical support.', 'mobile-pasal' ); ?></p>
+		<div class="container">
+			<div class="section-header center" style="margin-bottom: 32px;">
+				<span class="section-badge"><?php esc_html_e( 'ZERO-RISK PURCHASE', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title"><?php esc_html_e( 'The Ali Mobile Handset Assurance', 'mobile-pasal' ); ?></h2>
+				<p class="section-desc"><?php esc_html_e( 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.', 'mobile-pasal' ); ?></p>
 			</div>
 
-			<div class="steps-flow-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
-				<div class="flow-step-card">
-					<div class="flow-step-num">
-						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+			<div class="hero-trust-grid">
+				<!-- Card 1: 100% NTA Approved -->
+				<div class="trust-box">
+					<div class="trust-box-icon">
+						<?php echo mp_get_icon_svg( 'shield', 22, 22 ); ?>
 					</div>
-					<h3><?php esc_html_e( '100% NTA Approved', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'Fully compliant with Nepal Telecommunications Authority IMEI registration. No SIM lock or network blacklisting issues.', 'mobile-pasal' ); ?></p>
+					<div>
+						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h4>
+						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
+					</div>
 				</div>
 
-				<div class="flow-step-card">
-					<div class="flow-step-num">
-						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+				<!-- Card 2: Official VAT Bill -->
+				<div class="trust-box">
+					<div class="trust-box-icon">
+						<?php echo mp_get_icon_svg( 'receipt', 22, 22 ); ?>
 					</div>
-					<h3><?php esc_html_e( 'Official VAT Bill', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'Every purchase comes with a legitimate serial invoice for official brand warranty claims across Nepal.', 'mobile-pasal' ); ?></p>
+					<div>
+						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h4>
+						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
+					</div>
 				</div>
 
-				<div class="flow-step-card">
-					<div class="flow-step-num">
-						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+				<!-- Card 3: Free Data Transfer -->
+				<div class="trust-box">
+					<div class="trust-box-icon">
+						<?php echo mp_get_icon_svg( 'arrows-rotate', 22, 22 ); ?>
 					</div>
-					<h3><?php esc_html_e( 'Free Data Transfer', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'Our technicians migrate your WhatsApp, contacts, and photos safely to your new phone right at the counter.', 'mobile-pasal' ); ?></p>
+					<div>
+						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h4>
+						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+					</div>
 				</div>
 
-				<div class="flow-step-card">
-					<div class="flow-step-num">
-						<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+				<!-- Card 4: Trade-In Counter -->
+				<div class="trust-box">
+					<div class="trust-box-icon">
+						<?php echo mp_get_icon_svg( 'store', 22, 22 ); ?>
 					</div>
-					<h3><?php esc_html_e( 'Trade-In Counter', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'Bring your old handset for fair trade-in evaluation toward any new smartphone upgrade.', 'mobile-pasal' ); ?></p>
+					<div>
+						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h4>
+						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 
-	<!-- 7. Similar / Related Handsets Section -->
+	<!-- 7. Similar / Related Handsets Section Consistent with Home Page Grid -->
 	<?php
 	$related_args = array(
 		'post_type'           => 'handset',
-		'posts_per_page'      => 4,
+		'posts_per_page'      => 3,
 		'post__not_in'        => array( $post_id ),
 		'ignore_sticky_posts' => 1,
 	);
@@ -621,7 +648,6 @@ while ( have_posts() ) :
 	}
 	$related_query = new WP_Query( $related_args );
 	if ( ! $related_query->have_posts() && isset( $related_args['tax_query'] ) ) {
-		// Fallback to recent handsets if no same-brand items
 		unset( $related_args['tax_query'] );
 		$related_query = new WP_Query( $related_args );
 	}
@@ -629,21 +655,21 @@ while ( have_posts() ) :
 	if ( $related_query->have_posts() ) :
 		?>
 		<section id="related-handsets" class="section-wrap" style="padding: 20px 0 60px;">
-			<div class="wrap">
-				<div class="sec-head" style="margin-bottom: 28px;">
-					<span class="sec-kicker"><?php esc_html_e( 'Explore More Options', 'mobile-pasal' ); ?></span>
-					<h2><?php esc_html_e( 'Similar Smartphone Models', 'mobile-pasal' ); ?></h2>
-					<p><?php esc_html_e( 'Compare related handsets available at our Gulariya counter showroom.', 'mobile-pasal' ); ?></p>
+			<div class="container">
+				<div class="section-header" style="margin-bottom: 28px;">
+					<span class="section-badge"><?php esc_html_e( 'EXPLORE MORE OPTIONS', 'mobile-pasal' ); ?></span>
+					<h2 class="section-title"><?php esc_html_e( 'Similar Smartphone Models', 'mobile-pasal' ); ?></h2>
+					<p class="section-desc"><?php esc_html_e( 'Compare related handsets available at our Gulariya counter showroom.', 'mobile-pasal' ); ?></p>
 				</div>
 
-				<div class="related-handsets-grid">
+				<div class="products-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
 					<?php
 					while ( $related_query->have_posts() ) :
 						$related_query->the_post();
 						$rel_id         = get_the_ID();
 						$rel_brand      = wp_get_post_terms( $rel_id, 'device_brand', array( 'fields' => 'names' ) );
 						$rel_brand_str  = ! empty( $rel_brand ) ? $rel_brand[0] : get_post_meta( $rel_id, '_mp_brand', true );
-						$rel_badge      = get_post_meta( $rel_id, '_mp_badge', true ) ?: __( 'Official', 'mobile-pasal' );
+						$rel_badge      = get_post_meta( $rel_id, '_mp_badge', true ) ?: __( 'Official VAT Bill', 'mobile-pasal' );
 						$rel_price      = get_post_meta( $rel_id, '_mp_price', true );
 						$rel_old_price  = get_post_meta( $rel_id, '_mp_old_price', true );
 						$rel_hide_price = get_post_meta( $rel_id, '_mp_hide_price', true );
@@ -653,67 +679,79 @@ while ( have_posts() ) :
 						// Show/Hide check for related card
 						$rel_show_price = ( $global_show_price == '1' || $global_show_price === 1 || $global_show_price === true ) && empty( $rel_hide_price ) && ! empty( $rel_price );
 						$rel_price_fmt  = is_numeric( $rel_price ) ? 'NPR ' . number_format( (float) $rel_price ) : $rel_price;
+						$rel_old_fmt    = ( is_numeric( $rel_old_price ) && (float) $rel_old_price > (float) $rel_price ) ? 'NPR ' . number_format( (float) $rel_old_price ) : ( ( ! empty( $rel_old_price ) && $rel_old_price !== $rel_price ) ? $rel_old_price : '' );
 
 						$rel_screen  = get_post_meta( $rel_id, '_mp_spec_screen', true ) ?: get_post_meta( $rel_id, '_mp_display', true );
 						$rel_chip    = get_post_meta( $rel_id, '_mp_spec_chip', true ) ?: get_post_meta( $rel_id, '_mp_processor', true );
 						$rel_storage = get_post_meta( $rel_id, '_mp_spec_storage', true );
 						?>
 						<article class="product-card">
+							
+							<!-- Top Badges Row -->
 							<div class="product-card-topbar">
-								<span class="product-badge-pill"><?php echo esc_html( $rel_badge ); ?></span>
-								<span class="product-nta-tag" style="font-size:11px;font-weight:750;color:#16a34a;display:inline-flex;align-items:center;gap:4px;">
-									<svg viewBox="0 0 24 24" width="11" height="11" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-									NTA
+								<span class="product-tag"><?php echo esc_html( $rel_badge ); ?></span>
+								<span class="product-cat-tag"><?php echo esc_html( $rel_brand_str ?: 'Handset' ); ?></span>
+							</div>
+
+							<!-- Device Showcase Image Pedestal -->
+							<a class="product-img-box" href="<?php echo esc_url( $rel_permalink ); ?>" aria-label="<?php the_title_attribute(); ?>">
+								<img src="<?php echo esc_url( $rel_img ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" />
+							</a>
+
+							<!-- Brand & MDMS Row -->
+							<div class="product-brand-row">
+								<span><?php echo esc_html( $rel_brand_str ?: 'Handset' ); ?></span>
+								<span class="product-mdms-tag">
+									<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-1px;margin-right:3px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+									MDMS &amp; VAT
 								</span>
 							</div>
 
-							<a class="product-img-anchor" href="<?php echo esc_url( $rel_permalink ); ?>" aria-label="<?php the_title_attribute(); ?>">
-								<div class="product-img-wrap" style="aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;padding:16px;">
-									<img src="<?php echo esc_url( $rel_img ); ?>" alt="<?php the_title_attribute(); ?>" loading="lazy" style="max-height:160px;max-width:100%;object-fit:contain;">
-								</div>
-							</a>
+							<!-- Title -->
+							<h3 class="product-name">
+								<a href="<?php echo esc_url( $rel_permalink ); ?>"><?php the_title(); ?></a>
+							</h3>
 
-							<div class="product-body">
-								<?php if ( ! empty( $rel_brand_str ) ) : ?>
-									<span class="product-brand-kicker" style="font-size:11px;margin-bottom:4px;"><?php echo esc_html( $rel_brand_str ); ?></span>
+							<!-- Pricing & Quotation Row Consistent with Home Page -->
+							<div class="product-pricing-row">
+								<?php if ( $rel_show_price ) : ?>
+									<div class="price-wrap">
+										<span class="current-price" style="color:var(--blue);"><?php echo esc_html( $rel_price_fmt ); ?></span>
+										<?php if ( ! empty( $rel_old_fmt ) ) : ?>
+											<span class="old-price"><?php echo esc_html( $rel_old_fmt ); ?></span>
+										<?php endif; ?>
+									</div>
+									<span class="vat-tag"><?php esc_html_e( 'VAT Included', 'mobile-pasal' ); ?></span>
+								<?php else : ?>
+									<span class="product-card-quote-pill" style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:750;color:#1d4ed8;background:#eff6ff;padding:4px 9px;border-radius:6px;border:1px solid #bfdbfe;">
+										<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+										<?php echo esc_html( $hidden_price_text ); ?>
+									</span>
 								<?php endif; ?>
-								
-								<h4 class="product-title" style="font-size:15px;font-weight:800;line-height:1.3;margin:0 0 10px;">
-									<a href="<?php echo esc_url( $rel_permalink ); ?>"><?php the_title(); ?></a>
-								</h4>
+							</div>
 
-								<!-- Pricing or Inquire badge -->
-								<div style="margin-bottom:12px;">
-									<?php if ( $rel_show_price ) : ?>
-										<div style="display:flex;align-items:baseline;gap:8px;">
-											<strong style="color:var(--primary, #0066cc);font-size:16px;font-weight:850;"><?php echo esc_html( $rel_price_fmt ); ?></strong>
-										</div>
-									<?php else : ?>
-										<span style="display:inline-block;background:#eff6ff;color:#1d4ed8;border:1px solid #bfdbfe;border-radius:6px;font-size:11.5px;font-weight:750;padding:3px 8px;">
-											<?php echo esc_html( $hidden_price_text ); ?>
-										</span>
-									<?php endif; ?>
-								</div>
+							<!-- Hardware Spec Micro-List -->
+							<div class="product-specs-list">
+								<?php if ( ! empty( $rel_screen ) ) : ?>
+									<div class="spec-item"><span class="spec-item-bullet"></span><span><?php echo esc_html( $rel_screen ); ?></span></div>
+								<?php endif; ?>
+								<?php if ( ! empty( $rel_chip ) ) : ?>
+									<div class="spec-item"><span class="spec-item-bullet"></span><span><?php echo esc_html( $rel_chip ); ?></span></div>
+								<?php endif; ?>
+								<?php if ( ! empty( $rel_storage ) ) : ?>
+									<div class="spec-item"><span class="spec-item-bullet"></span><span><?php echo esc_html( $rel_storage ); ?></span></div>
+								<?php endif; ?>
+							</div>
 
-								<!-- Hardware Chips -->
-								<div class="product-spec-chips" style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;">
-									<?php if ( ! empty( $rel_chip ) ) : ?>
-										<span class="spec-chip" style="font-size:11px;background:#f8fafc;border:1px solid #e2eaf5;padding:3px 8px;border-radius:6px;color:#475569;">
-											<?php echo esc_html( wp_trim_words( $rel_chip, 2, '' ) ); ?>
-										</span>
-									<?php endif; ?>
-									<?php if ( ! empty( $rel_screen ) ) : ?>
-										<span class="spec-chip" style="font-size:11px;background:#f8fafc;border:1px solid #e2eaf5;padding:3px 8px;border-radius:6px;color:#475569;">
-											<?php echo esc_html( wp_trim_words( $rel_screen, 2, '' ) ); ?>
-										</span>
-									<?php endif; ?>
-								</div>
-
-								<div class="product-action-dock" style="margin-top:auto;display:flex;gap:8px;">
-									<a class="btn btn-outline btn-sm btn-block" href="<?php echo esc_url( $rel_permalink ); ?>" style="flex:1;justify-content:center;text-align:center;">
-										<span><?php esc_html_e( 'View Details', 'mobile-pasal' ); ?></span>
-									</a>
-								</div>
+							<!-- Action Buttons Dock Consistent with Home Page -->
+							<div class="product-actions">
+								<a class="card-wa-btn" href="https://wa.me/<?php echo esc_attr( $wa_number ); ?>?text=<?php echo rawurlencode( 'Namaste Ali Mobile, ma tapaiharuko website ma ' . get_the_title() . ' herera aako chhu. Gulariya counter ma availability ra rate confirm gardinus na.' ); ?>" target="_blank" rel="noopener noreferrer">
+									<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
+									<span><?php echo $rel_show_price ? esc_html__( 'WhatsApp Rate', 'mobile-pasal' ) : esc_html__( 'Inquire Rate', 'mobile-pasal' ); ?></span>
+								</a>
+								<a class="card-specs-btn" href="<?php echo esc_url( $rel_permalink ); ?>" title="<?php esc_attr_e( 'View Specifications', 'mobile-pasal' ); ?>">
+									<span><?php esc_html_e( 'Specs ›', 'mobile-pasal' ); ?></span>
+								</a>
 							</div>
 						</article>
 						<?php
