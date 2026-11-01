@@ -45,6 +45,18 @@
 		}
 
 		// 2. Tab Panes: Hide all, show target pane
+		// Update mobile module nav chips
+		$( '.bopt-mobile-mod-chip' ).removeClass( 'is-active' );
+		var $activeMobileChip = $( '.bopt-mobile-mod-chip[data-tab="' + tabKey + '"]' );
+		if ( $activeMobileChip.length ) {
+			$activeMobileChip.addClass( 'is-active' );
+			var scroller = document.querySelector( '.bopt-mobile-module-scroll' );
+			if ( scroller && $activeMobileChip[0] ) {
+				var chipLeft = $activeMobileChip[0].offsetLeft - scroller.offsetLeft - 16;
+				scroller.scrollTo( { left: chipLeft, behavior: 'smooth' } );
+			}
+		}
+
 		$( '.bopt-tab-pane' ).hide().removeClass( 'is-active' );
 		if ( $targetPane.length ) {
 			$targetPane.show().addClass( 'is-active' );
@@ -109,6 +121,8 @@
 		}
 
 		window.boptSwitchTab( initialTab );
+		$( '.bopt-mobile-mod-chip' ).removeClass( 'is-active' );
+		$( '.bopt-mobile-mod-chip[data-tab="' + initialTab + '"]' ).addClass( 'is-active' );
 	}
 
 	function initHashChangeListener() {
@@ -186,7 +200,7 @@
 	 */
 	function initMobileDrawer() {
 		// Open drawer
-		$( document ).on( 'click', '#boptSidebarToggle', function ( e ) {
+		$( document ).on( 'click', '#boptSidebarToggle, #boptMobileMenuBtn, #boptMobileNavMoreBtn', function ( e ) {
 			e.preventDefault();
 			$( '#boptSidebar' ).addClass( 'is-mobile-open' );
 			$( 'body' ).addClass( 'bopt-drawer-active' );

@@ -1836,6 +1836,39 @@ function mobile_pasal_options_render_dashboard() {
 			<!-- Main Settings Canvas -->
 			<main class="bopt-content">
 
+				<!-- Mobile-First Horizontal Module Navigation Bar (< 1024px) -->
+				<div class="bopt-mobile-module-nav" id="boptMobileModuleNav">
+					<div class="bopt-mobile-module-scroll">
+						<?php
+						$mobile_nav_chips = array(
+							'colors'            => array( 'icon' => 'fa-palette', 'label' => __( 'Colors', 'mobile-pasal' ) ),
+							'identity'          => array( 'icon' => 'fa-image', 'label' => __( 'Brand & Logo', 'mobile-pasal' ) ),
+							'header_bar'        => array( 'icon' => 'fa-heading', 'label' => __( 'Header', 'mobile-pasal' ) ),
+							'catalog_sec'       => array( 'icon' => 'fa-tags', 'label' => __( 'Handsets', 'mobile-pasal' ) ),
+							'hero'              => array( 'icon' => 'fa-house', 'label' => __( 'Hero Banner', 'mobile-pasal' ) ),
+							'services_hero_tab' => array( 'icon' => 'fa-screwdriver-wrench', 'label' => __( 'Repair Services', 'mobile-pasal' ) ),
+							'testimonials'      => array( 'icon' => 'fa-comments', 'label' => __( 'Testimonials', 'mobile-pasal' ) ),
+							'about_story_tab'   => array( 'icon' => 'fa-book-open', 'label' => __( 'About Us', 'mobile-pasal' ) ),
+							'contact_coords_tab'=> array( 'icon' => 'fa-location-dot', 'label' => __( 'Contact & Map', 'mobile-pasal' ) ),
+							'footer_branding'   => array( 'icon' => 'fa-shoe-prints', 'label' => __( 'Footer', 'mobile-pasal' ) ),
+							'seo_meta_tab'      => array( 'icon' => 'fa-magnifying-glass-chart', 'label' => __( 'SEO & AI', 'mobile-pasal' ) ),
+							'backup_health_tab' => array( 'icon' => 'fa-shield-heart', 'label' => __( 'Backup', 'mobile-pasal' ) ),
+						);
+						foreach ( $mobile_nav_chips as $m_tab => $m_data ) :
+							$is_active_m = ( $active_tab === $m_tab );
+							?>
+							<button type="button" class="bopt-mobile-mod-chip <?php echo $is_active_m ? 'is-active' : ''; ?>" data-tab="<?php echo esc_attr( $m_tab ); ?>" onclick="if(window.boptSwitchTab){window.boptSwitchTab('<?php echo esc_js( $m_tab ); ?>', event);}">
+								<i class="fa-solid <?php echo esc_attr( $m_data['icon'] ); ?>"></i>
+								<span><?php echo esc_html( $m_data['label'] ); ?></span>
+							</button>
+						<?php endforeach; ?>
+						<button type="button" class="bopt-mobile-mod-chip bopt-mobile-mod-more" id="boptMobileNavMoreBtn">
+							<i class="fa-solid fa-bars-staggered"></i>
+							<span><?php esc_html_e( 'All Modules...', 'mobile-pasal' ); ?></span>
+						</button>
+					</div>
+				</div>
+
 				<!-- Easy 1-Click Admin Customization Shortcut Bar -->
 				<div class="bopt-easy-quickbar" style="background:#ffffff; border:1.5px solid #bfdbfe; border-radius:14px; padding:14px 18px; margin-bottom:18px; box-shadow:0 6px 18px rgba(0,102,204,0.06);">
 					<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
@@ -5131,12 +5164,16 @@ function mobile_pasal_options_render_dashboard() {
 
 					<!-- Mobile Sticky Bottom Save Dock (Zero Scroll UX) -->
 					<div class="bopt-mobile-save-dock">
-						<button type="button" class="bopt-btn-mobile-top bopt-mobile-top-btn" id="boptMobileTopBtn" aria-label="<?php esc_attr_e( 'Back to top', 'mobile-pasal' ); ?>">
-							<i class="fa-solid fa-arrow-up"></i>
+						<button type="button" class="bopt-btn-mobile-menu" id="boptMobileMenuBtn" aria-label="<?php esc_attr_e( 'Open Navigation Menu', 'mobile-pasal' ); ?>">
+							<i class="fa-solid fa-bars"></i>
+							<span><?php esc_html_e( 'Modules', 'mobile-pasal' ); ?></span>
 						</button>
 						<button type="button" class="bopt-btn-mobile-save bopt-mobile-save-action" id="boptMobileSaveBtn">
 							<i class="fa-solid fa-floppy-disk"></i>
 							<span><?php esc_html_e( 'Save All Settings', 'mobile-pasal' ); ?></span>
+						</button>
+						<button type="button" class="bopt-btn-mobile-top bopt-mobile-top-btn" id="boptMobileTopBtn" aria-label="<?php esc_attr_e( 'Back to top', 'mobile-pasal' ); ?>">
+							<i class="fa-solid fa-arrow-up"></i>
 						</button>
 					</div>
 

@@ -1778,6 +1778,11 @@ function mp_render_inquiries_admin_page() {
 			flex-wrap: wrap;
 			align-items: center;
 		}
+		.mp-report-btn-row {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+		}
 		.mp-report-kpi-grid {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1889,8 +1894,17 @@ function mp_render_inquiries_admin_page() {
 			background: var(--mp-admin-blue);
 			border-radius: 999px;
 		}
+		.mp-table-responsive {
+			width: 100%;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			margin: 0;
+			padding-bottom: 6px;
+			border-radius: 8px;
+		}
 		.mp-tech-table {
 			width: 100%;
+			min-width: 440px;
 			border-collapse: collapse;
 		}
 		.mp-tech-table th, .mp-tech-table td {
@@ -1905,6 +1919,160 @@ function mp_render_inquiries_admin_page() {
 			font-weight: 800;
 			text-transform: uppercase;
 			color: var(--mp-admin-muted);
+		}
+
+		/* Mobile-First Responsive Breakpoint for Reports & CRM (< 782px) */
+		@media screen and (max-width: 782px) {
+			.mp-crm-tabs {
+				display: flex !important;
+				flex-wrap: nowrap !important;
+				overflow-x: auto !important;
+				-webkit-overflow-scrolling: touch !important;
+				scrollbar-width: none !important;
+				gap: 8px !important;
+				padding-bottom: 4px !important;
+				margin-bottom: 16px !important;
+			}
+			.mp-crm-tabs::-webkit-scrollbar {
+				display: none !important;
+			}
+			.mp-crm-tab-card {
+				flex: 0 0 auto !important;
+				min-width: 180px !important;
+				max-width: 220px !important;
+				padding: 10px 14px !important;
+				border-radius: 12px !important;
+			}
+			.bopt-filter-pills {
+				flex-wrap: nowrap !important;
+				overflow-x: auto !important;
+				-webkit-overflow-scrolling: touch !important;
+				scrollbar-width: none !important;
+				padding-bottom: 8px !important;
+				margin-bottom: 12px !important;
+			}
+			.bopt-filter-pills::-webkit-scrollbar {
+				display: none !important;
+			}
+			.bopt-filter-pill {
+				flex-shrink: 0 !important;
+				white-space: nowrap !important;
+			}
+			.mp-report-toolbar {
+				padding: 14px !important;
+				gap: 12px !important;
+				flex-direction: column !important;
+				align-items: stretch !important;
+			}
+			.mp-report-toolbar h3 {
+				font-size: 15px !important;
+				line-height: 1.3 !important;
+			}
+			.mp-report-toolbar p {
+				font-size: 11.5px !important;
+			}
+			.mp-report-actions-wrap {
+				display: flex !important;
+				flex-direction: column !important;
+				gap: 10px !important;
+				width: 100% !important;
+			}
+			.mp-report-date-pills {
+				display: flex !important;
+				flex-wrap: nowrap !important;
+				overflow-x: auto !important;
+				-webkit-overflow-scrolling: touch !important;
+				scrollbar-width: none !important;
+				gap: 6px !important;
+				padding-bottom: 4px !important;
+				width: 100% !important;
+			}
+			.mp-report-date-pills::-webkit-scrollbar {
+				display: none !important;
+			}
+			.mp-report-date-pills .bopt-filter-pill {
+				flex-shrink: 0 !important;
+				white-space: nowrap !important;
+				padding: 6px 12px !important;
+				font-size: 11.5px !important;
+			}
+			.mp-report-btn-row {
+				display: grid !important;
+				grid-template-columns: 1fr 1fr !important;
+				gap: 8px !important;
+				width: 100% !important;
+			}
+			.mp-report-btn-row .bopt-btn-secondary {
+				width: 100% !important;
+				justify-content: center !important;
+				min-height: 42px !important;
+				font-size: 12px !important;
+				padding: 8px 10px !important;
+			}
+			/* 2-Column Bento Grid for Mobile */
+			.mp-report-kpi-grid {
+				grid-template-columns: repeat(2, 1fr) !important;
+				gap: 10px !important;
+				margin-bottom: 16px !important;
+			}
+			.mp-report-kpi-card {
+				padding: 12px 12px !important;
+				border-radius: 12px !important;
+			}
+			.mp-report-kpi-title {
+				font-size: 9.5px !important;
+				letter-spacing: 0.2px !important;
+				line-height: 1.2 !important;
+			}
+			.mp-report-kpi-icon {
+				font-size: 15px !important;
+			}
+			.mp-report-kpi-val {
+				font-size: clamp(15px, 4.5vw, 19px) !important;
+				margin-bottom: 2px !important;
+			}
+			.mp-report-kpi-sub {
+				font-size: 10px !important;
+				line-height: 1.2 !important;
+			}
+			.mp-report-card {
+				padding: 14px !important;
+				border-radius: 12px !important;
+			}
+			.mp-report-card-title {
+				font-size: 13.5px !important;
+				margin-bottom: 12px !important;
+				flex-wrap: wrap !important;
+				gap: 6px !important;
+			}
+			.mp-brand-bar-head {
+				font-size: 12px !important;
+				gap: 8px !important;
+			}
+			/* Mobile input auto-zoom prevention */
+			.mp-search-input-wrap input,
+			.mp-filter-select,
+			.mp-admin-field input,
+			.mp-admin-field select,
+			.mp-admin-field textarea,
+			.mp-inline-status-select {
+				font-size: 16px !important;
+			}
+		}
+		@media screen and (max-width: 400px) {
+			.mp-report-kpi-grid {
+				grid-template-columns: 1fr 1fr !important;
+				gap: 8px !important;
+			}
+			.mp-report-kpi-card {
+				padding: 10px 8px !important;
+			}
+			.mp-report-kpi-val {
+				font-size: 15px !important;
+			}
+			.mp-report-btn-row {
+				grid-template-columns: 1fr 1fr !important;
+			}
 		}
 
 		/* Modal Full Bottom-Sheet on Mobile (< 782px) */
@@ -2257,7 +2425,7 @@ function mp_render_inquiries_admin_page() {
 						</p>
 					</div>
 
-					<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+					<div class="mp-report-actions-wrap" style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
 						<div class="mp-report-date-pills">
 							<?php
 							$date_options = array(
@@ -2278,12 +2446,14 @@ function mp_render_inquiries_admin_page() {
 							<?php endforeach; ?>
 						</div>
 
-						<button type="button" onclick="window.print();" class="bopt-btn-secondary">
-							<i class="fa-solid fa-print"></i> <span><?php esc_html_e( 'Print Report', 'mobile-pasal' ); ?></span>
-						</button>
+						<div class="mp-report-btn-row">
+							<button type="button" onclick="window.print();" class="bopt-btn-secondary">
+								<i class="fa-solid fa-print"></i> <span><?php esc_html_e( 'Print Report', 'mobile-pasal' ); ?></span>
+							</button>
 						<a href="<?php echo esc_url( wp_nonce_url( admin_url( 'admin-post.php?action=mp_export_inquiries_csv&tab=repairs' ), 'mp_export_inquiries_csv' ) ); ?>" class="bopt-btn-secondary">
 							<i class="fa-solid fa-file-csv" style="color:var(--mp-admin-green);"></i> <span><?php esc_html_e( 'Export Data', 'mobile-pasal' ); ?></span>
 						</a>
+						</div>
 					</div>
 				</div>
 
@@ -2374,8 +2544,8 @@ function mp_render_inquiries_admin_page() {
 								?>
 								<div class="mp-brand-bar-item">
 									<div class="mp-brand-bar-head">
-										<span><?php echo esc_html( $b_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $b_data['count'] ); ?> units)</small></span>
-										<span><?php echo esc_html( $b_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $b_data['rev'] ) ); ?></span>
+										<span style="min-width:0; flex:1 1 auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><?php echo esc_html( $b_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $b_data['count'] ); ?> units)</small></span>
+										<span style="flex-shrink:0; margin-left:8px;"><?php echo esc_html( $b_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $b_data['rev'] ) ); ?></span>
 									</div>
 									<div class="mp-progress-track">
 										<div class="mp-progress-fill" style="width: <?php echo esc_attr( $b_pct ); ?>%;"></div>
@@ -2401,8 +2571,8 @@ function mp_render_inquiries_admin_page() {
 								?>
 								<div class="mp-brand-bar-item">
 									<div class="mp-brand-bar-head">
-										<span style="max-width:240px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><?php echo esc_html( $s_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $s_data['count'] ); ?>)</small></span>
-										<span><?php echo esc_html( $s_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $s_data['rev'] ) ); ?></span>
+										<span style="min-width:0; flex:1 1 auto; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><?php echo esc_html( $s_name ); ?> <small style="color:#64748b; font-weight:normal;">(<?php echo esc_html( $s_data['count'] ); ?>)</small></span>
+										<span style="flex-shrink:0; margin-left:8px;"><?php echo esc_html( $s_pct . '%' ); ?> &bull; <?php echo esc_html( $currency . ' ' . number_format( $s_data['rev'] ) ); ?></span>
 									</div>
 									<div class="mp-progress-track">
 										<div class="mp-progress-fill" style="background:#16a34a; width: <?php echo esc_attr( $s_pct ); ?>%;"></div>
@@ -2423,6 +2593,7 @@ function mp_render_inquiries_admin_page() {
 						<?php if ( empty( $rep_tech_stats ) ) : ?>
 							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No assigned technician data in this period.', 'mobile-pasal' ); ?></p>
 						<?php else : ?>
+							<div class="mp-table-responsive">
 							<table class="mp-tech-table">
 								<thead>
 									<tr>
@@ -2451,6 +2622,7 @@ function mp_render_inquiries_admin_page() {
 									<?php endforeach; ?>
 								</tbody>
 							</table>
+							</div>
 						<?php endif; ?>
 					</div>
 
@@ -2462,6 +2634,7 @@ function mp_render_inquiries_admin_page() {
 						<?php if ( empty( $rep_pay_stats ) ) : ?>
 							<p style="color:#64748b; font-size:13px;"><?php esc_html_e( 'No payment settlement transactions recorded.', 'mobile-pasal' ); ?></p>
 						<?php else : ?>
+							<div class="mp-table-responsive">
 							<table class="mp-tech-table">
 								<thead>
 									<tr>
@@ -2484,6 +2657,7 @@ function mp_render_inquiries_admin_page() {
 									<?php endforeach; ?>
 								</tbody>
 							</table>
+							</div>
 						<?php endif; ?>
 					</div>
 				</div>
