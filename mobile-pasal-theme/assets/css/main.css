@@ -6751,65 +6751,150 @@ html, body {
   margin-top: 1px;
 }
 
-/* Action CTAs */
+/* Action CTAs - Harmonized 2-Tier Flagship Action Architecture */
 .flagship-action-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 24px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+/* Tier 1: Primary WhatsApp CTA - Full Width Prominence */
 .btn-flagship-wa {
+  grid-column: 1 / -1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 14px 26px;
-  background: #16a34a;
-  color: #ffffff;
-  border-radius: 36px;
-  font-size: 15px;
+  height: 48px;
+  padding: 0 20px;
+  background: var(--green, #25d366);
+  color: #ffffff !important;
+  border: none;
+  border-radius: 12px;
+  font-size: 14.5px;
   font-weight: 800;
   text-decoration: none;
-  box-shadow: 0 8px 24px rgba(22, 163, 74, 0.25);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.28);
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .btn-flagship-wa:hover {
-  background: #15803d;
-  transform: translateY(-3px);
-  box-shadow: 0 12px 30px rgba(22, 163, 74, 0.4);
-  color: #ffffff;
+  background: var(--green-dark, #1ea952);
+  color: #ffffff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(30, 169, 82, 0.38);
 }
 
 .btn-flagship-wa .btn-arrow {
   transition: transform 0.2s ease;
+  font-size: 16px;
+  line-height: 1;
 }
 
 .btn-flagship-wa:hover .btn-arrow {
   transform: translateX(4px);
 }
 
-.btn-flagship-call {
+/* Tier 2: Secondary Store Call & Specs Compare - Unified Dimensions, Height & Radius */
+.btn-flagship-call,
+.btn-flagship-compare {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
-  padding: 14px 24px;
+  gap: 8px;
+  height: 46px;
+  padding: 0 14px;
   background: #ffffff;
-  border: 1.5px solid #dce7f8;
-  border-radius: 36px;
-  color: #071b3b;
-  font-size: 15px;
-  font-weight: 800;
+  border: 1.5px solid #dbe6f5;
+  border-radius: 12px;
+  color: var(--navy, #071b3b);
+  font-size: 13.5px;
+  font-weight: 750;
   text-decoration: none;
-  transition: all 0.25s ease;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 100%;
+  box-shadow: 0 2px 6px rgba(7, 27, 59, 0.03);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .btn-flagship-call:hover {
-  background: #edf4ff;
-  border-color: #0862e9;
-  color: #0862e9;
-  transform: translateY(-2px);
+  background: #eff6ff;
+  border-color: var(--blue, #0862e9);
+  color: var(--blue, #0862e9);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(8, 98, 233, 0.12);
+}
+
+.btn-flagship-compare:hover,
+.btn-flagship-compare.active {
+  background: #eff6ff;
+  border-color: var(--blue, #0862e9);
+  color: var(--blue, #0862e9);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(8, 98, 233, 0.12);
+}
+
+.btn-flagship-call .call-text-mobile,
+.btn-flagship-compare .comp-text-mobile {
+  display: none;
+}
+
+/* Fallback when only 2 buttons exist (e.g. front-page or repair without compare button) */
+.flagship-action-row > .btn-flagship-call:last-child {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+  .flagship-bento-hero {
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+}
+
+@media (max-width: 520px) {
+  .flagship-action-row {
+    gap: 8px;
+  }
+  .btn-flagship-call,
+  .btn-flagship-compare {
+    font-size: 13px;
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .btn-flagship-call svg,
+  .btn-flagship-compare svg {
+    flex-shrink: 0;
+  }
+  .btn-flagship-call .call-text-desktop {
+    display: none;
+  }
+  .btn-flagship-call .call-text-mobile {
+    display: inline;
+  }
+  .btn-flagship-compare .comp-text-desktop {
+    display: none;
+  }
+  .btn-flagship-compare .comp-text-mobile {
+    display: inline;
+  }
+}
+
+@media (max-width: 380px) {
+  .btn-flagship-call,
+  .btn-flagship-compare {
+    font-size: 12px;
+    padding: 0 6px;
+    gap: 4px;
+  }
 }
 
 /* Stage Pedestal Showcase */
@@ -11612,28 +11697,7 @@ html, body {
   color: var(--blue, #0862e9);
 }
 
-.btn-flagship-compare {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  height: 46px;
-  padding: 0 16px;
-  border-radius: 12px;
-  border: 1.5px solid #dbe6f5;
-  background: #ffffff;
-  color: var(--navy, #071b3b);
-  font-size: 13.5px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.btn-flagship-compare:hover,
-.btn-flagship-compare.active {
-  border-color: var(--blue, #0862e9);
-  background: #eff6ff;
-  color: var(--blue, #0862e9);
-}
+/* .btn-flagship-compare defined in flagship action section */
 
 .mp-compare-bar {
   position: fixed;

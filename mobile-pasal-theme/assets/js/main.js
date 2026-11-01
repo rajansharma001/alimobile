@@ -1452,7 +1452,9 @@
       var lbl = btn.querySelector(".compare-btn-label") || btn.querySelector("span");
       if (lbl) {
         if (btn.classList.contains("btn-flagship-compare")) {
-          lbl.textContent = isSelected ? "✓ In Compare" : "+ Compare Specs";
+          lbl.innerHTML = isSelected
+            ? '<span class="comp-text-desktop">✓ In Compare</span><span class="comp-text-mobile">✓ Added</span>'
+            : '<span class="comp-text-desktop">+ Compare Specs</span><span class="comp-text-mobile">+ Compare</span>';
         } else {
           lbl.textContent = isSelected ? "✓ Added" : "+ Compare";
         }
