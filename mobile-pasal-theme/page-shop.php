@@ -355,63 +355,84 @@ $brand_terms = get_terms( array(
 	</div>
 </section>
 
-<!-- 3. Handset Assurance Section (Consistent with Home Page Trust Grid) -->
-<section class="section-wrap" id="assurance" style="padding: 40px 0 60px;">
+<!-- 3. Handset Assurance Section (4-Pillar Bento Guarantee Grid) -->
+<section class="section-wrap assurance-showcase-section" id="assurance">
 	<div class="tech-bg-grid" aria-hidden="true"></div>
 	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="container">
-		<div class="section-header" style="text-align: center; margin-bottom: 36px; max-width: 720px; margin-left: auto; margin-right: auto;">
-			<div class="section-header-copy" style="text-align: center;">
-				<span class="eyebrow"><?php echo esc_html( mp_opt( 'assurance_kicker', 'ZERO-RISK PURCHASE' ) ); ?></span>
-				<h2 class="section-title" style="margin: 0 0 10px 0;"><?php echo esc_html( mp_opt( 'assurance_title', 'The Ali Mobile Handset Assurance' ) ); ?></h2>
-				<p class="section-subtitle" style="margin: 0 auto;"><?php echo esc_html( mp_opt( 'assurance_subtitle', 'Why hundreds of smartphone buyers across Bardiya trust our showroom counter over unverified online imports.' ) ); ?></p>
-			</div>
+		<div class="sec-head sec-head-center">
+			<span class="sec-kicker">
+				<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+				<?php echo esc_html( mp_opt( 'assurance_kicker', 'ZERO-RISK PURCHASE' ) ); ?>
+			</span>
+			<h2><?php echo esc_html( mp_opt( 'assurance_title', 'The Ali Mobile Handset Assurance' ) ); ?></h2>
+			<p><?php echo esc_html( mp_opt( 'assurance_subtitle', 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.' ) ); ?></p>
 		</div>
 
-		<div class="hero-trust-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-			<!-- Card 1: NTA Approved -->
-			<div class="trust-box">
-				<div class="trust-box-icon">
-					<?php echo mp_get_icon_svg( mp_opt( 'assurance1_icon', 'shield' ), 22, 22 ); ?>
+		<div class="assurance-pillars-grid">
+			<!-- Pillar 1: NTA Approved -->
+			<article class="assurance-pillar-card">
+				<div class="assurance-card-top">
+					<div class="assurance-icon-box">
+						<?php echo mp_get_icon_svg( mp_opt( 'assurance1_icon', 'shield' ), 24, 24 ); ?>
+					</div>
+					<span class="assurance-pillar-tag">01 &bull; NTA MDMS</span>
 				</div>
-				<div>
-					<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h4>
-					<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
+				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h3>
+				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted MDMS cellular service across Nepal.' ) ); ?></p>
+				<div class="assurance-card-footer">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					<span><?php esc_html_e( 'Lifetime SIM Network Guarantee', 'mobile-pasal' ); ?></span>
 				</div>
-			</div>
+			</article>
 
-			<!-- Card 2: Official VAT Bill -->
-			<div class="trust-box">
-				<div class="trust-box-icon">
-					<?php echo mp_get_icon_svg( mp_opt( 'assurance2_icon', 'receipt' ), 22, 22 ); ?>
+			<!-- Pillar 2: Official VAT Bill -->
+			<article class="assurance-pillar-card">
+				<div class="assurance-card-top">
+					<div class="assurance-icon-box">
+						<?php echo mp_get_icon_svg( mp_opt( 'assurance2_icon', 'receipt' ), 24, 24 ); ?>
+					</div>
+					<span class="assurance-pillar-tag">02 &bull; VAT INVOICE</span>
 				</div>
-				<div>
-					<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h4>
-					<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
+				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h3>
+				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every single handset comes with an authorized commercial VAT serial bill enabling legitimate distributor warranty claims.' ) ); ?></p>
+				<div class="assurance-card-footer">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					<span><?php esc_html_e( '1-Year Official Brand Warranty', 'mobile-pasal' ); ?></span>
 				</div>
-			</div>
+			</article>
 
-			<!-- Card 3: Free Data Transfer -->
-			<div class="trust-box">
-				<div class="trust-box-icon">
-					<?php echo mp_get_icon_svg( mp_opt( 'assurance3_icon', 'arrows-rotate' ), 22, 22 ); ?>
+			<!-- Pillar 3: Free Data Transfer -->
+			<article class="assurance-pillar-card">
+				<div class="assurance-card-top">
+					<div class="assurance-icon-box">
+						<?php echo mp_get_icon_svg( mp_opt( 'assurance3_icon', 'arrows-rotate' ), 24, 24 ); ?>
+					</div>
+					<span class="assurance-pillar-tag">03 &bull; SMART SETUP</span>
 				</div>
-				<div>
-					<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h4>
-					<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h3>
+				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+				<div class="assurance-card-footer">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					<span><?php esc_html_e( '100% Zero Data Loss Migration', 'mobile-pasal' ); ?></span>
 				</div>
-			</div>
+			</article>
 
-			<!-- Card 4: Trade-In Counter -->
-			<div class="trust-box">
-				<div class="trust-box-icon">
-					<?php echo mp_get_icon_svg( mp_opt( 'assurance4_icon', 'store' ), 22, 22 ); ?>
+			<!-- Pillar 4: Trade-In Counter -->
+			<article class="assurance-pillar-card">
+				<div class="assurance-card-top">
+					<div class="assurance-icon-box">
+						<?php echo mp_get_icon_svg( mp_opt( 'assurance4_icon', 'store' ), 24, 24 ); ?>
+					</div>
+					<span class="assurance-pillar-tag">04 &bull; TRADE-IN DESK</span>
 				</div>
-				<div>
-					<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h4>
-					<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+				<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h3>
+				<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+				<div class="assurance-card-footer">
+					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+					<span><?php esc_html_e( 'Instant Counter Exchange Credit', 'mobile-pasal' ); ?></span>
 				</div>
-			</div>
+			</article>
 		</div>
 	</div>
 </section>

@@ -584,50 +584,70 @@ while ( have_posts() ) :
 
 				<!-- PANE 3: Ali Mobile 4-Pillar Handset Assurance -->
 				<div id="pane-assurance" class="handset-hub-pane" role="tabpanel" aria-labelledby="tab-assurance">
-					<div id="counter-assurance" class="hero-trust-grid">
-						<!-- Card 1: 100% NTA Approved -->
-						<div class="trust-box">
-							<div class="trust-box-icon">
-								<?php echo mp_get_icon_svg( 'shield', 22, 22 ); ?>
+					<div id="counter-assurance" class="assurance-pillars-grid">
+						<!-- Pillar 1: 100% NTA Approved -->
+						<article class="assurance-pillar-card">
+							<div class="assurance-card-top">
+								<div class="assurance-icon-box">
+									<?php echo mp_get_icon_svg( 'shield', 24, 24 ); ?>
+								</div>
+								<span class="assurance-pillar-tag">01 &bull; NTA MDMS</span>
 							</div>
-							<div>
-								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h4>
-								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
+							<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h3>
+							<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
+							<div class="assurance-card-footer">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+								<span><?php esc_html_e( 'Lifetime SIM Network Guarantee', 'mobile-pasal' ); ?></span>
 							</div>
-						</div>
+						</article>
 
-						<!-- Card 2: Official VAT Bill -->
-						<div class="trust-box">
-							<div class="trust-box-icon">
-								<?php echo mp_get_icon_svg( 'receipt', 22, 22 ); ?>
+						<!-- Pillar 2: Official VAT Bill -->
+						<article class="assurance-pillar-card">
+							<div class="assurance-card-top">
+								<div class="assurance-icon-box">
+									<?php echo mp_get_icon_svg( 'receipt', 24, 24 ); ?>
+								</div>
+								<span class="assurance-pillar-tag">02 &bull; VAT INVOICE</span>
 							</div>
-							<div>
-								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h4>
-								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
+							<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h3>
+							<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
+							<div class="assurance-card-footer">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+								<span><?php esc_html_e( '1-Year Official Brand Warranty', 'mobile-pasal' ); ?></span>
 							</div>
-						</div>
+						</article>
 
-						<!-- Card 3: Free Data Transfer -->
-						<div class="trust-box">
-							<div class="trust-box-icon">
-								<?php echo mp_get_icon_svg( 'arrows-rotate', 22, 22 ); ?>
+						<!-- Pillar 3: Free Data Transfer -->
+						<article class="assurance-pillar-card">
+							<div class="assurance-card-top">
+								<div class="assurance-icon-box">
+									<?php echo mp_get_icon_svg( 'arrows-rotate', 24, 24 ); ?>
+								</div>
+								<span class="assurance-pillar-tag">03 &bull; SMART SETUP</span>
 							</div>
-							<div>
-								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h4>
-								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+							<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h3>
+							<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+							<div class="assurance-card-footer">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+								<span><?php esc_html_e( '100% Zero Data Loss Migration', 'mobile-pasal' ); ?></span>
 							</div>
-						</div>
+						</article>
 
-						<!-- Card 4: Trade-In Counter -->
-						<div class="trust-box">
-							<div class="trust-box-icon">
-								<?php echo mp_get_icon_svg( 'store', 22, 22 ); ?>
+						<!-- Pillar 4: Trade-In Counter -->
+						<article class="assurance-pillar-card">
+							<div class="assurance-card-top">
+								<div class="assurance-icon-box">
+									<?php echo mp_get_icon_svg( 'store', 24, 24 ); ?>
+								</div>
+								<span class="assurance-pillar-tag">04 &bull; TRADE-IN DESK</span>
 							</div>
-							<div>
-								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h4>
-								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+							<h3 class="assurance-card-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h3>
+							<p class="assurance-card-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+							<div class="assurance-card-footer">
+								<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+								<span><?php esc_html_e( 'Instant Counter Exchange Credit', 'mobile-pasal' ); ?></span>
 							</div>
-						</div>
+						</article>
 					</div>
 				</div>
 
