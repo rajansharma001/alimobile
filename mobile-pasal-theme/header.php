@@ -124,11 +124,6 @@ $header_search_enabled = mp_opt( 'header_search_enabled', 1 );
       <?php endif; ?>
     </a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="<?php esc_attr_e( 'Toggle navigation menu', 'mobile-pasal' ); ?>" aria-expanded="false" type="button">
-      <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-      <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-    </button>
-
     <nav class="nav" id="nav" aria-label="<?php esc_attr_e( 'Main Navigation', 'mobile-pasal' ); ?>">
       <?php
       if ( has_nav_menu( 'primary' ) ) {
@@ -145,32 +140,21 @@ $header_search_enabled = mp_opt( 'header_search_enabled', 1 );
       }
       ?>
 
-      <!-- Mobile-only Deep Section Shortcuts inside Dropdown Drawer -->
-      <div class="nav-drawer-extras">
-        <?php if ( ! empty( $header_search_enabled ) && '0' !== (string) $header_search_enabled ) : ?>
-          <form role="search" method="get" class="mp-mobile-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <input type="search" name="s" class="mp-simple-search-input" placeholder="<?php esc_attr_e( 'Search phones & repairs...', 'mobile-pasal' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" aria-label="<?php esc_attr_e( 'Search phones & repairs', 'mobile-pasal' ); ?>" />
-            <button type="submit" class="mp-simple-search-btn" aria-label="<?php esc_attr_e( 'Search', 'mobile-pasal' ); ?>">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            </button>
-          </form>
-        <?php endif; ?>
-        <div class="nav-drawer-divider"></div>
-        <span class="nav-drawer-heading"><?php esc_html_e( 'Showroom Sections', 'mobile-pasal' ); ?></span>
-        <a href="<?php echo is_front_page() ? '#categories' : esc_url( home_url( '/#categories' ) ); ?>"><?php esc_html_e( 'Device Categories', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#brands' : esc_url( home_url( '/#brands' ) ); ?>"><?php esc_html_e( 'Verified Brands', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#catalog' : esc_url( home_url( '/#catalog' ) ); ?>"><?php esc_html_e( 'Showroom Catalog', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#lab' : esc_url( home_url( '/#lab' ) ); ?>"><?php esc_html_e( 'Cleanroom Lab', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#repairs' : esc_url( home_url( '/#repairs' ) ); ?>"><?php esc_html_e( 'Repairs & Rates', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#workflow' : esc_url( home_url( '/#workflow' ) ); ?>"><?php esc_html_e( 'Service Workflow', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>"><?php esc_html_e( 'Track Repair Status', 'mobile-pasal' ); ?></a>
-        <a href="<?php echo is_front_page() ? '#reviews' : esc_url( home_url( '/#reviews' ) ); ?>"><?php esc_html_e( 'Customer Reviews', 'mobile-pasal' ); ?></a>
-      </div>
+      <div class="nav-drawer-footer">
+        <div class="mp-gtranslate-wrap notranslate">
+          <button type="button" class="header-lang-btn notranslate" aria-label="<?php esc_attr_e( 'Google Translate EN / Nepali', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Google Translate (English / नेपाली)', 'mobile-pasal' ); ?>">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span class="lang-opt lang-en active" data-gt-lang="en">EN</span>
+            <span class="lang-sep">|</span>
+            <span class="lang-opt lang-np" data-gt-lang="ne">नेपाली</span>
+          </button>
+        </div>
 
-      <a class="phone-link mobile-cta" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
-        <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-        <span><?php printf( esc_html__( 'Call %s', 'mobile-pasal' ), esc_html( $phone ) ); ?></span>
-      </a>
+        <a class="phone-link mobile-cta" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+          <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          <span><?php printf( esc_html__( 'Call %s', 'mobile-pasal' ), esc_html( $phone ) ); ?></span>
+        </a>
+      </div>
     </nav>
 
     <div class="header-right-actions">
@@ -198,6 +182,11 @@ $header_search_enabled = mp_opt( 'header_search_enabled', 1 );
         <span><?php echo esc_html( $phone ); ?></span>
       </a>
     </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="<?php esc_attr_e( 'Toggle navigation menu', 'mobile-pasal' ); ?>" aria-expanded="false" type="button">
+      <svg class="hamburger-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      <svg class="close-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="display:none;"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
   </div>
 </header>
 

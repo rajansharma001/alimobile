@@ -593,3 +593,114 @@ body.mp-compare-active .floating-actions {
     color: var(--blue, #0862e9);
   }
 }
+
+/* Clean Mobile Header */
+/* =========================================================
+   CLEAN MOBILE NAVIGATION DRAWER
+   ========================================================= */
+.nav-drawer-extras {
+  display: none !important;
+}
+
+.nav-drawer-footer {
+  display: none;
+}
+
+@media (max-width: 860px) {
+  .nav.open .nav-drawer-footer {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid #edf2f9;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .nav.open .nav-drawer-footer .mp-gtranslate-wrap {
+    display: block;
+  }
+
+  .nav.open .nav-drawer-footer .header-lang-btn {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    background: #f8faff;
+    border: 1.5px solid #dbe6f5;
+    color: var(--navy, #071b3b);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav.open .nav-drawer-footer .phone-link.mobile-cta {
+    margin: 0;
+    flex: 1;
+    height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 0 14px;
+    border-radius: 10px;
+    background: var(--blue, #0862e9);
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(8, 98, 233, 0.22);
+    box-sizing: border-box;
+  }
+}
+@media (max-width: 1140px) {
+  .header-track-pill {
+    display: none;
+  }
+  .header-right-actions {
+    margin-left: auto;
+    margin-right: 8px;
+  }
+}
+
+@media (max-width: 860px) {
+  .header-bar {
+    padding: 0;
+  }
+  .header {
+    min-height: 64px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand {
+    margin-right: auto;
+  }
+  .header-right-actions {
+    display: none !important;
+  }
+  .menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #f8faff;
+    border: 1.5px solid #dbe6f5;
+    color: var(--navy, #071b3b);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+  .menu-toggle:hover {
+    background: #eff6ff;
+    border-color: var(--blue, #0862e9);
+    color: var(--blue, #0862e9);
+  }
+}

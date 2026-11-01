@@ -1813,12 +1813,12 @@
     currentLang = (lang === "np") ? "np" : "en";
     try { localStorage.setItem("mp_site_lang", currentLang); } catch (e) {}
 
-    if (langToggle) {
-      var enOpt = langToggle.querySelector(".lang-en");
-      var npOpt = langToggle.querySelector(".lang-np");
+    document.querySelectorAll(".header-lang-btn").forEach(function (btn) {
+      var enOpt = btn.querySelector(".lang-en");
+      var npOpt = btn.querySelector(".lang-np");
       if (enOpt) enOpt.classList.toggle("active", currentLang === "en");
       if (npOpt) npOpt.classList.toggle("active", currentLang === "np");
-    }
+    });
 
     // 1. Trigger Google Website Translator for full-page translation
     if (triggerGT !== false) {
@@ -1849,22 +1849,22 @@
     });
   }
 
-  if (langToggle) {
-    langToggle.addEventListener("click", function (e) {
-      var clickedOpt = e.target.closest("[data-gt-lang]");
-      var nextLang;
-      if (clickedOpt) {
-        nextLang = clickedOpt.getAttribute("data-gt-lang") === "ne" ? "np" : "en";
-        if (nextLang === currentLang) {
-          nextLang = (currentLang === "en") ? "np" : "en";
-        }
-      } else {
+  document.addEventListener("click", function (e) {
+    var langBtn = e.target.closest(".header-lang-btn");
+    if (!langBtn) return;
+    var clickedOpt = e.target.closest("[data-gt-lang]");
+    var nextLang;
+    if (clickedOpt) {
+      nextLang = clickedOpt.getAttribute("data-gt-lang") === "ne" ? "np" : "en";
+      if (nextLang === currentLang) {
         nextLang = (currentLang === "en") ? "np" : "en";
       }
-      applySiteLanguage(nextLang, true);
-      triggerToast(nextLang === "np" ? "Google Translate: नेपाली सक्रिय गरियो" : "Google Translate: Switched to English");
-    });
-  }
+    } else {
+      nextLang = (currentLang === "en") ? "np" : "en";
+    }
+    applySiteLanguage(nextLang, true);
+    triggerToast(nextLang === "np" ? "Google Translate: नेपाली सक्रिय गरियो" : "Google Translate: Switched to English");
+  });
 
   // -------------------------------------------------------------
   // 13. EXPOSE GLOBAL HANDLERS ON WINDOW
