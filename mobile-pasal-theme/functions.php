@@ -522,7 +522,13 @@ function mp_pending_reviews_menu_bubble() {
 }
 add_action( 'admin_menu', 'mp_pending_reviews_menu_bubble', 99 );
 
-
-
-
+/**
+ * 15. Ensure Standard Search Includes Handsets & Repair Services
+ */
+function mp_include_cpt_in_search( $query ) {
+	if ( ! is_admin() && $query->is_main_query() && $query->is_search() ) {
+		$query->set( 'post_type', array( 'handset', 'repair_service', 'post', 'page' ) );
+	}
+}
+add_action( 'pre_get_posts', 'mp_include_cpt_in_search' );
 

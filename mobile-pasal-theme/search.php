@@ -46,6 +46,11 @@ $hidden_price_text = mp_opt( 'handset_hidden_price_text', 'Contact for Counter P
     <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="container wrap">
 
+      <form role="search" method="get" class="mp-page-search-bar" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <input type="search" name="s" class="mp-page-search-input" placeholder="<?php esc_attr_e( 'Search iPhone, Samsung, Redmi, or repair service...', 'mobile-pasal' ); ?>" value="<?php echo esc_attr( $search_query ); ?>" aria-label="<?php esc_attr_e( 'Search phones and services', 'mobile-pasal' ); ?>" />
+        <button type="submit" class="mp-page-search-btn"><?php esc_html_e( 'Search', 'mobile-pasal' ); ?></button>
+      </form>
+
       <?php if ( have_posts() ) : ?>
         <div class="products-grid">
           <?php

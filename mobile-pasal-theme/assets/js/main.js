@@ -1618,178 +1618,20 @@
     });
   }
 
-  // -------------------------------------------------------------
-  // 12. LIVE AJAX QUICK SEARCH & AUTOCOMPLETE MODAL (Ctrl+K)
-  // -------------------------------------------------------------
-  var qsModal = document.getElementById("mpQuickSearchModal");
-  var qsOpenBtn = document.getElementById("mpQuickSearchOpen");
-  var qsCloseBtn = document.getElementById("mpQuickSearchClose");
-  var qsInput = document.getElementById("mpQuickSearchInput");
-  var qsResults = document.getElementById("mpQuickSearchResults");
-  var qsTimer = null;
-  var qsDefaultHtml = qsResults ? qsResults.innerHTML : "";
-
-  function openQuickSearch() {
-    if (!qsModal) return;
-    qsModal.classList.add("open");
-    qsModal.setAttribute("aria-hidden", "false");
-    if (qsInput) {
-      setTimeout(function () { qsInput.focus(); }, 60);
-    }
-  }
-
-  function closeQuickSearch() {
-    if (!qsModal) return;
-    qsModal.classList.remove("open");
-    qsModal.setAttribute("aria-hidden", "true");
-  }
-
-  if (qsOpenBtn) {
-    qsOpenBtn.addEventListener("click", function (e) {
-      e.preventDefault();
-      openQuickSearch();
-    });
-  }
-  if (qsCloseBtn) {
-    qsCloseBtn.addEventListener("click", closeQuickSearch);
-  }
-  if (qsModal) {
-    qsModal.addEventListener("click", function (e) {
-      if (e.target === qsModal) closeQuickSearch();
-    });
-  }
-
   document.addEventListener("keydown", function (e) {
-    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
-      e.preventDefault();
-      openQuickSearch();
-    }
     if (e.key === "Escape") {
-      closeQuickSearch();
       if (compModal && compModal.classList.contains("open")) {
         compModal.classList.remove("open");
       }
-    }
-  });
-
-  function runLiveSearch(query) {
-    if (!qsResults) return;
-    var q = (query || "").trim();
-    if (q.length < 2) {
-      qsResults.innerHTML = qsDefaultHtml;
-      return;
-    }
-
-    qsResults.innerHTML = '<div class="mp-qsearch-loading">Searching Gulariya Showroom &amp; Repair Lab...</div>';
-
-    var ajaxEndpoint = (window.mpAjax && window.mpAjax.ajaxurl)
-      ? window.mpAjax.ajaxurl
-      : ((window.mp_ajax && window.mp_ajax.ajax_url) ? window.mp_ajax.ajax_url : "/wp-admin/admin-ajax.php");
-
-    fetch(ajaxEndpoint + "?action=mp_live_search&q=" + encodeURIComponent(q))
-      .then(function (r) { return r.json(); })
-      .then(function (res) {
-        if (!res || !res.success || !res.data) {
-          qsResults.innerHTML = '<div class="mp-qsearch-loading">No matching results found.</div>';
-          return;
-        }
-        var d = res.data;
-        var html = "";
-
-        if (d.docket) {
-          html +=
-            '<div class="mp-qsearch-group">' +
-              '<div class="mp-qsearch-group-label">LIVE REPAIR DOCKET TRACKER</div>' +
-              '<a href="' + escSafe(d.docket.url) + '" class="mp-qsearch-docket-item">' +
-                '<strong>' + escSafe(d.docket.label) + '</strong>' +
-                '<span>Open Live Status →</span>' +
-              '</a>' +
-            '</div>';
-        }
-
-        if (d.handsets && d.handsets.length > 0) {
-          html += '<div class="mp-qsearch-group"><div class="mp-qsearch-group-label">VERIFIED HANDSETS (' + d.handsets.length + ')</div>';
-          d.handsets.forEach(function (h) {
-            html +=
-              '<a href="' + escSafe(h.url) + '" class="mp-qsearch-item">' +
-                '<img src="' + escSafe(h.img) + '" alt="" class="mp-qsearch-thumb" />' +
-                '<div class="mp-qsearch-meta">' +
-                  '<strong>' + escSafe(h.title) + '</strong>' +
-                  '<span>' + escSafe(h.brand) + (h.specs ? ' • ' + escSafe(h.specs) : '') + '</span>' +
-                '</div>' +
-                '<div class="mp-qsearch-price">' + escSafe(h.priceFmt) + '</div>' +
-              '</a>';
-          });
-          html += '</div>';
-        }
-
-        if (d.repairs && d.repairs.length > 0) {
-          html += '<div class="mp-qsearch-group"><div class="mp-qsearch-group-label">APPLE FIX REPAIR SERVICES (' + d.repairs.length + ')</div>';
-          d.repairs.forEach(function (rp) {
-            html +=
-              '<a href="' + escSafe(rp.url) + '" class="mp-qsearch-item">' +
-                '<div class="mp-qsearch-repair-icon">🔧</div>' +
-                '<div class="mp-qsearch-meta">' +
-                  '<strong>' + escSafe(rp.title) + '</strong>' +
-                  '<span>Turnaround: ' + escSafe(rp.turnaround) + '</span>' +
-                '</div>' +
-                '<div class="mp-qsearch-price">' + escSafe(rp.rate) + '</div>' +
-              '</a>';
-          });
-          html += '</div>';
-        }
-
-        if (!html) {
-          html =
-            '<div class="mp-qsearch-empty-hint">' +
-              '<p>No exact matches for "<strong>' + escSafe(q) + '</strong>". Inquire directly on WhatsApp for custom stock or repair quotes.</p>' +
-            '</div>';
-        }
-
-        qsResults.innerHTML = html;
-      })
-      .catch(function () {
-        qsResults.innerHTML = '<div class="mp-qsearch-loading">Unable to reach search service right now.</div>';
-      });
-  }
-
-  if (qsInput) {
-    qsInput.addEventListener("input", function () {
-      var val = this.value;
-      if (qsTimer) clearTimeout(qsTimer);
-      qsTimer = setTimeout(function () {
-        runLiveSearch(val);
-      }, 220);
-    });
-  }
-
-  document.addEventListener("click", function (e) {
-    var qTag = e.target.closest(".mp-qsearch-tag");
-    if (qTag && qsInput) {
-      var qVal = qTag.getAttribute("data-query") || "";
-      qsInput.value = qVal;
-      runLiveSearch(qVal);
-    }
-  });
-
-  // -------------------------------------------------------------
-  // 13. PROMO BAR DISMISS, CUSTOMER REVIEW MODAL & EN/NEPALI TOGGLE
-  // -------------------------------------------------------------
-  var promoBar = document.getElementById("mpPromoTopbar");
-  var promoDismiss = document.getElementById("mpPromoDismissBtn");
-  if (promoBar && promoDismiss) {
-    try {
-      if (sessionStorage.getItem("mp_promo_dismissed") === "1") {
-        promoBar.style.display = "none";
+      if (revModal && revModal.classList.contains("open")) {
+        closeReviewModal();
       }
-    } catch (e) {}
-    promoDismiss.addEventListener("click", function () {
-      promoBar.style.display = "none";
-      try { sessionStorage.setItem("mp_promo_dismissed", "1"); } catch (e) {}
-    });
-  }
+    }
+  });
 
-  // Verified Customer Review Modal
+  // -------------------------------------------------------------
+  // 12. CUSTOMER REVIEW SUBMISSION MODAL & GOOGLE TRANSLATE SWITCHER
+  // -------------------------------------------------------------
   var revModal = document.getElementById("mpReviewModal");
   var revForm = document.getElementById("mpReviewSubmitForm");
   var starPicker = document.getElementById("mpStarPicker");
@@ -1886,11 +1728,15 @@
     });
   }
 
-  // Instant EN | नेपाली (Nepali) UI Switcher
+  // Google Translate + Instant EN | नेपाली Switcher
   var langToggle = document.getElementById("mpLangToggle");
   var currentLang = "en";
   try {
-    currentLang = localStorage.getItem("mp_site_lang") || "en";
+    if (document.cookie.indexOf("googtrans=/en/ne") !== -1) {
+      currentLang = "np";
+    } else {
+      currentLang = localStorage.getItem("mp_site_lang") || "en";
+    }
   } catch (e) {}
 
   var npPhraseMap = {
@@ -1908,12 +1754,41 @@
     "Direct WhatsApp Order": "व्हाट्सएप अर्डर",
     "Inquire Rate on WhatsApp": "व्हाट्सएपमा दर सोध्नुहोस्",
     "Write a Review": "समीक्षा लेख्नुहोस्",
-    "Track Repair": "मर्मत स्थिति",
     "Reset Filters": "फिल्टर रिसेट",
     "VAT Included": "भ्याट सहित"
   };
 
-  function applySiteLanguage(lang) {
+  function setGoogleTranslateCookie(gtCode) {
+    var val = (gtCode === "ne") ? "/en/ne" : "/en/en";
+    document.cookie = "googtrans=" + val + "; path=/";
+    if (window.location.hostname && window.location.hostname !== "localhost") {
+      document.cookie = "googtrans=" + val + "; path=/; domain=" + window.location.hostname;
+      document.cookie = "googtrans=" + val + "; path=/; domain=." + window.location.hostname;
+    }
+  }
+
+  function triggerGoogleTranslate(gtCode, retryCount) {
+    var attempts = retryCount || 0;
+    setGoogleTranslateCookie(gtCode);
+    var gtCombo = document.querySelector(".goog-te-combo");
+    if (gtCombo) {
+      gtCombo.value = gtCode;
+      gtCombo.dispatchEvent(new Event("change"));
+      if (gtCode === "en" && document.documentElement.classList.contains("translated-ltr")) {
+        setTimeout(function () {
+          if (document.documentElement.classList.contains("translated-ltr")) {
+            window.location.reload();
+          }
+        }, 250);
+      }
+    } else if (attempts < 10) {
+      setTimeout(function () {
+        triggerGoogleTranslate(gtCode, attempts + 1);
+      }, 300);
+    }
+  }
+
+  function applySiteLanguage(lang, triggerGT) {
     currentLang = (lang === "np") ? "np" : "en";
     try { localStorage.setItem("mp_site_lang", currentLang); } catch (e) {}
 
@@ -1924,7 +1799,12 @@
       if (npOpt) npOpt.classList.toggle("active", currentLang === "np");
     }
 
-    // 1. Elements with explicit data-i18n-np attribute
+    // 1. Trigger Google Website Translator for full-page translation
+    if (triggerGT !== false) {
+      triggerGoogleTranslate(currentLang === "np" ? "ne" : "en");
+    }
+
+    // 2. Instant fallback dictionary for key UI labels
     document.querySelectorAll("[data-i18n-np]").forEach(function (el) {
       if (!el.hasAttribute("data-i18n-en")) {
         el.setAttribute("data-i18n-en", el.textContent);
@@ -1932,10 +1812,9 @@
       el.textContent = (currentLang === "np") ? el.getAttribute("data-i18n-np") : el.getAttribute("data-i18n-en");
     });
 
-    // 2. Navigation & Action Button Labels
     var selectors = ".nav a, .card-wa-btn span, .card-specs-btn span, .card-compare-btn span, .btn-flagship-wa span:first-of-type, .vat-tag";
     document.querySelectorAll(selectors).forEach(function (el) {
-      if (el.children.length > 0) return; // only leaf text nodes
+      if (el.children.length > 0) return;
       var orig = el.getAttribute("data-orig-en");
       if (!orig) {
         orig = el.textContent.trim();
@@ -1950,15 +1829,24 @@
   }
 
   if (langToggle) {
-    langToggle.addEventListener("click", function () {
-      var nextLang = (currentLang === "en") ? "np" : "en";
-      applySiteLanguage(nextLang);
-      triggerToast(nextLang === "np" ? "नेपाली भाषा सक्रिय गरियो" : "Switched to English");
+    langToggle.addEventListener("click", function (e) {
+      var clickedOpt = e.target.closest("[data-gt-lang]");
+      var nextLang;
+      if (clickedOpt) {
+        nextLang = clickedOpt.getAttribute("data-gt-lang") === "ne" ? "np" : "en";
+        if (nextLang === currentLang) {
+          nextLang = (currentLang === "en") ? "np" : "en";
+        }
+      } else {
+        nextLang = (currentLang === "en") ? "np" : "en";
+      }
+      applySiteLanguage(nextLang, true);
+      triggerToast(nextLang === "np" ? "Google Translate: नेपाली सक्रिय गरियो" : "Google Translate: Switched to English");
     });
   }
 
   // -------------------------------------------------------------
-  // 14. EXPOSE GLOBAL HANDLERS ON WINDOW
+  // 13. EXPOSE GLOBAL HANDLERS ON WINDOW
   // -------------------------------------------------------------
   window.setFinish = setFinish;
   window.openQuoteModal = openQuoteModal;
@@ -1971,7 +1859,6 @@
   window.resetCatalogFilters = resetCatalogFilters;
   window.filterCatalog = filterCatalog;
   window.sortCatalog = sortCatalog;
-  window.openQuickSearch = openQuickSearch;
 
   // Initialize
   if (productsGrid && !isShopPage) {
@@ -1979,7 +1866,7 @@
   }
   renderCompareBarAndModal();
   if (currentLang === "np") {
-    applySiteLanguage("np");
+    applySiteLanguage("np", true);
   }
   startAutoPlay();
   initAllCarousels();

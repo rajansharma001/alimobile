@@ -96,37 +96,10 @@ $preloader_color = mp_opt( 'color_primary', '#0066cc' );
 </div>
 <?php endif; ?>
 
-<!-- Festive Offer & Promotional Top Announcement Bar -->
-<?php
-$promo_bar_enabled  = mp_opt( 'promo_bar_enabled', 1 );
-$promo_bar_badge    = mp_opt( 'promo_bar_badge', 'SHOWROOM OFFER' );
-$promo_bar_text     = mp_opt( 'promo_bar_text', 'Free Original Tempered Glass, Back Case & Data Migration with Every New Smartphone Purchase!' );
-$promo_bar_cta_text = mp_opt( 'promo_bar_cta_text', 'Browse Handsets →' );
-$promo_bar_cta_url  = mp_opt( 'promo_bar_cta_url', home_url( '/shop/' ) );
-if ( 0 === strpos( $promo_bar_cta_url, '/' ) && 0 !== strpos( $promo_bar_cta_url, '//' ) ) {
-	$promo_bar_cta_url = home_url( $promo_bar_cta_url );
-}
-if ( ! empty( $promo_bar_enabled ) && '0' !== (string) $promo_bar_enabled && ! empty( $promo_bar_text ) ) :
-?>
-<div class="mp-promo-topbar" id="mpPromoTopbar" role="region" aria-label="<?php esc_attr_e( 'Showroom Promotional Announcement', 'mobile-pasal' ); ?>">
-	<div class="container mp-promo-topbar-inner">
-		<div class="mp-promo-copy">
-			<?php if ( ! empty( $promo_bar_badge ) ) : ?>
-				<span class="mp-promo-badge"><?php echo esc_html( $promo_bar_badge ); ?></span>
-			<?php endif; ?>
-			<span class="mp-promo-text" data-i18n-np="हरेक नयाँ स्मार्टफोन खरिदमा सक्कली टेम्पर्ड ग्लास, कभर र डाटा ट्रान्सफर पूर्ण निःशुल्क!"><?php echo esc_html( $promo_bar_text ); ?></span>
-			<?php if ( ! empty( $promo_bar_cta_text ) ) : ?>
-				<a href="<?php echo esc_url( $promo_bar_cta_url ); ?>" class="mp-promo-link" data-i18n-np="मोबाइल हेर्नुहोस् →"><?php echo esc_html( $promo_bar_cta_text ); ?></a>
-			<?php endif; ?>
-		</div>
-		<button type="button" class="mp-promo-dismiss" id="mpPromoDismissBtn" aria-label="<?php esc_attr_e( 'Dismiss announcement', 'mobile-pasal' ); ?>">&times;</button>
-	</div>
-</div>
-<?php endif; ?>
-
 <!-- Modern Sticky Header Bar -->
 <?php
-$header_sticky = mp_opt( 'header_sticky', 1 );
+$header_sticky         = mp_opt( 'header_sticky', 1 );
+$header_search_enabled = mp_opt( 'header_search_enabled', 1 );
 ?>
 <header class="header-bar" id="topHeader"<?php echo ( empty( $header_sticky ) || '0' === (string) $header_sticky ) ? ' style="position:relative;"' : ''; ?>>
   <div class="container header">
@@ -174,6 +147,14 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
 
       <!-- Mobile-only Deep Section Shortcuts inside Dropdown Drawer -->
       <div class="nav-drawer-extras">
+        <?php if ( ! empty( $header_search_enabled ) && '0' !== (string) $header_search_enabled ) : ?>
+          <form role="search" method="get" class="mp-mobile-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+            <input type="search" name="s" class="mp-simple-search-input" placeholder="<?php esc_attr_e( 'Search phones & repairs...', 'mobile-pasal' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" aria-label="<?php esc_attr_e( 'Search phones & repairs', 'mobile-pasal' ); ?>" />
+            <button type="submit" class="mp-simple-search-btn" aria-label="<?php esc_attr_e( 'Search', 'mobile-pasal' ); ?>">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            </button>
+          </form>
+        <?php endif; ?>
         <div class="nav-drawer-divider"></div>
         <span class="nav-drawer-heading"><?php esc_html_e( 'Showroom Sections', 'mobile-pasal' ); ?></span>
         <a href="<?php echo is_front_page() ? '#categories' : esc_url( home_url( '/#categories' ) ); ?>"><?php esc_html_e( 'Device Categories', 'mobile-pasal' ); ?></a>
@@ -193,22 +174,26 @@ $header_sticky = mp_opt( 'header_sticky', 1 );
     </nav>
 
     <div class="header-right-actions">
-      <button type="button" class="header-lang-btn" id="mpLangToggle" aria-label="<?php esc_attr_e( 'Switch Language EN / Nepali', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Switch Language (English / नेपाली)', 'mobile-pasal' ); ?>">
-        <span class="lang-opt lang-en active">EN</span>
-        <span class="lang-sep">|</span>
-        <span class="lang-opt lang-np">नेपाली</span>
-      </button>
+      <?php if ( ! empty( $header_search_enabled ) && '0' !== (string) $header_search_enabled ) : ?>
+      <form role="search" method="get" class="mp-simple-search-form" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+        <input type="search" name="s" class="mp-simple-search-input" placeholder="<?php esc_attr_e( 'Search phones...', 'mobile-pasal' ); ?>" value="<?php echo esc_attr( get_search_query() ); ?>" aria-label="<?php esc_attr_e( 'Search phones & repairs', 'mobile-pasal' ); ?>" />
+        <button type="submit" class="mp-simple-search-btn" aria-label="<?php esc_attr_e( 'Search', 'mobile-pasal' ); ?>">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+      </form>
+      <?php endif; ?>
 
-      <button type="button" class="header-search-btn" id="mpQuickSearchOpen" aria-label="<?php esc_attr_e( 'Search Handsets & Repairs', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Search Handsets & Repairs (Ctrl+K)', 'mobile-pasal' ); ?>">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      </button>
+      <div class="mp-gtranslate-wrap notranslate">
+        <div id="google_translate_element" class="mp-gtranslate-hidden" aria-hidden="true"></div>
+        <button type="button" class="header-lang-btn notranslate" id="mpLangToggle" aria-label="<?php esc_attr_e( 'Google Translate EN / Nepali', 'mobile-pasal' ); ?>" title="<?php esc_attr_e( 'Google Translate (English / नेपाली)', 'mobile-pasal' ); ?>">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          <span class="lang-opt lang-en active" data-gt-lang="en">EN</span>
+          <span class="lang-sep">|</span>
+          <span class="lang-opt lang-np" data-gt-lang="ne">नेपाली</span>
+        </button>
+      </div>
 
-      <a class="header-track-pill" href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>" title="<?php esc_attr_e( 'Track Live Repair Status', 'mobile-pasal' ); ?>">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
-        <span data-i18n-np="मर्मत स्थिति"><?php esc_html_e( 'Track Repair', 'mobile-pasal' ); ?></span>
-      </a>
-
-      <a class="phone-link" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
+      <a class="phone-link notranslate" href="tel:+<?php echo esc_attr( $clean_p ); ?>">
         <svg class="phone-icon-svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
         <span><?php echo esc_html( $phone ); ?></span>
       </a>

@@ -256,34 +256,6 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
   <span id="toastMsg"><?php esc_html_e( 'Action selected', 'mobile-pasal' ); ?></span>
 </div>
 
-<!-- Live AJAX Quick Search Modal -->
-<div class="mp-qsearch-backdrop" id="mpQuickSearchModal" aria-hidden="true" role="dialog" aria-label="<?php esc_attr_e( 'Quick Search Handsets & Services', 'mobile-pasal' ); ?>">
-  <div class="mp-qsearch-box">
-    <div class="mp-qsearch-header">
-      <svg class="mp-qsearch-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-      <input type="search" id="mpQuickSearchInput" class="mp-qsearch-input" placeholder="<?php esc_attr_e( 'Search iPhone 16 Pro, S24 Ultra, Screen Repair, Docket ID...', 'mobile-pasal' ); ?>" autocomplete="off" />
-      <button type="button" class="mp-qsearch-close" id="mpQuickSearchClose" aria-label="<?php esc_attr_e( 'Close Search', 'mobile-pasal' ); ?>">ESC</button>
-    </div>
-    <div class="mp-qsearch-body" id="mpQuickSearchResults">
-      <div class="mp-qsearch-empty-hint">
-        <p><?php esc_html_e( 'Start typing to instantly search verified Nepal MDMS handsets, specs, and Apple Fix repair lab services.', 'mobile-pasal' ); ?></p>
-        <div class="mp-qsearch-quick-tags">
-          <span><?php esc_html_e( 'Popular:', 'mobile-pasal' ); ?></span>
-          <button type="button" class="mp-qsearch-tag" data-query="iPhone">iPhone</button>
-          <button type="button" class="mp-qsearch-tag" data-query="Samsung">Samsung</button>
-          <button type="button" class="mp-qsearch-tag" data-query="Redmi">Redmi</button>
-          <button type="button" class="mp-qsearch-tag" data-query="Screen">Screen Repair</button>
-          <button type="button" class="mp-qsearch-tag" data-query="Battery">Battery</button>
-        </div>
-      </div>
-    </div>
-    <div class="mp-qsearch-footer">
-      <a href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Browse All Handsets →', 'mobile-pasal' ); ?></a>
-      <a href="<?php echo esc_url( home_url( '/services/#repair-tracker' ) ); ?>"><?php esc_html_e( 'Track Repair Docket →', 'mobile-pasal' ); ?></a>
-    </div>
-  </div>
-</div>
-
 <!-- Sticky Bottom Handset Comparison Drawer -->
 <div class="mp-compare-bar" id="mpCompareBar" aria-hidden="true">
   <div class="container mp-compare-bar-inner">
@@ -362,6 +334,20 @@ $soc_yt = mp_opt( 'social_youtube', 'https://youtube.com/@alimobilecenter' );
     </form>
   </div>
 </div>
+
+<!-- Google Translate Website Translator Integration -->
+<script>
+function googleTranslateElementInit() {
+  if (typeof google !== 'undefined' && google.translate && google.translate.TranslateElement) {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ne,hi',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+}
+</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 
 <?php wp_footer(); ?>
 </body>

@@ -48,11 +48,6 @@ function mobile_pasal_options_defaults() {
 		'handset_show_price'           => 1,
 		'handset_hidden_price_text'    => 'Inquire for Today\'s Best Counter Rate',
 		'handset_hidden_price_note'    => 'Official NTA stock. Contact our counter directly for today\'s cash/card offer.',
-		'promo_bar_enabled'            => 1,
-		'promo_bar_badge'              => 'SHOWROOM OFFER',
-		'promo_bar_text'               => 'Free Original Tempered Glass, Back Case & Data Migration with Every New Smartphone Purchase!',
-		'promo_bar_cta_text'           => 'Browse Handsets →',
-		'promo_bar_cta_url'            => '/shop/',
 
 		// ── 2. Header & Counter Desk Coordinates ──
 		'counter_phone'                => '+977 9804530786',
@@ -1992,29 +1987,8 @@ function mobile_pasal_options_render_dashboard() {
 								<div class="bopt-field-grid">
 									<?php
 									mp_render_field_toggle( 'header_sticky', __( 'Sticky Header on Scroll', 'mobile-pasal' ), __( 'Pin the header smoothly to top of screen as the customer scrolls down.' ) );
-									mp_render_field_toggle( 'header_search_enabled', __( 'Enable Search Button', 'mobile-pasal' ), __( 'Displays the search trigger in the header menu.' ) );
+									mp_render_field_toggle( 'header_search_enabled', __( 'Enable Search Option', 'mobile-pasal' ), __( 'Displays the simple search box in the header bar.' ) );
 									mp_render_field_text( 'header_wa_btn_text', __( 'Header WhatsApp Button Text', 'mobile-pasal' ), __( 'Default: Chat on WhatsApp. Launches instant chat with store technician.' ) );
-									?>
-								</div>
-							</div>
-						</div>
-
-						<div class="bopt-card">
-							<div class="bopt-card-header">
-								<div class="bopt-card-header-icon"><i class="fa-solid fa-gift"></i></div>
-								<div>
-									<h3 class="bopt-card-title"><?php esc_html_e( 'Festive Offer & Promotional Top Announcement Bar', 'mobile-pasal' ); ?></h3>
-									<p class="bopt-card-desc"><?php esc_html_e( 'Display a high-visibility Dashain / Tihar / New Year or daily showroom offer strip at the very top of your website.', 'mobile-pasal' ); ?></p>
-								</div>
-							</div>
-							<div class="bopt-card-body">
-								<div class="bopt-field-grid">
-									<?php
-									mp_render_field_toggle( 'promo_bar_enabled', __( 'Enable Promotional Offer Bar', 'mobile-pasal' ), __( 'Show the festive / showroom offer banner above the sticky header.' ) );
-									mp_render_field_text( 'promo_bar_badge', __( 'Offer Pill Badge', 'mobile-pasal' ), __( 'Short highlight tag (e.g. SHOWROOM OFFER, DASHAIN DEAL, EMI AVAILABLE).' ), 'SHOWROOM OFFER' );
-									mp_render_field_text( 'promo_bar_text', __( 'Promotional Announcement Text', 'mobile-pasal' ), __( 'Main offer message shown to visitors.' ), 'Free Original Tempered Glass, Back Case & Data Migration with Every New Smartphone Purchase!' );
-									mp_render_field_text( 'promo_bar_cta_text', __( 'Action Link Label', 'mobile-pasal' ), __( 'Call-to-action link text (e.g. Browse Handsets →).' ), 'Browse Handsets →' );
-									mp_render_field_text( 'promo_bar_cta_url', __( 'Action Link URL', 'mobile-pasal' ), __( 'Destination URL (e.g. /shop/ or #catalog).' ), '/shop/' );
 									?>
 								</div>
 							</div>
