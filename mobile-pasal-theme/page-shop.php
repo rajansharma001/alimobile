@@ -14,61 +14,22 @@ if ( ! defined( 'ABSPATH' ) ) {
 get_header();
 ?>
 
-<!-- Redesigned Page Hero Banner -->
+<!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
 <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Shop Catalog Header', 'mobile-pasal' ); ?>">
 	<div class="page-hero-container">
-		<div class="page-hero-grid">
-			<div class="page-hero-content">
-				<div class="page-breadcrumb-wrap">
-					<nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
-						<a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-							<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-							<span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
-						</a>
-						<span class="crumb-divider">/</span>
-						<span class="crumb-active"><?php esc_html_e( 'Shop Handsets', 'mobile-pasal' ); ?></span>
-					</nav>
-				</div>
-				<div class="page-hero-kicker">
-					<span class="page-hero-kicker-dot"></span>
-					<span><?php echo esc_html( mp_opt( 'catalog_kicker', 'OFFICIAL GULARIYA SHOWROOM' ) ); ?></span>
-				</div>
-				<h1 class="page-hero-title"><?php echo wp_kses_post( mp_opt( 'catalog_title', 'Official NTA Smartphones &amp; Genuine Gear' ) ); ?></h1>
-				<p class="page-hero-desc"><?php echo esc_html( mp_opt( 'catalog_subtitle', 'Browse factory-sealed smartphones with 100% MDMS IMEI registration, official serial-numbered VAT bills, and free in-store data migration before you leave.' ) ); ?></p>
-				<div class="page-hero-chips">
-					<div class="page-hero-chip">
-						<?php echo mp_get_icon_svg( 'shield', 14, 14 ); ?>
-						<span><?php esc_html_e( '100% NTA MDMS Approved', 'mobile-pasal' ); ?></span>
-					</div>
-					<div class="page-hero-chip">
-						<?php echo mp_get_icon_svg( 'receipt', 14, 14 ); ?>
-						<span><?php esc_html_e( 'Official Nepal VAT Invoice', 'mobile-pasal' ); ?></span>
-					</div>
-					<div class="page-hero-chip">
-						<?php echo mp_get_icon_svg( 'arrows-rotate', 14, 14 ); ?>
-						<span><?php esc_html_e( 'Free Walk-In Data Migration', 'mobile-pasal' ); ?></span>
-					</div>
-					<div class="page-hero-chip">
-						<?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
-						<span><?php esc_html_e( 'Ji. Pra. Ka. Chowk Counter', 'mobile-pasal' ); ?></span>
-					</div>
-				</div>
+		<div class="page-hero-row">
+			<div class="page-hero-main">
+				<nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+					<a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+						<span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+					</a>
+					<span class="crumb-divider">/</span>
+					<span class="crumb-active"><?php esc_html_e( 'Shop', 'mobile-pasal' ); ?></span>
+				</nav>
+				<h1 class="page-hero-title"><?php echo wp_kses_post( mp_opt( 'catalog_title', 'Latest Smartphones &amp; Top Models' ) ); ?></h1>
 			</div>
-			<div class="page-hero-card">
-				<div class="page-hero-card-header">
-					<div class="page-hero-card-icon">
-						<?php echo mp_get_icon_svg( 'phone', 20, 20 ); ?>
-					</div>
-					<div class="page-hero-card-meta">
-						<h4><?php esc_html_e( 'Direct Showroom Assistance', 'mobile-pasal' ); ?></h4>
-						<p><?php esc_html_e( 'Looking for a specific model or color?', 'mobile-pasal' ); ?></p>
-					</div>
-				</div>
-				<a class="page-hero-card-action btn-wa" href="https://wa.me/<?php echo esc_attr( mp_clean_phone( mp_opt( 'contact_phone', '+977 9804530786' ) ) ); ?>?text=<?php echo rawurlencode( 'Namaste Ali Mobile, I am inquiring about smartphone availability and prices in Gulariya showroom.' ); ?>" target="_blank" rel="noopener noreferrer">
-					<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.05-.39-2-1.23-.74-.66-1.24-1.47-1.39-1.72-.14-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.14.17-.25.25-.41.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.47c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.08 0 1.23.9 2.41 1.02 2.58.13.17 1.76 2.69 4.27 3.77.6.26 1.07.41 1.43.53.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.06-.11-.23-.17-.48-.29z"/></svg>
-					<span><?php esc_html_e( 'WhatsApp Showroom Desk', 'mobile-pasal' ); ?></span>
-				</a>
-			</div>
+			<?php mp_render_page_hero_graphic(); ?>
 		</div>
 	</div>
 </section>

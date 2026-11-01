@@ -14,11 +14,11 @@ get_header();
     $cat_name   = ! empty( $categories ) ? $categories[0]->name : __( 'Blog Article', 'mobile-pasal' );
     $cat_link   = ! empty( $categories ) ? get_category_link( $categories[0]->term_id ) : '';
   ?>
-    <!-- Redesigned Post Hero Banner -->
+    <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
     <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Article Header', 'mobile-pasal' ); ?>">
       <div class="page-hero-container">
-        <div class="page-hero-content">
-          <div class="page-breadcrumb-wrap">
+        <div class="page-hero-row">
+          <div class="page-hero-main">
             <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
               <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
                 <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -31,26 +31,9 @@ get_header();
               <?php endif; ?>
               <span class="crumb-active"><?php the_title(); ?></span>
             </nav>
+            <h1 class="page-hero-title"><?php the_title(); ?></h1>
           </div>
-          <div class="page-hero-kicker">
-            <span class="page-hero-kicker-dot"></span>
-            <span><?php echo esc_html( $cat_name ); ?></span>
-          </div>
-          <h1 class="page-hero-title"><?php the_title(); ?></h1>
-          <div class="page-hero-chips">
-            <div class="page-hero-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              <span><?php the_author(); ?></span>
-            </div>
-            <div class="page-hero-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              <span><?php echo get_the_date(); ?></span>
-            </div>
-            <div class="page-hero-chip">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              <span><?php printf( esc_html__( '%d min read', 'mobile-pasal' ), max( 1, round( str_word_count( strip_tags( get_the_content() ) ) / 200 ) ) ); ?></span>
-            </div>
-          </div>
+          <?php mp_render_page_hero_graphic(); ?>
         </div>
       </div>
     </section>

@@ -12,11 +12,11 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
 ?>
 
 <main>
-  <!-- Redesigned Page Hero Banner -->
+  <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Archive Header', 'mobile-pasal' ); ?>">
     <div class="page-hero-container">
-      <div class="page-hero-content">
-        <div class="page-breadcrumb-wrap">
+      <div class="page-hero-row">
+        <div class="page-hero-main">
           <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
             <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -29,31 +29,9 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
             <?php endif; ?>
             <span class="crumb-active"><?php the_archive_title(); ?></span>
           </nav>
+          <h1 class="page-hero-title"><?php the_archive_title(); ?></h1>
         </div>
-        <div class="page-hero-kicker">
-          <span class="page-hero-kicker-dot"></span>
-          <span><?php esc_html_e( 'Inventory Archive', 'mobile-pasal' ); ?></span>
-        </div>
-        <h1 class="page-hero-title"><?php the_archive_title(); ?></h1>
-        <?php if ( get_the_archive_description() ) : ?>
-          <div class="page-hero-desc"><?php the_archive_description(); ?></div>
-        <?php else : ?>
-          <p class="page-hero-desc"><?php esc_html_e( 'Explore verified genuine mobile devices and services available at Ali Mobile counter in Gulariya.', 'mobile-pasal' ); ?></p>
-        <?php endif; ?>
-        <div class="page-hero-chips">
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'shield', 14, 14 ); ?>
-            <span><?php esc_html_e( '100% NTA MDMS Compliant', 'mobile-pasal' ); ?></span>
-          </div>
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'receipt', 14, 14 ); ?>
-            <span><?php esc_html_e( 'Genuine Nepal VAT Invoicing', 'mobile-pasal' ); ?></span>
-          </div>
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
-            <span><?php esc_html_e( 'Gulariya Showroom Handover', 'mobile-pasal' ); ?></span>
-          </div>
-        </div>
+        <?php mp_render_page_hero_graphic(); ?>
       </div>
     </div>
   </section>

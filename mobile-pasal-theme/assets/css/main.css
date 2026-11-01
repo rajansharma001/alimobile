@@ -5947,16 +5947,16 @@ html, body {
 }
 
 /* =========================================================
-   REDESIGNED PAGE HERO BANNER & HEADER SECTION
+   REDESIGNED PAGE HERO BANNER (Breadcrumbs, Title & Pure Graphics)
    ========================================================= */
 .page-hero-banner {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(ellipse at 85% 20%, rgba(0, 102, 204, 0.08), transparent 50%),
+    radial-gradient(ellipse at 88% 30%, rgba(0, 102, 204, 0.08), transparent 55%),
     linear-gradient(110deg, #ffffff 0%, #fbfdff 45%, #eff5ff 100%);
   border-bottom: 1px solid #e2eaf5;
-  padding: clamp(28px, 4vw, 48px) 0 clamp(24px, 3.5vw, 40px);
+  padding: clamp(24px, 3.2vw, 38px) 0;
 }
 
 .page-hero-banner::before {
@@ -5992,34 +5992,22 @@ html, body {
   z-index: 2;
 }
 
-.page-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.6fr);
-  gap: clamp(24px, 4vw, 44px);
+.page-hero-row {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 4vw, 48px);
 }
 
-@media (max-width: 960px) {
-  .page-hero-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-}
-
-.page-hero-content {
+.page-hero-main {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
+  max-width: 820px;
 }
 
-/* Breadcrumbs Pill */
-.page-breadcrumb-wrap {
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 2px;
-}
-
+/* Breadcrumbs Nav */
 .page-breadcrumb-nav,
 .page-hero-banner .breadcrumb-nav {
   display: inline-flex;
@@ -6067,37 +6055,13 @@ html, body {
   font-weight: 700;
 }
 
-/* Eyebrow Kicker Badge */
-.page-hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 4px 12px;
-  border-radius: 6px;
-  background: #eff6ff;
-  border: 1px solid rgba(0, 102, 204, 0.18);
-  color: #0066cc;
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.page-hero-kicker-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #0066cc;
-  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
-}
-
-/* Main Heading */
+/* Main Heading (Crisp, bold, zero extra text) */
 .page-hero-title {
   margin: 0;
   font-size: clamp(24px, 3.2vw, 38px);
   font-weight: 850;
   letter-spacing: -0.025em;
-  line-height: 1.2;
+  line-height: 1.18;
   color: #071b3b;
 }
 
@@ -6105,138 +6069,31 @@ html, body {
   color: #0066cc;
 }
 
-/* Subtitle */
-.page-hero-desc {
-  margin: 0;
-  font-size: clamp(14px, 1.1vw, 15.5px);
-  line-height: 1.6;
-  color: #475569;
-  max-width: 720px;
-}
-
-/* Trust / Feature Highlight Chips */
-.page-hero-chips {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 4px;
-}
-
-.page-hero-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: #ffffff;
-  border: 1px solid #e2eaf5;
-  border-radius: 8px;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 650;
-  color: #1e293b;
-  box-shadow: 0 1px 2px rgba(7, 27, 59, 0.03);
-  transition: all 0.15s ease;
-}
-
-.page-hero-chip svg {
-  width: 14px;
-  height: 14px;
-  color: #0066cc;
-  stroke: currentColor;
-  stroke-width: 2.2;
+/* Tech Graphic on right */
+.page-hero-graphic {
   flex-shrink: 0;
-}
-
-.page-hero-chip:hover {
-  border-color: #0066cc;
-  background: #f8faff;
-  transform: translateY(-1px);
-}
-
-/* Right-Side Action Card / Quick Widget */
-.page-hero-card {
-  background: #ffffff;
-  border: 1px solid #e2eaf5;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 4px 16px rgba(7, 27, 59, 0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  position: relative;
-}
-
-.page-hero-card-header {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-end;
+  pointer-events: none;
+  user-select: none;
 }
 
-.page-hero-card-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  background: #eff6ff;
-  border: 1px solid rgba(0, 102, 204, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #0066cc;
-  flex-shrink: 0;
+.page-hero-svg {
+  width: clamp(170px, 18vw, 240px);
+  height: auto;
+  display: block;
 }
 
-.page-hero-card-icon svg {
-  width: 20px;
-  height: 20px;
-  stroke: currentColor;
-  stroke-width: 2.2;
-}
-
-.page-hero-card-meta h4 {
-  margin: 0 0 2px;
-  font-size: 13.5px;
-  font-weight: 750;
-  color: #071b3b;
-}
-
-.page-hero-card-meta p {
-  margin: 0;
-  font-size: 12px;
-  color: #64748b;
-}
-
-.page-hero-card-action {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: #0066cc;
-  color: #ffffff !important;
-  font-size: 13px;
-  font-weight: 700;
-  padding: 9px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: all 0.18s ease;
-  width: 100%;
-  box-sizing: border-box;
-  box-shadow: 0 2px 6px rgba(0, 102, 204, 0.25);
-}
-
-.page-hero-card-action:hover {
-  background: #004c99;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 102, 204, 0.35);
-}
-
-.page-hero-card-action.btn-wa {
-  background: #16a34a;
-  box-shadow: 0 2px 6px rgba(22, 163, 74, 0.25);
-}
-
-.page-hero-card-action.btn-wa:hover {
-  background: #15803d;
-  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.35);
+@media (max-width: 768px) {
+  .page-hero-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .page-hero-graphic {
+    display: none;
+  }
 }
 
 

@@ -44,24 +44,28 @@ while ( have_posts() ) : the_post();
 ?>
 
 <main>
-  <!-- Redesigned Breadcrumb Header -->
-  <section class="page-hero-banner" style="padding: 16px 0;" aria-label="<?php esc_attr_e( 'Handset Breadcrumb Header', 'mobile-pasal' ); ?>">
+  <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
+  <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Handset Header', 'mobile-pasal' ); ?>">
     <div class="page-hero-container">
-      <div class="page-breadcrumb-wrap">
-        <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
-          <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-            <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
-          </a>
-          <span class="crumb-divider">/</span>
-          <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Shop Handsets', 'mobile-pasal' ); ?></a>
-          <?php if ( $brand ) : ?>
+      <div class="page-hero-row">
+        <div class="page-hero-main">
+          <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+            </a>
             <span class="crumb-divider">/</span>
-            <span class="crumb-link"><?php echo esc_html( $brand ); ?></span>
-          <?php endif; ?>
-          <span class="crumb-divider">/</span>
-          <span class="crumb-active"><?php the_title(); ?></span>
-        </nav>
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/shop/' ) ); ?>"><?php esc_html_e( 'Shop Handsets', 'mobile-pasal' ); ?></a>
+            <?php if ( $brand ) : ?>
+              <span class="crumb-divider">/</span>
+              <span class="crumb-link"><?php echo esc_html( $brand ); ?></span>
+            <?php endif; ?>
+            <span class="crumb-divider">/</span>
+            <span class="crumb-active"><?php the_title(); ?></span>
+          </nav>
+          <h1 class="page-hero-title"><?php the_title(); ?></h1>
+        </div>
+        <?php mp_render_page_hero_graphic(); ?>
       </div>
     </div>
   </section>

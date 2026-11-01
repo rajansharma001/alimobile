@@ -23,62 +23,23 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
 <main>
 
   <!-- ====================================================================
-       PAGE HERO BANNER (Redesigned High-Tech Studio Header)
+       PAGE HERO BANNER: Breadcrumbs, Title & Pure Graphics
        ==================================================================== -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Contact Header', 'mobile-pasal' ); ?>">
     <div class="page-hero-container">
-      <div class="page-hero-grid">
-        <div class="page-hero-content">
-          <div class="page-breadcrumb-wrap">
-            <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
-              <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-                <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
-              </a>
-              <span class="crumb-divider">/</span>
-              <span class="crumb-active"><?php esc_html_e( 'Contact & Location', 'mobile-pasal' ); ?></span>
-            </nav>
-          </div>
-          <div class="page-hero-kicker">
-            <span class="page-hero-kicker-dot"></span>
-            <span><?php echo esc_html( $contact_badge ); ?></span>
-          </div>
+      <div class="page-hero-row">
+        <div class="page-hero-main">
+          <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+            </a>
+            <span class="crumb-divider">/</span>
+            <span class="crumb-active"><?php esc_html_e( 'Contact & Location', 'mobile-pasal' ); ?></span>
+          </nav>
           <h1 class="page-hero-title"><?php echo wp_kses_post( $contact_title ); ?></h1>
-          <p class="page-hero-desc"><?php echo esc_html( $contact_desc ); ?></p>
-          <div class="page-hero-chips">
-            <div class="page-hero-chip">
-              <?php echo mp_get_icon_svg( 'location', 14, 14 ); ?>
-              <span><?php echo esc_html( $store_address ); ?></span>
-            </div>
-            <div class="page-hero-chip">
-              <?php echo mp_get_icon_svg( 'clock', 14, 14 ); ?>
-              <span><?php echo esc_html( $store_hours ); ?></span>
-            </div>
-            <div class="page-hero-chip">
-              <?php echo mp_get_icon_svg( 'phone', 14, 14 ); ?>
-              <span><?php echo esc_html( $store_phone ); ?></span>
-            </div>
-            <div class="page-hero-chip">
-              <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
-              <span><?php esc_html_e( 'Direct Showroom Counter', 'mobile-pasal' ); ?></span>
-            </div>
-          </div>
         </div>
-        <div class="page-hero-card">
-          <div class="page-hero-card-header">
-            <div class="page-hero-card-icon">
-              <?php echo mp_get_icon_svg( 'phone', 20, 20 ); ?>
-            </div>
-            <div class="page-hero-card-meta">
-              <h4><?php esc_html_e( 'Direct Call Helpline', 'mobile-pasal' ); ?></h4>
-              <p><?php echo esc_html( $store_phone ); ?></p>
-            </div>
-          </div>
-          <a class="page-hero-card-action" href="tel:+<?php echo esc_attr( $store_phone_raw ); ?>">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <span><?php esc_html_e( 'Call Counter Directly', 'mobile-pasal' ); ?></span>
-          </a>
-        </div>
+        <?php mp_render_page_hero_graphic(); ?>
       </div>
     </div>
   </section>

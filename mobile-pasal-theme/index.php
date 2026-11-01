@@ -9,27 +9,29 @@ get_header();
 ?>
 
 <main>
-  <!-- Page Hero Banner -->
-  <section class="page-hero-banner">
-    <div class="wrap">
-      <nav class="breadcrumb-nav" aria-label="Breadcrumb">
-        <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
-          <span>Home</span>
-        </a>
-        <span class="crumb-divider">/</span>
-        <span class="crumb-active"><?php esc_html_e( 'Latest News & Updates', 'mobile-pasal' ); ?></span>
-      </nav>
+  <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
+  <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Blog Updates Header', 'mobile-pasal' ); ?>">
+    <div class="page-hero-container">
+      <div class="page-hero-row">
+        <div class="page-hero-main">
+          <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
+            <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
+              <span><?php esc_html_e( 'Home', 'mobile-pasal' ); ?></span>
+            </a>
+            <span class="crumb-divider">/</span>
+            <span class="crumb-active"><?php single_post_title( '', true ); ?></span>
+          </nav>
+          <h1 class="page-hero-title"><?php single_post_title( '', true ); ?></h1>
+        </div>
+        <?php mp_render_page_hero_graphic(); ?>
+      </div>
     </div>
   </section>
 
   <!-- News / Blog Section -->
   <section class="guides-section" style="padding: 40px 0 60px;">
     <div class="wrap">
-      <div class="sec-head" style="margin-bottom: 32px;">
-        <h1 class="sec-title" style="font-size: clamp(1.6rem, 3.5vw, 2.2rem); font-weight: 800; color: var(--text-heading); margin-bottom: 8px;"><?php single_post_title( '', true ); ?></h1>
-        <p class="sec-desc" style="color: var(--text-muted); font-size: 1rem; max-width: 720px;"><?php esc_html_e( 'Handset releases, repair guides, maintenance tips, and store news from Ali Mobile Center.', 'mobile-pasal' ); ?></p>
-      </div>
 
       <?php if ( have_posts() ) : ?>
         <div class="guides-grid">

@@ -233,4 +233,43 @@ function mp_inject_admin_and_login_favicon() {
 add_action( 'login_head', 'mp_inject_admin_and_login_favicon' );
 add_action( 'admin_head', 'mp_inject_admin_and_login_favicon' );
 
+/**
+ * 11. Render High-Tech Graphic for Page Headers (Zero Text, Pure Vector Geometry)
+ */
+function mp_render_page_hero_graphic() {
+	?>
+	<div class="page-hero-graphic" aria-hidden="true">
+		<svg class="page-hero-svg" viewBox="0 0 260 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<defs>
+				<linearGradient id="pghGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+					<stop offset="0%" stop-color="#0066cc" stop-opacity="0.16" />
+					<stop offset="100%" stop-color="#0066cc" stop-opacity="0.02" />
+				</linearGradient>
+			</defs>
+			<circle cx="180" cy="70" r="62" stroke="#e2eaf5" stroke-width="1.5" stroke-dasharray="4 4" />
+			<circle cx="180" cy="70" r="46" stroke="#d0e1f7" stroke-width="1.5" />
+			<circle cx="180" cy="70" r="28" fill="url(#pghGlow)" stroke="#0066cc" stroke-width="1.8" />
+			<line x1="180" y1="36" x2="180" y2="44" stroke="#0066cc" stroke-width="2" stroke-linecap="round" />
+			<line x1="180" y1="96" x2="180" y2="104" stroke="#0066cc" stroke-width="2" stroke-linecap="round" />
+			<line x1="146" y1="70" x2="154" y2="70" stroke="#0066cc" stroke-width="2" stroke-linecap="round" />
+			<line x1="206" y1="70" x2="214" y2="70" stroke="#0066cc" stroke-width="2" stroke-linecap="round" />
+			<circle cx="180" cy="70" r="4" fill="#0066cc" />
+			<rect x="52" y="16" width="56" height="108" rx="10" stroke="#0066cc" stroke-width="2" fill="#ffffff" />
+			<rect x="58" y="24" width="44" height="88" rx="6" stroke="#e2eaf5" stroke-width="1" fill="#f8faff" />
+			<line x1="72" y1="20" x2="88" y2="20" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round" />
+			<line x1="73" y1="106" x2="87" y2="106" stroke="#0066cc" stroke-width="2.5" stroke-linecap="round" />
+			<path d="M108 50 H136 L152 70" stroke="#0066cc" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3 3" />
+			<circle cx="108" cy="50" r="3" fill="#0066cc" />
+			<circle cx="136" cy="50" r="2.5" fill="#38bdf8" />
+			<rect x="22" y="44" width="12" height="12" rx="3" stroke="#d0e1f7" stroke-width="1.5" />
+			<circle cx="28" cy="50" r="2" fill="#0066cc" />
+			<line x1="34" y1="50" x2="52" y2="50" stroke="#d0e1f7" stroke-width="1.5" stroke-dasharray="2 2" />
+			<path d="M228 26 V34 M224 30 H232" stroke="#0066cc" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+			<path d="M30 102 V110 M26 106 H34" stroke="#0066cc" stroke-width="1.5" stroke-linecap="round" opacity="0.6" />
+		</svg>
+	</div>
+	<?php
+}
+
+
 

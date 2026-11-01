@@ -12,11 +12,11 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
 ?>
 
 <main>
-  <!-- Redesigned Page Hero Banner -->
+  <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Search Results Header', 'mobile-pasal' ); ?>">
     <div class="page-hero-container">
-      <div class="page-hero-content">
-        <div class="page-breadcrumb-wrap">
+      <div class="page-hero-row">
+        <div class="page-hero-main">
           <nav class="page-breadcrumb-nav" aria-label="<?php esc_attr_e( 'Breadcrumb', 'mobile-pasal' ); ?>">
             <a class="crumb-link" href="<?php echo esc_url( home_url( '/' ) ); ?>">
               <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path></svg>
@@ -25,37 +25,14 @@ $wa_number    = mp_opt( 'whatsapp_number', '9779804530786' );
             <span class="crumb-divider">/</span>
             <span class="crumb-active"><?php esc_html_e( 'Search', 'mobile-pasal' ); ?></span>
           </nav>
+          <h1 class="page-hero-title">
+            <?php
+            $search_title_fmt = mp_opt( 'search_results_title', 'Search: %s' );
+            printf( esc_html( $search_title_fmt ), '<span class="accent">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
+            ?>
+          </h1>
         </div>
-        <div class="page-hero-kicker">
-          <span class="page-hero-kicker-dot"></span>
-          <span><?php esc_html_e( 'Store & Lab Search', 'mobile-pasal' ); ?></span>
-        </div>
-        <h1 class="page-hero-title">
-          <?php
-          $search_title_fmt = mp_opt( 'search_results_title', 'Search: %s' );
-          printf( esc_html( $search_title_fmt ), '<span class="accent">&ldquo;' . esc_html( $search_query ) . '&rdquo;</span>' );
-          ?>
-        </h1>
-        <p class="page-hero-desc">
-          <?php
-          global $wp_query;
-          printf( esc_html__( 'Found %d result(s) across our smartphone catalog and repair solutions docket.', 'mobile-pasal' ), (int) $wp_query->found_posts );
-          ?>
-        </p>
-        <div class="page-hero-chips">
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'store', 14, 14 ); ?>
-            <span><?php esc_html_e( 'Handset Inventory', 'mobile-pasal' ); ?></span>
-          </div>
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'wrench', 14, 14 ); ?>
-            <span><?php esc_html_e( 'Apple Fix Lab Services', 'mobile-pasal' ); ?></span>
-          </div>
-          <div class="page-hero-chip">
-            <?php echo mp_get_icon_svg( 'phone', 14, 14 ); ?>
-            <span><?php esc_html_e( 'Live WhatsApp Counter Help', 'mobile-pasal' ); ?></span>
-          </div>
-        </div>
+        <?php mp_render_page_hero_graphic(); ?>
       </div>
     </div>
   </section>
