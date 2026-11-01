@@ -237,8 +237,22 @@ function mobile_pasal_print_price_sheet() {
 	$store_name  = mp_opt( 'site_brand_name', 'Ali Mobile Center & Apple Fix' );
 	$store_phone = mp_opt( 'contact_phone', '+977 9804530786' );
 	$store_addr  = mp_opt( 'contact_address', 'Ji. Pra. Ka. Chowk, Gulariya-06, Bardiya' );
+	$store_email = mp_opt( 'counter_email', get_option( 'admin_email', 'alimobilecenter@gmail.com' ) );
 	$shop_url    = home_url( '/shop/' );
 	$qr_src      = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=' . rawurlencode( $shop_url );
+
+	// Resolve Brand Logo with Multiple Fallbacks
+	$logo_url = mp_opt( 'site_logo', '' );
+	if ( empty( $logo_url ) ) {
+		$logo_url = mp_opt( 'logo_image', '' );
+	}
+	if ( empty( $logo_url ) && function_exists( 'has_custom_logo' ) && has_custom_logo() ) {
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+		$logo_url       = wp_get_attachment_image_url( $custom_logo_id, 'full' );
+	}
+	if ( empty( $logo_url ) && file_exists( get_template_directory() . '/assets/images/logo-full.png' ) ) {
+		$logo_url = get_template_directory_uri() . '/assets/images/logo-full.png';
+	}
 
 	$handsets = get_posts( array(
 		'post_type'      => 'handset',
@@ -294,10 +308,17 @@ function mobile_pasal_print_price_sheet() {
 		</div>
 		<div class="sheet">
 			<div class="sheet-head">
-				<div>
-					<h1 class="sheet-title"><?php echo esc_html( $store_name ); ?></h1>
-					<p class="sheet-sub"><?php echo esc_html( $store_addr . ' • Hotline: ' . $store_phone ); ?></p>
-					<p class="sheet-sub" style="margin-top:4px;color:#059669;">✓ 100% NTA MDMS Registered &bull; Official 13% VAT Bill &bull;Updated: <?php echo esc_html( date_i18n( 'F j, Y' ) ); ?></p>
+				<div style="display:flex;align-items:center;gap:16px;">
+					<?php if ( ! empty( $logo_url ) ) : ?>
+						<img src="<?php echo esc_url( $logo_url ); ?>" alt="<?php echo esc_attr( $store_name ); ?>" style="max-height:52px;max-width:160px;object-fit:contain;" />
+					<?php else : ?>
+						<div style="width:48px;height:48px;border-radius:10px;background:#071b3b;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;">AM</div>
+					<?php endif; ?>
+					<div>
+						<h1 class="sheet-title"><?php echo esc_html( $store_name ); ?></h1>
+						<p class="sheet-sub"><?php echo esc_html( $store_addr . ' • Hotline: ' . $store_phone . ' • ' . $store_email ); ?></p>
+						<p class="sheet-sub" style="margin-top:4px;color:#059669;">✓ 100% NTA MDMS Registered &bull; Official 13% VAT Bill &bull; Updated: <?php echo esc_html( date_i18n( 'F j, Y' ) ); ?></p>
+					</div>
 				</div>
 				<div style="text-align:center;">
 					<img src="<?php echo esc_url( $qr_src ); ?>" alt="QR" width="76" height="76" style="border:1px solid #cbd5e1;padding:3px;border-radius:8px;" />
