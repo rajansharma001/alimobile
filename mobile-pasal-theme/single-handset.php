@@ -401,233 +401,302 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
-	<!-- 3. Technical Anchor Navigation Strip -->
-	<section class="section-wrap" style="padding: 0 0 20px;">
+	<!-- 3. Unified Handset Intelligence & Assurance Hub (Zero Scrolling Tabbed Bento Architecture) -->
+	<section id="handset-hub" class="section-wrap handset-hub-section">
+		<div class="tech-bg-grid" aria-hidden="true"></div>
 		<div class="container">
-			<nav class="handset-section-anchor-nav" aria-label="<?php esc_attr_e( 'Handset Sections Navigation', 'mobile-pasal' ); ?>">
-				<a class="handset-anchor-link active" href="#specs-matrix">
-					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
+
+			<!-- Section Header -->
+			<div class="section-header center" style="margin-bottom: 28px;">
+				<span class="section-badge"><?php esc_html_e( 'DEVICE INTELLIGENCE & SHOWROOM ASSURANCE', 'mobile-pasal' ); ?></span>
+				<h2 class="section-title"><?php esc_html_e( 'Technical Specifications & Counter Assurance', 'mobile-pasal' ); ?></h2>
+				<p class="section-desc"><?php printf( esc_html__( 'Verified hardware architecture, showroom highlights, and our 4-pillar buyer protection for %s.', 'mobile-pasal' ), get_the_title() ); ?></p>
+			</div>
+
+			<!-- Interactive Segmented Tab Controls -->
+			<div class="handset-hub-tabs-bar" role="tablist" aria-label="<?php esc_attr_e( 'Handset Intelligence Navigation', 'mobile-pasal' ); ?>">
+				<button type="button" class="handset-hub-tab active" role="tab" id="tab-specs" aria-selected="true" aria-controls="pane-specs" data-target="pane-specs">
+					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line></svg>
 					<span><?php esc_html_e( 'Full Specifications', 'mobile-pasal' ); ?></span>
-				</a>
-				<a class="handset-anchor-link" href="#editorial-overview">
-					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+					<span class="tab-badge"><?php esc_html_e( '6 Categories', 'mobile-pasal' ); ?></span>
+				</button>
+				<button type="button" class="handset-hub-tab" role="tab" id="tab-overview" aria-selected="false" aria-controls="pane-overview" data-target="pane-overview">
+					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
 					<span><?php esc_html_e( 'Overview & Highlights', 'mobile-pasal' ); ?></span>
-				</a>
-				<a class="handset-anchor-link" href="#counter-assurance">
-					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+				</button>
+				<button type="button" class="handset-hub-tab" role="tab" id="tab-assurance" aria-selected="false" aria-controls="pane-assurance" data-target="pane-assurance">
+					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
 					<span><?php esc_html_e( 'Ali Mobile Assurance', 'mobile-pasal' ); ?></span>
-				</a>
-				<a class="handset-anchor-link" href="#related-handsets">
-					<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
-					<span><?php esc_html_e( 'Similar Handsets', 'mobile-pasal' ); ?></span>
-				</a>
-			</nav>
+					<span class="tab-badge tab-badge-success"><?php esc_html_e( '4 Guarantees', 'mobile-pasal' ); ?></span>
+				</button>
+			</div>
+
+			<!-- Tab Panes Container -->
+			<div class="handset-hub-panes">
+
+				<!-- PANE 1: Technical Specifications Bento Grid -->
+				<div id="pane-specs" class="handset-hub-pane active" role="tabpanel" aria-labelledby="tab-specs">
+					<div id="specs-matrix" class="specs-bento-grid">
+
+						<!-- Card 1: General & Nepal MDMS Compliance -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'General & Nepal MDMS Compliance', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Brand & Manufacturer', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( $brand_name ?: get_the_title() ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Model Designation', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( $model_name ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'NTA MDMS Status', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val" style="color: #16a34a; display: inline-flex; align-items: center; gap: 4px;">
+										<svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+										<?php esc_html_e( '100% Registered (Tax Paid)', 'mobile-pasal' ); ?>
+									</span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Showroom Invoice', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Official Serial VAT Bill', 'mobile-pasal' ); ?></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card 2: Display & Touch Visuals -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="5" y="2" width="14" height="20" rx="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'Display & Touch Visuals', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Screen Configuration', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( ! empty( $spec_screen ) ? $spec_screen : __( 'Ultra-Vivid High Refresh Rate Panel', 'mobile-pasal' ) ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Protection & Glass', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Tempered Scratch-Resistant Oleophobic Nano-Coating', 'mobile-pasal' ); ?></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card 3: Processor & Memory Matrix -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'Processor & Performance Matrix', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Processor / Chipset', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( ! empty( $spec_chip ) ? $spec_chip : __( 'High-Efficiency Multi-Core Mobile Engine', 'mobile-pasal' ) ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'RAM & Storage', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( ! empty( $spec_storage ) ? $spec_storage : __( 'High-Speed UFS / NVMe Storage Configuration', 'mobile-pasal' ) ); ?></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card 4: Camera & Optics Setup -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'Optics & Imaging System', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Camera Setup', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( ! empty( $spec_camera ) ? $spec_camera : __( 'High-Resolution Multi-Sensor Array with Night Mode', 'mobile-pasal' ) ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Video Capabilities', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Ultra HD 4K / High Frame Rate Stabilization', 'mobile-pasal' ); ?></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card 5: Battery & Power Architecture -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'Power & Battery Architecture', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Battery Capacity', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( ! empty( $spec_battery ) ? $spec_battery : __( 'All-Day High Endurance Battery Cell', 'mobile-pasal' ) ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Fast Charging Standard', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Official Rapid Charging with Intelligent Thermal Guard', 'mobile-pasal' ); ?></span>
+								</div>
+							</div>
+						</div>
+
+						<!-- Card 6: Official Warranty & Showroom After-Sales -->
+						<div class="spec-bento-card">
+							<div class="spec-bento-card-header">
+								<div class="spec-bento-card-icon">
+									<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.3"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+								</div>
+								<span class="spec-bento-card-title"><?php esc_html_e( 'Official Warranty & After-Sales', 'mobile-pasal' ); ?></span>
+							</div>
+							<div class="spec-bento-card-body">
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Warranty Coverage', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php echo esc_html( $spec_warranty ?: __( '1 Year Official Brand Warranty', 'mobile-pasal' ) ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Data Migration', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Free WhatsApp, Photos & Contacts Migration', 'mobile-pasal' ); ?></span>
+								</div>
+								<div class="spec-bento-row">
+									<span class="spec-bento-label"><?php esc_html_e( 'Trade-In / Exchange', 'mobile-pasal' ); ?></span>
+									<span class="spec-bento-val"><?php esc_html_e( 'Instant On-Spot Valuation Available', 'mobile-pasal' ); ?></span>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- PANE 2: Device Overview & Editorial Highlights -->
+				<div id="pane-overview" class="handset-hub-pane" role="tabpanel" aria-labelledby="tab-overview">
+					<div id="editorial-overview" class="handset-description-card">
+						<?php
+						$content = get_the_content();
+						if ( ! empty( trim( $content ) ) ) {
+							the_content();
+						} else {
+							?>
+							<h3><?php printf( esc_html__( 'Experience Next-Level Mobility with %s', 'mobile-pasal' ), get_the_title() ); ?></h3>
+							<p><?php printf( esc_html__( 'Engineered for exceptional performance and daily durability, the %s represents the pinnacle of modern mobile engineering. Available now directly at Ali Mobile Gulariya, each unit is 100%% genuine, sourced through authorized national distributor channels, and backed by genuine manufacturer warranty.', 'mobile-pasal' ), get_the_title() ); ?></p>
+							
+							<h3><?php esc_html_e( 'Why Purchase from Ali Mobile Gulariya?', 'mobile-pasal' ); ?></h3>
+							<p><?php esc_html_e( 'When you purchase your smartphone from our physical showroom in Bardiya, you eliminate the risks of gray-market imports, locked SIMs, or unverified MDMS registrations. We issue a legitimate serial-numbered VAT bill and offer on-the-spot data migration, so you can walk out with your new phone completely ready to use.', 'mobile-pasal' ); ?></p>
+							<?php
+						}
+						?>
+					</div>
+				</div>
+
+				<!-- PANE 3: Ali Mobile 4-Pillar Handset Assurance -->
+				<div id="pane-assurance" class="handset-hub-pane" role="tabpanel" aria-labelledby="tab-assurance">
+					<div id="counter-assurance" class="hero-trust-grid">
+						<!-- Card 1: 100% NTA Approved -->
+						<div class="trust-box">
+							<div class="trust-box-icon">
+								<?php echo mp_get_icon_svg( 'shield', 22, 22 ); ?>
+							</div>
+							<div>
+								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h4>
+								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
+							</div>
+						</div>
+
+						<!-- Card 2: Official VAT Bill -->
+						<div class="trust-box">
+							<div class="trust-box-icon">
+								<?php echo mp_get_icon_svg( 'receipt', 22, 22 ); ?>
+							</div>
+							<div>
+								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h4>
+								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
+							</div>
+						</div>
+
+						<!-- Card 3: Free Data Transfer -->
+						<div class="trust-box">
+							<div class="trust-box-icon">
+								<?php echo mp_get_icon_svg( 'arrows-rotate', 22, 22 ); ?>
+							</div>
+							<div>
+								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h4>
+								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
+							</div>
+						</div>
+
+						<!-- Card 4: Trade-In Counter -->
+						<div class="trust-box">
+							<div class="trust-box-icon">
+								<?php echo mp_get_icon_svg( 'store', 22, 22 ); ?>
+							</div>
+							<div>
+								<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h4>
+								<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
 		</div>
 	</section>
 
-	<!-- 4. Deep Full Specifications Matrix Section -->
-	<section id="specs-matrix" class="section-wrap" style="padding: 20px 0 50px;">
-		<div class="tech-bg-grid" aria-hidden="true"></div>
-		<div class="container">
-			<div class="section-header" style="margin-bottom: 24px;">
-				<span class="section-badge"><?php esc_html_e( 'DETAILED HARDWARE TELEMETRY', 'mobile-pasal' ); ?></span>
-				<h2 class="section-title"><?php esc_html_e( 'Full Technical Specifications Matrix', 'mobile-pasal' ); ?></h2>
-				<p class="section-desc"><?php esc_html_e( 'Verified technical architecture and compliance data direct from official brand specifications.', 'mobile-pasal' ); ?></p>
-			</div>
+	<script>
+	(function() {
+		function initHandsetHub() {
+			var tabs = document.querySelectorAll('.handset-hub-tab');
+			var panes = document.querySelectorAll('.handset-hub-pane');
+			if (!tabs.length || !panes.length) return;
 
-			<div class="handset-specs-table-card">
-				
-				<!-- Group 1: General & MDMS Compliance -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-					<span><?php esc_html_e( 'General & Nepal MDMS Compliance', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Brand & Manufacturer', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( $brand_name ?: get_the_title() ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Model Designation', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( $model_name ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Nepal Telecommunications Authority (NTA)', 'mobile-pasal' ); ?></div>
-					<div class="specs-value">
-						<span style="display:inline-flex;align-items:center;gap:6px;color:#16a34a;font-weight:750;">
-							<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
-							<?php esc_html_e( '100% Genuine MDMS Registered with Tax Paid Invoice', 'mobile-pasal' ); ?>
-						</span>
-					</div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Official Showroom Invoice', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Official Serial Numbered VAT Invoice Issued at Counter', 'mobile-pasal' ); ?></div>
-				</div>
+			function activateTab(targetId) {
+				tabs.forEach(function(t) {
+					var match = t.getAttribute('data-target') === targetId;
+					t.classList.toggle('active', match);
+					t.setAttribute('aria-selected', match ? 'true' : 'false');
+				});
+				panes.forEach(function(p) {
+					p.classList.toggle('active', p.id === targetId);
+				});
+			}
 
-				<!-- Group 2: Display & Screen Architecture -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="5" y="2" width="14" height="20" rx="2"></rect></svg>
-					<span><?php esc_html_e( 'Display & Touch Visuals', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Screen Configuration', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( ! empty( $spec_screen ) ? $spec_screen : __( 'Ultra-Vivid High Refresh Rate Panel', 'mobile-pasal' ) ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Protection & Glass', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Tempered Scratch-Resistant Oleophobic Nano-Coating', 'mobile-pasal' ); ?></div>
-				</div>
+			tabs.forEach(function(btn) {
+				btn.addEventListener('click', function(e) {
+					e.preventDefault();
+					var targetId = this.getAttribute('data-target');
+					activateTab(targetId);
+					if (history.replaceState) {
+						var hashName = targetId === 'pane-specs' ? 'specs-matrix' : (targetId === 'pane-overview' ? 'editorial-overview' : 'counter-assurance');
+						history.replaceState(null, '', '#' + hashName);
+					}
+				});
+			});
 
-				<!-- Group 3: Processor & Memory Matrix -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="4" y="4" width="16" height="16" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect></svg>
-					<span><?php esc_html_e( 'Processor & Performance Matrix', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Processor / Chipset', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( ! empty( $spec_chip ) ? $spec_chip : __( 'High-Efficiency Multi-Core Mobile Engine', 'mobile-pasal' ) ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'RAM & Internal Storage', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( ! empty( $spec_storage ) ? $spec_storage : __( 'High-Speed UFS / NVMe Storage Configuration', 'mobile-pasal' ) ); ?></div>
-				</div>
-
-				<!-- Group 4: Camera & Optics Setup -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
-					<span><?php esc_html_e( 'Optics & Imaging System', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Camera Setup', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( ! empty( $spec_camera ) ? $spec_camera : __( 'High-Resolution Multi-Sensor Array with Night Mode', 'mobile-pasal' ) ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Video Capabilities', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Ultra HD 4K / High Frame Rate Stabilization Supported', 'mobile-pasal' ); ?></div>
-				</div>
-
-				<!-- Group 5: Battery & Power Management -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="6" width="18" height="12" rx="2"></rect><line x1="23" y1="11" x2="23" y2="13"></line></svg>
-					<span><?php esc_html_e( 'Power & Battery Architecture', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Battery Capacity', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( ! empty( $spec_battery ) ? $spec_battery : __( 'All-Day High Endurance Battery Cell', 'mobile-pasal' ) ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Fast Charging Standard', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Official Rapid Charging Protocol with Intelligent Thermal Guard', 'mobile-pasal' ); ?></div>
-				</div>
-
-				<!-- Group 6: Official Warranty & Showroom After-Sales -->
-				<div class="specs-table-group-header">
-					<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-					<span><?php esc_html_e( 'Official Warranty & Counter After-Sales', 'mobile-pasal' ); ?></span>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Warranty Coverage', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php echo esc_html( $spec_warranty ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Data Migration Support', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Complimentary WhatsApp, Photos & Contacts Migration at Gulariya Counter', 'mobile-pasal' ); ?></div>
-				</div>
-				<div class="specs-table-row">
-					<div class="specs-label"><?php esc_html_e( 'Trade-In / Exchange', 'mobile-pasal' ); ?></div>
-					<div class="specs-value"><?php esc_html_e( 'Instant On-Spot Valuation Available for Old Working Handsets', 'mobile-pasal' ); ?></div>
-				</div>
-
-			</div>
-		</div>
-	</section>
-
-	<!-- 5. Editorial Overview & Counter Insights -->
-	<section id="editorial-overview" class="section-wrap" style="padding: 20px 0 50px;">
-		<div class="container">
-			<div class="section-header" style="margin-bottom: 24px;">
-				<span class="section-badge"><?php esc_html_e( 'EXPERT EVALUATION', 'mobile-pasal' ); ?></span>
-				<h2 class="section-title"><?php esc_html_e( 'Device Overview & Highlights', 'mobile-pasal' ); ?></h2>
-				<p class="section-desc"><?php printf( esc_html__( 'Comprehensive overview of features and counter performance for %s.', 'mobile-pasal' ), get_the_title() ); ?></p>
-			</div>
-
-			<div class="handset-description-card">
-				<?php
-				$content = get_the_content();
-				if ( ! empty( trim( $content ) ) ) {
-					the_content();
-				} else {
-					?>
-					<h3><?php printf( esc_html__( 'Experience Next-Level Mobility with %s', 'mobile-pasal' ), get_the_title() ); ?></h3>
-					<p><?php printf( esc_html__( 'Engineered for exceptional performance and daily durability, the %s represents the pinnacle of modern mobile engineering. Available now directly at Ali Mobile Gulariya, each unit is 100%% genuine, sourced through authorized national distributor channels, and backed by genuine manufacturer warranty.', 'mobile-pasal' ), get_the_title() ); ?></p>
-					
-					<h3><?php esc_html_e( 'Why Purchase from Ali Mobile Gulariya?', 'mobile-pasal' ); ?></h3>
-					<p><?php esc_html_e( 'When you purchase your smartphone from our physical showroom in Bardiya, you eliminate the risks of gray-market imports, locked SIMs, or unverified MDMS registrations. We issue a legitimate serial-numbered VAT bill and offer on-the-spot data migration, so you can walk out with your new phone completely ready to use.', 'mobile-pasal' ); ?></p>
-					<?php
-				}
-				?>
-			</div>
-		</div>
-	</section>
-
-	<!-- 6. Assurance Ribbon: The Ali Mobile 4-Pillar Handset Guarantee Consistent with Home Page -->
-	<section id="counter-assurance" class="section-wrap trust-features-section" style="padding: 40px 0 60px;">
-		<div class="tech-bg-grid" aria-hidden="true"></div>
-		<div class="tech-ring-accent" aria-hidden="true"></div>
-		<div class="container">
-			<div class="section-header center" style="margin-bottom: 32px;">
-				<span class="section-badge"><?php esc_html_e( 'ZERO-RISK PURCHASE', 'mobile-pasal' ); ?></span>
-				<h2 class="section-title"><?php esc_html_e( 'The Ali Mobile Handset Assurance', 'mobile-pasal' ); ?></h2>
-				<p class="section-desc"><?php esc_html_e( 'Why hundreds of phone buyers across Bardiya trust our counter over unverified online imports.', 'mobile-pasal' ); ?></p>
-			</div>
-
-			<div class="hero-trust-grid">
-				<!-- Card 1: 100% NTA Approved -->
-				<div class="trust-box">
-					<div class="trust-box-icon">
-						<?php echo mp_get_icon_svg( 'shield', 22, 22 ); ?>
-					</div>
-					<div>
-						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance1_title', '100% NTA Approved' ) ); ?></h4>
-						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance1_desc', 'Compliant with Nepal Telecommunications Authority IMEI registration for uninterrupted SIM network connectivity nationwide.' ) ); ?></p>
-					</div>
-				</div>
-
-				<!-- Card 2: Official VAT Bill -->
-				<div class="trust-box">
-					<div class="trust-box-icon">
-						<?php echo mp_get_icon_svg( 'receipt', 22, 22 ); ?>
-					</div>
-					<div>
-						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance2_title', 'Official VAT Bill' ) ); ?></h4>
-						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance2_desc', 'Every purchase comes with a legitimate serial-numbered VAT invoice valid for official 1-year brand warranty claims.' ) ); ?></p>
-					</div>
-				</div>
-
-				<!-- Card 3: Free Data Transfer -->
-				<div class="trust-box">
-					<div class="trust-box-icon">
-						<?php echo mp_get_icon_svg( 'arrows-rotate', 22, 22 ); ?>
-					</div>
-					<div>
-						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance3_title', 'Free Data Transfer' ) ); ?></h4>
-						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance3_desc', 'We safely migrate your WhatsApp chats, photos, contacts, and mobile apps directly to your new phone before you leave.' ) ); ?></p>
-					</div>
-				</div>
-
-				<!-- Card 4: Trade-In Counter -->
-				<div class="trust-box">
-					<div class="trust-box-icon">
-						<?php echo mp_get_icon_svg( 'store', 22, 22 ); ?>
-					</div>
-					<div>
-						<h4 class="trust-box-title"><?php echo esc_html( mp_opt( 'assurance4_title', 'Trade-In Counter' ) ); ?></h4>
-						<p class="trust-box-desc"><?php echo esc_html( mp_opt( 'assurance4_desc', 'Bring your old handset for fair, transparent counter evaluation toward the purchase of any new smartphone.' ) ); ?></p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+			// Handle deep links from URL hash
+			var hash = window.location.hash;
+			if (hash === '#specs-matrix' || hash === '#specs') {
+				activateTab('pane-specs');
+			} else if (hash === '#editorial-overview' || hash === '#overview') {
+				activateTab('pane-overview');
+			} else if (hash === '#counter-assurance' || hash === '#assurance') {
+				activateTab('pane-assurance');
+			}
+		}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initHandsetHub);
+		} else {
+			initHandsetHub();
+		}
+	})();
+	</script>
 
 	<!-- 7. Similar / Related Handsets Section Consistent with Home Page Grid -->
 	<?php
