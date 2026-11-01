@@ -46,6 +46,8 @@ while ( have_posts() ) : the_post();
 <main>
   <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Handset Header', 'mobile-pasal' ); ?>">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="page-hero-container">
       <div class="page-hero-row">
         <div class="page-hero-main">
@@ -71,7 +73,9 @@ while ( have_posts() ) : the_post();
   </section>
 
   <!-- Product Showcase Section -->
-  <section class="single-product-section" style="padding: 20px 0 60px;">
+  <section class="section-wrap single-product-section" style="padding: 30px 0 60px;">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: start;">
         
@@ -200,7 +204,9 @@ while ( have_posts() ) : the_post();
   </section>
 
   <!-- Assurance Ribbon Section -->
-  <section class="trust-features-section" style="padding: 40px 0 60px;">
+  <section class="section-wrap trust-features-section" style="padding: 40px 0 60px;">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head sec-head-center" style="margin-bottom: 32px;">
         <span class="sec-kicker">Guaranteed Genuine</span>

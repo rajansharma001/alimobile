@@ -12,6 +12,8 @@ get_header();
   <?php while ( have_posts() ) : the_post(); ?>
     <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
     <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Page Header', 'mobile-pasal' ); ?>">
+      <div class="tech-bg-grid" aria-hidden="true"></div>
+      <div class="tech-ring-accent" aria-hidden="true"></div>
       <div class="page-hero-container">
         <div class="page-hero-row">
           <div class="page-hero-main">
@@ -31,7 +33,9 @@ get_header();
     </section>
 
     <!-- Page Content -->
-    <section class="single-page-content" style="padding: 40px 0 60px;">
+    <section class="section-wrap single-page-content" style="padding: 40px 0 60px;">
+      <div class="tech-bg-grid" aria-hidden="true"></div>
+      <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
       <div class="wrap" style="max-width: 900px;">
         <article id="post-<?php the_ID(); ?>" <?php post_class( 'page-body-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.8; color: var(--text-body);">
           <?php if ( has_post_thumbnail() ) : ?>

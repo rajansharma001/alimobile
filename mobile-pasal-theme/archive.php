@@ -14,6 +14,8 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
 <main>
   <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Archive Header', 'mobile-pasal' ); ?>">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="page-hero-container">
       <div class="page-hero-row">
         <div class="page-hero-main">
@@ -37,7 +39,9 @@ $wa_number          = mp_opt( 'whatsapp_number', '9779804530786' );
   </section>
 
   <!-- Archive Content Section -->
-  <section class="archive-section" style="padding: 36px 0 60px;">
+  <section class="section-wrap archive-section" style="padding: 36px 0 60px;">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
 
       <?php if ( have_posts() ) : ?>

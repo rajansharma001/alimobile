@@ -26,6 +26,8 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 
 <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
 <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'About Us Header', 'mobile-pasal' ); ?>">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="page-hero-container">
 		<div class="page-hero-row">
 			<div class="page-hero-main">
@@ -45,7 +47,9 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 </section>
 
 <!-- Our Story & Stats Dock -->
-<section class="about-story-section">
+<section class="section-wrap about-story-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="about-story-grid fade-up">
 			<!-- Story Content -->
@@ -104,7 +108,9 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 </section>
 
 <!-- Inside Our Workbench (Cleanroom Tooling) -->
-<section class="lab-standards-section">
+<section class="section-wrap lab-standards-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_tooling_kicker', 'Cleanroom Tooling' ) ); ?></span>
@@ -141,7 +147,9 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 </section>
 
 <!-- 4 Core Commitments -->
-<section class="commitments-section">
+<section class="section-wrap commitments-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'about_commitments_kicker', 'Integrity First' ) ); ?></span>
@@ -178,7 +186,9 @@ $stat4_lbl   = mp_opt( 'about_stat4_label', 'Standard Testing Warranty on Repair
 </section>
 
 <!-- Community Reviews Section -->
-<section class="reviews-section">
+<section class="section-wrap reviews-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php esc_html_e( 'Community Feedback', 'mobile-pasal' ); ?></span>

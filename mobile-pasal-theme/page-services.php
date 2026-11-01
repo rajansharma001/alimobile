@@ -18,6 +18,8 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 
 <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
 <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Repair Services Header', 'mobile-pasal' ); ?>">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="page-hero-container">
 		<div class="page-hero-row">
 			<div class="page-hero-main">
@@ -37,7 +39,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 
 <!-- Interactive Repair Diagnostic Console -->
-<section id="repair-builder" class="repair-builder-section" style="margin-top: 36px;">
+<section id="repair-builder" class="section-wrap repair-builder-section" style="margin-top: 36px;">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker">
@@ -265,7 +269,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 
 <!-- In-Depth Lab Capabilities Section -->
-<section class="services-section">
+<section class="section-wrap services-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php esc_html_e( 'Lab Bench Specialties', 'mobile-pasal' ); ?></span>
@@ -332,7 +338,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 
 <!-- Pricing & Turnaround Matrix -->
-<section class="pricing-table-section" id="pricing">
+<section class="section-wrap pricing-table-section" id="pricing">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php esc_html_e( 'Transparent Counter Rates', 'mobile-pasal' ); ?></span>
@@ -448,7 +456,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 
 <!-- 4-Step Counter Workflow -->
-<section class="repair-steps-section">
+<section class="section-wrap repair-steps-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php esc_html_e( 'Simple & Transparent', 'mobile-pasal' ); ?></span>
@@ -485,7 +495,9 @@ $services_title = mp_opt( 'services_hero_title', 'Apple Fix Lab & Precision Repa
 </section>
 
 <!-- Repair FAQ Accordion -->
-<section class="faq-section" id="faq">
+<section class="section-wrap faq-section" id="faq">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php esc_html_e( 'Frequently Asked Questions', 'mobile-pasal' ); ?></span>

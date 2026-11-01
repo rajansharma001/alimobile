@@ -26,6 +26,8 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
        PAGE HERO BANNER: Breadcrumbs, Title & Pure Graphics
        ==================================================================== -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Contact Header', 'mobile-pasal' ); ?>">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="page-hero-container">
       <div class="page-hero-row">
         <div class="page-hero-main">
@@ -47,7 +49,9 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
   <!-- ====================================================================
        CONTACT GRID: INTERACTIVE FORM + DIRECT INFO CARD
        ==================================================================== -->
-  <section class="contact-page-section">
+  <section class="section-wrap contact-page-section">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
       <div class="contact-page-grid fade-up">
         
@@ -172,7 +176,9 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
   <!-- ====================================================================
        LIVE GOOGLE MAPS EMBED
        ==================================================================== -->
-  <section class="map-embed-section">
+  <section class="section-wrap map-embed-section">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head sec-head-center fade-up">
         <span class="sec-kicker"><?php echo esc_html( mp_opt( 'contact_map_kicker', 'Navigation & Map' ) ); ?></span>
@@ -198,7 +204,9 @@ $contact_desc    = mp_opt( 'contact_hero_desc', 'Whether you are looking to purc
   <!-- ====================================================================
        LANDMARK & PARKING GUIDANCE
        ==================================================================== -->
-  <section class="landmarks-section">
+  <section class="section-wrap landmarks-section">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
       <div class="sec-head sec-head-center fade-up" style="margin-bottom: 32px;">
         <span class="sec-kicker"><?php echo esc_html( mp_opt( 'contact_landmarks_kicker', 'Arrival & Transit' ) ); ?></span>

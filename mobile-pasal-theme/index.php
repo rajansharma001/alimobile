@@ -11,6 +11,8 @@ get_header();
 <main>
   <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Blog Updates Header', 'mobile-pasal' ); ?>">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="page-hero-container">
       <div class="page-hero-row">
         <div class="page-hero-main">
@@ -30,7 +32,9 @@ get_header();
   </section>
 
   <!-- News / Blog Section -->
-  <section class="guides-section" style="padding: 40px 0 60px;">
+  <section class="section-wrap guides-section" style="padding: 40px 0 60px;">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
 
       <?php if ( have_posts() ) : ?>

@@ -29,6 +29,8 @@ while ( have_posts() ) : the_post();
 <main>
   <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
   <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Service Docket Header', 'mobile-pasal' ); ?>">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent" aria-hidden="true"></div>
     <div class="page-hero-container">
       <div class="page-hero-row">
         <div class="page-hero-main">
@@ -50,7 +52,9 @@ while ( have_posts() ) : the_post();
   </section>
 
   <!-- Service Details & Booking Grid -->
-  <section class="service-details-section" style="padding: 36px 0 60px;">
+  <section class="section-wrap service-details-section" style="padding: 36px 0 60px;">
+    <div class="tech-bg-grid" aria-hidden="true"></div>
+    <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
     <div class="wrap">
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; align-items: start;">
         

@@ -16,6 +16,8 @@ get_header();
 
 <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
 <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Shop Catalog Header', 'mobile-pasal' ); ?>">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="page-hero-container">
 		<div class="page-hero-row">
 			<div class="page-hero-main">
@@ -35,7 +37,9 @@ get_header();
 </section>
 
 <!-- Main Catalog Section: Left-Sidebar Filters + Right-Products -->
-<section class="catalog-section" id="catalog">
+<section class="section-wrap catalog-section" id="catalog">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
 	<div class="wrap">
 
 		<!-- Mobile Filter Drawer Trigger Button -->
@@ -360,7 +364,9 @@ get_header();
 </section>
 
 <!-- Handset Assurance Section ("Zero-Risk Purchase") -->
-<section class="assurance-section">
+<section class="section-wrap assurance-section">
+	<div class="tech-bg-grid" aria-hidden="true"></div>
+	<div class="tech-ring-accent" aria-hidden="true"></div>
 	<div class="wrap">
 		<div class="sec-head sec-head-center fade-up">
 			<span class="sec-kicker"><?php echo esc_html( mp_opt( 'assurance_kicker', 'Zero-Risk Purchase' ) ); ?></span>

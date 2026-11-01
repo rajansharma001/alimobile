@@ -16,6 +16,8 @@ get_header();
   ?>
     <!-- Page Hero Banner: Breadcrumbs, Title & Pure Graphics -->
     <section class="page-hero-banner" aria-label="<?php esc_attr_e( 'Article Header', 'mobile-pasal' ); ?>">
+      <div class="tech-bg-grid" aria-hidden="true"></div>
+      <div class="tech-ring-accent" aria-hidden="true"></div>
       <div class="page-hero-container">
         <div class="page-hero-row">
           <div class="page-hero-main">
@@ -39,7 +41,9 @@ get_header();
     </section>
 
     <!-- Post Article Content -->
-    <section class="single-post-section" style="padding: 40px 0 60px;">
+    <section class="section-wrap single-post-section" style="padding: 40px 0 60px;">
+      <div class="tech-bg-grid" aria-hidden="true"></div>
+      <div class="tech-ring-accent tech-ring-right" aria-hidden="true"></div>
       <div class="wrap" style="max-width: 860px;">
         <article id="post-<?php the_ID(); ?>" <?php post_class( 'post-entry-card' ); ?> style="background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: clamp(24px, 4vw, 48px); line-height: 1.85; color: var(--text-body);">
           <header class="entry-header" style="margin-bottom: 24px;">
