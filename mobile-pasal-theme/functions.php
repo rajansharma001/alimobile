@@ -532,3 +532,40 @@ function mp_include_cpt_in_search( $query ) {
 }
 add_action( 'pre_get_posts', 'mp_include_cpt_in_search' );
 
+/**
+ * 16. Top WP Admin Bar Quick-Access Menu for Easy Store Management & Customization
+ */
+function mp_admin_bar_quick_menu( $wp_admin_bar ) {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		return;
+	}
+
+	$wp_admin_bar->add_node( array(
+		'id'    => 'mp-store-hub',
+		'title' => '📱 Ali Mobile Admin',
+		'href'  => admin_url( 'admin.php?page=mobile-pasal-options' ),
+	) );
+
+	$links = array(
+		'mp-hub-repairs'  => array( '🔧 Repair Lab Dockets', admin_url( 'admin.php?page=mp-inquiries&tab=repairs' ) ),
+		'mp-hub-general'  => array( '💬 General Inquiries', admin_url( 'admin.php?page=mp-inquiries&tab=general' ) ),
+		'mp-hub-prices'   => array( '🏷️ Bulk Handset Price Editor', admin_url( 'admin.php?page=mp-bulk-price-editor' ) ),
+		'mp-hub-logo'     => array( '🖼️ Change Logo & Brand Name', admin_url( 'admin.php?page=mobile-pasal-options&tab=identity' ) ),
+		'mp-hub-contact'  => array( '📞 Change Phone, Email & Address', admin_url( 'admin.php?page=mobile-pasal-options&tab=contact_coords_tab' ) ),
+		'mp-hub-colors'   => array( '🎨 Theme Colors & Presets', admin_url( 'admin.php?page=mobile-pasal-options&tab=colors' ) ),
+		'mp-hub-newphone' => array( '➕ Add New Smartphone', admin_url( 'post-new.php?post_type=handset' ) ),
+		'mp-hub-newrep'   => array( '🛠️ Add New Repair Service', admin_url( 'post-new.php?post_type=repair_service' ) ),
+	);
+
+	foreach ( $links as $id => $item ) {
+		$wp_admin_bar->add_node( array(
+			'id'     => $id,
+			'parent' => 'mp-store-hub',
+			'title'  => $item[0],
+			'href'   => $item[1],
+		) );
+	}
+}
+add_action( 'admin_bar_menu', 'mp_admin_bar_quick_menu', 85 );
+
+

@@ -1806,6 +1806,42 @@ function mobile_pasal_options_render_dashboard() {
 			<!-- Main Settings Canvas -->
 			<main class="bopt-content">
 
+				<!-- Easy 1-Click Admin Customization Shortcut Bar -->
+				<div class="bopt-easy-quickbar" style="background:#ffffff; border:1.5px solid #bfdbfe; border-radius:14px; padding:14px 18px; margin-bottom:18px; box-shadow:0 6px 18px rgba(0,102,204,0.06);">
+					<div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:10px;">
+						<span style="font-size:12px; font-weight:800; text-transform:uppercase; letter-spacing:0.05em; color:#0066cc;">
+							<i class="fa-solid fa-bolt"></i> <?php esc_html_e( 'Quick Customization Shortcuts — Jump to Most Used Settings:', 'mobile-pasal' ); ?>
+						</span>
+						<span style="font-size:11.5px; color:#64748b;"><?php esc_html_e( 'Click any button below to customize immediately', 'mobile-pasal' ); ?></span>
+					</div>
+					<div style="display:flex; flex-wrap:wrap; gap:8px;">
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('identity');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-image" style="color:#0066cc;"></i> <?php esc_html_e( 'Logo, Brand Name & Favicon', 'mobile-pasal' ); ?>
+						</button>
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('contact_coords_tab');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-phone" style="color:#16a34a;"></i> <?php esc_html_e( 'Phone, WhatsApp, Email & Address', 'mobile-pasal' ); ?>
+						</button>
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('colors');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-palette" style="color:#8b5cf6;"></i> <?php esc_html_e( 'Colors & 1-Click Themes', 'mobile-pasal' ); ?>
+						</button>
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('catalog_sec');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-tags" style="color:#d97706;"></i> <?php esc_html_e( 'Show / Hide Phone Prices', 'mobile-pasal' ); ?>
+						</button>
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('hero');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-house" style="color:#0284c7;"></i> <?php esc_html_e( 'Homepage Hero Banner', 'mobile-pasal' ); ?>
+						</button>
+						<button type="button" class="bopt-messages-btn" onclick="if(window.boptSwitchTab)window.boptSwitchTab('contact_map_tab');" style="font-size:12px; padding:6px 12px;">
+							<i class="fa-solid fa-map-location-dot" style="color:#dc2626;"></i> <?php esc_html_e( 'Google Maps Location', 'mobile-pasal' ); ?>
+						</button>
+						<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=repairs' ) ); ?>" class="bopt-messages-btn" style="font-size:12px; padding:6px 12px; text-decoration:none; background:#eff6ff; border-color:#93c5fd; color:#0066cc;">
+							<i class="fa-solid fa-screwdriver-wrench"></i> <?php esc_html_e( 'Repair Lab Dockets', 'mobile-pasal' ); ?>
+						</a>
+						<a href="<?php echo esc_url( admin_url( 'admin.php?page=mp-inquiries&tab=general' ) ); ?>" class="bopt-messages-btn" style="font-size:12px; padding:6px 12px; text-decoration:none; background:#f5f3ff; border-color:#ddd6fe; color:#6d28d9;">
+							<i class="fa-solid fa-envelope-open-text"></i> <?php esc_html_e( 'General Inquiries', 'mobile-pasal' ); ?>
+						</a>
+					</div>
+				</div>
+
 				<div class="bopt-breadcrumbs">
 					<span><?php esc_html_e( 'Theme Options', 'mobile-pasal' ); ?></span>
 					<span class="bopt-breadcrumb-sep">/</span>

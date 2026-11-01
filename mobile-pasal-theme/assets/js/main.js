@@ -726,10 +726,23 @@
     var phoneInput = document.getElementById("modalPhone");
     var phone = phoneInput ? phoneInput.value.trim() : "";
 
+    if (window.mpAjax && window.mpAjax.ajaxurl && phone) {
+      var fd = new FormData();
+      fd.append("action", "mp_submit_repair_docket");
+      fd.append("nonce", window.mpAjax.nonce || "");
+      fd.append("customer_name", "Counter Quote Request");
+      fd.append("phone", phone);
+      fd.append("model", dev);
+      fd.append("issue", issue);
+      try {
+        fetch(window.mpAjax.ajaxurl, { method: "POST", body: fd, keepalive: true });
+      } catch (err) {}
+    }
+
     var text = "Hello Ali Mobile Center Gulariya, I would like to request counter service for my device:%0A• Device: " + encodeURIComponent(dev) + "%0A• Problem/Service: " + encodeURIComponent(issue) + "%0A• My Phone: " + encodeURIComponent(phone);
     window.open("https://wa.me/" + SHOP_PHONE + "?text=" + text, "_blank", "noopener,noreferrer");
     closeQuoteModal();
-    triggerToast("Opening WhatsApp with your request...");
+    triggerToast("Opening WhatsApp with your repair request...");
   }
 
   function triggerToast(message) {
