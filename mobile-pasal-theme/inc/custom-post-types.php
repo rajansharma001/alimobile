@@ -214,12 +214,12 @@ function mp_cpt_edit_header_banner() {
 		$title     = __( 'Showroom Handset Studio', 'mobile-pasal' );
 		$icon      = 'fa-mobile-screen';
 		$desc      = __( 'Configure smartphone retail price, NTA approval, counter stock status, and hardware specifications.', 'mobile-pasal' );
-		$theme_tab = 'shop_inventory_tab';
+		$theme_tab = 'catalog_sec';
 	} elseif ( 'repair_service' === $cpt ) {
 		$title     = __( 'Apple Fix Repair Lab Studio', 'mobile-pasal' );
 		$icon      = 'fa-screwdriver-wrench';
 		$desc      = __( 'Configure cleanroom repair diagnostic fee, turnaround warranty, and supported smartphone models.', 'mobile-pasal' );
-		$theme_tab = 'services_labs_tab';
+		$theme_tab = 'services_hero_tab';
 	} elseif ( 'mp_review' === $cpt ) {
 		$title     = __( 'Customer Review Desk', 'mobile-pasal' );
 		$icon      = 'fa-star';
